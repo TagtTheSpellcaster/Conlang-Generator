@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conlang Generator Web</title>
+    <style>
+        :root {
+            --bg-primary: #121824;
+            --bg-secondary: #1c2536;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --btn-green: #10b981;
+            --btn-green-hover: #059669;
+            --text: #e2e8f0;
+            --border: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f8fafc;
+        }
+
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        select, input, button {
+            width: 100%;
+            padding: 10px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+            box-sizing: border-box;
+        }
+
+        button.primary-btn {
+            background-color: var(--accent);
+            color: #ffffff;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        button.primary-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        button.export-btn {
+            background-color: var(--btn-green);
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: background 0.2s;
+        }
+
+        button.export-btn:hover {
+            background-color: var(--btn-green-hover);
+        }
+
+        .output-box {
+            background-color: #0f172a;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 15px;
+            white-space: pre-wrap;
+            font-family: "Courier New", Courier, monospace;
+            font-size: 0.95rem;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .actions-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Generatore di Conlang Web</h1>
+
+    <div class="card">
+        <button class="primary-btn" onclick="generateRandomConlang()">⚡ Generazione Rapida (One-Click)</button>
+    </div>
+
+    <div class="card">
+        <h3>Parametri di Configurazione</h3>
+        <div class="grid">
+            <div>
+                <label for="desc">Stile Descrittivo</label>
+                <select id="desc">
+                    <option value="none">Nessuno (Bilanciato)</option>
+                    <option value="musical">Musicale / Flautata</option>
+                    <option value="dark">Oscura / Cavernosa</option>
+                    <option value="magic">Magica / Eterea</option>
+                    <option value="harsh">Dura / Imperiale</option>
+                </select>
+            </div>
+            <div>
+                <label for="socio">Assetto Sociolinguistico</label>
+                <select id="socio">
+                    <option value="egalitarian">Egalitaria (Regolare)</option>
+                    <option value="hierarchical">Gerarchica (Onorifici)</option>
+                </select>
+            </div>
+            <div>
+                <label for="culture">Ambiente Culturale</label>
+                <select id="culture">
+                    <option value="ancient">Antica / Arcaica (SOV)</option>
+                    <option value="primitive">Primitiva (Sillabe CV)</option>
+                    <option value="alien">Extraterrestre (Non-umana)</option>
+                </select>
+            </div>
+        </div>
+
+        <br>
+
+        <div class="grid">
+            <div>
+                <label for="custom-vowels">Vocali Personalizzate (separate da virgola)</label>
+                <input type="text" id="custom-vowels" placeholder="a, e, i, o, u">
+            </div>
+            <div>
+                <label for="custom-cons">Consonanti Personalizzate (separate da virgola)</label>
+                <input type="text" id="custom-cons" placeholder="p, t, k, m, n, s">
+            </div>
+        </div>
+
+        <br>
+        <button class="primary-btn" onclick="generateCustomConlang()">Genera Conlang Personalizzata</button>
+    </div>
+
+    <div class="card">
+        <h3>Risultato Generazione</h3>
+        <div id="output" class="output-box">Seleziona i parametri e clicca su genera...</div>
+        
+        <div class="actions-group">
+            <button class="export-btn" onclick="exportJSON()">📥 Esporta Dizionario (JSON)</button>
+            <button class="export-btn" onclick="exportCSV()">📥 Esporta Dizionario (CSV)</button>
+        </div>
+    </div>
+</div>
+
+<script>
+const DB_PHONETICS = {
+    vowels: ['a', 'e', 'i', 'o', 'u'],
+    consonants: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l', 'f', 'h']
+};
+
+const PROFILES_DESC = {
+    musical: { vowels: ['a', 'e', 'i', 'ia', 'ea'], consonants: ['l', 'r', 'm', 'n', 'v', 's'], syll: ['CV', 'V'] },
+    dark: { vowels: ['u', 'o', 'y'], consonants: ['k', 'g', 'q', 'x', 'z', 'r'], syll: ['CVC', 'CCV'] },
+    magic: { vowels: ['a', 'i', 'e', 'ae'], consonants: ['s', 'sh', 'h', 'f', 'l', 'm'], syll: ['CV', 'CVC'] },
+    harsh: { vowels: ['a', 'u'], consonants: ['p', 't', 'k', 'ts', 'tr', 'gr'], syll: ['CCVC', 'CVCC'] }
+};
+
+const BASE_WORDS = [
+    "uomo", "donna", "acqua", "fuoco", "terra", "cielo", "sole", "luna",
+    "re", "guerra", "pace", "casa", "notte", "giorno", "amico"
+];
+
+let currentLexicon = {};
+
+function getRandom(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function generateWord(vowels, consonants, syllStructures) {
+    const struct = getRandom(syllStructures);
+    let word = "";
+    for (let char of struct) {
+        if (char === 'C') word += getRandom(consonants);
+        if (char === 'V') word += getRandom(vowels);
+    }
+    return word;
+}
+
+function buildConlang(config) {
+    let v = config.vowels.length ? config.vowels : DB_PHONETICS.vowels;
+    let c = config.consonants.length ? config.consonants : DB_PHONETICS.consonants;
+    let syll = ['CV', 'CVC'];
+    let order = 'SVO';
+
+    if (config.desc && PROFILES_DESC[config.desc]) {
+        const prof = PROFILES_DESC[config.desc];
+        v = prof.vowels;
+        c = prof.consonants;
+        syll = prof.syll;
+    }
+
+    if (config.culture === 'ancient') order = 'SOV';
+    if (config.culture === 'primitive') syll = ['CV'];
+    if (config.culture === 'alien') {
+        c = ['z\'', 'k\'', 'x', 'r\'', 'q'];
+        v = ['i\'', 'u\'', 'a\''];
+    }
+
+    let lexicon = {};
+    BASE_WORDS.forEach(w => {
+        let generated;
+        do {
+            generated = generateWord(v, c, syll);
+        } while (Object.values(lexicon).includes(generated));
+        lexicon[w] = generated;
+    });
+
+    currentLexicon = lexicon;
+
+    let text = `=== PROFILO CONLANG ===\n`;
+    text += `Ordine sintattico: ${order}\n`;
+    text += `Struttura sillabica: ${syll.join(', ')}\n`;
+    text += `Inventario Vocali: [${v.join(', ')}]\n`;
+    text += `Inventario Consonanti: [${c.join(', ')}]\n\n`;
+
+    if (config.socio === 'hierarchical') {
+        text += `Regola Sociolinguistica: Aggiungere il suffisso '-tha' per forme di rispetto/onorifici.\n\n`;
+    }
+
+    text += `=== DIZIONARIO BASE ===\n`;
+    for (let [ita, con] of Object.entries(lexicon)) {
+        text += `${ita.padEnd(10, ' ')} : ${con}\n`;
+    }
+
+    return text;
+}
+
+function generateRandomConlang() {
+    const descs = ['none', 'musical', 'dark', 'magic', 'harsh'];
+    const socios = ['egalitarian', 'hierarchical'];
+    const cultures = ['ancient', 'primitive', 'alien'];
+
+    const config = {
+        vowels: [],
+        consonants: [],
+        desc: getRandom(descs),
+        socio: getRandom(socios),
+        culture: getRandom(cultures)
+    };
+
+    document.getElementById('output').innerText = buildConlang(config);
+}
+
+function generateCustomConlang() {
+    const vInput = document.getElementById('custom-vowels').value;
+    const cInput = document.getElementById('custom-cons').value;
+
+    const config = {
+        vowels: vInput ? vInput.split(',').map(s => s.trim()) : [],
+        consonants: cInput ? cInput.split(',').map(s => s.trim()) : [],
+        desc: document.getElementById('desc').value,
+        socio: document.getElementById('socio').value,
+        culture: document.getElementById('culture').value
+    };
+
+    document.getElementById('output').innerText = buildConlang(config);
+}
+
+function exportJSON() {
+    if (Object.keys(currentLexicon).length === 0) {
+        return alert("Errore: Genera prima un conlang.");
+    }
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentLexicon, null, 2));
+    const btn = document.createElement('a');
+    btn.setAttribute("href", dataStr);
+    btn.setAttribute("download", "dizionario_conlang.json");
+    document.body.appendChild(btn);
+    btn.click();
+    btn.remove();
+}
+
+function exportCSV() {
+    if (Object.keys(currentLexicon).length === 0) {
+        return alert("Errore: Genera prima un conlang.");
+    }
+    let csvContent = "data:text/csv;charset=utf-8,Italiano,Conlang\n";
+    for (let [ita, con] of Object.entries(currentLexicon)) {
+        csvContent += `${ita},${con}\n`;
+    }
+    const btn = document.createElement("a");
+    btn.setAttribute("href", encodeURI(csvContent));
+    btn.setAttribute("download", "dizionario_conlang.csv");
+    document.body.appendChild(btn);
+    btn.click();
+    btn.remove();
+}
+</script>
+
+</body>
+</html>
