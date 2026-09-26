@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Generator Web</title>
+    <title>Conlang Engine - Advanced Generator</title>
     <style>
         :root {
-            --bg-primary: #121824;
-            --bg-secondary: #1c2536;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
             --accent: #3b82f6;
             --accent-hover: #2563eb;
             --btn-green: #10b981;
             --btn-green-hover: #059669;
-            --text: #e2e8f0;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
             --border: #334155;
         }
 
@@ -27,13 +28,13 @@
         }
 
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             width: 100%;
         }
 
-        h1 {
-            text-align: center;
+        h1, h3 {
             color: #f8fafc;
+            margin-top: 0;
         }
 
         .card {
@@ -46,7 +47,7 @@
 
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 15px;
         }
 
@@ -54,7 +55,8 @@
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            color: var(--text-dim);
         }
 
         select, input, button {
@@ -77,9 +79,7 @@
             transition: background 0.2s;
         }
 
-        button.primary-btn:hover {
-            background-color: var(--accent-hover);
-        }
+        button.primary-btn:hover { background-color: var(--accent-hover); }
 
         button.export-btn {
             background-color: var(--btn-green);
@@ -90,20 +90,19 @@
             transition: background 0.2s;
         }
 
-        button.export-btn:hover {
-            background-color: var(--btn-green-hover);
-        }
+        button.export-btn:hover { background-color: var(--btn-green-hover); }
 
         .output-box {
-            background-color: #0f172a;
+            background-color: #020617;
             border: 1px solid var(--border);
             border-radius: 4px;
             padding: 15px;
             white-space: pre-wrap;
-            font-family: "Courier New", Courier, monospace;
-            font-size: 0.95rem;
-            max-height: 500px;
+            font-family: "Cascadia Code", "Courier New", Courier, monospace;
+            font-size: 0.9rem;
+            max-height: 550px;
             overflow-y: auto;
+            line-height: 1.5;
         }
 
         .actions-group {
@@ -116,38 +115,42 @@
 <body>
 
 <div class="container">
-    <h1>Generatore di Conlang Web</h1>
+    <h1>Generatore di Conlang Adattivo</h1>
 
     <div class="card">
-        <button class="primary-btn" onclick="generateRandomConlang()">⚡ Generazione Rapida (One-Click)</button>
+        <button class="primary-btn" onclick="generateRandomConlang()">⚡ Generazione Rapida Contestualizzata</button>
     </div>
 
     <div class="card">
-        <h3>Parametri di Configurazione</h3>
+        <h3>Inquadramento Socioculturale & Fonetico</h3>
         <div class="grid">
             <div>
-                <label for="desc">Stile Descrittivo</label>
+                <label for="desc">Stile Estetico / Descrittivo</label>
                 <select id="desc">
-                    <option value="none">Nessuno (Bilanciato)</option>
-                    <option value="musical">Musicale / Flautata</option>
-                    <option value="dark">Oscura / Cavernosa</option>
-                    <option value="magic">Magica / Eterea</option>
-                    <option value="harsh">Dura / Imperiale</option>
+                    <option value="none">Bilanciato / Naturale</option>
+                    <option value="musical">Musicale / Flautata (Liquida)</option>
+                    <option value="dark">Oscura / Cavernosa (Gutturale)</option>
+                    <option value="magic">Magica / Eterea (Sibilante)</option>
+                    <option value="harsh">Dura / Imperiale (Ostruttiva)</option>
+                    <option value="aquatic">Acquatica / Fluidica</option>
                 </select>
             </div>
             <div>
-                <label for="socio">Assetto Sociolinguistico</label>
+                <label for="socio">Struttura Sociolinguistica</label>
                 <select id="socio">
-                    <option value="egalitarian">Egalitaria (Regolare)</option>
-                    <option value="hierarchical">Gerarchica (Onorifici)</option>
+                    <option value="egalitarian">Egalitaria (Senza gerarchie formali)</option>
+                    <option value="hierarchical">Gerarchica / Feudale (Onorifici stretti)</option>
+                    <option value="caste">Castale / Segreta (Forme tabuizzate)</option>
                 </select>
             </div>
             <div>
-                <label for="culture">Ambiente Culturale</label>
+                <label for="culture">Ambiente Socio-Temporale</label>
                 <select id="culture">
-                    <option value="ancient">Antica / Arcaica (SOV)</option>
-                    <option value="primitive">Primitiva (Sillabe CV)</option>
-                    <option value="alien">Extraterrestre (Non-umana)</option>
+                    <option value="primitive">Cultura Primitiva / Tribale</option>
+                    <option value="ancient">Cultura Antica / Arcaica</option>
+                    <option value="medieval">Cultura Medievale / Nomadica</option>
+                    <option value="renaissance">Cultura Rinascimentale / Erudita</option>
+                    <option value="alien">Cultura Extraterrestre / Non-Umana</option>
                 </select>
             </div>
         </div>
@@ -156,49 +159,135 @@
 
         <div class="grid">
             <div>
-                <label for="custom-vowels">Vocali Personalizzate (separate da virgola)</label>
+                <label for="custom-vowels">Vocali Personalizzate</label>
                 <input type="text" id="custom-vowels" placeholder="a, e, i, o, u">
             </div>
             <div>
-                <label for="custom-cons">Consonanti Personalizzate (separate da virgola)</label>
-                <input type="text" id="custom-cons" placeholder="p, t, k, m, n, s">
+                <label for="custom-cons">Consonanti Personalizzate</label>
+                <input type="text" id="custom-cons" placeholder="p, t, k, m, n, s, r, l">
             </div>
         </div>
 
         <br>
-        <button class="primary-btn" onclick="generateCustomConlang()">Genera Conlang Personalizzata</button>
+        <button class="primary-btn" onclick="generateCustomConlang()">Genera Sistema Linguistico Completo</button>
     </div>
 
     <div class="card">
-        <h3>Risultato Generazione</h3>
-        <div id="output" class="output-box">Seleziona i parametri e clicca su genera...</div>
+        <h3>Specifiche e Grammatica Generata</h3>
+        <div id="output" class="output-box">Configura i parametri per generare la lingua...</div>
         
         <div class="actions-group">
-            <button class="export-btn" onclick="exportJSON()">📥 Esporta Dizionario (JSON)</button>
-            <button class="export-btn" onclick="exportCSV()">📥 Esporta Dizionario (CSV)</button>
+            <button class="export-btn" onclick="exportJSON()">📥 Esporta Lessico Completo (JSON)</button>
+            <button class="export-btn" onclick="exportCSV()">📥 Esporta Lessico Completo (CSV)</button>
         </div>
     </div>
 </div>
 
 <script>
-const DB_PHONETICS = {
-    vowels: ['a', 'e', 'i', 'o', 'u'],
-    consonants: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l', 'f', 'h']
-};
-
-const PROFILES_DESC = {
-    musical: { vowels: ['a', 'e', 'i', 'ia', 'ea'], consonants: ['l', 'r', 'm', 'n', 'v', 's'], syll: ['CV', 'V'] },
-    dark: { vowels: ['u', 'o', 'y'], consonants: ['k', 'g', 'q', 'x', 'z', 'r'], syll: ['CVC', 'CCV'] },
-    magic: { vowels: ['a', 'i', 'e', 'ae'], consonants: ['s', 'sh', 'h', 'f', 'l', 'm'], syll: ['CV', 'CVC'] },
-    harsh: { vowels: ['a', 'u'], consonants: ['p', 't', 'k', 'ts', 'tr', 'gr'], syll: ['CCVC', 'CVCC'] }
-};
-
-const BASE_WORDS = [
-    "uomo", "donna", "acqua", "fuoco", "terra", "cielo", "sole", "luna",
-    "re", "guerra", "pace", "casa", "notte", "giorno", "amico"
+// --- DATABASES & DOMAIN CONCEPTS ---
+const CORE_UNIVERSALS = [
+    // Pronomi e Particelle Functional
+    { category: "Pronomi/Grammatica", concept: "io (1a pers. sing.)", pos: "PRON" },
+    { category: "Pronomi/Grammatica", concept: "tu (2a pers. sing. informale)", pos: "PRON" },
+    { category: "Pronomi/Grammatica", concept: "egli/ella (3a pers. sing.)", pos: "PRON" },
+    { category: "Pronomi/Grammatica", concept: "noi (1a pers. plur. inclusivo)", pos: "PRON" },
+    { category: "Pronomi/Grammatica", concept: "questo/questa (deissi vicina)", pos: "DET" },
+    { category: "Pronomi/Grammatica", concept: "quello/quella (deissi lontana)", pos: "DET" },
+    { category: "Pronomi/Grammatica", concept: "non / negazione assoluta", pos: "PART" },
+    { category: "Pronomi/Grammatica", concept: "e / congiunzione coordinante", pos: "CONJ" },
+    { category: "Pronomi/Grammatica", concept: "se / particella ipotetica", pos: "CONJ" },
+    { category: "Pronomi/Grammatica", concept: "sopra / posizione superiore", pos: "PREP" },
+    { category: "Pronomi/Grammatica", concept: "sotto / posizione inferiore", pos: "PREP" },
+    { category: "Pronomi/Grammatica", concept: "dentro / contenimento", pos: "PREP" },
+    
+    // Verbi Universali
+    { category: "Verbi Base", concept: "essere / esistere", pos: "V" },
+    { category: "Verbi Base", concept: "avere / possedere", pos: "V" },
+    { category: "Verbi Base", concept: "mangiare / nutrirsi", pos: "V" },
+    { category: "Verbi Base", concept: "bere / assorbire liquidi", pos: "V" },
+    { category: "Verbi Base", concept: "dormire / riposare stato di torpore", pos: "V" },
+    { category: "Verbi Base", concept: "vedere / percepire visivamente", pos: "V" },
+    { category: "Verbi Base", concept: "udire / percepire suoni", pos: "V" },
+    { category: "Verbi Base", concept: "camminare / muoversi via terra", pos: "V" },
+    { category: "Verbi Base", concept: "parlare / emettere significato", pos: "V" },
+    { category: "Verbi Base", concept: "morire / cessare la vita", pos: "V" },
+    { category: "Verbi Base", concept: "uccidere / togliere la vita", pos: "V" },
+    { category: "Verbi Base", concept: "dare / trasferire possesso", pos: "V" },
+    
+    // Modificatori/Aggettivi Universali
+    { category: "Aggettivi", concept: "grande / di vaste dimensioni", pos: "ADJ" },
+    { category: "Aggettivi", concept: "piccolo / di ridotte dimensioni", pos: "ADJ" },
+    { category: "Aggettivi", concept: "buono / favorevole / valido", pos: "ADJ" },
+    { category: "Aggettivi", concept: "cattivo / ostile / dannoso", pos: "ADJ" },
+    { category: "Aggettivi", concept: "caldo / temperatura elevata", pos: "ADJ" },
+    { category: "Aggettivi", concept: "freddo / assenza di calore", pos: "ADJ" },
+    { category: "Aggettivi", concept: "nuovo / recente", pos: "ADJ" },
+    { category: "Aggettivi", concept: "vecchio / antico / consumato", pos: "ADJ" }
 ];
 
-let currentLexicon = {};
+const CULTURAL_MODULES = {
+    primitive: [
+        { category: "Natura/Sostentamento", concept: "fuoco di campo / fonte primaria di calore", pos: "N" },
+        { category: "Natura/Sostentamento", concept: "traccia / orma lasciata da preda", pos: "N" },
+        { category: "Natura/Sostentamento", concept: "pelle di animale lavorata / riparo primario", pos: "N" },
+        { category: "Natura/Sostentamento", concept: "lancia / utensile per la caccia a fendente", pos: "N" },
+        { category: "Verbi Culturali", concept: "inseguire la preda fino allo sfinimento", pos: "V" },
+        { category: "Verbi Culturali", concept: "evocare gli spiriti della natura/antenati", pos: "V" },
+        { category: "Concetti Complessi", concept: "il silenzio che precede l'attacco di un predatore", pos: "N" },
+        { category: "Anatomia", concept: "sangue vitale / fluido di forza", pos: "N" }
+    ],
+    ancient: [
+        { category: "Società/Antichità", concept: "città fortificata / insediamento murato", pos: "N" },
+        { category: "Società/Antichità", concept: "re / capo supremo consacrato dagli dei", pos: "N" },
+        { category: "Società/Antichità", concept: "sacerdote / interprete dei presagi", pos: "N" },
+        { category: "Società/Antichità", concept: "bronzo / metallo lavorato per armi e vasi", pos: "N" },
+        { category: "Società/Antichità", concept: "tributo / offerta dovuta al sovrano", pos: "N" },
+        { category: "Verbi Culturali", concept: "scolpire nella pietra / rendere eterno", pos: "V" },
+        { category: "Concetti Complessi", concept: "il destino ineluttabile stabilito dalle divinità", pos: "N" },
+        { category: "Militare", concept: "schiera di fanti / falange di combattimento", pos: "N" }
+    ],
+    medieval: [
+        { category: "Feudalesimo/Guerra", concept: "fortezza / castello di pietra sovrano", pos: "N" },
+        { category: "Feudalesimo/Guerra", concept: "cavaliere / guerriero vincolato da giuramento", pos: "N" },
+        { category: "Feudalesimo/Guerra", concept: "spada d'acciaio tempra doppia", pos: "N" },
+        { category: "Feudalesimo/Guerra", concept: "giuramento di fedeltà vasallatica", pos: "N" },
+        { category: "Verbi Culturali", concept: "spostare l'accampamento prima dell'alba", pos: "V" },
+        { category: "Verbi Culturali", concept: "riscattare un prigioniero di alto rango", pos: "V" },
+        { category: "Concetti Complessi", concept: "l'onore preservato attraverso la vendetta di sangue", pos: "N" },
+        { category: "Economia", concept: "moneta d'argento / conio d'autorità", pos: "N" }
+    ],
+    renaissance: [
+        { category: "Erudizione/Arte", concept: "accademia / luogo del sapere razionale", pos: "N" },
+        { category: "Erudizione/Arte", concept: "stampa / saggio scritto riproducibile", pos: "N" },
+        { category: "Erudizione/Arte", concept: "telescopio / strumento per osservare le stelle", pos: "N" },
+        { category: "Erudizione/Arte", concept: "prospettiva / proporzione armonica della vista", pos: "N" },
+        { category: "Verbi Culturali", concept: "analizzare / scomporre un fenomeno in elementi", pos: "V" },
+        { category: "Verbi Culturali", concept: "finanziare un'esplorazione / patrocinare", pos: "V" },
+        { category: "Concetti Complessi", concept: "la ricerca della conoscenza senza vincoli dogmatici", pos: "N" },
+        { category: "Scienza Primordiale", concept: "alchimia / trasmutazione della materia", pos: "N" }
+    ],
+    alien: [
+        { category: "Fisiologia Non-Umana", concept: "organo bio-luminescente di comunicazione", pos: "N" },
+        { category: "Fisiologia Non-Umana", concept: "esoscheletro chitinoso protettivo", pos: "N" },
+        { category: "Ambiente Extraterrestre", concept: "plasma atmosferico energetico", pos: "N" },
+        { category: "Tecnologia/Mente", concept: "connessione mentale collettiva / rete neurale", pos: "N" },
+        { category: "Verbi Non-Umani", concept: "sintonizzare la frequenza di pensiero con un conspecifico", pos: "V" },
+        { category: "Verbi Non-Umani", concept: "mutare pigmentazione per mascheramento", pos: "V" },
+        { category: "Concetti Complessi", concept: "la percezione del tempo come dimensione spaziale percorribile", pos: "N" },
+        { category: "Orientamento", concept: "vettore di spinta gravitazionale locale", pos: "N" }
+    ]
+};
+
+const PHONETIC_PROFILES = {
+    none: { v: ['a', 'e', 'i', 'o', 'u'], c: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l'], syll: ['CV', 'CVC'] },
+    musical: { v: ['a', 'e', 'i', 'ia', 'ea'], c: ['l', 'r', 'm', 'n', 'v', 's', 'j'], syll: ['CV', 'V'] },
+    dark: { v: ['u', 'o', 'y'], c: ['k', 'g', 'q', 'x', 'z', 'r', 'kh'], syll: ['CVC', 'CCV'] },
+    magic: { v: ['a', 'i', 'e', 'ae'], c: ['s', 'sh', 'h', 'f', 'l', 'm', 'th'], syll: ['CV', 'CVC'] },
+    harsh: { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr', 'kr'], syll: ['CCVC', 'CVCC'] },
+    aquatic: { v: ['a', 'i', 'u', 'o'], c: ['m', 'n', 'l', 'w', 'f', 'v', 'bh'], syll: ['CV', 'CVC'] }
+};
+
+let currentConlangData = null;
 
 function getRandom(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
@@ -214,59 +303,94 @@ function generateWord(vowels, consonants, syllStructures) {
     return word;
 }
 
-function buildConlang(config) {
-    let v = config.vowels.length ? config.vowels : DB_PHONETICS.vowels;
-    let c = config.consonants.length ? config.consonants : DB_PHONETICS.consonants;
-    let syll = ['CV', 'CVC'];
+function buildFullConlang(config) {
+    let v = config.vowels.length ? config.vowels : PHONETIC_PROFILES[config.desc].v;
+    let c = config.consonants.length ? config.consonants : PHONETIC_PROFILES[config.desc].c;
+    let syll = PHONETIC_PROFILES[config.desc].syll;
     let order = 'SVO';
 
-    if (config.desc && PROFILES_DESC[config.desc]) {
-        const prof = PROFILES_DESC[config.desc];
-        v = prof.vowels;
-        c = prof.consonants;
-        syll = prof.syll;
-    }
-
-    if (config.culture === 'ancient') order = 'SOV';
+    if (config.culture === 'ancient' || config.culture === 'primitive') order = 'SOV';
+    if (config.culture === 'alien') order = 'OVS';
     if (config.culture === 'primitive') syll = ['CV'];
-    if (config.culture === 'alien') {
-        c = ['z\'', 'k\'', 'x', 'r\'', 'q'];
+
+    if (config.culture === 'alien' && !config.vowels.length) {
+        c = ['z\'', 'k\'', 'x', 'r\'', 'q', 'tx'];
         v = ['i\'', 'u\'', 'a\''];
     }
 
-    let lexicon = {};
-    BASE_WORDS.forEach(w => {
+    // Unione del nucleo universale con il modulo culturale
+    const activeConcepts = [...CORE_UNIVERSALS, ...(CULTURAL_MODULES[config.culture] || CULTURAL_MODULES.primitive)];
+
+    // Se la cultura è gerarchica, aggiungi termini di rispetto
+    if (config.socio === 'hierarchical') {
+        activeConcepts.push(
+            { category: "Sociolinguistica", concept: "tu (2a pers. sing. formale / ad alto rango)", pos: "PRON" },
+            { category: "Sociolinguistica", concept: "suffisso di sottomissione/rispetto per verbi", pos: "AFFIX" }
+        );
+    } else if (config.socio === 'caste') {
+        activeConcepts.push(
+            { category: "Sociolinguistica", concept: "parola tabù per indicare gli estranei/non iniziati", pos: "N" },
+            { category: "Sociolinguistica", concept: "marcatore di segretezza per rituali", pos: "PART" }
+        );
+    }
+
+    let lexicon = [];
+    let usedWords = new Set();
+
+    activeConcepts.forEach(item => {
         let generated;
         do {
             generated = generateWord(v, c, syll);
-        } while (Object.values(lexicon).includes(generated));
-        lexicon[w] = generated;
+        } while (usedWords.has(generated));
+        
+        usedWords.add(generated);
+
+        lexicon.push({
+            parola: generated,
+            categoria: item.category,
+            significato: item.concept,
+            pos: item.pos
+        });
     });
 
-    currentLexicon = lexicon;
+    currentConlangData = {
+        metadata: {
+            ordineSintattico: order,
+            strutturaSillabica: syll.join(', '),
+            vocali: v,
+            consonanti: c,
+            stile: config.desc,
+            assettoSociolinguistico: config.socio,
+            ambienteCulturale: config.culture
+        },
+        lexicon: lexicon
+    };
 
-    let text = `=== PROFILO CONLANG ===\n`;
-    text += `Ordine sintattico: ${order}\n`;
-    text += `Struttura sillabica: ${syll.join(', ')}\n`;
-    text += `Inventario Vocali: [${v.join(', ')}]\n`;
-    text += `Inventario Consonanti: [${c.join(', ')}]\n\n`;
+    // Formattazione Output
+    let text = `=== ARCHITETTURA DEL SISTEMA LINGUISTICO ===\n`;
+    text += `Ambiente Socio-Temporale : ${config.culture.toUpperCase()}\n`;
+    text += `Profilo Estetico         : ${config.desc.toUpperCase()}\n`;
+    text += `Assetto Sociolinguistico : ${config.socio.toUpperCase()}\n`;
+    text += `Ordine Sintattico Canonico: ${order}\n`;
+    text += `Struttura Sillabica      : ${syll.join(', ')}\n`;
+    text += `Inventario Vocali        : [${v.join(', ')}]\n`;
+    text += `Inventario Consonanti    : [${c.join(', ')}]\n\n`;
 
-    if (config.socio === 'hierarchical') {
-        text += `Regola Sociolinguistica: Aggiungere il suffisso '-tha' per forme di rispetto/onorifici.\n\n`;
-    }
+    text += `=== VOCABOLARIO E GRAMMATICA ADATTIVA (${lexicon.length} Termini Generati) ===\n`;
+    text += `${"TERMINE".padEnd(16, ' ')} | ${"POS".padEnd(6, ' ')} | ${"CATEGORIA".padEnd(22, ' ')} | GLOSSA / CONCETTO\n`;
+    text += `-`.repeat(85) + `\n`;
 
-    text += `=== DIZIONARIO BASE ===\n`;
-    for (let [ita, con] of Object.entries(lexicon)) {
-        text += `${ita.padEnd(10, ' ')} : ${con}\n`;
-    }
+    lexicon.forEach(entry => {
+        text += `${entry.parola.padEnd(16, ' ')} | ${entry.pos.padEnd(6, ' ')} | ${entry.categoria.padEnd(22, ' ')} | ${entry.significato}\n`;
+    });
 
     return text;
 }
 
 function generateRandomConlang() {
-    const descs = ['none', 'musical', 'dark', 'magic', 'harsh'];
-    const socios = ['egalitarian', 'hierarchical'];
-    const cultures = ['ancient', 'primitive', 'alien'];
+    const descs = ['none', 'musical', 'dark', 'magic', 'harsh', 'aquatic'];
+    const socios = ['egalitarian', 'hierarchical', 'caste'];
+    const cultures = ['primitive', 'ancient', 'medieval', 'renaissance', 'alien'];
 
     const config = {
         vowels: [],
@@ -276,7 +400,7 @@ function generateRandomConlang() {
         culture: getRandom(cultures)
     };
 
-    document.getElementById('output').innerText = buildConlang(config);
+    document.getElementById('output').innerText = buildFullConlang(config);
 }
 
 function generateCustomConlang() {
@@ -291,33 +415,33 @@ function generateCustomConlang() {
         culture: document.getElementById('culture').value
     };
 
-    document.getElementById('output').innerText = buildConlang(config);
+    document.getElementById('output').innerText = buildFullConlang(config);
 }
 
 function exportJSON() {
-    if (Object.keys(currentLexicon).length === 0) {
-        return alert("Errore: Genera prima un conlang.");
+    if (!currentConlangData) {
+        return alert("Errore: Genera prima una conlang.");
     }
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentLexicon, null, 2));
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentConlangData, null, 2));
     const btn = document.createElement('a');
     btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", "dizionario_conlang.json");
+    btn.setAttribute("download", `conlang_${currentConlangData.metadata.ambienteCulturale}.json`);
     document.body.appendChild(btn);
     btn.click();
     btn.remove();
 }
 
 function exportCSV() {
-    if (Object.keys(currentLexicon).length === 0) {
-        return alert("Errore: Genera prima un conlang.");
+    if (!currentConlangData) {
+        return alert("Errore: Genera prima una conlang.");
     }
-    let csvContent = "data:text/csv;charset=utf-8,Italiano,Conlang\n";
-    for (let [ita, con] of Object.entries(currentLexicon)) {
-        csvContent += `${ita},${con}\n`;
-    }
+    let csvContent = "data:text/csv;charset=utf-8,Termine,POS,Categoria,Glossa_Significato\n";
+    currentConlangData.lexicon.forEach(item => {
+        csvContent += `"${item.parola}","${item.pos}","${item.categoria}","${item.significato}"\n`;
+    });
     const btn = document.createElement("a");
     btn.setAttribute("href", encodeURI(csvContent));
-    btn.setAttribute("download", "dizionario_conlang.csv");
+    btn.setAttribute("download", `conlang_${currentConlangData.metadata.ambienteCulturale}.csv`);
     document.body.appendChild(btn);
     btn.click();
     btn.remove();
