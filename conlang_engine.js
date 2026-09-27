@@ -1,6 +1,6 @@
 /**
  * Conlang Engine Studio
- * Version: 1.0.0
+ * Version: 1.1.0
  * Architecture: Procedural Phonotactic & Semantic Generator
  */
 
@@ -46,6 +46,7 @@ const ContextualLexicon = {
 class ConlangEngine {
     constructor() {
         this.currentConfig = {};
+        this.lastGeneratedData = null;
     }
 
     generatePhonotacticWord(minSyllables = 1, maxSyllables = 3) {
@@ -125,7 +126,17 @@ class ConlangEngine {
             dialogues.push(dialogueLines);
         }
 
-        return { vocabulary, sentences, dialogues };
+        this.lastGeneratedData = {
+            metadata: {
+                generatedAt: new Date().toISOString(),
+                configuration: config
+            },
+            vocabulary,
+            sentences,
+            dialogues
+        };
+
+        return this.lastGeneratedData;
     }
 }
 
@@ -135,6 +146,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const quickBtn = document.getElementById('quick-generate-btn');
     const customBtn = document.getElementById('custom-generate-btn');
+    const exportJsonBtn = document.getElementById('export-json-btn');
+    const copyJsonBtn = document.getElementById('copy-json-btn');
 
     const descPreset = document.getElementById('descriptive-preset');
     const cultPreset = document.getElementById('cultural-preset');
@@ -210,6 +223,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     customBtn.addEventListener('click', () => {
         executeGeneration(getFormConfig());
+    });
+
+    // Download JSON File
+    exportJsonBtn.addEventListener('click', () => {
+        if (!engine.lastGeneratedData) return;
+        
+        const jsonString = JSON.stringify(engine.lastGeneratedData, null, 2);
+        const blob = new Blob([jsonString], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `conlang-export-${Date.now()}.json`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    });
+
+    // Copy JSON to Clipboard
+    copyJsonBtn.addEventListener('click', () => {
+        if (!engine.lastGeneratedData) return;
+        
+        const jsonString = JSON.stringify(engine.lastGeneratedData, null, 2);
+        navigator.clipboard.writeText(jsonString).then(() => {
+            const originalText = copyJsonBtn.textContent;
+            copyJsonBtn.textContent = 'Copied!';
+            setTimeout(() => {
+                copyJsonBtn.textContent = originalText;
+            }, 2000);
+        }).catch(err => {
+            console.error('Failed to copy JSON: ', err);
+        });
     });
 
     // Tab Navigation Logic
