@@ -247,13 +247,22 @@
         .grammar-item strong {
             color: #f1f5f9;
         }
+
+        .section-header {
+            font-weight: bold;
+            color: var(--accent);
+            margin: 1rem 0 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.2rem;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Conlang Generator Studio <span id="conlang-title-badge" class="lang-name-badge">Language: Unnamed</span></h1>
-        <span class="version-tag">v1.6.0</span>
+        <span class="version-tag">v2.1.0</span>
     </header>
 
     <div class="main-container">
@@ -289,7 +298,7 @@
             <div class="form-group">
                 <label for="sociological-preset">Sociolinguistic Context</label>
                 <select id="sociological-preset">
-                    <option value="egalitarian">Egalitarian Nomads</option>
+                    <option value="egalitarian">Tribal / Communal Egalitarianism</option>
                     <option value="hierarchical">Hierarchical Feudalism</option>
                     <option value="mercantile">Mercantile Trade Society</option>
                     <option value="monastic">Isolationist Monastic</option>
@@ -361,7 +370,7 @@
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="tab-grammar">Grammar Profile</button>
                     <button class="tab-btn" data-tab="tab-words">Vocabulary (600)</button>
-                    <button class="tab-btn" data-tab="tab-sentences">Sentences (50)</button>
+                    <button class="tab-btn" data-tab="tab-sentences">Sentences (100)</button>
                     <button class="tab-btn" data-tab="tab-dialogues">Dialogues (20)</button>
                 </div>
                 
