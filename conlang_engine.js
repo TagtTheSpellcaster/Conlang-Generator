@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 1.6.0
- * Architecture: Anthropological Alignment, Clean Root Lexicon & Strict Phonotactics
+ * Version: 2.1.0
+ * Architecture: Separated Runtime Engine, Procedural Word-Order Generator & Categorized Survival Phrase Generator
  */
 
 const Phonetics = {
@@ -56,26 +56,26 @@ const ContextualLexicon = {
         "he (third person singular masculine)",
         "she (third person singular feminine)", 
         "it (third person singular neuter)", 
-        "we (inclusive: speaker + listener)", 
-        "we (exclusive: speaker + others, excluding listener)",
-        "they (proximate / present within hearth or circle)", 
-        "they (obviate / absent / distant group)", 
-        "they (ancestral / tribal elders respect mark)",
-        "they (collective / inanimate or natural forces)"
+        "we (inclusive)", 
+        "we (exclusive)",
+        "they (proximate / present)", 
+        "they (obviate / absent)", 
+        "they (ancestral / elders)",
+        "they (collective)"
     ],
     possessives: [
-        "my / mine", "your / yours (singular)", "his", "her / hers", "its", "our / ours", "their / theirs"
+        "my / mine", "your / yours", "his", "her / hers", "its", "our / ours", "their / theirs"
     ],
     grammatical: [
-        "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for", "this (proximate)", "that (distal)"
+        "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for", "this", "that"
     ],
     culturalModifiers: {
-        medieval: { nouns: ["feud", "castle", "knight", "honor", "vassal", "lance", "crown"], verbs: ["joust", "pledge"], adjectives: ["noble", "feudal"] },
-        ancient: { nouns: ["empire", "chariot", "oracle", "bronze", "tomb", "papyrus"], verbs: ["conquer", "annoint"], adjectives: ["imperial", "archaic"] },
-        primitive: { nouns: ["hunt", "tribe", "cave", "flint", "pelt", "totem"], verbs: ["track", "gather"], adjectives: ["savage", "primal"] },
-        renaissance: { nouns: ["art", "guild", "patron", "cannon", "sail", "monarch"], verbs: ["paint", "navigate"], adjectives: ["erudite", "ornate"] },
-        african: { nouns: ["savanna", "spirit", "ancestor", "drum", "elder", "drought"], verbs: ["praise", "resonate"], adjectives: ["ancestral", "arid"] },
-        alien: { nouns: ["plasma", "void", "hive", "orbit", "core", "nexus"], verbs: ["synthesize", "warp"], adjectives: ["astral", "synthetic"] }
+        medieval: { nouns: ["feud", "castle", "knight", "honor", "vassal", "lance", "crown", "inn", "horse", "guard", "coin"], verbs: ["joust", "pledge", "rest"], adjectives: ["noble", "feudal"] },
+        ancient: { nouns: ["empire", "chariot", "oracle", "bronze", "tomb", "papyrus", "forum", "guard", "gold"], verbs: ["conquer", "annoint", "rest"], adjectives: ["imperial", "archaic"] },
+        primitive: { nouns: ["hunt", "tribe", "cave", "flint", "pelt", "totem", "spring", "beast", "fire"], verbs: ["track", "gather", "rest"], adjectives: ["savage", "primal"] },
+        renaissance: { nouns: ["art", "guild", "patron", "cannon", "sail", "monarch", "shop", "coin", "map"], verbs: ["paint", "navigate", "rest"], adjectives: ["erudite", "ornate"] },
+        african: { nouns: ["savanna", "spirit", "ancestor", "drum", "elder", "drought", "well", "beast"], verbs: ["praise", "resonate", "rest"], adjectives: ["ancestral", "arid"] },
+        alien: { nouns: ["plasma", "void", "hive", "orbit", "core", "nexus", "station", "ship", "guard"], verbs: ["synthesize", "warp", "rest"], adjectives: ["astral", "synthetic"] }
     }
 };
 
@@ -84,6 +84,7 @@ class ConlangEngine {
         this.currentConfig = {};
         this.usedWords = new Set();
         this.lastGeneratedData = null;
+        this.lexiconMap = new Map();
     }
 
     boxMullerRandom() {
@@ -151,25 +152,139 @@ class ConlangEngine {
         return name;
     }
 
+    // Costruttore di frasi procedurali a nodi funzionali
+    generateProceduralPhraseCategory(categoryIndex, count, culture, wordOrder, articles, caseSuffix, suffix) {
+        const phrases = [];
+        
+        const culturalShelterMap = {
+            primitive: { shelter: "cave", guard: "beast", coin: "flint", guide: "totem", water: "spring" },
+            medieval: { shelter: "inn", guard: "guard", coin: "coin", guide: "castle", water: "well" },
+            ancient: { shelter: "tomb", guard: "guard", coin: "gold", guide: "forum", water: "river" },
+            renaissance: { shelter: "shop", guard: "guard", coin: "coin", guide: "guild", water: "river" },
+            african: { shelter: "savanna", guard: "elder", coin: "drum", guide: "ancestor", water: "well" },
+            alien: { shelter: "station", guard: "hive", coin: "core", guide: "nexus", water: "plasma" }
+        };
+
+        const ctx = culturalShelterMap[culture] || culturalShelterMap.medieval;
+
+        const templates = {
+            // Cat 1: Saluti, Identità e Interazione Base (20)
+            0: [
+                { s: "peace", v: "be", o: "you", eng: "Peace be with you." },
+                { s: "I", v: "be", o: "person", eng: "I am a person of this land." },
+                { s: "you", v: "speak", o: "word", eng: "You speak known words." },
+                { s: "my", v: "be", o: "friend", eng: "My friend is here." },
+                { s: "I", v: "know", o: "not", eng: "I do not know." }
+            ],
+            // Cat 2: Orientamento, Spostamenti e Direzioni (20)
+            1: [
+                { s: "where", v: "be", o: ctx.shelter, eng: `Where is the ${ctx.shelter}?` },
+                { s: "I", v: "walk", o: ctx.guide, eng: `I walk towards the ${ctx.guide}.` },
+                { s: "river", v: "be", o: "far", eng: "The river is far from here." },
+                { s: "you", v: "see", o: "path", eng: "Do you see the right path?" },
+                { s: "we", v: "stop", o: "here", eng: "We stop here immediately." }
+            ],
+            // Cat 3: Bisogni Primari, Cibo e Alloggio (20)
+            2: [
+                { s: "I", v: "have", o: "hunger", eng: "I have hunger and need food." },
+                { s: "where", v: "find", o: ctx.water, eng: `Where can I find ${ctx.water}?` },
+                { s: "we", v: "need", o: ctx.shelter, eng: `We need a safe ${ctx.shelter} for night.` },
+                { s: "food", v: "be", o: "good", eng: "This food is good." },
+                { s: "I", v: "drink", o: "water", eng: "I wish to drink water." }
+            ],
+            // Cat 4: Commercio, Scambio e Acquisti (15)
+            3: [
+                { s: "what", v: "cost", o: ctx.coin, eng: `How much ${ctx.coin} does this cost?` },
+                { s: "I", v: "take", o: "trade", eng: "I take this trade item." },
+                { s: "you", v: "give", o: ctx.coin, eng: `You give the ${ctx.coin}.` },
+                { s: "this", v: "be", o: "great", eng: "This object is of great value." },
+                { s: "I", v: "have", o: "no", eng: "I have no goods to trade." }
+            ],
+            // Cat 5: Emergenze, Salute e Sicurezza (15)
+            4: [
+                { s: "help", v: "be", o: "need", eng: "Help is needed immediately!" },
+                { s: "call", v: "see", o: ctx.guard, eng: `Call the ${ctx.guard}!` },
+                { s: "fire", v: "be", o: "danger", eng: "Fire brings great danger!" },
+                { s: "I", v: "have", o: "blood", eng: "I am wounded and bleeding." },
+                { s: "beast", v: "run", o: "fast", eng: "The wild beast runs fast!" }
+            ],
+            // Cat 6: Socialità e Small Talk (10)
+            5: [
+                { s: "sun", v: "be", o: "bright", eng: "The sun is bright today." },
+                { s: "night", v: "be", o: "cold", eng: "The night is cold and dark." },
+                { s: "you", v: "be", o: "wise", eng: "You are a wise person." },
+                { s: "we", v: "live", o: "peace", eng: "We live in peace together." },
+                { s: "day", v: "come", o: "fast", eng: "A new day comes fast." }
+            ]
+        };
+
+        const pool = templates[categoryIndex] || templates[0];
+
+        for (let i = 0; i < count; i++) {
+            const baseObj = pool[i % pool.length];
+            
+            const getLex = (key) => {
+                const found = this.lexiconMap.get(key.toLowerCase());
+                return found || this.generatePhonotacticWord(2, false, false);
+            };
+
+            let sTerm = getLex(baseObj.s);
+            let vTerm = getLex(baseObj.v);
+            let oTerm = getLex(baseObj.o);
+
+            if (this.currentConfig.grammarStrategy === 'cases') {
+                sTerm += caseSuffix;
+            }
+
+            if (this.currentConfig.morphologyType === 'agglutinative' && Math.random() > 0.6) {
+                vTerm = vTerm + '-' + suffix;
+            }
+
+            // Assemblaggio in base all'ordine dei costituenti procedurale
+            let cWords = [];
+            for (let char of wordOrder) {
+                if (char === 'S') cWords.push(sTerm);
+                if (char === 'V') cWords.push(vTerm);
+                if (char === 'O') cWords.push(oTerm);
+            }
+
+            if (articles.definite && Math.random() > 0.5) {
+                cWords.unshift(articles.definite);
+            }
+
+            const conlangStr = cWords.join(' ');
+            phrases.push({
+                conlang: conlangStr.charAt(0).toUpperCase() + conlangStr.slice(1) + '.',
+                english: baseObj.eng
+            });
+        }
+
+        return phrases;
+    }
+
     buildDataset(config) {
         this.currentConfig = config;
         this.usedWords.clear();
+        this.lexiconMap.clear();
 
         const langName = this.generateLanguageName();
 
-        // Alignment sociolinguistico antropologico
         let resolvedSociology = config.sociology;
         if (config.sociology === 'egalitarian') {
-            resolvedSociology = 'Tribal / Communal Egalitarianism (Deictic & Kinship Focus)';
+            resolvedSociology = 'Tribal / Communal Egalitarianism (Deictic Focus)';
         }
+
+        // Generazione procedurale dell'ordine delle parole (SVO, SOV, VSO, VOS, OVS, OSV)
+        const wordOrderPermutations = ['SVO', 'SOV', 'VSO', 'VOS', 'OVS', 'OSV'];
+        const wordOrder = wordOrderPermutations[Math.floor(Math.random() * wordOrderPermutations.length)];
 
         const prefix = this.generatePhonotacticWord(1, true);
         const suffix = this.generatePhonotacticWord(1, true);
         const caseSuffix = this.generatePhonotacticWord(1, true);
 
         const affixSemantics = {
-            prefix: { form: prefix, meaning: "Agentive / Nominalizer (indicates 'one who performs an action' or 'origin')" },
-            suffix: { form: suffix, meaning: "Intensive / Augmentative (indicates 'great', 'major', or 'extended state of')" }
+            prefix: { form: prefix, meaning: "Agentive / Nominalizer (origin / actor)" },
+            suffix: { form: suffix, meaning: "Intensive / Augmentative (great / extended state)" }
         };
 
         const articles = {};
@@ -185,60 +300,29 @@ class ConlangEngine {
 
         const vocabulary = [];
 
-        // 1. STRUTTURALI E PRONOMI IN TESTA AL DIZIONARIO
-        if (articles.definite) {
-            vocabulary.push({ conlang: articles.definite, english: "the (definite article)", category: "Article" });
-        }
-        if (articles.indefinite) {
-            vocabulary.push({ conlang: articles.indefinite, english: "a / an (indefinite article)", category: "Article" });
-        }
-        if (articles.partitive) {
-            vocabulary.push({ conlang: articles.partitive, english: "some / part of (partitive article)", category: "Article" });
-        }
-        if (config.grammarStrategy === 'cases') {
-            vocabulary.push({ conlang: `-${caseSuffix}`, english: "[Nominative Subject Suffix]", category: "Case Suffix" });
-        }
+        const registerWord = (english, category, isGrammatical = false, isCore = false) => {
+            const syllables = isGrammatical ? 1 : (isCore ? 1 : config.meanLength + (this.boxMullerRandom() * config.stdDev));
+            const conlangWord = this.generatePhonotacticWord(syllables, isGrammatical, isCore);
+            const entry = { conlang: conlangWord, english: english, category: category };
+            vocabulary.push(entry);
+            const key = english.toLowerCase().split('(')[0].trim();
+            this.lexiconMap.set(key, conlangWord);
+            return conlangWord;
+        };
 
-        ContextualLexicon.pronouns.forEach(p => {
-            vocabulary.push({
-                conlang: this.generatePhonotacticWord(1, true),
-                english: p,
-                category: "Pronoun"
-            });
-        });
+        // 1. STRUTTURALI IN TESTA AL DIZIONARIO
+        if (articles.definite) registerWord("the (definite article)", "Article", true);
+        if (articles.indefinite) registerWord("a / an (indefinite article)", "Article", true);
+        if (articles.partitive) registerWord("some / part of (partitive article)", "Article", true);
+        if (config.grammarStrategy === 'cases') registerWord("[Nominative Subject Suffix]", "Case Suffix", true);
 
-        ContextualLexicon.possessives.forEach(p => {
-            vocabulary.push({
-                conlang: this.generatePhonotacticWord(1, true),
-                english: p,
-                category: "Possessive"
-            });
-        });
-
-        ContextualLexicon.grammatical.forEach(g => {
-            vocabulary.push({
-                conlang: this.generatePhonotacticWord(1, true),
-                english: g,
-                category: "Grammatical Word"
-            });
-        });
+        ContextualLexicon.pronouns.forEach(p => registerWord(p, "Pronoun", true));
+        ContextualLexicon.possessives.forEach(p => registerWord(p, "Possessive", true));
+        ContextualLexicon.grammatical.forEach(g => registerWord(g, "Grammatical Word", true));
 
         // 2. RADICI PRIMORDIALI
-        ContextualLexicon.coreNouns.forEach(cn => {
-            vocabulary.push({
-                conlang: this.generatePhonotacticWord(1, false, true),
-                english: cn,
-                category: "Noun"
-            });
-        });
-
-        ContextualLexicon.coreVerbs.forEach(cv => {
-            vocabulary.push({
-                conlang: this.generatePhonotacticWord(1, false, true),
-                english: cv,
-                category: "Verb"
-            });
-        });
+        ContextualLexicon.coreNouns.forEach(cn => registerWord(cn, "Noun", false, true));
+        ContextualLexicon.coreVerbs.forEach(cv => registerWord(cv, "Verb", false, true));
 
         // 3. LESSICO ORDINARIO POLISILLABICO (Radici Pulite)
         const categories = [
@@ -260,74 +344,40 @@ class ConlangEngine {
                 else if (cat.type === 'Adjective') uniqueConcept = `${rawConcept} (relational aspect ${cycle + 1})`;
             }
 
-            const sampleSyllables = config.meanLength + (this.boxMullerRandom() * config.stdDev);
-            const cleanRoot = this.generatePhonotacticWord(sampleSyllables, false, false);
-
-            vocabulary.push({
-                conlang: cleanRoot,
-                english: uniqueConcept,
-                category: cat.type
-            });
-
+            registerWord(uniqueConcept, cat.type, false, false);
             index++;
         }
 
-        // Generazione Frasi e Dialoghi
+        // 4. GENERAZIONE DELLE 100 FRASI PROCEDURALI RIGIDAMENTE CATEGORIZZATE
+        const sentenceCategories = [
+            { title: "1. Greetings, Identity & Basic Interaction", count: 20 },
+            { title: "2. Navigation, Movement & Directions", count: 20 },
+            { title: "3. Primary Needs, Sustenance & Lodging", count: 20 },
+            { title: "4. Trade, Commerce & Purchases", count: 15 },
+            { title: "5. Emergencies, Health & Safety", count: 15 },
+            { title: "6. Sociality & Small Talk", count: 10 }
+        ];
+
         const sentences = [];
-        const nouns = vocabulary.filter(v => v.category === 'Noun');
-        const verbs = vocabulary.filter(v => v.category === 'Verb');
-        const adjs = vocabulary.filter(v => v.category === 'Adjective');
-
-        for (let i = 0; i < 50; i++) {
-            const n = nouns[i % nouns.length];
-            const v = verbs[i % verbs.length];
-            const a = adjs[i % adjs.length];
-
-            let cWords = [];
-            let eWords = [];
-
-            if (articles.definite && Math.random() > 0.4) {
-                cWords.push(articles.definite);
-                eWords.push("the");
-            }
-
-            let adjForm = a.conlang;
-            if (config.morphologyType === 'agglutinative' && Math.random() > 0.7) {
-                adjForm = adjForm + '-' + suffix;
-            }
-            cWords.push(adjForm);
-            eWords.push(a.english.split('(')[0].trim());
-
-            let subj = n.conlang;
-            if (config.grammarStrategy === 'cases') {
-                subj += caseSuffix;
-            }
-            cWords.push(subj);
-            eWords.push(n.english.split('(')[0].trim());
-
-            let verbForm = v.conlang;
-            if (config.morphologyType === 'agglutinative' && Math.random() > 0.7) {
-                verbForm = prefix + '-' + verbForm;
-            }
-            cWords.push(verbForm);
-            eWords.push(v.english.split('(')[0].trim());
-
-            const cStr = cWords.join(' ');
-            const eStr = eWords.join(' ');
-
-            sentences.push({
-                conlang: cStr.charAt(0).toUpperCase() + cStr.slice(1) + '.',
-                english: eStr.charAt(0).toUpperCase() + eStr.slice(1) + '.'
+        sentenceCategories.forEach((catInfo, catIdx) => {
+            const generatedPhrases = this.generateProceduralPhraseCategory(
+                catIdx, catInfo.count, config.culture, wordOrder, articles, caseSuffix, suffix
+            );
+            generatedPhrases.forEach(p => {
+                sentences.push({ ...p, sectionTitle: catInfo.title });
             });
-        }
+        });
 
+        // 5. GENERAZIONE 20 DIALOGHI ADATTIVI
         const dialogues = [];
         for (let i = 0; i < 20; i++) {
             const dialogueLines = [];
             const turns = Math.floor(Math.random() * 3) + 2;
+            const baseIdx = (i * 4) % sentences.length;
+
             for (let t = 0; t < turns; t++) {
                 const speaker = t % 2 === 0 ? "Speaker A" : "Speaker B";
-                const sentenceObj = sentences[Math.floor(Math.random() * sentences.length)];
+                const sentenceObj = sentences[(baseIdx + t) % sentences.length];
                 dialogueLines.push({
                     speaker: speaker,
                     conlang: sentenceObj.conlang,
@@ -348,7 +398,7 @@ class ConlangEngine {
                 ipaVowels: vowelsList.map(v => Phonetics.ipaMap[v] || `/${v}/`),
                 ipaConsonants: consList.map(c => Phonetics.ipaMap[c] || `/${c}/`),
                 syllableStructures: SyllableStructures[config.aesthetic] || SyllableStructures.musical,
-                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Monosyllabic forms strictly reserved for grammatical items, pronouns, articles, and select core lexemes.`
+                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Monosyllables strictly reserved for grammatical words.`
             },
             morphology: {
                 type: config.morphologyType === 'agglutinative' ? 'Agglutinative (Affix Stacking)' : 'Isolating / Fusional',
@@ -356,10 +406,10 @@ class ConlangEngine {
                     prefix: `${affixSemantics.prefix.form}- : ${affixSemantics.prefix.meaning}`,
                     suffix: `-${affixSemantics.suffix.form} : ${affixSemantics.suffix.meaning}`
                 },
-                inflectionalCases: config.grammarStrategy === 'cases' ? { nominativeSubjectSuffix: `-${caseSuffix} (Marks nominal subject in SVO clauses)` } : 'None (Prepositional Strategy)'
+                inflectionalCases: config.grammarStrategy === 'cases' ? { nominativeSubjectSuffix: `-${caseSuffix}` } : 'None (Prepositional)'
             },
             syntax: {
-                wordOrder: 'Subject-Verb-Object (SVO) / Adjective-Noun Modifier Alignment',
+                wordOrder: `${wordOrder} Alignment`,
                 grammaticalRelations: config.grammarStrategy === 'cases' ? 'Case-Marked Suffixes' : 'Prepositional & Fixed Positional Order',
                 articleSystem: articles
             },
@@ -374,7 +424,7 @@ class ConlangEngine {
             metadata: {
                 generatedAt: new Date().toISOString(),
                 languageName: langName,
-                configuration: { ...config, sociology: resolvedSociology }
+                configuration: { ...config, sociology: resolvedSociology, wordOrder }
             },
             grammar,
             vocabulary,
@@ -386,7 +436,7 @@ class ConlangEngine {
     }
 }
 
-// UI Controller
+// UI Controller & Event Handlers
 document.addEventListener('DOMContentLoaded', () => {
     const engine = new ConlangEngine();
 
@@ -425,6 +475,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderOutput(data) {
         titleBadge.textContent = `Language: ${data.grammar.languageName}`;
 
+        // Render Grammar Profile
         const grammarContainer = document.getElementById('grammar-container');
         const g = data.grammar;
         grammarContainer.innerHTML = `
@@ -437,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         Consonants: ${g.phonology.consonantInventory.join(', ')} (${g.phonology.ipaConsonants.join(' ')})
                     </div>
                     <div class="grammar-item">
-                        <strong>Phonotactics:</strong><br>
+                        <strong>Phonotactics & Syllable Rules:</strong><br>
                         Structures: [${g.phonology.syllableStructures.join(', ')}]<br>
                         ${g.phonology.phonotacticConstraints}
                     </div>
@@ -448,8 +499,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         Suffix: <em>${g.morphology.derivationalAffixes.suffix}</em>
                     </div>
                     <div class="grammar-item">
-                        <strong>Syntax, Pragmatics & Context:</strong><br>
-                        Word Order: ${g.syntax.wordOrder}<br>
+                        <strong>Syntax, Word Order & Context:</strong><br>
+                        Procedural Word Order: <strong>${g.syntax.wordOrder}</strong><br>
                         Articles: ${Object.keys(g.syntax.articleSystem).length > 0 ? JSON.stringify(g.syntax.articleSystem) : 'None'}<br>
                         Sociolinguistics: <em>${g.semanticsAndContext.sociolinguisticContext}</em>
                     </div>
@@ -457,6 +508,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
+        // Render Words (600)
         const wordsContainer = document.getElementById('words-container');
         wordsContainer.innerHTML = data.vocabulary.map(item => `
             <div class="card">
@@ -466,14 +518,26 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
+        // Render Sentences (100 grouped by Category)
         const sentencesContainer = document.getElementById('sentences-container');
-        sentencesContainer.innerHTML = data.sentences.map(item => `
-            <div class="card" style="margin-bottom: 0.8rem;">
-                <div class="conlang-word">${item.conlang}</div>
-                <div class="translation">${item.english}</div>
-            </div>
-        `).join('');
+        let sentencesHTML = '';
+        let currentSection = '';
 
+        data.sentences.forEach((item, idx) => {
+            if (item.sectionTitle !== currentSection) {
+                currentSection = item.sectionTitle;
+                sentencesHTML += `<div class="section-header">${currentSection}</div>`;
+            }
+            sentencesHTML += `
+                <div class="card" style="margin-bottom: 0.6rem;">
+                    <div class="conlang-word">${item.conlang}</div>
+                    <div class="translation">${item.english}</div>
+                </div>
+            `;
+        });
+        sentencesContainer.innerHTML = sentencesHTML;
+
+        // Render Dialogues (20)
         const dialoguesContainer = document.getElementById('dialogues-container');
         dialoguesContainer.innerHTML = data.dialogues.map((dialogue, index) => `
             <div class="dialogue-box">
