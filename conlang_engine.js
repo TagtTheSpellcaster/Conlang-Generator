@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.8.0
- * Features: Sandhi Rules, Phonotactic Assimilation & Grammatical Cleanup
+ * Version: 2.9.0
+ * Features: Natural Lexicon Limits (No Fake Periphrastics), Aspect/Modal Affix Derivation, Sandhi Rules
  */
 
 const Phonetics = {
@@ -141,16 +141,16 @@ class ConlangEngine {
 
         let res = word;
 
-        // Sandhi Interno 1: Fusione di vocali identiche adiacenti (es. aa -> a, iii -> i)
+        // Sandhi Interno 1: Fusione di vocali adiacenti identiche (es. aa -> a)
         res = res.replace(/([aeiouyøæ])\1+/gi, '$1');
 
-        // Sandhi Interno 2: Eliminazione di tripli nessi consonantici complessi
+        // Sandhi Interno 2: Eliminazione di tripli nessi consonantici
         res = res.replace(/([bcdfghjklmnpqrstvwxz])\1{2,}/gi, '$1$1');
 
         // Sandhi Interno 3: Assimilazione nasale regressiva (np -> mp, nk -> ngk)
         res = res.replace(/np/g, 'mp').replace(/nb/g, 'mb').replace(/nk/g, 'ngk');
 
-        // Sandhi Interno 4: Inserimento epentetico per evitare iato diretto tra certe vocali
+        // Sandhi Interno 4: Inserimento epentetico per evitare iato vocalico diretto
         res = res.replace(/ia/g, 'iya').replace(/ua/g, 'uwa').replace(/eo/g, 'eyo');
 
         return res;
@@ -589,9 +589,20 @@ class ConlangEngine {
         const suffix = this.generatePhonotacticWord(1, true);
         const caseSuffix = this.generatePhonotacticWord(1, true);
 
+        // Generazione affissi aspectuali e modali trasparenti per la grammatica
+        const pretendPrefix = this.generatePhonotacticWord(1, true);
+        const tryPrefix = this.generatePhonotacticWord(1, true);
+        const causeSuffix = this.generatePhonotacticWord(1, true);
+
         const affixSemantics = {
             prefix: { form: prefix, meaning: "Agentive / Nominalizer (actor)" },
             suffix: { form: suffix, meaning: "Intensive / Augmentative (great / major state)" }
+        };
+
+        const aspectModifiers = {
+            simulativePretend: `${pretendPrefix}- (Simulative / 'to pretend to')`,
+            conativeTry: `${tryPrefix}- (Conative / 'to try to')`,
+            causative: `-${causeSuffix} (Causative / 'to cause to')`
         };
 
         const articles = {};
@@ -620,7 +631,6 @@ class ConlangEngine {
             return conlangWord;
         };
 
-        // Articoli ed elementi grammaticali salvati solo ad uso interno di sistema
         if (articles.definite) this.lexiconMap.set("the", articles.definite);
         if (articles.indefinite) this.lexiconMap.set("a", articles.indefinite);
         if (articles.partitive) this.lexiconMap.set("some", articles.partitive);
@@ -634,55 +644,14 @@ class ConlangEngine {
 
         const culturalDomainTerms = ExpandedCulturalDomains[config.culture] || ExpandedCulturalDomains.medieval;
         
-        const categories = [
-            { type: 'Noun', concepts: [...ContextualLexicon.nouns, ...culturalDomainTerms] },
-            { type: 'Verb', concepts: ContextualLexicon.verbs },
-            { type: 'Adjective', concepts: ContextualLexicon.adjectives }
-        ];
+        // Popolamento basato rigorosamente su parole reali senza derivazioni periphrastiche o cicli infiniti
+        const poolNouns = [...ContextualLexicon.nouns, ...culturalDomainTerms];
+        const poolVerbs = ContextualLexicon.verbs;
+        const poolAdjectives = ContextualLexicon.adjectives;
 
-        const nounDerivations = ["realm of", "essence of", "keeper of", "art of", "master of", "place of", "source of", "sign of"];
-        const verbAspects = ["to begin to", "to cause to", "to fail to", "to try to", "to stop", "to pretend to", "re-"];
-        const adjGradations = ["slightly", "extremely", "almost", "inherently", "partially", "truly"];
-
-        let index = 0;
-
-        while (vocabulary.length < 600) {
-            const cat = categories[index % categories.length];
-            const conceptList = cat.concepts;
-            const baseConcept = conceptList[index % conceptList.length];
-
-            let concept = baseConcept;
-            
-            if (this.lexiconMap.has(concept.toLowerCase())) {
-                const shiftIndex = Math.floor(index / conceptList.length);
-                if (cat.type === 'Noun') {
-                    const prefixNoun = nounDerivations[shiftIndex % nounDerivations.length];
-                    concept = `${prefixNoun} ${baseConcept}`;
-                } else if (cat.type === 'Verb') {
-                    const aspect = verbAspects[shiftIndex % verbAspects.length];
-                    if (aspect === "to stop") {
-                        const gerund = baseConcept.endsWith('e') ? baseConcept.slice(0, -1) + 'ing' : baseConcept + 'ing';
-                        concept = `to stop ${gerund}`;
-                    } else if (aspect === "re-") {
-                        concept = `re-${baseConcept}`;
-                    } else {
-                        concept = `${aspect} ${baseConcept}`;
-                    }
-                } else if (cat.type === 'Adjective') {
-                    const grad = adjGradations[shiftIndex % adjGradations.length];
-                    concept = `${grad} ${baseConcept}`;
-                }
-            }
-
-            const normalizedKey = concept.toLowerCase().trim();
-
-            if (!this.lexiconMap.has(normalizedKey)) {
-                registerWord(concept, cat.type, false, false);
-            }
-
-            index++;
-            if (index > 10000) break;
-        }
+        poolNouns.forEach(n => registerWord(n, "Noun", false, false));
+        poolVerbs.forEach(v => registerWord(v, "Verb", false, false));
+        poolAdjectives.forEach(a => registerWord(a, "Adjective", false, false));
 
         const sentenceCategories = [
             { title: "1. Greetings, Identity & Basic Interaction", count: 20 },
@@ -724,6 +693,7 @@ class ConlangEngine {
                     prefix: `${affixSemantics.prefix.form}- : ${affixSemantics.prefix.meaning}`,
                     suffix: `-${affixSemantics.suffix.form} : ${affixSemantics.suffix.meaning}`
                 },
+                aspectAndMoodDerivation: aspectModifiers,
                 inflectionalCases: config.grammarStrategy === 'cases' ? { nominativeSubjectSuffix: `-${caseSuffix} (Marks nominal subject strictly regardless of clause position)` } : 'None (Prepositional)'
             },
             syntax: {
@@ -875,6 +845,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const grammarContainer = document.getElementById('grammar-container');
         const g = data.grammar;
+        
+        let aspectHtml = '';
+        if (g.morphology.aspectAndMoodDerivation) {
+            aspectHtml = `<br>Aspect Affixes: <em>${JSON.stringify(g.morphology.aspectAndMoodDerivation)}</em>`;
+        }
+
         grammarContainer.innerHTML = `
             <div class="grammar-section">
                 <h3>Systemic Summary: ${g.languageName}</h3>
@@ -893,7 +869,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <strong>Morphology & Affixation:</strong><br>
                         Type: ${g.morphology.type}<br>
                         Prefix: <em>${g.morphology.derivationalAffixes.prefix}</em><br>
-                        Suffix: <em>${g.morphology.derivationalAffixes.suffix}</em>
+                        Suffix: <em>${g.morphology.derivationalAffixes.suffix}</em>${aspectHtml}
                     </div>
                     <div class="grammar-item">
                         <strong>Syntax & Word Order:</strong><br>
@@ -913,6 +889,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <div class="translation">${item.english}</div>
             </div>
         `).join('');
+
+        // Aggiorna l'etichetta del Tab Vocabolario con il numero effettivo di parole uniche
+        const vocabTabBtn = document.querySelector('button[data-tab="tab-words"]');
+        if (vocabTabBtn) {
+            vocabTabBtn.textContent = `Vocabulary (${data.vocabulary.length})`;
+        }
 
         renderDictionaryTable(data.vocabulary, dictDirectionSelect.value);
 
