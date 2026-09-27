@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.6.1
- * Architecture: Reordered Primary Command Toolbar, Bidirectional Dictionary & Global Term Search
+ * Version: 2.7.0
+ * Architecture: 2nd-Order Markov Chain Word Synthesis & Dynamic Modal Integration
  */
 
 const Phonetics = {
@@ -152,6 +152,61 @@ class ConlangEngine {
 
         this.usedWords.add(word);
         return word;
+    }
+
+    // CATENA DI MARKOV DI SECONDO ORDINE
+    generateMarkov2ndOrderWord() {
+        if (!this.lastGeneratedData || !this.lastGeneratedData.vocabulary || this.lastGeneratedData.vocabulary.length === 0) {
+            return this.generatePhonotacticWord(2);
+        }
+
+        const corpus = this.lastGeneratedData.vocabulary.map(v => v.conlang.toLowerCase());
+        const transitions = {};
+        const starters = [];
+
+        corpus.forEach(word => {
+            if (word.length >= 2) {
+                starters.push(word.slice(0, 2));
+            }
+            const padded = '^' + word + '$';
+            for (let i = 0; i < padded.length - 2; i++) {
+                const state = padded.slice(i, i + 2);
+                const nextChar = padded[i + 2];
+                if (!transitions[state]) transitions[state] = [];
+                transitions[state].push(nextChar);
+            }
+        });
+
+        let generated = '';
+        let attempts = 0;
+
+        do {
+            let currentState = '^' + (starters[Math.floor(Math.random() * starters.length)] || 'ba')[0];
+            generated = currentState.replace('^', '');
+
+            while (generated.length < 12) {
+                const choices = transitions[currentState];
+                if (!choices || choices.length === 0) break;
+                
+                const next = choices[Math.floor(Math.random() * choices.length)];
+                if (next === '$') break;
+                
+                generated += next;
+                currentState = currentState[1] + next;
+            }
+
+            attempts++;
+            if (attempts > 100) break;
+
+        } while (generated.length < 2 || this.usedWords.has(generated));
+
+        if (generated.length < 2) {
+            generated = this.generatePhonotacticWord(2);
+        } else {
+            this.usedWords.add(generated);
+        }
+
+        return generated;
     }
 
     generateLanguageName() {
@@ -620,6 +675,7 @@ class ConlangEngine {
     }
 }
 
+// Controllo dell'Interfaccia Utente e Gestore Eventi Modale
 document.addEventListener('DOMContentLoaded', () => {
     const engine = new ConlangEngine();
 
@@ -645,6 +701,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const globalSearchInput = document.getElementById('global-search-input');
     const searchCardContainer = document.getElementById('search-card-container');
     const dictDirectionSelect = document.getElementById('dict-direction-select');
+
+    // Elementi della finestra Modale "New Term"
+    const openModalBtn = document.getElementById('open-new-term-modal-btn');
+    const newTermModal = document.getElementById('new-term-modal');
+    const closeModalX = document.getElementById('modal-close-x-btn');
+    const cancelModalBtn = document.getElementById('modal-cancel-btn');
+    const okModalBtn = document.getElementById('modal-ok-btn');
+    const createTermBtn = document.getElementById('modal-create-term-btn');
+    const modalEnglishInput = document.getElementById('modal-english-input');
+    const modalPosSelect = document.getElementById('modal-pos-select');
+    const modalConlangOutput = document.getElementById('modal-conlang-output');
+    const modalWarningAlert = document.getElementById('modal-warning-alert');
+
+    let currentGeneratedTerm = '';
 
     function getRandomSelectValue(selectElement) {
         const options = selectElement.options;
@@ -799,7 +869,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h4>Dialogue #${idx + 1}: ${dlg.title}</h4>
                     ${dlg.lines.map(line => `
                         <div class="dialogue-line">
-                            <span class="speaker">${line.speaker}:</span> ${line.conlang}
+                            <span class="speaker">${line.speaker}:</span>${line.conlang}
                             <br><small class="translation">${line.english}</small>
                         </div>
                     `).join('')}
@@ -813,6 +883,79 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = engine.buildDataset(config);
         renderOutput(result);
     }
+
+    // LOGICA DELLA FINESTRA MODALE "NEW TERM"
+    function resetModal() {
+        modalEnglishInput.value = '';
+        modalPosSelect.value = 'Noun';
+        modalConlangOutput.textContent = '---';
+        currentGeneratedTerm = '';
+        modalWarningAlert.classList.add('hidden');
+    }
+
+    openModalBtn.addEventListener('click', () => {
+        resetModal();
+        newTermModal.classList.remove('hidden');
+    });
+
+    const closeModal = () => {
+        newTermModal.classList.add('hidden');
+        resetModal();
+    };
+
+    closeModalX.addEventListener('click', closeModal);
+    cancelModalBtn.addEventListener('click', closeModal);
+
+    modalEnglishInput.addEventListener('input', () => {
+        const query = modalEnglishInput.value.trim().toLowerCase();
+        if (!query || !engine.lastGeneratedData) {
+            modalWarningAlert.classList.add('hidden');
+            return;
+        }
+
+        const exists = engine.lastGeneratedData.vocabulary.some(v => v.english.toLowerCase() === query);
+        if (exists) {
+            modalWarningAlert.classList.remove('hidden');
+        } else {
+            modalWarningAlert.classList.add('hidden');
+        }
+    });
+
+    createTermBtn.addEventListener('click', () => {
+        currentGeneratedTerm = engine.generateMarkov2ndOrderWord();
+        modalConlangOutput.textContent = currentGeneratedTerm;
+    });
+
+    okModalBtn.addEventListener('click', () => {
+        const englishVal = modalEnglishInput.value.trim();
+        const categoryVal = modalPosSelect.value;
+
+        if (!englishVal) {
+            alert('Please enter an English translation.');
+            return;
+        }
+
+        if (!currentGeneratedTerm) {
+            alert('Please click "Create" first to synthesize a Conlang term.');
+            return;
+        }
+
+        const newEntry = {
+            conlang: currentGeneratedTerm,
+            english: englishVal,
+            category: categoryVal
+        };
+
+        if (engine.lastGeneratedData) {
+            engine.lastGeneratedData.vocabulary.push(newEntry);
+            const key = englishVal.toLowerCase().split('(')[0].trim();
+            engine.lexiconMap.set(key, currentGeneratedTerm);
+
+            renderOutput(engine.lastGeneratedData);
+        }
+
+        closeModal();
+    });
 
     dictDirectionSelect.addEventListener('change', () => {
         if (engine.lastGeneratedData && engine.lastGeneratedData.vocabulary) {
