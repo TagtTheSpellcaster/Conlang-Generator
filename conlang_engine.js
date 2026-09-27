@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 1.4.0
- * Architecture: Procedural Phonotactic, Morphosyntactic & Semantic Generator
+ * Version: 1.5.0
+ * Architecture: Clean Root Lexicon, Phonotactic Enforcement & Functional Sorting
  */
 
 const Phonetics = {
@@ -33,8 +33,12 @@ const SyllableStructures = {
 };
 
 const ContextualLexicon = {
+    // Termini fondamentali ammessi come monosillabi
+    coreNouns: ["man", "person", "sun"],
+    coreVerbs: ["be", "have"],
+
     nouns: [
-        "sun", "moon", "water", "fire", "earth", "sky", "person", "man", "woman", "child",
+        "moon", "water", "fire", "earth", "sky", "woman", "child",
         "king", "leader", "god", "spirit", "sword", "shield", "trade", "gold", "house", "city",
         "star", "river", "tree", "animal", "beast", "life", "death", "blood", "war", "peace",
         "food", "bread", "night", "day", "shadow", "light", "stone", "iron", "wind", "sea"
@@ -47,12 +51,17 @@ const ContextualLexicon = {
         "great", "small", "bright", "dark", "strong", "weak", "old", "young", "good", "evil",
         "hot", "cold", "fast", "slow", "hard", "soft", "wise", "wild", "holy", "mortal"
     ],
-    grammatical: [
-        "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for",
+    pronouns: [
         "I (first person singular)", "you (second person singular)", "he (third person singular masculine)",
         "she (third person singular feminine)", "it (third person singular neuter)", "we (inclusive)", "we (exclusive)",
         "they (proximate / present group)", "they (obviate / absent group)", "they (honorific / elders)",
-        "they (collective / inanimate)", "this (proximate)", "that (distal)"
+        "they (collective / inanimate)"
+    ],
+    possessives: [
+        "my / mine", "your / yours (singular)", "his", "her / hers", "its", "our / ours", "their / theirs"
+    ],
+    grammatical: [
+        "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for", "this (proximate)", "that (distal)"
     ],
     culturalModifiers: {
         medieval: { nouns: ["feud", "castle", "knight", "honor", "vassal", "lance", "crown"], verbs: ["joust", "pledge"], adjectives: ["noble", "feudal"] },
@@ -78,12 +87,20 @@ class ConlangEngine {
         return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
     }
 
-    generatePhonotacticWord(targetSyllables = 2, isGrammatical = false) {
+    generatePhonotacticWord(targetSyllables = 2, isGrammatical = false, isCoreLexeme = false) {
         const vowels = Phonetics.vowels[this.currentConfig.vowelSet] || Phonetics.vowels.standard;
         const consonants = Phonetics.consonants[this.currentConfig.consonantSet] || Phonetics.consonants.balanced;
         const structures = SyllableStructures[this.currentConfig.aesthetic] || SyllableStructures.musical;
 
-        let numSyllables = isGrammatical ? 1 : Math.max(1, Math.round(targetSyllables));
+        let numSyllables;
+        if (isGrammatical) {
+            numSyllables = 1;
+        } else if (isCoreLexeme) {
+            numSyllables = Math.random() > 0.5 ? 1 : 2;
+        } else {
+            numSyllables = Math.max(2, Math.round(targetSyllables));
+        }
+
         let word = '';
         let attempts = 0;
 
@@ -112,8 +129,8 @@ class ConlangEngine {
 
     generateLanguageName() {
         const oldUsed = new Set(this.usedWords);
-        const nameWord1 = this.generatePhonotacticWord(2, false);
-        const nameWord2 = this.generatePhonotacticWord(1, false);
+        const nameWord1 = this.generatePhonotacticWord(2, false, false);
+        const nameWord2 = this.generatePhonotacticWord(1, true, false);
         
         let name = '';
         if (this.currentConfig.aesthetic === 'musical' || this.currentConfig.aesthetic === 'magical') {
@@ -134,23 +151,17 @@ class ConlangEngine {
 
         const langName = this.generateLanguageName();
 
-        // 1. Affixes Setup & Semantic Assignment
+        // Affissi morfosintattici (invariati nel dizionario radici, applicabili solo a runtime)
         const prefix = this.generatePhonotacticWord(1, true);
         const suffix = this.generatePhonotacticWord(1, true);
         const caseSuffix = this.generatePhonotacticWord(1, true);
 
         const affixSemantics = {
-            prefix: {
-                form: prefix,
-                meaning: "Agentive / Nominalizer (indicates 'one who performs an action' or 'origin')"
-            },
-            suffix: {
-                form: suffix,
-                meaning: "Intensive / Augmentative (indicates 'great', 'major', or 'extended state of')"
-            }
+            prefix: { form: prefix, meaning: "Agentive / Nominalizer (indicates 'one who performs an action' or 'origin')" },
+            suffix: { form: suffix, meaning: "Intensive / Augmentative (indicates 'great', 'major', or 'extended state of')" }
         };
 
-        // 2. Articles Setup
+        // Articoli
         const articles = {};
         if (config.articleMode === 'both' || config.articleMode === 'definite_only' || config.articleMode === 'partitive') {
             articles.definite = this.generatePhonotacticWord(1, true);
@@ -162,9 +173,9 @@ class ConlangEngine {
             articles.partitive = this.generatePhonotacticWord(1, true);
         }
 
-        // 3. Build Vocabulary (Injecting Articles and Case Suffixes explicitely into Lexicon)
         const vocabulary = [];
 
+        // 1. INSERIMENTO ELEMENTI STRUTTURALI IN TESTA AL DIZIONARIO
         if (articles.definite) {
             vocabulary.push({ conlang: articles.definite, english: "the (definite article)", category: "Article" });
         }
@@ -178,11 +189,55 @@ class ConlangEngine {
             vocabulary.push({ conlang: `-${caseSuffix}`, english: "[Nominative Subject Suffix]", category: "Case Suffix" });
         }
 
+        // Pronomi
+        ContextualLexicon.pronouns.forEach(p => {
+            vocabulary.push({
+                conlang: this.generatePhonotacticWord(1, true),
+                english: p,
+                category: "Pronoun"
+            });
+        });
+
+        // Possessivi
+        ContextualLexicon.possessives.forEach(p => {
+            vocabulary.push({
+                conlang: this.generatePhonotacticWord(1, true),
+                english: p,
+                category: "Possessive"
+            });
+        });
+
+        // Parole Grammaticali e Preposizioni
+        ContextualLexicon.grammatical.forEach(g => {
+            vocabulary.push({
+                conlang: this.generatePhonotacticWord(1, true),
+                english: g,
+                category: "Grammatical Word"
+            });
+        });
+
+        // 2. INSERIMENTO RADICI FONDAMENTALI (Discrezionalmente monosillabiche)
+        ContextualLexicon.coreNouns.forEach(cn => {
+            vocabulary.push({
+                conlang: this.generatePhonotacticWord(1, false, true),
+                english: cn,
+                category: "Noun"
+            });
+        });
+
+        ContextualLexicon.coreVerbs.forEach(cv => {
+            vocabulary.push({
+                conlang: this.generatePhonotacticWord(1, false, true),
+                english: cv,
+                category: "Verb"
+            });
+        });
+
+        // 3. INSERIMENTO LESSICO ORDINARIO (Polisillabico vincolato)
         const categories = [
             { type: 'Noun', concepts: [...ContextualLexicon.nouns, ...(ContextualLexicon.culturalModifiers[config.culture]?.nouns || [])] },
             { type: 'Verb', concepts: [...ContextualLexicon.verbs, ...(ContextualLexicon.culturalModifiers[config.culture]?.verbs || [])] },
-            { type: 'Adjective', concepts: [...ContextualLexicon.adjectives, ...(ContextualLexicon.culturalModifiers[config.culture]?.adjectives || [])] },
-            { type: 'Grammatical Word', concepts: ContextualLexicon.grammatical }
+            { type: 'Adjective', concepts: [...ContextualLexicon.adjectives, ...(ContextualLexicon.culturalModifiers[config.culture]?.adjectives || [])] }
         ];
 
         let index = 0;
@@ -190,27 +245,21 @@ class ConlangEngine {
             const cat = categories[index % categories.length];
             const rawConcept = cat.concepts[Math.floor(index / categories.length) % cat.concepts.length];
             
-            // Explicit semantic nuances for repeated concept cycles
             let uniqueConcept = rawConcept;
             const cycle = Math.floor(index / (categories.length * cat.concepts.length));
             if (cycle > 0) {
-                if (cat.type === 'Noun') uniqueConcept = `${rawConcept} (domain aspect ${cycle + 1})`;
-                else if (cat.type === 'Verb') uniqueConcept = `${rawConcept} (frequentative / secondary form ${cycle + 1})`;
-                else if (cat.type === 'Adjective') uniqueConcept = `${rawConcept} (relational / comparative aspect ${cycle + 1})`;
-                else uniqueConcept = `${rawConcept} (register variant ${cycle + 1})`;
+                if (cat.type === 'Noun') uniqueConcept = `${rawConcept} (aspect ${cycle + 1})`;
+                else if (cat.type === 'Verb') uniqueConcept = `${rawConcept} (secondary form ${cycle + 1})`;
+                else if (cat.type === 'Adjective') uniqueConcept = `${rawConcept} (relational aspect ${cycle + 1})`;
             }
 
-            const isGram = cat.type === 'Grammatical Word';
             const sampleSyllables = config.meanLength + (this.boxMullerRandom() * config.stdDev);
-            let word = this.generatePhonotacticWord(sampleSyllables, isGram);
-
-            if (config.morphologyType === 'agglutinative' && !isGram && Math.random() > 0.6) {
-                if (Math.random() > 0.5) word = prefix + '-' + word;
-                else word = word + '-' + suffix;
-            }
+            
+            // RADICE PULITA: Nessun affisso viene pre-incollato nel dizionario
+            const cleanRoot = this.generatePhonotacticWord(sampleSyllables, false, false);
 
             vocabulary.push({
-                conlang: word,
+                conlang: cleanRoot,
                 english: uniqueConcept,
                 category: cat.type
             });
@@ -218,7 +267,7 @@ class ConlangEngine {
             index++;
         }
 
-        // 4. Generate 50 Sentences
+        // Generazione Frasi e Dialoghi basata sulle radici pulite + applicazione dinamica morfologia
         const sentences = [];
         const nouns = vocabulary.filter(v => v.category === 'Noun');
         const verbs = vocabulary.filter(v => v.category === 'Verb');
@@ -237,7 +286,11 @@ class ConlangEngine {
                 eWords.push("the");
             }
 
-            cWords.push(a.conlang);
+            let adjForm = a.conlang;
+            if (config.morphologyType === 'agglutinative' && Math.random() > 0.7) {
+                adjForm = adjForm + '-' + suffix;
+            }
+            cWords.push(adjForm);
             eWords.push(a.english.split('(')[0].trim());
 
             let subj = n.conlang;
@@ -247,7 +300,11 @@ class ConlangEngine {
             cWords.push(subj);
             eWords.push(n.english.split('(')[0].trim());
 
-            cWords.push(v.conlang);
+            let verbForm = v.conlang;
+            if (config.morphologyType === 'agglutinative' && Math.random() > 0.7) {
+                verbForm = prefix + '-' + verbForm;
+            }
+            cWords.push(verbForm);
             eWords.push(v.english.split('(')[0].trim());
 
             const cStr = cWords.join(' ');
@@ -259,7 +316,6 @@ class ConlangEngine {
             });
         }
 
-        // 5. Generate 20 Dialogues
         const dialogues = [];
         for (let i = 0; i < 20; i++) {
             const dialogueLines = [];
@@ -276,7 +332,6 @@ class ConlangEngine {
             dialogues.push(dialogueLines);
         }
 
-        // 6. Generate Grammar Profile
         const vowelsList = Phonetics.vowels[config.vowelSet] || Phonetics.vowels.standard;
         const consList = Phonetics.consonants[config.consonantSet] || Phonetics.consonants.balanced;
 
@@ -288,7 +343,7 @@ class ConlangEngine {
                 ipaVowels: vowelsList.map(v => Phonetics.ipaMap[v] || `/${v}/`),
                 ipaConsonants: consList.map(c => Phonetics.ipaMap[c] || `/${c}/`),
                 syllableStructures: SyllableStructures[config.aesthetic] || SyllableStructures.musical,
-                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Monosyllabic forms strictly reserved for grammatical items and articles.`
+                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Monosyllabic forms strictly reserved for grammatical items, pronouns, articles, and select core lexemes.`
             },
             morphology: {
                 type: config.morphologyType === 'agglutinative' ? 'Agglutinative (Affix Stacking)' : 'Isolating / Fusional',
@@ -365,7 +420,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderOutput(data) {
         titleBadge.textContent = `Language: ${data.grammar.languageName}`;
 
-        // Render Grammar Profile
         const grammarContainer = document.getElementById('grammar-container');
         const g = data.grammar;
         grammarContainer.innerHTML = `
@@ -397,7 +451,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
 
-        // Render Words
         const wordsContainer = document.getElementById('words-container');
         wordsContainer.innerHTML = data.vocabulary.map(item => `
             <div class="card">
@@ -407,7 +460,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        // Render Sentences
         const sentencesContainer = document.getElementById('sentences-container');
         sentencesContainer.innerHTML = data.sentences.map(item => `
             <div class="card" style="margin-bottom: 0.8rem;">
@@ -416,7 +468,6 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        // Render Dialogues
         const dialoguesContainer = document.getElementById('dialogues-container');
         dialoguesContainer.innerHTML = data.dialogues.map((dialogue, index) => `
             <div class="dialogue-box">
@@ -445,8 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
             aesthetic: presets[Math.floor(Math.random() * presets.length)],
             culture: cultures[Math.floor(Math.random() * cultures.length)],
             sociology: 'hierarchical',
-            meanLength: 2.2,
-            stdDev: 0.7,
+            meanLength: 2.5,
+            stdDev: 0.8,
             articleMode: articleModes[Math.floor(Math.random() * articleModes.length)],
             morphologyType: Math.random() > 0.5 ? 'agglutinative' : 'isolating',
             grammarStrategy: Math.random() > 0.5 ? 'cases' : 'prepositions',
@@ -498,7 +549,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Tab Navigation Logic
     const tabs = document.querySelectorAll('.tab-btn');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -510,6 +560,5 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Initial default generation
     executeGeneration(getFormConfig());
 });
