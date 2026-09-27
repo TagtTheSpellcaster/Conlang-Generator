@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.9.0
- * Features: Natural Lexicon Limits (No Fake Periphrastics), Aspect/Modal Affix Derivation, Sandhi Rules
+ * Version: 3.0.0
+ * Features: Complete Italian Phrasebook Corpus (No Phrase Loops), Sandhi Rules, Clean Lexicon Limit
  */
 
 const Phonetics = {
@@ -120,6 +120,150 @@ const ContextualLexicon = {
         "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for", "this", "that"
     ]
 };
+
+// Corpus frasi strutturato in italiano senza duplicati procedurali
+const ItalianSentenceCorpus = [
+    {
+        sectionTitle: "1. Saluti e cortesia",
+        phrases: [
+            { s: "peace", v: "be", o: "you", ita: "Ciao.", art: "none" },
+            { s: "sun", v: "be", o: "good", ita: "Buongiorno.", art: "none" },
+            { s: "night", v: "be", o: "good", ita: "Buonasera.", art: "none" },
+            { s: "I", v: "walk", o: "away", ita: "Arrivederci.", art: "none" },
+            { s: "we", v: "see", o: "soon", ita: "A presto.", art: "none" },
+            { s: "I", v: "ask", o: "favor", ita: "Per favore.", art: "none" },
+            { s: "I", v: "give", o: "thanks", ita: "Grazie.", art: "none" },
+            { s: "I", v: "give", o: "great thanks", ita: "Grazie mille.", art: "none" },
+            { s: "you", v: "be", o: "welcome", ita: "Prego.", art: "none" },
+            { s: "I", v: "ask", o: "pardon", ita: "Scusa / Mi scusi.", art: "none" },
+            { s: "problem", v: "be", o: "not", ita: "Non c’è problema.", art: "none" },
+            { s: "this", v: "be", o: "true", ita: "Sì.", art: "none" },
+            { s: "this", v: "be", o: "false", ita: "No.", art: "none" },
+            { s: "all", v: "be", o: "good", ita: "Va bene.", art: "none" },
+            { s: "I", v: "bind", o: "word", ita: "D’accordo.", art: "none" }
+        ]
+    },
+    {
+        sectionTitle: "2. Comunicazione di base",
+        phrases: [
+            { s: "I", v: "know", o: "not", ita: "Non capisco.", art: "none" },
+            { s: "I", v: "know", o: "truth", ita: "Capisco.", art: "none" },
+            { s: "I", v: "speak", o: "bad", ita: "Non parlo bene questa lingua.", art: "none" },
+            { s: "you", v: "speak", o: "word", ita: "Parli la lingua?", art: "none" },
+            { s: "you", v: "speak", o: "slow", ita: "Parla più lentamente, per favore.", art: "none" },
+            { s: "you", v: "say", o: "again", ita: "Può ripetere?", art: "none" },
+            { s: "you", v: "say", o: "again", ita: "Puoi ripetere?", art: "none" },
+            { s: "what", v: "be", o: "meaning", ita: "Cosa significa?", art: "none" },
+            { s: "how", v: "say", o: "word", ita: "Come si dice questo?", art: "none" },
+            { s: "how", v: "sound", o: "word", ita: "Come si pronuncia?", art: "none" },
+            { s: "you", v: "write", o: "it", ita: "Puoi scriverlo?", art: "none" },
+            { s: "I", v: "hear", o: "not", ita: "Non ho capito.", art: "none" },
+            { s: "I", v: "hear", o: "word", ita: "Ho capito.", art: "none" },
+            { s: "I", v: "know", o: "nothing", ita: "Non lo so.", art: "none" },
+            { s: "I", v: "be", o: "not sure", ita: "Non sono sicuro.", art: "none" }
+        ]
+    },
+    {
+        sectionTitle: "3. Identità e informazioni personali",
+        phrases: [
+            { s: "my", v: "be", o: "name", ita: "Mi chiamo così.", art: "none" },
+            { s: "what", v: "be", o: "name", ita: "Come ti chiami?", art: "none" },
+            { s: "I", v: "come", o: "far", ita: "Sono di un altro luogo.", art: "none" },
+            { s: "where", v: "come", o: "you", ita: "Da dove vieni?", art: "none" },
+            { s: "I", v: "live", o: "here", ita: "Vivo qui.", art: "none" },
+            { s: "I", v: "be", o: "traveler", ita: "Sono un viaggiatore.", art: "indefinite" },
+            { s: "I", v: "work", o: "here", ita: "Sono qui per lavoro.", art: "none" },
+            { s: "I", v: "stay", o: "day", ita: "Sono qui per qualche giorno.", art: "none" },
+            { s: "I", v: "need", o: "help", ita: "Ho bisogno di aiuto.", art: "none" },
+            { s: "you", v: "help", o: "me", ita: "Puoi aiutarmi?", art: "none" }
+        ]
+    },
+    {
+        sectionTitle: "4. Orientamento",
+        phrases: [
+            { s: "where", v: "be", o: "place", ita: "Dov’è il luogo?", art: "definite" },
+            { s: "where", v: "be", o: "water", ita: "Dov’è il bagno?", art: "definite" },
+            { s: "where", v: "be", o: "road", ita: "Dov’è la stazione?", art: "definite" },
+            { s: "where", v: "be", o: "trade", ita: "Dov’è il mercato?", art: "definite" },
+            { s: "where", v: "be", o: "gate", ita: "Dov’è l’uscita?", art: "definite" },
+            { s: "where", v: "be", o: "door", ita: "Dov’è l’ingresso?", art: "definite" },
+            { s: "it", v: "be", o: "far", ita: "È lontano?", art: "none" },
+            { s: "it", v: "be", o: "near", ita: "È vicino?", art: "none" },
+            { s: "road", v: "be", o: "where", ita: "A destra o a sinistra?", art: "none" },
+            { s: "I", v: "walk", o: "this road", ita: "Devo andare da questa parte?", art: "none" },
+            { s: "I", v: "be", o: "good road", ita: "Sono sulla strada giusta?", art: "none" },
+            { s: "time", v: "be", o: "how much", ita: "Quanto tempo ci vuole?", art: "none" },
+            { s: "you", v: "show", o: "map", ita: "Puoi mostrarmelo sulla mappa?", art: "none" },
+            { s: "you", v: "walk", o: "me", ita: "Accompagnami, per favore.", art: "none" },
+            { s: "I", v: "be", o: "lost", ita: "Mi sono perso.", art: "none" }
+        ]
+    },
+    {
+        sectionTitle: "5. Cibo e acqua",
+        phrases: [
+            { s: "I", v: "have", o: "hunger", ita: "Ho fame.", art: "none" },
+            { s: "I", v: "have", o: "thirst", ita: "Ho sete.", art: "none" },
+            { s: "I", v: "eat", o: "food", ita: "Vorrei mangiare.", art: "none" },
+            { s: "I", v: "drink", o: "water", ita: "Vorrei bere.", art: "none" },
+            { s: "I", v: "need", o: "water", ita: "Vorrei dell’acqua.", art: "partitive" },
+            { s: "you", v: "have", o: "food", ita: "Avete del cibo?", art: "none" },
+            { s: "food", v: "be", o: "safe", ita: "È commestibile?", art: "none" },
+            { s: "it", v: "be", o: "good", ita: "È sicuro da mangiare?", art: "none" },
+            { s: "I", v: "eat", o: "not", ita: "Non mangio questo.", art: "none" },
+            { s: "food", v: "make", o: "sick", ita: "Sono allergico a questo.", art: "none" },
+            { s: "what", v: "be", o: "cost", ita: "Quanto costa?", art: "none" },
+            { s: "I", v: "pay", o: "now", ita: "Il conto, per favore.", art: "none" },
+            { s: "this", v: "be", o: "all", ita: "È tutto qui?", art: "none" },
+            { s: "I", v: "take", o: "more", ita: "Posso avere ancora di questo?", art: "none" },
+            { s: "food", v: "be", o: "good", ita: "È buono.", art: "none" }
+        ]
+    },
+    {
+        sectionTitle: "6. Alloggio e viaggio",
+        phrases: [
+            { s: "I", v: "need", o: "house", ita: "Ho bisogno di una stanza.", art: "indefinite" },
+            { s: "you", v: "have", o: "room", ita: "Avete una stanza libera?", art: "indefinite" },
+            { s: "what", v: "cost", o: "night", ita: "Quanto costa una notte?", art: "none" },
+            { s: "I", v: "have", o: "word", ita: "Ho una prenotazione.", art: "indefinite" },
+            { s: "where", v: "be", o: "room", ita: "Dov’è la mia stanza?", art: "none" },
+            { s: "when", v: "leave", o: "ship", ita: "A che ora parte?", art: "definite" },
+            { s: "when", v: "come", o: "ship", ita: "A che ora arriva?", art: "definite" },
+            { s: "where", v: "be", o: "stop", ita: "Dov’è la fermata?", art: "definite" },
+            { s: "I", v: "buy", o: "ticket", ita: "Un biglietto per questo luogo, per favore.", art: "indefinite" },
+            { s: "I", v: "stop", o: "here", ita: "Devo scendere qui?", art: "none" },
+            { s: "ship", v: "go", o: "there", ita: "Questo va in quel luogo?", art: "none" },
+            { s: "time", v: "be", o: "long", ita: "Quanto dura il viaggio?", art: "none" }
+        ]
+    },
+    {
+        sectionTitle: "7. Denaro e acquisti",
+        phrases: [
+            { s: "what", v: "be", o: "price", ita: "Quanto costa?", art: "none" },
+            { s: "price", v: "be", o: "high", ita: "È troppo caro.", art: "none" },
+            { s: "you", v: "have", o: "cheap", ita: "Avete qualcosa di più economico?", art: "none" },
+            { s: "I", v: "buy", o: "this", ita: "Vorrei comprarlo.", art: "none" },
+            { s: "I", v: "buy", o: "not", ita: "Non voglio comprarlo.", art: "none" },
+            { s: "I", v: "pay", o: "coin", ita: "Posso pagare con la carta / moneta?", art: "none" },
+            { s: "you", v: "have", o: "coin", ita: "Avete il resto?", art: "none" },
+            { s: "coin", v: "be", o: "wrong", ita: "Mi avete dato il resto sbagliato.", art: "none" }
+        ]
+    },
+    {
+        sectionTitle: "8. Emergenze",
+        phrases: [
+            { s: "help", v: "come", o: "now", ita: "Aiuto!", art: "none" },
+            { s: "call", v: "see", o: "person", ita: "Chiamate qualcuno!", art: "none" },
+            { s: "call", v: "see", o: "guard", ita: "Chiamate la guardia!", art: "definite" },
+            { s: "call", v: "see", o: "healer", ita: "Chiamate un medico!", art: "indefinite" },
+            { s: "call", v: "see", o: "cart", ita: "Chiamate un'ambulanza!", art: "indefinite" },
+            { s: "I", v: "be", o: "hurt", ita: "Sono ferito.", art: "none" },
+            { s: "body", v: "be", o: "bad", ita: "Mi sento male.", art: "none" },
+            { s: "thief", v: "take", o: "gold", ita: "Mi hanno derubato.", art: "none" },
+            { s: "I", v: "lose", o: "this", ita: "Ho perso questo oggetto.", art: "none" },
+            { s: "I", v: "be", o: "danger", ita: "Sono in pericolo.", art: "none" }
+        ]
+    }
+];
 
 class ConlangEngine {
     constructor() {
@@ -310,73 +454,23 @@ class ConlangEngine {
         return conlangStr.charAt(0).toUpperCase() + conlangStr.slice(1) + '.';
     }
 
-    generateProceduralPhraseCategory(categoryIndex, count, culture, wordOrder, articles, caseSuffix, suffix) {
-        const phrases = [];
-        const culturalShelterMap = {
-            primitive: { shelter: "cave", guard: "beast", coin: "flint", guide: "totem", water: "spring" },
-            medieval: { shelter: "inn", guard: "guard", coin: "coin", guide: "castle", water: "well" },
-            ancient: { shelter: "tomb", guard: "centurion", coin: "gold", guide: "forum", water: "river" },
-            renaissance: { shelter: "shop", guard: "diplomat", coin: "coin", guide: "guild", water: "river" },
-            african: { shelter: "savanna", guard: "elder", coin: "cowrie", guide: "ancestor", water: "well" },
-            alien: { shelter: "station", guard: "drone", coin: "core", guide: "nexus", water: "plasma" }
-        };
+    generateCorpusSentences(wordOrder, articles, caseSuffix, suffix) {
+        const sentences = [];
 
-        const ctx = culturalShelterMap[culture] || culturalShelterMap.medieval;
+        ItalianSentenceCorpus.forEach(cat => {
+            cat.phrases.forEach(item => {
+                const conlangStr = this.buildClause(
+                    item.s, item.v, item.o, wordOrder, articles, caseSuffix, suffix, item.art
+                );
+                sentences.push({
+                    conlang: conlangStr,
+                    english: item.ita,
+                    sectionTitle: cat.sectionTitle
+                });
+            });
+        });
 
-        const templates = {
-            0: [
-                { s: "peace", v: "be", o: "you", eng: "Peace be with you.", art: "none" },
-                { s: "I", v: "be", o: "person", eng: "I am a person of this land.", art: "indefinite" },
-                { s: "you", v: "speak", o: "word", eng: "You speak known words.", art: "none" },
-                { s: "my", v: "be", o: "friend", eng: "My friend is here.", art: "none" },
-                { s: "I", v: "know", o: "not", eng: "I do not know.", art: "none" }
-            ],
-            1: [
-                { s: "where", v: "be", o: ctx.shelter, eng: `Where is the ${ctx.shelter}?`, art: "definite" },
-                { s: "I", v: "walk", o: ctx.guide, eng: `I walk towards the ${ctx.guide}.`, art: "definite" },
-                { s: "river", v: "be", o: "far", eng: "The river is far from here.", art: "definite" },
-                { s: "you", v: "see", o: "road", eng: "Do you see a road?", art: "indefinite" },
-                { s: "we", v: "stop", o: "here", eng: "We stop here immediately.", art: "none" }
-            ],
-            2: [
-                { s: "I", v: "have", o: "hunger", eng: "I have hunger and need food.", art: "none" },
-                { s: "where", v: "find", o: ctx.water, eng: `Where can I find some ${ctx.water}?`, art: "partitive" },
-                { s: "we", v: "need", o: ctx.shelter, eng: `We need a safe ${ctx.shelter}.`, art: "indefinite" },
-                { s: "food", v: "be", o: "good", eng: "The food is good.", art: "definite" },
-                { s: "I", v: "drink", o: "water", eng: "I wish to drink water.", art: "none" }
-            ],
-            3: [
-                { s: "what", v: "cost", o: ctx.coin, eng: `How much ${ctx.coin} does this cost?`, art: "none" },
-                { s: "I", v: "take", o: "trade", eng: "I take this trade item.", art: "none" },
-                { s: "you", v: "give", o: ctx.coin, eng: `You give a ${ctx.coin}.`, art: "indefinite" },
-                { s: "this", v: "be", o: "great", eng: "This object is of great value.", art: "none" },
-                { s: "I", v: "have", o: "no", eng: "I have no goods to trade.", art: "none" }
-            ],
-            4: [
-                { s: "help", v: "be", o: "need", eng: "Help is needed immediately!", art: "none" },
-                { s: "call", v: "see", o: ctx.guard, eng: `Call the ${ctx.guard}!`, art: "definite" },
-                { s: "fire", v: "be", o: "danger", eng: "Fire brings great danger!", art: "none" },
-                { s: "I", v: "have", o: "blood", eng: "I am wounded and bleeding.", art: "none" },
-                { s: "beast", v: "run", o: "fast", eng: "A wild beast runs fast!", art: "indefinite" }
-            ],
-            5: [
-                { s: "sun", v: "be", o: "bright", eng: "The sun is bright today.", art: "definite" },
-                { s: "night", v: "be", o: "cold", eng: "The night is cold and dark.", art: "definite" },
-                { s: "you", v: "be", o: "wise", eng: "You are a wise person.", art: "indefinite" },
-                { s: "we", v: "live", o: "peace", eng: "We live in peace together.", art: "none" },
-                { s: "day", v: "come", o: "fast", eng: "A new day comes fast.", art: "indefinite" }
-            ]
-        };
-
-        const pool = templates[categoryIndex] || templates[0];
-
-        for (let i = 0; i < count; i++) {
-            const baseObj = pool[i % pool.length];
-            const conlangStr = this.buildClause(baseObj.s, baseObj.v, baseObj.o, wordOrder, articles, caseSuffix, suffix, baseObj.art);
-            phrases.push({ conlang: conlangStr, english: baseObj.eng });
-        }
-
-        return phrases;
+        return sentences;
     }
 
     generateNarrativeDialogues(culture, wordOrder, articles, caseSuffix, suffix) {
@@ -589,7 +683,6 @@ class ConlangEngine {
         const suffix = this.generatePhonotacticWord(1, true);
         const caseSuffix = this.generatePhonotacticWord(1, true);
 
-        // Generazione affissi aspectuali e modali trasparenti per la grammatica
         const pretendPrefix = this.generatePhonotacticWord(1, true);
         const tryPrefix = this.generatePhonotacticWord(1, true);
         const causeSuffix = this.generatePhonotacticWord(1, true);
@@ -644,7 +737,6 @@ class ConlangEngine {
 
         const culturalDomainTerms = ExpandedCulturalDomains[config.culture] || ExpandedCulturalDomains.medieval;
         
-        // Popolamento basato rigorosamente su parole reali senza derivazioni periphrastiche o cicli infiniti
         const poolNouns = [...ContextualLexicon.nouns, ...culturalDomainTerms];
         const poolVerbs = ContextualLexicon.verbs;
         const poolAdjectives = ContextualLexicon.adjectives;
@@ -653,24 +745,8 @@ class ConlangEngine {
         poolVerbs.forEach(v => registerWord(v, "Verb", false, false));
         poolAdjectives.forEach(a => registerWord(a, "Adjective", false, false));
 
-        const sentenceCategories = [
-            { title: "1. Greetings, Identity & Basic Interaction", count: 20 },
-            { title: "2. Navigation, Movement & Directions", count: 20 },
-            { title: "3. Primary Needs, Sustenance & Lodging", count: 20 },
-            { title: "4. Trade, Commerce & Purchases", count: 15 },
-            { title: "5. Emergencies, Health & Safety", count: 15 },
-            { title: "6. Sociality & Small Talk", count: 10 }
-        ];
-
-        const sentences = [];
-        sentenceCategories.forEach((catInfo, catIdx) => {
-            const generatedPhrases = this.generateProceduralPhraseCategory(
-                catIdx, catInfo.count, config.culture, wordOrder, articles, caseSuffix, suffix
-            );
-            generatedPhrases.forEach(p => {
-                sentences.push({ ...p, sectionTitle: catInfo.title });
-            });
-        });
+        // Generazione delle frasi usando rigorosamente il corpus italiano senza ripetizioni
+        const sentences = this.generateCorpusSentences(wordOrder, articles, caseSuffix, suffix);
 
         const dialogues = this.generateNarrativeDialogues(config.culture, wordOrder, articles, caseSuffix, suffix);
 
@@ -811,7 +887,7 @@ document.addEventListener('DOMContentLoaded', () => {
             tHead.innerHTML = `
                 <tr>
                     <th class="py-3 px-4 w-1/2">Conlang Term</th>
-                    <th class="py-3 px-4 w-1/2">English Translation</th>
+                    <th class="py-3 px-4 w-1/2">Italian Translation</th>
                 </tr>
             `;
             sortedVocab.sort((a, b) => a.conlang.localeCompare(b.conlang));
@@ -824,7 +900,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             tHead.innerHTML = `
                 <tr>
-                    <th class="py-3 px-4 w-1/2">English Word</th>
+                    <th class="py-3 px-4 w-1/2">Italian Word</th>
                     <th class="py-3 px-4 w-1/2">Conlang Translation</th>
                 </tr>
             `;
@@ -890,10 +966,14 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
-        // Aggiorna l'etichetta del Tab Vocabolario con il numero effettivo di parole uniche
         const vocabTabBtn = document.querySelector('button[data-tab="tab-words"]');
         if (vocabTabBtn) {
             vocabTabBtn.textContent = `Vocabulary (${data.vocabulary.length})`;
+        }
+
+        const sentenceTabBtn = document.querySelector('button[data-tab="tab-sentences"]');
+        if (sentenceTabBtn) {
+            sentenceTabBtn.textContent = `Sentences (${data.sentences.length})`;
         }
 
         renderDictionaryTable(data.vocabulary, dictDirectionSelect.value);
@@ -993,7 +1073,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryVal = modalPosSelect.value;
 
         if (!englishVal) {
-            alert('Please enter an English translation.');
+            alert('Please enter a translation.');
             return;
         }
 
