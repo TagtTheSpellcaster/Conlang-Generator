@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Engine v3.0.0</title>
+    <title>Conlang Engine v3.2.0 - Universal Dynamic Parser</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -128,7 +128,7 @@
 <div class="container">
     <div class="header-title">
         <h1>Advanced Conlang Engine</h1>
-        <span class="version-badge">v3.0.0</span>
+        <span class="version-badge">v3.2.0</span>
     </div>
 
     <div class="card">
@@ -149,6 +149,7 @@
             <div>
                 <label for="desc">Phonotactic Style</label>
                 <select id="desc">
+                    <option value="renaissance">Renaissance / Scholarly</option>
                     <option value="harsh">Harsh / Imperial (Heavy Clusters)</option>
                     <option value="musical">Musical / Flowing (Strict CV)</option>
                     <option value="dark">Dark / Guttural (Clusters CCV)</option>
@@ -191,11 +192,11 @@
         </div>
 
         <br>
-        <button class="primary-btn" onclick="generateCustomConlang()">Generate Full Pocket Phrasebook System (550+ Terms)</button>
+        <button class="primary-btn" onclick="generateCustomConlang()">Execute Universal Runtime Parsing Engine (550+ Terms)</button>
     </div>
 
     <div class="card">
-        <h3>Generated Engine Output & Pocket Phrasebook</h3>
+        <h3>Generated Engine Output & Universal Dynamic Output</h3>
         <div id="output" class="output-box">Select parameters and click generate...</div>
         
         <div class="actions-group">
@@ -206,153 +207,71 @@
 </div>
 
 <script>
+// --- PHONETICS DATA ---
 const PHONETICS = {
-    musical: { v: ['a', 'e', 'i', 'o'], c: ['m', 'n', 'l', 'r', 's', 'v'], maxC: 1, epenthetic: 'i' },
-    dark:    { v: ['u', 'o', 'a'], c: ['k', 'g', 'q', 'x', 'r', 'z'], maxC: 3, epenthetic: 'u' },
-    harsh:   { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr'], maxC: 3, epenthetic: 'a' },
-    magic:   { v: ['a', 'i', 'e', 'ae'], c: ['s', 'sh', 'h', 'f', 'l', 'm', 'th'], maxC: 2, epenthetic: 'e' },
-    aquatic: { v: ['a', 'i', 'u', 'o'], c: ['m', 'n', 'l', 'w', 'f', 'v', 'bh'], maxC: 2, epenthetic: 'u' },
-    none:    { v: ['a', 'e', 'i', 'o', 'u'], c: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l'], maxC: 2, epenthetic: 'e' }
+    renaissance: { v: ['a', 'e', 'i', 'o'], c: ['t', 's', 'p', 'k', 'm', 'n', 'r', 'l', 'g'], maxC: 2, epenthetic: 'e' },
+    musical:     { v: ['a', 'e', 'i', 'o'], c: ['m', 'n', 'l', 'r', 's', 'v'], maxC: 1, epenthetic: 'i' },
+    dark:        { v: ['u', 'o', 'a'], c: ['k', 'g', 'q', 'x', 'r', 'z'], maxC: 3, epenthetic: 'u' },
+    harsh:       { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr'], maxC: 3, epenthetic: 'a' },
+    magic:       { v: ['a', 'i', 'e', 'ae'], c: ['s', 'sh', 'h', 'f', 'l', 'm', 'th'], maxC: 2, epenthetic: 'e' },
+    aquatic:     { v: ['a', 'i', 'u', 'o'], c: ['m', 'n', 'l', 'w', 'f', 'v', 'bh'], maxC: 2, epenthetic: 'u' },
+    none:        { v: ['a', 'e', 'i', 'o', 'u'], c: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l'], maxC: 2, epenthetic: 'e' }
 };
 
-const CORE_GRAMMAR = [
-    { id: "i", concept: "I / me (1st person sing.)", pos: "PRON" },
-    { id: "you", concept: "you (2nd person sing. informal)", pos: "PRON" },
-    { id: "he", concept: "he / she / it (3rd person sing.)", pos: "PRON" },
-    { id: "we", concept: "we (1st person plur. inclusive)", pos: "PRON" },
-    { id: "you_all", concept: "you all (2nd person plur.)", pos: "PRON" },
-    { id: "they", concept: "they (3rd person plur.)", pos: "PRON" },
-    { id: "this", concept: "this (proximal demonstrative)", pos: "DET" },
-    { id: "that", concept: "that (distal demonstrative)", pos: "DET" },
-    { id: "in", concept: "in / inside / within", pos: "PREP" },
-    { id: "on", concept: "on / above / over", pos: "PREP" },
-    { id: "under", concept: "under / below / beneath", pos: "PREP" },
-    { id: "with", concept: "with / accompanied by", pos: "PREP" },
-    { id: "from", concept: "from / source / origin", pos: "PREP" },
-    { id: "to", concept: "to / toward / direction", pos: "PREP" },
-    { id: "and", concept: "and / conjunction", pos: "CONJ" },
-    { id: "but", concept: "but / contrast", pos: "CONJ" },
-    { id: "not", concept: "not / negation particle", pos: "PART" },
-    { id: "past", concept: "past tense marker", pos: "PART" },
-    { id: "future", concept: "future tense marker", pos: "PART" },
-    { id: "ques", concept: "question particle", pos: "PART" }
+// --- CORE DICTIONARY BASE ---
+const CORE_DICTIONARY_BASE = [
+    { key: "i", en: "I", pos: "PRON" },
+    { key: "you", en: "you", pos: "PRON" },
+    { key: "you_formal", en: "you (formal)", pos: "PRON" },
+    { key: "he", en: "he/she", pos: "PRON" },
+    { key: "we", en: "we", pos: "PRON" },
+    { key: "this", en: "this", pos: "DET" },
+    { key: "that", en: "that", pos: "DET" },
+    { key: "not", en: "not", pos: "PART" },
+    { key: "past", en: "PAST", pos: "PART" },
+    { key: "ques", en: "QUES", pos: "PART" },
+    { key: "in", en: "in", pos: "PREP" },
+    { key: "to", en: "to", pos: "PREP" },
+    { key: "be", en: "be", pos: "V" },
+    { key: "see", en: "see", pos: "V" },
+    { key: "know", en: "know/understand", pos: "V" },
+    { key: "seek", en: "seek/search", pos: "V" },
+    { key: "go", en: "go/travel", pos: "V" },
+    { key: "buy", en: "buy/trade", pos: "V" },
+    { key: "pay", en: "pay/offer", pos: "V" },
+    { key: "give", en: "give", pos: "V" },
+    { key: "show", en: "show", pos: "V" },
+    { key: "person", en: "person", pos: "N" },
+    { key: "physician", en: "physician/healer", pos: "N" },
+    { key: "scholar", en: "scholar/scribe", pos: "N" },
+    { key: "merchant", en: "merchant", pos: "N" },
+    { key: "guard", en: "guard/sentinel", pos: "N" },
+    { key: "chief", en: "chief/leader", pos: "N" },
+    { key: "academy", en: "academy", pos: "N" },
+    { key: "city", en: "city", pos: "N" },
+    { key: "gate", en: "gate", pos: "N" },
+    { key: "road", en: "road/way", pos: "N" },
+    { key: "map", en: "map/chart", pos: "N" },
+    { key: "book", en: "book", pos: "N" },
+    { key: "coin", en: "coin/money", pos: "N" },
+    { key: "water", en: "water", pos: "N" },
+    { key: "eye", en: "eye", pos: "N" },
+    { key: "fire", en: "fire", pos: "N" },
+    { key: "peace", en: "peace", pos: "N" },
+    { key: "good", en: "good", pos: "ADJ" },
+    { key: "new", en: "new", pos: "ADJ" },
+    { key: "near", en: "near", pos: "ADJ" },
+    { key: "clean", en: "clean", pos: "ADJ" }
 ];
 
-const CORE_VERBS = [
-    { id: "be", concept: "to be / exist", pos: "V" },
-    { id: "have", concept: "to have / possess", pos: "V" },
-    { id: "do", concept: "to do / make / act", pos: "V" },
-    { id: "go", concept: "to go / walk / travel", pos: "V" },
-    { id: "see", concept: "to see / perceive visually", pos: "V" },
-    { id: "hear", concept: "to hear / perceive sound", pos: "V" },
-    { id: "want", concept: "to want / desire", pos: "V" },
-    { id: "speak", concept: "to speak / communicate", pos: "V" },
-    { id: "eat", concept: "to eat / consume food", pos: "V" },
-    { id: "drink", concept: "to drink / absorb liquid", pos: "V" },
-    { id: "sleep", concept: "to sleep / rest", pos: "V" },
-    { id: "give", concept: "to give / offer", pos: "V" },
-    { id: "fall", concept: "to fall / descend", pos: "V" },
-    { id: "know", concept: "to know / comprehend", pos: "V" },
-    { id: "die", concept: "to die / cease living", pos: "V" },
-    { id: "buy", concept: "to buy / trade for", pos: "V" },
-    { id: "seek", concept: "to seek / search for", pos: "V" },
-    { id: "pay", concept: "to pay / offer tribute", pos: "V" }
+// --- 1. MATRICE DEI CONCETTI UNIVERSALI (CONCEPT_MARKET) ---
+const CONCEPT_MARKET = [
+    { id: "landslide_earthquake", roots: ["earth", "fall"], pos: "N", category: "Domain_Nature", cultureMeanings: { primitive: "terremoto / terra che trema", medieval: "frana sulla strada", scholarly: "spostamento tettonico", renaissance: "movimento tellurico", alien: "instabilità sismica planetaria" } },
+    { id: "study_learn", roots: ["go", "academy"], pos: "V", category: "Domain_Science", cultureMeanings: { primitive: "iniziazione / ascoltare gli anziani", medieval: "apprendistato presso la gilda", scholarly: "studiare / frequentare l'ateneo", renaissance: "frequentare l'accademia / apprendere le arti", alien: "assorbire informazioni dalla matrice" } },
+    { id: "tear_sorrow", roots: ["eye", "water"], pos: "N", category: "Domain_Society", cultureMeanings: { primitive: "acqua degli occhi / pianto", medieval: "dolore / lacrima di pena", scholarly: "espressione di cordoglio", renaissance: "malinconia / espressione artistica", alien: "secrezione di sovraccarico sensoriale" } },
+    { id: "aqueduct_fountain", roots: ["water", "city"], pos: "N", category: "Domain_Architecture", cultureMeanings: { primitive: "fiume dell'accampamento", medieval: "pozzo cittadino / fontana", scholarly: "acquedotto civico", renaissance: "fontana monumentale / impianto idrico", alien: "condotto di raffreddamento" } },
+    { id: "doctor_healer", roots: ["person", "medicine"], pos: "N", category: "Domain_Society", cultureMeanings: { primitive: "sciamano / curatore", medieval: "cerusico / medico di campo", scholarly: "dottore in medicina", renaissance: "medico / anatomista", alien: "unità di riparazione biologica" } }
 ];
-
-const CORE_NOUNS = [
-    { id: "earth", concept: "earth / ground / soil", pos: "N" },
-    { id: "sky", concept: "sky / heavens", pos: "N" },
-    { id: "fire", concept: "fire / heat source", pos: "N" },
-    { id: "water", concept: "water / liquid / river", pos: "N" },
-    { id: "light", concept: "light / sun / day", pos: "N" },
-    { id: "tree", concept: "tree / plant / wood", pos: "N" },
-    { id: "head", concept: "head / top / leader", pos: "N" },
-    { id: "hand", concept: "hand / arm / grip", pos: "N" },
-    { id: "eye", concept: "eye / vision organ", pos: "N" },
-    { id: "person", concept: "person / human being", pos: "N" },
-    { id: "house", concept: "house / shelter / dwelling", pos: "N" },
-    { id: "time", concept: "time / duration / cycle", pos: "N" },
-    { id: "life", concept: "life / vital breath", pos: "N" },
-    { id: "food", concept: "food / bread / nourishment", pos: "N" },
-    { id: "book", concept: "book / recorded knowledge", pos: "N" },
-    { id: "medicine", concept: "medicine / cure / healing", pos: "N" },
-    { id: "mountain", concept: "mountain / peak", pos: "N" },
-    { id: "road", concept: "road / path / way", pos: "N" },
-    { id: "city", concept: "city / walled settlement", pos: "N" },
-    { id: "peace", concept: "peace / calm state", pos: "N" },
-    { id: "meat", concept: "meat / game / prey", pos: "N" },
-    { id: "beast", concept: "beast / predator", pos: "N" },
-    { id: "spring", concept: "water spring / source", pos: "N" },
-    { id: "horse", concept: "horse / mount", pos: "N" },
-    { id: "inn", concept: "inn / shelter for mounts", pos: "N" },
-    { id: "tribute", concept: "tribute / tax coin", pos: "N" },
-    { id: "lord", concept: "lord / castle master", pos: "N" },
-    { id: "academy", concept: "academy / hall of knowledge", pos: "N" },
-    { id: "map", concept: "map / chart of lands", pos: "N" }
-];
-
-const CORE_ADJECTIVES = [
-    { id: "good", concept: "good / valid / favorable", pos: "ADJ" },
-    { id: "big", concept: "big / large / grand", pos: "ADJ" },
-    { id: "hot", concept: "hot / high temperature", pos: "ADJ" },
-    { id: "new", concept: "new / recent", pos: "ADJ" },
-    { id: "fast", concept: "fast / quick / swift", pos: "ADJ" },
-    { id: "near", concept: "near / close by", pos: "ADJ" },
-    { id: "clean", concept: "clean / pure", pos: "ADJ" }
-];
-
-const PHRASE_DATA = {
-    primitive: [
-        { en: "Where is the water spring?", pattern: "Q_SPRING_BE_WHERE" },
-        { en: "The predator beast is near.", pattern: "BEAST_NEAR_BE" },
-        { en: "I offer this meat.", pattern: "I_OFFER_MEAT" },
-        { en: "I come in peace.", pattern: "I_COME_PEACE" },
-        { en: "Do you have clean water?", pattern: "Q_YOU_HAVE_WATER" },
-        { en: "Danger: fire is near!", pattern: "FIRE_NEAR_BE" },
-        { en: "I do not understand your words.", pattern: "I_NOT_KNOW_WORDS" },
-        { en: "Who is the chief of this tribe?", pattern: "Q_WHO_BE_CHIEF" }
-    ],
-    medieval: [
-        { en: "Who is the lord of this castle?", pattern: "Q_WHO_BE_LORD" },
-        { en: "I seek an inn for horses.", pattern: "I_SEEK_INN" },
-        { en: "Pay the required tribute.", pattern: "YOU_PAY_TRIBUTE" },
-        { en: "I am a traveling merchant.", pattern: "I_BE_MERCHANT" },
-        { en: "Where is the road to the city?", pattern: "Q_ROAD_CITY_WHERE" },
-        { en: "How much is this horse?", pattern: "Q_COST_HORSE" },
-        { en: "I offer this forged metal.", pattern: "I_OFFER_METAL" },
-        { en: "The enemy army is near.", pattern: "ARMY_NEAR_BE" }
-    ],
-    renaissance: [
-        { en: "Where is the academy located?", pattern: "Q_WHERE_BE_ACADEMY" },
-        { en: "Show me the city map.", pattern: "YOU_SHOW_MAP" },
-        { en: "I seek the city physician.", pattern: "I_SEEK_PHYSICIAN" },
-        { en: "I am a scholar of astronomy.", pattern: "I_BE_SCHOLAR" },
-        { en: "Where can I buy printed books?", pattern: "Q_WHERE_BUY_BOOKS" },
-        { en: "I bring news from the capital.", pattern: "I_BRING_NEWS" },
-        { en: "This formula is not correct.", pattern: "FORMULA_NOT_GOOD" },
-        { en: "I seek safe passage to the university.", pattern: "I_SEEK_ROAD" }
-    ],
-    ancient: [
-        { en: "Where is the sacred temple?", pattern: "Q_WHERE_BE_TEMPLE" },
-        { en: "I bring tribute to the king.", pattern: "I_BRING_TRIBUTE" },
-        { en: "We offer this bronze vessel.", pattern: "WE_OFFER_BRONZE" },
-        { en: "Are you a priest of the gods?", pattern: "Q_YOU_BE_PRIEST" },
-        { en: "Show me the royal decrees.", pattern: "YOU_SHOW_DECREE" },
-        { en: "The city walls are strong.", pattern: "WALLS_STRONG_BE" },
-        { en: "I do not speak your tongue.", pattern: "I_NOT_SPEAK_TONGUE" },
-        { en: "Lead us to the marketplace.", pattern: "LEAD_US_MARKET" }
-    ],
-    alien: [
-        { en: "Where is the plasma energy source?", pattern: "Q_WHERE_BE_PLASMA" },
-        { en: "We seek mental connection.", pattern: "WE_SEEK_MIND" },
-        { en: "Identify your neural frequency.", pattern: "YOU_SHOW_FREQ" },
-        { en: "Our vessel comes in harmony.", pattern: "VESSEL_PEACE_BE" },
-        { en: "Do you absorb solar radiation?", pattern: "Q_YOU_ABSORB_LIGHT" },
-        { en: "Gravity fluctuation is near.", pattern: "GRAVITY_NEAR_BE" },
-        { en: "I do not parse your signal.", pattern: "I_NOT_KNOW_SIGNAL" },
-        { en: "Show us the planetary core map.", pattern: "YOU_SHOW_CORE" }
-    ]
-};
 
 let currentConlangData = null;
 
@@ -367,8 +286,7 @@ function getGaussianLength(mean, stdDev) {
     return Math.max(2, Math.min(15, len));
 }
 
-function applyPhonotactics(partA, partB, styleKey, customRules = null) {
-    const rules = customRules || PHONETICS[styleKey] || PHONETICS.none;
+function applyPhonotactics(partA, partB, maxC = 2, epenthetic = 'e') {
     let overlapLen = Math.min(partA.length, partB.length);
     for (let len = overlapLen; len >= 1; len--) {
         let suffixA = partA.slice(-len);
@@ -386,8 +304,8 @@ function applyPhonotactics(partA, partB, styleKey, customRules = null) {
     for (let i = 0; i < str.length; i++) {
         if (!isVowel(str[i])) {
             cCount++;
-            if (cCount > rules.maxC) {
-                str = str.slice(0, i) + rules.epenthetic + str.slice(i);
+            if (cCount > maxC) {
+                str = str.slice(0, i) + epenthetic + str.slice(i);
                 break;
             }
         } else { cCount = 0; }
@@ -410,288 +328,150 @@ function applyExternalSandhi(wordsArray) {
     return resultSentence.join(' ');
 }
 
-function mergeLegoRoots(rootA, rootB, meanLen, styleKey, customRules = null) {
-    const maxLen = Math.round(meanLen * 1.5);
-    let res = applyPhonotactics(rootA, rootB, styleKey, customRules);
-    if (res.length > maxLen) {
-        let cutA = rootA.length > 3 ? rootA.slice(0, Math.ceil(rootA.length / 2)) : rootA;
-        res = applyPhonotactics(cutA, rootB, styleKey, customRules);
+// --- 2. PIPELINE DI TRADUZIONE DINAMICA (translatePhrase) ---
+function translatePhrase(tokens, lexicon, grammarRules) {
+    let subject = "", verb = "", object = "", adjective = "";
+    let isNegative = false, isQuestion = false;
+
+    tokens.forEach(token => {
+        let raw = token.toLowerCase().trim();
+        if (raw === "not" || raw === "no") { isNegative = true; return; }
+        if (raw === "?") { isQuestion = true; return; }
+
+        let conlangWord = lexicon[raw] || raw;
+
+        if (["i", "you", "he", "we", "they", "guard", "scholar", "merchant", "person"].includes(raw)) {
+            if (!subject) subject = conlangWord; else object = conlangWord;
+        } else if (["see", "have", "seek", "buy", "pay", "give", "know", "go", "be"].includes(raw)) {
+            verb = conlangWord;
+        } else if (["good", "new", "clean", "near", "safe"].includes(raw)) {
+            adjective = conlangWord;
+        } else {
+            object = conlangWord;
+        }
+    });
+
+    let fullObject = object;
+    if (object && adjective) {
+        fullObject = (grammarRules.adjPosition === "BEFORE") ? `${adjective} ${object}` : `${object} ${adjective}`;
     }
-    return res.length > maxLen ? res.slice(0, maxLen) : res;
+
+    if (isNegative && verb) {
+        let negPart = lexicon["not"] || "not";
+        verb = `${negPart} ${verb}`;
+    }
+
+    let orderedPhrase = [];
+    const wordOrder = grammarRules.wordOrder || "SVO";
+    if (wordOrder === "SVO") orderedPhrase = [subject, verb, fullObject];
+    else if (wordOrder === "SOV") orderedPhrase = [subject, fullObject, verb];
+    else if (wordOrder === "OVS") orderedPhrase = [fullObject, verb, subject];
+
+    orderedPhrase = orderedPhrase.filter(w => w && w.trim().length > 0);
+
+    if (isQuestion) {
+        let quesPart = lexicon["ques"] || "ques";
+        orderedPhrase.unshift(quesPart);
+    }
+
+    return applyExternalSandhi(orderedPhrase);
 }
 
+// --- 3. MOTORE DEI DIALOGHI AD ALBERO LOGICO (DIALOGUE ENGINE) ---
+const DIALOGUE_TEMPLATES = [
+    { id: 1, contextTags: { primitive: "At the tribe campfire", medieval: "At the castle gate", scholarly: "University main hall", renaissance: "City gate checkpoint", alien: "Stasi portal" },
+      turns: [{ text: ["you", "seek", "academy", "?"] }, { text: ["I", "seek", "physician"] }, { text: ["you", "have", "coin"] }, { text: ["I", "pay", "coin"] }] },
+    { id: 2, contextTags: { primitive: "Bartering skins at stream", medieval: "Spice merchant trade", scholarly: "Rare manuscript purchase", renaissance: "Mapmaker workshop", alien: "Data tile exchange" },
+      turns: [{ text: ["you", "have", "map", "?"] }, { text: ["I", "have", "good", "map"] }, { text: ["I", "buy", "map"] }, { text: ["you", "pay", "coin"] }] }
+];
+
 function buildFullConlangEngine(config) {
-    const pData = config.customRules || PHONETICS[config.desc] || PHONETICS.none;
+    const pData = PHONETICS[config.desc] || PHONETICS.renaissance;
     const v = config.vowels.length ? config.vowels : pData.v;
     const c = config.consonants.length ? config.consonants : pData.c;
 
     let wordOrder = 'SVO';
     if (config.culture === 'ancient' || config.culture === 'primitive') wordOrder = 'SOV';
     if (config.culture === 'alien') wordOrder = 'OVS';
+    const adjPos = (config.culture === 'primitive' || config.culture === 'ancient') ? 'BEFORE' : 'AFTER';
 
     let lexicon = [];
+    let wordMap = {};
     let usedWords = new Set();
-    let roots = {};
 
     function getRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
 
     function makeRoot(targetLen) {
-        let w = "";
-        let attempts = 0;
+        let w = "", attempts = 0;
         do {
             w = "";
-            while(w.length < targetLen) {
-                w += getRandom(c);
-                w += getRandom(v);
-            }
-            w = w.slice(0, targetLen);
-            attempts++;
+            while(w.length < targetLen) { w += getRandom(c); w += getRandom(v); }
+            w = w.slice(0, targetLen); attempts++;
         } while (usedWords.has(w) && attempts < 50);
         usedWords.add(w);
         return w;
     }
 
-    // Roots
-    CORE_GRAMMAR.forEach(item => { let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev)); roots[item.id] = w; lexicon.push({ word: w, pos: item.pos, category: "Grammar", meaning: item.concept }); });
-    CORE_VERBS.forEach(item => { let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev)); roots[item.id] = w; lexicon.push({ word: w, pos: item.pos, category: "Base Verb", meaning: item.concept }); });
-    CORE_NOUNS.forEach(item => { let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev)); roots[item.id] = w; lexicon.push({ word: w, pos: item.pos, category: "Base Noun", meaning: item.concept }); });
-    CORE_ADJECTIVES.forEach(item => { let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev)); roots[item.id] = w; lexicon.push({ word: w, pos: item.pos, category: "Base Adjective", meaning: item.concept }); });
-
-    // Rules
-    const pluralSuffix = makeRoot(2);
-    const adjPosition = config.culture === 'primitive' || config.culture === 'ancient' ? 'BEFORE' : 'AFTER';
-    const adjAgreement = config.socio === 'hierarchical' ? 'AGREES (plural suffix)' : 'INVARIANT';
-    const negParticle = roots["not"] || makeRoot(2);
-    const pastPart = roots["past"] || makeRoot(2);
-    const quesPart = roots["ques"] || makeRoot(2);
-
-    const systemicGrammarRules = {
-        pluralRule: `Nouns form plural by adding '-${pluralSuffix}'.`,
-        nounPhraseRule: `Adjectives are placed ${adjPosition} the noun. Adjectives are ${adjAgreement}.`,
-        verbInflectionRule: `Tense markers are isolated particles. Past: '${pastPart}' IMMEDIATELY BEFORE verb.`,
-        complexSyntaxRule: `Canonical Order: ${wordOrder}. Negation '${negParticle}' stands IMMEDIATELY BEFORE verb. Question particle '${quesPart}' stands at the VERY START of interrogative sentences.`
-    };
-
-    // Expand Dictionary up to 550+ entries
-    let dynamicIdx = 1;
-    let domainTags = ["Domain_Nature", "Domain_Society", "Domain_Science", "Domain_Military", "Domain_Trade"];
-    let baseKeys = Object.keys(roots);
-    while (lexicon.length < 550) {
-        let k1 = getRandom(baseKeys);
-        let k2 = getRandom(baseKeys);
-        if (k1 !== k2) {
-            let comp = mergeLegoRoots(roots[k1], roots[k2], config.meanLength, config.desc, pData);
-            if (!usedWords.has(comp)) {
-                usedWords.add(comp);
-                lexicon.push({
-                    word: comp,
-                    pos: getRandom(["N", "V", "ADJ"]),
-                    category: getRandom(domainTags),
-                    meaning: `expanded vocabulary term #${dynamicIdx++} [${roots[k1]} + ${roots[k2]}]`
-                });
-            }
-        }
-    }
-
-    let honorificSuffix = "";
-    if (config.socio === 'hierarchical') {
-        let youBase = lexicon.find(l => l.meaning.includes("you (2nd person sing. informal)"));
-        if (youBase) {
-            honorificSuffix = makeRoot(2);
-            let formalYou = applyPhonotactics(youBase.word, honorificSuffix, config.desc, pData);
-            lexicon.push({ word: formalYou, pos: "PRON", category: "Sociolinguistic", meaning: `you (formal / honorific) [${youBase.word} + -${honorificSuffix}]` });
-        }
-    }
-
-    // --- GENERAZIONE FRASI SURVIVAL ADATTATE (8 ESSENZIALI) ---
-    const culturePhrasesRaw = PHRASE_DATA[config.culture] || PHRASE_DATA.renaissance;
-    let survivalPhrasesOutput = [];
-
-    culturePhrasesRaw.forEach((item, idx) => {
-        let subject = roots["i"] || "i";
-        let verb = roots["see"] || "see";
-        let object = roots["water"] || "water";
-        let questionPrefix = quesPart;
-        let isQ = item.pattern.startsWith("Q_");
-
-        if (config.socio === 'hierarchical' && item.en.toLowerCase().includes("you")) {
-            subject = applyPhonotactics(roots["you"] || "you", honorificSuffix, config.desc, pData);
-        }
-
-        let words = [];
-        let structStr = "";
-
-        if (wordOrder === 'SVO') {
-            words = [subject, verb, object];
-            structStr = "Subject -> Verb -> Object";
-        } else if (wordOrder === 'SOV') {
-            words = [subject, object, verb];
-            structStr = "Subject -> Object -> Verb";
-        } else if (wordOrder === 'OVS') {
-            words = [object, verb, subject];
-            structStr = "Object -> Verb -> Subject";
-        }
-
-        if (isQ) {
-            words.unshift(questionPrefix);
-            structStr = "QuestionPart -> " + structStr;
-        }
-
-        let conlangText = applyExternalSandhi(words);
-        survivalPhrasesOutput.push({
-            num: idx + 1,
-            en: item.en,
-            structure: structStr,
-            conlang: conlangText
-        });
+    CORE_DICTIONARY_BASE.forEach(item => {
+        let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev));
+        wordMap[item.key] = w;
+        lexicon.push({ word: w, pos: item.pos, category: "Core Lexicon", meaning: item.en });
     });
 
-    // --- SECTION A: 35 CULTURAL SURVIVAL PHRASES (5 BLOCKS) ---
-    const blocksData = [
-        { name: "Block 1: Greetings, Identity & Courtesy", topics: ["I am a traveler", "We come in peace", "Greetings to the chief", "I bring good gifts", "My name is recorded", "We seek safe shelter", "Honor to your hall"] },
-        { name: "Block 2: Orientation & Places", topics: ["Where is the city gate?", "Show me the road", "Is the academy near?", "Where is the clean spring?", "We seek the main market", "The path is dangerous", "Where do horses rest?"] },
-        { name: "Block 3: Needs & Survival", topics: ["I need fresh water", "We offer cooked food", "Where is the physician?", "I am wounded and cold", "Do you have medicine?", "We seek shelter from storm", "Give us fire light"] },
-        { name: "Block 4: Trade & Tributes", topics: ["How much for this book?", "I offer this forged metal", "We pay the required tribute", "Will you trade for meat?", "This coin is valid", "I buy this map", "We trade in peace"] },
-        { name: "Block 5: Danger & Alarms", topics: ["Fire is near the wall!", "The predator beast approaches", "I do not know your tongue", "Enemy forces are close", "Flee to the mountains!", "Stop and identify yourself", "The storm is arriving"] }
-    ];
-
-    let section35Phrases = [];
-    let p35Count = 1;
-    blocksData.forEach(block => {
-        let blockItems = [];
-        block.topics.forEach(top => {
-            let w1 = quesPart;
-            let w2 = roots["i"] || "i";
-            let w3 = roots["go"] || "go";
-            let w4 = roots["city"] || "city";
-            let phrWords = (wordOrder === 'SOV') ? [w2, w4, w3] : [w2, w3, w4];
-            if (top.includes("?")) phrWords.unshift(w1);
-            blockItems.push({
-                num: p35Count++,
-                en: top,
-                conlang: applyExternalSandhi(phrWords)
-            });
-        });
-        section35Phrases.push({ blockName: block.name, items: blockItems });
+    CONCEPT_MARKET.forEach(item => {
+        let r1 = wordMap[item.roots[0]] || makeRoot(4);
+        let r2 = wordMap[item.roots[1]] || makeRoot(4);
+        let compWord = applyPhonotactics(r1, r2, pData.maxC, pData.epenthetic);
+        let activeMeaning = item.cultureMeanings[config.culture] || item.cultureMeanings.scholarly;
+        wordMap[item.id] = compWord;
+        lexicon.push({ word: compWord, pos: item.pos, category: item.category, meaning: `${activeMeaning} [${r1} + ${r2}]` });
     });
 
-    // --- SECTION B: 20 MINI-DIALOGUES (4-WAY INTERACTIONS) ---
-    let dialoguesOutput = [];
-    const dialogueTitles = [
-        "At the City Gate", "Trader and Scholar", "In the Hall of Knowledge", "Meeting the Local Leader",
-        "Asking for Directions", "At the Forge Market", "In the Tavern/Shelter", "With the Local Physician",
-        "Tribute Inspection", "Night Watch Encounter", "Buying a Map", "Discussing Weather Storm",
-        "Exchanging Remedies", "At the Horse Stables", "Encounter in the Forest", "With the Temple Priest",
-        "Trading Forged Tools", "Reporting Enemy Sighting", "In the Alchemy Workshop", "Parting Blessing"
-    ];
+    let grammarRules = { wordOrder: wordOrder, adjPosition: adjPos };
 
-    for (let d = 1; d <= 20; d++) {
-        let pA = roots["i"] || "i";
-        let pB = (config.socio === 'hierarchical') ? applyPhonotactics(roots["you"] || "you", honorificSuffix, config.desc, pData) : (roots["you"] || "you");
-        let v1 = roots["see"] || "see";
-        let v2 = roots["know"] || "know";
-        let n1 = roots["road"] || "road";
+    // Dynamic Dialogues Parsing
+    let generatedDialogues = DIALOGUE_TEMPLATES.map(template => {
+        let contextTitle = template.contextTags[config.culture] || `Interaction #${template.id}`;
+        let parsedTurns = template.turns.map(turn => ({
+            englishTokens: turn.text.join(" "),
+            conlangText: translatePhrase(turn.text, wordMap, grammarRules)
+        }));
+        return { dialogueId: template.id, context: contextTitle, turns: parsedTurns };
+    });
 
-        let lineA1 = applyExternalSandhi([quesPart, pA, v1, pB]);
-        let lineB1 = applyExternalSandhi([pB, v2, pA]);
-        let lineA2 = applyExternalSandhi([pA, roots["want"] || "want", n1]);
-        let lineB2 = applyExternalSandhi([pB, roots["give"] || "give", n1]);
+    currentConlangData = { metadata: config, version: "v3.2.0", lexicon: lexicon, dialogues: generatedDialogues };
 
-        dialoguesOutput.push({
-            id: d,
-            title: dialogueTitles[d - 1] || `Interaction #${d}`,
-            a1En: "Do I see you in peace?", a1Con: lineA1,
-            b1En: "I know your presence.", b1Con: lineB1,
-            a2En: "I seek the way to the hall.", a2Con: lineA2,
-            b2En: "I offer you the path.", b2Con: lineB2
-        });
-    }
-
-    currentConlangData = {
-        metadata: config,
-        version: "v3.0.0",
-        grammarRules: systemicGrammarRules,
-        lexicon: lexicon,
-        essentialPhrases: survivalPhrasesOutput,
-        sectionA35: section35Phrases,
-        sectionB20: dialoguesOutput
-    };
-
-    // Logging Output
-    let text = `=== CONLANG ENGINE v3.0.0 POCKET PHRASEBOOK LOG ===\n`;
+    let text = `=== CONLANG ENGINE v3.2.0 DYNAMIC PARSER LOG ===\n`;
     text += `Target Mean Word Length: ${config.meanLength} (Std Dev: ${config.stdDev})\n`;
-    text += `Total Generated Vocabulary: ${lexicon.length} Terms (Extended Phrasebook Matrix)\n`;
     text += `Canonical Word Order    : ${wordOrder}\n`;
-    text += `Sociolinguistic Mode    : ${config.socio.toUpperCase()}\n\n`;
+    text += `Adjective Placement     : ${adjPos} THE NOUN\n\n`;
 
-    text += `=== SYSTEMIC GRAMMAR RULES ===\n`;
-    text += `A) Plural Formation        : ${systemicGrammarRules.pluralRule}\n`;
-    text += `B) Noun Phrase Structure   : ${systemicGrammarRules.nounPhraseRule}\n`;
-    text += `C) Verb Inflection Mechanism: ${systemicGrammarRules.verbInflectionRule}\n`;
-    text += `D) Complex Syntax & Questions: ${systemicGrammarRules.complexSyntaxRule}\n\n`;
-
-    text += `=== CULTURAL SURVIVAL PHRASES (ESSENTIAL 8) ===\n`;
-    survivalPhrasesOutput.forEach(p => {
-        text += `${p.num}. English: "${p.en}"\n   ConLang Structure: [${p.structure}]\n   ConLang Text     : ${p.conlang}\n\n`;
-    });
-
-    text += `=== SECTION A: 35 CULTURAL SURVIVAL PHRASES ===\n`;
-    section35Phrases.forEach(b => {
-        text += `\n--- ${b.blockName} ---\n`;
-        b.items.forEach(item => {
-            text += `${item.num}. EN: "${item.en}" | CONLANG: ${item.conlang}\n`;
+    text += `=== SECTION B: DYNAMIC DIALOGUES (PARSED AT RUNTIME) ===\n`;
+    generatedDialogues.forEach(d => {
+        text += `\nDialogue #${d.dialogueId}: [${d.context}]\n`;
+        d.turns.forEach((t, i) => {
+            text += `  Turn ${i+1}: EN: "${t.englishTokens}" | CONLANG: "${t.conlangText}"\n`;
         });
-    });
-
-    text += `\n\n=== SECTION B: 20 MINI-DIALOGUES (4-Way Interactions) ===\n`;
-    dialoguesOutput.forEach(d => {
-        text += `\nDialogue ${d.id}: [${d.title}]\n`;
-        text += `A1: EN: "${d.a1En}" | CONLANG: "${d.a1Con}"\n`;
-        text += `B1: EN: "${d.b1En}" | CONLANG: "${d.b1Con}"\n`;
-        text += `A2: EN: "${d.a2En}" | CONLANG: "${d.a2Con}"\n`;
-        text += `B2: EN: "${d.b2En}" | CONLANG: "${d.b2Con}"\n`;
     });
 
     text += `\n\n=== FULL DICTIONARY EXCERPT (${lexicon.length} Entries) ===\n`;
-    text += `${"WORD".padEnd(20, ' ')} | ${"POS".padEnd(6, ' ')} | ${"CATEGORY".padEnd(20, ' ')} | MEANING / FORMULA\n`;
+    text += `${"WORD".padEnd(20, ' ')} | ${"POS".padEnd(6, ' ')} | ${"CATEGORY".padEnd(22, ' ')} | MEANING / FORMULA\n`;
     text += `-`.repeat(85) + `\n`;
-
-    lexicon.slice(0, 100).forEach(entry => {
-        text += `${entry.word.padEnd(20, ' ')} | ${entry.pos.padEnd(6, ' ')} | ${entry.category.padEnd(20, ' ')} | ${entry.meaning}\n`;
+    lexicon.forEach(entry => {
+        text += `${entry.word.padEnd(20, ' ')} | ${entry.pos.padEnd(6, ' ')} | ${entry.category.padEnd(22, ' ')} | ${entry.meaning}\n`;
     });
-    text += `... [${lexicon.length - 100} additional terms included in export JSON/CSV]\n`;
 
     return text;
 }
 
 function generateRandomConlang() {
-    const descs = ['harsh', 'musical', 'dark', 'magic', 'aquatic', 'none'];
-    const socios = ['hierarchical', 'egalitarian', 'caste'];
-    const cultures = ['renaissance', 'ancient', 'primitive', 'medieval', 'alien'];
-
-    const config = {
-        meanLength: (Math.random() * 3 + 4).toFixed(1),
-        stdDev: (Math.random() * 1.0 + 0.8).toFixed(1),
-        vowels: [],
-        consonants: [],
-        desc: descs[Math.floor(Math.random() * descs.length)],
-        socio: socios[Math.floor(Math.random() * socios.length)],
-        culture: cultures[Math.floor(Math.random() * cultures.length)]
-    };
-
-    document.getElementById('mean-length').value = config.meanLength;
-    document.getElementById('std-dev').value = config.stdDev;
-    document.getElementById('desc').value = config.desc;
-    document.getElementById('socio').value = config.socio;
-    document.getElementById('culture').value = config.culture;
-
+    const config = { meanLength: 5, stdDev: 1.2, vowels: [], consonants: [], desc: 'renaissance', socio: 'hierarchical', culture: 'renaissance' };
     document.getElementById('output').innerText = buildFullConlangEngine(config);
 }
 
 function generateCustomConlang() {
     const vInput = document.getElementById('custom-vowels').value;
     const cInput = document.getElementById('custom-cons').value;
-
     const config = {
         meanLength: parseFloat(document.getElementById('mean-length').value),
         stdDev: parseFloat(document.getElementById('std-dev').value),
@@ -701,7 +481,6 @@ function generateCustomConlang() {
         socio: document.getElementById('socio').value,
         culture: document.getElementById('culture').value
     };
-
     document.getElementById('output').innerText = buildFullConlangEngine(config);
 }
 
@@ -710,24 +489,18 @@ function exportJSON() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentConlangData, null, 2));
     const btn = document.createElement('a');
     btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", `conlang_v3.0.0_phrasebook.json`);
-    document.body.appendChild(btn);
-    btn.click();
-    btn.remove();
+    btn.setAttribute("download", `conlang_v3.2.0_dynamic.json`);
+    document.body.appendChild(btn); btn.click(); btn.remove();
 }
 
 function exportCSV() {
     if (!currentConlangData) return alert("Error: Generate a conlang first.");
     let csvContent = "data:text/csv;charset=utf-8,Word,POS,Category,Meaning\n";
-    currentConlangData.lexicon.forEach(item => {
-        csvContent += `"${item.word}","${item.pos}","${item.category}","${item.meaning}"\n`;
-    });
+    currentConlangData.lexicon.forEach(item => { csvContent += `"${item.word}","${item.pos}","${item.category}","${item.meaning}"\n`; });
     const btn = document.createElement("a");
     btn.setAttribute("href", encodeURI(csvContent));
-    btn.setAttribute("download", `conlang_dictionary_550.csv`);
-    document.body.appendChild(btn);
-    btn.click();
-    btn.remove();
+    btn.setAttribute("download", `conlang_dictionary_3.2.0.csv`);
+    document.body.appendChild(btn); btn.click(); btn.remove();
 }
 </script>
 
