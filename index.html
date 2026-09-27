@@ -12,6 +12,10 @@
             --text-main: #f8fafc;
             --text-muted: #94a3b8;
             --border: #334155;
+            --badge-noun: #3b82f6;
+            --badge-verb: #10b981;
+            --badge-adj: #f59e0b;
+            --badge-gram: #8b5cf6;
         }
 
         body {
@@ -62,7 +66,7 @@
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 1.2rem;
+            gap: 1rem;
         }
 
         .content-area {
@@ -74,26 +78,45 @@
             gap: 1.5rem;
         }
 
+        .form-section-title {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-top: 0.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.2rem;
+        }
+
         .form-group {
             display: flex;
             flex-direction: column;
-            gap: 0.4rem;
+            gap: 0.3rem;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
         }
 
         label {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-muted);
             font-weight: 600;
-            text-transform: uppercase;
         }
 
         select, input, button {
             background-color: var(--bg-color);
             color: var(--text-main);
             border: 1px solid var(--border);
-            padding: 0.6rem;
+            padding: 0.5rem;
             border-radius: 4px;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         select:focus, input:focus {
@@ -107,7 +130,7 @@
             border: none;
             cursor: pointer;
             padding: 0.8rem;
-            margin-top: 1rem;
+            margin-top: 0.5rem;
             transition: opacity 0.2s;
         }
 
@@ -154,7 +177,7 @@
 
         .grid-list {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 0.8rem;
         }
 
@@ -163,16 +186,45 @@
             border: 1px solid var(--border);
             padding: 0.8rem;
             border-radius: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .card .conlang-word {
             color: var(--accent);
             font-weight: bold;
+            font-size: 1.05rem;
         }
 
         .card .translation {
             color: var(--text-muted);
             font-size: 0.85rem;
+        }
+
+        .pos-badge {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .pos-noun { background-color: var(--badge-noun); color: white; }
+        .pos-verb { background-color: var(--badge-verb); color: white; }
+        .pos-adj { background-color: var(--badge-adj); color: black; }
+        .pos-gram { background-color: var(--badge-gram); color: white; }
+
+        .morph-info {
+            font-size: 0.75rem;
+            color: #64748b;
+            font-style: italic;
         }
 
         .dialogue-box {
@@ -191,25 +243,69 @@
             font-weight: bold;
             color: var(--accent);
         }
+
+        .search-filter-bar {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
     </style>
 </head>
 <body>
 
     <header>
         <h1>Conlang Generator Studio</h1>
-        <span class="version-tag">v1.1.0</span>
+        <span class="version-tag">v1.2.0</span>
     </header>
 
     <div class="main-container">
         <aside class="sidebar">
             <button id="quick-generate-btn" class="quick-action-btn">⚡ One-Click Generate</button>
-            
-            <hr style="border-color: var(--border); width: 100%;">
 
+            <div class="form-section-title">Word Length Parameters</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="mean-length">Mean Length (Chars)</label>
+                    <input type="number" id="mean-length" min="3" max="15" value="6.5" step="0.5">
+                </div>
+                <div class="form-group">
+                    <label for="std-dev">Std Deviation</label>
+                    <input type="number" id="std-dev" min="0.5" max="4" value="1.5" step="0.2">
+                </div>
+            </div>
+
+            <div class="form-section-title">Morphology & Grammar</div>
+            <div class="form-group">
+                <label for="morph-type">Morphological Type</label>
+                <select id="morph-type">
+                    <option value="agglutinative">Agglutinative (Affix stacking)</option>
+                    <option value="isolating">Isolating / Fusional</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="case-system">Grammatical Alignment Strategy</label>
+                <select id="case-system">
+                    <option value="cases">Case Endings (Inflexional Suffixes)</option>
+                    <option value="prepositions">Prepositional / Word Order</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="article-system">Article System</label>
+                <select id="article-system">
+                    <option value="both">Definite & Indefinite Articles</option>
+                    <option value="definite_only">Definite Articles Only</option>
+                    <option value="indefinite_only">Indefinite Articles Only</option>
+                    <option value="partitive">Definite, Indefinite & Partitive</option>
+                    <option value="none">No Articles (Zero Article Language)</option>
+                </select>
+            </div>
+
+            <div class="form-section-title">Aesthetics & Context</div>
             <div class="form-group">
                 <label for="descriptive-preset">Aesthetic & Descriptive Profile</label>
                 <select id="descriptive-preset">
-                    <option value="custom">Custom Configuration</option>
                     <option value="musical">Musical / Melodic</option>
                     <option value="dark">Dark / Guttural</option>
                     <option value="magical">Magical / Ethereal</option>
@@ -240,6 +336,7 @@
                 </select>
             </div>
 
+            <div class="form-section-title">Phonology</div>
             <div class="form-group">
                 <label for="vowel-inventory">Vowel Inventory Set</label>
                 <select id="vowel-inventory">
@@ -263,7 +360,7 @@
         </aside>
 
         <main class="content-area">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="tab-words">Vocabulary (600)</button>
                     <button class="tab-btn" data-tab="tab-sentences">Sentences (50)</button>
@@ -272,11 +369,21 @@
                 
                 <div style="display: flex; gap: 0.5rem;">
                     <button id="export-json-btn" class="btn-primary" style="margin-top: 0; padding: 0.5rem 1rem;">Export JSON Table</button>
-                    <button id="copy-json-btn" class="quick-action-btn" style="padding: 0.5rem 1rem;">Copy JSON to Clipboard</button>
+                    <button id="copy-json-btn" class="quick-action-btn" style="padding: 0.5rem 1rem;">Copy JSON</button>
                 </div>
             </div>
 
             <div id="tab-words" class="tab-content active">
+                <div class="search-filter-bar">
+                    <input type="text" id="vocab-search" placeholder="Filter vocabulary..." style="flex: 1;">
+                    <select id="pos-filter">
+                        <option value="all">All Parts of Speech</option>
+                        <option value="noun">Nouns</option>
+                        <option value="verb">Verbs</option>
+                        <option value="adjective">Adjectives</option>
+                        <option value="grammatical">Grammatical Words</option>
+                    </select>
+                </div>
                 <div id="words-container" class="grid-list"></div>
             </div>
 
