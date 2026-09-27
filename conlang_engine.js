@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.5.0
- * Architecture: Full Parameter Randomization, JSON Import/Restore Capabilities & Fixed Phonotactics
+ * Version: 2.6.0
+ * Architecture: Bidirectional Sorted Dictionary & Global Header Term Search System
  */
 
 const Phonetics = {
@@ -516,7 +516,6 @@ class ConlangEngine {
             return conlangWord;
         };
 
-        // 1. STRUTTURALI E PRONOMI
         if (articles.definite) registerWord("the (definite article)", "Article", true);
         if (articles.indefinite) registerWord("a / an (indefinite article)", "Article", true);
         if (articles.partitive) registerWord("some / part of (partitive article)", "Article", true);
@@ -526,11 +525,9 @@ class ConlangEngine {
         ContextualLexicon.possessives.forEach(p => registerWord(p, "Possessive", true));
         ContextualLexicon.grammatical.forEach(g => registerWord(g, "Grammatical Word", true));
 
-        // 2. RADICI PRIMORDIALI
         ContextualLexicon.coreNouns.forEach(cn => registerWord(cn, "Noun", false, true));
         ContextualLexicon.coreVerbs.forEach(cv => registerWord(cv, "Verb", false, true));
 
-        // 3. DIZIONARIO ESTESO
         const culturalDomainTerms = ExpandedCulturalDomains[config.culture] || ExpandedCulturalDomains.medieval;
         
         const categories = [
@@ -553,7 +550,6 @@ class ConlangEngine {
             index++;
         }
 
-        // 4. GENERAZIONE DELLE 100 FRASI PROCEDURALI
         const sentenceCategories = [
             { title: "1. Greetings, Identity & Basic Interaction", count: 20 },
             { title: "2. Navigation, Movement & Directions", count: 20 },
@@ -573,7 +569,6 @@ class ConlangEngine {
             });
         });
 
-        // 5. GENERAZIONE 20 DIALOGHI NARRATIVI
         const dialogues = this.generateNarrativeDialogues(config.culture, wordOrder, articles, caseSuffix, suffix);
 
         const vowelsList = Phonetics.vowels[config.vowelSet] || Phonetics.vowels.standard;
@@ -625,7 +620,7 @@ class ConlangEngine {
     }
 }
 
-// UI Controller & Event Handlers
+// UI Controller & Render Handler
 document.addEventListener('DOMContentLoaded', () => {
     const engine = new ConlangEngine();
 
@@ -648,14 +643,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const vowelPreset = document.getElementById('vowel-inventory');
     const consPreset = document.getElementById('consonant-inventory');
 
-    // Funzione per estrarre o sintonizzare casualmente una voce da un elemento select HTML
+    const globalSearchInput = document.getElementById('global-search-input');
+    const searchCardContainer = document.getElementById('search-card-container');
+    const dictDirectionSelect = document.getElementById('dict-direction-select');
+
     function getRandomSelectValue(selectElement) {
         const options = selectElement.options;
         const randomIndex = Math.floor(Math.random() * options.length);
         return options[randomIndex].value;
     }
 
-    // Funzione per randomizzare in modo completo tutti i controlli della UI
     function randomizeAllParameters() {
         descPreset.value = getRandomSelectValue(descPreset);
         cultPreset.value = getRandomSelectValue(cultPreset);
@@ -666,7 +663,6 @@ document.addEventListener('DOMContentLoaded', () => {
         vowelPreset.value = getRandomSelectValue(vowelPreset);
         consPreset.value = getRandomSelectValue(consPreset);
 
-        // Genera casualmente una media sillabe compresa tra 1.8 e 3.5 e una deviazione standard tra 0.4 e 1.2
         meanLengthInput.value = (Math.random() * (3.5 - 1.8) + 1.8).toFixed(1);
         stdDevInput.value = (Math.random() * (1.2 - 0.4) + 0.4).toFixed(1);
     }
@@ -684,6 +680,44 @@ document.addEventListener('DOMContentLoaded', () => {
             vowelSet: vowelPreset.value,
             consonantSet: consPreset.value
         };
+    }
+
+    function renderDictionaryTable(vocabulary, direction) {
+        const tHead = document.getElementById('dict-table-head');
+        const tBody = document.getElementById('dict-table-body');
+        if (!tHead || !tBody) return;
+
+        let sortedVocab = [...vocabulary];
+
+        if (direction === 'conlang-english') {
+            tHead.innerHTML = `
+                <tr>
+                    <th class="py-3 px-4 w-1/2">Conlang Term</th>
+                    <th class="py-3 px-4 w-1/2">English Translation</th>
+                </tr>
+            `;
+            sortedVocab.sort((a, b) => a.conlang.localeCompare(b.conlang));
+            tBody.innerHTML = sortedVocab.map(item => `
+                <tr class="hover:bg-slate-900/60 transition-colors">
+                    <td class="py-2.5 px-4 font-bold text-sky-400 mono-font">${item.conlang}</td>
+                    <td class="py-2.5 px-4 text-slate-300">${item.english} <span class="text-xs text-slate-500 font-mono ml-2">(${item.category})</span></td>
+                </tr>
+            `).join('');
+        } else {
+            tHead.innerHTML = `
+                <tr>
+                    <th class="py-3 px-4 w-1/2">English Word</th>
+                    <th class="py-3 px-4 w-1/2">Conlang Translation</th>
+                </tr>
+            `;
+            sortedVocab.sort((a, b) => a.english.localeCompare(b.english));
+            tBody.innerHTML = sortedVocab.map(item => `
+                <tr class="hover:bg-slate-900/60 transition-colors">
+                    <td class="py-2.5 px-4 font-medium text-slate-200">${item.english} <span class="text-xs text-slate-500 font-mono ml-2">(${item.category})</span></td>
+                    <td class="py-2.5 px-4 font-bold text-sky-400 mono-font">${item.conlang}</td>
+                </tr>
+            `).join('');
+        }
     }
 
     function renderOutput(data) {
@@ -732,6 +766,8 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `).join('');
 
+        renderDictionaryTable(data.vocabulary, dictDirectionSelect.value);
+
         const sentencesContainer = document.getElementById('sentences-container');
         let sentencesHTML = '';
         let currentSection = '';
@@ -779,7 +815,47 @@ document.addEventListener('DOMContentLoaded', () => {
         renderOutput(result);
     }
 
-    // Gestore del pulsante One-Click: randomizza tutti i parametri e genera la lingua
+    dictDirectionSelect.addEventListener('change', () => {
+        if (engine.lastGeneratedData && engine.lastGeneratedData.vocabulary) {
+            renderDictionaryTable(engine.lastGeneratedData.vocabulary, dictDirectionSelect.value);
+        }
+    });
+
+    globalSearchInput.addEventListener('input', (e) => {
+        const query = e.target.value.trim().toLowerCase();
+        if (!query || !engine.lastGeneratedData || !engine.lastGeneratedData.vocabulary) {
+            searchCardContainer.classList.add('hidden');
+            searchCardContainer.innerHTML = '';
+            return;
+        }
+
+        const match = engine.lastGeneratedData.vocabulary.find(item => 
+            item.conlang.toLowerCase() === query || 
+            item.english.toLowerCase() === query ||
+            item.conlang.toLowerCase().includes(query) ||
+            item.english.toLowerCase().includes(query)
+        );
+
+        if (match) {
+            searchCardContainer.innerHTML = `
+                <div class="text-xs text-sky-400 font-semibold uppercase tracking-wider mb-1">Search Result</div>
+                <span class="category-tag">${match.category}</span>
+                <div class="conlang-word text-lg">${match.conlang}</div>
+                <div class="translation text-sm font-medium mt-1">${match.english}</div>
+            `;
+            searchCardContainer.classList.remove('hidden');
+        } else {
+            searchCardContainer.innerHTML = `<div class="text-xs text-slate-400">No matching lexeme found.</div>`;
+            searchCardContainer.classList.remove('hidden');
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!globalSearchInput.contains(e.target) && !searchCardContainer.contains(e.target)) {
+            searchCardContainer.classList.add('hidden');
+        }
+    });
+
     quickBtn.addEventListener('click', () => {
         randomizeAllParameters();
         executeGeneration(getFormConfig());
@@ -820,7 +896,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Gestione dell'importazione del file JSON salvato
     if (importJsonBtn && importJsonInput) {
         importJsonBtn.addEventListener('click', () => {
             importJsonInput.click();
@@ -837,7 +912,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (importedData && importedData.grammar && importedData.vocabulary) {
                         engine.lastGeneratedData = importedData;
                         
-                        // Sincronizza i controlli dell'interfaccia utente con la configurazione del file importato
                         if (importedData.metadata && importedData.metadata.configuration) {
                             const cfg = importedData.metadata.configuration;
                             if (cfg.aesthetic) descPreset.value = cfg.aesthetic;
@@ -860,13 +934,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     console.error('JSON Import Error:', err);
                     alert('Error reading the JSON file. Ensure the file is not corrupted.');
                 }
-                importJsonInput.value = ''; // Reset dell'input
+                importJsonInput.value = '';
             };
             reader.readAsText(file);
         });
     }
 
-    // Gestione della navigazione a schede (Tab Navigation)
     const tabs = document.querySelectorAll('.tab-btn');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -881,7 +954,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Avvio iniziale: Sceglie parametri del tutto casuali e genera la conlang
     randomizeAllParameters();
     executeGeneration(getFormConfig());
 });
