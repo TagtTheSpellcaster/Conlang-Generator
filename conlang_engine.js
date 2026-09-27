@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.7.0
- * Architecture: 2nd-Order Markov Chain Word Synthesis & Dynamic Modal Integration
+ * Version: 2.7.1
+ * Architecture: 2nd-Order Markov Chain Generator & Enhanced Duplicate Warning with Conlang Lexeme
  */
 
 const Phonetics = {
@@ -154,7 +154,6 @@ class ConlangEngine {
         return word;
     }
 
-    // CATENA DI MARKOV DI SECONDO ORDINE
     generateMarkov2ndOrderWord() {
         if (!this.lastGeneratedData || !this.lastGeneratedData.vocabulary || this.lastGeneratedData.vocabulary.length === 0) {
             return this.generatePhonotacticWord(2);
@@ -713,6 +712,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalPosSelect = document.getElementById('modal-pos-select');
     const modalConlangOutput = document.getElementById('modal-conlang-output');
     const modalWarningAlert = document.getElementById('modal-warning-alert');
+    const modalWarningTerm = document.getElementById('modal-warning-term');
 
     let currentGeneratedTerm = '';
 
@@ -884,13 +884,13 @@ document.addEventListener('DOMContentLoaded', () => {
         renderOutput(result);
     }
 
-    // LOGICA DELLA FINESTRA MODALE "NEW TERM"
     function resetModal() {
         modalEnglishInput.value = '';
         modalPosSelect.value = 'Noun';
         modalConlangOutput.textContent = '---';
         currentGeneratedTerm = '';
         modalWarningAlert.classList.add('hidden');
+        if (modalWarningTerm) modalWarningTerm.textContent = '---';
     }
 
     openModalBtn.addEventListener('click', () => {
@@ -906,6 +906,7 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModalX.addEventListener('click', closeModal);
     cancelModalBtn.addEventListener('click', closeModal);
 
+    // CONTROLLO DUPLICATO INGLESE CON MOSTRAMENTO DEL TERMINE CONLANG ESISTENTE
     modalEnglishInput.addEventListener('input', () => {
         const query = modalEnglishInput.value.trim().toLowerCase();
         if (!query || !engine.lastGeneratedData) {
@@ -913,8 +914,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        const exists = engine.lastGeneratedData.vocabulary.some(v => v.english.toLowerCase() === query);
-        if (exists) {
+        const existingEntry = engine.lastGeneratedData.vocabulary.find(v => v.english.toLowerCase() === query);
+        if (existingEntry) {
+            if (modalWarningTerm) modalWarningTerm.textContent = existingEntry.conlang;
             modalWarningAlert.classList.remove('hidden');
         } else {
             modalWarningAlert.classList.add('hidden');
