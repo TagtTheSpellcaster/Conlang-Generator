@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Engine v3.3.0</title>
+    <title>Conlang Engine v3.4.0</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -128,7 +128,7 @@
 <div class="container">
     <div class="header-title">
         <h1>Advanced Conlang Engine</h1>
-        <span class="version-badge">v3.3.0</span>
+        <span class="version-badge">v3.4.0</span>
     </div>
 
     <div class="card">
@@ -192,47 +192,57 @@
         </div>
 
         <br>
-        <button class="primary-btn" onclick="uiGenerateCustomConlang()">Execute Engine & Render Interface</button>
+        <button class="primary-btn" onclick="uiGenerateCustomConlang()">Execute Engine (600+ Words & Pocket Phrasebook)</button>
     </div>
 
     <div class="card">
-        <h3>Generated Engine Output & Universal Dynamic Log</h3>
+        <h3>Generated Engine Output</h3>
         <div id="output" class="output-box">Select parameters and click generate...</div>
         
         <div class="actions-group">
             <button class="export-btn" onclick="uiExportJSON()">📥 Export Conlang Data (JSON)</button>
-            <button class="export-btn" onclick="uiExportCSV()">📥 Export Dictionary (CSV)</button>
+            <button class="export-btn" onclick="uiExportCSV()">📥 Export Lexicon (CSV)</button>
         </div>
     </div>
 </div>
 
-<!-- Collegamento al modulo motore JS separato -->
 <script src="conlang_engine.js"></script>
 
 <script>
 let globalEngineResult = null;
 
 function renderEngineLog(result) {
-    let log = `=== CONLANG ENGINE v3.3.0 DISCOUPLED ARCHITECTURE ===\n`;
+    let log = `=== CONLANG ENGINE v3.4.0 HIGH-VOLUME SYSTEM ===\n`;
     log += `Style Mode               : ${result.metadata.desc.toUpperCase()}\n`;
-    log += `Target Mean Word Length  : ${result.metadata.meanLength} (Std Dev: ${result.metadata.stdDev})\n`;
+    log += `Socio-Temporal Culture   : ${result.metadata.culture.toUpperCase()}\n`;
     log += `Canonical Word Order     : ${result.grammarRules.wordOrder}\n`;
-    log += `Adjective Placement      : ${result.grammarRules.adjPosition} THE NOUN\n\n`;
+    log += `Total Lexicon Volume     : ${Object.keys(result.lexicon).length} Words\n\n`;
 
-    log += `=== DYNAMIC DIALOGUES (COMPILED AT RUNTIME) ===\n`;
-    result.dialogues.forEach(d => {
+    log += `=== SECTION A: 35 CULTURAL SURVIVAL PHRASES ===\n`;
+    let currentBlock = "";
+    result.sectionA35.forEach(item => {
+        if (item.block !== currentBlock) {
+            currentBlock = item.block;
+            log += `\n--- [${currentBlock.toUpperCase()}] ---\n`;
+        }
+        log += `${item.id}. EN: "${item.en}" | CONLANG: "${item.conlang}"\n`;
+    });
+
+    log += `\n\n=== SECTION B: 20 MINI-DIALOGUES (4 TURNS) ===\n`;
+    result.sectionB20.forEach(d => {
         log += `\nDialogue #${d.id}: [${d.context}]\n`;
         d.turns.forEach(t => {
-            log += `  Speaker ${t.speaker}: EN: "${t.englishTokens}" | CONLANG: "${t.conlangText}"\n`;
+            log += `  Speaker ${t.speaker}: EN: "${t.en}" | CONLANG: "${t.conlang}"\n`;
         });
     });
 
-    log += `\n\n=== GENERATED LEXICON (${Object.keys(result.lexicon).length} Entries) ===\n`;
-    log += `${"KEY / ID".padEnd(25, ' ')} | CONLANG WORD\n`;
-    log += `-`.repeat(50) + `\n`;
-    Object.keys(result.lexicon).forEach(key => {
+    log += `\n\n=== FULL LEXICON EXCERPT (First 80 / ${Object.keys(result.lexicon).length} Total Words) ===\n`;
+    log += `${"KEY / TERM".padEnd(25, ' ')} | CONLANG WORD\n`;
+    log += `-`.repeat(55) + `\n`;
+    Object.keys(result.lexicon).slice(0, 80).forEach(key => {
         log += `${key.padEnd(25, ' ')} | ${result.lexicon[key]}\n`;
     });
+    log += `... [All ${Object.keys(result.lexicon).length} terms are included in JSON/CSV export]\n`;
 
     document.getElementById('output').innerText = log;
 }
@@ -283,7 +293,7 @@ function uiExportJSON() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(globalEngineResult, null, 2));
     const btn = document.createElement('a');
     btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", `conlang_export_v3.3.0.json`);
+    btn.setAttribute("download", `conlang_v3.4.0_600words.json`);
     document.body.appendChild(btn);
     btn.click();
     btn.remove();
@@ -297,7 +307,7 @@ function uiExportCSV() {
     });
     const btn = document.createElement("a");
     btn.setAttribute("href", encodeURI(csvContent));
-    btn.setAttribute("download", `conlang_lexicon.csv`);
+    btn.setAttribute("download", `conlang_lexicon_600words.csv`);
     document.body.appendChild(btn);
     btn.click();
     btn.remove();
