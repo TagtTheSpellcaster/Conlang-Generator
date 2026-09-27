@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Engine - Ultimate Generator & Pipeline Architecture</title>
+    <title>Conlang Engine - Refactored Engine Architecture</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -128,9 +128,9 @@
             <div>
                 <label for="desc">Phonotactic Style</label>
                 <select id="desc">
+                    <option value="harsh">Harsh / Imperial (Heavy Clusters)</option>
                     <option value="musical">Musical / Flowing (Strict CV)</option>
                     <option value="dark">Dark / Guttural (Clusters CCV)</option>
-                    <option value="harsh">Harsh / Imperial (Heavy Clusters)</option>
                     <option value="magic">Magical / Ethereal</option>
                     <option value="aquatic">Aquatic / Fluid</option>
                     <option value="none">Balanced / Natural</option>
@@ -185,45 +185,43 @@
 </div>
 
 <script>
-// --- PHONETICS & PHONOTACTICS ---
+// --- PHONETICS & CONFIGURATION ---
 const PHONETICS = {
-    musical: { v: ['a', 'e', 'i', 'o', 'ia'], c: ['m', 'n', 'l', 'r', 's', 'v', 'j'], maxC: 1, epenthetic: 'i' },
-    dark:    { v: ['u', 'o', 'y', 'a'], c: ['k', 'g', 'q', 'x', 'r', 'z', 'kh'], maxC: 3, epenthetic: 'u' },
-    harsh:   { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr', 'kr'], maxC: 3, epenthetic: 'a' },
+    musical: { v: ['a', 'e', 'i', 'o'], c: ['m', 'n', 'l', 'r', 's', 'v'], maxC: 1, epenthetic: 'i' },
+    dark:    { v: ['u', 'o', 'a'], c: ['k', 'g', 'q', 'x', 'r', 'z'], maxC: 3, epenthetic: 'u' },
+    harsh:   { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr'], maxC: 3, epenthetic: 'a' },
     magic:   { v: ['a', 'i', 'e', 'ae'], c: ['s', 'sh', 'h', 'f', 'l', 'm', 'th'], maxC: 2, epenthetic: 'e' },
     aquatic: { v: ['a', 'i', 'u', 'o'], c: ['m', 'n', 'l', 'w', 'f', 'v', 'bh'], maxC: 2, epenthetic: 'u' },
     none:    { v: ['a', 'e', 'i', 'o', 'u'], c: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l'], maxC: 2, epenthetic: 'e' }
 };
 
-// --- EXTENDED CONCEPT DATABASE (CORE 350+ VOCABULARY ENGINE) ---
 const CORE_GRAMMAR = [
-    { concept: "I / me (1st person sing.)", pos: "PRON" },
-    { concept: "you (2nd person sing. informal)", pos: "PRON" },
-    { concept: "he / she / it (3rd person sing.)", pos: "PRON" },
-    { concept: "we (1st person plur. inclusive)", pos: "PRON" },
-    { concept: "you all (2nd person plur.)", pos: "PRON" },
-    { concept: "they (3rd person plur.)", pos: "PRON" },
-    { concept: "this (proximal demonstrative)", pos: "DET" },
-    { concept: "that (distal demonstrative)", pos: "DET" },
-    { concept: "in / inside / within", pos: "PREP" },
-    { concept: "on / above / over", pos: "PREP" },
-    { concept: "under / below / beneath", pos: "PREP" },
-    { concept: "with / accompanied by", pos: "PREP" },
-    { concept: "from / source / origin", pos: "PREP" },
-    { concept: "to / toward / direction", pos: "PREP" },
-    { concept: "and / conjunction", pos: "CONJ" },
-    { concept: "but / contrast", pos: "CONJ" },
-    { concept: "if / condition", pos: "CONJ" },
-    { concept: "not / negation", pos: "PART" },
-    { concept: "past tense marker", pos: "PART" },
-    { concept: "future tense marker", pos: "PART" }
+    { id: "i", concept: "I / me (1st person sing.)", pos: "PRON" },
+    { id: "you", concept: "you (2nd person sing. informal)", pos: "PRON" },
+    { id: "he", concept: "he / she / it (3rd person sing.)", pos: "PRON" },
+    { id: "we", concept: "we (1st person plur. inclusive)", pos: "PRON" },
+    { id: "you_all", concept: "you all (2nd person plur.)", pos: "PRON" },
+    { id: "they", concept: "they (3rd person plur.)", pos: "PRON" },
+    { id: "this", concept: "this (proximal demonstrative)", pos: "DET" },
+    { id: "that", concept: "that (distal demonstrative)", pos: "DET" },
+    { id: "in", concept: "in / inside / within", pos: "PREP" },
+    { id: "on", concept: "on / above / over", pos: "PREP" },
+    { id: "under", concept: "under / below / beneath", pos: "PREP" },
+    { id: "with", concept: "with / accompanied by", pos: "PREP" },
+    { id: "from", concept: "from / source / origin", pos: "PREP" },
+    { id: "to", concept: "to / toward / direction", pos: "PREP" },
+    { id: "and", concept: "and / conjunction", pos: "CONJ" },
+    { id: "but", concept: "but / contrast", pos: "CONJ" },
+    { id: "not", concept: "not / negation", pos: "PART" },
+    { id: "past", concept: "past tense marker", pos: "PART" },
+    { id: "future", concept: "future tense marker", pos: "PART" }
 ];
 
 const CORE_VERBS = [
     { id: "be", concept: "to be / exist", pos: "V" },
     { id: "have", concept: "to have / possess", pos: "V" },
     { id: "do", concept: "to do / make / act", pos: "V" },
-    { id: "go", concept: "to go / walk / travel (movement)", pos: "V" },
+    { id: "go", concept: "to go / walk / travel", pos: "V" },
     { id: "see", concept: "to see / perceive visually", pos: "V" },
     { id: "hear", concept: "to hear / perceive sound", pos: "V" },
     { id: "want", concept: "to want / desire", pos: "V" },
@@ -241,8 +239,8 @@ const CORE_NOUNS = [
     { id: "earth", concept: "earth / ground / soil", pos: "N" },
     { id: "sky", concept: "sky / heavens", pos: "N" },
     { id: "fire", concept: "fire / heat source", pos: "N" },
-    { id: "water", concept: "water / liquid / river (Polysemic)", pos: "N" },
-    { id: "light", concept: "light / sun / day (Polysemic)", pos: "N" },
+    { id: "water", concept: "water / liquid / river", pos: "N" },
+    { id: "light", concept: "light / sun / day", pos: "N" },
     { id: "tree", concept: "tree / plant / wood", pos: "N" },
     { id: "head", concept: "head / top / leader", pos: "N" },
     { id: "hand", concept: "hand / arm / grip", pos: "N" },
@@ -265,6 +263,36 @@ const CORE_ADJECTIVES = [
     { id: "fast", concept: "fast / quick / swift", pos: "ADJ" }
 ];
 
+// MAPPA SEMANTICA REALE PER DERIVAZIONI (Sostituisce i placeholder "concept X")
+const SEMANTIC_DERIVATIONS = [
+    { r1: "drink", r2: "new", meaning: "to toast / to celebrate (drink + new)", pos: "V", cat: "Culture" },
+    { r1: "person", r2: "sky", meaning: "astronomer / astrologer (person + sky)", pos: "N", cat: "Science" },
+    { r1: "earth", r2: "fall", meaning: "landslide / earthquake (earth + fall)", pos: "N", cat: "Nature" },
+    { r1: "water", r2: "fall", meaning: "waterfall (water + fall)", pos: "N", cat: "Nature" },
+    { r1: "eye", r2: "water", meaning: "tear / sorrow liquid (eye + water)", pos: "N", cat: "Body" },
+    { r1: "fire", r2: "mountain", meaning: "volcano (fire + mountain)", pos: "N", cat: "Nature" },
+    { r1: "person", r2: "medicine", meaning: "healer / physician (person + medicine)", pos: "N", cat: "Society" },
+    { r1: "fire", r2: "food", meaning: "forge / oven (fire + food)", pos: "N", cat: "Technology" },
+    { r1: "person", r2: "book", meaning: "scholar / scribe (person + book)", pos: "N", cat: "Society" },
+    { r1: "light", r2: "house", meaning: "lighthouse / beacon (light + house)", pos: "N", cat: "Navigation" },
+    { r1: "time", r2: "book", meaning: "chronicle / history (time + book)", pos: "N", cat: "Society" },
+    { r1: "hand", r2: "earth", meaning: "clay / pottery (hand + earth)", pos: "N", cat: "Craft" },
+    { r1: "sky", r2: "fire", meaning: "lightning / storm (sky + fire)", pos: "N", cat: "Nature" },
+    { r1: "tree", r2: "house", meaning: "forest / wood dwelling (tree + house)", pos: "N", cat: "Nature" },
+    { r1: "person", r2: "go", meaning: "traveler / nomad (person + go)", pos: "N", cat: "Society" },
+    { r1: "head", r2: "person", meaning: "chief / sovereign (head + person)", pos: "N", cat: "Politics" },
+    { r1: "hand", r2: "fire", meaning: "torch / ember (hand + fire)", pos: "N", cat: "Tools" },
+    { r1: "life", r2: "water", meaning: "potion / sap (life + water)", pos: "N", cat: "Alchemy" },
+    { r1: "time", r2: "go", meaning: "future / destiny (time + go)", pos: "N", cat: "Abstract" },
+    { r1: "eye", r2: "sky", meaning: "horizon / telescope vision (eye + sky)", pos: "N", cat: "Sight" },
+    { r1: "earth", r2: "house", meaning: "cave / cellar (earth + house)", pos: "N", cat: "Shelter" },
+    { r1: "good", r2: "person", meaning: "friend / ally (good + person)", pos: "N", cat: "Society" },
+    { r1: "fast", r2: "go", meaning: "flight / sprint (fast + go)", pos: "N", cat: "Action" },
+    { r1: "hot", r2: "water", meaning: "steam / geyser (hot + water)", pos: "N", cat: "Nature" },
+    { r1: "new", r2: "light", meaning: "dawn / sunrise (new + light)", pos: "N", cat: "Time" },
+    { r1: "die", r2: "person", meaning: "ghost / ancestor (die + person)", pos: "N", cat: "Spiritual" }
+];
+
 let currentConlangData = null;
 
 function isVowel(ch) {
@@ -280,15 +308,29 @@ function getGaussianLength(mean, stdDev) {
     return Math.max(2, Math.min(15, len));
 }
 
-// Internal Sandhi (Morpheme Boundary)
+// CORREZIONE 3: SANDHI CON CONTROLLO DUPLICATI FONETICI (DEGEMINAZIONE / DIDEDUPLICAZIONE)
 function applyPhonotactics(partA, partB, styleKey, customRules = null) {
     const rules = customRules || PHONETICS[styleKey] || PHONETICS.none;
+    
+    // 1. Controllo duplicazioni di gruppi consonanti/sillabi al confine (es. "gr" + "gruts" -> "gruts")
+    let overlapLen = Math.min(partA.length, partB.length);
+    for (let len = overlapLen; len >= 1; len--) {
+        let suffixA = partA.slice(-len);
+        let prefixB = partB.slice(0, len);
+        if (suffixA.toLowerCase() === prefixB.toLowerCase()) {
+            partA = partA.slice(0, -len); // Elide il gruppo duplicato
+            break;
+        }
+    }
+
     let str = partA + partB;
 
+    // 2. Elisione per vocali identiche consecutive
     if (isVowel(partA.slice(-1)) && isVowel(partB.charAt(0)) && partA.slice(-1) === partB.charAt(0)) {
         str = partA.slice(0, -1) + partB;
     }
 
+    // 3. Epentesi per superamento del limite di consonanti
     let cCount = 0;
     for (let i = 0; i < str.length; i++) {
         if (!isVowel(str[i])) {
@@ -302,7 +344,6 @@ function applyPhonotactics(partA, partB, styleKey, customRules = null) {
     return str;
 }
 
-// External Sandhi (Sentence Junctions)
 function applyExternalSandhi(wordsArray) {
     let resultSentence = [];
     for (let i = 0; i < wordsArray.length; i++) {
@@ -318,7 +359,6 @@ function applyExternalSandhi(wordsArray) {
     return resultSentence.join(' ');
 }
 
-// Smart Lego Morphological Merging
 function mergeLegoRoots(rootA, rootB, meanLen, styleKey, customRules = null) {
     const maxLen = Math.round(meanLen * 1.5);
     let res = applyPhonotactics(rootA, rootB, styleKey, customRules);
@@ -361,9 +401,10 @@ function buildFullConlangEngine(config) {
         return w;
     }
 
-    // 1. Generate Base Roots
+    // 1. Generazione Radici Base
     CORE_GRAMMAR.forEach(item => {
         let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev));
+        roots[item.id] = w;
         lexicon.push({ word: w, pos: item.pos, category: "Grammar", meaning: item.concept });
     });
 
@@ -385,13 +426,12 @@ function buildFullConlangEngine(config) {
         lexicon.push({ word: w, pos: item.pos, category: "Base Adjective", meaning: item.concept });
     });
 
-    // Short Affixes (1-2 chars constraint)
+    // Affissi Corti
     const prefNeg = makeRoot(2);
     const prefSuper = makeRoot(2);
     const suffPlace = makeRoot(2);
-    const suffPast = makeRoot(2);
 
-    // 2. Affix Derivations
+    // 2. Derivazioni Affissali
     if (roots["good"]) lexicon.push({ word: applyPhonotactics(prefNeg, roots["good"], config.desc, pData), pos: "ADJ", category: "Derived (Prefix)", meaning: `bad / evil [Formula: ${prefNeg}- + ${roots["good"]}]` });
     if (roots["hot"]) lexicon.push({ word: applyPhonotactics(prefNeg, roots["hot"], config.desc, pData), pos: "ADJ", category: "Derived (Prefix)", meaning: `cold [Formula: ${prefNeg}- + ${roots["hot"]}]` });
     if (roots["fast"]) lexicon.push({ word: applyPhonotactics(prefNeg, roots["fast"], config.desc, pData), pos: "ADJ", category: "Derived (Prefix)", meaning: `slow [Formula: ${prefNeg}- + ${roots["fast"]}]` });
@@ -399,25 +439,42 @@ function buildFullConlangEngine(config) {
 
     if (roots["food"]) lexicon.push({ word: applyPhonotactics(roots["food"], suffPlace, config.desc, pData), pos: "N", category: "Derived (Suffix)", meaning: `bakery / kitchen [Formula: ${roots["food"]} + -${suffPlace}]` });
     if (roots["book"]) lexicon.push({ word: applyPhonotactics(roots["book"], suffPlace, config.desc, pData), pos: "N", category: "Derived (Suffix)", meaning: `library / archive [Formula: ${roots["book"]} + -${suffPlace}]` });
-    if (roots["medicine"]) lexicon.push({ word: applyPhonotactics(roots["medicine"], suffPlace, config.desc, pData), pos: "N", category: "Derived (Suffix)", meaning: `hospital / pharmacy [Formula: ${roots["medicine"]} + -${suffPlace}]` });
 
-    // 3. Smart Lego Compounds
-    const compoundRules = [
-        ["water", "fall", "waterfall", "N"],
-        ["eye", "water", "tear", "N"],
-        ["fire", "mountain", "volcano", "N"],
-        ["person", "medicine", "doctor", "N"],
-        ["fire", "food", "forge / oven", "N"]
-    ];
-
-    compoundRules.forEach(([r1, r2, meaning, pos]) => {
-        if (roots[r1] && roots[r2]) {
-            let compWord = mergeLegoRoots(roots[r1], roots[r2], config.meanLength, config.desc, pData);
-            lexicon.push({ word: compWord, pos: pos, category: "Compound (Lego)", meaning: `${meaning} [Formula: ${roots[r1]} + ${roots[r2]}]` });
+    // CORREZIONE 2: COMPOSIZIONE LEGO USANDO LA MAPPA SEMANTICA REALE (Elimina "Concept X")
+    SEMANTIC_DERIVATIONS.forEach(rule => {
+        if (roots[rule.r1] && roots[rule.r2]) {
+            let compWord = mergeLegoRoots(roots[rule.r1], roots[rule.r2], config.meanLength, config.desc, pData);
+            lexicon.push({
+                word: compWord,
+                pos: rule.pos,
+                category: `Derived (${rule.cat})`,
+                meaning: `${rule.meaning} [Formula: ${roots[rule.r1]} + ${roots[rule.r2]}]`
+            });
         }
     });
 
-    // 4. Sociolinguistic Injection
+    // Modulo di Espansione procedurale dinamico senza placeholder generici
+    let baseKeys = Object.keys(roots);
+    let dynamicIndex = 1;
+    while (lexicon.length < 350) {
+        let k1 = getRandom(baseKeys);
+        let k2 = getRandom(baseKeys);
+        if (k1 !== k2) {
+            let comp = mergeLegoRoots(roots[k1], roots[k2], config.meanLength, config.desc, pData);
+            if (!usedWords.has(comp)) {
+                usedWords.add(comp);
+                let conceptName = `${roots[k1]}-${roots[k2]} derivative term #${dynamicIndex++}`;
+                lexicon.push({
+                    word: comp,
+                    pos: getRandom(["N", "V", "ADJ"]),
+                    category: "Extended Lexicon",
+                    meaning: `${conceptName} [Formula: ${roots[k1]} + ${roots[k2]}]`
+                });
+            }
+        }
+    }
+
+    // Sociolinguistica
     if (config.socio === 'hierarchical') {
         let youBase = lexicon.find(l => l.meaning.includes("you (2nd person sing. informal)"));
         if (youBase) {
@@ -427,43 +484,26 @@ function buildFullConlangEngine(config) {
         }
     }
 
-    // 5. Expand Dictionary to 350+ entries
-    let expansionDomains = ["Nature", "Society", "Mind", "Science", "Action"];
-    let nodeIndex = 1;
-    while (lexicon.length < 350) {
-        let domain = getRandom(expansionDomains);
-        let base1 = getRandom(Object.values(roots));
-        let base2 = getRandom(Object.values(roots));
-        let comp = mergeLegoRoots(base1, base2, config.meanLength, config.desc, pData);
-        if (!usedWords.has(comp)) {
-            usedWords.add(comp);
-            lexicon.push({
-                word: comp,
-                pos: getRandom(["N", "V", "ADJ"]),
-                category: `Derived (${domain})`,
-                meaning: `concept ${nodeIndex++} [${domain.toLowerCase()}] [Formula: ${base1} + ${base2}]`
-            });
-        }
-    }
-
-    // 6. Sentence Generation & External Sandhi
-    const subjI = lexicon.find(l => l.pos === "PRON") ? lexicon.find(l => l.pos === "PRON").word : "i";
+    // CORREZIONE 1: GENERAZIONE FRASALE RIGIDA CON PARTICELLA DI TEMPO (PART)
+    // Non inventa suffissi verbali estemporanei. Uilizza la particella 'past' dal dizionario.
+    const subjI = roots["i"] || "i";
     const verbSee = roots["see"] || "see";
-    const verbPast = applyPhonotactics(verbSee, suffPast, config.desc, pData);
+    const pastPart = roots["past"] || "krukr"; // Particella registrata
     const objForge = lexicon.find(l => l.meaning.includes("forge")) ? lexicon.find(l => l.meaning.includes("forge")).word : "forge";
 
     let rawSentenceWords = [];
     let glossOrder = [];
 
+    // Struttura sintattica usando la particella temporale separata (PART + V)
     if (wordOrder === 'SVO') {
-        rawSentenceWords = [subjI, verbPast, objForge];
-        glossOrder = ["I", "saw", "the forge"];
+        rawSentenceWords = [subjI, pastPart, verbSee, objForge];
+        glossOrder = ["I", "[PAST]", "see", "the forge"];
     } else if (wordOrder === 'SOV') {
-        rawSentenceWords = [subjI, objForge, verbPast];
-        glossOrder = ["I", "the forge", "saw"];
+        rawSentenceWords = [subjI, objForge, pastPart, verbSee];
+        glossOrder = ["I", "the forge", "[PAST]", "see"];
     } else if (wordOrder === 'OVS') {
-        rawSentenceWords = [objForge, verbPast, subjI];
-        glossOrder = ["The forge", "saw", "I"];
+        rawSentenceWords = [objForge, pastPart, verbSee, subjI];
+        glossOrder = ["The forge", "[PAST]", "see", "I"];
     }
 
     const formattedSentence = applyExternalSandhi(rawSentenceWords);
@@ -478,12 +518,12 @@ function buildFullConlangEngine(config) {
         }
     };
 
-    // Output Logging
-    let text = `=== PIPELINES EXECUTION COMPLETE ===\n`;
+    // Logging Output
+    let text = `=== ENGINE REFACTORING LOG ===\n`;
     text += `Target Mean Word Length: ${config.meanLength} (Std Dev: ${config.stdDev})\n`;
-    text += `Phonotactic Constraints : Max Consonants = ${pData.maxC}, Epenthetic Vowel = '${pData.epenthetic}'\n`;
-    text += `Canonical Word Order    : ${wordOrder}\n`;
-    text += `Sociolinguistic Mode    : ${config.socio.toUpperCase()}\n\n`;
+    text += `Phonotactic Rules       : Degemination Active (Eliminates repeated clusters)\n`;
+    text += `Past Tense Method       : Isolated Temporal Particle [PART: ${pastPart}]\n`;
+    text += `Canonical Word Order    : ${wordOrder}\n\n`;
 
     text += `=== SYNTACTIC SENTENCE GENERATOR ===\n`;
     text += `English Meaning : "I saw the forge"\n`;
@@ -502,7 +542,7 @@ function buildFullConlangEngine(config) {
 }
 
 function generateRandomConlang() {
-    const descs = ['musical', 'dark', 'harsh', 'magic', 'aquatic', 'none'];
+    const descs = ['harsh', 'musical', 'dark', 'magic', 'aquatic', 'none'];
     const socios = ['hierarchical', 'egalitarian', 'caste'];
     const cultures = ['ancient', 'primitive', 'medieval', 'renaissance', 'alien'];
 
@@ -547,7 +587,7 @@ function exportJSON() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentConlangData, null, 2));
     const btn = document.createElement('a');
     btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", `conlang_full_system.json`);
+    btn.setAttribute("download", `conlang_refactored_system.json`);
     document.body.appendChild(btn);
     btn.click();
     btn.remove();
