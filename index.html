@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Engine v3.2.0 - Universal Dynamic Parser</title>
+    <title>Conlang Engine v3.3.0</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -128,11 +128,11 @@
 <div class="container">
     <div class="header-title">
         <h1>Advanced Conlang Engine</h1>
-        <span class="version-badge">v3.2.0</span>
+        <span class="version-badge">v3.3.0</span>
     </div>
 
     <div class="card">
-        <button class="primary-btn" onclick="generateRandomConlang()">⚡ One-Click Quick Generation</button>
+        <button class="primary-btn" onclick="uiOneClickGenerate()">⚡ One-Click Quick Generation</button>
     </div>
 
     <div class="card">
@@ -149,11 +149,11 @@
             <div>
                 <label for="desc">Phonotactic Style</label>
                 <select id="desc">
-                    <option value="renaissance">Renaissance / Scholarly</option>
                     <option value="harsh">Harsh / Imperial (Heavy Clusters)</option>
                     <option value="musical">Musical / Flowing (Strict CV)</option>
                     <option value="dark">Dark / Guttural (Clusters CCV)</option>
                     <option value="magic">Magical / Ethereal</option>
+                    <option value="renaissance">Renaissance / Scholarly</option>
                     <option value="aquatic">Aquatic / Fluid</option>
                     <option value="none">Balanced / Natural</option>
                 </select>
@@ -192,286 +192,55 @@
         </div>
 
         <br>
-        <button class="primary-btn" onclick="generateCustomConlang()">Execute Universal Runtime Parsing Engine (550+ Terms)</button>
+        <button class="primary-btn" onclick="uiGenerateCustomConlang()">Execute Engine & Render Interface</button>
     </div>
 
     <div class="card">
-        <h3>Generated Engine Output & Universal Dynamic Output</h3>
+        <h3>Generated Engine Output & Universal Dynamic Log</h3>
         <div id="output" class="output-box">Select parameters and click generate...</div>
         
         <div class="actions-group">
-            <button class="export-btn" onclick="exportJSON()">📥 Export Conlang Data (JSON)</button>
-            <button class="export-btn" onclick="exportCSV()">📥 Export Dictionary (CSV)</button>
+            <button class="export-btn" onclick="uiExportJSON()">📥 Export Conlang Data (JSON)</button>
+            <button class="export-btn" onclick="uiExportCSV()">📥 Export Dictionary (CSV)</button>
         </div>
     </div>
 </div>
 
+<!-- Collegamento al modulo motore JS separato -->
+<script src="conlang_engine.js"></script>
+
 <script>
-// --- PHONETICS DATA ---
-const PHONETICS = {
-    renaissance: { v: ['a', 'e', 'i', 'o'], c: ['t', 's', 'p', 'k', 'm', 'n', 'r', 'l', 'g'], maxC: 2, epenthetic: 'e' },
-    musical:     { v: ['a', 'e', 'i', 'o'], c: ['m', 'n', 'l', 'r', 's', 'v'], maxC: 1, epenthetic: 'i' },
-    dark:        { v: ['u', 'o', 'a'], c: ['k', 'g', 'q', 'x', 'r', 'z'], maxC: 3, epenthetic: 'u' },
-    harsh:       { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr'], maxC: 3, epenthetic: 'a' },
-    magic:       { v: ['a', 'i', 'e', 'ae'], c: ['s', 'sh', 'h', 'f', 'l', 'm', 'th'], maxC: 2, epenthetic: 'e' },
-    aquatic:     { v: ['a', 'i', 'u', 'o'], c: ['m', 'n', 'l', 'w', 'f', 'v', 'bh'], maxC: 2, epenthetic: 'u' },
-    none:        { v: ['a', 'e', 'i', 'o', 'u'], c: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l'], maxC: 2, epenthetic: 'e' }
-};
+let globalEngineResult = null;
 
-// --- CORE DICTIONARY BASE ---
-const CORE_DICTIONARY_BASE = [
-    { key: "i", en: "I", pos: "PRON" },
-    { key: "you", en: "you", pos: "PRON" },
-    { key: "you_formal", en: "you (formal)", pos: "PRON" },
-    { key: "he", en: "he/she", pos: "PRON" },
-    { key: "we", en: "we", pos: "PRON" },
-    { key: "this", en: "this", pos: "DET" },
-    { key: "that", en: "that", pos: "DET" },
-    { key: "not", en: "not", pos: "PART" },
-    { key: "past", en: "PAST", pos: "PART" },
-    { key: "ques", en: "QUES", pos: "PART" },
-    { key: "in", en: "in", pos: "PREP" },
-    { key: "to", en: "to", pos: "PREP" },
-    { key: "be", en: "be", pos: "V" },
-    { key: "see", en: "see", pos: "V" },
-    { key: "know", en: "know/understand", pos: "V" },
-    { key: "seek", en: "seek/search", pos: "V" },
-    { key: "go", en: "go/travel", pos: "V" },
-    { key: "buy", en: "buy/trade", pos: "V" },
-    { key: "pay", en: "pay/offer", pos: "V" },
-    { key: "give", en: "give", pos: "V" },
-    { key: "show", en: "show", pos: "V" },
-    { key: "person", en: "person", pos: "N" },
-    { key: "physician", en: "physician/healer", pos: "N" },
-    { key: "scholar", en: "scholar/scribe", pos: "N" },
-    { key: "merchant", en: "merchant", pos: "N" },
-    { key: "guard", en: "guard/sentinel", pos: "N" },
-    { key: "chief", en: "chief/leader", pos: "N" },
-    { key: "academy", en: "academy", pos: "N" },
-    { key: "city", en: "city", pos: "N" },
-    { key: "gate", en: "gate", pos: "N" },
-    { key: "road", en: "road/way", pos: "N" },
-    { key: "map", en: "map/chart", pos: "N" },
-    { key: "book", en: "book", pos: "N" },
-    { key: "coin", en: "coin/money", pos: "N" },
-    { key: "water", en: "water", pos: "N" },
-    { key: "eye", en: "eye", pos: "N" },
-    { key: "fire", en: "fire", pos: "N" },
-    { key: "peace", en: "peace", pos: "N" },
-    { key: "good", en: "good", pos: "ADJ" },
-    { key: "new", en: "new", pos: "ADJ" },
-    { key: "near", en: "near", pos: "ADJ" },
-    { key: "clean", en: "clean", pos: "ADJ" }
-];
+function renderEngineLog(result) {
+    let log = `=== CONLANG ENGINE v3.3.0 DISCOUPLED ARCHITECTURE ===\n`;
+    log += `Style Mode               : ${result.metadata.desc.toUpperCase()}\n`;
+    log += `Target Mean Word Length  : ${result.metadata.meanLength} (Std Dev: ${result.metadata.stdDev})\n`;
+    log += `Canonical Word Order     : ${result.grammarRules.wordOrder}\n`;
+    log += `Adjective Placement      : ${result.grammarRules.adjPosition} THE NOUN\n\n`;
 
-// --- 1. MATRICE DEI CONCETTI UNIVERSALI (CONCEPT_MARKET) ---
-const CONCEPT_MARKET = [
-    { id: "landslide_earthquake", roots: ["earth", "fall"], pos: "N", category: "Domain_Nature", cultureMeanings: { primitive: "terremoto / terra che trema", medieval: "frana sulla strada", scholarly: "spostamento tettonico", renaissance: "movimento tellurico", alien: "instabilità sismica planetaria" } },
-    { id: "study_learn", roots: ["go", "academy"], pos: "V", category: "Domain_Science", cultureMeanings: { primitive: "iniziazione / ascoltare gli anziani", medieval: "apprendistato presso la gilda", scholarly: "studiare / frequentare l'ateneo", renaissance: "frequentare l'accademia / apprendere le arti", alien: "assorbire informazioni dalla matrice" } },
-    { id: "tear_sorrow", roots: ["eye", "water"], pos: "N", category: "Domain_Society", cultureMeanings: { primitive: "acqua degli occhi / pianto", medieval: "dolore / lacrima di pena", scholarly: "espressione di cordoglio", renaissance: "malinconia / espressione artistica", alien: "secrezione di sovraccarico sensoriale" } },
-    { id: "aqueduct_fountain", roots: ["water", "city"], pos: "N", category: "Domain_Architecture", cultureMeanings: { primitive: "fiume dell'accampamento", medieval: "pozzo cittadino / fontana", scholarly: "acquedotto civico", renaissance: "fontana monumentale / impianto idrico", alien: "condotto di raffreddamento" } },
-    { id: "doctor_healer", roots: ["person", "medicine"], pos: "N", category: "Domain_Society", cultureMeanings: { primitive: "sciamano / curatore", medieval: "cerusico / medico di campo", scholarly: "dottore in medicina", renaissance: "medico / anatomista", alien: "unità di riparazione biologica" } }
-];
-
-let currentConlangData = null;
-
-function isVowel(ch) { return ['a', 'e', 'i', 'o', 'u', 'y'].includes(ch.toLowerCase()); }
-
-function getGaussianLength(mean, stdDev) {
-    let u1 = 0, u2 = 0;
-    while (u1 === 0) u1 = Math.random();
-    while (u2 === 0) u2 = Math.random();
-    let z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
-    let len = Math.round(mean + z0 * stdDev);
-    return Math.max(2, Math.min(15, len));
-}
-
-function applyPhonotactics(partA, partB, maxC = 2, epenthetic = 'e') {
-    let overlapLen = Math.min(partA.length, partB.length);
-    for (let len = overlapLen; len >= 1; len--) {
-        let suffixA = partA.slice(-len);
-        let prefixB = partB.slice(0, len);
-        if (suffixA.toLowerCase() === prefixB.toLowerCase()) {
-            partA = partA.slice(0, -len);
-            break;
-        }
-    }
-    let str = partA + partB;
-    if (isVowel(partA.slice(-1)) && isVowel(partB.charAt(0)) && partA.slice(-1) === partB.charAt(0)) {
-        str = partA.slice(0, -1) + partB;
-    }
-    let cCount = 0;
-    for (let i = 0; i < str.length; i++) {
-        if (!isVowel(str[i])) {
-            cCount++;
-            if (cCount > maxC) {
-                str = str.slice(0, i) + epenthetic + str.slice(i);
-                break;
-            }
-        } else { cCount = 0; }
-    }
-    return str;
-}
-
-function applyExternalSandhi(wordsArray) {
-    let resultSentence = [];
-    for (let i = 0; i < wordsArray.length; i++) {
-        let current = wordsArray[i];
-        if (i < wordsArray.length - 1) {
-            let next = wordsArray[i + 1];
-            if (isVowel(current.slice(-1)) && isVowel(next.charAt(0)) && current.slice(-1) === next.charAt(0)) {
-                current = current.slice(0, -1);
-            }
-        }
-        resultSentence.push(current);
-    }
-    return resultSentence.join(' ');
-}
-
-// --- 2. PIPELINE DI TRADUZIONE DINAMICA (translatePhrase) ---
-function translatePhrase(tokens, lexicon, grammarRules) {
-    let subject = "", verb = "", object = "", adjective = "";
-    let isNegative = false, isQuestion = false;
-
-    tokens.forEach(token => {
-        let raw = token.toLowerCase().trim();
-        if (raw === "not" || raw === "no") { isNegative = true; return; }
-        if (raw === "?") { isQuestion = true; return; }
-
-        let conlangWord = lexicon[raw] || raw;
-
-        if (["i", "you", "he", "we", "they", "guard", "scholar", "merchant", "person"].includes(raw)) {
-            if (!subject) subject = conlangWord; else object = conlangWord;
-        } else if (["see", "have", "seek", "buy", "pay", "give", "know", "go", "be"].includes(raw)) {
-            verb = conlangWord;
-        } else if (["good", "new", "clean", "near", "safe"].includes(raw)) {
-            adjective = conlangWord;
-        } else {
-            object = conlangWord;
-        }
-    });
-
-    let fullObject = object;
-    if (object && adjective) {
-        fullObject = (grammarRules.adjPosition === "BEFORE") ? `${adjective} ${object}` : `${object} ${adjective}`;
-    }
-
-    if (isNegative && verb) {
-        let negPart = lexicon["not"] || "not";
-        verb = `${negPart} ${verb}`;
-    }
-
-    let orderedPhrase = [];
-    const wordOrder = grammarRules.wordOrder || "SVO";
-    if (wordOrder === "SVO") orderedPhrase = [subject, verb, fullObject];
-    else if (wordOrder === "SOV") orderedPhrase = [subject, fullObject, verb];
-    else if (wordOrder === "OVS") orderedPhrase = [fullObject, verb, subject];
-
-    orderedPhrase = orderedPhrase.filter(w => w && w.trim().length > 0);
-
-    if (isQuestion) {
-        let quesPart = lexicon["ques"] || "ques";
-        orderedPhrase.unshift(quesPart);
-    }
-
-    return applyExternalSandhi(orderedPhrase);
-}
-
-// --- 3. MOTORE DEI DIALOGHI AD ALBERO LOGICO (DIALOGUE ENGINE) ---
-const DIALOGUE_TEMPLATES = [
-    { id: 1, contextTags: { primitive: "At the tribe campfire", medieval: "At the castle gate", scholarly: "University main hall", renaissance: "City gate checkpoint", alien: "Stasi portal" },
-      turns: [{ text: ["you", "seek", "academy", "?"] }, { text: ["I", "seek", "physician"] }, { text: ["you", "have", "coin"] }, { text: ["I", "pay", "coin"] }] },
-    { id: 2, contextTags: { primitive: "Bartering skins at stream", medieval: "Spice merchant trade", scholarly: "Rare manuscript purchase", renaissance: "Mapmaker workshop", alien: "Data tile exchange" },
-      turns: [{ text: ["you", "have", "map", "?"] }, { text: ["I", "have", "good", "map"] }, { text: ["I", "buy", "map"] }, { text: ["you", "pay", "coin"] }] }
-];
-
-function buildFullConlangEngine(config) {
-    const pData = PHONETICS[config.desc] || PHONETICS.renaissance;
-    const v = config.vowels.length ? config.vowels : pData.v;
-    const c = config.consonants.length ? config.consonants : pData.c;
-
-    let wordOrder = 'SVO';
-    if (config.culture === 'ancient' || config.culture === 'primitive') wordOrder = 'SOV';
-    if (config.culture === 'alien') wordOrder = 'OVS';
-    const adjPos = (config.culture === 'primitive' || config.culture === 'ancient') ? 'BEFORE' : 'AFTER';
-
-    let lexicon = [];
-    let wordMap = {};
-    let usedWords = new Set();
-
-    function getRandom(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-
-    function makeRoot(targetLen) {
-        let w = "", attempts = 0;
-        do {
-            w = "";
-            while(w.length < targetLen) { w += getRandom(c); w += getRandom(v); }
-            w = w.slice(0, targetLen); attempts++;
-        } while (usedWords.has(w) && attempts < 50);
-        usedWords.add(w);
-        return w;
-    }
-
-    CORE_DICTIONARY_BASE.forEach(item => {
-        let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev));
-        wordMap[item.key] = w;
-        lexicon.push({ word: w, pos: item.pos, category: "Core Lexicon", meaning: item.en });
-    });
-
-    CONCEPT_MARKET.forEach(item => {
-        let r1 = wordMap[item.roots[0]] || makeRoot(4);
-        let r2 = wordMap[item.roots[1]] || makeRoot(4);
-        let compWord = applyPhonotactics(r1, r2, pData.maxC, pData.epenthetic);
-        let activeMeaning = item.cultureMeanings[config.culture] || item.cultureMeanings.scholarly;
-        wordMap[item.id] = compWord;
-        lexicon.push({ word: compWord, pos: item.pos, category: item.category, meaning: `${activeMeaning} [${r1} + ${r2}]` });
-    });
-
-    let grammarRules = { wordOrder: wordOrder, adjPosition: adjPos };
-
-    // Dynamic Dialogues Parsing
-    let generatedDialogues = DIALOGUE_TEMPLATES.map(template => {
-        let contextTitle = template.contextTags[config.culture] || `Interaction #${template.id}`;
-        let parsedTurns = template.turns.map(turn => ({
-            englishTokens: turn.text.join(" "),
-            conlangText: translatePhrase(turn.text, wordMap, grammarRules)
-        }));
-        return { dialogueId: template.id, context: contextTitle, turns: parsedTurns };
-    });
-
-    currentConlangData = { metadata: config, version: "v3.2.0", lexicon: lexicon, dialogues: generatedDialogues };
-
-    let text = `=== CONLANG ENGINE v3.2.0 DYNAMIC PARSER LOG ===\n`;
-    text += `Target Mean Word Length: ${config.meanLength} (Std Dev: ${config.stdDev})\n`;
-    text += `Canonical Word Order    : ${wordOrder}\n`;
-    text += `Adjective Placement     : ${adjPos} THE NOUN\n\n`;
-
-    text += `=== SECTION B: DYNAMIC DIALOGUES (PARSED AT RUNTIME) ===\n`;
-    generatedDialogues.forEach(d => {
-        text += `\nDialogue #${d.dialogueId}: [${d.context}]\n`;
-        d.turns.forEach((t, i) => {
-            text += `  Turn ${i+1}: EN: "${t.englishTokens}" | CONLANG: "${t.conlangText}"\n`;
+    log += `=== DYNAMIC DIALOGUES (COMPILED AT RUNTIME) ===\n`;
+    result.dialogues.forEach(d => {
+        log += `\nDialogue #${d.id}: [${d.context}]\n`;
+        d.turns.forEach(t => {
+            log += `  Speaker ${t.speaker}: EN: "${t.englishTokens}" | CONLANG: "${t.conlangText}"\n`;
         });
     });
 
-    text += `\n\n=== FULL DICTIONARY EXCERPT (${lexicon.length} Entries) ===\n`;
-    text += `${"WORD".padEnd(20, ' ')} | ${"POS".padEnd(6, ' ')} | ${"CATEGORY".padEnd(22, ' ')} | MEANING / FORMULA\n`;
-    text += `-`.repeat(85) + `\n`;
-    lexicon.forEach(entry => {
-        text += `${entry.word.padEnd(20, ' ')} | ${entry.pos.padEnd(6, ' ')} | ${entry.category.padEnd(22, ' ')} | ${entry.meaning}\n`;
+    log += `\n\n=== GENERATED LEXICON (${Object.keys(result.lexicon).length} Entries) ===\n`;
+    log += `${"KEY / ID".padEnd(25, ' ')} | CONLANG WORD\n`;
+    log += `-`.repeat(50) + `\n`;
+    Object.keys(result.lexicon).forEach(key => {
+        log += `${key.padEnd(25, ' ')} | ${result.lexicon[key]}\n`;
     });
 
-    return text;
+    document.getElementById('output').innerText = log;
 }
 
-function generateRandomConlang() {
-    const config = { meanLength: 5, stdDev: 1.2, vowels: [], consonants: [], desc: 'renaissance', socio: 'hierarchical', culture: 'renaissance' };
-    document.getElementById('output').innerText = buildFullConlangEngine(config);
-}
-
-function generateCustomConlang() {
+function uiGenerateCustomConlang() {
     const vInput = document.getElementById('custom-vowels').value;
     const cInput = document.getElementById('custom-cons').value;
+
     const config = {
         meanLength: parseFloat(document.getElementById('mean-length').value),
         stdDev: parseFloat(document.getElementById('std-dev').value),
@@ -481,26 +250,57 @@ function generateCustomConlang() {
         socio: document.getElementById('socio').value,
         culture: document.getElementById('culture').value
     };
-    document.getElementById('output').innerText = buildFullConlangEngine(config);
+
+    globalEngineResult = executeConlangPipeline(config);
+    renderEngineLog(globalEngineResult);
 }
 
-function exportJSON() {
-    if (!currentConlangData) return alert("Error: Generate a conlang first.");
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentConlangData, null, 2));
+function uiOneClickGenerate() {
+    const styles = ['harsh', 'musical', 'dark', 'magic', 'renaissance', 'aquatic', 'none'];
+    const cultures = ['renaissance', 'ancient', 'primitive', 'medieval', 'alien'];
+
+    const config = {
+        meanLength: (Math.random() * 3 + 4).toFixed(1),
+        stdDev: (Math.random() * 0.8 + 0.8).toFixed(1),
+        vowels: [],
+        consonants: [],
+        desc: styles[Math.floor(Math.random() * styles.length)],
+        socio: 'hierarchical',
+        culture: cultures[Math.floor(Math.random() * cultures.length)]
+    };
+
+    document.getElementById('mean-length').value = config.meanLength;
+    document.getElementById('std-dev').value = config.stdDev;
+    document.getElementById('desc').value = config.desc;
+    document.getElementById('culture').value = config.culture;
+
+    globalEngineResult = executeConlangPipeline(config);
+    renderEngineLog(globalEngineResult);
+}
+
+function uiExportJSON() {
+    if (!globalEngineResult) return alert("Error: Generate a conlang first.");
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(globalEngineResult, null, 2));
     const btn = document.createElement('a');
     btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", `conlang_v3.2.0_dynamic.json`);
-    document.body.appendChild(btn); btn.click(); btn.remove();
+    btn.setAttribute("download", `conlang_export_v3.3.0.json`);
+    document.body.appendChild(btn);
+    btn.click();
+    btn.remove();
 }
 
-function exportCSV() {
-    if (!currentConlangData) return alert("Error: Generate a conlang first.");
-    let csvContent = "data:text/csv;charset=utf-8,Word,POS,Category,Meaning\n";
-    currentConlangData.lexicon.forEach(item => { csvContent += `"${item.word}","${item.pos}","${item.category}","${item.meaning}"\n`; });
+function uiExportCSV() {
+    if (!globalEngineResult) return alert("Error: Generate a conlang first.");
+    let csvContent = "data:text/csv;charset=utf-8,Key_ID,ConlangWord\n";
+    Object.keys(globalEngineResult.lexicon).forEach(key => {
+        csvContent += `"${key}","${globalEngineResult.lexicon[key]}"\n`;
+    });
     const btn = document.createElement("a");
     btn.setAttribute("href", encodeURI(csvContent));
-    btn.setAttribute("download", `conlang_dictionary_3.2.0.csv`);
-    document.body.appendChild(btn); btn.click(); btn.remove();
+    btn.setAttribute("download", `conlang_lexicon.csv`);
+    document.body.appendChild(btn);
+    btn.click();
+    btn.remove();
 }
 </script>
 
