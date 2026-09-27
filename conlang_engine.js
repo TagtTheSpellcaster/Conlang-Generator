@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 1.5.0
- * Architecture: Clean Root Lexicon, Phonotactic Enforcement & Functional Sorting
+ * Version: 1.6.0
+ * Architecture: Anthropological Alignment, Clean Root Lexicon & Strict Phonotactics
  */
 
 const Phonetics = {
@@ -33,7 +33,6 @@ const SyllableStructures = {
 };
 
 const ContextualLexicon = {
-    // Termini fondamentali ammessi come monosillabi
     coreNouns: ["man", "person", "sun"],
     coreVerbs: ["be", "have"],
 
@@ -52,10 +51,17 @@ const ContextualLexicon = {
         "hot", "cold", "fast", "slow", "hard", "soft", "wise", "wild", "holy", "mortal"
     ],
     pronouns: [
-        "I (first person singular)", "you (second person singular)", "he (third person singular masculine)",
-        "she (third person singular feminine)", "it (third person singular neuter)", "we (inclusive)", "we (exclusive)",
-        "they (proximate / present group)", "they (obviate / absent group)", "they (honorific / elders)",
-        "they (collective / inanimate)"
+        "I (first person singular)", 
+        "you (second person singular)", 
+        "he (third person singular masculine)",
+        "she (third person singular feminine)", 
+        "it (third person singular neuter)", 
+        "we (inclusive: speaker + listener)", 
+        "we (exclusive: speaker + others, excluding listener)",
+        "they (proximate / present within hearth or circle)", 
+        "they (obviate / absent / distant group)", 
+        "they (ancestral / tribal elders respect mark)",
+        "they (collective / inanimate or natural forces)"
     ],
     possessives: [
         "my / mine", "your / yours (singular)", "his", "her / hers", "its", "our / ours", "their / theirs"
@@ -151,7 +157,12 @@ class ConlangEngine {
 
         const langName = this.generateLanguageName();
 
-        // Affissi morfosintattici (invariati nel dizionario radici, applicabili solo a runtime)
+        // Alignment sociolinguistico antropologico
+        let resolvedSociology = config.sociology;
+        if (config.sociology === 'egalitarian') {
+            resolvedSociology = 'Tribal / Communal Egalitarianism (Deictic & Kinship Focus)';
+        }
+
         const prefix = this.generatePhonotacticWord(1, true);
         const suffix = this.generatePhonotacticWord(1, true);
         const caseSuffix = this.generatePhonotacticWord(1, true);
@@ -161,7 +172,6 @@ class ConlangEngine {
             suffix: { form: suffix, meaning: "Intensive / Augmentative (indicates 'great', 'major', or 'extended state of')" }
         };
 
-        // Articoli
         const articles = {};
         if (config.articleMode === 'both' || config.articleMode === 'definite_only' || config.articleMode === 'partitive') {
             articles.definite = this.generatePhonotacticWord(1, true);
@@ -175,7 +185,7 @@ class ConlangEngine {
 
         const vocabulary = [];
 
-        // 1. INSERIMENTO ELEMENTI STRUTTURALI IN TESTA AL DIZIONARIO
+        // 1. STRUTTURALI E PRONOMI IN TESTA AL DIZIONARIO
         if (articles.definite) {
             vocabulary.push({ conlang: articles.definite, english: "the (definite article)", category: "Article" });
         }
@@ -189,7 +199,6 @@ class ConlangEngine {
             vocabulary.push({ conlang: `-${caseSuffix}`, english: "[Nominative Subject Suffix]", category: "Case Suffix" });
         }
 
-        // Pronomi
         ContextualLexicon.pronouns.forEach(p => {
             vocabulary.push({
                 conlang: this.generatePhonotacticWord(1, true),
@@ -198,7 +207,6 @@ class ConlangEngine {
             });
         });
 
-        // Possessivi
         ContextualLexicon.possessives.forEach(p => {
             vocabulary.push({
                 conlang: this.generatePhonotacticWord(1, true),
@@ -207,7 +215,6 @@ class ConlangEngine {
             });
         });
 
-        // Parole Grammaticali e Preposizioni
         ContextualLexicon.grammatical.forEach(g => {
             vocabulary.push({
                 conlang: this.generatePhonotacticWord(1, true),
@@ -216,7 +223,7 @@ class ConlangEngine {
             });
         });
 
-        // 2. INSERIMENTO RADICI FONDAMENTALI (Discrezionalmente monosillabiche)
+        // 2. RADICI PRIMORDIALI
         ContextualLexicon.coreNouns.forEach(cn => {
             vocabulary.push({
                 conlang: this.generatePhonotacticWord(1, false, true),
@@ -233,7 +240,7 @@ class ConlangEngine {
             });
         });
 
-        // 3. INSERIMENTO LESSICO ORDINARIO (Polisillabico vincolato)
+        // 3. LESSICO ORDINARIO POLISILLABICO (Radici Pulite)
         const categories = [
             { type: 'Noun', concepts: [...ContextualLexicon.nouns, ...(ContextualLexicon.culturalModifiers[config.culture]?.nouns || [])] },
             { type: 'Verb', concepts: [...ContextualLexicon.verbs, ...(ContextualLexicon.culturalModifiers[config.culture]?.verbs || [])] },
@@ -254,8 +261,6 @@ class ConlangEngine {
             }
 
             const sampleSyllables = config.meanLength + (this.boxMullerRandom() * config.stdDev);
-            
-            // RADICE PULITA: Nessun affisso viene pre-incollato nel dizionario
             const cleanRoot = this.generatePhonotacticWord(sampleSyllables, false, false);
 
             vocabulary.push({
@@ -267,7 +272,7 @@ class ConlangEngine {
             index++;
         }
 
-        // Generazione Frasi e Dialoghi basata sulle radici pulite + applicazione dinamica morfologia
+        // Generazione Frasi e Dialoghi
         const sentences = [];
         const nouns = vocabulary.filter(v => v.category === 'Noun');
         const verbs = vocabulary.filter(v => v.category === 'Verb');
@@ -361,7 +366,7 @@ class ConlangEngine {
             semanticsAndContext: {
                 aestheticProfile: config.aesthetic,
                 culturalProfile: config.culture,
-                sociolinguisticContext: config.sociology
+                sociolinguisticContext: resolvedSociology
             }
         };
 
@@ -369,7 +374,7 @@ class ConlangEngine {
             metadata: {
                 generatedAt: new Date().toISOString(),
                 languageName: langName,
-                configuration: config
+                configuration: { ...config, sociology: resolvedSociology }
             },
             grammar,
             vocabulary,
@@ -443,9 +448,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         Suffix: <em>${g.morphology.derivationalAffixes.suffix}</em>
                     </div>
                     <div class="grammar-item">
-                        <strong>Syntax & Articles:</strong><br>
+                        <strong>Syntax, Pragmatics & Context:</strong><br>
                         Word Order: ${g.syntax.wordOrder}<br>
-                        Articles: ${Object.keys(g.syntax.articleSystem).length > 0 ? JSON.stringify(g.syntax.articleSystem) : 'None'}
+                        Articles: ${Object.keys(g.syntax.articleSystem).length > 0 ? JSON.stringify(g.syntax.articleSystem) : 'None'}<br>
+                        Sociolinguistics: <em>${g.semanticsAndContext.sociolinguisticContext}</em>
                     </div>
                 </div>
             </div>
@@ -495,7 +501,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const randomConfig = {
             aesthetic: presets[Math.floor(Math.random() * presets.length)],
             culture: cultures[Math.floor(Math.random() * cultures.length)],
-            sociology: 'hierarchical',
+            sociology: 'egalitarian',
             meanLength: 2.5,
             stdDev: 0.8,
             articleMode: articleModes[Math.floor(Math.random() * articleModes.length)],
