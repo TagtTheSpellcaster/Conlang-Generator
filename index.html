@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Generator Studio v2.4.0</title>
+    <title>Conlang Generator Studio v2.4.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -31,6 +31,117 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #475569;
         }
+
+        /* Tab Navigation & Display Logic Fix */
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block !important;
+        }
+
+        .tab-btn {
+            color: #94a3b8;
+            background-color: transparent;
+            transition: all 0.2s ease-in-out;
+        }
+        .tab-btn:hover {
+            color: #e2e8f0;
+        }
+        .tab-btn.active {
+            color: #38bdf8 !important;
+            background-color: #1e293b !important;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+        }
+
+        /* Legacy Compatibility Classes */
+        .grammar-section {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+        .grammar-section h3 {
+            margin-top: 0;
+            color: #38bdf8;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 0.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+        .grammar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .grammar-item {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            color: #cbd5e1;
+        }
+        .grammar-item strong {
+            color: #f8fafc;
+        }
+        .card {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            padding: 0.85rem;
+            border-radius: 0.5rem;
+        }
+        .card .conlang-word {
+            color: #38bdf8;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .card .category-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        .card .translation {
+            color: #94a3b8;
+            font-size: 0.875rem;
+        }
+        .section-header {
+            font-weight: 700;
+            color: #38bdf8;
+            margin: 1.5rem 0 0.75rem 0;
+            border-bottom: 1px solid #1e293b;
+            padding-bottom: 0.25rem;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        .dialogue-box {
+            background-color: #0f172a;
+            border: 1px solid #1e293b;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .dialogue-box h4 {
+            color: #38bdf8;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        .dialogue-line {
+            margin-bottom: 0.6rem;
+            font-size: 0.9rem;
+        }
+        .speaker {
+            font-weight: 700;
+            color: #38bdf8;
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-sky-500 selection:text-white">
@@ -49,7 +160,7 @@
             </div>
         </div>
         <div class="flex items-center space-x-3 mt-2 sm:mt-0">
-            <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded border border-slate-700">v2.4.0</span>
+            <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded border border-slate-700">v2.4.1</span>
         </div>
     </header>
 
@@ -175,10 +286,10 @@
             <!-- Tab Navigation Header & Export Toolbar -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
                 <nav class="flex space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-800">
-                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-sky-400 bg-slate-800 shadow transition-all" data-tab="tab-grammar">Grammar Profile</button>
-                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-all" data-tab="tab-words">Vocabulary (600)</button>
-                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-all" data-tab="tab-sentences">Sentences (100)</button>
-                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-all" data-tab="tab-dialogues">Dialogues (20)</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md active" data-tab="tab-grammar">Grammar Profile</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-words">Vocabulary (600)</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-sentences">Sentences (100)</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-dialogues">Dialogues (20)</button>
                 </nav>
 
                 <div class="flex space-x-2">
@@ -192,36 +303,22 @@
             </div>
 
             <!-- Tab Content View: Grammar Profile -->
-            <div id="tab-grammar" class="tab-content block space-y-6">
+            <div id="tab-grammar" class="tab-content active space-y-6">
                 <div id="grammar-container"></div>
             </div>
 
             <!-- Tab Content View: Vocabulary -->
-            <div id="tab-words" class="tab-content hidden space-y-4">
-                <div class="flex flex-col sm:flex-row gap-3">
-                    <input type="text" id="vocab-search" placeholder="Search lexemes or translations..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
-                    <select id="pos-filter" class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
-                        <option value="all">All Categories</option>
-                        <option value="Article">Articles</option>
-                        <option value="Case Suffix">Case Suffixes</option>
-                        <option value="Pronoun">Pronouns</option>
-                        <option value="Possessive">Possessives</option>
-                        <option value="Grammatical Word">Grammatical Words</option>
-                        <option value="Noun">Nouns</option>
-                        <option value="Verb">Verbs</option>
-                        <option value="Adjective">Adjectives</option>
-                    </select>
-                </div>
+            <div id="tab-words" class="tab-content space-y-4">
                 <div id="words-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
             </div>
 
             <!-- Tab Content View: Sentences -->
-            <div id="tab-sentences" class="tab-content hidden space-y-4">
+            <div id="tab-sentences" class="tab-content space-y-4">
                 <div id="sentences-container" class="space-y-4"></div>
             </div>
 
             <!-- Tab Content View: Dialogues -->
-            <div id="tab-dialogues" class="tab-content hidden space-y-4">
+            <div id="tab-dialogues" class="tab-content space-y-4">
                 <div id="dialogues-container" class="space-y-4"></div>
             </div>
 
