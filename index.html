@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Generator Studio v2.6.0</title>
+    <title>Conlang Generator Studio v2.6.1</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -156,7 +156,7 @@
             </div>
         </div>
         <div class="flex items-center space-x-3 mt-2 sm:mt-0">
-            <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded border border-slate-700">v2.6.0</span>
+            <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded border border-slate-700">v2.6.1</span>
         </div>
     </header>
 
@@ -276,7 +276,31 @@
 
         <main class="flex-1 flex flex-col bg-slate-950 p-6 overflow-y-auto">
             
-            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
+            <!-- Barra Superiore dei Comandi e Ricerca (Posizionata sopra le Tab) -->
+            <div class="flex flex-col md:flex-row justify-between items-stretch md:items-center gap-4 mb-4 pb-4 border-b border-slate-800">
+                <!-- Casella di ricerca globale per termini Conlang / Inglese -->
+                <div class="relative flex-1 max-w-md">
+                    <input type="text" id="global-search-input" placeholder="Search term (Conlang/English)..." class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2.5 focus:outline-none focus:border-sky-500 shadow-inner">
+                    <div id="search-card-container" class="hidden absolute top-full left-0 mt-2 z-50 w-full bg-slate-900 border border-sky-500 rounded-lg p-3 shadow-2xl"></div>
+                </div>
+
+                <!-- Pulsanti di azione e gestione file -->
+                <div class="flex items-center space-x-2 flex-wrap gap-y-2">
+                    <input type="file" id="import-json-input" accept=".json" class="hidden">
+                    <button id="import-json-btn" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5 shadow-sm">
+                        <span>📂 Import JSON</span>
+                    </button>
+                    <button id="export-json-btn" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5 shadow-sm">
+                        <span>📥 Export JSON</span>
+                    </button>
+                    <button id="copy-json-btn" class="px-3.5 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5 shadow-sm">
+                        <span>📋 Copy JSON</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Header (Posizionata subito sotto la barra comandi) -->
+            <div class="mb-6 pb-2 border-b border-slate-800">
                 <nav class="flex space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-800 flex-wrap">
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md active" data-tab="tab-grammar">Grammar Profile</button>
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-words">Vocabulary (600)</button>
@@ -284,25 +308,6 @@
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-sentences">Sentences (100)</button>
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-dialogues">Dialogues (20)</button>
                 </nav>
-
-                <div class="flex items-center space-x-2 flex-wrap gap-y-2">
-                    <!-- Casella di ricerca globale per termini Conlang / Inglese -->
-                    <div class="relative">
-                        <input type="text" id="global-search-input" placeholder="Search term (Conlang/English)..." class="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 w-48 sm:w-64 focus:outline-none focus:border-sky-500">
-                        <div id="search-card-container" class="hidden absolute top-full right-0 mt-2 z-50 w-72 bg-slate-900 border border-sky-500 rounded-lg p-3 shadow-xl"></div>
-                    </div>
-
-                    <input type="file" id="import-json-input" accept=".json" class="hidden">
-                    <button id="import-json-btn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5">
-                        <span>📂 Import JSON</span>
-                    </button>
-                    <button id="export-json-btn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5">
-                        <span>📥 Export JSON</span>
-                    </button>
-                    <button id="copy-json-btn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5">
-                        <span>📋 Copy JSON</span>
-                    </button>
-                </div>
             </div>
 
             <div id="tab-grammar" class="tab-content active space-y-6">
