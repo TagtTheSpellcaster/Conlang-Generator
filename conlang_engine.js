@@ -1,6 +1,6 @@
 /**
  * Conlang Engine Studio
- * Version: 1.3.0
+ * Version: 1.4.0
  * Architecture: Procedural Phonotactic, Morphosyntactic & Semantic Generator
  */
 
@@ -49,7 +49,10 @@ const ContextualLexicon = {
     ],
     grammatical: [
         "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for",
-        "I", "you", "he", "she", "it", "we", "they", "this", "that"
+        "I (first person singular)", "you (second person singular)", "he (third person singular masculine)",
+        "she (third person singular feminine)", "it (third person singular neuter)", "we (inclusive)", "we (exclusive)",
+        "they (proximate / present group)", "they (obviate / absent group)", "they (honorific / elders)",
+        "they (collective / inanimate)", "this (proximate)", "that (distal)"
     ],
     culturalModifiers: {
         medieval: { nouns: ["feud", "castle", "knight", "honor", "vassal", "lance", "crown"], verbs: ["joust", "pledge"], adjectives: ["noble", "feudal"] },
@@ -97,7 +100,7 @@ class ConlangEngine {
                 }
             }
             attempts++;
-            if (attempts > 100) {
+            if (attempts > 150) {
                 word += attempts; 
                 break;
             }
@@ -131,12 +134,23 @@ class ConlangEngine {
 
         const langName = this.generateLanguageName();
 
-        // Affixes Setup
+        // 1. Affixes Setup & Semantic Assignment
         const prefix = this.generatePhonotacticWord(1, true);
         const suffix = this.generatePhonotacticWord(1, true);
         const caseSuffix = this.generatePhonotacticWord(1, true);
 
-        // Articles Setup
+        const affixSemantics = {
+            prefix: {
+                form: prefix,
+                meaning: "Agentive / Nominalizer (indicates 'one who performs an action' or 'origin')"
+            },
+            suffix: {
+                form: suffix,
+                meaning: "Intensive / Augmentative (indicates 'great', 'major', or 'extended state of')"
+            }
+        };
+
+        // 2. Articles Setup
         const articles = {};
         if (config.articleMode === 'both' || config.articleMode === 'definite_only' || config.articleMode === 'partitive') {
             articles.definite = this.generatePhonotacticWord(1, true);
@@ -148,8 +162,22 @@ class ConlangEngine {
             articles.partitive = this.generatePhonotacticWord(1, true);
         }
 
-        // Build 600-Word Lexicon
+        // 3. Build Vocabulary (Injecting Articles and Case Suffixes explicitely into Lexicon)
         const vocabulary = [];
+
+        if (articles.definite) {
+            vocabulary.push({ conlang: articles.definite, english: "the (definite article)", category: "Article" });
+        }
+        if (articles.indefinite) {
+            vocabulary.push({ conlang: articles.indefinite, english: "a / an (indefinite article)", category: "Article" });
+        }
+        if (articles.partitive) {
+            vocabulary.push({ conlang: articles.partitive, english: "some / part of (partitive article)", category: "Article" });
+        }
+        if (config.grammarStrategy === 'cases') {
+            vocabulary.push({ conlang: `-${caseSuffix}`, english: "[Nominative Subject Suffix]", category: "Case Suffix" });
+        }
+
         const categories = [
             { type: 'Noun', concepts: [...ContextualLexicon.nouns, ...(ContextualLexicon.culturalModifiers[config.culture]?.nouns || [])] },
             { type: 'Verb', concepts: [...ContextualLexicon.verbs, ...(ContextualLexicon.culturalModifiers[config.culture]?.verbs || [])] },
@@ -161,9 +189,16 @@ class ConlangEngine {
         while (vocabulary.length < 600) {
             const cat = categories[index % categories.length];
             const rawConcept = cat.concepts[Math.floor(index / categories.length) % cat.concepts.length];
-            const uniqueConcept = index >= categories.length * cat.concepts.length 
-                ? `${rawConcept} (${Math.floor(index / cat.concepts.length)})` 
-                : rawConcept;
+            
+            // Explicit semantic nuances for repeated concept cycles
+            let uniqueConcept = rawConcept;
+            const cycle = Math.floor(index / (categories.length * cat.concepts.length));
+            if (cycle > 0) {
+                if (cat.type === 'Noun') uniqueConcept = `${rawConcept} (domain aspect ${cycle + 1})`;
+                else if (cat.type === 'Verb') uniqueConcept = `${rawConcept} (frequentative / secondary form ${cycle + 1})`;
+                else if (cat.type === 'Adjective') uniqueConcept = `${rawConcept} (relational / comparative aspect ${cycle + 1})`;
+                else uniqueConcept = `${rawConcept} (register variant ${cycle + 1})`;
+            }
 
             const isGram = cat.type === 'Grammatical Word';
             const sampleSyllables = config.meanLength + (this.boxMullerRandom() * config.stdDev);
@@ -183,7 +218,7 @@ class ConlangEngine {
             index++;
         }
 
-        // Generate 50 Sentences
+        // 4. Generate 50 Sentences
         const sentences = [];
         const nouns = vocabulary.filter(v => v.category === 'Noun');
         const verbs = vocabulary.filter(v => v.category === 'Verb');
@@ -203,17 +238,17 @@ class ConlangEngine {
             }
 
             cWords.push(a.conlang);
-            eWords.push(a.english);
+            eWords.push(a.english.split('(')[0].trim());
 
             let subj = n.conlang;
             if (config.grammarStrategy === 'cases') {
                 subj += caseSuffix;
             }
             cWords.push(subj);
-            eWords.push(n.english);
+            eWords.push(n.english.split('(')[0].trim());
 
             cWords.push(v.conlang);
-            eWords.push(v.english);
+            eWords.push(v.english.split('(')[0].trim());
 
             const cStr = cWords.join(' ');
             const eStr = eWords.join(' ');
@@ -224,7 +259,7 @@ class ConlangEngine {
             });
         }
 
-        // Generate 20 Dialogues
+        // 5. Generate 20 Dialogues
         const dialogues = [];
         for (let i = 0; i < 20; i++) {
             const dialogueLines = [];
@@ -241,7 +276,7 @@ class ConlangEngine {
             dialogues.push(dialogueLines);
         }
 
-        // Generate Grammar Profile
+        // 6. Generate Grammar Profile
         const vowelsList = Phonetics.vowels[config.vowelSet] || Phonetics.vowels.standard;
         const consList = Phonetics.consonants[config.consonantSet] || Phonetics.consonants.balanced;
 
@@ -253,15 +288,15 @@ class ConlangEngine {
                 ipaVowels: vowelsList.map(v => Phonetics.ipaMap[v] || `/${v}/`),
                 ipaConsonants: consList.map(c => Phonetics.ipaMap[c] || `/${c}/`),
                 syllableStructures: SyllableStructures[config.aesthetic] || SyllableStructures.musical,
-                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Short monosyllabic structures strictly assigned to Grammatical Words.`
+                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Monosyllabic forms strictly reserved for grammatical items and articles.`
             },
             morphology: {
                 type: config.morphologyType === 'agglutinative' ? 'Agglutinative (Affix Stacking)' : 'Isolating / Fusional',
                 derivationalAffixes: {
-                    prefix: prefix,
-                    suffix: suffix
+                    prefix: `${affixSemantics.prefix.form}- : ${affixSemantics.prefix.meaning}`,
+                    suffix: `-${affixSemantics.suffix.form} : ${affixSemantics.suffix.meaning}`
                 },
-                inflectionalCases: config.grammarStrategy === 'cases' ? { nominativeSubjectSuffix: caseSuffix } : 'None (Prepositional Strategy)'
+                inflectionalCases: config.grammarStrategy === 'cases' ? { nominativeSubjectSuffix: `-${caseSuffix} (Marks nominal subject in SVO clauses)` } : 'None (Prepositional Strategy)'
             },
             syntax: {
                 wordOrder: 'Subject-Verb-Object (SVO) / Adjective-Noun Modifier Alignment',
@@ -350,7 +385,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="grammar-item">
                         <strong>Morphology & Affixation:</strong><br>
                         Type: ${g.morphology.type}<br>
-                        Prefix: <em>${g.morphology.derivationalAffixes.prefix}-</em> | Suffix: <em>-${g.morphology.derivationalAffixes.suffix}</em>
+                        Prefix: <em>${g.morphology.derivationalAffixes.prefix}</em><br>
+                        Suffix: <em>${g.morphology.derivationalAffixes.suffix}</em>
                     </div>
                     <div class="grammar-item">
                         <strong>Syntax & Articles:</strong><br>
