@@ -3,316 +3,286 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Engine v3.4.0</title>
+    <title>Conlang Generator Studio</title>
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --accent: #3b82f6;
-            --accent-hover: #2563eb;
-            --btn-green: #10b981;
-            --btn-green-hover: #059669;
-            --text: #f8fafc;
-            --text-dim: #94a3b8;
+            --bg-color: #0f172a;
+            --panel-bg: #1e293b;
+            --accent: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
             --border: #334155;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: var(--bg-primary);
-            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
         }
 
-        .container { max-width: 1100px; width: 100%; }
-
-        .header-title {
+        header {
+            background-color: var(--panel-bg);
+            padding: 1rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--border);
-            padding-bottom: 10px;
-            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border);
         }
 
-        .header-title h1 { margin: 0; }
-        .version-badge {
-            background-color: var(--accent);
-            color: #ffffff;
-            padding: 4px 10px;
-            border-radius: 12px;
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .version-tag {
             font-size: 0.85rem;
-            font-weight: bold;
+            background-color: var(--border);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            color: var(--text-muted);
         }
 
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
+        .main-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
         }
 
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+        .sidebar {
+            width: 380px;
+            background-color: var(--panel-bg);
+            border-right: 1px solid var(--border);
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .content-area {
+            flex: 1;
+            padding: 1.5rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
         }
 
         label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: 600;
             font-size: 0.85rem;
-            color: var(--text-dim);
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
         }
 
         select, input, button {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--bg-primary);
+            background-color: var(--bg-color);
+            color: var(--text-main);
             border: 1px solid var(--border);
+            padding: 0.6rem;
             border-radius: 4px;
-            color: var(--text);
-            box-sizing: border-box;
+            font-size: 0.95rem;
         }
 
-        button.primary-btn {
+        select:focus, input:focus {
+            outline: 1px solid var(--accent);
+        }
+
+        button.btn-primary {
             background-color: var(--accent);
-            color: #ffffff;
+            color: var(--bg-color);
             font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
             border: none;
-            transition: background 0.2s;
+            cursor: pointer;
+            padding: 0.8rem;
+            margin-top: 1rem;
+            transition: opacity 0.2s;
         }
 
-        button.primary-btn:hover { background-color: var(--accent-hover); }
+        button.btn-primary:hover {
+            opacity: 0.9;
+        }
 
-        button.export-btn {
-            background-color: var(--btn-green);
-            color: #ffffff;
+        .quick-action-btn {
+            background-color: #059669;
+            color: white;
             font-weight: bold;
-            cursor: pointer;
             border: none;
-            transition: background 0.2s;
+            cursor: pointer;
+            padding: 0.8rem;
         }
 
-        button.export-btn:hover { background-color: var(--btn-green-hover); }
-
-        .output-box {
-            background-color: #020617;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            padding: 15px;
-            white-space: pre-wrap;
-            font-family: "Cascadia Code", "Courier New", Courier, monospace;
-            font-size: 0.85rem;
-            max-height: 600px;
-            overflow-y: auto;
-            line-height: 1.5;
-        }
-
-        .actions-group {
+        .tabs {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+        }
+
+        .tab-btn.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.8rem;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            padding: 0.8rem;
+            border-radius: 4px;
+        }
+
+        .card .conlang-word {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .card .translation {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .dialogue-box {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .dialogue-line {
+            margin-bottom: 0.5rem;
+        }
+
+        .speaker {
+            font-weight: bold;
+            color: var(--accent);
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header-title">
-        <h1>Advanced Conlang Engine</h1>
-        <span class="version-badge">v3.4.0</span>
-    </div>
+    <header>
+        <h1>Conlang Generator Studio</h1>
+        <span class="version-tag">v1.0.0</span>
+    </header>
 
-    <div class="card">
-        <button class="primary-btn" onclick="uiOneClickGenerate()">⚡ One-Click Quick Generation</button>
-    </div>
+    <div class="main-container">
+        <aside class="sidebar">
+            <button id="quick-generate-btn" class="quick-action-btn">⚡ One-Click Generate</button>
+            
+            <hr style="border-color: var(--border); width: 100%;">
 
-    <div class="card">
-        <h3>Configuration Parameters</h3>
-        <div class="grid">
-            <div>
-                <label for="mean-length">Mean Word Length (Chars)</label>
-                <input type="number" id="mean-length" value="5" min="3" max="10" step="0.5">
-            </div>
-            <div>
-                <label for="std-dev">Std Deviation (Gaussian)</label>
-                <input type="number" id="std-dev" value="1.2" min="0.2" max="3.0" step="0.1">
-            </div>
-            <div>
-                <label for="desc">Phonotactic Style</label>
-                <select id="desc">
-                    <option value="harsh">Harsh / Imperial (Heavy Clusters)</option>
-                    <option value="musical">Musical / Flowing (Strict CV)</option>
-                    <option value="dark">Dark / Guttural (Clusters CCV)</option>
-                    <option value="magic">Magical / Ethereal</option>
-                    <option value="renaissance">Renaissance / Scholarly</option>
+            <div class="form-group">
+                <label for="descriptive-preset">Aesthetic & Descriptive Profile</label>
+                <select id="descriptive-preset">
+                    <option value="custom">Custom Configuration</option>
+                    <option value="musical">Musical / Melodic</option>
+                    <option value="dark">Dark / Guttural</option>
+                    <option value="magical">Magical / Ethereal</option>
                     <option value="aquatic">Aquatic / Fluid</option>
-                    <option value="none">Balanced / Natural</option>
+                    <option value="harsh">Harsh / Rigid</option>
                 </select>
             </div>
-            <div>
-                <label for="socio">Sociolinguistic Structure</label>
-                <select id="socio">
-                    <option value="hierarchical">Hierarchical (Strict Honorifics)</option>
-                    <option value="egalitarian">Egalitarian (No Honorifics)</option>
-                    <option value="caste">Caste / Secret (Taboo Markers)</option>
+
+            <div class="form-group">
+                <label for="cultural-preset">Cultural & Temporal Profile</label>
+                <select id="cultural-preset">
+                    <option value="medieval">Medieval Fantasy</option>
+                    <option value="ancient">Ancient Empire</option>
+                    <option value="primitive">Tribal / Primitive</option>
+                    <option value="renaissance">Renaissance High-Culture</option>
+                    <option value="african">Sub-Saharan Inspired</option>
+                    <option value="alien">Extraterrestrial Sci-Fi</option>
                 </select>
             </div>
-            <div>
-                <label for="culture">Socio-Temporal Setting</label>
-                <select id="culture">
-                    <option value="renaissance">Renaissance / Scholarly (SVO)</option>
-                    <option value="ancient">Ancient / Archaic (SOV)</option>
-                    <option value="primitive">Primitive / Tribal (SOV)</option>
-                    <option value="medieval">Medieval / Nomadic (SVO)</option>
-                    <option value="alien">Alien / Non-Human (OVS)</option>
+
+            <div class="form-group">
+                <label for="sociological-preset">Sociolinguistic Context</label>
+                <select id="sociological-preset">
+                    <option value="egalitarian">Egalitarian Nomads</option>
+                    <option value="hierarchical">Hierarchical Feudalism</option>
+                    <option value="mercantile">Mercantile Trade Society</option>
+                    <option value="monastic">Isolationist Monastic</option>
                 </select>
             </div>
-        </div>
 
-        <br>
-
-        <div class="grid">
-            <div>
-                <label for="custom-vowels">Custom Vowels (comma separated)</label>
-                <input type="text" id="custom-vowels" placeholder="a, e, i, o, u">
+            <div class="form-group">
+                <label for="vowel-inventory">Vowel Inventory Set</label>
+                <select id="vowel-inventory">
+                    <option value="standard">Standard (a, e, i, o, u)</option>
+                    <option value="minimal">Minimal (a, i, u)</option>
+                    <option value="extended">Extended (a, e, i, o, u, y, ø, æ)</option>
+                </select>
             </div>
-            <div>
-                <label for="custom-cons">Custom Consonants (comma separated)</label>
-                <input type="text" id="custom-cons" placeholder="p, t, k, m, n, s, r, l">
-            </div>
-        </div>
 
-        <br>
-        <button class="primary-btn" onclick="uiGenerateCustomConlang()">Execute Engine (600+ Words & Pocket Phrasebook)</button>
+            <div class="form-group">
+                <label for="consonant-inventory">Consonant Density</label>
+                <select id="consonant-inventory">
+                    <option value="balanced">Balanced (Plosives, Nasals, Fricatives)</option>
+                    <option value="guttural">Guttural Heavy (Velar, Uvular Focus)</option>
+                    <option value="sibilant">Sibilant & Liquid Heavy (s, z, sh, r, l)</option>
+                    <option value="soft">Soft (Nasals, Approximants Focus)</option>
+                </select>
+            </div>
+
+            <button id="custom-generate-btn" class="btn-primary">Generate Custom Conlang</button>
+        </aside>
+
+        <main class="content-area">
+            <div class="tabs">
+                <button class="tab-btn active" data-tab="tab-words">Vocabulary (600)</button>
+                <button class="tab-btn" data-tab="tab-sentences">Sentences (50)</button>
+                <button class="tab-btn" data-tab="tab-dialogues">Dialogues (20)</button>
+            </div>
+
+            <div id="tab-words" class="tab-content active">
+                <div id="words-container" class="grid-list"></div>
+            </div>
+
+            <div id="tab-sentences" class="tab-content">
+                <div id="sentences-container"></div>
+            </div>
+
+            <div id="tab-dialogues" class="tab-content">
+                <div id="dialogues-container"></div>
+            </div>
+        </main>
     </div>
 
-    <div class="card">
-        <h3>Generated Engine Output</h3>
-        <div id="output" class="output-box">Select parameters and click generate...</div>
-        
-        <div class="actions-group">
-            <button class="export-btn" onclick="uiExportJSON()">📥 Export Conlang Data (JSON)</button>
-            <button class="export-btn" onclick="uiExportCSV()">📥 Export Lexicon (CSV)</button>
-        </div>
-    </div>
-</div>
-
-<script src="conlang_engine.js"></script>
-
-<script>
-let globalEngineResult = null;
-
-function renderEngineLog(result) {
-    let log = `=== CONLANG ENGINE v3.4.0 HIGH-VOLUME SYSTEM ===\n`;
-    log += `Style Mode               : ${result.metadata.desc.toUpperCase()}\n`;
-    log += `Socio-Temporal Culture   : ${result.metadata.culture.toUpperCase()}\n`;
-    log += `Canonical Word Order     : ${result.grammarRules.wordOrder}\n`;
-    log += `Total Lexicon Volume     : ${Object.keys(result.lexicon).length} Words\n\n`;
-
-    log += `=== SECTION A: 35 CULTURAL SURVIVAL PHRASES ===\n`;
-    let currentBlock = "";
-    result.sectionA35.forEach(item => {
-        if (item.block !== currentBlock) {
-            currentBlock = item.block;
-            log += `\n--- [${currentBlock.toUpperCase()}] ---\n`;
-        }
-        log += `${item.id}. EN: "${item.en}" | CONLANG: "${item.conlang}"\n`;
-    });
-
-    log += `\n\n=== SECTION B: 20 MINI-DIALOGUES (4 TURNS) ===\n`;
-    result.sectionB20.forEach(d => {
-        log += `\nDialogue #${d.id}: [${d.context}]\n`;
-        d.turns.forEach(t => {
-            log += `  Speaker ${t.speaker}: EN: "${t.en}" | CONLANG: "${t.conlang}"\n`;
-        });
-    });
-
-    log += `\n\n=== FULL LEXICON EXCERPT (First 80 / ${Object.keys(result.lexicon).length} Total Words) ===\n`;
-    log += `${"KEY / TERM".padEnd(25, ' ')} | CONLANG WORD\n`;
-    log += `-`.repeat(55) + `\n`;
-    Object.keys(result.lexicon).slice(0, 80).forEach(key => {
-        log += `${key.padEnd(25, ' ')} | ${result.lexicon[key]}\n`;
-    });
-    log += `... [All ${Object.keys(result.lexicon).length} terms are included in JSON/CSV export]\n`;
-
-    document.getElementById('output').innerText = log;
-}
-
-function uiGenerateCustomConlang() {
-    const vInput = document.getElementById('custom-vowels').value;
-    const cInput = document.getElementById('custom-cons').value;
-
-    const config = {
-        meanLength: parseFloat(document.getElementById('mean-length').value),
-        stdDev: parseFloat(document.getElementById('std-dev').value),
-        vowels: vInput ? vInput.split(',').map(s => s.trim()) : [],
-        consonants: cInput ? cInput.split(',').map(s => s.trim()) : [],
-        desc: document.getElementById('desc').value,
-        socio: document.getElementById('socio').value,
-        culture: document.getElementById('culture').value
-    };
-
-    globalEngineResult = executeConlangPipeline(config);
-    renderEngineLog(globalEngineResult);
-}
-
-function uiOneClickGenerate() {
-    const styles = ['harsh', 'musical', 'dark', 'magic', 'renaissance', 'aquatic', 'none'];
-    const cultures = ['renaissance', 'ancient', 'primitive', 'medieval', 'alien'];
-
-    const config = {
-        meanLength: (Math.random() * 3 + 4).toFixed(1),
-        stdDev: (Math.random() * 0.8 + 0.8).toFixed(1),
-        vowels: [],
-        consonants: [],
-        desc: styles[Math.floor(Math.random() * styles.length)],
-        socio: 'hierarchical',
-        culture: cultures[Math.floor(Math.random() * cultures.length)]
-    };
-
-    document.getElementById('mean-length').value = config.meanLength;
-    document.getElementById('std-dev').value = config.stdDev;
-    document.getElementById('desc').value = config.desc;
-    document.getElementById('culture').value = config.culture;
-
-    globalEngineResult = executeConlangPipeline(config);
-    renderEngineLog(globalEngineResult);
-}
-
-function uiExportJSON() {
-    if (!globalEngineResult) return alert("Error: Generate a conlang first.");
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(globalEngineResult, null, 2));
-    const btn = document.createElement('a');
-    btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", `conlang_v3.4.0_600words.json`);
-    document.body.appendChild(btn);
-    btn.click();
-    btn.remove();
-}
-
-function uiExportCSV() {
-    if (!globalEngineResult) return alert("Error: Generate a conlang first.");
-    let csvContent = "data:text/csv;charset=utf-8,Key_ID,ConlangWord\n";
-    Object.keys(globalEngineResult.lexicon).forEach(key => {
-        csvContent += `"${key}","${globalEngineResult.lexicon[key]}"\n`;
-    });
-    const btn = document.createElement("a");
-    btn.setAttribute("href", encodeURI(csvContent));
-    btn.setAttribute("download", `conlang_lexicon_600words.csv`);
-    document.body.appendChild(btn);
-    btn.click();
-    btn.remove();
-}
-</script>
-
+    <script src="conlang_engine.js"></script>
 </body>
 </html>
