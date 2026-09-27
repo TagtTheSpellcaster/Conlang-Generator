@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Engine - Advanced Generator</title>
+    <title>Conlang Engine - Advanced Phonotactic & Morphological Pipeline</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -11,7 +11,6 @@
             --accent: #3b82f6;
             --accent-hover: #2563eb;
             --btn-green: #10b981;
-            --btn-green-hover: #059669;
             --text: #f8fafc;
             --text-dim: #94a3b8;
             --border: #334155;
@@ -27,11 +26,7 @@
             justify-content: center;
         }
 
-        .container {
-            max-width: 1050px;
-            width: 100%;
-        }
-
+        .container { max-width: 1100px; width: 100%; }
         h1, h3 { color: #f8fafc; margin-top: 0; }
 
         .card {
@@ -78,17 +73,6 @@
 
         button.primary-btn:hover { background-color: var(--accent-hover); }
 
-        button.export-btn {
-            background-color: var(--btn-green);
-            color: #ffffff;
-            font-weight: bold;
-            cursor: pointer;
-            border: none;
-            transition: background 0.2s;
-        }
-
-        button.export-btn:hover { background-color: var(--btn-green-hover); }
-
         .output-box {
             background-color: #020617;
             border: 1px solid var(--border);
@@ -96,424 +80,160 @@
             padding: 15px;
             white-space: pre-wrap;
             font-family: "Cascadia Code", "Courier New", Courier, monospace;
-            font-size: 0.88rem;
+            font-size: 0.85rem;
             max-height: 550px;
             overflow-y: auto;
             line-height: 1.5;
-        }
-
-        .actions-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Advanced Conlang Generator</h1>
+    <h1>Advanced Conlang Engine - Pipeline Architecture</h1>
 
     <div class="card">
-        <button class="primary-btn" onclick="generateRandomConlang()">⚡ One-Click Quick Generation</button>
-    </div>
-
-    <div class="card">
-        <h3>Configuration Parameters</h3>
-        
+        <h3>Pipeline Parameters & Constraints</h3>
         <div class="grid">
             <div>
-                <label for="mean-length">Mean Word Length (Chars)</label>
-                <input type="number" id="mean-length" value="5" min="2" max="12" step="0.5">
+                <label for="mean-length">Mean Word Length</label>
+                <input type="number" id="mean-length" value="5" min="3" max="10" step="0.5">
             </div>
             <div>
-                <label for="std-dev">Standard Deviation (Variability)</label>
-                <input type="number" id="std-dev" value="1.2" min="0.0" max="4.0" step="0.1">
+                <label for="std-dev">Std Deviation (Gaussian)</label>
+                <input type="number" id="std-dev" value="1.2" min="0.2" max="3.0" step="0.1">
             </div>
             <div>
-                <label for="desc">Aesthetic Style</label>
+                <label for="desc">Phonotactic Style</label>
                 <select id="desc">
+                    <option value="musical">Musical / Flowing (Strict CV)</option>
+                    <option value="dark">Dark / Guttural (Clusters CCV)</option>
+                    <option value="harsh">Harsh / Imperial (Heavy Clusters)</option>
                     <option value="none">Balanced / Natural</option>
-                    <option value="musical">Musical / Flowing</option>
-                    <option value="dark">Dark / Guttural</option>
-                    <option value="magic">Magical / Ethereal</option>
-                    <option value="harsh">Harsh / Imperial</option>
-                    <option value="aquatic">Aquatic / Fluid</option>
                 </select>
             </div>
-        </div>
-
-        <br>
-
-        <div class="grid">
             <div>
-                <label for="socio">Sociolinguistic Structure</label>
+                <label for="socio">Sociolinguistics</label>
                 <select id="socio">
-                    <option value="egalitarian">Egalitarian (No honorifics)</option>
-                    <option value="hierarchical">Hierarchical (Strict honorifics)</option>
-                    <option value="caste">Caste / Secret (Taboo markers)</option>
+                    <option value="hierarchical">Hierarchical (Honorifics Active)</option>
+                    <option value="egalitarian">Egalitarian (Flat Syntax)</option>
                 </select>
             </div>
             <div>
-                <label for="culture">Socio-Temporal Setting</label>
+                <label for="culture">Cultural Filter</label>
                 <select id="culture">
-                    <option value="primitive">Primitive / Tribal</option>
-                    <option value="ancient">Ancient / Archaic</option>
-                    <option value="medieval">Medieval / Nomadic</option>
                     <option value="renaissance">Renaissance / Scholarly</option>
-                    <option value="alien">Alien / Non-Human</option>
+                    <option value="primitive">Primitive / Tribal</option>
+                    <option value="medieval">Medieval / Feudal</option>
                 </select>
             </div>
         </div>
-
         <br>
-
-        <div class="grid">
-            <div>
-                <label for="custom-vowels">Custom Vowels (comma separated)</label>
-                <input type="text" id="custom-vowels" placeholder="a, e, i, o, u">
-            </div>
-            <div>
-                <label for="custom-cons">Custom Consonants (comma separated)</label>
-                <input type="text" id="custom-cons" placeholder="p, t, k, m, n, s, r, l">
-            </div>
-        </div>
-
-        <br>
-        <button class="primary-btn" onclick="generateCustomConlang()">Generate Complete Conlang System</button>
+        <button class="primary-btn" onclick="runPipelineEngine()">Execute Conlang Generation Pipelines</button>
     </div>
 
     <div class="card">
-        <h3>Generated Engine Output & Dictionary</h3>
-        <div id="output" class="output-box">Select parameters and click generate...</div>
-        
-        <div class="actions-group">
-            <button class="export-btn" onclick="exportJSON()">📥 Export Dictionary (JSON)</button>
-            <button class="export-btn" onclick="exportCSV()">📥 Export Dictionary (CSV)</button>
-        </div>
+        <h3>Engine Output Log & Dictionary</h3>
+        <div id="output" class="output-box">Click execute to run the pipelines...</div>
     </div>
 </div>
 
 <script>
-// --- EXTENDED CONCEPT DATABASE (Over 350 core concepts & expansion nodes) ---
-const CORE_GRAMMAR = [
-    { concept: "I / me (1st person sing.)", pos: "PRON" },
-    { concept: "you (2nd person sing. informal)", pos: "PRON" },
-    { concept: "he / she / it (3rd person sing.)", pos: "PRON" },
-    { concept: "we (1st person plur. inclusive)", pos: "PRON" },
-    { concept: "you all (2nd person plur.)", pos: "PRON" },
-    { concept: "they (3rd person plur.)", pos: "PRON" },
-    { concept: "this (proximal demonstrative)", pos: "DET" },
-    { concept: "that (distal demonstrative)", pos: "DET" },
-    { concept: "in / inside / within", pos: "PREP" },
-    { concept: "on / above / over", pos: "PREP" },
-    { concept: "under / below / beneath", pos: "PREP" },
-    { concept: "with / accompanied by", pos: "PREP" },
-    { concept: "from / source / origin", pos: "PREP" },
-    { concept: "to / toward / direction", pos: "PREP" },
-    { concept: "and / conjunction", pos: "CONJ" },
-    { concept: "but / contrast", pos: "CONJ" },
-    { concept: "or / alternative", pos: "CONJ" },
-    { concept: "if / condition", pos: "CONJ" },
-    { concept: "because / cause", pos: "CONJ" },
-    { concept: "not / negation", pos: "PART" },
-    { concept: "past tense marker", pos: "PART" },
-    { concept: "future tense marker", pos: "PART" },
-    { concept: "question marker", pos: "PART" }
-];
-
-const CORE_VERBS = [
-    { id: "be", concept: "to be / exist", pos: "V" },
-    { id: "have", concept: "to have / possess", pos: "V" },
-    { id: "do", concept: "to do / make / act", pos: "V" },
-    { id: "go", concept: "to go / walk / travel (move)", pos: "V" },
-    { id: "see", concept: "to see / perceive visually", pos: "V" },
-    { id: "hear", concept: "to hear / listen / perceive sound", pos: "V" },
-    { id: "want", concept: "to want / desire", pos: "V" },
-    { id: "speak", concept: "to speak / talk / communicate", pos: "V" },
-    { id: "eat", concept: "to eat / consume food", pos: "V" },
-    { id: "drink", concept: "to drink / absorb liquid", pos: "V" },
-    { id: "sleep", concept: "to sleep / rest", pos: "V" },
-    { id: "give", concept: "to give / offer / transfer", pos: "V" },
-    { id: "take", concept: "to take / grab / seize", pos: "V" },
-    { id: "fall", concept: "to fall / drop / descend", pos: "V" },
-    { id: "know", concept: "to know / comprehend", pos: "V" },
-    { id: "think", concept: "to think / ponder", pos: "V" },
-    { id: "die", concept: "to die / cease living", pos: "V" },
-    { id: "kill", concept: "to kill / slay", pos: "V" },
-    { id: "cut", concept: "to cut / sever / divide", pos: "V" },
-    { id: "burn", concept: "to burn / ignite", pos: "V" }
-];
-
-const CORE_NOUNS = [
-    { id: "earth", concept: "earth / ground / soil", pos: "N" },
-    { id: "sky", concept: "sky / heavens", pos: "N" },
-    { id: "fire", concept: "fire / primary heat", pos: "N" },
-    { id: "water", concept: "water / liquid / river (Polysemic)", pos: "N" },
-    { id: "light", concept: "light / sun / day (Polysemic)", pos: "N" },
-    { id: "tree", concept: "tree / plant / wood", pos: "N" },
-    { id: "head", concept: "head / top / leader", pos: "N" },
-    { id: "hand", concept: "hand / arm / grip", pos: "N" },
-    { id: "heart", concept: "heart / core / center", pos: "N" },
-    { id: "eye", concept: "eye / vision organ", pos: "N" },
-    { id: "person", concept: "person / human being", pos: "N" },
-    { id: "house", concept: "house / shelter / dwelling", pos: "N" },
-    { id: "time", concept: "time / duration / cycle", pos: "N" },
-    { id: "life", concept: "life / vital breath", pos: "N" },
-    { id: "food", concept: "food / bread / nourishment", pos: "N" },
-    { id: "book", concept: "book / recorded knowledge", pos: "N" },
-    { id: "medicine", concept: "medicine / cure / healing substance", pos: "N" },
-    { id: "mountain", concept: "mountain / peak / high relief", pos: "N" },
-    { id: "stone", concept: "stone / rock / mineral", pos: "N" },
-    { id: "wind", concept: "wind / air / breeze", pos: "N" },
-    { id: "night", concept: "night / darkness / shadow", pos: "N" },
-    { id: "blood", concept: "blood / life fluid", pos: "N" },
-    { id: "child", concept: "child / offspring / young one", pos: "N" }
-];
-
-const CORE_ADJECTIVES = [
-    { id: "good", concept: "good / valid / favorable", pos: "ADJ" },
-    { id: "big", concept: "big / large / grand", pos: "ADJ" },
-    { id: "hot", concept: "hot / high temperature", pos: "ADJ" },
-    { id: "new", concept: "new / recent", pos: "ADJ" },
-    { id: "fast", concept: "fast / quick / swift", pos: "ADJ" },
-    { id: "clean", concept: "clean / pure", pos: "ADJ" },
-    { id: "strong", concept: "strong / powerful / durable", pos: "ADJ" }
-];
-
-const PHONETIC_PROFILES = {
-    none: { v: ['a', 'e', 'i', 'o', 'u'], c: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l'], syll: ['CV', 'CVC'] },
-    musical: { v: ['a', 'e', 'i', 'ia', 'ea'], c: ['l', 'r', 'm', 'n', 'v', 's', 'j'], syll: ['CV', 'V'] },
-    dark: { v: ['u', 'o', 'y'], c: ['k', 'g', 'q', 'x', 'z', 'r', 'kh'], syll: ['CVC', 'CCV'] },
-    magic: { v: ['a', 'i', 'e', 'ae'], c: ['s', 'sh', 'h', 'f', 'l', 'm', 'th'], syll: ['CV', 'CVC'] },
-    harsh: { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr', 'kr'], syll: ['CCVC', 'CVCC'] },
-    aquatic: { v: ['a', 'i', 'u', 'o'], c: ['m', 'n', 'l', 'w', 'f', 'v', 'bh'], syll: ['CV', 'CVC'] }
+const PHONETICS = {
+    musical: { v: ['a', 'e', 'i', 'o'], c: ['m', 'n', 'l', 'r', 's', 'v'], maxC: 1, epenthetic: 'i' },
+    dark:    { v: ['u', 'o', 'a'], c: ['k', 'g', 'q', 'x', 'r', 'z'], maxC: 3, epenthetic: 'u' },
+    harsh:   { v: ['a', 'u'], c: ['p', 't', 'k', 'ts', 'tr', 'gr'], maxC: 3, epenthetic: 'a' },
+    none:    { v: ['a', 'e', 'i', 'o', 'u'], c: ['p', 't', 'k', 'b', 'd', 'm', 'n', 's', 'r', 'l'], maxC: 2, epenthetic: 'e' }
 };
 
-let currentConlangData = null;
-
-function getGaussianLength(mean, stdDev) {
-    let u1 = 0, u2 = 0;
-    while (u1 === 0) u1 = Math.random();
-    while (u2 === 0) u2 = Math.random();
-    let z0 = Math.sqrt(-2.0 * Math.log(u1)) * Math.cos(2.0 * Math.PI * u2);
-    let len = Math.round(mean + z0 * stdDev);
-    return Math.max(2, Math.min(15, len));
+function isVowel(ch) {
+    return ['a', 'e', 'i', 'o', 'u', 'y'].includes(ch.toLowerCase());
 }
 
-function getRandom(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
-}
+function applyPhonotactics(partA, partB, styleKey) {
+    const rules = PHONETICS[styleKey] || PHONETICS.none;
+    let str = partA + partB;
 
-function generateTargetWord(vowels, consonants, syllStructures, targetLength) {
-    let word = "";
-    while (word.length < targetLength) {
-        let struct = getRandom(syllStructures);
-        for (let char of struct) {
-            if (char === 'C') word += getRandom(consonants);
-            if (char === 'V') word += getRandom(vowels);
-            if (word.length >= targetLength) break;
-        }
+    // 1. Elision on double identical vowels
+    if (isVowel(partA.slice(-1)) && isVowel(partB.charAt(0)) && partA.slice(-1) === partB.charAt(0)) {
+        str = partA.slice(0, -1) + partB;
     }
-    return word.substring(0, targetLength);
+
+    // 2. Sandhi Epenthesis on heavy consonant cluster
+    let cCount = 0;
+    for (let i = 0; i < str.length; i++) {
+        if (!isVowel(str[i])) {
+            cCount++;
+            if (cCount > rules.maxC) {
+                str = str.slice(0, i) + rules.epenthetic + str.slice(i);
+                break;
+            }
+        } else { cCount = 0; }
+    }
+    return str;
 }
 
-function buildExtendedDictionary(config) {
-    let v = config.vowels.length ? config.vowels : PHONETIC_PROFILES[config.desc].v;
-    let c = config.consonants.length ? config.consonants : PHONETIC_PROFILES[config.desc].c;
-    let syll = PHONETIC_PROFILES[config.desc].syll;
-    let order = 'SVO';
+function mergeLegoRoots(rootA, rootB, meanLen, styleKey) {
+    const maxLen = Math.round(meanLen * 1.5);
+    let res = applyPhonotactics(rootA, rootB, styleKey);
 
-    if (config.culture === 'ancient' || config.culture === 'primitive') order = 'SOV';
-    if (config.culture === 'alien') order = 'OVS';
+    if (res.length > maxLen) {
+        let cutA = rootA.length > 3 ? rootA.slice(0, Math.ceil(rootA.length / 2)) : rootA;
+        res = applyPhonotactics(cutA, rootB, styleKey);
+    }
+    return res.length > maxLen ? res.slice(0, maxLen) : res;
+}
 
-    let prefNeg = generateTargetWord(v, c, syll, 3);
-    let prefSuper = generateTargetWord(v, c, syll, 3);
-    let suffPlace = generateTargetWord(v, c, syll, 3);
-    let suffPerson = generateTargetWord(v, c, syll, 3);
+function runPipelineEngine() {
+    const meanLen = parseFloat(document.getElementById('mean-length').value);
+    const styleKey = document.getElementById('desc').value;
+    const socioKey = document.getElementById('socio').value;
+    const cultureKey = document.getElementById('culture').value;
 
+    const pData = PHONETICS[styleKey];
     let lexicon = [];
-    let usedWords = new Set();
-    let roots = {};
 
-    function makeWord() {
-        let word;
-        let attempts = 0;
-        do {
-            let targetLen = getGaussianLength(config.meanLength, config.stdDev);
-            word = generateTargetWord(v, c, syll, targetLen);
-            attempts++;
-        } while (usedWords.has(word) && attempts < 100);
-        usedWords.add(word);
-        return word;
-    }
-
-    // 1. Primitive Roots Generation
-    CORE_GRAMMAR.forEach(item => lexicon.push({ word: makeWord(), pos: item.pos, category: "Grammar", meaning: item.concept }));
-    CORE_VERBS.forEach(item => {
-        let w = makeWord();
-        roots[item.id] = w;
-        lexicon.push({ word: w, pos: item.pos, category: "Base Verb", meaning: item.concept });
-    });
-    CORE_NOUNS.forEach(item => {
-        let w = makeWord();
-        roots[item.id] = w;
-        lexicon.push({ word: w, pos: item.pos, category: "Base Noun", meaning: item.concept });
-    });
-    CORE_ADJECTIVES.forEach(item => {
-        let w = makeWord();
-        roots[item.id] = w;
-        lexicon.push({ word: w, pos: item.pos, category: "Base Adjective", meaning: item.concept });
-    });
-
-    // 2. Affix Derivations (Opposites, Superlatives, Locations, Agents)
-    const baseAdjectives = [
-        ["good", "bad / evil (anti-good)"], ["hot", "cold (anti-hot)"], 
-        ["new", "old (anti-new)"], ["fast", "slow (anti-fast)"],
-        ["clean", "dirty (anti-clean)"], ["strong", "weak (anti-strong)"]
-    ];
-    baseAdjectives.forEach(([base, derivMeaning]) => {
-        if (roots[base]) lexicon.push({ word: `${prefNeg}-${roots[base]}`, pos: "ADJ", category: "Derived (Prefix)", meaning: derivMeaning });
-    });
-
-    if (roots["big"]) {
-        lexicon.push({ word: `${prefSuper}-${roots["big"]}`, pos: "ADJ", category: "Derived (Prefix)", meaning: "enormous / giant (super-big)" });
-    }
-
-    const placeDerivations = [
-        ["food", "bakery / restaurant (food-place)"],
-        ["book", "library / archive (book-place)"],
-        ["medicine", "hospital / pharmacy (medicine-place)"],
-        ["house", "village / town (house-place)"]
-    ];
-    placeDerivations.forEach(([base, meaning]) => {
-        if (roots[base]) lexicon.push({ word: `${roots[base]}-${suffPlace}`, pos: "N", category: "Derived (Suffix)", meaning: meaning });
-    });
-
-    // 3. Compounds Generation ("Lego Words") -> Expanding to 350+ entries
-    const compoundRules = [
-        ["water", "fall", "waterfall (water + fall)", "N"],
-        ["eye", "water", "tear (eye + water)", "N"],
-        ["fire", "mountain", "volcano (fire + mountain)", "N"],
-        ["person", "medicine", "doctor / healer (person + medicine)", "N"],
-        ["light", "house", "lighthouse (light + house)", "N"],
-        ["earth", "go", "earthquake (earth + go)", "N"],
-        ["person", "go", "traveler / nomad (person + go)", "N"],
-        ["time", "book", "history / chronicle (time + book)", "N"],
-        ["hand", "stone", "tool / hammer (hand + stone)", "N"],
-        ["sky", "fire", "lightning / thunderstorm (sky + fire)", "N"]
-    ];
-
-    compoundRules.forEach(([r1, r2, meaning, pos]) => {
-        if (roots[r1] && roots[r2]) lexicon.push({ word: `${roots[r1]}${roots[r2]}`, pos: pos, category: "Compound", meaning: meaning });
-    });
-
-    // Bulk Procedural Expansion Node to guarantee over 350 full words
-    let expansionDomains = ["Nature", "Society", "Body", "Mind", "Action", "Quality"];
-    let nodeIndex = 1;
-    while (lexicon.length < 360) {
-        let domain = getRandom(expansionDomains);
-        let baseWord1 = getRandom(Object.values(roots));
-        let baseWord2 = getRandom(Object.values(roots));
-        let compWord = `${baseWord1}${baseWord2}`;
-        if (!usedWords.has(compWord)) {
-            usedWords.add(compWord);
-            lexicon.push({
-                word: compWord,
-                pos: getRandom(["N", "V", "ADJ"]),
-                category: `Derived (${domain})`,
-                meaning: `cultural concept ${nodeIndex++} related to ${domain.toLowerCase()}`
-            });
+    // Base root generation
+    function genRoot(len) {
+        let w = "";
+        while(w.length < len) {
+            w += pData.c[Math.floor(Math.random() * pData.c.length)];
+            w += pData.v[Math.floor(Math.random() * pData.v.length)];
         }
+        return w.slice(0, len);
     }
 
-    currentConlangData = {
-        metadata: {
-            targetMeanLength: config.meanLength,
-            stdDev: config.stdDev,
-            wordOrder: order,
-            negativePrefix: prefNeg,
-            superlativePrefix: prefSuper,
-            locationSuffix: suffPlace,
-            setting: config.culture
-        },
-        lexicon: lexicon
-    };
+    const fireRoot = genRoot(Math.round(meanLen));
+    const placeSuffix = genRoot(2); // Short 1-2 char suffix constraint
 
-    let text = `=== STATISTICAL & MORPHOLOGICAL PROFILE ===\n`;
-    text += `Target Mean Word Length: ${config.meanLength} chars (Std Dev: ${config.stdDev})\n`;
-    text += `Negative Prefix (Anti-) : ${prefNeg}-\n`;
-    text += `Superlative Prefix      : ${prefSuper}-\n`;
-    text += `Location Suffix (-Place): -${suffPlace}\n`;
-    text += `Canonical Word Order    : ${order}\n\n`;
+    lexicon.push({ word: fireRoot, pos: "N", meaning: "fire / heat source [Base Root]" });
+    
+    // Lego Compound with Sandhi and Length Cut
+    const forgeWord = mergeLegoRoots(fireRoot, placeSuffix, meanLen, styleKey);
+    lexicon.push({ word: forgeWord, pos: "N", meaning: `forge / volcano [Formula: ${fireRoot} + -${placeSuffix}]` });
 
-    text += `=== LEXICON & DICTIONARY (${lexicon.length} Total Terms Generated) ===\n`;
-    text += `${"WORD".padEnd(22, ' ')} | ${"POS".padEnd(6, ' ')} | ${"CATEGORY".padEnd(20, ' ')} | MEANING / DERIVATION\n`;
-    text += `-`.repeat(85) + `\n`;
+    // Sociolinguistic Injection
+    if (socioKey === 'hierarchical') {
+        const youRoot = genRoot(Math.round(meanLen * 0.8));
+        const honorific = genRoot(2);
+        const formalYou = applyPhonotactics(youRoot, honorific, styleKey);
+        
+        lexicon.push({ word: youRoot, pos: "PRON", meaning: "you (informal) [Base Root]" });
+        lexicon.push({ word: formalYou, pos: "PRON", meaning: `you (formal) [Formula: ${youRoot} + -${honorific}]` });
+    }
 
-    lexicon.forEach(entry => {
-        text += `${entry.word.padEnd(22, ' ')} | ${entry.pos.padEnd(6, ' ')} | ${entry.category.padEnd(20, ' ')} | ${entry.meaning}\n`;
+    let log = `=== PIPELINE EXECUTION ENGINE COMPLETE ===\n`;
+    log += `Applied Phonotactic Rules : Max Consecutive Consonants = ${pData.maxC}, Epenthetic Vowel = '${pData.epenthetic}'\n`;
+    log += `Cultural Focus Filter    : ${cultureKey.toUpperCase()}\n`;
+    log += `Morphological Constraint  : Max Compound Length = ${Math.round(meanLen * 1.5)} chars\n\n`;
+    log += `WORD                   | POS   | MEANING / DERIVATION FORMULA\n`;
+    log += `-`.repeat(75) + `\n`;
+
+    lexicon.forEach(e => {
+        log += `${e.word.padEnd(22, ' ')} | ${e.pos.padEnd(5, ' ')} | ${e.meaning}\n`;
     });
 
-    return text;
-}
-
-function generateRandomConlang() {
-    const config = {
-        meanLength: (Math.random() * 4 + 4).toFixed(1),
-        stdDev: (Math.random() * 1.5 + 0.5).toFixed(1),
-        vowels: [],
-        consonants: [],
-        desc: getRandom(['none', 'musical', 'dark', 'magic', 'harsh', 'aquatic']),
-        socio: getRandom(['egalitarian', 'hierarchical', 'caste']),
-        culture: getRandom(['primitive', 'ancient', 'medieval', 'renaissance', 'alien'])
-    };
-
-    document.getElementById('mean-length').value = config.meanLength;
-    document.getElementById('std-dev').value = config.stdDev;
-    document.getElementById('output').innerText = buildExtendedDictionary(config);
-}
-
-function generateCustomConlang() {
-    const vInput = document.getElementById('custom-vowels').value;
-    const cInput = document.getElementById('custom-cons').value;
-
-    const config = {
-        meanLength: parseFloat(document.getElementById('mean-length').value),
-        stdDev: parseFloat(document.getElementById('std-dev').value),
-        vowels: vInput ? vInput.split(',').map(s => s.trim()) : [],
-        consonants: cInput ? cInput.split(',').map(s => s.trim()) : [],
-        desc: document.getElementById('desc').value,
-        socio: document.getElementById('socio').value,
-        culture: document.getElementById('culture').value
-    };
-
-    document.getElementById('output').innerText = buildExtendedDictionary(config);
-}
-
-function exportJSON() {
-    if (!currentConlangData) return alert("Error: Generate a conlang first.");
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentConlangData, null, 2));
-    const btn = document.createElement('a');
-    btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", `conlang_dictionary.json`);
-    document.body.appendChild(btn);
-    btn.click();
-    btn.remove();
-}
-
-function exportCSV() {
-    if (!currentConlangData) return alert("Error: Generate a conlang first.");
-    let csvContent = "data:text/csv;charset=utf-8,Word,POS,Category,Meaning\n";
-    currentConlangData.lexicon.forEach(item => {
-        csvContent += `"${item.word}","${item.pos}","${item.category}","${item.meaning}"\n`;
-    });
-    const btn = document.createElement("a");
-    btn.setAttribute("href", encodeURI(csvContent));
-    btn.setAttribute("download", `conlang_dictionary.csv`);
-    document.body.appendChild(btn);
-    btn.click();
-    btn.remove();
+    document.getElementById('output').innerText = log;
 }
 </script>
 
