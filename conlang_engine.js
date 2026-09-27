@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.6.0
- * Architecture: Bidirectional Sorted Dictionary & Global Header Term Search System
+ * Version: 2.6.1
+ * Architecture: Reordered Primary Command Toolbar, Bidirectional Dictionary & Global Term Search
  */
 
 const Phonetics = {
@@ -620,7 +620,6 @@ class ConlangEngine {
     }
 }
 
-// UI Controller & Render Handler
 document.addEventListener('DOMContentLoaded', () => {
     const engine = new ConlangEngine();
 
@@ -800,7 +799,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <h4>Dialogue #${idx + 1}: ${dlg.title}</h4>
                     ${dlg.lines.map(line => `
                         <div class="dialogue-line">
-                            <span class="speaker">${line.speaker}:</span>${line.conlang}
+                            <span class="speaker">${line.speaker}:</span> ${line.conlang}
                             <br><small class="translation">${line.english}</small>
                         </div>
                     `).join('')}
