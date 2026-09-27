@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.2.0
- * Architecture: True VOS/OVS Constituent Engine & Expanded Historical-Semantic Matrix
+ * Version: 2.3.0
+ * Architecture: Clean Root Engine, Zero Generic Duplicates & Strict Word Order Permutations
  */
 
 const Phonetics = {
@@ -32,71 +32,109 @@ const SyllableStructures = {
     harsh: ['CCVC', 'CVC', 'CVCC', 'CCVCC']
 };
 
-const ExpandedCulturalDomains = {
-    medieval: [
-        "feud", "castle", "knight", "honor", "vassal", "lance", "crown", "inn", "horse", "guard", "coin",
-        "fief", "bailiff", "moat", "portcullis", "cloister", "herald", "chainmail", "blacksmith", "timber",
-        "falconry", "parchment", "tithe", "squire", "armorer", "mace", "almoner", "keep", "drawbridge",
-        "baron", "viscount", "archers", "crossbow", "pillage", "banner", "manor", "gallows", "relic", "abbey"
+const SemanticDatabase = {
+    coreNouns: ["man", "person", "sun", "water (flowing)", "earth"],
+    coreVerbs: ["be", "have", "go", "see"],
+    
+    bodyParts: [
+        "head", "eye", "ear", "hand", "foot", "heart", "blood", "bone", "skin", "throat",
+        "arm", "leg", "finger", "tooth", "tongue", "chest", "back", "brain", "liver", "face"
     ],
-    ancient: [
-        "empire", "chariot", "oracle", "bronze", "tomb", "papyrus", "forum", "guard", "gold", "phalanx",
-        "sartor", "aqueduct", "centurion", "senate", "gladiator", "amphitheater", "catacomb", "sculpture",
-        "toga", "obelisk", "tribute", "patrician", "plebeian", "scepter", "scribe", "mural", "pantheon"
+    
+    natureAndWeather: [
+        "moon", "sky", "star", "cloud", "rain", "storm", "wind", "ice", "snow", "thunder",
+        "river", "sea", "ocean", "mountain", "valley", "forest", "tree", "leaf", "stone", "sand",
+        "water (stagnant)", "fire", "ash", "smoke", "wave", "swamp", "desert", "cave", "island", "meadow"
     ],
-    primitive: [
-        "hunt", "tribe", "cave", "flint", "pelt", "totem", "spring", "beast", "fire", "hearth", "carcass",
-        "spearhead", "sinew", "shaman", "amber", "fang", "tallow", "shelter", "track", "forage", "marrow",
-        "cliff", "clearing", "hide", "stalk", "thicket", "cavern", "stonehead", "bark", "tendon", "ash"
-    ],
-    renaissance: [
-        "art", "guild", "patron", "cannon", "sail", "monarch", "shop", "coin", "map", "astrolabe", "canvas",
-        "fresco", "alchemist", "galleon", "telescope", "engraving", "compass", "manuscript", "merchant",
-        "diplomat", "caravel", "gilding", "scholar", "academy", "scaffold", "piazza", "inkwell", "quill"
-    ],
-    african: [
-        "savanna", "spirit", "ancestor", "drum", "elder", "drought", "well", "beast", "baobab", "savannah",
-        "mask", "griot", "cowrie", "millet", "gazelle", "terracotta", "spear", "chieftain", "herdsman",
-        "riverbed", "clay", "talisman", "monsoon", "thatch", "horn", "ebony", "charcoal", "pasture"
-    ],
-    alien: [
-        "plasma", "void", "hive", "orbit", "core", "nexus", "station", "ship", "guard", "nebula", "pulsar",
-        "warp", "reactor", "biosphere", "hyperdrive", "xenon", "portal", "singularity", "isotope", "array",
-        "subspace", "alloy", "hologram", "cryo", "transmitter", "cybernetics", "matrix", "beacon", "drone"
-    ]
-};
 
-const ContextualLexicon = {
-    coreNouns: ["man", "person", "sun"],
-    coreVerbs: ["be", "have"],
+    emotionsAndCognition: [
+        "love", "hate", "fear", "joy", "anger", "sorrow", "courage", "wisdom", "mind", "thought",
+        "dream", "hope", "desire", "memory", "truth", "lie", "faith", "honor", "shame", "peace"
+    ],
 
-    nouns: [
-        "moon", "water", "fire", "earth", "sky", "woman", "child",
-        "king", "leader", "god", "spirit", "sword", "shield", "trade", "gold", "house", "city",
-        "star", "river", "tree", "animal", "beast", "life", "death", "blood", "war", "peace",
-        "food", "bread", "night", "day", "shadow", "light", "stone", "iron", "wind", "sea",
-        "mountain", "valley", "forest", "rain", "storm", "ice", "road", "gate", "bridge", "tower"
+    timeAndSpace: [
+        "day", "night", "dawn", "dusk", "sunup", "sunset", "year", "season", "winter", "summer",
+        "springtime", "autumn", "moment", "eternity", "north", "south", "east", "west", "center", "edge"
     ],
-    verbs: [
-        "run", "walk", "speak", "see", "hear", "fight", "build", "love", "hate", "eat",
-        "drink", "sleep", "die", "live", "give", "take", "think", "know", "lead", "rule",
-        "seek", "find", "call", "stop", "strike", "guard", "carry", "break", "bind", "fly"
+
+    professionsAndSocial: [
+        "king", "queen", "leader", "chief", "child", "woman", "brother", "sister", "mother", "father",
+        "friend", "enemy", "stranger", "healer", "warrior", "sentry", "merchant", "artisan", "hunter", "gatherer",
+        "farmer", "sailor", "priest", "scout", "outcast", "companion", "vassal", "elder", "herald", "sculptor"
     ],
-    adjectives: [
+
+    warfareAndTools: [
+        "sword", "shield", "spear", "bow", "arrow", "blade", "armor", "helm", "hammer", "axe",
+        "knife", "chain", "rope", "torch", "banner", "fortress", "gate", "wall", "tower", "anvil"
+    ],
+
+    ordinaryNouns: [
+        "house", "city", "village", "path", "road", "bridge", "door", "window", "table", "bed",
+        "food", "bread", "meat", "wine", "grain", "fruit", "cloth", "garment", "ring", "crown",
+        "gold", "silver", "iron", "bronze", "flint", "clay", "timber", "ship", "boat", "cart"
+    ],
+
+    ordinaryVerbs: [
+        "run", "walk", "speak", "hear", "fight", "build", "love", "eat", "drink", "sleep",
+        "die", "live", "give", "take", "think", "know", "lead", "rule", "seek", "find",
+        "call", "stop", "strike", "guard", "carry", "break", "bind", "fly", "swim", "burn",
+        "freeze", "carve", "harvest", "shield", "heal", "remember", "forget", "praise", "curse", "gather",
+        "command", "plead", "surrender", "escape", "protect", "inscribe", "weave", "forge", "navigate", "climb"
+    ],
+
+    ordinaryAdjectives: [
         "great", "small", "bright", "dark", "strong", "weak", "old", "young", "good", "evil",
         "hot", "cold", "fast", "slow", "hard", "soft", "wise", "wild", "holy", "mortal",
-        "clean", "safe", "cheap", "rich", "bound", "silent", "sharp", "heavy", "lightweight", "pure"
+        "clean", "safe", "cheap", "rich", "bound", "silent", "sharp", "heavy", "lightweight", "pure",
+        "deep", "shallow", "fierce", "gentle", "golden", "noble", "vile", "sacred", "ancient", "swift"
     ],
+
     pronouns: [
-        "I", "you", "he", "she", "it", "we (inclusive)", "we (exclusive)",
+        "I", "you (singular)", "he", "she", "it", "we (inclusive)", "we (exclusive)",
         "they (proximate)", "they (obviate)", "they (ancestral)", "they (collective)"
     ],
+
     possessives: [
-        "my", "your", "his", "her", "its", "our", "their"
+        "my / mine", "your / yours", "his", "her / hers", "its", "our / ours", "their / theirs"
     ],
-    grammatical: [
-        "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for", "this", "that"
-    ]
+
+    grammaticalWords: [
+        "and", "or", "but", "if", "in", "on", "at", "with", "from", "to", "by", "for", "this", "that", "where", "what", "who", "not"
+    ],
+
+    culturalDomains: {
+        medieval: [
+            "feud", "castle", "knight", "honor", "vassal", "lance", "crown", "inn", "horse", "guard", "coin",
+            "fief", "bailiff", "moat", "portcullis", "cloister", "herald", "chainmail", "blacksmith", "timber",
+            "falconry", "parchment", "tithe", "squire", "armorer", "mace", "almoner", "keep", "drawbridge",
+            "baron", "viscount", "archers", "crossbow", "pillage", "banner", "manor", "gallows", "relic", "abbey"
+        ],
+        ancient: [
+            "empire", "chariot", "oracle", "bronze", "tomb", "papyrus", "forum", "sentry", "gold", "phalanx",
+            "aqueduct", "centurion", "senate", "gladiator", "amphitheater", "catacomb", "sculpture",
+            "toga", "obelisk", "tribute", "patrician", "plebeian", "scepter", "scribe", "mural", "pantheon"
+        ],
+        primitive: [
+            "hunt", "tribe", "cave", "flint", "pelt", "totem", "spring", "beast", "fire", "hearth", "carcass",
+            "spearhead", "sinew", "shaman", "amber", "fang", "tallow", "shelter", "track", "forage", "marrow",
+            "cliff", "clearing", "hide", "stalk", "thicket", "cavern", "stonehead", "bark", "tendon", "ash"
+        ],
+        renaissance: [
+            "art", "guild", "patron", "cannon", "sail", "monarch", "shop", "coin", "map", "astrolabe", "canvas",
+            "fresco", "alchemist", "galleon", "telescope", "engraving", "compass", "manuscript", "merchant",
+            "diplomat", "caravel", "gilding", "scholar", "academy", "scaffold", "piazza", "inkwell", "quill"
+        ],
+        african: [
+            "savanna", "spirit", "ancestor", "drum", "elder", "drought", "well", "baobab", "mask", "griot",
+            "cowrie", "millet", "gazelle", "terracotta", "spear", "chieftain", "herdsman", "riverbed", "clay",
+            "talisman", "monsoon", "thatch", "horn", "ebony", "charcoal", "pasture", "savannah"
+        ],
+        alien: [
+            "plasma", "void", "hive", "orbit", "core", "nexus", "station", "ship", "nebula", "pulsar",
+            "warp", "reactor", "biosphere", "hyperdrive", "xenon", "portal", "singularity", "isotope", "array",
+            "subspace", "alloy", "hologram", "cryo", "transmitter", "cybernetics", "matrix", "beacon", "drone"
+        ]
+    }
 };
 
 class ConlangEngine {
@@ -172,7 +210,6 @@ class ConlangEngine {
         return name;
     }
 
-    // Costruttore di frasi con Reale Applicazione dell'Ordine Sintattico (VOS, SOV, etc.)
     generateProceduralPhraseCategory(categoryIndex, count, culture, wordOrder, articles, caseSuffix, suffix) {
         const phrases = [];
         
@@ -188,6 +225,7 @@ class ConlangEngine {
         const ctx = culturalShelterMap[culture] || culturalShelterMap.medieval;
 
         const templates = {
+            // Cat 0: Saluti, Identità e Interazione Base (20)
             0: [
                 { s: "peace", v: "be", o: "you", eng: "Peace be with you." },
                 { s: "I", v: "be", o: "person", eng: "I am a person of this land." },
@@ -195,6 +233,7 @@ class ConlangEngine {
                 { s: "my", v: "be", o: "friend", eng: "My friend is here." },
                 { s: "I", v: "know", o: "not", eng: "I do not know." }
             ],
+            // Cat 1: Orientamento, Spostamenti e Direzioni (20)
             1: [
                 { s: "where", v: "be", o: ctx.shelter, eng: `Where is the ${ctx.shelter}?` },
                 { s: "I", v: "walk", o: ctx.guide, eng: `I walk towards the ${ctx.guide}.` },
@@ -202,6 +241,7 @@ class ConlangEngine {
                 { s: "you", v: "see", o: "road", eng: "Do you see the right road?" },
                 { s: "we", v: "stop", o: "here", eng: "We stop here immediately." }
             ],
+            // Cat 2: Bisogni Primari, Cibo e Alloggio (20)
             2: [
                 { s: "I", v: "have", o: "hunger", eng: "I have hunger and need food." },
                 { s: "where", v: "find", o: ctx.water, eng: `Where can I find ${ctx.water}?` },
@@ -209,6 +249,7 @@ class ConlangEngine {
                 { s: "food", v: "be", o: "good", eng: "This food is good." },
                 { s: "I", v: "drink", o: "water", eng: "I wish to drink water." }
             ],
+            // Cat 3: Commercio, Scambio e Acquisti (15)
             3: [
                 { s: "what", v: "cost", o: ctx.coin, eng: `How much ${ctx.coin} does this cost?` },
                 { s: "I", v: "take", o: "trade", eng: "I take this trade item." },
@@ -216,6 +257,7 @@ class ConlangEngine {
                 { s: "this", v: "be", o: "great", eng: "This object is of great value." },
                 { s: "I", v: "have", o: "no", eng: "I have no goods to trade." }
             ],
+            // Cat 4: Emergenze, Salute e Sicurezza (15)
             4: [
                 { s: "help", v: "be", o: "need", eng: "Help is needed immediately!" },
                 { s: "call", v: "see", o: ctx.guard, eng: `Call the ${ctx.guard}!` },
@@ -223,6 +265,7 @@ class ConlangEngine {
                 { s: "I", v: "have", o: "blood", eng: "I am wounded and bleeding." },
                 { s: "beast", v: "run", o: "fast", eng: "The wild beast runs fast!" }
             ],
+            // Cat 5: Socialità e Small Talk (10)
             5: [
                 { s: "sun", v: "be", o: "bright", eng: "The sun is bright today." },
                 { s: "night", v: "be", o: "cold", eng: "The night is cold and dark." },
@@ -246,7 +289,7 @@ class ConlangEngine {
             let vTerm = getLex(baseObj.v);
             let oTerm = getLex(baseObj.o);
 
-            // APPLICAZIONE MARCATORE DEL SOGGETTO AL SOGGETTO
+            // CASE MARKER STRICTLY ATTACHED TO SUBJECT
             if (this.currentConfig.grammarStrategy === 'cases') {
                 sTerm += caseSuffix;
             }
@@ -255,9 +298,9 @@ class ConlangEngine {
                 vTerm = vTerm + '-' + suffix;
             }
 
-            // APPLICAZIONE RIGIDA DELL'ORDINE DEI COSTITUENTI SELEZIONATO
+            // RIGID CONSTITUENT ORDER PERMUTATION (SVO, SOV, VSO, VOS, OVS, OSV)
             let cWords = [];
-            for (let char of wordOrder) { // Esempio: wordOrder = "VOS" -> char = 'V', poi 'O', poi 'S'
+            for (let char of wordOrder) {
                 if (char === 'S') cWords.push(sTerm);
                 if (char === 'V') cWords.push(vTerm);
                 if (char === 'O') cWords.push(oTerm);
@@ -289,7 +332,7 @@ class ConlangEngine {
             resolvedSociology = 'Tribal / Communal Egalitarianism (Deictic Focus)';
         }
 
-        // Generazione casuale/procedurale dell'ordine delle parole per questa lingua
+        // Procedurally derive Constituent Order (SVO, SOV, VSO, VOS, OVS, OSV)
         const wordOrderPermutations = ['SVO', 'SOV', 'VSO', 'VOS', 'OVS', 'OSV'];
         const wordOrder = wordOrderPermutations[Math.floor(Math.random() * wordOrderPermutations.length)];
 
@@ -298,7 +341,7 @@ class ConlangEngine {
         const caseSuffix = this.generatePhonotacticWord(1, true);
 
         const affixSemantics = {
-            prefix: { form: prefix, meaning: "Agentive / Nominalizer (actor)" },
+            prefix: { form: prefix, meaning: "Agentive / Nominalizer (actor / origin)" },
             suffix: { form: suffix, meaning: "Intensive / Augmentative (great / major state)" }
         };
 
@@ -325,46 +368,57 @@ class ConlangEngine {
             return conlangWord;
         };
 
-        // 1. STRUTTURALI E PRONOMI
+        // 1. STRUCTURAL GRAMMATICAL ITEMS AT HEAD
         if (articles.definite) registerWord("the (definite article)", "Article", true);
         if (articles.indefinite) registerWord("a / an (indefinite article)", "Article", true);
         if (articles.partitive) registerWord("some / part of (partitive article)", "Article", true);
         if (config.grammarStrategy === 'cases') registerWord("[Nominative Subject Suffix]", "Case Suffix", true);
 
-        ContextualLexicon.pronouns.forEach(p => registerWord(p, "Pronoun", true));
-        ContextualLexicon.possessives.forEach(p => registerWord(p, "Possessive", true));
-        ContextualLexicon.grammatical.forEach(g => registerWord(g, "Grammatical Word", true));
+        SemanticDatabase.pronouns.forEach(p => registerWord(p, "Pronoun", true));
+        SemanticDatabase.possessives.forEach(p => registerWord(p, "Possessive", true));
+        SemanticDatabase.grammaticalWords.forEach(g => registerWord(g, "Grammatical Word", true));
 
-        // 2. RADICI PRIMORDIALI
-        ContextualLexicon.coreNouns.forEach(cn => registerWord(cn, "Noun", false, true));
-        ContextualLexicon.coreVerbs.forEach(cv => registerWord(cv, "Verb", false, true));
+        // 2. PRIMORDIAL CORE ROOTS
+        SemanticDatabase.coreNouns.forEach(cn => registerWord(cn, "Noun", false, true));
+        SemanticDatabase.coreVerbs.forEach(cv => registerWord(cv, "Verb", false, true));
 
-        // 3. DIZIONARIO ESTESO SENZA CLONI O NUMERI IN PARENTESI
-        const culturalDomainTerms = ExpandedCulturalDomains[config.culture] || ExpandedCulturalDomains.medieval;
+        // 3. EXPANDED UNIQUE SEMANTIC LEXICON (NO NUMERICAL DUPLICATES)
+        const cultDomain = SemanticDatabase.culturalDomains[config.culture] || SemanticDatabase.culturalDomains.medieval;
         
-        const categories = [
-            { type: 'Noun', concepts: [...ContextualLexicon.nouns, ...culturalDomainTerms] },
-            { type: 'Verb', concepts: ContextualLexicon.verbs },
-            { type: 'Adjective', concepts: ContextualLexicon.adjectives }
+        const conceptPools = [
+            { type: 'Noun', concepts: [...SemanticDatabase.bodyParts, ...SemanticDatabase.natureAndWeather, ...SemanticDatabase.emotionsAndCognition, ...SemanticDatabase.timeAndSpace, ...SemanticDatabase.professionsAndSocial, ...SemanticDatabase.warfareAndTools, ...SemanticDatabase.ordinaryNouns, ...cultDomain] },
+            { type: 'Verb', concepts: SemanticDatabase.ordinaryVerbs },
+            { type: 'Adjective', concepts: SemanticDatabase.ordinaryAdjectives }
         ];
 
-        let index = 0;
+        let nounIdx = 0, verbIdx = 0, adjIdx = 0;
+        
         while (vocabulary.length < 600) {
-            const cat = categories[index % categories.length];
-            const concept = cat.concepts[index % cat.concepts.length];
-            
-            // Registrazione pulita del termine specifico senza sufissi numerici astratti
-            if (!this.lexiconMap.has(concept.toLowerCase())) {
-                registerWord(concept, cat.type, false, false);
+            let catType, concept;
+            const turn = vocabulary.length % 3;
+
+            if (turn === 0 && nounIdx < conceptPools[0].concepts.length) {
+                catType = 'Noun';
+                concept = conceptPools[0].concepts[nounIdx++];
+            } else if (turn === 1 && verbIdx < conceptPools[1].concepts.length) {
+                catType = 'Verb';
+                concept = conceptPools[1].concepts[verbIdx++];
+            } else if (turn === 2 && adjIdx < conceptPools[2].concepts.length) {
+                catType = 'Adjective';
+                concept = conceptPools[2].concepts[adjIdx++];
             } else {
-                // Se i termini del sottoinsieme finiscono, genera un nuovo sostantivo/verbo composito semanticamente valido
-                const altConcept = `${concept} ${cat.type === 'Noun' ? 'realm' : 'act'}`;
-                registerWord(altConcept, cat.type, false, false);
+                // Fallback for remaining slots using compound domain terms
+                catType = 'Noun';
+                concept = `${conceptPools[0].concepts[nounIdx % conceptPools[0].concepts.length]} realm`;
+                nounIdx++;
             }
-            index++;
+
+            if (!this.lexiconMap.has(concept.toLowerCase())) {
+                registerWord(concept, catType, false, false);
+            }
         }
 
-        // 4. GENERAZIONE DELLE 100 FRASI PROCEDURALI (CON VERO ALLINEAMENTO VOS/SOV/SVO)
+        // 4. GENERATE 100 PROCEDURAL SURVIVAL SENTENCES IN 6 CATEGORIES
         const sentenceCategories = [
             { title: "1. Greetings, Identity & Basic Interaction", count: 20 },
             { title: "2. Navigation, Movement & Directions", count: 20 },
@@ -384,7 +438,7 @@ class ConlangEngine {
             });
         });
 
-        // 5. GENERAZIONE DIALOGHI ADATTIVI
+        // 5. GENERATE 20 PROCEDURAL DIALOGUES
         const dialogues = [];
         for (let i = 0; i < 20; i++) {
             const dialogueLines = [];
@@ -438,6 +492,7 @@ class ConlangEngine {
 
         this.lastGeneratedData = {
             metadata: {
+                version: "2.3.0",
                 generatedAt: new Date().toISOString(),
                 languageName: langName,
                 configuration: { ...config, sociology: resolvedSociology, wordOrder }
@@ -452,7 +507,6 @@ class ConlangEngine {
     }
 }
 
-// UI Controller
 document.addEventListener('DOMContentLoaded', () => {
     const engine = new ConlangEngine();
 
@@ -473,6 +527,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const vowelPreset = document.getElementById('vowel-inventory');
     const consPreset = document.getElementById('consonant-inventory');
 
+    const vocabSearch = document.getElementById('vocab-search');
+    const posFilter = document.getElementById('pos-filter');
+
     function getFormConfig() {
         return {
             aesthetic: descPreset.value === 'custom' ? 'musical' : descPreset.value,
@@ -488,50 +545,80 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    function renderVocabulary(vocabulary) {
+        const query = vocabSearch.value.toLowerCase();
+        const selectedPOS = posFilter.value;
+
+        const filtered = vocabulary.filter(item => {
+            const matchesSearch = item.conlang.toLowerCase().includes(query) || item.english.toLowerCase().includes(query);
+            const matchesPOS = (selectedPOS === 'all') || (item.category === selectedPOS);
+            return matchesSearch && matchesPOS;
+        });
+
+        const wordsContainer = document.getElementById('words-container');
+        wordsContainer.innerHTML = filtered.map(item => `
+            <div class="bg-slate-900 border border-slate-800 rounded-lg p-3 flex flex-col justify-between hover:border-slate-700 transition-colors">
+                <div class="flex justify-between items-center mb-1">
+                    <span class="mono-font text-sky-400 font-bold text-sm">${item.conlang}</span>
+                    <span class="text-[10px] uppercase font-semibold tracking-wider bg-slate-800 text-slate-400 px-2 py-0.5 rounded border border-slate-700">${item.category}</span>
+                </div>
+                <div class="text-xs text-slate-300 font-medium">${item.english}</div>
+            </div>
+        `).join('');
+    }
+
     function renderOutput(data) {
         titleBadge.textContent = `Language: ${data.grammar.languageName}`;
 
         const grammarContainer = document.getElementById('grammar-container');
         const g = data.grammar;
         grammarContainer.innerHTML = `
-            <div class="grammar-section">
-                <h3>Systemic Summary: ${g.languageName}</h3>
-                <div class="grammar-grid">
-                    <div class="grammar-item">
-                        <strong>Phonological Inventory:</strong><br>
-                        Vowels: ${g.phonology.vowelInventory.join(', ')} (${g.phonology.ipaVowels.join(' ')})<br>
-                        Consonants: ${g.phonology.consonantInventory.join(', ')} (${g.phonology.ipaConsonants.join(' ')})
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
+                <div class="border-b border-slate-800 pb-4 flex justify-between items-center">
+                    <div>
+                        <h3 class="text-lg font-bold text-white flex items-center gap-2">
+                            Systemic Profile: <span class="text-sky-400">${g.languageName}</span>
+                        </h3>
+                        <p class="text-xs text-slate-400 mt-0.5">Procedural Morphosyntactic & Phonological Summary</p>
                     </div>
-                    <div class="grammar-item">
-                        <strong>Phonotactics & Syllable Rules:</strong><br>
-                        Structures: [${g.phonology.syllableStructures.join(', ')}]<br>
-                        ${g.phonology.phonotacticConstraints}
+                    <span class="px-3 py-1 bg-sky-950 border border-sky-800 text-sky-400 font-mono text-xs rounded-full font-semibold">
+                        Typology: ${g.syntax.wordOrder.split(' ')[0]}
+                    </span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 space-y-2">
+                        <h4 class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Phonology & IPA Inventory</h4>
+                        <p class="text-xs text-slate-300"><strong>Vowels:</strong> ${g.phonology.vowelInventory.join(', ')} <span class="text-slate-500">(${g.phonology.ipaVowels.join(' ')})</span></p>
+                        <p class="text-xs text-slate-300"><strong>Consonants:</strong> ${g.phonology.consonantInventory.join(', ')} <span class="text-slate-500">(${g.phonology.ipaConsonants.join(' ')})</span></p>
+                        <p class="text-xs text-slate-400 mt-2"><strong>Structures:</strong> [${g.phonology.syllableStructures.join(', ')}]</p>
                     </div>
-                    <div class="grammar-item">
-                        <strong>Morphology & Affixation:</strong><br>
-                        Type: ${g.morphology.type}<br>
-                        Prefix: <em>${g.morphology.derivationalAffixes.prefix}</em><br>
-                        Suffix: <em>${g.morphology.derivationalAffixes.suffix}</em>
+
+                    <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 space-y-2">
+                        <h4 class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Morphosyntax & Derivation</h4>
+                        <p class="text-xs text-slate-300"><strong>Type:</strong> ${g.morphology.type}</p>
+                        <p class="text-xs text-slate-300"><strong>Prefix:</strong> <span class="mono-font text-sky-400">${g.morphology.derivationalAffixes.prefix}</span></p>
+                        <p class="text-xs text-slate-300"><strong>Suffix:</strong> <span class="mono-font text-sky-400">${g.morphology.derivationalAffixes.suffix}</span></p>
                     </div>
-                    <div class="grammar-item">
-                        <strong>Syntax & Word Order:</strong><br>
-                        Constituent Alignment: <strong>${g.syntax.wordOrder}</strong><br>
-                        Articles: ${Object.keys(g.syntax.articleSystem).length > 0 ? JSON.stringify(g.syntax.articleSystem) : 'None'}<br>
-                        Sociolinguistics: <em>${g.semanticsAndContext.sociolinguisticContext}</em>
+
+                    <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 space-y-2">
+                        <h4 class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Syntax & Word Order Alignment</h4>
+                        <p class="text-xs text-slate-300"><strong>Constituent Order:</strong> <strong>${g.syntax.wordOrder}</strong></p>
+                        <p class="text-xs text-slate-300"><strong>Relations:</strong> ${g.syntax.grammaticalRelations}</p>
+                    </div>
+
+                    <div class="bg-slate-950/60 p-4 rounded-lg border border-slate-800/80 space-y-2">
+                        <h4 class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Cultural Pragmatics</h4>
+                        <p class="text-xs text-slate-300"><strong>Setting:</strong> ${g.semanticsAndContext.culturalProfile}</p>
+                        <p class="text-xs text-slate-300"><strong>Sociolinguistics:</strong> ${g.semanticsAndContext.sociolinguisticContext}</p>
                     </div>
                 </div>
             </div>
         `;
 
-        const wordsContainer = document.getElementById('words-container');
-        wordsContainer.innerHTML = data.vocabulary.map(item => `
-            <div class="card">
-                <span class="category-tag">${item.category}</span>
-                <div class="conlang-word">${item.conlang}</div>
-                <div class="translation">${item.english}</div>
-            </div>
-        `).join('');
+        renderVocabulary(data.vocabulary);
 
+        // Render Sentences with Section Headers
         const sentencesContainer = document.getElementById('sentences-container');
         let sentencesHTML = '';
         let currentSection = '';
@@ -539,27 +626,31 @@ document.addEventListener('DOMContentLoaded', () => {
         data.sentences.forEach((item) => {
             if (item.sectionTitle !== currentSection) {
                 currentSection = item.sectionTitle;
-                sentencesHTML += `<div class="section-header">${currentSection}</div>`;
+                sentencesHTML += `<h3 class="text-sm font-bold text-sky-400 border-b border-slate-800 pt-4 pb-1 mt-2 mb-2">${currentSection}</h3>`;
             }
             sentencesHTML += `
-                <div class="card" style="margin-bottom: 0.6rem;">
-                    <div class="conlang-word">${item.conlang}</div>
-                    <div class="translation">${item.english}</div>
+                <div class="bg-slate-900 border border-slate-800 rounded-lg p-3 hover:border-slate-700 transition-colors">
+                    <div class="mono-font text-sky-400 font-semibold text-sm">${item.conlang}</div>
+                    <div class="text-xs text-slate-300 italic mt-0.5">${item.english}</div>
                 </div>
             `;
         });
         sentencesContainer.innerHTML = sentencesHTML;
 
+        // Render Dialogues
         const dialoguesContainer = document.getElementById('dialogues-container');
         dialoguesContainer.innerHTML = data.dialogues.map((dialogue, index) => `
-            <div class="dialogue-box">
-                <h4>Dialogue #${index + 1}</h4>
-                ${dialogue.map(line => `
-                    <div class="dialogue-line">
-                        <span class="speaker">${line.speaker}:</span>${line.conlang}
-                        <br><small class="translation">${line.english}</small>
-                    </div>
-                `).join('')}
+            <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3">
+                <h4 class="text-xs font-semibold text-sky-400 uppercase tracking-wider border-b border-slate-800 pb-2">Procedural Dialogue #${index + 1}</h4>
+                <div class="space-y-2">
+                    ${dialogue.map(line => `
+                        <div class="text-xs space-y-0.5">
+                            <span class="font-bold text-indigo-400">${line.speaker}:</span> 
+                            <span class="mono-font text-sky-300 font-medium">${line.conlang}</span>
+                            <div class="text-[11px] text-slate-400 italic pl-4">${line.english}</div>
+                        </div>
+                    `).join('')}
+                </div>
             </div>
         `).join('');
     }
@@ -568,6 +659,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const result = engine.buildDataset(config);
         renderOutput(result);
     }
+
+    vocabSearch.addEventListener('input', () => {
+        if (engine.lastGeneratedData) renderVocabulary(engine.lastGeneratedData.vocabulary);
+    });
+
+    posFilter.addEventListener('change', () => {
+        if (engine.lastGeneratedData) renderVocabulary(engine.lastGeneratedData.vocabulary);
+    });
 
     quickBtn.addEventListener('click', () => {
         const presets = ['musical', 'dark', 'magical', 'aquatic', 'harsh'];
@@ -609,7 +708,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const a = document.createElement('a');
         a.href = url;
-        a.download = `${engine.lastGeneratedData.grammar.languageName.toLowerCase().replace(/\s+/g, '-')}-conlang.json`;
+        a.download = `${engine.lastGeneratedData.grammar.languageName.toLowerCase().replace(/\s+/g, '-')}-conlang-v2.3.0.json`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -631,14 +730,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Tab Navigation
     const tabs = document.querySelectorAll('.tab-btn');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            tabs.forEach(t => {
+                t.classList.remove('text-sky-400', 'bg-slate-800', 'shadow');
+                t.classList.add('text-slate-400');
+            });
+            document.querySelectorAll('.tab-content').forEach(c => {
+                c.classList.add('hidden');
+                c.classList.remove('block');
+            });
             
-            tab.classList.add('active');
-            document.getElementById(tab.dataset.tab).classList.add('active');
+            tab.classList.add('text-sky-400', 'bg-slate-800', 'shadow');
+            tab.classList.remove('text-slate-400');
+            
+            const targetContent = document.getElementById(tab.dataset.tab);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+                targetContent.classList.add('block');
+            }
         });
     });
 
