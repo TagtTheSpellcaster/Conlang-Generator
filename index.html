@@ -3,401 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Generator Studio</title>
+    <title>Conlang Generator Studio v2.3.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        :root {
-            --bg-color: #0f172a;
-            --panel-bg: #1e293b;
-            --accent: #38bdf8;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border: #334155;
-        }
-
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
+            font-family: 'Inter', sans-serif;
         }
 
-        header {
-            background-color: var(--panel-bg);
-            padding: 1rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
+        .mono-font {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        header h1 {
-            margin: 0;
-            font-size: 1.5rem;
-            color: var(--accent);
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
+        /* Custom scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
         }
-
-        .lang-name-badge {
-            background-color: #0284c7;
-            color: #ffffff;
-            font-size: 0.95rem;
-            padding: 0.2rem 0.6rem;
-            border-radius: 4px;
-            font-weight: normal;
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
         }
-
-        .version-tag {
-            font-size: 0.85rem;
-            background-color: var(--border);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            color: var(--text-muted);
-        }
-
-        .main-container {
-            display: flex;
-            flex: 1;
-            overflow: hidden;
-        }
-
-        .sidebar {
-            width: 380px;
-            background-color: var(--panel-bg);
-            border-right: 1px solid var(--border);
-            padding: 1.5rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.1rem;
-        }
-
-        .content-area {
-            flex: 1;
-            padding: 1.5rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1.2rem;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
-
-        label {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        select, input, button {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            border: 1px solid var(--border);
-            padding: 0.55rem;
-            border-radius: 4px;
-            font-size: 0.9rem;
-        }
-
-        select:focus, input:focus {
-            outline: 1px solid var(--accent);
-        }
-
-        button.btn-primary {
-            background-color: var(--accent);
-            color: var(--bg-color);
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            padding: 0.75rem;
-            margin-top: 0.5rem;
-            transition: opacity 0.2s;
-        }
-
-        button.btn-primary:hover {
-            opacity: 0.9;
-        }
-
-        .quick-action-btn {
-            background-color: #059669;
-            color: white;
-            font-weight: bold;
-            border: none;
-            cursor: pointer;
-            padding: 0.75rem;
-        }
-
-        .tabs {
-            display: flex;
-            gap: 0.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .tab-btn {
-            background: none;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.5rem 1rem;
-            cursor: pointer;
-            border-bottom: 2px solid transparent;
-            font-size: 0.95rem;
-        }
-
-        .tab-btn.active {
-            color: var(--accent);
-            border-bottom-color: var(--accent);
-            font-weight: bold;
-        }
-
-        .tab-content {
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .grid-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 0.8rem;
-        }
-
-        .card {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border);
-            padding: 0.8rem;
-            border-radius: 4px;
-        }
-
-        .card .conlang-word {
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 1.05rem;
-        }
-
-        .card .category-tag {
-            display: inline-block;
-            font-size: 0.7rem;
-            color: #38bdf8;
-            background: rgba(56, 189, 248, 0.1);
-            padding: 0.1rem 0.4rem;
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
             border-radius: 3px;
-            margin-bottom: 0.4rem;
-            text-transform: uppercase;
         }
-
-        .card .translation {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-        }
-
-        .dialogue-box {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border);
-            padding: 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-
-        .dialogue-line {
-            margin-bottom: 0.6rem;
-        }
-
-        .speaker {
-            font-weight: bold;
-            color: var(--accent);
-        }
-
-        .grammar-section {
-            background-color: var(--panel-bg);
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-        }
-
-        .grammar-section h3 {
-            margin-top: 0;
-            color: var(--accent);
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.5rem;
-        }
-
-        .grammar-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1rem;
-        }
-
-        .grammar-item {
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .grammar-item strong {
-            color: #f1f5f9;
-        }
-
-        .section-header {
-            font-weight: bold;
-            color: var(--accent);
-            margin: 1rem 0 0.5rem 0;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 0.2rem;
-            font-size: 0.95rem;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
         }
     </style>
 </head>
-<body>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-sky-500 selection:text-white">
 
-    <header>
-        <h1>Conlang Generator Studio <span id="conlang-title-badge" class="lang-name-badge">Language: Unnamed</span></h1>
-        <span class="version-tag">v2.2.0</span>
+    <!-- Header Section -->
+    <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex flex-wrap justify-between items-center shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-md shadow-sky-500/20">
+                C
+            </div>
+            <div>
+                <h1 class="text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                    Conlang Generator Studio
+                    <span id="conlang-title-badge" class="text-xs bg-sky-950 text-sky-400 border border-sky-800/60 px-2.5 py-0.5 rounded-full font-medium">Language: Unnamed</span>
+                </h1>
+            </div>
+        </div>
+        <div class="flex items-center space-x-3 mt-2 sm:mt-0">
+            <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded border border-slate-700">v2.3.0</span>
+        </div>
     </header>
 
-    <div class="main-container">
-        <aside class="sidebar">
-            <button id="quick-generate-btn" class="quick-action-btn">⚡ One-Click Generate</button>
-            
-            <hr style="border-color: var(--border); width: 100%; margin: 0;">
+    <!-- Main Workspace Container -->
+    <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+        
+        <!-- Sidebar Controls Panel -->
+        <aside class="w-full lg:w-96 bg-slate-900/90 border-r border-slate-800 p-5 overflow-y-auto flex flex-col space-y-5">
+            <button id="quick-generate-btn" class="w-full py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-lg shadow-lg shadow-emerald-900/20 active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
+                <span>⚡ One-Click Generate</span>
+            </button>
 
-            <div class="form-group">
-                <label for="descriptive-preset">Aesthetic Profile</label>
-                <select id="descriptive-preset">
-                    <option value="custom">Custom Configuration</option>
-                    <option value="musical">Musical / Melodic</option>
-                    <option value="dark">Dark / Guttural</option>
-                    <option value="magical">Magical / Ethereal</option>
-                    <option value="aquatic">Aquatic / Fluid</option>
-                    <option value="harsh">Harsh / Rigid</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="cultural-preset">Cultural & Temporal Profile</label>
-                <select id="cultural-preset">
-                    <option value="medieval">Medieval Fantasy</option>
-                    <option value="ancient">Ancient Empire</option>
-                    <option value="primitive">Tribal / Primitive</option>
-                    <option value="renaissance">Renaissance High-Culture</option>
-                    <option value="african">Sub-Saharan Inspired</option>
-                    <option value="alien">Extraterrestrial Sci-Fi</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="sociological-preset">Sociolinguistic Context</label>
-                <select id="sociological-preset">
-                    <option value="egalitarian">Tribal / Communal Egalitarianism</option>
-                    <option value="hierarchical">Hierarchical Feudalism</option>
-                    <option value="mercantile">Mercantile Trade Society</option>
-                    <option value="monastic">Isolationist Monastic</option>
-                </select>
-            </div>
-
-            <div style="display: flex; gap: 0.5rem;">
-                <div class="form-group" style="flex: 1;">
-                    <label for="mean-length">Mean Syllables</label>
-                    <input type="number" id="mean-length" value="2.5" step="0.1" min="1.0" max="5.0">
+            <div class="border-t border-slate-800 pt-4 space-y-4">
+                <h2 class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Aesthetic & Cultural Settings</h2>
+                
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Aesthetic Profile</label>
+                    <select id="descriptive-preset" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500 transition-colors">
+                        <option value="musical">Musical / Melodic</option>
+                        <option value="dark">Dark / Guttural</option>
+                        <option value="magical">Magical / Ethereal</option>
+                        <option value="aquatic">Aquatic / Fluid</option>
+                        <option value="harsh">Harsh / Rigid</option>
+                    </select>
                 </div>
-                <div class="form-group" style="flex: 1;">
-                    <label for="std-dev">Std Deviation</label>
-                    <input type="number" id="std-dev" value="0.8" step="0.1" min="0.1" max="2.0">
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Cultural & Temporal Setting</label>
+                    <select id="cultural-preset" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500 transition-colors">
+                        <option value="primitive">Tribal / Primal Era</option>
+                        <option value="ancient">Ancient Empire</option>
+                        <option value="medieval">Medieval Fantasy</option>
+                        <option value="renaissance">Renaissance Guilds</option>
+                        <option value="african">Sub-Saharan Nomadic</option>
+                        <option value="alien">Extraterrestrial Sci-Fi</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Sociolinguistic Context</label>
+                    <select id="sociological-preset" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500 transition-colors">
+                        <option value="egalitarian">Tribal / Communal Egalitarianism</option>
+                        <option value="hierarchical">Hierarchical Feudal Imperial</option>
+                        <option value="mercantile">Mercantile Trade Guild</option>
+                        <option value="monastic">Isolationist Monastic Order</option>
+                    </select>
                 </div>
             </div>
 
-            <div class="form-group">
-                <label for="article-mode">Article Strategy</label>
-                <select id="article-mode">
-                    <option value="both">Definite & Indefinite</option>
-                    <option value="definite_only">Definite Only</option>
-                    <option value="indefinite_only">Indefinite Only</option>
-                    <option value="partitive">Definite, Indefinite & Partitive</option>
-                    <option value="none">No Articles</option>
-                </select>
+            <div class="border-t border-slate-800 pt-4 space-y-4">
+                <h2 class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Phonology & Syllable Rules</h2>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Mean Syllables</label>
+                        <input type="number" id="mean-length" value="2.5" step="0.1" min="1.0" max="4.5" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 mb-1">Std Deviation</label>
+                        <input type="number" id="std-dev" value="0.8" step="0.1" min="0.1" max="2.0" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Vowel Inventory</label>
+                    <select id="vowel-inventory" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                        <option value="standard">Standard (a, e, i, o, u)</option>
+                        <option value="minimal">Minimalist (a, i, u)</option>
+                        <option value="extended">Extended (a, e, i, o, u, y, ø, æ)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Consonant Density</label>
+                    <select id="consonant-inventory" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                        <option value="balanced">Balanced (Plosives, Nasals, Fricatives)</option>
+                        <option value="guttural">Guttural Heavy (Velar, Uvular Focus)</option>
+                        <option value="sibilant">Sibilant & Liquid Heavy (s, z, sh, r, l)</option>
+                        <option value="soft">Soft Approximant (m, n, l, r, w, j)</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="morphology-type">Morphological Structure</label>
-                <select id="morphology-type">
-                    <option value="agglutinative">Agglutinative (Stacked Affixes)</option>
-                    <option value="isolating">Isolating / Fusional (Minimal Stacking)</option>
-                </select>
+            <div class="border-t border-slate-800 pt-4 space-y-4">
+                <h2 class="text-xs font-semibold text-sky-400 uppercase tracking-wider">Morphosyntax & Typology</h2>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Morphological Strategy</label>
+                    <select id="morphology-type" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                        <option value="agglutinative">Agglutinative (Affix Stacking)</option>
+                        <option value="isolating">Isolating / Fusional (Stem Preservation)</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Grammatical Relations Strategy</label>
+                    <select id="grammar-strategy" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                        <option value="cases">Inflectional Case Endings</option>
+                        <option value="prepositions">Prepositional / Word-Order Based</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs text-slate-400 mb-1">Article System</label>
+                    <select id="article-mode" class="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                        <option value="both">Definite & Indefinite</option>
+                        <option value="definite_only">Definite Only</option>
+                        <option value="indefinite_only">Indefinite Only</option>
+                        <option value="partitive">Definite, Indefinite & Partitive</option>
+                        <option value="none">Zero Articles (No Articles)</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="grammar-strategy">Grammatical Relations</label>
-                <select id="grammar-strategy">
-                    <option value="cases">Case Endings (Inflexional Suffixes)</option>
-                    <option value="prepositions">Prepositions & Word Order</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="vowel-inventory">Vowel Inventory Set</label>
-                <select id="vowel-inventory">
-                    <option value="standard">Standard (a, e, i, o, u)</option>
-                    <option value="minimal">Minimal (a, i, u)</option>
-                    <option value="extended">Extended (a, e, i, o, u, y, ø, æ)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label for="consonant-inventory">Consonant Density</label>
-                <select id="consonant-inventory">
-                    <option value="balanced">Balanced (Plosives, Nasals, Fricatives)</option>
-                    <option value="guttural">Guttural Heavy (Velar, Uvular Focus)</option>
-                    <option value="sibilant">Sibilant & Liquid Heavy (s, z, sh, r, l)</option>
-                    <option value="soft">Soft (Nasals, Approximants Focus)</option>
-                </select>
-            </div>
-
-            <button id="custom-generate-btn" class="btn-primary">Generate Custom Conlang</button>
+            <button id="custom-generate-btn" class="w-full py-2.5 px-4 bg-sky-600 hover:bg-sky-500 text-white font-semibold rounded-lg shadow-md shadow-sky-900/30 transition-all text-sm">
+                Generate Custom Conlang
+            </button>
         </aside>
 
-        <main class="content-area">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
-                <div class="tabs">
-                    <button class="tab-btn active" data-tab="tab-grammar">Grammar Profile</button>
-                    <button class="tab-btn" data-tab="tab-words">Vocabulary (600)</button>
-                    <button class="tab-btn" data-tab="tab-sentences">Sentences (100)</button>
-                    <button class="tab-btn" data-tab="tab-dialogues">Dialogues (20)</button>
-                </div>
-                
-                <div style="display: flex; gap: 0.5rem;">
-                    <button id="export-json-btn" class="btn-primary" style="margin-top: 0; padding: 0.5rem 0.8rem; font-size: 0.85rem;">Export JSON Table</button>
-                    <button id="copy-json-btn" class="quick-action-btn" style="padding: 0.5rem 0.8rem; font-size: 0.85rem;">Copy JSON to Clipboard</button>
+        <!-- Main Content Area -->
+        <main class="flex-1 flex flex-col bg-slate-950 p-6 overflow-y-auto">
+            
+            <!-- Tab Navigation Header & Export Toolbar -->
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
+                <nav class="flex space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-800">
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-sky-400 bg-slate-800 shadow transition-all" data-tab="tab-grammar">Grammar Profile</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-all" data-tab="tab-words">Vocabulary (600)</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-all" data-tab="tab-sentences">Sentences (100)</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md text-slate-400 hover:text-slate-200 transition-all" data-tab="tab-dialogues">Dialogues (20)</button>
+                </nav>
+
+                <div class="flex space-x-2">
+                    <button id="export-json-btn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5">
+                        <span>📥 Export JSON</span>
+                    </button>
+                    <button id="copy-json-btn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5">
+                        <span>📋 Copy JSON</span>
+                    </button>
                 </div>
             </div>
 
-            <div id="tab-grammar" class="tab-content active">
+            <!-- Tab Content View: Grammar Profile -->
+            <div id="tab-grammar" class="tab-content block space-y-6">
                 <div id="grammar-container"></div>
             </div>
 
-            <div id="tab-words" class="tab-content">
-                <div id="words-container" class="grid-list"></div>
+            <!-- Tab Content View: Vocabulary -->
+            <div id="tab-words" class="tab-content hidden space-y-4">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="text" id="vocab-search" placeholder="Search lexemes or translations..." class="flex-1 bg-slate-900 border border-slate-800 rounded-lg px-4 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                    <select id="pos-filter" class="bg-slate-900 border border-slate-800 rounded-lg px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-sky-500">
+                        <option value="all">All Categories</option>
+                        <option value="Article">Articles</option>
+                        <option value="Case Suffix">Case Suffixes</option>
+                        <option value="Pronoun">Pronouns</option>
+                        <option value="Possessive">Possessives</option>
+                        <option value="Grammatical Word">Grammatical Words</option>
+                        <option value="Noun">Nouns</option>
+                        <option value="Verb">Verbs</option>
+                        <option value="Adjective">Adjectives</option>
+                    </select>
+                </div>
+                <div id="words-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
             </div>
 
-            <div id="tab-sentences" class="tab-content">
-                <div id="sentences-container"></div>
+            <!-- Tab Content View: Sentences -->
+            <div id="tab-sentences" class="tab-content hidden space-y-4">
+                <div id="sentences-container" class="space-y-4"></div>
             </div>
 
-            <div id="tab-dialogues" class="tab-content">
-                <div id="dialogues-container"></div>
+            <!-- Tab Content View: Dialogues -->
+            <div id="tab-dialogues" class="tab-content hidden space-y-4">
+                <div id="dialogues-container" class="space-y-4"></div>
             </div>
+
         </main>
     </div>
 
+    <!-- External JavaScript Engine Logic -->
     <script src="conlang_engine.js"></script>
 </body>
 </html>
