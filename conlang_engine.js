@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.7.1
- * Architecture: 2nd-Order Markov Chain Generator & Enhanced Duplicate Warning with Conlang Lexeme
+ * Version: 2.8.0
+ * Architecture: 2nd-Order Markov Chain Generator & Expanded Unique Concept Mapping
  */
 
 const Phonetics = {
@@ -71,21 +71,43 @@ const ContextualLexicon = {
     coreVerbs: ["be", "have"],
 
     nouns: [
-        "moon", "water", "fire", "earth", "sky", "woman", "child",
-        "king", "leader", "god", "spirit", "sword", "shield", "trade", "gold", "house", "city",
-        "star", "river", "tree", "animal", "beast", "life", "death", "blood", "war", "peace",
-        "food", "bread", "night", "day", "shadow", "light", "stone", "iron", "wind", "sea",
-        "mountain", "valley", "forest", "rain", "storm", "ice", "road", "gate", "bridge", "tower"
+        "moon", "water", "fire", "earth", "sky", "woman", "child", "king", "leader", "god", "spirit", 
+        "sword", "shield", "trade", "gold", "house", "city", "star", "river", "tree", "animal", 
+        "beast", "life", "death", "blood", "war", "peace", "food", "bread", "night", "day", 
+        "shadow", "light", "stone", "iron", "wind", "sea", "mountain", "valley", "forest", 
+        "rain", "storm", "ice", "road", "gate", "bridge", "tower", "ocean", "cloud", "field",
+        "desert", "swamp", "island", "shore", "wave", "ash", "dust", "smoke", "flame", "spark",
+        "leaf", "root", "seed", "flower", "fruit", "wood", "grass", "bird", "fish", "snake",
+        "wolf", "bear", "deer", "eagle", "dragon", "body", "head", "eye", "hand", "foot",
+        "heart", "bone", "flesh", "mind", "soul", "voice", "word", "name", "truth", "lie",
+        "law", "rule", "order", "chaos", "time", "year", "month", "season", "winter", "summer",
+        "springtime", "autumn", "morning", "evening", "dawn", "dusk", "silence", "sound", "song",
+        "story", "dream", "hope", "fear", "pain", "joy", "grief", "love", "hatred", "courage",
+        "wisdom", "strength", "power", "glory", "shame", "freedom", "bondage", "gift", "work",
+        "rest", "sleep", "path", "border", "wall", "door", "window", "roof", "bed", "table",
+        "cup", "blade", "bow", "arrow", "spear", "armor", "helm", "ring", "crown", "throne",
+        "jewel", "silver", "copper", "bronze", "glass", "cloth", "rope", "wheel", "cart", "boat"
     ],
     verbs: [
         "run", "walk", "speak", "see", "hear", "fight", "build", "love", "hate", "eat",
         "drink", "sleep", "die", "live", "give", "take", "think", "know", "lead", "rule",
-        "seek", "find", "call", "stop", "strike", "guard", "carry", "break", "bind", "fly"
+        "seek", "find", "call", "stop", "strike", "guard", "carry", "break", "bind", "fly",
+        "stand", "sit", "lie down", "rise", "fall", "climb", "swim", "jump", "touch", "hold",
+        "push", "pull", "throw", "catch", "cut", "burn", "freeze", "wash", "clean", "open",
+        "close", "hide", "show", "seek out", "lose", "win", "learn", "teach", "forget", "remember",
+        "ask", "answer", "say", "tell", "sing", "shout", "whisper", "listen", "watch", "read",
+        "write", "draw", "make", "destroy", "heal", "harm", "help", "hinder", "buy", "sell",
+        "pay", "steal", "protect", "attack", "surrender", "escape", "wait", "begin", "end", "continue"
     ],
     adjectives: [
         "great", "small", "bright", "dark", "strong", "weak", "old", "young", "good", "evil",
         "hot", "cold", "fast", "slow", "hard", "soft", "wise", "wild", "holy", "mortal",
-        "clean", "safe", "cheap", "rich", "bound", "silent", "sharp", "heavy", "lightweight", "pure"
+        "clean", "safe", "cheap", "rich", "bound", "silent", "sharp", "heavy", "lightweight", "pure",
+        "new", "ancient", "high", "low", "long", "short", "wide", "narrow", "deep", "shallow",
+        "thick", "thin", "heavy-set", "full", "empty", "dry", "wet", "sweet", "bitter", "sour",
+        "salty", "smooth", "rough", "clean-cut", "dirty", "true", "false", "calm", "fierce", "kind",
+        "cruel", "brave", "cowardly", "proud", "humble", "noble", "common", "free", "captive", "alive",
+        "dead", "sick", "healthy", "blind", "deaf", "mute", "sharp-eyed", "swift", "firm", "loose"
     ],
     pronouns: [
         "I", "you", "he", "she", "it", "we (inclusive)", "we (exclusive)",
@@ -561,11 +583,13 @@ class ConlangEngine {
         const vocabulary = [];
 
         const registerWord = (english, category, isGrammatical = false, isCore = false) => {
+            const key = english.toLowerCase().split('(')[0].trim();
+            if (this.lexiconMap.has(key)) return this.lexiconMap.get(key);
+
             const syllables = isGrammatical ? 1 : (isCore ? 1 : config.meanLength + (this.boxMullerRandom() * config.stdDev));
             const conlangWord = this.generatePhonotacticWord(syllables, isGrammatical, isCore);
             const entry = { conlang: conlangWord, english: english, category: category };
             vocabulary.push(entry);
-            const key = english.toLowerCase().split('(')[0].trim();
             this.lexiconMap.set(key, conlangWord);
             return conlangWord;
         };
@@ -591,16 +615,31 @@ class ConlangEngine {
         ];
 
         let index = 0;
+        let derivationCounter = 1;
+        const descriptors = ["inner", "outer", "upper", "lower", "ancient", "silent", "distant", "sacred", "wild", "deep"];
+
         while (vocabulary.length < 600) {
             const cat = categories[index % categories.length];
-            const concept = cat.concepts[index % cat.concepts.length];
-            
-            if (!this.lexiconMap.has(concept.toLowerCase())) {
-                registerWord(concept, cat.type, false, false);
-            } else {
-                const altConcept = `${concept} ${cat.type === 'Noun' ? 'realm' : 'act'}`;
-                registerWord(altConcept, cat.type, false, false);
+            const conceptList = cat.concepts;
+            const conceptIndex = Math.floor(index / categories.length) % conceptList.length;
+            const baseConcept = conceptList[conceptIndex];
+
+            let concept = baseConcept;
+            const key = concept.toLowerCase().split('(')[0].trim();
+
+            if (this.lexiconMap.has(key)) {
+                const descriptor = descriptors[derivationCounter % descriptors.length];
+                if (cat.type === 'Noun') {
+                    concept = `${descriptor} ${baseConcept}`;
+                } else if (cat.type === 'Verb') {
+                    concept = `to ${baseConcept} continuously (${derivationCounter})`;
+                } else {
+                    concept = `very ${baseConcept} (${derivationCounter})`;
+                }
+                derivationCounter++;
             }
+
+            registerWord(concept, cat.type, false, false);
             index++;
         }
 
@@ -906,7 +945,6 @@ document.addEventListener('DOMContentLoaded', () => {
     closeModalX.addEventListener('click', closeModal);
     cancelModalBtn.addEventListener('click', closeModal);
 
-    // CONTROLLO DUPLICATO INGLESE CON MOSTRAMENTO DEL TERMINE CONLANG ESISTENTE
     modalEnglishInput.addEventListener('input', () => {
         const query = modalEnglishInput.value.trim().toLowerCase();
         if (!query || !engine.lastGeneratedData) {
