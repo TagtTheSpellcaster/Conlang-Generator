@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.4.0
- * Architecture: Fixed Lexicon, Strict Article Mapping & Narrative Dialogue Structures (4-Turn A1->B1->A2->B2)
+ * Version: 2.5.0
+ * Architecture: Full Parameter Randomization, JSON Import/Restore Capabilities & Fixed Phonotactics
  */
 
 const Phonetics = {
@@ -172,7 +172,6 @@ class ConlangEngine {
         return name;
     }
 
-    // Helper di formattazione frase con articoli e ordine sintattico rigoroso
     buildClause(sKey, vKey, oKey, wordOrder, articles, caseSuffix, suffix, forceArticle = null) {
         const getLex = (key) => {
             const found = this.lexiconMap.get(key.toLowerCase());
@@ -198,7 +197,6 @@ class ConlangEngine {
             if (char === 'O') cWords.push(oTerm);
         }
 
-        // Controllo rigoroso e distinto dell'articolo
         if (forceArticle === 'definite' && articles.definite) {
             cWords.unshift(articles.definite);
         } else if (forceArticle === 'indefinite' && articles.indefinite) {
@@ -280,7 +278,6 @@ class ConlangEngine {
         return phrases;
     }
 
-    // GENERATORE PROCEDURALE DEI 20 DIALOGHI NARRATIVI (4 BATTUTE: A1 -> B1 -> A2 -> B2)
     generateNarrativeDialogues(culture, wordOrder, articles, caseSuffix, suffix) {
         const dialogCategories = [
             {
@@ -576,7 +573,7 @@ class ConlangEngine {
             });
         });
 
-        // 5. GENERAZIONE 20 DIALOGHI NARRATIVI (4 BATTUTE RIGIDE)
+        // 5. GENERAZIONE 20 DIALOGHI NARRATIVI
         const dialogues = this.generateNarrativeDialogues(config.culture, wordOrder, articles, caseSuffix, suffix);
 
         const vowelsList = Phonetics.vowels[config.vowelSet] || Phonetics.vowels.standard;
@@ -628,7 +625,7 @@ class ConlangEngine {
     }
 }
 
-// UI Controller
+// UI Controller & Event Handlers
 document.addEventListener('DOMContentLoaded', () => {
     const engine = new ConlangEngine();
 
@@ -636,6 +633,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const customBtn = document.getElementById('custom-generate-btn');
     const exportJsonBtn = document.getElementById('export-json-btn');
     const copyJsonBtn = document.getElementById('copy-json-btn');
+    const importJsonBtn = document.getElementById('import-json-btn');
+    const importJsonInput = document.getElementById('import-json-input');
     const titleBadge = document.getElementById('conlang-title-badge');
 
     const descPreset = document.getElementById('descriptive-preset');
@@ -649,9 +648,32 @@ document.addEventListener('DOMContentLoaded', () => {
     const vowelPreset = document.getElementById('vowel-inventory');
     const consPreset = document.getElementById('consonant-inventory');
 
+    // Funzione per estrarre o sintonizzare casualmente una voce da un elemento select HTML
+    function getRandomSelectValue(selectElement) {
+        const options = selectElement.options;
+        const randomIndex = Math.floor(Math.random() * options.length);
+        return options[randomIndex].value;
+    }
+
+    // Funzione per randomizzare in modo completo tutti i controlli della UI
+    function randomizeAllParameters() {
+        descPreset.value = getRandomSelectValue(descPreset);
+        cultPreset.value = getRandomSelectValue(cultPreset);
+        socioPreset.value = getRandomSelectValue(socioPreset);
+        articleModeSelect.value = getRandomSelectValue(articleModeSelect);
+        morphologySelect.value = getRandomSelectValue(morphologySelect);
+        grammarStrategySelect.value = getRandomSelectValue(grammarStrategySelect);
+        vowelPreset.value = getRandomSelectValue(vowelPreset);
+        consPreset.value = getRandomSelectValue(consPreset);
+
+        // Genera casualmente una media sillabe compresa tra 1.8 e 3.5 e una deviazione standard tra 0.4 e 1.2
+        meanLengthInput.value = (Math.random() * (3.5 - 1.8) + 1.8).toFixed(1);
+        stdDevInput.value = (Math.random() * (1.2 - 0.4) + 0.4).toFixed(1);
+    }
+
     function getFormConfig() {
         return {
-            aesthetic: descPreset.value === 'custom' ? 'musical' : descPreset.value,
+            aesthetic: descPreset.value,
             culture: cultPreset.value,
             sociology: socioPreset.value,
             meanLength: parseFloat(meanLengthInput.value) || 2.5,
@@ -665,6 +687,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderOutput(data) {
+        if (!data || !data.grammar) return;
+
         titleBadge.textContent = `Language: ${data.grammar.languageName}`;
 
         const grammarContainer = document.getElementById('grammar-container');
@@ -726,7 +750,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         sentencesContainer.innerHTML = sentencesHTML;
 
-        // Render dei 20 Dialoghi Narrativi divisi per categoria e titolo
         const dialoguesContainer = document.getElementById('dialogues-container');
         let dialogueHTML = '';
         let lastDialogCategory = '';
@@ -756,31 +779,10 @@ document.addEventListener('DOMContentLoaded', () => {
         renderOutput(result);
     }
 
+    // Gestore del pulsante One-Click: randomizza tutti i parametri e genera la lingua
     quickBtn.addEventListener('click', () => {
-        const presets = ['musical', 'dark', 'magical', 'aquatic', 'harsh'];
-        const cultures = ['medieval', 'ancient', 'primitive', 'renaissance', 'african', 'alien'];
-        const articleModes = ['both', 'definite_only', 'indefinite_only', 'partitive', 'none'];
-        
-        const randomConfig = {
-            aesthetic: presets[Math.floor(Math.random() * presets.length)],
-            culture: cultures[Math.floor(Math.random() * cultures.length)],
-            sociology: 'egalitarian',
-            meanLength: 2.5,
-            stdDev: 0.8,
-            articleMode: articleModes[Math.floor(Math.random() * articleModes.length)],
-            morphologyType: Math.random() > 0.5 ? 'agglutinative' : 'isolating',
-            grammarStrategy: Math.random() > 0.5 ? 'cases' : 'prepositions',
-            vowelSet: 'standard',
-            consonantSet: 'balanced'
-        };
-
-        descPreset.value = randomConfig.aesthetic;
-        cultPreset.value = randomConfig.culture;
-        articleModeSelect.value = randomConfig.articleMode;
-        morphologySelect.value = randomConfig.morphologyType;
-        grammarStrategySelect.value = randomConfig.grammarStrategy;
-        
-        executeGeneration(randomConfig);
+        randomizeAllParameters();
+        executeGeneration(getFormConfig());
     });
 
     customBtn.addEventListener('click', () => {
@@ -818,6 +820,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Gestione dell'importazione del file JSON salvato
+    if (importJsonBtn && importJsonInput) {
+        importJsonBtn.addEventListener('click', () => {
+            importJsonInput.click();
+        });
+
+        importJsonInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                try {
+                    const importedData = JSON.parse(event.target.result);
+                    if (importedData && importedData.grammar && importedData.vocabulary) {
+                        engine.lastGeneratedData = importedData;
+                        
+                        // Sincronizza i controlli dell'interfaccia utente con la configurazione del file importato
+                        if (importedData.metadata && importedData.metadata.configuration) {
+                            const cfg = importedData.metadata.configuration;
+                            if (cfg.aesthetic) descPreset.value = cfg.aesthetic;
+                            if (cfg.culture) cultPreset.value = cfg.culture;
+                            if (cfg.articleMode) articleModeSelect.value = cfg.articleMode;
+                            if (cfg.morphologyType) morphologySelect.value = cfg.morphologyType;
+                            if (cfg.grammarStrategy) grammarStrategySelect.value = cfg.grammarStrategy;
+                            if (cfg.vowelSet) vowelPreset.value = cfg.vowelSet;
+                            if (cfg.consonantSet) consPreset.value = cfg.consonantSet;
+                            if (cfg.meanLength) meanLengthInput.value = cfg.meanLength;
+                            if (cfg.stdDev) stdDevInput.value = cfg.stdDev;
+                        }
+
+                        renderOutput(importedData);
+                        alert(`Successfully imported "${importedData.grammar.languageName}"!`);
+                    } else {
+                        alert('Invalid conlang JSON structure. Please select a valid exported file.');
+                    }
+                } catch (err) {
+                    console.error('JSON Import Error:', err);
+                    alert('Error reading the JSON file. Ensure the file is not corrupted.');
+                }
+                importJsonInput.value = ''; // Reset dell'input
+            };
+            reader.readAsText(file);
+        });
+    }
+
+    // Gestione della navigazione a schede (Tab Navigation)
     const tabs = document.querySelectorAll('.tab-btn');
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -825,9 +874,14 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             
             tab.classList.add('active');
-            document.getElementById(tab.dataset.tab).classList.add('active');
+            const targetContent = document.getElementById(tab.dataset.tab);
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
         });
     });
 
+    // Avvio iniziale: Sceglie parametri del tutto casuali e genera la conlang
+    randomizeAllParameters();
     executeGeneration(getFormConfig());
 });
