@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Engine - Refactored Engine Architecture</title>
+    <title>Conlang Engine v2.5.0</title>
     <style>
         :root {
             --bg-primary: #0f172a;
@@ -28,7 +28,25 @@
         }
 
         .container { max-width: 1100px; width: 100%; }
-        h1, h3 { color: #f8fafc; margin-top: 0; }
+
+        .header-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .header-title h1 { margin: 0; }
+        .version-badge {
+            background-color: var(--accent);
+            color: #ffffff;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
 
         .card {
             background-color: var(--bg-secondary);
@@ -108,7 +126,10 @@
 <body>
 
 <div class="container">
-    <h1>Advanced Conlang Engine</h1>
+    <div class="header-title">
+        <h1>Advanced Conlang Engine</h1>
+        <span class="version-badge">v2.5.0</span>
+    </div>
 
     <div class="card">
         <button class="primary-btn" onclick="generateRandomConlang()">⚡ One-Click Quick Generation</button>
@@ -170,11 +191,11 @@
         </div>
 
         <br>
-        <button class="primary-btn" onclick="generateCustomConlang()">Generate Complete Conlang System (350+ Terms)</button>
+        <button class="primary-btn" onclick="generateCustomConlang()">Generate Complete Conlang System (v2.5.0)</button>
     </div>
 
     <div class="card">
-        <h3>Generated Engine Output & Syntax Log</h3>
+        <h3>Generated Engine Output & Grammar Rules</h3>
         <div id="output" class="output-box">Select parameters and click generate...</div>
         
         <div class="actions-group">
@@ -185,7 +206,6 @@
 </div>
 
 <script>
-// --- PHONETICS & CONFIGURATION ---
 const PHONETICS = {
     musical: { v: ['a', 'e', 'i', 'o'], c: ['m', 'n', 'l', 'r', 's', 'v'], maxC: 1, epenthetic: 'i' },
     dark:    { v: ['u', 'o', 'a'], c: ['k', 'g', 'q', 'x', 'r', 'z'], maxC: 3, epenthetic: 'u' },
@@ -212,7 +232,7 @@ const CORE_GRAMMAR = [
     { id: "to", concept: "to / toward / direction", pos: "PREP" },
     { id: "and", concept: "and / conjunction", pos: "CONJ" },
     { id: "but", concept: "but / contrast", pos: "CONJ" },
-    { id: "not", concept: "not / negation", pos: "PART" },
+    { id: "not", concept: "not / negation particle", pos: "PART" },
     { id: "past", concept: "past tense marker", pos: "PART" },
     { id: "future", concept: "future tense marker", pos: "PART" }
 ];
@@ -263,7 +283,6 @@ const CORE_ADJECTIVES = [
     { id: "fast", concept: "fast / quick / swift", pos: "ADJ" }
 ];
 
-// MAPPA SEMANTICA REALE PER DERIVAZIONI (Sostituisce i placeholder "concept X")
 const SEMANTIC_DERIVATIONS = [
     { r1: "drink", r2: "new", meaning: "to toast / to celebrate (drink + new)", pos: "V", cat: "Culture" },
     { r1: "person", r2: "sky", meaning: "astronomer / astrologer (person + sky)", pos: "N", cat: "Science" },
@@ -308,29 +327,25 @@ function getGaussianLength(mean, stdDev) {
     return Math.max(2, Math.min(15, len));
 }
 
-// CORREZIONE 3: SANDHI CON CONTROLLO DUPLICATI FONETICI (DEGEMINAZIONE / DIDEDUPLICAZIONE)
 function applyPhonotactics(partA, partB, styleKey, customRules = null) {
     const rules = customRules || PHONETICS[styleKey] || PHONETICS.none;
     
-    // 1. Controllo duplicazioni di gruppi consonanti/sillabi al confine (es. "gr" + "gruts" -> "gruts")
     let overlapLen = Math.min(partA.length, partB.length);
     for (let len = overlapLen; len >= 1; len--) {
         let suffixA = partA.slice(-len);
         let prefixB = partB.slice(0, len);
         if (suffixA.toLowerCase() === prefixB.toLowerCase()) {
-            partA = partA.slice(0, -len); // Elide il gruppo duplicato
+            partA = partA.slice(0, -len);
             break;
         }
     }
 
     let str = partA + partB;
 
-    // 2. Elisione per vocali identiche consecutive
     if (isVowel(partA.slice(-1)) && isVowel(partB.charAt(0)) && partA.slice(-1) === partB.charAt(0)) {
         str = partA.slice(0, -1) + partB;
     }
 
-    // 3. Epentesi per superamento del limite di consonanti
     let cCount = 0;
     for (let i = 0; i < str.length; i++) {
         if (!isVowel(str[i])) {
@@ -401,7 +416,7 @@ function buildFullConlangEngine(config) {
         return w;
     }
 
-    // 1. Generazione Radici Base
+    // 1. Core Roots Generation
     CORE_GRAMMAR.forEach(item => {
         let w = makeRoot(getGaussianLength(config.meanLength, config.stdDev));
         roots[item.id] = w;
@@ -426,21 +441,32 @@ function buildFullConlangEngine(config) {
         lexicon.push({ word: w, pos: item.pos, category: "Base Adjective", meaning: item.concept });
     });
 
-    // Affissi Corti
+    // 2. GENERAZIONE DELLE REGOLE GRAMMATICALI SISTEMICHE (4 PILASTRI)
+    const pluralSuffix = makeRoot(2);
+    const adjPosition = config.culture === 'primitive' || config.culture === 'ancient' ? 'BEFORE' : 'AFTER';
+    const adjAgreement = config.socio === 'hierarchical' ? 'AGREES (takes plural suffix)' : 'INVARIANT';
+    const verbInflection = 'INVARIANT (relies on subject pronoun)';
+    const negParticle = roots["not"] || makeRoot(2);
+    const pastPart = roots["past"] || makeRoot(2);
+
+    const systemicGrammarRules = {
+        pluralRule: `Nouns form the plural by adding the suffix '-${pluralSuffix}' (e.g. ${roots["house"] || "house"} -> ${applyPhonotactics(roots["house"] || "house", pluralSuffix, config.desc, pData)}).`,
+        nounPhraseRule: `Adjectives are placed ${adjPosition} the noun. Adjective form is ${adjAgreement}.`,
+        verbInflectionRule: `Tense markers are isolated particles. The past tense particle '${pastPart}' stands IMMEDIATELY BEFORE the verb. The verb stem is ${verbInflection}.`,
+        complexSyntaxRule: `Canonical Order: ${wordOrder}. Negation particle '${negParticle}' stands IMMEDIATELY BEFORE the main verb.`
+    };
+
+    // Affissi Corti per Derivazioni
     const prefNeg = makeRoot(2);
     const prefSuper = makeRoot(2);
     const suffPlace = makeRoot(2);
 
-    // 2. Derivazioni Affissali
     if (roots["good"]) lexicon.push({ word: applyPhonotactics(prefNeg, roots["good"], config.desc, pData), pos: "ADJ", category: "Derived (Prefix)", meaning: `bad / evil [Formula: ${prefNeg}- + ${roots["good"]}]` });
     if (roots["hot"]) lexicon.push({ word: applyPhonotactics(prefNeg, roots["hot"], config.desc, pData), pos: "ADJ", category: "Derived (Prefix)", meaning: `cold [Formula: ${prefNeg}- + ${roots["hot"]}]` });
-    if (roots["fast"]) lexicon.push({ word: applyPhonotactics(prefNeg, roots["fast"], config.desc, pData), pos: "ADJ", category: "Derived (Prefix)", meaning: `slow [Formula: ${prefNeg}- + ${roots["fast"]}]` });
     if (roots["big"]) lexicon.push({ word: applyPhonotactics(prefSuper, roots["big"], config.desc, pData), pos: "ADJ", category: "Derived (Prefix)", meaning: `enormous [Formula: ${prefSuper}- + ${roots["big"]}]` });
 
     if (roots["food"]) lexicon.push({ word: applyPhonotactics(roots["food"], suffPlace, config.desc, pData), pos: "N", category: "Derived (Suffix)", meaning: `bakery / kitchen [Formula: ${roots["food"]} + -${suffPlace}]` });
-    if (roots["book"]) lexicon.push({ word: applyPhonotactics(roots["book"], suffPlace, config.desc, pData), pos: "N", category: "Derived (Suffix)", meaning: `library / archive [Formula: ${roots["book"]} + -${suffPlace}]` });
 
-    // CORREZIONE 2: COMPOSIZIONE LEGO USANDO LA MAPPA SEMANTICA REALE (Elimina "Concept X")
     SEMANTIC_DERIVATIONS.forEach(rule => {
         if (roots[rule.r1] && roots[rule.r2]) {
             let compWord = mergeLegoRoots(roots[rule.r1], roots[rule.r2], config.meanLength, config.desc, pData);
@@ -453,7 +479,6 @@ function buildFullConlangEngine(config) {
         }
     });
 
-    // Modulo di Espansione procedurale dinamico senza placeholder generici
     let baseKeys = Object.keys(roots);
     let dynamicIndex = 1;
     while (lexicon.length < 350) {
@@ -474,7 +499,6 @@ function buildFullConlangEngine(config) {
         }
     }
 
-    // Sociolinguistica
     if (config.socio === 'hierarchical') {
         let youBase = lexicon.find(l => l.meaning.includes("you (2nd person sing. informal)"));
         if (youBase) {
@@ -484,17 +508,14 @@ function buildFullConlangEngine(config) {
         }
     }
 
-    // CORREZIONE 1: GENERAZIONE FRASALE RIGIDA CON PARTICELLA DI TEMPO (PART)
-    // Non inventa suffissi verbali estemporanei. Uilizza la particella 'past' dal dizionario.
+    // GENERAZIONE FRASALE RIGIDA BASATA SULLE REGOLE GRAMMATICALI
     const subjI = roots["i"] || "i";
     const verbSee = roots["see"] || "see";
-    const pastPart = roots["past"] || "krukr"; // Particella registrata
     const objForge = lexicon.find(l => l.meaning.includes("forge")) ? lexicon.find(l => l.meaning.includes("forge")).word : "forge";
 
     let rawSentenceWords = [];
     let glossOrder = [];
 
-    // Struttura sintattica usando la particella temporale separata (PART + V)
     if (wordOrder === 'SVO') {
         rawSentenceWords = [subjI, pastPart, verbSee, objForge];
         glossOrder = ["I", "[PAST]", "see", "the forge"];
@@ -510,6 +531,8 @@ function buildFullConlangEngine(config) {
 
     currentConlangData = {
         metadata: config,
+        version: "v2.5.0",
+        grammarRules: systemicGrammarRules,
         lexicon: lexicon,
         sentence: {
             text: formattedSentence,
@@ -519,11 +542,16 @@ function buildFullConlangEngine(config) {
     };
 
     // Logging Output
-    let text = `=== ENGINE REFACTORING LOG ===\n`;
+    let text = `=== CONLANG ENGINE v2.5.0 LOG ===\n`;
     text += `Target Mean Word Length: ${config.meanLength} (Std Dev: ${config.stdDev})\n`;
-    text += `Phonotactic Rules       : Degemination Active (Eliminates repeated clusters)\n`;
-    text += `Past Tense Method       : Isolated Temporal Particle [PART: ${pastPart}]\n`;
+    text += `Phonotactic Constraints : Max Consonants = ${pData.maxC}, Epenthetic Vowel = '${pData.epenthetic}'\n`;
     text += `Canonical Word Order    : ${wordOrder}\n\n`;
+
+    text += `=== SYSTEMIC GRAMMAR RULES ===\n`;
+    text += `A) Plural Formation        : ${systemicGrammarRules.pluralRule}\n`;
+    text += `B) Noun Phrase Structure   : ${systemicGrammarRules.nounPhraseRule}\n`;
+    text += `C) Verb Inflection Mechanism: ${systemicGrammarRules.verbInflectionRule}\n`;
+    text += `D) Complex Sentence Syntax : ${systemicGrammarRules.complexSyntaxRule}\n\n`;
 
     text += `=== SYNTACTIC SENTENCE GENERATOR ===\n`;
     text += `English Meaning : "I saw the forge"\n`;
@@ -587,7 +615,7 @@ function exportJSON() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentConlangData, null, 2));
     const btn = document.createElement('a');
     btn.setAttribute("href", dataStr);
-    btn.setAttribute("download", `conlang_refactored_system.json`);
+    btn.setAttribute("download", `conlang_v2.5.0_system.json`);
     document.body.appendChild(btn);
     btn.click();
     btn.remove();
