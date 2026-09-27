@@ -614,10 +614,50 @@ class ConlangEngine {
             { type: 'Adjective', concepts: ContextualLexicon.adjectives }
         ];
 
-        let index = 0;
-        let derivationCounter = 1;
-        const descriptors = ["inner", "outer", "upper", "lower", "ancient", "silent", "distant", "sacred", "wild", "deep"];
+// Dizionari derivazionali coerenti per ampliare il vocabolario senza stringhe fisse o numeri
+        const nounDerivations = ["realm of", "essence of", "keeper of", "art of", "master of", "place of", "source of", "sign of"];
+        const verbAspects = ["to begin to", "to cause to", "to fail to", "to try to", "to stop", "to pretend to", "to re-"];
+        const adjGradations = ["slightly", "extremely", "almost", "inherently", "partially", "truly"];
 
+        let index = 0;
+        let cycleCount = 0;
+
+        while (vocabulary.length < 600) {
+            const cat = categories[index % categories.length];
+            const conceptList = cat.concepts;
+            const baseConcept = conceptList[index % conceptList.length];
+
+            let concept = baseConcept;
+            
+            // Se il concetto base esiste già, genera un'estensione semantica valida senza contatori o stringhe fisse ripetute
+            if (this.lexiconMap.has(concept.toLowerCase())) {
+                const shiftIndex = Math.floor(index / conceptList.length);
+                if (cat.type === 'Noun') {
+                    const prefix = nounDerivations[shiftIndex % nounDerivations.length];
+                    concept = `${prefix} ${baseConcept}`;
+                } else if (cat.type === 'Verb') {
+                    const aspect = verbAspects[shiftIndex % verbAspects.length];
+                    concept = aspect.startsWith("to re-") ? aspect.replace("to re-", `re-${baseConcept}`) : `${aspect} ${baseConcept}`;
+                } else if (cat.type === 'Adjective') {
+                    const grad = adjGradations[shiftIndex % adjGradations.length];
+                    concept = `${grad} ${baseConcept}`;
+                }
+            }
+
+            // Normalizza la chiave per la mappa
+            const normalizedKey = concept.toLowerCase().trim();
+
+            // Registra solo se la nuova derivazione semantica non è già presente
+            if (!this.lexiconMap.has(normalizedKey)) {
+                registerWord(concept, cat.type, false, false);
+            }
+
+            index++;
+            
+            // Sicurezza per evitare cicli infiniti se saturati tutti i combinatori
+            if (index > 5000) break; 
+        }
+        
         while (vocabulary.length < 600) {
             const cat = categories[index % categories.length];
             const conceptList = cat.concepts;
