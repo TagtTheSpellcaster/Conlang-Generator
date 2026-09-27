@@ -1,7 +1,7 @@
 /**
  * Conlang Engine Studio
- * Version: 2.9.0
- * Architecture: 2nd-Order Markov Chain Generator & Expanded Unique Concept Mapping
+ * Version: 2.8.0
+ * Features: Sandhi Rules, Phonotactic Assimilation & Grammatical Cleanup
  */
 
 const Phonetics = {
@@ -136,6 +136,26 @@ class ConlangEngine {
         return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
     }
 
+    applySandhi(word) {
+        if (!word || word.length < 2) return word;
+
+        let res = word;
+
+        // Sandhi Interno 1: Fusione di vocali identiche adiacenti (es. aa -> a, iii -> i)
+        res = res.replace(/([aeiouyøæ])\1+/gi, '$1');
+
+        // Sandhi Interno 2: Eliminazione di tripli nessi consonantici complessi
+        res = res.replace(/([bcdfghjklmnpqrstvwxz])\1{2,}/gi, '$1$1');
+
+        // Sandhi Interno 3: Assimilazione nasale regressiva (np -> mp, nk -> ngk)
+        res = res.replace(/np/g, 'mp').replace(/nb/g, 'mb').replace(/nk/g, 'ngk');
+
+        // Sandhi Interno 4: Inserimento epentetico per evitare iato diretto tra certe vocali
+        res = res.replace(/ia/g, 'iya').replace(/ua/g, 'uwa').replace(/eo/g, 'eyo');
+
+        return res;
+    }
+
     generatePhonotacticWord(targetSyllables = 2, isGrammatical = false, isCoreLexeme = false) {
         const vowels = Phonetics.vowels[this.currentConfig.vowelSet] || Phonetics.vowels.standard;
         const consonants = Phonetics.consonants[this.currentConfig.consonantSet] || Phonetics.consonants.balanced;
@@ -150,30 +170,34 @@ class ConlangEngine {
             numSyllables = Math.max(2, Math.round(targetSyllables));
         }
 
-        let word = '';
+        let rawWord = '';
+        let processedWord = '';
         let attempts = 0;
 
         do {
-            word = '';
+            rawWord = '';
             for (let i = 0; i < numSyllables; i++) {
                 const struct = structures[Math.floor(Math.random() * structures.length)];
                 for (let char of struct) {
                     if (char === 'C') {
-                        word += consonants[Math.floor(Math.random() * consonants.length)];
+                        rawWord += consonants[Math.floor(Math.random() * consonants.length)];
                     } else if (char === 'V') {
-                        word += vowels[Math.floor(Math.random() * vowels.length)];
+                        rawWord += vowels[Math.floor(Math.random() * vowels.length)];
                     }
                 }
             }
+            
+            processedWord = this.applySandhi(rawWord);
             attempts++;
+
             if (attempts > 150) {
-                word += attempts; 
+                processedWord += attempts;
                 break;
             }
-        } while (this.usedWords.has(word));
+        } while (this.usedWords.has(processedWord) || processedWord.length < 2);
 
-        this.usedWords.add(word);
-        return word;
+        this.usedWords.add(processedWord);
+        return processedWord;
     }
 
     generateMarkov2ndOrderWord() {
@@ -216,6 +240,7 @@ class ConlangEngine {
                 currentState = currentState[1] + next;
             }
 
+            generated = this.applySandhi(generated);
             attempts++;
             if (attempts > 100) break;
 
@@ -259,11 +284,11 @@ class ConlangEngine {
         let oTerm = getLex(oKey);
 
         if (this.currentConfig.grammarStrategy === 'cases') {
-            sTerm += caseSuffix;
+            sTerm = this.applySandhi(sTerm + caseSuffix);
         }
 
         if (this.currentConfig.morphologyType === 'agglutinative' && Math.random() > 0.6) {
-            vTerm = vTerm + '-' + suffix;
+            vTerm = this.applySandhi(vTerm + suffix);
         }
 
         let cWords = [];
@@ -281,7 +306,7 @@ class ConlangEngine {
             cWords.unshift(articles.partitive);
         }
 
-        const conlangStr = cWords.join(' ');
+        const conlangStr = this.applySandhi(cWords.join(' '));
         return conlangStr.charAt(0).toUpperCase() + conlangStr.slice(1) + '.';
     }
 
@@ -583,21 +608,22 @@ class ConlangEngine {
         const vocabulary = [];
 
         const registerWord = (english, category, isGrammatical = false, isCore = false) => {
-            const key = english.toLowerCase().split('(')[0].trim();
+            const key = english.toLowerCase().trim();
             if (this.lexiconMap.has(key)) return this.lexiconMap.get(key);
 
             const syllables = isGrammatical ? 1 : (isCore ? 1 : config.meanLength + (this.boxMullerRandom() * config.stdDev));
             const conlangWord = this.generatePhonotacticWord(syllables, isGrammatical, isCore);
+            
             const entry = { conlang: conlangWord, english: english, category: category };
             vocabulary.push(entry);
             this.lexiconMap.set(key, conlangWord);
             return conlangWord;
         };
 
-        if (articles.definite) registerWord("the (definite article)", "Article", true);
-        if (articles.indefinite) registerWord("a / an (indefinite article)", "Article", true);
-        if (articles.partitive) registerWord("some / part of (partitive article)", "Article", true);
-        if (config.grammarStrategy === 'cases') registerWord("[Nominative Subject Suffix]", "Case Suffix", true);
+        // Articoli ed elementi grammaticali salvati solo ad uso interno di sistema
+        if (articles.definite) this.lexiconMap.set("the", articles.definite);
+        if (articles.indefinite) this.lexiconMap.set("a", articles.indefinite);
+        if (articles.partitive) this.lexiconMap.set("some", articles.partitive);
 
         ContextualLexicon.pronouns.forEach(p => registerWord(p, "Pronoun", true));
         ContextualLexicon.possessives.forEach(p => registerWord(p, "Possessive", true));
@@ -614,13 +640,11 @@ class ConlangEngine {
             { type: 'Adjective', concepts: ContextualLexicon.adjectives }
         ];
 
-// Dizionari derivazionali coerenti per ampliare il vocabolario senza stringhe fisse o numeri
         const nounDerivations = ["realm of", "essence of", "keeper of", "art of", "master of", "place of", "source of", "sign of"];
-        const verbAspects = ["to begin to", "to cause to", "to fail to", "to try to", "to stop", "to pretend to", "to re-"];
+        const verbAspects = ["to begin to", "to cause to", "to fail to", "to try to", "to stop", "to pretend to", "re-"];
         const adjGradations = ["slightly", "extremely", "almost", "inherently", "partially", "truly"];
 
         let index = 0;
-        let cycleCount = 0;
 
         while (vocabulary.length < 600) {
             const cat = categories[index % categories.length];
@@ -629,58 +653,35 @@ class ConlangEngine {
 
             let concept = baseConcept;
             
-            // Se il concetto base esiste già, genera un'estensione semantica valida senza contatori o stringhe fisse ripetute
             if (this.lexiconMap.has(concept.toLowerCase())) {
                 const shiftIndex = Math.floor(index / conceptList.length);
                 if (cat.type === 'Noun') {
-                    const prefix = nounDerivations[shiftIndex % nounDerivations.length];
-                    concept = `${prefix} ${baseConcept}`;
+                    const prefixNoun = nounDerivations[shiftIndex % nounDerivations.length];
+                    concept = `${prefixNoun} ${baseConcept}`;
                 } else if (cat.type === 'Verb') {
                     const aspect = verbAspects[shiftIndex % verbAspects.length];
-                    concept = aspect.startsWith("to re-") ? aspect.replace("to re-", `re-${baseConcept}`) : `${aspect} ${baseConcept}`;
+                    if (aspect === "to stop") {
+                        const gerund = baseConcept.endsWith('e') ? baseConcept.slice(0, -1) + 'ing' : baseConcept + 'ing';
+                        concept = `to stop ${gerund}`;
+                    } else if (aspect === "re-") {
+                        concept = `re-${baseConcept}`;
+                    } else {
+                        concept = `${aspect} ${baseConcept}`;
+                    }
                 } else if (cat.type === 'Adjective') {
                     const grad = adjGradations[shiftIndex % adjGradations.length];
                     concept = `${grad} ${baseConcept}`;
                 }
             }
 
-            // Normalizza la chiave per la mappa
             const normalizedKey = concept.toLowerCase().trim();
 
-            // Registra solo se la nuova derivazione semantica non è già presente
             if (!this.lexiconMap.has(normalizedKey)) {
                 registerWord(concept, cat.type, false, false);
             }
 
             index++;
-            
-            // Sicurezza per evitare cicli infiniti se saturati tutti i combinatori
-            if (index > 5000) break; 
-        }
-        
-        while (vocabulary.length < 600) {
-            const cat = categories[index % categories.length];
-            const conceptList = cat.concepts;
-            const conceptIndex = Math.floor(index / categories.length) % conceptList.length;
-            const baseConcept = conceptList[conceptIndex];
-
-            let concept = baseConcept;
-            const key = concept.toLowerCase().split('(')[0].trim();
-
-            if (this.lexiconMap.has(key)) {
-                const descriptor = descriptors[derivationCounter % descriptors.length];
-                if (cat.type === 'Noun') {
-                    concept = `${descriptor} ${baseConcept}`;
-                } else if (cat.type === 'Verb') {
-                    concept = `to ${baseConcept} continuously (${derivationCounter})`;
-                } else {
-                    concept = `very ${baseConcept} (${derivationCounter})`;
-                }
-                derivationCounter++;
-            }
-
-            registerWord(concept, cat.type, false, false);
-            index++;
+            if (index > 10000) break;
         }
 
         const sentenceCategories = [
@@ -715,7 +716,7 @@ class ConlangEngine {
                 ipaVowels: vowelsList.map(v => Phonetics.ipaMap[v] || `/${v}/`),
                 ipaConsonants: consList.map(c => Phonetics.ipaMap[c] || `/${c}/`),
                 syllableStructures: SyllableStructures[config.aesthetic] || SyllableStructures.musical,
-                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Monosyllables strictly reserved for grammatical words.`
+                phonotacticConstraints: `Mean Syllables: ${config.meanLength}, Std Dev: ${config.stdDev}. Monosyllables strictly reserved for grammatical words. Sandhi Rules applied.`
             },
             morphology: {
                 type: config.morphologyType === 'agglutinative' ? 'Agglutinative (Affix Stacking)' : 'Isolating / Fusional',
@@ -780,7 +781,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchCardContainer = document.getElementById('search-card-container');
     const dictDirectionSelect = document.getElementById('dict-direction-select');
 
-    // Elementi della finestra Modale "New Term"
     const openModalBtn = document.getElementById('open-new-term-modal-btn');
     const newTermModal = document.getElementById('new-term-modal');
     const closeModalX = document.getElementById('modal-close-x-btn');
@@ -1028,7 +1028,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (engine.lastGeneratedData) {
             engine.lastGeneratedData.vocabulary.push(newEntry);
-            const key = englishVal.toLowerCase().split('(')[0].trim();
+            const key = englishVal.toLowerCase().trim();
             engine.lexiconMap.set(key, currentGeneratedTerm);
 
             renderOutput(engine.lastGeneratedData);
