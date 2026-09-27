@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Generator Studio v2.5.0</title>
+    <title>Conlang Generator Studio v2.6.0</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
@@ -16,7 +16,6 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
-        /* Custom scrollbar styling */
         ::-webkit-scrollbar {
             width: 6px;
             height: 6px;
@@ -32,7 +31,6 @@
             background: #475569;
         }
 
-        /* Tab Navigation & Display Logic Fix */
         .tab-content {
             display: none;
         }
@@ -55,7 +53,6 @@
             font-weight: 600;
         }
 
-        /* Legacy Compatibility Classes */
         .grammar-section {
             background-color: #0f172a;
             border: 1px solid #1e293b;
@@ -146,7 +143,6 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-sky-500 selection:text-white">
 
-    <!-- Header Section -->
     <header class="bg-slate-900 border-b border-slate-800 px-6 py-4 flex flex-wrap justify-between items-center shadow-lg">
         <div class="flex items-center space-x-3">
             <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-white shadow-md shadow-sky-500/20">
@@ -160,14 +156,12 @@
             </div>
         </div>
         <div class="flex items-center space-x-3 mt-2 sm:mt-0">
-            <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded border border-slate-700">v2.5.0</span>
+            <span class="text-xs font-mono bg-slate-800 text-slate-400 px-2.5 py-1 rounded border border-slate-700">v2.6.0</span>
         </div>
     </header>
 
-    <!-- Main Workspace Container -->
     <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
         
-        <!-- Sidebar Controls Panel -->
         <aside class="w-full lg:w-96 bg-slate-900/90 border-r border-slate-800 p-5 overflow-y-auto flex flex-col space-y-5">
             <button id="quick-generate-btn" class="w-full py-3 px-4 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-lg shadow-lg shadow-emerald-900/20 active:scale-[0.99] transition-all flex items-center justify-center space-x-2">
                 <span>⚡ One-Click Generate</span>
@@ -280,22 +274,25 @@
             </button>
         </aside>
 
-        <!-- Main Content Area -->
         <main class="flex-1 flex flex-col bg-slate-950 p-6 overflow-y-auto">
             
-            <!-- Tab Navigation Header & Export Toolbar -->
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6 pb-4 border-b border-slate-800">
-                <nav class="flex space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-800">
+                <nav class="flex space-x-1 bg-slate-900 p-1 rounded-lg border border-slate-800 flex-wrap">
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md active" data-tab="tab-grammar">Grammar Profile</button>
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-words">Vocabulary (600)</button>
+                    <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-dictionary">Dictionary</button>
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-sentences">Sentences (100)</button>
                     <button class="tab-btn px-4 py-2 text-xs font-semibold rounded-md" data-tab="tab-dialogues">Dialogues (20)</button>
                 </nav>
 
-                <div class="flex space-x-2">
-                    <!-- Input nascosto per il caricamento file -->
+                <div class="flex items-center space-x-2 flex-wrap gap-y-2">
+                    <!-- Casella di ricerca globale per termini Conlang / Inglese -->
+                    <div class="relative">
+                        <input type="text" id="global-search-input" placeholder="Search term (Conlang/English)..." class="bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-lg px-3 py-2 w-48 sm:w-64 focus:outline-none focus:border-sky-500">
+                        <div id="search-card-container" class="hidden absolute top-full right-0 mt-2 z-50 w-72 bg-slate-900 border border-sky-500 rounded-lg p-3 shadow-xl"></div>
+                    </div>
+
                     <input type="file" id="import-json-input" accept=".json" class="hidden">
-                    
                     <button id="import-json-btn" class="px-3 py-2 bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium rounded-lg border border-slate-700 transition-all flex items-center space-x-1.5">
                         <span>📂 Import JSON</span>
                     </button>
@@ -308,22 +305,34 @@
                 </div>
             </div>
 
-            <!-- Tab Content View: Grammar Profile -->
             <div id="tab-grammar" class="tab-content active space-y-6">
                 <div id="grammar-container"></div>
             </div>
 
-            <!-- Tab Content View: Vocabulary -->
             <div id="tab-words" class="tab-content space-y-4">
                 <div id="words-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
             </div>
 
-            <!-- Tab Content View: Sentences -->
+            <div id="tab-dictionary" class="tab-content space-y-4">
+                <div class="flex justify-between items-center mb-4">
+                    <label class="text-sm text-slate-400 font-medium">Dictionary Mode:</label>
+                    <select id="dict-direction-select" class="bg-slate-900 border border-slate-800 text-sky-400 font-semibold text-xs rounded-lg px-3 py-2 focus:outline-none focus:border-sky-500">
+                        <option value="conlang-english">Conlang ➔ English (Alphabetical)</option>
+                        <option value="english-conlang">English ➔ Conlang (Alphabetical)</option>
+                    </select>
+                </div>
+                <div class="overflow-x-auto border border-slate-800 rounded-lg shadow-lg">
+                    <table class="w-full text-left border-collapse text-sm">
+                        <thead id="dict-table-head" class="bg-slate-900 border-b border-slate-800 text-sky-400 uppercase text-xs"></thead>
+                        <tbody id="dict-table-body" class="divide-y divide-slate-800/60 bg-slate-950"></tbody>
+                    </table>
+                </div>
+            </div>
+
             <div id="tab-sentences" class="tab-content space-y-4">
                 <div id="sentences-container" class="space-y-4"></div>
             </div>
 
-            <!-- Tab Content View: Dialogues -->
             <div id="tab-dialogues" class="tab-content space-y-4">
                 <div id="dialogues-container" class="space-y-4"></div>
             </div>
@@ -331,7 +340,6 @@
         </main>
     </div>
 
-    <!-- External JavaScript Engine Logic -->
     <script src="conlang_engine.js"></script>
 </body>
 </html>
