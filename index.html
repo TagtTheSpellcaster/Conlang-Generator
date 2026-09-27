@@ -263,10 +263,17 @@
         </aside>
 
         <main class="content-area">
-            <div class="tabs">
-                <button class="tab-btn active" data-tab="tab-words">Vocabulary (600)</button>
-                <button class="tab-btn" data-tab="tab-sentences">Sentences (50)</button>
-                <button class="tab-btn" data-tab="tab-dialogues">Dialogues (20)</button>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="tab-words">Vocabulary (600)</button>
+                    <button class="tab-btn" data-tab="tab-sentences">Sentences (50)</button>
+                    <button class="tab-btn" data-tab="tab-dialogues">Dialogues (20)</button>
+                </div>
+                
+                <div style="display: flex; gap: 0.5rem;">
+                    <button id="export-json-btn" class="btn-primary" style="margin-top: 0; padding: 0.5rem 1rem;">Export JSON Table</button>
+                    <button id="copy-json-btn" class="quick-action-btn" style="padding: 0.5rem 1rem;">Copy JSON to Clipboard</button>
+                </div>
             </div>
 
             <div id="tab-words" class="tab-content active">
