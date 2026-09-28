@@ -7,7 +7,9 @@
       "word_type": "adjective",
       "semantic_group": "life",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "life",
@@ -24,7 +26,9 @@
       "word_type": "adjective",
       "semantic_group": "evaluation",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "negative"
@@ -40,7 +44,9 @@
       "word_type": "adjective",
       "semantic_group": "size",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "size",
@@ -57,7 +63,9 @@
       "word_type": "adjective",
       "semantic_group": "temperature",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "temperature",
@@ -74,7 +82,9 @@
       "word_type": "adjective",
       "semantic_group": "life",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "death"
@@ -90,7 +100,9 @@
       "word_type": "adjective",
       "semantic_group": "comparison",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "difference"
@@ -106,7 +118,9 @@
       "word_type": "adjective",
       "semantic_group": "state",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "state",
@@ -123,7 +137,9 @@
       "word_type": "determiner",
       "semantic_group": "quantity",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "quantity",
         "small"
@@ -139,7 +155,9 @@
       "word_type": "adjective",
       "semantic_group": "state",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "state",
@@ -156,7 +174,9 @@
       "word_type": "adjective",
       "semantic_group": "evaluation",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "positive"
@@ -172,7 +192,9 @@
       "word_type": "adjective",
       "semantic_group": "temperature",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "temperature",
@@ -189,7 +211,9 @@
       "word_type": "adjective",
       "semantic_group": "dimension",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "dimension",
@@ -206,7 +230,9 @@
       "word_type": "determiner",
       "semantic_group": "quantity",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "quantity",
         "large"
@@ -220,7 +246,9 @@
       "word_type": "adjective",
       "semantic_group": "age",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "age",
@@ -237,7 +265,9 @@
       "word_type": "adjective",
       "semantic_group": "age",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "age",
@@ -254,7 +284,9 @@
       "word_type": "adjective",
       "semantic_group": "comparison",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "identity"
@@ -270,7 +302,9 @@
       "word_type": "adjective",
       "semantic_group": "dimension",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "dimension",
@@ -287,7 +321,9 @@
       "word_type": "adjective",
       "semantic_group": "size",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "property",
         "size",
@@ -305,7 +341,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -321,7 +358,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -337,7 +375,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -353,7 +392,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -377,7 +417,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -395,7 +436,9 @@
       "word_type": "noun",
       "semantic_group": "body_parts",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "body_part",
         "animate",
@@ -417,7 +460,8 @@
       "semantic_group": "bodily_substances",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_substance",
@@ -437,7 +481,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -456,7 +501,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -472,7 +518,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -488,7 +535,8 @@
       "semantic_group": "bodily_substances",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "bodily_substance",
@@ -504,7 +552,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -520,7 +569,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -536,7 +586,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -555,7 +606,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -571,7 +623,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -594,7 +647,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -610,7 +664,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -633,7 +688,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -657,7 +713,8 @@
       "semantic_group": "bodily_substances",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "bodily_substance",
@@ -673,7 +730,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -693,7 +751,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -717,7 +776,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -733,7 +793,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -749,7 +810,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -768,7 +830,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -791,7 +854,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -814,7 +878,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -837,7 +902,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -853,7 +919,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -869,7 +936,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -885,7 +953,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -909,7 +978,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -925,7 +995,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -941,7 +1012,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -966,7 +1038,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -982,7 +1055,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -998,7 +1072,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1017,7 +1092,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1033,7 +1109,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1053,7 +1130,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1069,7 +1147,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1085,7 +1164,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1107,7 +1187,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1126,7 +1207,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1142,7 +1224,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1158,7 +1241,8 @@
       "semantic_group": "bodily_substances",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "bodily_substance",
@@ -1174,7 +1258,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1190,7 +1275,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1206,7 +1292,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1222,7 +1309,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1238,7 +1326,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1258,7 +1347,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1281,7 +1371,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1303,7 +1394,8 @@
       "semantic_group": "bodily_substances",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "bodily_substance",
@@ -1319,7 +1411,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1335,7 +1428,8 @@
       "semantic_group": "bodily_substances",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "bodily_substance",
@@ -1351,7 +1445,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1367,7 +1462,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1383,7 +1479,8 @@
       "semantic_group": "body_parts",
       "scope": "universal",
       "tags": [
-        "body"
+        "body",
+        "universal"
       ],
       "features": [
         "body_part",
@@ -1399,7 +1496,8 @@
       "semantic_group": "demonstratives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "distal",
@@ -1415,7 +1513,8 @@
       "semantic_group": "demonstratives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "proximal",
@@ -1430,7 +1529,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1448,7 +1549,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1469,7 +1572,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1491,7 +1596,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1506,7 +1613,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1525,7 +1634,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1547,7 +1658,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1569,7 +1682,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1591,7 +1706,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1609,7 +1726,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1631,7 +1750,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1652,7 +1773,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1673,7 +1796,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1692,7 +1817,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1710,7 +1837,9 @@
       "word_type": "noun",
       "semantic_group": "kinship",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "kinship",
@@ -1729,7 +1858,8 @@
       "semantic_group": "quantity",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "quantity",
@@ -1745,7 +1875,8 @@
       "semantic_group": "coordination",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "coordination",
@@ -1761,7 +1892,8 @@
       "semantic_group": "causation",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "causation",
@@ -1777,7 +1909,8 @@
       "semantic_group": "condition",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "condition"
@@ -1792,7 +1925,8 @@
       "semantic_group": "modality",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "modality",
@@ -1808,7 +1942,8 @@
       "semantic_group": "affirmation_negation",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "negation",
@@ -1824,7 +1959,8 @@
       "semantic_group": "quantity",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "quantity",
@@ -1841,7 +1977,8 @@
       "semantic_group": "negation",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "negation"
@@ -1856,7 +1993,8 @@
       "semantic_group": "coordination",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "coordination",
@@ -1872,7 +2010,8 @@
       "semantic_group": "quantity",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "quantity",
@@ -1888,7 +2027,8 @@
       "semantic_group": "affirmation_negation",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "affirmation"
@@ -1903,7 +2043,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "manner",
@@ -1919,7 +2060,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "thing",
@@ -1935,7 +2077,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "time",
@@ -1951,7 +2094,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location",
@@ -1967,7 +2111,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -1983,7 +2128,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "reason",
@@ -1998,7 +2144,9 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "living",
         "animate",
@@ -2013,7 +2161,9 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "living",
         "animate",
@@ -2032,7 +2182,9 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "living",
         "animate",
@@ -2051,7 +2203,9 @@
       "word_type": "noun",
       "semantic_group": "weather",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "weather",
@@ -2066,7 +2220,9 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "living",
         "animate",
@@ -2085,7 +2241,9 @@
       "word_type": "noun",
       "semantic_group": "elements",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "element",
@@ -2100,7 +2258,9 @@
       "word_type": "noun",
       "semantic_group": "elements",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "element",
@@ -2116,7 +2276,9 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "living",
         "animate",
@@ -2135,7 +2297,9 @@
       "word_type": "noun",
       "semantic_group": "plants",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "plant_part",
@@ -2151,7 +2315,9 @@
       "word_type": "noun",
       "semantic_group": "plants",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "plant_part",
@@ -2169,7 +2335,9 @@
       "word_type": "noun",
       "semantic_group": "celestial",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "celestial",
@@ -2188,7 +2356,9 @@
       "word_type": "noun",
       "semantic_group": "weather",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "weather",
@@ -2208,7 +2378,9 @@
       "word_type": "noun",
       "semantic_group": "environment",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "environment",
@@ -2223,7 +2395,9 @@
       "word_type": "noun",
       "semantic_group": "celestial",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "celestial",
@@ -2238,7 +2412,9 @@
       "word_type": "noun",
       "semantic_group": "natural_materials",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "material",
@@ -2253,7 +2429,9 @@
       "word_type": "noun",
       "semantic_group": "celestial",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "celestial",
@@ -2273,7 +2451,9 @@
       "word_type": "noun",
       "semantic_group": "plants",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "plant",
@@ -2294,7 +2474,9 @@
       "word_type": "noun",
       "semantic_group": "elements",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "element",
@@ -2310,7 +2492,9 @@
       "word_type": "noun",
       "semantic_group": "weather",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "natural",
         "weather",
@@ -2325,7 +2509,9 @@
       "word_type": "noun",
       "semantic_group": "basic_needs",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "need",
         "hydration",
@@ -2345,7 +2531,9 @@
       "word_type": "noun",
       "semantic_group": "basic_needs",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "need",
         "nutrition",
@@ -2364,7 +2552,9 @@
       "word_type": "noun",
       "semantic_group": "social_needs",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "need",
         "assistance",
@@ -2379,7 +2569,9 @@
       "word_type": "noun",
       "semantic_group": "basic_needs",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "shelter",
         "place",
@@ -2398,7 +2590,9 @@
       "word_type": "noun",
       "semantic_group": "identity",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "identity",
         "person",
@@ -2413,7 +2607,9 @@
       "word_type": "noun",
       "semantic_group": "basic_needs",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "need",
         "rest",
@@ -2432,7 +2628,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2447,7 +2645,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2462,7 +2662,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2477,7 +2679,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2492,7 +2696,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2508,7 +2714,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2523,7 +2731,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2538,7 +2748,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2553,7 +2765,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2568,7 +2782,9 @@
       "word_type": "numeral",
       "semantic_group": "cardinal_numbers",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "number",
         "cardinal",
@@ -2584,7 +2800,9 @@
       "word_type": "noun",
       "semantic_group": "objects",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "human_made",
@@ -2599,7 +2817,9 @@
       "word_type": "noun",
       "semantic_group": "objects",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "human_made",
@@ -2614,7 +2834,9 @@
       "word_type": "noun",
       "semantic_group": "architecture",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "human_made",
@@ -2631,7 +2853,9 @@
       "word_type": "noun",
       "semantic_group": "basic_needs",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "nutrition",
@@ -2651,7 +2875,9 @@
       "word_type": "noun",
       "semantic_group": "shelter",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "place",
@@ -2672,7 +2898,9 @@
       "word_type": "noun",
       "semantic_group": "infrastructure",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "place",
@@ -2692,7 +2920,9 @@
       "word_type": "noun",
       "semantic_group": "objects",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "human_made",
@@ -2707,7 +2937,9 @@
       "word_type": "noun",
       "semantic_group": "objects",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "object",
         "human_made",
@@ -2726,7 +2958,9 @@
       "word_type": "noun",
       "semantic_group": "people",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "animate",
@@ -2746,7 +2980,9 @@
       "word_type": "noun",
       "semantic_group": "social_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "social",
@@ -2763,7 +2999,9 @@
       "word_type": "noun",
       "semantic_group": "social_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "social",
@@ -2778,7 +3016,9 @@
       "word_type": "noun",
       "semantic_group": "people",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "animate",
@@ -2796,7 +3036,9 @@
       "word_type": "noun",
       "semantic_group": "people",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "animate",
@@ -2812,7 +3054,9 @@
       "word_type": "noun",
       "semantic_group": "social_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "social",
@@ -2827,7 +3071,9 @@
       "word_type": "noun",
       "semantic_group": "people",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "person",
         "animate",
@@ -2846,7 +3092,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -2863,7 +3110,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -2880,7 +3128,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -2897,7 +3146,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -2914,7 +3164,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -2931,7 +3182,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -2949,7 +3201,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -2967,7 +3220,8 @@
       "semantic_group": "personal_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "third_person",
@@ -2983,7 +3237,9 @@
       "word_type": "adposition",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "vertical",
@@ -2998,7 +3254,9 @@
       "word_type": "noun",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "relative_position"
@@ -3012,7 +3270,9 @@
       "word_type": "adposition",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "vertical",
@@ -3027,7 +3287,9 @@
       "word_type": "adposition",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "distance",
         "long"
@@ -3041,7 +3303,9 @@
       "word_type": "noun",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "relative_position"
@@ -3055,7 +3319,9 @@
       "word_type": "adverb",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "proximal"
@@ -3069,7 +3335,9 @@
       "word_type": "adposition",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "interior"
@@ -3083,7 +3351,9 @@
       "word_type": "adposition",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "distance",
         "short"
@@ -3097,7 +3367,9 @@
       "word_type": "adposition",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "exterior"
@@ -3111,7 +3383,9 @@
       "word_type": "adverb",
       "semantic_group": "spatial_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "location",
         "distal"
@@ -3125,7 +3399,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_units",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "day",
@@ -3140,7 +3416,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_units",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "day_period"
@@ -3154,7 +3432,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_units",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "day_period"
@@ -3168,7 +3448,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_units",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "night",
@@ -3185,7 +3467,9 @@
       "word_type": "adverb",
       "semantic_group": "temporal_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "present"
@@ -3199,7 +3483,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_units",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "day",
@@ -3214,7 +3500,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "future",
@@ -3229,7 +3517,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_units",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "cycle",
@@ -3244,7 +3534,9 @@
       "word_type": "noun",
       "semantic_group": "temporal_relations",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "time",
         "past",
@@ -3259,7 +3551,9 @@
       "word_type": "verb",
       "semantic_group": "existence",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "state",
         "existence",
@@ -3274,7 +3568,9 @@
       "word_type": "verb",
       "semantic_group": "motion",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "motion",
@@ -3289,7 +3585,9 @@
       "word_type": "verb",
       "semantic_group": "life_and_death",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "state_change",
         "death",
@@ -3306,7 +3604,9 @@
       "word_type": "verb",
       "semantic_group": "action",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "general"
@@ -3320,7 +3620,9 @@
       "word_type": "verb",
       "semantic_group": "bodily_functions",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "bodily_function",
@@ -3341,7 +3643,9 @@
       "word_type": "verb",
       "semantic_group": "bodily_functions",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "bodily_function",
@@ -3363,7 +3667,9 @@
       "word_type": "verb",
       "semantic_group": "transfer",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "transfer",
@@ -3378,7 +3684,9 @@
       "word_type": "verb",
       "semantic_group": "motion",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "motion",
@@ -3393,7 +3701,9 @@
       "word_type": "verb",
       "semantic_group": "possession",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "state",
         "possession",
@@ -3408,7 +3718,9 @@
       "word_type": "verb",
       "semantic_group": "perception",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "perception",
         "hearing",
@@ -3427,7 +3739,9 @@
       "word_type": "verb",
       "semantic_group": "life_and_death",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "death",
@@ -3447,7 +3761,9 @@
       "word_type": "verb",
       "semantic_group": "cognition",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "mental_state",
         "knowledge",
@@ -3462,7 +3778,9 @@
       "word_type": "verb",
       "semantic_group": "emotion",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "emotion",
         "positive",
@@ -3477,7 +3795,9 @@
       "word_type": "verb",
       "semantic_group": "existence",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "state",
         "life",
@@ -3494,7 +3814,9 @@
       "word_type": "verb",
       "semantic_group": "emotion",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "emotion",
         "positive",
@@ -3509,7 +3831,9 @@
       "word_type": "verb",
       "semantic_group": "creation",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "creation",
@@ -3524,7 +3848,9 @@
       "word_type": "verb",
       "semantic_group": "communication",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "communication",
         "speech",
@@ -3539,7 +3865,9 @@
       "word_type": "verb",
       "semantic_group": "perception",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "perception",
         "vision",
@@ -3558,7 +3886,9 @@
       "word_type": "verb",
       "semantic_group": "bodily_functions",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "state",
         "bodily_function",
@@ -3578,7 +3908,9 @@
       "word_type": "verb",
       "semantic_group": "communication",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "communication",
         "speech",
@@ -3598,7 +3930,9 @@
       "word_type": "verb",
       "semantic_group": "transfer",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "action",
         "transfer",
@@ -3613,7 +3947,9 @@
       "word_type": "verb",
       "semantic_group": "cognition",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "mental_action",
         "thought",
@@ -3628,7 +3964,9 @@
       "word_type": "verb",
       "semantic_group": "desire",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "universal"
+      ],
       "features": [
         "mental_state",
         "desire",
@@ -3647,11 +3985,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3663,11 +4001,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect"
+        "insect",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3680,11 +4018,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3697,11 +4035,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3713,11 +4051,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect"
+        "insect",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3730,11 +4068,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3747,11 +4085,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3764,11 +4102,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -3781,11 +4119,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3798,11 +4136,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile"
+        "reptile",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -3815,11 +4153,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3832,11 +4170,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3849,11 +4187,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3867,11 +4205,11 @@
         "animal",
         "wild",
         "mammal",
-        "aquatic"
+        "aquatic",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3884,11 +4222,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3901,11 +4239,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3918,11 +4256,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3936,11 +4274,11 @@
         "animal",
         "wild",
         "bird",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3953,11 +4291,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -3969,11 +4307,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "aquatic"
+        "aquatic",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -3987,11 +4325,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4004,11 +4342,11 @@
       "tags": [
         "animal",
         "wild",
-        "amphibian"
+        "amphibian",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4021,11 +4359,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4038,11 +4376,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4055,11 +4393,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4072,11 +4410,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4090,11 +4428,11 @@
         "animal",
         "wild",
         "bird",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4107,11 +4445,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4124,11 +4462,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4141,11 +4479,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "australia"
     },
     {
@@ -4158,11 +4496,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "australia"
     },
     {
@@ -4176,11 +4514,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4193,11 +4531,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile"
+        "reptile",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4210,11 +4548,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4226,11 +4564,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect"
+        "insect",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4243,11 +4581,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4260,11 +4598,11 @@
       "tags": [
         "animal",
         "wild",
-        "aquatic"
+        "aquatic",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4278,11 +4616,11 @@
         "animal",
         "wild",
         "bird",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4295,11 +4633,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "asia"
     },
     {
@@ -4312,11 +4650,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4329,11 +4667,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4346,11 +4684,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4363,11 +4701,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4380,11 +4718,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4397,11 +4735,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4414,11 +4752,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4431,11 +4769,11 @@
       "tags": [
         "animal",
         "fish",
-        "aquatic"
+        "aquatic",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4447,11 +4785,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "arachnid"
+        "arachnid",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4464,11 +4802,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -4483,11 +4821,11 @@
         "wild",
         "fish",
         "aquatic",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4500,11 +4838,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4517,11 +4855,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile"
+        "reptile",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4533,11 +4871,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "arachnid"
+        "arachnid",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4550,11 +4888,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird"
+        "bird",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4568,11 +4906,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "asia"
     },
     {
@@ -4585,11 +4923,11 @@
       "tags": [
         "animal",
         "fish",
-        "aquatic"
+        "aquatic",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4602,11 +4940,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile"
+        "reptile",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4618,11 +4956,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect"
+        "insect",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4636,11 +4974,11 @@
         "animal",
         "wild",
         "mammal",
-        "aquatic"
+        "aquatic",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4654,11 +4992,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4672,11 +5010,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator"
+        "predator",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -4689,15 +5027,15 @@
       "tags": [
         "animal",
         "wild",
-        "mammal"
+        "mammal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
-      "id": "animal_ant",
+      "id": "animal.ant",
       "concept": "ant",
       "category": "animal",
       "word_type": "noun",
@@ -4705,11 +5043,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect"
+        "insect",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -4723,11 +5061,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile"
+        "reptile",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4740,11 +5078,11 @@
       "tags": [
         "monster",
         "mythical",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4757,11 +5095,11 @@
       "tags": [
         "animal",
         "monster",
-        "mythical"
+        "mythical",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4775,11 +5113,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile"
+        "reptile",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4792,11 +5130,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4808,11 +5146,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4824,11 +5162,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4842,11 +5180,11 @@
         "animal",
         "monster",
         "mythical",
-        "bird"
+        "bird",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4860,11 +5198,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile"
+        "reptile",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4878,11 +5216,11 @@
         "animal",
         "monster",
         "mythical",
-        "aquatic"
+        "aquatic",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4895,11 +5233,11 @@
       "tags": [
         "animal",
         "monster",
-        "mythical"
+        "mythical",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4912,11 +5250,11 @@
       "tags": [
         "monster",
         "mythical",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4928,11 +5266,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4944,11 +5282,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4962,11 +5300,11 @@
         "animal",
         "monster",
         "mythical",
-        "bird"
+        "bird",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4980,11 +5318,11 @@
         "animal",
         "monster",
         "mythical",
-        "bird"
+        "bird",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4999,11 +5337,11 @@
         "monster",
         "mythical",
         "aquatic",
-        "reptile"
+        "reptile",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5016,11 +5354,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5033,11 +5371,11 @@
       "tags": [
         "animal",
         "monster",
-        "mythical"
+        "mythical",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5049,11 +5387,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5067,11 +5405,11 @@
         "animal",
         "monster",
         "mythical",
-        "mammal"
+        "mammal",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5084,11 +5422,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5102,11 +5440,11 @@
         "animal",
         "monster",
         "mythical",
-        "mammal"
+        "mammal",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5120,11 +5458,11 @@
         "animal",
         "monster",
         "mythical",
-        "mammal"
+        "mammal",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5138,11 +5476,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile"
+        "reptile",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5155,11 +5493,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid"
+        "humanoid",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5172,11 +5510,11 @@
       "tags": [
         "transport",
         "movement",
-        "primitive"
+        "primitive",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5189,11 +5527,11 @@
       "tags": [
         "transport",
         "animal_power",
-        "mount"
+        "mount",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5206,11 +5544,11 @@
       "tags": [
         "transport",
         "animal_power",
-        "pack_animal"
+        "pack_animal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5224,11 +5562,11 @@
         "transport",
         "animal_power",
         "mount",
-        "pack_animal"
+        "pack_animal",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "africa"
     },
     {
@@ -5241,11 +5579,11 @@
       "tags": [
         "transport",
         "animal_power",
-        "mount"
+        "mount",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "asia"
     },
     {
@@ -5258,11 +5596,11 @@
       "tags": [
         "transport",
         "land",
-        "animal_power"
+        "animal_power",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -5276,11 +5614,11 @@
         "transport",
         "land",
         "wheeled",
-        "primitive"
+        "primitive",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5293,11 +5631,11 @@
       "tags": [
         "transport",
         "land",
-        "wheeled"
+        "wheeled",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5311,11 +5649,11 @@
         "transport",
         "land",
         "wheeled",
-        "animal_power"
+        "animal_power",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5330,11 +5668,11 @@
         "land",
         "wheeled",
         "animal_power",
-        "war"
+        "war",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "mediterranean"
     },
     {
@@ -5347,11 +5685,11 @@
       "tags": [
         "transport",
         "water",
-        "primitive"
+        "primitive",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5364,11 +5702,11 @@
       "tags": [
         "transport",
         "water",
-        "paddle"
+        "paddle",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5381,11 +5719,11 @@
       "tags": [
         "transport",
         "water",
-        "paddle"
+        "paddle",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -5397,11 +5735,11 @@
       "scope": "domain",
       "tags": [
         "transport",
-        "water"
+        "water",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5414,11 +5752,11 @@
       "tags": [
         "transport",
         "water",
-        "oar"
+        "oar",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5431,11 +5769,11 @@
       "tags": [
         "transport",
         "water",
-        "sail"
+        "sail",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5448,11 +5786,11 @@
       "tags": [
         "transport",
         "water",
-        "sail"
+        "sail",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5467,11 +5805,11 @@
         "water",
         "oar",
         "sail",
-        "ancient"
+        "ancient",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "mediterranean"
     },
     {
@@ -5486,11 +5824,11 @@
         "water",
         "sail",
         "oar",
-        "medieval"
+        "medieval",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5502,11 +5840,11 @@
       "scope": "domain",
       "tags": [
         "transport",
-        "water"
+        "water",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5520,11 +5858,11 @@
         "transport",
         "land",
         "wheeled",
-        "human_power"
+        "human_power",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5538,11 +5876,11 @@
         "transport",
         "land",
         "wheeled",
-        "human_power"
+        "human_power",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5555,11 +5893,11 @@
       "tags": [
         "transport",
         "land",
-        "motor"
+        "motor",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5572,11 +5910,11 @@
       "tags": [
         "transport",
         "land",
-        "motor"
+        "motor",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5590,11 +5928,11 @@
         "transport",
         "land",
         "motor",
-        "cargo"
+        "cargo",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5608,11 +5946,11 @@
         "transport",
         "land",
         "motor",
-        "passenger"
+        "passenger",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5626,11 +5964,11 @@
         "transport",
         "land",
         "motor",
-        "passenger"
+        "passenger",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5643,11 +5981,11 @@
       "tags": [
         "transport",
         "land",
-        "rail"
+        "rail",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5661,11 +5999,11 @@
         "transport",
         "land",
         "rail",
-        "motor"
+        "motor",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5679,11 +6017,11 @@
         "transport",
         "land",
         "rail",
-        "urban"
+        "urban",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5697,11 +6035,11 @@
         "transport",
         "land",
         "rail",
-        "urban"
+        "urban",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5715,11 +6053,11 @@
         "transport",
         "land",
         "rail",
-        "urban"
+        "urban",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5732,11 +6070,11 @@
       "tags": [
         "transport",
         "air",
-        "lighter_than_air"
+        "lighter_than_air",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5749,11 +6087,11 @@
       "tags": [
         "transport",
         "air",
-        "lighter_than_air"
+        "lighter_than_air",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5766,11 +6104,11 @@
       "tags": [
         "transport",
         "air",
-        "motor"
+        "motor",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5783,11 +6121,11 @@
       "tags": [
         "transport",
         "air",
-        "rotorcraft"
+        "rotorcraft",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5799,11 +6137,11 @@
       "scope": "domain",
       "tags": [
         "transport",
-        "air"
+        "air",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5816,11 +6154,11 @@
       "tags": [
         "transport",
         "air",
-        "water"
+        "water",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5835,11 +6173,11 @@
         "land",
         "rail",
         "cargo",
-        "industrial"
+        "industrial",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5852,11 +6190,11 @@
       "tags": [
         "transport",
         "vertical",
-        "mechanical"
+        "mechanical",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5870,11 +6208,11 @@
         "transport",
         "land",
         "rail",
-        "mountain"
+        "mountain",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5888,11 +6226,11 @@
         "transport",
         "land",
         "rail",
-        "mountain"
+        "mountain",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5906,11 +6244,11 @@
         "transport",
         "land",
         "water",
-        "air_cushion"
+        "air_cushion",
+        "natural"
       ],
       "features": [],
       "relations": {},
-      "type": "natural",
       "locale": "world"
     },
     {
@@ -5924,11 +6262,10 @@
         "transport",
         "land",
         "air",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5942,11 +6279,10 @@
         "transport",
         "air",
         "land",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5960,11 +6296,10 @@
         "transport",
         "air",
         "personal",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5977,11 +6312,10 @@
       "tags": [
         "transport",
         "instant",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5994,11 +6328,10 @@
       "tags": [
         "transport",
         "instant",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6011,11 +6344,10 @@
       "tags": [
         "transport",
         "space",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6028,11 +6360,10 @@
       "tags": [
         "transport",
         "space",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6046,11 +6377,10 @@
         "transport",
         "space",
         "interstellar",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6063,11 +6393,10 @@
       "tags": [
         "transport",
         "space",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6081,11 +6410,10 @@
         "transport",
         "space",
         "emergency",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6099,11 +6427,10 @@
         "transport",
         "space",
         "faster_than_light",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6117,11 +6444,10 @@
         "transport",
         "space",
         "faster_than_light",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6135,11 +6461,10 @@
         "transport",
         "instant",
         "fantasy",
-        "science_fiction"
+        "sci-fi"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6152,11 +6477,11 @@
       "tags": [
         "transport",
         "air",
-        "magic"
+        "magic",
+        "fantasy"
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6173,7 +6498,6 @@
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6192,7 +6516,6 @@
       ],
       "features": [],
       "relations": {},
-      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -17074,7 +17397,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17088,7 +17411,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17102,7 +17425,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17116,7 +17439,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17130,7 +17453,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17144,7 +17467,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17158,7 +17481,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17172,7 +17495,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17186,7 +17509,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17200,7 +17523,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17214,7 +17537,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17228,7 +17551,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17242,7 +17565,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -17256,7 +17579,7 @@
       "relations": {},
       "tags": [
         "material",
-        "science_fiction"
+        "sci-fi"
       ]
     },
     {
@@ -33000,7 +33323,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33014,7 +33338,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33042,7 +33367,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33070,7 +33396,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33238,7 +33565,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33252,7 +33580,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33266,7 +33595,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33280,7 +33610,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33294,7 +33625,8 @@
       "relations": {},
       "tags": [
         "function_word",
-        "grammar"
+        "grammar",
+        "universal"
       ]
     },
     {
@@ -33823,7 +34155,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33838,7 +34171,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33853,7 +34187,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33868,7 +34203,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33883,7 +34219,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33898,7 +34235,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33913,7 +34251,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33928,7 +34267,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33943,7 +34283,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33958,7 +34299,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -33973,7 +34315,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "path"
@@ -33988,7 +34331,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "path"
@@ -34003,7 +34347,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "path"
@@ -34018,7 +34363,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "direction"
@@ -34033,7 +34379,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "direction",
@@ -34049,7 +34396,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "direction",
@@ -34065,7 +34413,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "direction",
@@ -34081,7 +34430,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "direction",
@@ -34097,7 +34447,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "direction",
@@ -34113,7 +34464,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "direction",
@@ -34129,7 +34481,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "contact",
@@ -34145,7 +34498,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "location"
@@ -34160,7 +34514,8 @@
       "semantic_group": "social_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "association"
@@ -34175,7 +34530,8 @@
       "semantic_group": "social_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "absence"
@@ -34190,7 +34546,8 @@
       "semantic_group": "social_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "benefactive"
@@ -34205,7 +34562,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "possession"
@@ -34220,7 +34578,8 @@
       "semantic_group": "transfer",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "agent"
@@ -34235,7 +34594,8 @@
       "semantic_group": "language_and_communication",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "topic"
@@ -34250,7 +34610,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "time"
@@ -34270,7 +34631,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "time"
@@ -34290,7 +34652,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "time"
@@ -34305,7 +34668,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "time"
@@ -34320,7 +34684,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "time"
@@ -34335,7 +34700,8 @@
       "semantic_group": "comparison",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "similarity"
@@ -34350,7 +34716,8 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "path"
@@ -34365,7 +34732,8 @@
       "semantic_group": "language_and_communication",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "source"
@@ -34380,7 +34748,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "indefinite",
@@ -34396,7 +34765,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "definite"
@@ -34411,7 +34781,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "distributive",
@@ -34427,7 +34798,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "dual",
@@ -34443,7 +34815,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "choice"
@@ -34458,7 +34831,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "negative",
@@ -34474,7 +34848,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "indefinite"
@@ -34489,7 +34864,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "indefinite",
@@ -34505,7 +34881,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "quantity"
@@ -34520,7 +34897,8 @@
       "semantic_group": "articles_and_determiners",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "quantity"
@@ -34535,7 +34913,8 @@
       "semantic_group": "coordination",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "contrast"
@@ -34550,7 +34929,8 @@
       "semantic_group": "subordinators",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "contrast"
@@ -34565,7 +34945,8 @@
       "semantic_group": "subordinators",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "contrast"
@@ -34580,7 +34961,8 @@
       "semantic_group": "subordinators",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "simultaneous",
@@ -34596,7 +34978,8 @@
       "semantic_group": "subordinators",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "time"
@@ -34616,7 +34999,8 @@
       "semantic_group": "subordinators",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "condition",
@@ -34632,7 +35016,8 @@
       "semantic_group": "subordinators",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "alternative"
@@ -34647,7 +35032,8 @@
       "semantic_group": "connective_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "consequence"
@@ -34662,7 +35048,8 @@
       "semantic_group": "connective_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "sequence"
@@ -34677,7 +35064,8 @@
       "semantic_group": "connective_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "addition"
@@ -34697,7 +35085,8 @@
       "semantic_group": "connective_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "contrast"
@@ -34712,7 +35101,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "question",
@@ -34728,7 +35118,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "question",
@@ -34745,7 +35136,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "question",
@@ -34761,7 +35153,8 @@
       "semantic_group": "interrogatives",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "question",
@@ -34777,7 +35170,8 @@
       "semantic_group": "relative_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "relative"
@@ -34792,7 +35186,8 @@
       "semantic_group": "indefinite_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -34808,7 +35203,8 @@
       "semantic_group": "indefinite_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "thing",
@@ -34824,7 +35220,8 @@
       "semantic_group": "focus_and_emphasis",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "restriction"
@@ -34839,7 +35236,8 @@
       "semantic_group": "focus_and_emphasis",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "emphasis"
@@ -34854,7 +35252,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "continuation"
@@ -34869,7 +35268,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "completed",
@@ -34885,7 +35285,8 @@
       "semantic_group": "temporal_relations",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "repetition"
@@ -34900,7 +35301,8 @@
       "semantic_group": "modality",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "uncertainty"
@@ -34915,7 +35317,8 @@
       "semantic_group": "modal_and_auxiliary_concepts",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "necessity"
@@ -34930,7 +35333,8 @@
       "semantic_group": "modal_and_auxiliary_concepts",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "ability",
@@ -34946,7 +35350,8 @@
       "semantic_group": "modal_and_auxiliary_concepts",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "possibility",
@@ -34962,7 +35367,8 @@
       "semantic_group": "modal_and_auxiliary_concepts",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "desire"
@@ -34977,7 +35383,8 @@
       "semantic_group": "modal_and_auxiliary_concepts",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "obligation",
@@ -34993,7 +35400,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "first_person",
@@ -35009,7 +35417,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "second_person",
@@ -35025,7 +35434,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "third_person",
@@ -35042,7 +35452,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "third_person",
@@ -35059,7 +35470,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "third_person",
@@ -35076,7 +35488,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "first_person",
@@ -35093,7 +35506,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "third_person",
@@ -35110,7 +35524,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "first_person",
@@ -35126,7 +35541,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "second_person",
@@ -35142,7 +35558,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "first_person",
@@ -35159,7 +35576,8 @@
       "semantic_group": "possession",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "third_person",
@@ -35176,7 +35594,8 @@
       "semantic_group": "indefinite_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "thing",
@@ -35193,7 +35612,8 @@
       "semantic_group": "indefinite_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -35210,7 +35630,8 @@
       "semantic_group": "indefinite_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "person",
@@ -35226,13 +35647,1829 @@
       "semantic_group": "indefinite_pronouns",
       "scope": "universal",
       "tags": [
-        "grammar"
+        "grammar",
+        "universal"
       ],
       "features": [
         "thing",
         "indefinite"
       ],
       "relations": {}
+    },
+    {
+      "id": "abstract.love",
+      "concept": "love",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.hate",
+      "concept": "hate",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.hate",
+      "concept": "hate",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.fear",
+      "concept": "fear",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.hope",
+      "concept": "hope",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.trust",
+      "concept": "trust",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.doubt",
+      "concept": "doubt",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.doubt",
+      "concept": "doubt",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.desire",
+      "concept": "desire",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.desire",
+      "concept": "desire",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.anger",
+      "concept": "anger",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.anger",
+      "concept": "anger",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.envy",
+      "concept": "envy",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.envy",
+      "concept": "envy",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.shame",
+      "concept": "shame",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.shame",
+      "concept": "shame",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.grief",
+      "concept": "grief",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.grief",
+      "concept": "grief",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.peace",
+      "concept": "peace",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.peace",
+      "concept": "peace",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.war",
+      "concept": "war",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.war",
+      "concept": "war",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.fight",
+      "concept": "fight",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "conflict_and_resolution",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.attack",
+      "concept": "attack",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "conflict_and_resolution",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.support",
+      "concept": "support",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.support",
+      "concept": "support",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.respect",
+      "concept": "respect",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "morality_and_ethics",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "morality_and_ethics",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.promise",
+      "concept": "promise",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.promise",
+      "concept": "promise",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.command",
+      "concept": "command",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.command",
+      "concept": "command",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.request",
+      "concept": "request",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.question",
+      "concept": "question",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.question",
+      "concept": "question",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.dream",
+      "concept": "dream",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.play",
+      "concept": "play",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.play",
+      "concept": "play",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.care",
+      "concept": "care",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.care",
+      "concept": "care",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.trade",
+      "concept": "trade",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.value",
+      "concept": "value",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "beauty_and_value",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.value",
+      "concept": "value",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "beauty_and_value",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.control",
+      "concept": "control",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "freedom_and_control",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "freedom_and_control",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.control",
+      "concept": "control",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "freedom_and_control",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "freedom_and_control",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.order",
+      "concept": "order",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.order",
+      "concept": "order",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.rule",
+      "concept": "rule",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.rule",
+      "concept": "rule",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.lead",
+      "concept": "lead",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.follow",
+      "concept": "follow",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "social_and_political",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.join",
+      "concept": "join",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.join",
+      "concept": "join",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.leave",
+      "concept": "leave",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.marry",
+      "concept": "marry",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.divorce",
+      "concept": "divorce",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.divorce",
+      "concept": "divorce",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.adopt",
+      "concept": "adopt",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "family",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "family",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.adopt",
+      "concept": "adopt",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "family",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "family",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.inherit",
+      "concept": "inherit",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "family",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "family",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.inherit",
+      "concept": "inherit",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "family",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "family",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.protect",
+      "concept": "protect",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "conflict_and_resolution",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.protect",
+      "concept": "protect",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "conflict_and_resolution",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.save",
+      "concept": "save",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "life_and_death",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.save",
+      "concept": "save",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "life_and_death",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.kill",
+      "concept": "kill",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "life_and_death",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.live",
+      "concept": "live",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "life_and_death",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.grow",
+      "concept": "grow",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "life_and_death",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.fall",
+      "concept": "fall",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.rise",
+      "concept": "rise",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.rise",
+      "concept": "rise",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.move",
+      "concept": "move",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.stop",
+      "concept": "stop",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.start",
+      "concept": "start",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "time_and_change",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.begin",
+      "concept": "begin",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "time_and_change",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.end",
+      "concept": "end",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "time_and_change",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.travel",
+      "concept": "travel",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.visit",
+      "concept": "visit",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.call",
+      "concept": "call",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.name",
+      "concept": "name",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.talk",
+      "concept": "talk",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.talk",
+      "concept": "talk",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.speak",
+      "concept": "speak",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.listen",
+      "concept": "listen",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.look",
+      "concept": "look",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.see",
+      "concept": "see",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.hear",
+      "concept": "hear",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.smell",
+      "concept": "smell",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.taste",
+      "concept": "taste",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.touch",
+      "concept": "touch",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.feel",
+      "concept": "feel",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "emotion_and_feeling",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.remember",
+      "concept": "remember",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.forget",
+      "concept": "forget",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.think",
+      "concept": "think",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.know",
+      "concept": "know",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.understand",
+      "concept": "understand",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.believe",
+      "concept": "believe",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.choose",
+      "concept": "choose",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.decide",
+      "concept": "decide",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.learn",
+      "concept": "learn",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.teach",
+      "concept": "teach",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.build",
+      "concept": "build",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.break",
+      "concept": "break",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.open",
+      "concept": "open",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.close",
+      "concept": "close",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.clean",
+      "concept": "clean",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "verb.clean",
+      "concept": "clean",
+      "scope": "universal",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.wash",
+      "concept": "wash",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.cook",
+      "concept": "cook",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.eat",
+      "concept": "eat",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.walk",
+      "concept": "walk",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.run",
+      "concept": "run",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.sit",
+      "concept": "sit",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.stand",
+      "concept": "stand",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.hold",
+      "concept": "hold",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.give",
+      "concept": "give",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "relationships",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.take",
+      "concept": "take",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.bring",
+      "concept": "bring",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "movement",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "movement",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.send",
+      "concept": "send",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.receive",
+      "concept": "receive",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "language_and_communication",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.find",
+      "concept": "find",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "knowledge_and_thought",
+        "universal"
+      ]
+    },
+    {
+      "id": "abstract.lose",
+      "concept": "lose",
+      "scope": "universal",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "activity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract",
+        "activity",
+        "universal"
+      ]
     }
   ]
 }
