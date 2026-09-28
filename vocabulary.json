@@ -17672,6 +17672,2567 @@
       "tags": [
         "material"
       ]
+    },
+    {
+      "id": "settlement.dwelling",
+      "concept": "dwelling",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.shelter",
+      "concept": "shelter",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.structure",
+      "concept": "structure",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.property",
+      "concept": "property",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.yard",
+      "concept": "yard",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.compound",
+      "concept": "compound",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.household",
+      "concept": "household",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.living_room",
+      "concept": "living_room",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.dining_room",
+      "concept": "dining_room",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.hallway",
+      "concept": "hallway",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.corridor",
+      "concept": "corridor",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.entrance",
+      "concept": "entrance",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.cellar",
+      "concept": "cellar",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.basement",
+      "concept": "basement",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.attic",
+      "concept": "attic",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.storeroom",
+      "concept": "storeroom",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.pantry",
+      "concept": "pantry",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.office",
+      "concept": "office",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.study",
+      "concept": "study",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.nursery",
+      "concept": "nursery",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.guest_room",
+      "concept": "guest_room",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.courtyard",
+      "concept": "courtyard",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.balcony",
+      "concept": "balcony",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.terrace",
+      "concept": "terrace",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "interior_space",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.ceiling",
+      "concept": "ceiling",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.foundation",
+      "concept": "foundation",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.beam",
+      "concept": "beam",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.pillar",
+      "concept": "pillar",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.column",
+      "concept": "column",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.post",
+      "concept": "post",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.gate",
+      "concept": "gate",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.shutter",
+      "concept": "shutter",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.arch",
+      "concept": "arch",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.step",
+      "concept": "step",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.chimney",
+      "concept": "chimney",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.fountain",
+      "concept": "fountain",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.drain",
+      "concept": "drain",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.sewer",
+      "concept": "sewer",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.mattress",
+      "concept": "mattress",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.pillow",
+      "concept": "pillow",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.blanket",
+      "concept": "blanket",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.stool",
+      "concept": "stool",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.bench",
+      "concept": "bench",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.cabinet",
+      "concept": "cabinet",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.cupboard",
+      "concept": "cupboard",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.wardrobe",
+      "concept": "wardrobe",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.mirror",
+      "concept": "mirror",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.carpet",
+      "concept": "carpet",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.curtain",
+      "concept": "curtain",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.brazier",
+      "concept": "brazier",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.oven",
+      "concept": "oven",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.stove",
+      "concept": "stove",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.sink",
+      "concept": "sink",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.basin",
+      "concept": "basin",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.broom",
+      "concept": "broom",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "household",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.water_supply",
+      "concept": "water_supply",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.cistern",
+      "concept": "cistern",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.pipe",
+      "concept": "pipe",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.plumbing",
+      "concept": "plumbing",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.drainage",
+      "concept": "drainage",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.waste",
+      "concept": "waste",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.garbage",
+      "concept": "garbage",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.latrine",
+      "concept": "latrine",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.bath",
+      "concept": "bath",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.heating",
+      "concept": "heating",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.cooling",
+      "concept": "cooling",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.electricity",
+      "concept": "electricity",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.gas",
+      "concept": "gas",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.fuel",
+      "concept": "fuel",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.firewood",
+      "concept": "firewood",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.power",
+      "concept": "power",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "utilities",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.hut",
+      "concept": "hut",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.cabin",
+      "concept": "cabin",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.cottage",
+      "concept": "cottage",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.farmhouse",
+      "concept": "farmhouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.apartment",
+      "concept": "apartment",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.flat",
+      "concept": "flat",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.mansion",
+      "concept": "mansion",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.villa",
+      "concept": "villa",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.palace",
+      "concept": "palace",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.fort",
+      "concept": "fort",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.bunker",
+      "concept": "bunker",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.tent",
+      "concept": "tent",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.yurt",
+      "concept": "yurt",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.igloo",
+      "concept": "igloo",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.longhouse",
+      "concept": "longhouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.roundhouse",
+      "concept": "roundhouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.treehouse",
+      "concept": "treehouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.houseboat",
+      "concept": "houseboat",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.caravan",
+      "concept": "caravan",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.mobile_home",
+      "concept": "mobile_home",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.apartment_block",
+      "concept": "apartment_block",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.tenement",
+      "concept": "tenement",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.skyscraper",
+      "concept": "skyscraper",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "dwelling_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.camp",
+      "concept": "camp",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.encampment",
+      "concept": "encampment",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.hamlet",
+      "concept": "hamlet",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.village",
+      "concept": "village",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.town",
+      "concept": "town",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.city",
+      "concept": "city",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.capital",
+      "concept": "capital",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.metropolis",
+      "concept": "metropolis",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.district",
+      "concept": "district",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.neighborhood",
+      "concept": "neighborhood",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.suburb",
+      "concept": "suburb",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.colony",
+      "concept": "colony",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.settlement",
+      "concept": "settlement",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.outpost",
+      "concept": "outpost",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.stronghold",
+      "concept": "stronghold",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.monastery",
+      "concept": "monastery",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.convent",
+      "concept": "convent",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.temple_complex",
+      "concept": "temple_complex",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_type",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.marketplace",
+      "concept": "marketplace",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.store",
+      "concept": "store",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.inn",
+      "concept": "inn",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.pub",
+      "concept": "pub",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.restaurant",
+      "concept": "restaurant",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.bakery",
+      "concept": "bakery",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.butcher_shop",
+      "concept": "butcher_shop",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.granary",
+      "concept": "granary",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.warehouse",
+      "concept": "warehouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.factory",
+      "concept": "factory",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.clinic",
+      "concept": "clinic",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.pharmacy",
+      "concept": "pharmacy",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.courthouse",
+      "concept": "courthouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.shrine",
+      "concept": "shrine",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.mosque",
+      "concept": "mosque",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.synagogue",
+      "concept": "synagogue",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.theater",
+      "concept": "theater",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.arena",
+      "concept": "arena",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.bathhouse",
+      "concept": "bathhouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.brothel",
+      "concept": "brothel",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.graveyard",
+      "concept": "graveyard",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "communal_building",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.path",
+      "concept": "path",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.alley",
+      "concept": "alley",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.avenue",
+      "concept": "avenue",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.square",
+      "concept": "square",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.plaza",
+      "concept": "plaza",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.crossroads",
+      "concept": "crossroads",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.intersection",
+      "concept": "intersection",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.sidewalk",
+      "concept": "sidewalk",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.dock",
+      "concept": "dock",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.pier",
+      "concept": "pier",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.station",
+      "concept": "station",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.railway_station",
+      "concept": "railway_station",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.city_gate",
+      "concept": "city_gate",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.watchtower",
+      "concept": "watchtower",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.city_wall",
+      "concept": "city_wall",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.moat",
+      "concept": "moat",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.aqueduct",
+      "concept": "aqueduct",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.canal",
+      "concept": "canal",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.dam",
+      "concept": "dam",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.public_garden",
+      "concept": "public_garden",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.orchard",
+      "concept": "orchard",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.vineyard",
+      "concept": "vineyard",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.shed",
+      "concept": "shed",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.windmill",
+      "concept": "windmill",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.watermill",
+      "concept": "watermill",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.corral",
+      "concept": "corral",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.hedge",
+      "concept": "hedge",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.irrigation",
+      "concept": "irrigation",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.greenhouse",
+      "concept": "greenhouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "rural",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.fortification",
+      "concept": "fortification",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.battlement",
+      "concept": "battlement",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.parapet",
+      "concept": "parapet",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.rampart",
+      "concept": "rampart",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.drawbridge",
+      "concept": "drawbridge",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.gatehouse",
+      "concept": "gatehouse",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.portcullis",
+      "concept": "portcullis",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.arrow_slit",
+      "concept": "arrow_slit",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.keep",
+      "concept": "keep",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.citadel",
+      "concept": "citadel",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.barrier",
+      "concept": "barrier",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.construct",
+      "concept": "construct",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.demolish",
+      "concept": "demolish",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.renovate",
+      "concept": "renovate",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.move_in",
+      "concept": "move_in",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.move_out",
+      "concept": "move_out",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.found",
+      "concept": "found",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.expand",
+      "concept": "expand",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.abandon",
+      "concept": "abandon",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.occupy",
+      "concept": "occupy",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.evacuate",
+      "concept": "evacuate",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "verb",
+      "semantic_group": "settlement_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.resident",
+      "concept": "resident",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.inhabitant",
+      "concept": "inhabitant",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.neighbor",
+      "concept": "neighbor",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.landlord",
+      "concept": "landlord",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.tenant",
+      "concept": "tenant",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.builder",
+      "concept": "builder",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.architect",
+      "concept": "architect",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.mason",
+      "concept": "mason",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.carpenter",
+      "concept": "carpenter",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.plumber",
+      "concept": "plumber",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.electrician",
+      "concept": "electrician",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.innkeeper",
+      "concept": "innkeeper",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.mayor",
+      "concept": "mayor",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
+    },
+    {
+      "id": "settlement.governor",
+      "concept": "governor",
+      "scope": "domain",
+      "category": "settlement",
+      "word_type": "noun",
+      "semantic_group": "settlement_role",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "settlement"
+      ]
     }
   ]
 }
