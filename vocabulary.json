@@ -64,7 +64,6 @@
       "semantic_group": "personal_pronouns",
       "features": ["person", "third_person", "plural"]
     },
-
     {
       "id": "demonstrative.this",
       "category": "demonstratives",
@@ -81,7 +80,6 @@
       "semantic_group": "demonstratives",
       "features": ["distal", "singular"]
     },
-
     {
       "id": "interrogative.who",
       "category": "interrogatives",
@@ -130,7 +128,6 @@
       "semantic_group": "interrogatives",
       "features": ["manner", "question"]
     },
-
     {
       "id": "body.head",
       "category": "body",
@@ -409,7 +406,6 @@
         "related_to": ["body.blood"]
       }
     },
-
     {
       "id": "family.mother",
       "category": "family",
@@ -580,7 +576,6 @@
       "semantic_group": "kinship",
       "features": ["person", "kinship", "extended_family"]
     },
-
     {
       "id": "number.one",
       "category": "numbers",
@@ -661,7 +656,6 @@
       "semantic_group": "cardinal_numbers",
       "features": ["number", "cardinal", "quantity"]
     },
-
     {
       "id": "space.here",
       "category": "space",
@@ -742,7 +736,6 @@
       "semantic_group": "spatial_relations",
       "features": ["distance", "long"]
     },
-
     {
       "id": "time.now",
       "category": "time",
@@ -818,7 +811,6 @@
       "semantic_group": "temporal_units",
       "features": ["time", "cycle", "long_period"]
     },
-
     {
       "id": "nature.sun",
       "category": "nature",
@@ -998,7 +990,6 @@
         "is_a": "nature.animal"
       }
     },
-
     {
       "id": "verb.be",
       "category": "verbs",
@@ -1210,7 +1201,6 @@
       "semantic_group": "emotion",
       "features": ["emotion", "positive", "animate_agent"]
     },
-
     {
       "id": "adjective.big",
       "category": "adjectives",
@@ -1406,7 +1396,6 @@
         "opposite": "adjective.alive"
       }
     },
-
     {
       "id": "need.food",
       "category": "needs",
@@ -1467,7 +1456,6 @@
       "semantic_group": "identity",
       "features": ["identity", "person", "social"]
     },
-
     {
       "id": "object.house",
       "category": "objects",
@@ -1547,7 +1535,6 @@
       "semantic_group": "objects",
       "features": ["object", "human_made", "container"]
     },
-
     {
       "id": "social.person",
       "category": "people",
@@ -1616,7 +1603,6 @@
       "semantic_group": "social_relations",
       "features": ["person", "social", "unknown_relation"]
     },
-
     {
       "id": "logic.yes",
       "category": "function_words",
@@ -1704,6 +1690,1009 @@
       "word_type": "particle",
       "semantic_group": "modality",
       "features": ["modality", "uncertainty"]
+    },
+    {
+      "id": "body.head",
+      "category": "body",
+      "concept": "head",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.face",
+      "category": "body",
+      "concept": "face",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.eye",
+      "category": "body",
+      "concept": "eye",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.ear",
+      "category": "body",
+      "concept": "ear",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.nose",
+      "category": "body",
+      "concept": "nose",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.mouth",
+      "category": "body",
+      "concept": "mouth",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.lip",
+      "category": "body",
+      "concept": "lip",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.tooth",
+      "category": "body",
+      "concept": "tooth",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.tongue",
+      "category": "body",
+      "concept": "tongue",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.throat",
+      "category": "body",
+      "concept": "throat",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.neck",
+      "category": "body",
+      "concept": "neck",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.shoulder",
+      "category": "body",
+      "concept": "shoulder",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.chest",
+      "category": "body",
+      "concept": "chest",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.breast",
+      "category": "body",
+      "concept": "breast",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.nipple",
+      "category": "body",
+      "concept": "nipple",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.back",
+      "category": "body",
+      "concept": "back",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.abdomen",
+      "category": "body",
+      "concept": "abdomen",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.waist",
+      "category": "body",
+      "concept": "waist",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.hip",
+      "category": "body",
+      "concept": "hip",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.groin",
+      "category": "body",
+      "concept": "groin",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.buttocks",
+      "category": "body",
+      "concept": "buttocks",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.anus",
+      "category": "body",
+      "concept": "anus",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.genitals",
+      "category": "body",
+      "concept": "genitals",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.penis",
+      "category": "body",
+      "concept": "penis",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.testicles",
+      "category": "body",
+      "concept": "testicles",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.vulva",
+      "category": "body",
+      "concept": "vulva",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.vagina",
+      "category": "body",
+      "concept": "vagina",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.clitoris",
+      "category": "body",
+      "concept": "clitoris",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.arm",
+      "category": "body",
+      "concept": "arm",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.elbow",
+      "category": "body",
+      "concept": "elbow",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.wrist",
+      "category": "body",
+      "concept": "wrist",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.hand",
+      "category": "body",
+      "concept": "hand",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.palm",
+      "category": "body",
+      "concept": "palm",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.finger",
+      "category": "body",
+      "concept": "finger",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.thumb",
+      "category": "body",
+      "concept": "thumb",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.nail",
+      "category": "body",
+      "concept": "nail",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.leg",
+      "category": "body",
+      "concept": "leg",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.thigh",
+      "category": "body",
+      "concept": "thigh",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.knee",
+      "category": "body",
+      "concept": "knee",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.calf",
+      "category": "body",
+      "concept": "calf",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.ankle",
+      "category": "body",
+      "concept": "ankle",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.foot",
+      "category": "body",
+      "concept": "foot",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.heel",
+      "category": "body",
+      "concept": "heel",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.sole",
+      "category": "body",
+      "concept": "sole",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.toe",
+      "category": "body",
+      "concept": "toe",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.skin",
+      "category": "body",
+      "concept": "skin",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.hair",
+      "category": "body",
+      "concept": "hair",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.bone",
+      "category": "body",
+      "concept": "bone",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.muscle",
+      "category": "body",
+      "concept": "muscle",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.heart",
+      "category": "body",
+      "concept": "heart",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.lung",
+      "category": "body",
+      "concept": "lung",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.stomach",
+      "category": "body",
+      "concept": "stomach",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.brain",
+      "category": "body",
+      "concept": "brain",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "body_part",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.blood",
+      "category": "body",
+      "concept": "blood",
+      "word_type": "noun",
+      "semantic_group": "bodily_substances",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "bodily_substance",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.breath",
+      "category": "body",
+      "concept": "breath",
+      "word_type": "noun",
+      "semantic_group": "bodily_substances",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "bodily_substance",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.sweat",
+      "category": "body",
+      "concept": "sweat",
+      "word_type": "noun",
+      "semantic_group": "bodily_substances",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "bodily_substance",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.urine",
+      "category": "body",
+      "concept": "urine",
+      "word_type": "noun",
+      "semantic_group": "bodily_substances",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "bodily_substance",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.feces",
+      "category": "body",
+      "concept": "feces",
+      "word_type": "noun",
+      "semantic_group": "bodily_substances",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "bodily_substance",
+        "animate"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "body.vomit",
+      "category": "body",
+      "concept": "vomit",
+      "word_type": "noun",
+      "semantic_group": "bodily_substances",
+      "scope": "universal",
+      "tags": [
+        "universal",
+        "body"
+      ],
+      "features": [
+        "bodily_substance",
+        "animate"
+      ],
+      "relations": {}
     }
   ]
 }
