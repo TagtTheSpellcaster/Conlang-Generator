@@ -14057,6 +14057,1865 @@
       "tags": [
         "nature"
       ]
+    },
+    {
+      "id": "food.meal",
+      "concept": "meal",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.dish",
+      "concept": "dish",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.ingredient",
+      "concept": "ingredient",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.portion",
+      "concept": "portion",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.serving",
+      "concept": "serving",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.snack",
+      "concept": "snack",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.breakfast",
+      "concept": "breakfast",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.lunch",
+      "concept": "lunch",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.dinner",
+      "concept": "dinner",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.dessert",
+      "concept": "dessert",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.barley",
+      "concept": "barley",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.oat",
+      "concept": "oat",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.rye",
+      "concept": "rye",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.millet",
+      "concept": "millet",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.sorghum",
+      "concept": "sorghum",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.flour",
+      "concept": "flour",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.loaf",
+      "concept": "loaf",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.porridge",
+      "concept": "porridge",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.pasta",
+      "concept": "pasta",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.noodle",
+      "concept": "noodle",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cake",
+      "concept": "cake",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.pie",
+      "concept": "pie",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.biscuit",
+      "concept": "biscuit",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cracker",
+      "concept": "cracker",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cereal",
+      "concept": "cereal",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "staple_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.beef",
+      "concept": "beef",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.pork",
+      "concept": "pork",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.ham",
+      "concept": "ham",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.bacon",
+      "concept": "bacon",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.mutton",
+      "concept": "mutton",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.lamb",
+      "concept": "lamb",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.goat_meat",
+      "concept": "goat_meat",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.veal",
+      "concept": "veal",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.chicken",
+      "concept": "chicken",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.turkey",
+      "concept": "turkey",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.duck",
+      "concept": "duck",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.rabbit",
+      "concept": "rabbit",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.venison",
+      "concept": "venison",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.sausage",
+      "concept": "sausage",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.shellfish",
+      "concept": "shellfish",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.shrimp",
+      "concept": "shrimp",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.crab",
+      "concept": "crab",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.lobster",
+      "concept": "lobster",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.oyster",
+      "concept": "oyster",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cream",
+      "concept": "cream",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.yogurt",
+      "concept": "yogurt",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "animal_food",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.pear",
+      "concept": "pear",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.peach",
+      "concept": "peach",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.plum",
+      "concept": "plum",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.apricot",
+      "concept": "apricot",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cherry",
+      "concept": "cherry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.fig",
+      "concept": "fig",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.date",
+      "concept": "date",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.lime",
+      "concept": "lime",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.pomegranate",
+      "concept": "pomegranate",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.melon",
+      "concept": "melon",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.watermelon",
+      "concept": "watermelon",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.banana",
+      "concept": "banana",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.coconut",
+      "concept": "coconut",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.berry",
+      "concept": "berry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.strawberry",
+      "concept": "strawberry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.raspberry",
+      "concept": "raspberry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.blackberry",
+      "concept": "blackberry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.blueberry",
+      "concept": "blueberry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "fruit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cabbage",
+      "concept": "cabbage",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.lettuce",
+      "concept": "lettuce",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.spinach",
+      "concept": "spinach",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.lentil",
+      "concept": "lentil",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.chickpea",
+      "concept": "chickpea",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.turnip",
+      "concept": "turnip",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.beet",
+      "concept": "beet",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.radish",
+      "concept": "radish",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.squash",
+      "concept": "squash",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.tomato",
+      "concept": "tomato",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.herb",
+      "concept": "herb",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.sprout",
+      "concept": "sprout",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "vegetable",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.nut",
+      "concept": "nut",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.almond",
+      "concept": "almond",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.walnut",
+      "concept": "walnut",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.hazelnut",
+      "concept": "hazelnut",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.chestnut",
+      "concept": "chestnut",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.peanut",
+      "concept": "peanut",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.sesame",
+      "concept": "sesame",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.flax",
+      "concept": "flax",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.sunflower_seed",
+      "concept": "sunflower_seed",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "nuts_and_seeds",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.syrup",
+      "concept": "syrup",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.spice",
+      "concept": "spice",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cinnamon",
+      "concept": "cinnamon",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.ginger",
+      "concept": "ginger",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.clove",
+      "concept": "clove",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.nutmeg",
+      "concept": "nutmeg",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.olive_oil",
+      "concept": "olive_oil",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.mustard",
+      "concept": "mustard",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "seasoning",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.boil",
+      "concept": "boil",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.fry",
+      "concept": "fry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.roast",
+      "concept": "roast",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.bake",
+      "concept": "bake",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.grill",
+      "concept": "grill",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.steam",
+      "concept": "steam",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.stew",
+      "concept": "stew",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.smoke",
+      "concept": "smoke",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.ferment",
+      "concept": "ferment",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.preserve",
+      "concept": "preserve",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.dry",
+      "concept": "dry",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.peel",
+      "concept": "peel",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cut",
+      "concept": "cut",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.chop",
+      "concept": "chop",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.grind",
+      "concept": "grind",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.mix",
+      "concept": "mix",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.knead",
+      "concept": "knead",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.serve",
+      "concept": "serve",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "verb",
+      "semantic_group": "food_preparation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.juice",
+      "concept": "juice",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cider",
+      "concept": "cider",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.mead",
+      "concept": "mead",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.ale",
+      "concept": "ale",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.spirits",
+      "concept": "spirits",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.liquor",
+      "concept": "liquor",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.broth",
+      "concept": "broth",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.soup",
+      "concept": "soup",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.hot_chocolate",
+      "concept": "hot_chocolate",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.lemonade",
+      "concept": "lemonade",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "beverage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.mug",
+      "concept": "mug",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "dining",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.jug",
+      "concept": "jug",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "dining",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.table",
+      "concept": "table",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "dining",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.flavor",
+      "concept": "flavor",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.stale",
+      "concept": "stale",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.cooked",
+      "concept": "cooked",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.ripe",
+      "concept": "ripe",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.unripe",
+      "concept": "unripe",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.delicious",
+      "concept": "delicious",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.edible",
+      "concept": "edible",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.inedible",
+      "concept": "inedible",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "adjective",
+      "semantic_group": "food_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.feast",
+      "concept": "feast",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.banquet",
+      "concept": "banquet",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.festival_food",
+      "concept": "festival_food",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.ration",
+      "concept": "ration",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.provision",
+      "concept": "provision",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.harvest",
+      "concept": "harvest",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.recipe",
+      "concept": "recipe",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.baker",
+      "concept": "baker",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.brewer",
+      "concept": "brewer",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.farmer",
+      "concept": "farmer",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
+    },
+    {
+      "id": "food.tavern",
+      "concept": "tavern",
+      "scope": "domain",
+      "category": "food",
+      "word_type": "noun",
+      "semantic_group": "food_culture",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "food"
+      ]
     }
   ]
 }
