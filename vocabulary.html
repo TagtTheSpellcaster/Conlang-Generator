@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Conlang Vocabulary</title>
+
+    <link
+        rel="stylesheet"
+        href="vocabulary.css"
+    >
+</head>
+
+<body>
+
+    <header>
+        <h1>Conlang Vocabulary</h1>
+
+        <div class="statistics">
+            <span>
+                Total:
+                <strong id="totalCount">0</strong>
+            </span>
+
+            <span>
+                Visible:
+                <strong id="visibleCount">0</strong>
+            </span>
+        </div>
+    </header>
+
+
+    <main>
+
+        <section class="controls">
+
+            <div class="search">
+                <label for="searchVocabulary">
+                    Search
+                </label>
+
+                <input
+                    id="searchVocabulary"
+                    type="search"
+                    placeholder="Search vocabulary..."
+                >
+            </div>
+
+
+            <div
+                id="attributeFilters"
+                class="filters"
+            ></div>
+
+
+            <div class="sorting">
+
+                <label for="sortAttribute">
+                    Sort by
+                </label>
+
+                <select id="sortAttribute">
+                    <option value="">
+                        Default order
+                    </option>
+                </select>
+
+                <select id="sortDirection">
+                    <option value="asc">
+                        A → Z
+                    </option>
+
+                    <option value="desc">
+                        Z → A
+                    </option>
+                </select>
+
+            </div>
+
+        </section>
+
+
+        <section class="actions">
+
+            <button id="addVocabulary">
+                Add term
+            </button>
+
+            <button id="exportVocabulary">
+                Export vocabulary.json
+            </button>
+
+            <button id="resetVocabulary">
+                Reset local changes
+            </button>
+
+        </section>
+
+
+        <div
+            id="errorMessage"
+            class="error"
+            style="display:none"
+        ></div>
+
+
+        <section class="table-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>#</th>
+                        <th>ID</th>
+                        <th>Concept</th>
+                        <th>Category</th>
+                        <th>Type</th>
+                        <th>Semantic Group</th>
+                        <th>Features</th>
+                        <th>Actions</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="vocabularyBody">
+                </tbody>
+
+            </table>
+
+        </section>
+
+    </main>
+
+
+    <script src="vocabulary-manager.js"></script>
+
+</body>
+
+</html>
