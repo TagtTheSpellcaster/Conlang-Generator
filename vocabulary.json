@@ -22885,6 +22885,2528 @@
       "tags": [
         "technology"
       ]
+    },
+    {
+      "id": "clothing.garment",
+      "concept": "garment",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.outfit",
+      "concept": "outfit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.costume",
+      "concept": "costume",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.underwear",
+      "concept": "underwear",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.outerwear",
+      "concept": "outerwear",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.workwear",
+      "concept": "workwear",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sportswear",
+      "concept": "sportswear",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sleepwear",
+      "concept": "sleepwear",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.blouse",
+      "concept": "blouse",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.t_shirt",
+      "concept": "t_shirt",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.undershirt",
+      "concept": "undershirt",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.tank_top",
+      "concept": "tank_top",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.vest",
+      "concept": "vest",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.waistcoat",
+      "concept": "waistcoat",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.tunic",
+      "concept": "tunic",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sweater",
+      "concept": "sweater",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.pullover",
+      "concept": "pullover",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.jersey",
+      "concept": "jersey",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.jacket",
+      "concept": "jacket",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cape",
+      "concept": "cape",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.poncho",
+      "concept": "poncho",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.hoodie",
+      "concept": "hoodie",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cardigan",
+      "concept": "cardigan",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.dress_shirt",
+      "concept": "dress_shirt",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "upper_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.shorts",
+      "concept": "shorts",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.kilt",
+      "concept": "kilt",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.leggings",
+      "concept": "leggings",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.loincloth",
+      "concept": "loincloth",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.breeches",
+      "concept": "breeches",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.knickers",
+      "concept": "knickers",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.underpants",
+      "concept": "underpants",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.briefs",
+      "concept": "briefs",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.diaper",
+      "concept": "diaper",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "lower_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.gown",
+      "concept": "gown",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.robe",
+      "concept": "robe",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.jumpsuit",
+      "concept": "jumpsuit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.overalls",
+      "concept": "overalls",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.coveralls",
+      "concept": "coveralls",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.bodysuit",
+      "concept": "bodysuit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.kimono",
+      "concept": "kimono",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sari",
+      "concept": "sari",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sarong",
+      "concept": "sarong",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.kaftan",
+      "concept": "kaftan",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.abaya",
+      "concept": "abaya",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cassock",
+      "concept": "cassock",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.habit",
+      "concept": "habit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "full_body",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cap",
+      "concept": "cap",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.crown",
+      "concept": "crown",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.tiara",
+      "concept": "tiara",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.turban",
+      "concept": "turban",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.veil",
+      "concept": "veil",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.headscarf",
+      "concept": "headscarf",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.headband",
+      "concept": "headband",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.bonnet",
+      "concept": "bonnet",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.headdress",
+      "concept": "headdress",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.mask",
+      "concept": "mask",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "headwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.slipper",
+      "concept": "slipper",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sneaker",
+      "concept": "sneaker",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.loafer",
+      "concept": "loafer",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.clog",
+      "concept": "clog",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.moccasin",
+      "concept": "moccasin",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.socks",
+      "concept": "socks",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.stockings",
+      "concept": "stockings",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.legging",
+      "concept": "legging",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.footwrap",
+      "concept": "footwrap",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sandals",
+      "concept": "sandals",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "footwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.mitten",
+      "concept": "mitten",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "handwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.gauntlet",
+      "concept": "gauntlet",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "handwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.handwrap",
+      "concept": "handwrap",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "handwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.bra",
+      "concept": "bra",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "underwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.brassiere",
+      "concept": "brassiere",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "underwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.corset",
+      "concept": "corset",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "underwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.petticoat",
+      "concept": "petticoat",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "underwear",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.buckle",
+      "concept": "buckle",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sash",
+      "concept": "sash",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.shawl",
+      "concept": "shawl",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.bow_tie",
+      "concept": "bow_tie",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.necktie",
+      "concept": "necktie",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.suspenders",
+      "concept": "suspenders",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.braces",
+      "concept": "braces",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.zipper",
+      "concept": "zipper",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.brooch",
+      "concept": "brooch",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.pin",
+      "concept": "pin",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.badge",
+      "concept": "badge",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.purse",
+      "concept": "purse",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.handbag",
+      "concept": "handbag",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.satchel",
+      "concept": "satchel",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.wallet",
+      "concept": "wallet",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.umbrella",
+      "concept": "umbrella",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.earring",
+      "concept": "earring",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.anklet",
+      "concept": "anklet",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.pendant",
+      "concept": "pendant",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.amulet",
+      "concept": "amulet",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.medallion",
+      "concept": "medallion",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.bead",
+      "concept": "bead",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.jewel",
+      "concept": "jewel",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.gemstone",
+      "concept": "gemstone",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "jewelry",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.shield",
+      "concept": "shield",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.breastplate",
+      "concept": "breastplate",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cuirass",
+      "concept": "cuirass",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.chainmail",
+      "concept": "chainmail",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.mail",
+      "concept": "mail",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.greave",
+      "concept": "greave",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.pauldron",
+      "concept": "pauldron",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.gorget",
+      "concept": "gorget",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.armguard",
+      "concept": "armguard",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.leg_guard",
+      "concept": "leg_guard",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.protective_suit",
+      "concept": "protective_suit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.hazmat_suit",
+      "concept": "hazmat_suit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.bulletproof_vest",
+      "concept": "bulletproof_vest",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.spacesuit",
+      "concept": "spacesuit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "protective_clothing",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.toga",
+      "concept": "toga",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.tunica",
+      "concept": "tunica",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.chiton",
+      "concept": "chiton",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.peplos",
+      "concept": "peplos",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.himation",
+      "concept": "himation",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.stola",
+      "concept": "stola",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.mantle",
+      "concept": "mantle",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.tabard",
+      "concept": "tabard",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.surcoat",
+      "concept": "surcoat",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.doublet",
+      "concept": "doublet",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.jerkin",
+      "concept": "jerkin",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.hose",
+      "concept": "hose",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.farthingale",
+      "concept": "farthingale",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.codpiece",
+      "concept": "codpiece",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.coif",
+      "concept": "coif",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.wimple",
+      "concept": "wimple",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cowl",
+      "concept": "cowl",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.yukata",
+      "concept": "yukata",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.hanbok",
+      "concept": "hanbok",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.djellaba",
+      "concept": "djellaba",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.burnous",
+      "concept": "burnous",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.thawb",
+      "concept": "thawb",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "historical_fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.textile",
+      "concept": "textile",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.velvet",
+      "concept": "velvet",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.satin",
+      "concept": "satin",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.felt",
+      "concept": "felt",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.canvas",
+      "concept": "canvas",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.denim",
+      "concept": "denim",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.hemp",
+      "concept": "hemp",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.flax",
+      "concept": "flax",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.lace",
+      "concept": "lace",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.brocade",
+      "concept": "brocade",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.damask",
+      "concept": "damask",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.muslin",
+      "concept": "muslin",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.nylon",
+      "concept": "nylon",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.polyester",
+      "concept": "polyester",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.rubber",
+      "concept": "rubber",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "materials_and_textiles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sleeve",
+      "concept": "sleeve",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.collar",
+      "concept": "collar",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cuff",
+      "concept": "cuff",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.hem",
+      "concept": "hem",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.seam",
+      "concept": "seam",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.strap",
+      "concept": "strap",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.shoulder",
+      "concept": "shoulder",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.waistband",
+      "concept": "waistband",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.buttonhole",
+      "concept": "buttonhole",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.sole",
+      "concept": "sole",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.heel",
+      "concept": "heel",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.toe",
+      "concept": "toe",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.lining",
+      "concept": "lining",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.drawstring",
+      "concept": "drawstring",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "clothing_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.decorated",
+      "concept": "decorated",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "adjective",
+      "semantic_group": "clothing_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.colorful",
+      "concept": "colorful",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "adjective",
+      "semantic_group": "clothing_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.worn",
+      "concept": "worn",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "adjective",
+      "semantic_group": "clothing_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.torn",
+      "concept": "torn",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "adjective",
+      "semantic_group": "clothing_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.elegant",
+      "concept": "elegant",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "adjective",
+      "semantic_group": "clothing_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.modest",
+      "concept": "modest",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "adjective",
+      "semantic_group": "clothing_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.put_on",
+      "concept": "put_on",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.take_off",
+      "concept": "take_off",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.unbutton",
+      "concept": "unbutton",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.untie",
+      "concept": "untie",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.fasten",
+      "concept": "fasten",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.unfasten",
+      "concept": "unfasten",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.stitch",
+      "concept": "stitch",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.weave",
+      "concept": "weave",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.knit",
+      "concept": "knit",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.iron",
+      "concept": "iron",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.fold",
+      "concept": "fold",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.mend",
+      "concept": "mend",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.dye",
+      "concept": "dye",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.bleach",
+      "concept": "bleach",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.cut",
+      "concept": "cut",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "verb",
+      "semantic_group": "clothing_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.livery",
+      "concept": "livery",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.ceremonial_robe",
+      "concept": "ceremonial_robe",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.wedding_dress",
+      "concept": "wedding_dress",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.mourning_clothes",
+      "concept": "mourning_clothes",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.military_uniform",
+      "concept": "military_uniform",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.work_uniform",
+      "concept": "work_uniform",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.priestly_robe",
+      "concept": "priestly_robe",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.royal_robes",
+      "concept": "royal_robes",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.school_uniform",
+      "concept": "school_uniform",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.protective_gear",
+      "concept": "protective_gear",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
+    },
+    {
+      "id": "clothing.disguise",
+      "concept": "disguise",
+      "scope": "domain",
+      "category": "clothing",
+      "word_type": "noun",
+      "semantic_group": "social_and_occupational",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "clothing"
+      ]
     }
   ]
 }
