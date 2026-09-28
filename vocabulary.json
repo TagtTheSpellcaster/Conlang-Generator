@@ -7579,6 +7579,1800 @@
       ],
       "features": [],
       "relations": {}
+    },
+    {
+      "id": "verb.arrive",
+      "concept": "arrive",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.leave",
+      "concept": "leave",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.enter",
+      "concept": "enter",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.exit",
+      "concept": "exit",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.return",
+      "concept": "return",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.travel",
+      "concept": "travel",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.walk",
+      "concept": "walk",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.run",
+      "concept": "run",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.climb",
+      "concept": "climb",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.fall",
+      "concept": "fall",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.jump",
+      "concept": "jump",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.swim",
+      "concept": "swim",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.fly",
+      "concept": "fly",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.cross",
+      "concept": "cross",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.follow",
+      "concept": "follow",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.lead",
+      "concept": "lead",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.stop",
+      "concept": "stop",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.start",
+      "concept": "start",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.turn",
+      "concept": "turn",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.move",
+      "concept": "move",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.look",
+      "concept": "look",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.watch",
+      "concept": "watch",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.smell",
+      "concept": "smell",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.taste",
+      "concept": "taste",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.touch",
+      "concept": "touch",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.feel",
+      "concept": "feel",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.remember",
+      "concept": "remember",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.forget",
+      "concept": "forget",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.understand",
+      "concept": "understand",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.learn",
+      "concept": "learn",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.teach",
+      "concept": "teach",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.believe",
+      "concept": "believe",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.hope",
+      "concept": "hope",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.fear",
+      "concept": "fear",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.choose",
+      "concept": "choose",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.decide",
+      "concept": "decide",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.imagine",
+      "concept": "imagine",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.dream",
+      "concept": "dream",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.ask",
+      "concept": "ask",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.answer",
+      "concept": "answer",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.tell",
+      "concept": "tell",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.call",
+      "concept": "call",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.listen",
+      "concept": "listen",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.read",
+      "concept": "read",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.write",
+      "concept": "write",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.sing",
+      "concept": "sing",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.shout",
+      "concept": "shout",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.whisper",
+      "concept": "whisper",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.show",
+      "concept": "show",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.meet",
+      "concept": "meet",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.help",
+      "concept": "help",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.trust",
+      "concept": "trust",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.betray",
+      "concept": "betray",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.marry",
+      "concept": "marry",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.separate",
+      "concept": "separate",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.visit",
+      "concept": "visit",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.invite",
+      "concept": "invite",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.use",
+      "concept": "use",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.hold",
+      "concept": "hold",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.carry",
+      "concept": "carry",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.put",
+      "concept": "put",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.bring",
+      "concept": "bring",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.send",
+      "concept": "send",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.receive",
+      "concept": "receive",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "possession",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.find",
+      "concept": "find",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.lose",
+      "concept": "lose",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "possession",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.keep",
+      "concept": "keep",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "possession",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.open",
+      "concept": "open",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.close",
+      "concept": "close",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.break",
+      "concept": "break",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.cut",
+      "concept": "cut",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.tie",
+      "concept": "tie",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.untie",
+      "concept": "untie",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.throw",
+      "concept": "throw",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.catch",
+      "concept": "catch",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.pull",
+      "concept": "pull",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.push",
+      "concept": "push",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "manipulation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.build",
+      "concept": "build",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.create",
+      "concept": "create",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.draw",
+      "concept": "draw",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.paint",
+      "concept": "paint",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.grow",
+      "concept": "grow",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.plant",
+      "concept": "plant",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.repair",
+      "concept": "repair",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.destroy",
+      "concept": "destroy",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "destruction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.burn",
+      "concept": "burn",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "destruction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.dig",
+      "concept": "dig",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.shape",
+      "concept": "shape",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.change",
+      "concept": "change",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.fight",
+      "concept": "fight",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.attack",
+      "concept": "attack",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.defend",
+      "concept": "defend",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.hurt",
+      "concept": "hurt",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.wound",
+      "concept": "wound",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.shoot",
+      "concept": "shoot",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.stab",
+      "concept": "stab",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.strike",
+      "concept": "strike",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.escape",
+      "concept": "escape",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "danger",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.hide",
+      "concept": "hide",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "danger",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.chase",
+      "concept": "chase",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.capture",
+      "concept": "capture",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "combat",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.rescue",
+      "concept": "rescue",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.survive",
+      "concept": "survive",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "life",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.wake",
+      "concept": "wake",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_state",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.wash",
+      "concept": "wash",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_action",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.bathe",
+      "concept": "bathe",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_action",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.dress",
+      "concept": "dress",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_action",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.undress",
+      "concept": "undress",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_action",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.sit",
+      "concept": "sit",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.stand",
+      "concept": "stand",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.kneel",
+      "concept": "kneel",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.rest",
+      "concept": "rest",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_state",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.breathe",
+      "concept": "breathe",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_action",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.cough",
+      "concept": "cough",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "bodily_action",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.laugh",
+      "concept": "laugh",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.cry",
+      "concept": "cry",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.smile",
+      "concept": "smile",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "emotion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.kiss",
+      "concept": "kiss",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "social",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.buy",
+      "concept": "buy",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "commerce",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.sell",
+      "concept": "sell",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "commerce",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.pay",
+      "concept": "pay",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "commerce",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.cost",
+      "concept": "cost",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "commerce",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.trade",
+      "concept": "trade",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "commerce",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.work",
+      "concept": "work",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "work",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.hunt",
+      "concept": "hunt",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "survival",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.fish",
+      "concept": "fish",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "survival",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.farm",
+      "concept": "farm",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "work",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.cook",
+      "concept": "cook",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "daily_life",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.gather",
+      "concept": "gather",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "survival",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.steal",
+      "concept": "steal",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "commerce",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.own",
+      "concept": "own",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "possession",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.rain",
+      "concept": "rain",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "nature",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.snow",
+      "concept": "snow",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "nature",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.freeze",
+      "concept": "freeze",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "nature",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.melt",
+      "concept": "melt",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "nature",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.flow",
+      "concept": "flow",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "nature",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.shine",
+      "concept": "shine",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "nature",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
+    },
+    {
+      "id": "verb.blow",
+      "concept": "blow",
+      "scope": "domain",
+      "category": "verb",
+      "word_type": "verb",
+      "semantic_group": "nature",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "verb"
+      ]
     }
   ]
 }
