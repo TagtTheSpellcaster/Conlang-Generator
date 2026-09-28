@@ -8,50 +8,102 @@ const STORAGE_KEY = "conlang_vocabulary";
 // DATABASE NORMALIZATION
 // ============================================================
 
-function flattenVocabulary(data) {
-    if (Array.isArray(data)) {
-        return data.map(entry => ({ ...entry }));
+/*
+ * Canonical database format:
+ *
+ * {
+ *   "vocabulary": [
+ *     { ...entry... },
+ *     { ...entry... }
+ *   ]
+ * }
+ *
+ * The application never assigns semantic meaning to top-level JSON
+ * groups. All filtering is based on fields inside each entry.
+ */
+
+
+function normalizeVocabularyData(data) {
+
+    // New canonical format.
+    if (
+        data &&
+        !Array.isArray(data) &&
+        Array.isArray(data.vocabulary)
+    ) {
+        return data.vocabulary.map(entry => ({
+            ...entry
+        }));
     }
 
-    const result = [];
 
-    for (const [group, entries] of Object.entries(data || {})) {
-        if (!Array.isArray(entries)) continue;
+    // Plain array is also accepted.
+    if (Array.isArray(data)) {
 
-        for (const entry of entries) {
-            const item = { ...entry };
+        return data.map(entry => ({
+            ...entry
+        }));
+    }
 
-            // If the JSON is grouped by scope, use the group
-            // as scope when the entry does not already define one.
-            if (!item.scope) {
-                item.scope = group;
+
+    // Backward compatibility:
+    // accept the old grouped format and flatten it.
+    if (
+        data &&
+        typeof data === "object"
+    ) {
+
+        const result = [];
+
+
+        for (
+            const [group, entries]
+            of Object.entries(data)
+        ) {
+
+            if (!Array.isArray(entries)) {
+                continue;
             }
 
-            result.push(item);
+
+            for (const entry of entries) {
+
+                const item = {
+                    ...entry
+                };
+
+
+                if (!item.scope) {
+
+                    item.scope =
+                        group === "universal"
+                            ? "universal"
+                            : "domain";
+                }
+
+
+                result.push(item);
+            }
         }
+
+
+        return result;
     }
 
-    return result;
+
+    throw new Error(
+        "Unsupported vocabulary JSON structure."
+    );
 }
 
 
-function groupVocabulary(entries) {
-    const data = {};
+function serializeVocabulary() {
 
-    for (const entry of entries) {
-        const group = entry.scope || "common";
-
-        if (!data[group]) {
-            data[group] = [];
-        }
-
-        const copy = { ...entry };
-        delete copy.scope;
-
-        data[group].push(copy);
-    }
-
-    return data;
+    return {
+        vocabulary: vocabulary.map(entry => ({
+            ...entry
+        }))
+    };
 }
 
 
@@ -59,42 +111,77 @@ function groupVocabulary(entries) {
 // LOAD / SAVE
 // ============================================================
 
+
 async function loadVocabularyFromJSON() {
+
     const response = await fetch(
-        "vocabulary.json?cacheBust=" + Date.now()
+        "vocabulary.json?cacheBust=" +
+        Date.now()
     );
 
+
     if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
+
+        throw new Error(
+            `HTTP error ${response.status}`
+        );
     }
 
-    const data = await response.json();
 
-    vocabulary = flattenVocabulary(data);
+    const data =
+        await response.json();
+
+
+    vocabulary =
+        normalizeVocabularyData(
+            data
+        );
 }
 
 
 async function loadVocabulary() {
+
     try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+
+        const stored =
+            localStorage.getItem(
+                STORAGE_KEY
+            );
+
 
         if (stored) {
-            vocabulary = JSON.parse(stored);
-            setDatabaseStatus("Local working copy");
+
+            vocabulary =
+                JSON.parse(
+                    stored
+                );
+
+
+            setDatabaseStatus(
+                "Local working copy"
+            );
+
         } else {
+
             await loadVocabularyFromJSON();
 
+
             saveVocabulary();
+
 
             setDatabaseStatus(
                 "Loaded from vocabulary.json"
             );
         }
 
+
         refreshInterface();
 
+
     } catch (error) {
+
         console.error(error);
+
 
         showError(
             "Unable to load vocabulary.json: " +
@@ -105,9 +192,14 @@ async function loadVocabulary() {
 
 
 function saveVocabulary() {
+
     localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(vocabulary, null, 2)
+        JSON.stringify(
+            vocabulary,
+            null,
+            2
+        )
     );
 }
 
@@ -116,26 +208,33 @@ function saveVocabulary() {
 // RELOAD
 // ============================================================
 
+
 async function reloadVocabularyFromJSON() {
 
     if (!confirm(
         "Reload vocabulary.json from the server?\n\n" +
         "All local changes stored in this browser will be discarded."
     )) {
+
         return;
     }
+
 
     try {
 
         await loadVocabularyFromJSON();
 
+
         saveVocabulary();
+
 
         setDatabaseStatus(
             "Reloaded from vocabulary.json"
         );
 
+
         refreshInterface();
+
 
     } catch (error) {
 
@@ -151,71 +250,116 @@ async function reloadVocabularyFromJSON() {
 // APPEND JSON
 // ============================================================
 
+
 let pendingAppendEntries = null;
 
 
 function openAppendPicker() {
 
     document
-        .getElementById("appendFileInput")
+        .getElementById(
+            "appendFileInput"
+        )
         .click();
 }
 
 
 async function handleAppendFile(event) {
 
-    const file = event.target.files[0];
+    const file =
+        event.target.files[0];
 
-    // Reset input so that the same file can be selected again.
+
+    // Reset input so that the same file
+    // can be selected again.
     event.target.value = "";
 
-    if (!file) return;
+
+    if (!file) {
+        return;
+    }
+
 
     try {
 
-        const text = await file.text();
+        const text =
+            await file.text();
+
 
         let parsed;
 
+
         try {
-            parsed = JSON.parse(text);
+
+            parsed =
+                JSON.parse(text);
+
         } catch (error) {
+
             throw new Error(
                 "The selected file is not valid JSON.\n\n" +
                 error.message
             );
         }
 
-        const imported =
-            flattenVocabulary(parsed);
 
-        validateImportedEntries(imported);
+        const imported =
+            normalizeVocabularyData(
+                parsed
+            );
+
+
+        validateImportedEntries(
+            imported
+        );
+
 
         const existingIds =
             new Set(
-                vocabulary.map(entry => entry.id)
+                vocabulary.map(
+                    entry => entry.id
+                )
             );
+
 
         const duplicateIds =
             imported
-                .filter(entry =>
-                    existingIds.has(entry.id)
+                .filter(
+                    entry =>
+                        existingIds.has(
+                            entry.id
+                        )
                 )
-                .map(entry => entry.id);
+                .map(
+                    entry =>
+                        entry.id
+                );
+
 
         const newEntries =
-            imported.filter(entry =>
-                !existingIds.has(entry.id)
+            imported.filter(
+                entry =>
+                    !existingIds.has(
+                        entry.id
+                    )
             );
 
+
         pendingAppendEntries = {
-            fileName: file.name,
+
+            fileName:
+                file.name,
+
             imported,
+
             newEntries,
+
             duplicateIds
         };
 
+
         showAppendModal();
+
 
     } catch (error) {
 
@@ -227,42 +371,56 @@ async function handleAppendFile(event) {
 }
 
 
-function validateImportedEntries(entries) {
+function validateImportedEntries(
+    entries
+) {
 
     if (!Array.isArray(entries)) {
+
         throw new Error(
             "The imported JSON does not contain vocabulary entries."
         );
     }
 
+
     const invalid = [];
 
-    entries.forEach((entry, index) => {
 
-        if (
-            !entry ||
-            typeof entry !== "object" ||
-            Array.isArray(entry)
-        ) {
-            invalid.push(
-                `Entry ${index + 1}: not an object`
-            );
+    entries.forEach(
+        (entry, index) => {
 
-            return;
+            if (
+                !entry ||
+                typeof entry !== "object" ||
+                Array.isArray(entry)
+            ) {
+
+                invalid.push(
+                    `Entry ${index + 1}: not an object`
+                );
+
+
+                return;
+            }
+
+
+            if (!entry.id) {
+
+                invalid.push(
+                    `Entry ${index + 1}: missing "id"`
+                );
+            }
+
+
+            if (!entry.concept) {
+
+                invalid.push(
+                    `Entry ${index + 1}: missing "concept"`
+                );
+            }
         }
+    );
 
-        if (!entry.id) {
-            invalid.push(
-                `Entry ${index + 1}: missing "id"`
-            );
-        }
-
-        if (!entry.concept) {
-            invalid.push(
-                `Entry ${index + 1}: missing "concept"`
-            );
-        }
-    });
 
     if (invalid.length) {
 
@@ -273,17 +431,26 @@ function validateImportedEntries(entries) {
     }
 
 
-    // Check for duplicate IDs inside the imported file.
+    // Check for duplicate IDs inside
+    // the imported file.
 
-    const ids = new Set();
+    const ids =
+        new Set();
 
-    const internalDuplicates = [];
+
+    const internalDuplicates =
+        [];
+
 
     entries.forEach(entry => {
 
         if (ids.has(entry.id)) {
-            internalDuplicates.push(entry.id);
+
+            internalDuplicates.push(
+                entry.id
+            );
         }
+
 
         ids.add(entry.id);
     });
@@ -293,7 +460,11 @@ function validateImportedEntries(entries) {
 
         throw new Error(
             "The imported file contains duplicate IDs:\n\n" +
-            [...new Set(internalDuplicates)].join("\n")
+            [
+                ...new Set(
+                    internalDuplicates
+                )
+            ].join("\n")
         );
     }
 }
@@ -302,16 +473,27 @@ function validateImportedEntries(entries) {
 function showAppendModal() {
 
     const modal =
-        document.getElementById("appendModal");
+        document.getElementById(
+            "appendModal"
+        );
+
 
     const summary =
-        document.getElementById("appendSummary");
+        document.getElementById(
+            "appendSummary"
+        );
+
 
     const errors =
-        document.getElementById("appendErrors");
+        document.getElementById(
+            "appendErrors"
+        );
+
 
     const confirmButton =
-        document.getElementById("confirmAppend");
+        document.getElementById(
+            "confirmAppend"
+        );
 
 
     const {
@@ -319,7 +501,8 @@ function showAppendModal() {
         imported,
         newEntries,
         duplicateIds
-    } = pendingAppendEntries;
+    } =
+        pendingAppendEntries;
 
 
     document.getElementById(
@@ -343,6 +526,7 @@ function showAppendModal() {
 
         errors.hidden = false;
 
+
         errors.textContent =
             "The following IDs already exist and will not be appended:\n\n" +
             duplicateIds.join("\n");
@@ -359,15 +543,21 @@ function showAppendModal() {
 
 function confirmAppend() {
 
-    if (!pendingAppendEntries) return;
+    if (!pendingAppendEntries) {
+        return;
+    }
 
 
     const {
         newEntries
-    } = pendingAppendEntries;
+    } =
+        pendingAppendEntries;
 
 
-    vocabulary.push(...newEntries);
+    vocabulary.push(
+        ...newEntries
+    );
+
 
     saveVocabulary();
 
@@ -380,7 +570,9 @@ function confirmAppend() {
     pendingAppendEntries = null;
 
 
-    closeModal("appendModal");
+    closeModal(
+        "appendModal"
+    );
 
 
     refreshInterface();
@@ -391,15 +583,17 @@ function confirmAppend() {
 // EXPORT
 // ============================================================
 
+
 function exportVocabulary() {
 
     /*
-     * Reconstruct the grouped JSON structure.
+     * Always export the canonical format.
+     *
      * JSON.stringify guarantees valid JSON syntax.
      */
 
     const data =
-        groupVocabulary(vocabulary);
+        serializeVocabulary();
 
 
     const json =
@@ -420,27 +614,38 @@ function exportVocabulary() {
 
 
     const url =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
 
     const link =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
 
     link.href = url;
+
 
     link.download =
         "vocabulary.json";
 
 
-    document.body.appendChild(link);
+    document.body.appendChild(
+        link
+    );
+
 
     link.click();
+
 
     link.remove();
 
 
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(
+        url
+    );
 }
 
 
@@ -448,22 +653,30 @@ function exportVocabulary() {
 // FILTERS
 // ============================================================
 
+
 function getAllAttributes() {
 
     const attributes =
         new Set();
 
 
-    vocabulary.forEach(entry => {
+    vocabulary.forEach(
+        entry => {
 
-        Object.keys(entry)
-            .forEach(key =>
-                attributes.add(key)
-            );
-    });
+            Object.keys(entry)
+                .forEach(
+                    key =>
+                        attributes.add(
+                            key
+                        )
+                );
+        }
+    );
 
 
-    return [...attributes].sort();
+    return [
+        ...attributes
+    ].sort();
 }
 
 
@@ -471,7 +684,9 @@ function valueToArray(value) {
 
     if (Array.isArray(value)) {
 
-        return value.map(String);
+        return value.map(
+            String
+        );
     }
 
 
@@ -481,7 +696,9 @@ function valueToArray(value) {
         typeof value !== "object"
     ) {
 
-        return [String(value)];
+        return [
+            String(value)
+        ];
     }
 
 
@@ -502,19 +719,26 @@ function getAttributeValue(
         value === undefined ||
         value === null
     ) {
+
         return "";
     }
 
 
     if (Array.isArray(value)) {
 
-        return value.join(", ");
+        return value.join(
+            ", "
+        );
     }
 
 
-    if (typeof value === "object") {
+    if (
+        typeof value === "object"
+    ) {
 
-        return JSON.stringify(value);
+        return JSON.stringify(
+            value
+        );
     }
 
 
@@ -537,118 +761,158 @@ function populateFilters() {
         getAllAttributes();
 
 
-    attributes.forEach(attribute => {
+    attributes.forEach(
+        attribute => {
 
-        const values =
-            new Set();
-
-
-        vocabulary.forEach(entry => {
-
-            valueToArray(
-                entry[attribute]
-            ).forEach(value =>
-                values.add(value)
-            );
-        });
+            const values =
+                new Set();
 
 
-        if (!values.size) return;
+            vocabulary.forEach(
+                entry => {
 
-
-        const wrapper =
-            document.createElement("div");
-
-
-        wrapper.className =
-            "filter-group";
-
-
-        const label =
-            document.createElement("label");
-
-
-        label.textContent =
-            formatAttributeName(
-                attribute
-            );
-
-
-        const select =
-            document.createElement("select");
-
-
-        select.dataset.attribute =
-            attribute;
-
-
-        const all =
-            document.createElement("option");
-
-
-        all.value = "";
-
-        all.textContent = "All";
-
-
-        select.appendChild(all);
-
-
-        [...values]
-            .sort((a, b) =>
-                a.localeCompare(
-                    b,
-                    undefined,
-                    {
-                        numeric: true,
-                        sensitivity: "base"
-                    }
-                )
-            )
-            .forEach(value => {
-
-                const option =
-                    document.createElement(
-                        "option"
+                    valueToArray(
+                        entry[attribute]
+                    ).forEach(
+                        value =>
+                            values.add(
+                                value
+                            )
                     );
+                }
+            );
 
 
-                option.value =
-                    value;
+            if (!values.size) {
+                return;
+            }
 
 
-                option.textContent =
-                    value;
-
-
-                select.appendChild(
-                    option
+            const wrapper =
+                document.createElement(
+                    "div"
                 );
-            });
 
 
-        select.addEventListener(
-            "change",
-            applyFilters
-        );
+            wrapper.className =
+                "filter-group";
 
 
-        wrapper.appendChild(label);
+            const label =
+                document.createElement(
+                    "label"
+                );
 
-        wrapper.appendChild(select);
 
-        container.appendChild(wrapper);
-    });
+            label.textContent =
+                formatAttributeName(
+                    attribute
+                );
+
+
+            const select =
+                document.createElement(
+                    "select"
+                );
+
+
+            select.dataset.attribute =
+                attribute;
+
+
+            const all =
+                document.createElement(
+                    "option"
+                );
+
+
+            all.value = "";
+
+
+            all.textContent =
+                "All";
+
+
+            select.appendChild(
+                all
+            );
+
+
+            [
+                ...values
+            ]
+                .sort(
+                    (a, b) =>
+                        a.localeCompare(
+                            b,
+                            undefined,
+                            {
+                                numeric: true,
+                                sensitivity: "base"
+                            }
+                        )
+                )
+                .forEach(
+                    value => {
+
+                        const option =
+                            document.createElement(
+                                "option"
+                            );
+
+
+                        option.value =
+                            value;
+
+
+                        option.textContent =
+                            value;
+
+
+                        select.appendChild(
+                            option
+                        );
+                    }
+                );
+
+
+            select.addEventListener(
+                "change",
+                applyFilters
+            );
+
+
+            wrapper.appendChild(
+                label
+            );
+
+
+            wrapper.appendChild(
+                select
+            );
+
+
+            container.appendChild(
+                wrapper
+            );
+        }
+    );
 }
 
 
-function formatAttributeName(attribute) {
+function formatAttributeName(
+    attribute
+) {
 
     return attribute
-        .replace(/_/g, " ")
+        .replace(
+            /_/g,
+            " "
+        )
         .replace(
             /\b\w/g,
-            char => char.toUpperCase()
+            char =>
+                char.toUpperCase()
         );
 }
 
@@ -672,67 +936,73 @@ function applyFilters() {
 
 
     filteredVocabulary =
-        vocabulary.filter(entry => {
+        vocabulary.filter(
+            entry => {
 
-            /*
-             * General text search.
-             */
+                /*
+                 * General text search.
+                 */
 
-            if (search) {
+                if (search) {
 
-                const text =
-                    JSON.stringify(
-                        entry
-                    ).toLowerCase();
-
-
-                if (
-                    !text.includes(search)
-                ) {
-                    return false;
-                }
-            }
+                    const text =
+                        JSON.stringify(
+                            entry
+                        ).toLowerCase();
 
 
-            /*
-             * Attribute filters.
-             */
+                    if (
+                        !text.includes(
+                            search
+                        )
+                    ) {
 
-            for (
-                const select of selects
-            ) {
-
-                const selected =
-                    select.value;
-
-
-                if (!selected) {
-                    continue;
+                        return false;
+                    }
                 }
 
 
-                const values =
-                    valueToArray(
-                        entry[
-                            select.dataset
-                                .attribute
-                        ]
-                    );
+                /*
+                 * Attribute filters.
+                 */
 
-
-                if (
-                    !values.includes(
-                        selected
-                    )
+                for (
+                    const select
+                    of selects
                 ) {
 
-                    return false;
+                    const selected =
+                        select.value;
+
+
+                    if (!selected) {
+                        continue;
+                    }
+
+
+                    const values =
+                        valueToArray(
+                            entry[
+                                select.dataset
+                                    .attribute
+                            ]
+                        );
+
+
+                    if (
+                        !values.includes(
+                            selected
+                        )
+                    ) {
+
+                        return false;
+                    }
                 }
+
+
+                return true;
             }
-
-
-            return true;
-        });
+        );
 
 
     applySorting();
@@ -742,6 +1012,7 @@ function applyFilters() {
 // ============================================================
 // SORTING
 // ============================================================
+
 
 function populateSortAttributes() {
 
@@ -762,51 +1033,60 @@ function populateSortAttributes() {
 
     none.value = "";
 
+
     none.textContent =
         "Default order";
 
 
-    select.appendChild(none);
+    select.appendChild(
+        none
+    );
 
 
     getAllAttributes()
-        .forEach(attribute => {
+        .forEach(
+            attribute => {
 
-            const option =
-                document.createElement(
-                    "option"
+                const option =
+                    document.createElement(
+                        "option"
+                    );
+
+
+                option.value =
+                    attribute;
+
+
+                option.textContent =
+                    formatAttributeName(
+                        attribute
+                    );
+
+
+                select.appendChild(
+                    option
                 );
-
-
-            option.value =
-                attribute;
-
-
-            option.textContent =
-                formatAttributeName(
-                    attribute
-                );
-
-
-            select.appendChild(
-                option
-            );
-        });
+            }
+        );
 }
 
 
 function applySorting() {
 
     const attribute =
-        document.getElementById(
-            "sortAttribute"
-        ).value;
+        document
+            .getElementById(
+                "sortAttribute"
+            )
+            .value;
 
 
     const direction =
-        document.getElementById(
-            "sortDirection"
-        ).value;
+        document
+            .getElementById(
+                "sortDirection"
+            )
+            .value;
 
 
     if (!attribute) {
@@ -860,6 +1140,7 @@ function applySorting() {
 // TABLE
 // ============================================================
 
+
 function renderVocabulary() {
 
     const tbody =
@@ -896,6 +1177,8 @@ function renderVocabulary() {
 
                 entry.scope || "",
 
+                entry.type || "",
+
                 entry.locale || "",
 
                 getAttributeValue(
@@ -910,20 +1193,24 @@ function renderVocabulary() {
             ];
 
 
-            cells.forEach(value => {
+            cells.forEach(
+                value => {
 
-                const cell =
-                    document.createElement(
-                        "td"
+                    const cell =
+                        document.createElement(
+                            "td"
+                        );
+
+
+                    cell.textContent =
+                        value;
+
+
+                    row.appendChild(
+                        cell
                     );
-
-
-                cell.textContent =
-                    value;
-
-
-                row.appendChild(cell);
-            });
+                }
+            );
 
 
             const actions =
@@ -974,14 +1261,24 @@ function renderVocabulary() {
             );
 
 
-            actions.appendChild(edit);
+            actions.appendChild(
+                edit
+            );
 
-            actions.appendChild(remove);
+
+            actions.appendChild(
+                remove
+            );
 
 
-            row.appendChild(actions);
+            row.appendChild(
+                actions
+            );
 
-            tbody.appendChild(row);
+
+            tbody.appendChild(
+                row
+            );
         }
     );
 
@@ -1008,6 +1305,7 @@ function updateCounters() {
 // ============================================================
 // ADD / EDIT
 // ============================================================
+
 
 let editingId = null;
 
@@ -1043,7 +1341,7 @@ function openEntryModal(
 
             semantic_group: "",
 
-            scope: "common",
+            scope: "domain",
 
             type: "",
 
@@ -1108,16 +1406,24 @@ function openEntryModal(
     document.getElementById(
         "entryTags"
     ).value =
-        Array.isArray(values.tags)
-            ? values.tags.join(", ")
+        Array.isArray(
+            values.tags
+        )
+            ? values.tags.join(
+                ", "
+            )
             : "";
 
 
     document.getElementById(
         "entryFeatures"
     ).value =
-        Array.isArray(values.features)
-            ? values.features.join(", ")
+        Array.isArray(
+            values.features
+        )
+            ? values.features.join(
+                ", "
+            )
             : "";
 
 
@@ -1182,7 +1488,9 @@ function readEntryForm() {
                     item =>
                         item.trim()
                 )
-                .filter(Boolean);
+                .filter(
+                    Boolean
+                );
 
 
     return {
@@ -1274,7 +1582,9 @@ function readEntryForm() {
 }
 
 
-function submitEntryForm(event) {
+function submitEntryForm(
+    event
+) {
 
     event.preventDefault();
 
@@ -1366,6 +1676,7 @@ function submitEntryForm(event) {
         errorBox.hidden =
             false;
 
+
         errorBox.textContent =
             error.message;
     }
@@ -1378,7 +1689,9 @@ function addVocabularyEntry() {
 }
 
 
-function editVocabularyEntry(id) {
+function editVocabularyEntry(
+    id
+) {
 
     const entry =
         vocabulary.find(
@@ -1396,7 +1709,9 @@ function editVocabularyEntry(id) {
 }
 
 
-function deleteVocabularyEntry(id) {
+function deleteVocabularyEntry(
+    id
+) {
 
     const entry =
         vocabulary.find(
@@ -1405,12 +1720,15 @@ function deleteVocabularyEntry(id) {
         );
 
 
-    if (!entry) return;
+    if (!entry) {
+        return;
+    }
 
 
     if (!confirm(
         `Delete "${entry.concept}" (${id})?`
     )) {
+
         return;
     }
 
@@ -1433,6 +1751,7 @@ function deleteVocabularyEntry(id) {
 // MODALS / UI
 // ============================================================
 
+
 function closeModal(id) {
 
     document.getElementById(
@@ -1441,15 +1760,20 @@ function closeModal(id) {
 }
 
 
-function setDatabaseStatus(text) {
+function setDatabaseStatus(
+    text
+) {
 
     document.getElementById(
         "databaseStatus"
-    ).textContent = text;
+    ).textContent =
+        text;
 }
 
 
-function showError(message) {
+function showError(
+    message
+) {
 
     const element =
         document.getElementById(
@@ -1459,6 +1783,7 @@ function showError(message) {
 
     element.hidden = false;
 
+
     element.textContent =
         message;
 }
@@ -1467,6 +1792,7 @@ function showError(message) {
 // ============================================================
 // REFRESH
 // ============================================================
+
 
 function refreshInterface() {
 
@@ -1482,11 +1808,13 @@ function refreshInterface() {
 // RESET
 // ============================================================
 
+
 function resetVocabulary() {
 
     if (!confirm(
         "Clear local changes and reload vocabulary.json?"
     )) {
+
         return;
     }
 
@@ -1503,6 +1831,7 @@ function resetVocabulary() {
 // ============================================================
 // INITIALIZATION
 // ============================================================
+
 
 document.addEventListener(
     "DOMContentLoaded",
