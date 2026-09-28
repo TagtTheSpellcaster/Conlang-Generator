@@ -12224,6 +12224,1839 @@
       "tags": [
         "time"
       ]
+    },
+    {
+      "id": "nature.land",
+      "concept": "land",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.ground",
+      "concept": "ground",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.rock",
+      "concept": "rock",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.pebble",
+      "concept": "pebble",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.boulder",
+      "concept": "boulder",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.dust",
+      "concept": "dust",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.mud",
+      "concept": "mud",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.clay",
+      "concept": "clay",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.cliff",
+      "concept": "cliff",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.canyon",
+      "concept": "canyon",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.cave",
+      "concept": "cave",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.plain",
+      "concept": "plain",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.plateau",
+      "concept": "plateau",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.desert",
+      "concept": "desert",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.dune",
+      "concept": "dune",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.field",
+      "concept": "field",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.meadow",
+      "concept": "meadow",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.marsh",
+      "concept": "marsh",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.swamp",
+      "concept": "swamp",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.wetland",
+      "concept": "wetland",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.shore",
+      "concept": "shore",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.coast",
+      "concept": "coast",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.beach",
+      "concept": "beach",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.island",
+      "concept": "island",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.peninsula",
+      "concept": "peninsula",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.volcano",
+      "concept": "volcano",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.crater",
+      "concept": "crater",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.geyser",
+      "concept": "geyser",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "landform",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.stream",
+      "concept": "stream",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.creek",
+      "concept": "creek",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.river",
+      "concept": "river",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.waterfall",
+      "concept": "waterfall",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.pond",
+      "concept": "pond",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.lake",
+      "concept": "lake",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.riverbank",
+      "concept": "riverbank",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.seashore",
+      "concept": "seashore",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.sea",
+      "concept": "sea",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.ocean",
+      "concept": "ocean",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.bay",
+      "concept": "bay",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.gulf",
+      "concept": "gulf",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.strait",
+      "concept": "strait",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.reef",
+      "concept": "reef",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.coral_reef",
+      "concept": "coral_reef",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.lagoon",
+      "concept": "lagoon",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.estuary",
+      "concept": "estuary",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.delta",
+      "concept": "delta",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.tide",
+      "concept": "tide",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.wave",
+      "concept": "wave",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.current",
+      "concept": "current",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.iceberg",
+      "concept": "iceberg",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.glacier",
+      "concept": "glacier",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "water",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.air",
+      "concept": "air",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.fog",
+      "concept": "fog",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.mist",
+      "concept": "mist",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.drizzle",
+      "concept": "drizzle",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.thunderstorm",
+      "concept": "thunderstorm",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.sleet",
+      "concept": "sleet",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.hail",
+      "concept": "hail",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.frost",
+      "concept": "frost",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.breeze",
+      "concept": "breeze",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.gale",
+      "concept": "gale",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.hurricane",
+      "concept": "hurricane",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.tornado",
+      "concept": "tornado",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.rainbow",
+      "concept": "rainbow",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.sunlight",
+      "concept": "sunlight",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.daylight",
+      "concept": "daylight",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.darkness",
+      "concept": "darkness",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.shadow",
+      "concept": "shadow",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "atmosphere",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.planet",
+      "concept": "planet",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.comet",
+      "concept": "comet",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.asteroid",
+      "concept": "asteroid",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.meteor",
+      "concept": "meteor",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.constellation",
+      "concept": "constellation",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.eclipse",
+      "concept": "eclipse",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.orbit",
+      "concept": "orbit",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.plant",
+      "concept": "plant",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.shrub",
+      "concept": "shrub",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.bush",
+      "concept": "bush",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.moss",
+      "concept": "moss",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.fern",
+      "concept": "fern",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.vine",
+      "concept": "vine",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.branch",
+      "concept": "branch",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.twig",
+      "concept": "twig",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.trunk",
+      "concept": "trunk",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.bark",
+      "concept": "bark",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.berry",
+      "concept": "berry",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.thorn",
+      "concept": "thorn",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.bud",
+      "concept": "bud",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.blossom",
+      "concept": "blossom",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.pollen",
+      "concept": "pollen",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.sap",
+      "concept": "sap",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.resin",
+      "concept": "resin",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.fungus",
+      "concept": "fungus",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.lichen",
+      "concept": "lichen",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.weed",
+      "concept": "weed",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.crop",
+      "concept": "crop",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.woodland",
+      "concept": "woodland",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.grove",
+      "concept": "grove",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.jungle",
+      "concept": "jungle",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.rainforest",
+      "concept": "rainforest",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.bamboo",
+      "concept": "bamboo",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "vegetation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.wood",
+      "concept": "wood",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.amber",
+      "concept": "amber",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.coal",
+      "concept": "coal",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.charcoal",
+      "concept": "charcoal",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.salt",
+      "concept": "salt",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.mineral",
+      "concept": "mineral",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.crystal",
+      "concept": "crystal",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.ore",
+      "concept": "ore",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.metal",
+      "concept": "metal",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.quartz",
+      "concept": "quartz",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.obsidian",
+      "concept": "obsidian",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.marble",
+      "concept": "marble",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.granite",
+      "concept": "granite",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.limestone",
+      "concept": "limestone",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.flame",
+      "concept": "flame",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.ember",
+      "concept": "ember",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.lava",
+      "concept": "lava",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.magma",
+      "concept": "magma",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.eruption",
+      "concept": "eruption",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.earthquake",
+      "concept": "earthquake",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.landslide",
+      "concept": "landslide",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.erosion",
+      "concept": "erosion",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.flood",
+      "concept": "flood",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.drought",
+      "concept": "drought",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.avalanche",
+      "concept": "avalanche",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "natural_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.wilderness",
+      "concept": "wilderness",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.habitat",
+      "concept": "habitat",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.ecosystem",
+      "concept": "ecosystem",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.environment",
+      "concept": "environment",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.life",
+      "concept": "life",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.death",
+      "concept": "death",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.growth",
+      "concept": "growth",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.decay",
+      "concept": "decay",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.birth",
+      "concept": "birth",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.reproduction",
+      "concept": "reproduction",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.cycle",
+      "concept": "cycle",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.migration",
+      "concept": "migration",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.pollination",
+      "concept": "pollination",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.germination",
+      "concept": "germination",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "noun",
+      "semantic_group": "ecology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
+    },
+    {
+      "id": "nature.living",
+      "concept": "living",
+      "scope": "domain",
+      "category": "nature",
+      "word_type": "adjective",
+      "semantic_group": "natural_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "nature"
+      ]
     }
   ]
 }
