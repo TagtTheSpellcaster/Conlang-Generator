@@ -20233,6 +20233,2658 @@
       "tags": [
         "settlement"
       ]
+    },
+    {
+      "id": "technology.instrument",
+      "concept": "instrument",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.handle",
+      "concept": "handle",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.blade",
+      "concept": "blade",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.hook",
+      "concept": "hook",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.awl",
+      "concept": "awl",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.clamp",
+      "concept": "clamp",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.vise",
+      "concept": "vise",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.wedge",
+      "concept": "wedge",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.bolt",
+      "concept": "bolt",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.hinge",
+      "concept": "hinge",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "basic_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.mallet",
+      "concept": "mallet",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.hatchet",
+      "concept": "hatchet",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.handsaw",
+      "concept": "handsaw",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.dagger",
+      "concept": "dagger",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.screwdriver",
+      "concept": "screwdriver",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.wrench",
+      "concept": "wrench",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.pliers",
+      "concept": "pliers",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.tongs",
+      "concept": "tongs",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.tweezers",
+      "concept": "tweezers",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.plane",
+      "concept": "plane",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.rasp",
+      "concept": "rasp",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.crowbar",
+      "concept": "crowbar",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.grindstone",
+      "concept": "grindstone",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "hand_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.plow",
+      "concept": "plow",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.plough",
+      "concept": "plough",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.harrow",
+      "concept": "harrow",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.sickle",
+      "concept": "sickle",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.scythe",
+      "concept": "scythe",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.mattock",
+      "concept": "mattock",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.pitchfork",
+      "concept": "pitchfork",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.thresher",
+      "concept": "thresher",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.millstone",
+      "concept": "millstone",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.plowshare",
+      "concept": "plowshare",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.seed_drill",
+      "concept": "seed_drill",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "agricultural_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.loom",
+      "concept": "loom",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.spindle",
+      "concept": "spindle",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.distaff",
+      "concept": "distaff",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.sewing_needle",
+      "concept": "sewing_needle",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.spinning_wheel",
+      "concept": "spinning_wheel",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.potter_wheel",
+      "concept": "potter_wheel",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.anvil",
+      "concept": "anvil",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.forge",
+      "concept": "forge",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.bellows",
+      "concept": "bellows",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.lathe",
+      "concept": "lathe",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.workbench",
+      "concept": "workbench",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.measuring_tape",
+      "concept": "measuring_tape",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.ruler",
+      "concept": "ruler",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.square",
+      "concept": "square",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.level",
+      "concept": "level",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.sawhorse",
+      "concept": "sawhorse",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "craft_tool",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.container",
+      "concept": "container",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.crate",
+      "concept": "crate",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.bag",
+      "concept": "bag",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.sack",
+      "concept": "sack",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.flask",
+      "concept": "flask",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.canteen",
+      "concept": "canteen",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.chest",
+      "concept": "chest",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.coffer",
+      "concept": "coffer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.amphora",
+      "concept": "amphora",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.tank",
+      "concept": "tank",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "container_and_storage",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.oil_lamp",
+      "concept": "oil_lamp",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "lighting_and_fire",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.brazier",
+      "concept": "brazier",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "lighting_and_fire",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.lighter",
+      "concept": "lighter",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "lighting_and_fire",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.match",
+      "concept": "match",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "lighting_and_fire",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.flintlock",
+      "concept": "flintlock",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "lighting_and_fire",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.fire_drill",
+      "concept": "fire_drill",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "lighting_and_fire",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.carriage",
+      "concept": "carriage",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.saddle",
+      "concept": "saddle",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.harness",
+      "concept": "harness",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.yoke",
+      "concept": "yoke",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.sled",
+      "concept": "sled",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.canoe",
+      "concept": "canoe",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.bicycle",
+      "concept": "bicycle",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.motorcycle",
+      "concept": "motorcycle",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.locomotive",
+      "concept": "locomotive",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.helicopter",
+      "concept": "helicopter",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "transport_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.writing",
+      "concept": "writing",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.alphabet",
+      "concept": "alphabet",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.scroll",
+      "concept": "scroll",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.quill",
+      "concept": "quill",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.printing_press",
+      "concept": "printing_press",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.signal",
+      "concept": "signal",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.horn",
+      "concept": "horn",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.telegraph",
+      "concept": "telegraph",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.telephone",
+      "concept": "telephone",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.radio",
+      "concept": "radio",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.antenna",
+      "concept": "antenna",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.microphone",
+      "concept": "microphone",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.speaker",
+      "concept": "speaker",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.photograph",
+      "concept": "photograph",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.scale",
+      "concept": "scale",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.balance",
+      "concept": "balance",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.weight",
+      "concept": "weight",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.calendar",
+      "concept": "calendar",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.sextant",
+      "concept": "sextant",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.astrolabe",
+      "concept": "astrolabe",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.thermometer",
+      "concept": "thermometer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.barometer",
+      "concept": "barometer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.globe",
+      "concept": "globe",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.odometer",
+      "concept": "odometer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.speedometer",
+      "concept": "speedometer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "measurement_and_navigation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.turbine",
+      "concept": "turbine",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.boiler",
+      "concept": "boiler",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.steam_engine",
+      "concept": "steam_engine",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.gearbox",
+      "concept": "gearbox",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.transmission",
+      "concept": "transmission",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.crank",
+      "concept": "crank",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.piston",
+      "concept": "piston",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.cylinder",
+      "concept": "cylinder",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.valve",
+      "concept": "valve",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.conveyor",
+      "concept": "conveyor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "mechanical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.energy",
+      "concept": "energy",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.power",
+      "concept": "power",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.cell",
+      "concept": "cell",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.circuit",
+      "concept": "circuit",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.socket",
+      "concept": "socket",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.plug",
+      "concept": "plug",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.transformer",
+      "concept": "transformer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.solar_panel",
+      "concept": "solar_panel",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.reactor",
+      "concept": "reactor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.nuclear_reactor",
+      "concept": "nuclear_reactor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.fusion_reactor",
+      "concept": "fusion_reactor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "energy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.electronic",
+      "concept": "electronic",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.processor",
+      "concept": "processor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.memory",
+      "concept": "memory",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.chip",
+      "concept": "chip",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.circuit_board",
+      "concept": "circuit_board",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.display",
+      "concept": "display",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.keyboard",
+      "concept": "keyboard",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.mouse",
+      "concept": "mouse",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.printer",
+      "concept": "printer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.scanner",
+      "concept": "scanner",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.router",
+      "concept": "router",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.modem",
+      "concept": "modem",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.sensor",
+      "concept": "sensor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.drone",
+      "concept": "drone",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "electronic_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.program",
+      "concept": "program",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.algorithm",
+      "concept": "algorithm",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.database",
+      "concept": "database",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.website",
+      "concept": "website",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.internet",
+      "concept": "internet",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.email",
+      "concept": "email",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.password",
+      "concept": "password",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.encryption",
+      "concept": "encryption",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.artificial_intelligence",
+      "concept": "artificial_intelligence",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.virtual_reality",
+      "concept": "virtual_reality",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.simulation",
+      "concept": "simulation",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "digital",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.splint",
+      "concept": "splint",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.prosthesis",
+      "concept": "prosthesis",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.crutch",
+      "concept": "crutch",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.wheelchair",
+      "concept": "wheelchair",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.stethoscope",
+      "concept": "stethoscope",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.surgical_knife",
+      "concept": "surgical_knife",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.ventilator",
+      "concept": "ventilator",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.x_ray",
+      "concept": "x_ray",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.pacemaker",
+      "concept": "pacemaker",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.implant",
+      "concept": "implant",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "medical_technology",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.assembly_line",
+      "concept": "assembly_line",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.crane",
+      "concept": "crane",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.forklift",
+      "concept": "forklift",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.drill_press",
+      "concept": "drill_press",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.press",
+      "concept": "press",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.furnace",
+      "concept": "furnace",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.kiln",
+      "concept": "kiln",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.compressor",
+      "concept": "compressor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.warehouse_machine",
+      "concept": "warehouse_machine",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "industrial",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.laboratory",
+      "concept": "laboratory",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "scientific",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.experiment",
+      "concept": "experiment",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "scientific",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.detector",
+      "concept": "detector",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "scientific",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.spectrometer",
+      "concept": "spectrometer",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "scientific",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.accelerator",
+      "concept": "accelerator",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "scientific",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.observatory",
+      "concept": "observatory",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "scientific",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.laboratory_equipment",
+      "concept": "laboratory_equipment",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "scientific",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.android",
+      "concept": "android",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.cyborg",
+      "concept": "cyborg",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.ray_gun",
+      "concept": "ray_gun",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.laser",
+      "concept": "laser",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.plasma_cannon",
+      "concept": "plasma_cannon",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.force_field",
+      "concept": "force_field",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.teleporter",
+      "concept": "teleporter",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.teleporter_pad",
+      "concept": "teleporter_pad",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.hologram",
+      "concept": "hologram",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.starship",
+      "concept": "starship",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.spaceship",
+      "concept": "spaceship",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.warp_drive",
+      "concept": "warp_drive",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.hyperdrive",
+      "concept": "hyperdrive",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.gravity_generator",
+      "concept": "gravity_generator",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.matter_transmitter",
+      "concept": "matter_transmitter",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.energy_weapon",
+      "concept": "energy_weapon",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.power_armor",
+      "concept": "power_armor",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.cybernetic_implant",
+      "concept": "cybernetic_implant",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.powered",
+      "concept": "powered",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "adjective",
+      "semantic_group": "tool_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.unpowered",
+      "concept": "unpowered",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "adjective",
+      "semantic_group": "tool_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.assemble",
+      "concept": "assemble",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.install",
+      "concept": "install",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.operate",
+      "concept": "operate",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.activate",
+      "concept": "activate",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.deactivate",
+      "concept": "deactivate",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.disconnect",
+      "concept": "disconnect",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.calibrate",
+      "concept": "calibrate",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.encode",
+      "concept": "encode",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.decode",
+      "concept": "decode",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.manufacture",
+      "concept": "manufacture",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
+    },
+    {
+      "id": "technology.invent",
+      "concept": "invent",
+      "scope": "domain",
+      "category": "technology",
+      "word_type": "verb",
+      "semantic_group": "technology_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "technology"
+      ]
     }
   ]
 }
