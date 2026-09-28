@@ -22,6 +22,72 @@ const STORAGE_KEY = "conlang_vocabulary";
  * groups. All filtering is based on fields inside each entry.
  */
 
+function cleanEntry(entry) {
+    const cleaned = { ...entry };
+
+    // Legacy field: semantic distinctions are now represented by tags.
+    delete cleaned.type;
+
+    const tags = Array.isArray(cleaned.tags)
+        ? [...cleaned.tags]
+        : [];
+
+    const addTag = tag => {
+        if (!tags.includes(tag)) tags.push(tag);
+    };
+
+    // Normalize legacy technology/fantasy markers.
+    const hasScienceFiction = tags.includes("science_fiction");
+    const hasFantasy = tags.includes("fantasy");
+
+    if (hasScienceFiction) {
+        addTag("sci-fi");
+    }
+
+    // Existing legacy type values are converted to tags
+    // before the field is removed.
+    if (entry.type === "natural") {
+        addTag("natural");
+    }
+
+    if (entry.type === "monster") {
+        addTag("fantasy");
+    }
+
+    if (
+        entry.type === "fictional" &&
+        !hasScienceFiction &&
+        !hasFantasy
+    ) {
+        addTag("fantasy");
+    }
+
+    // Normalize old spelling.
+    const normalizedTags = tags
+        .filter(tag => tag !== "science_fiction")
+        .map(tag => tag === "science-fiction" ? "sci-fi" : tag);
+
+    // Universal is represented primarily by scope,
+    // but is also retained as a tag for backward compatibility.
+    if (cleaned.scope === "universal") {
+        if (!normalizedTags.includes("universal")) {
+            normalizedTags.push("universal");
+        }
+    }
+
+    cleaned.tags = [...new Set(normalizedTags)];
+
+    // Repair the known malformed animal ID.
+    if (
+        cleaned.id === "animal_ant" &&
+        cleaned.concept === "ant"
+    ) {
+        cleaned.id = "animal.ant";
+    }
+
+    return cleaned;
+}
+
 
 function normalizeVocabularyData(data) {
 
@@ -31,40 +97,25 @@ function normalizeVocabularyData(data) {
         !Array.isArray(data) &&
         Array.isArray(data.vocabulary)
     ) {
-        return data.vocabulary.map(entry => ({
-            ...entry
-        }));
+        return data.vocabulary.map(cleanEntry);
     }
-
 
     // Plain array is also accepted.
     if (Array.isArray(data)) {
-
-        return data.map(entry => ({
-            ...entry
-        }));
+        return data.map(cleanEntry);
     }
-
 
     // Backward compatibility:
     // accept the old grouped format and flatten it.
-    if (
-        data &&
-        typeof data === "object"
-    ) {
+    if (data && typeof data === "object") {
 
         const result = [];
 
-
-        for (
-            const [group, entries]
-            of Object.entries(data)
-        ) {
+        for (const [group, entries] of Object.entries(data)) {
 
             if (!Array.isArray(entries)) {
                 continue;
             }
-
 
             for (const entry of entries) {
 
@@ -72,24 +123,19 @@ function normalizeVocabularyData(data) {
                     ...entry
                 };
 
-
                 if (!item.scope) {
-
                     item.scope =
                         group === "universal"
                             ? "universal"
                             : "domain";
                 }
 
-
-                result.push(item);
+                result.push(cleanEntry(item));
             }
         }
 
-
         return result;
     }
-
 
     throw new Error(
         "Unsupported vocabulary JSON structure."
@@ -111,31 +157,20 @@ function serializeVocabulary() {
 // LOAD / SAVE
 // ============================================================
 
-
 async function loadVocabularyFromJSON() {
 
     const response = await fetch(
-        "vocabulary.json?cacheBust=" +
-        Date.now()
+        "vocabulary.json?cacheBust=" + Date.now()
     );
 
-
     if (!response.ok) {
-
-        throw new Error(
-            `HTTP error ${response.status}`
-        );
+        throw new Error(`HTTP error ${response.status}`);
     }
 
-
-    const data =
-        await response.json();
-
+    const data = await response.json();
 
     vocabulary =
-        normalizeVocabularyData(
-            data
-        );
+        normalizeVocabularyData(data);
 }
 
 
@@ -144,18 +179,21 @@ async function loadVocabulary() {
     try {
 
         const stored =
-            localStorage.getItem(
-                STORAGE_KEY
-            );
-
+            localStorage.getItem(STORAGE_KEY);
 
         if (stored) {
 
-            vocabulary =
-                JSON.parse(
-                    stored
-                );
+            const parsed = JSON.parse(stored);
 
+            /*
+             * localStorage contains the canonical vocabulary array.
+             * Normalize it again so legacy fields such as "type"
+             * cannot survive indefinitely in the working copy.
+             */
+            vocabulary =
+                normalizeVocabularyData(parsed);
+
+            saveVocabulary();
 
             setDatabaseStatus(
                 "Local working copy"
@@ -165,23 +203,18 @@ async function loadVocabulary() {
 
             await loadVocabularyFromJSON();
 
-
             saveVocabulary();
-
 
             setDatabaseStatus(
                 "Loaded from vocabulary.json"
             );
         }
 
-
         refreshInterface();
-
 
     } catch (error) {
 
         console.error(error);
-
 
         showError(
             "Unable to load vocabulary.json: " +
@@ -204,37 +237,26 @@ function saveVocabulary() {
 }
 
 
-// ============================================================
-// RELOAD
-// ============================================================
-
-
 async function reloadVocabularyFromJSON() {
 
     if (!confirm(
         "Reload vocabulary.json from the server?\n\n" +
         "All local changes stored in this browser will be discarded."
     )) {
-
         return;
     }
-
 
     try {
 
         await loadVocabularyFromJSON();
 
-
         saveVocabulary();
-
 
         setDatabaseStatus(
             "Reloaded from vocabulary.json"
         );
 
-
         refreshInterface();
-
 
     } catch (error) {
 
@@ -250,16 +272,13 @@ async function reloadVocabularyFromJSON() {
 // APPEND JSON
 // ============================================================
 
-
 let pendingAppendEntries = null;
 
 
 function openAppendPicker() {
 
     document
-        .getElementById(
-            "appendFileInput"
-        )
+        .getElementById("appendFileInput")
         .click();
 }
 
@@ -269,50 +288,24 @@ async function handleAppendFile(event) {
     const file =
         event.target.files[0];
 
-
-    // Reset input so that the same file
-    // can be selected again.
     event.target.value = "";
 
-
-    if (!file) {
-        return;
-    }
-
+    if (!file) return;
 
     try {
 
         const text =
             await file.text();
 
-
-        let parsed;
-
-
-        try {
-
-            parsed =
-                JSON.parse(text);
-
-        } catch (error) {
-
-            throw new Error(
-                "The selected file is not valid JSON.\n\n" +
-                error.message
-            );
-        }
-
+        const parsed =
+            JSON.parse(text);
 
         const imported =
-            normalizeVocabularyData(
-                parsed
-            );
-
+            flattenVocabulary(parsed);
 
         validateImportedEntries(
             imported
         );
-
 
         const existingIds =
             new Set(
@@ -321,45 +314,69 @@ async function handleAppendFile(event) {
                 )
             );
 
-
         const duplicateIds =
             imported
                 .filter(
                     entry =>
-                        existingIds.has(
-                            entry.id
-                        )
+                        existingIds.has(entry.id)
                 )
                 .map(
-                    entry =>
-                        entry.id
+                    entry => entry.id
                 );
 
+        /*
+         * Normalize imported entries before they are added.
+         * This ensures that appended files using old fields such as
+         * "type" are converted to the current canonical structure.
+         */
+        const normalizedImported =
+            imported.map(cleanEntry);
+
+        const normalizedExistingIds =
+            new Set(
+                vocabulary.map(
+                    entry => entry.id
+                )
+            );
+
+        const normalizedDuplicateIds =
+            normalizedImported
+                .filter(
+                    entry =>
+                        normalizedExistingIds.has(entry.id)
+                )
+                .map(
+                    entry => entry.id
+                );
 
         const newEntries =
-            imported.filter(
+            normalizedImported.filter(
                 entry =>
-                    !existingIds.has(
+                    !normalizedExistingIds.has(
                         entry.id
                     )
             );
 
-
         pendingAppendEntries = {
 
-            fileName:
-                file.name,
+            fileName: file.name,
 
-            imported,
+            imported: normalizedImported,
 
             newEntries,
 
-            duplicateIds
+            duplicateIds:
+                [
+                    ...new Set(
+                        [
+                            ...duplicateIds,
+                            ...normalizedDuplicateIds
+                        ]
+                    )
+                ]
         };
 
-
         showAppendModal();
-
 
     } catch (error) {
 
@@ -371,9 +388,71 @@ async function handleAppendFile(event) {
 }
 
 
-function validateImportedEntries(
-    entries
-) {
+function flattenVocabulary(data) {
+
+    // Canonical format:
+    // { vocabulary: [...] }
+
+    if (
+        data &&
+        !Array.isArray(data) &&
+        Array.isArray(data.vocabulary)
+    ) {
+        return data.vocabulary;
+    }
+
+    // Plain array.
+
+    if (Array.isArray(data)) {
+        return data;
+    }
+
+    // Legacy grouped format.
+
+    if (
+        data &&
+        typeof data === "object"
+    ) {
+
+        const result = [];
+
+        for (
+            const [group, entries]
+            of Object.entries(data)
+        ) {
+
+            if (!Array.isArray(entries)) {
+                continue;
+            }
+
+            for (const entry of entries) {
+
+                const item = {
+                    ...entry
+                };
+
+                if (!item.scope) {
+
+                    item.scope =
+                        group === "universal"
+                            ? "universal"
+                            : "domain";
+                }
+
+                result.push(item);
+            }
+        }
+
+        return result;
+    }
+
+    throw new Error(
+        "Unsupported vocabulary JSON structure."
+    );
+}
+
+
+function validateImportedEntries(entries) {
 
     if (!Array.isArray(entries)) {
 
@@ -382,9 +461,7 @@ function validateImportedEntries(
         );
     }
 
-
     const invalid = [];
-
 
     entries.forEach(
         (entry, index) => {
@@ -399,10 +476,8 @@ function validateImportedEntries(
                     `Entry ${index + 1}: not an object`
                 );
 
-
                 return;
             }
-
 
             if (!entry.id) {
 
@@ -410,7 +485,6 @@ function validateImportedEntries(
                     `Entry ${index + 1}: missing "id"`
                 );
             }
-
 
             if (!entry.concept) {
 
@@ -421,7 +495,6 @@ function validateImportedEntries(
         }
     );
 
-
     if (invalid.length) {
 
         throw new Error(
@@ -430,17 +503,9 @@ function validateImportedEntries(
         );
     }
 
+    const ids = new Set();
 
-    // Check for duplicate IDs inside
-    // the imported file.
-
-    const ids =
-        new Set();
-
-
-    const internalDuplicates =
-        [];
-
+    const internalDuplicates = [];
 
     entries.forEach(entry => {
 
@@ -451,10 +516,8 @@ function validateImportedEntries(
             );
         }
 
-
         ids.add(entry.id);
     });
-
 
     if (internalDuplicates.length) {
 
@@ -477,65 +540,53 @@ function showAppendModal() {
             "appendModal"
         );
 
-
     const summary =
         document.getElementById(
             "appendSummary"
         );
-
 
     const errors =
         document.getElementById(
             "appendErrors"
         );
 
-
     const confirmButton =
         document.getElementById(
             "confirmAppend"
         );
-
 
     const {
         fileName,
         imported,
         newEntries,
         duplicateIds
-    } =
-        pendingAppendEntries;
-
+    } = pendingAppendEntries;
 
     document.getElementById(
         "appendFilename"
     ).textContent =
         `File: ${fileName}`;
 
-
     summary.textContent =
         `Entries found: ${imported.length}\n` +
         `New entries: ${newEntries.length}\n` +
         `Existing IDs: ${duplicateIds.length}`;
 
-
     errors.hidden = true;
 
     errors.textContent = "";
 
-
     if (duplicateIds.length) {
 
         errors.hidden = false;
-
 
         errors.textContent =
             "The following IDs already exist and will not be appended:\n\n" +
             duplicateIds.join("\n");
     }
 
-
     confirmButton.disabled =
         newEntries.length === 0;
-
 
     modal.hidden = false;
 }
@@ -547,33 +598,25 @@ function confirmAppend() {
         return;
     }
 
-
     const {
         newEntries
-    } =
-        pendingAppendEntries;
-
+    } = pendingAppendEntries;
 
     vocabulary.push(
         ...newEntries
     );
 
-
     saveVocabulary();
-
 
     setDatabaseStatus(
         `${newEntries.length} entries appended locally`
     );
 
-
     pendingAppendEntries = null;
-
 
     closeModal(
         "appendModal"
     );
-
 
     refreshInterface();
 }
@@ -583,18 +626,15 @@ function confirmAppend() {
 // EXPORT
 // ============================================================
 
-
 function exportVocabulary() {
 
     /*
      * Always export the canonical format.
-     *
      * JSON.stringify guarantees valid JSON syntax.
      */
 
     const data =
         serializeVocabulary();
-
 
     const json =
         JSON.stringify(
@@ -602,7 +642,6 @@ function exportVocabulary() {
             null,
             2
         );
-
 
     const blob =
         new Blob(
@@ -612,71 +651,119 @@ function exportVocabulary() {
             }
         );
 
-
     const url =
-        URL.createObjectURL(
-            blob
-        );
-
+        URL.createObjectURL(blob);
 
     const link =
-        document.createElement(
-            "a"
-        );
-
+        document.createElement("a");
 
     link.href = url;
-
 
     link.download =
         "vocabulary.json";
 
-
-    document.body.appendChild(
-        link
-    );
-
+    document.body.appendChild(link);
 
     link.click();
 
-
     link.remove();
 
-
-    URL.revokeObjectURL(
-        url
-    );
+    URL.revokeObjectURL(url);
 }
 
 
 // ============================================================
-// FILTERS
+// FILTERS / SORTING
 // ============================================================
+
+/*
+ * Canonical entry properties.
+ *
+ * These are the properties that the application recognizes.
+ *
+ * "type" is deliberately excluded.
+ *
+ * Semantic distinctions such as:
+ *
+ * natural
+ * monster
+ * fictional
+ *
+ * are now represented through tags.
+ */
+
+const CANONICAL_PROPERTIES = [
+
+    "id",
+
+    "concept",
+
+    "category",
+
+    "word_type",
+
+    "semantic_group",
+
+    "scope",
+
+    "locale",
+
+    "tags",
+
+    "features",
+
+    "relations"
+
+];
+
+
+const FILTER_PROPERTIES = [
+
+    "category",
+
+    "word_type",
+
+    "semantic_group",
+
+    "scope",
+
+    "locale",
+
+    "tags",
+
+    "features"
+
+];
+
+
+const SORT_PROPERTIES = [
+
+    "id",
+
+    "concept",
+
+    "category",
+
+    "word_type",
+
+    "semantic_group",
+
+    "scope",
+
+    "locale",
+
+    "tags",
+
+    "features"
+
+];
 
 
 function getAllAttributes() {
 
-    const attributes =
-        new Set();
-
-
-    vocabulary.forEach(
-        entry => {
-
-            Object.keys(entry)
-                .forEach(
-                    key =>
-                        attributes.add(
-                            key
-                        )
-                );
-        }
-    );
-
-
     return [
-        ...attributes
-    ].sort();
+        ...CANONICAL_PROPERTIES
+    ];
 }
 
 
@@ -689,7 +776,6 @@ function valueToArray(value) {
         );
     }
 
-
     if (
         value !== undefined &&
         value !== null &&
@@ -700,7 +786,6 @@ function valueToArray(value) {
             String(value)
         ];
     }
-
 
     return [];
 }
@@ -714,7 +799,6 @@ function getAttributeValue(
     const value =
         entry[attribute];
 
-
     if (
         value === undefined ||
         value === null
@@ -723,14 +807,12 @@ function getAttributeValue(
         return "";
     }
 
-
     if (Array.isArray(value)) {
 
         return value.join(
             ", "
         );
     }
-
 
     if (
         typeof value === "object"
@@ -740,7 +822,6 @@ function getAttributeValue(
             value
         );
     }
-
 
     return String(value);
 }
@@ -753,20 +834,13 @@ function populateFilters() {
             "attributeFilters"
         );
 
-
     container.innerHTML = "";
 
-
-    const attributes =
-        getAllAttributes();
-
-
-    attributes.forEach(
+    FILTER_PROPERTIES.forEach(
         attribute => {
 
             const values =
                 new Set();
-
 
             vocabulary.forEach(
                 entry => {
@@ -774,69 +848,63 @@ function populateFilters() {
                     valueToArray(
                         entry[attribute]
                     ).forEach(
-                        value =>
-                            values.add(
-                                value
-                            )
+                        value => {
+
+                            if (
+                                value !== ""
+                            ) {
+                                values.add(
+                                    value
+                                );
+                            }
+                        }
                     );
                 }
             );
 
-
             if (!values.size) {
                 return;
             }
-
 
             const wrapper =
                 document.createElement(
                     "div"
                 );
 
-
             wrapper.className =
                 "filter-group";
-
 
             const label =
                 document.createElement(
                     "label"
                 );
 
-
             label.textContent =
                 formatAttributeName(
                     attribute
                 );
-
 
             const select =
                 document.createElement(
                     "select"
                 );
 
-
             select.dataset.attribute =
                 attribute;
-
 
             const all =
                 document.createElement(
                     "option"
                 );
 
-
             all.value = "";
-
 
             all.textContent =
                 "All";
 
-
             select.appendChild(
                 all
             );
-
 
             [
                 ...values
@@ -860,14 +928,11 @@ function populateFilters() {
                                 "option"
                             );
 
-
                         option.value =
                             value;
 
-
                         option.textContent =
                             value;
-
 
                         select.appendChild(
                             option
@@ -875,22 +940,18 @@ function populateFilters() {
                     }
                 );
 
-
             select.addEventListener(
                 "change",
                 applyFilters
             );
 
-
             wrapper.appendChild(
                 label
             );
 
-
             wrapper.appendChild(
                 select
             );
-
 
             container.appendChild(
                 wrapper
@@ -904,16 +965,43 @@ function formatAttributeName(
     attribute
 ) {
 
-    return attribute
-        .replace(
-            /_/g,
-            " "
-        )
-        .replace(
-            /\b\w/g,
-            char =>
-                char.toUpperCase()
-        );
+    const labels = {
+
+        id: "ID",
+
+        concept: "Concept",
+
+        category: "Category",
+
+        word_type: "Word Type",
+
+        semantic_group:
+            "Semantic Group",
+
+        scope: "Scope",
+
+        locale: "Locale",
+
+        tags: "Tags",
+
+        features: "Features",
+
+        relations: "Relations"
+    };
+
+    return (
+        labels[attribute] ||
+        attribute
+            .replace(
+                /_/g,
+                " "
+            )
+            .replace(
+                /\b\w/g,
+                char =>
+                    char.toUpperCase()
+            )
+    );
 }
 
 
@@ -928,20 +1016,14 @@ function applyFilters() {
             .trim()
             .toLowerCase();
 
-
     const selects =
         document.querySelectorAll(
             "#attributeFilters select"
         );
 
-
     filteredVocabulary =
         vocabulary.filter(
             entry => {
-
-                /*
-                 * General text search.
-                 */
 
                 if (search) {
 
@@ -950,21 +1032,14 @@ function applyFilters() {
                             entry
                         ).toLowerCase();
 
-
                     if (
                         !text.includes(
                             search
                         )
                     ) {
-
                         return false;
                     }
                 }
-
-
-                /*
-                 * Attribute filters.
-                 */
 
                 for (
                     const select
@@ -974,20 +1049,16 @@ function applyFilters() {
                     const selected =
                         select.value;
 
-
                     if (!selected) {
                         continue;
                     }
 
-
                     const values =
                         valueToArray(
                             entry[
-                                select.dataset
-                                    .attribute
+                                select.dataset.attribute
                             ]
                         );
-
 
                     if (
                         !values.includes(
@@ -999,19 +1070,12 @@ function applyFilters() {
                     }
                 }
 
-
                 return true;
             }
         );
 
-
     applySorting();
 }
-
-
-// ============================================================
-// SORTING
-// ============================================================
 
 
 function populateSortAttributes() {
@@ -1021,73 +1085,57 @@ function populateSortAttributes() {
             "sortAttribute"
         );
 
-
     select.innerHTML = "";
-
 
     const none =
         document.createElement(
             "option"
         );
 
-
     none.value = "";
-
 
     none.textContent =
         "Default order";
-
 
     select.appendChild(
         none
     );
 
+    SORT_PROPERTIES.forEach(
+        attribute => {
 
-    getAllAttributes()
-        .forEach(
-            attribute => {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-
-                option.value =
-                    attribute;
-
-
-                option.textContent =
-                    formatAttributeName(
-                        attribute
-                    );
-
-
-                select.appendChild(
-                    option
+            const option =
+                document.createElement(
+                    "option"
                 );
-            }
-        );
+
+            option.value =
+                attribute;
+
+            option.textContent =
+                formatAttributeName(
+                    attribute
+                );
+
+            select.appendChild(
+                option
+            );
+        }
+    );
 }
 
 
 function applySorting() {
 
     const attribute =
-        document
-            .getElementById(
-                "sortAttribute"
-            )
-            .value;
-
+        document.getElementById(
+            "sortAttribute"
+        ).value;
 
     const direction =
-        document
-            .getElementById(
-                "sortDirection"
-            )
-            .value;
-
+        document.getElementById(
+            "sortDirection"
+        ).value;
 
     if (!attribute) {
 
@@ -1095,7 +1143,6 @@ function applySorting() {
 
         return;
     }
-
 
     filteredVocabulary.sort(
         (a, b) => {
@@ -1106,13 +1153,11 @@ function applySorting() {
                     attribute
                 );
 
-
             const valueB =
                 getAttributeValue(
                     b,
                     attribute
                 );
-
 
             const comparison =
                 valueA.localeCompare(
@@ -1124,13 +1169,11 @@ function applySorting() {
                     }
                 );
 
-
             return direction === "desc"
                 ? -comparison
                 : comparison;
         }
     );
-
 
     renderVocabulary();
 }
@@ -1140,7 +1183,6 @@ function applySorting() {
 // TABLE
 // ============================================================
 
-
 function renderVocabulary() {
 
     const tbody =
@@ -1148,9 +1190,7 @@ function renderVocabulary() {
             "vocabularyBody"
         );
 
-
     tbody.innerHTML = "";
-
 
     filteredVocabulary.forEach(
         (entry, index) => {
@@ -1160,26 +1200,44 @@ function renderVocabulary() {
                     "tr"
                 );
 
-
             const cells = [
 
                 index + 1,
 
-                entry.id || "",
+                getAttributeValue(
+                    entry,
+                    "id"
+                ),
 
-                entry.concept || "",
+                getAttributeValue(
+                    entry,
+                    "concept"
+                ),
 
-                entry.category || "",
+                getAttributeValue(
+                    entry,
+                    "category"
+                ),
 
-                entry.word_type || "",
+                getAttributeValue(
+                    entry,
+                    "word_type"
+                ),
 
-                entry.semantic_group || "",
+                getAttributeValue(
+                    entry,
+                    "semantic_group"
+                ),
 
-                entry.scope || "",
+                getAttributeValue(
+                    entry,
+                    "scope"
+                ),
 
-                entry.type || "",
-
-                entry.locale || "",
+                getAttributeValue(
+                    entry,
+                    "locale"
+                ),
 
                 getAttributeValue(
                     entry,
@@ -1192,7 +1250,6 @@ function renderVocabulary() {
                 )
             ];
 
-
             cells.forEach(
                 value => {
 
@@ -1201,10 +1258,8 @@ function renderVocabulary() {
                             "td"
                         );
 
-
                     cell.textContent =
                         value;
-
 
                     row.appendChild(
                         cell
@@ -1212,26 +1267,21 @@ function renderVocabulary() {
                 }
             );
 
-
             const actions =
                 document.createElement(
                     "td"
                 );
 
-
             actions.className =
                 "actions";
-
 
             const edit =
                 document.createElement(
                     "button"
                 );
 
-
             edit.textContent =
                 "Edit";
-
 
             edit.addEventListener(
                 "click",
@@ -1241,16 +1291,13 @@ function renderVocabulary() {
                     )
             );
 
-
             const remove =
                 document.createElement(
                     "button"
                 );
 
-
             remove.textContent =
                 "Delete";
-
 
             remove.addEventListener(
                 "click",
@@ -1260,28 +1307,23 @@ function renderVocabulary() {
                     )
             );
 
-
             actions.appendChild(
                 edit
             );
-
 
             actions.appendChild(
                 remove
             );
 
-
             row.appendChild(
                 actions
             );
-
 
             tbody.appendChild(
                 row
             );
         }
     );
-
 
     updateCounters();
 }
@@ -1294,7 +1336,6 @@ function updateCounters() {
     ).textContent =
         vocabulary.length;
 
-
     document.getElementById(
         "visibleCount"
     ).textContent =
@@ -1305,7 +1346,6 @@ function updateCounters() {
 // ============================================================
 // ADD / EDIT
 // ============================================================
-
 
 let editingId = null;
 
@@ -1319,14 +1359,12 @@ function openEntryModal(
             ? entry.id
             : null;
 
-
     document.getElementById(
         "entryModalTitle"
     ).textContent =
         entry
             ? "Edit vocabulary entry"
             : "Add vocabulary entry";
-
 
     const values =
         entry || {
@@ -1343,8 +1381,6 @@ function openEntryModal(
 
             scope: "domain",
 
-            type: "",
-
             locale: "",
 
             tags: [],
@@ -1354,54 +1390,40 @@ function openEntryModal(
             relations: {}
         };
 
-
     document.getElementById(
         "entryId"
     ).value =
         values.id || "";
-
 
     document.getElementById(
         "entryConcept"
     ).value =
         values.concept || "";
 
-
     document.getElementById(
         "entryCategory"
     ).value =
         values.category || "";
-
 
     document.getElementById(
         "entryWordType"
     ).value =
         values.word_type || "";
 
-
     document.getElementById(
         "entrySemanticGroup"
     ).value =
         values.semantic_group || "";
-
 
     document.getElementById(
         "entryScope"
     ).value =
         values.scope || "";
 
-
-    document.getElementById(
-        "entryType"
-    ).value =
-        values.type || "";
-
-
     document.getElementById(
         "entryLocale"
     ).value =
         values.locale || "";
-
 
     document.getElementById(
         "entryTags"
@@ -1409,11 +1431,8 @@ function openEntryModal(
         Array.isArray(
             values.tags
         )
-            ? values.tags.join(
-                ", "
-            )
+            ? values.tags.join(", ")
             : "";
-
 
     document.getElementById(
         "entryFeatures"
@@ -1421,11 +1440,8 @@ function openEntryModal(
         Array.isArray(
             values.features
         )
-            ? values.features.join(
-                ", "
-            )
+            ? values.features.join(", ")
             : "";
-
 
     document.getElementById(
         "entryRelations"
@@ -1436,11 +1452,9 @@ function openEntryModal(
             2
         );
 
-
     document.getElementById(
         "entryFormError"
     ).hidden = true;
-
 
     document.getElementById(
         "entryModal"
@@ -1451,34 +1465,19 @@ function openEntryModal(
 function readEntryForm() {
 
     const relationsText =
-        document
-            .getElementById(
-                "entryRelations"
-            )
-            .value
-            .trim();
-
+        document.getElementById(
+            "entryRelations"
+        ).value.trim();
 
     let relations = {};
 
-
     if (relationsText) {
 
-        try {
-
-            relations =
-                JSON.parse(
-                    relationsText
-                );
-
-        } catch (error) {
-
-            throw new Error(
-                "Relations must contain valid JSON."
+        relations =
+            JSON.parse(
+                relationsText
             );
-        }
     }
-
 
     const splitList =
         value =>
@@ -1488,93 +1487,57 @@ function readEntryForm() {
                     item =>
                         item.trim()
                 )
-                .filter(
-                    Boolean
-                );
-
+                .filter(Boolean);
 
     return {
 
         id:
-            document
-                .getElementById(
-                    "entryId"
-                )
-                .value
-                .trim(),
+            document.getElementById(
+                "entryId"
+            ).value.trim(),
 
         concept:
-            document
-                .getElementById(
-                    "entryConcept"
-                )
-                .value
-                .trim(),
+            document.getElementById(
+                "entryConcept"
+            ).value.trim(),
 
         category:
-            document
-                .getElementById(
-                    "entryCategory"
-                )
-                .value
-                .trim(),
+            document.getElementById(
+                "entryCategory"
+            ).value.trim(),
 
         word_type:
-            document
-                .getElementById(
-                    "entryWordType"
-                )
-                .value
-                .trim(),
+            document.getElementById(
+                "entryWordType"
+            ).value.trim(),
 
         semantic_group:
-            document
-                .getElementById(
-                    "entrySemanticGroup"
-                )
-                .value
-                .trim(),
+            document.getElementById(
+                "entrySemanticGroup"
+            ).value.trim(),
 
         scope:
-            document
-                .getElementById(
-                    "entryScope"
-                )
-                .value
-                .trim(),
-
-        type:
-            document
-                .getElementById(
-                    "entryType"
-                )
-                .value
-                .trim(),
+            document.getElementById(
+                "entryScope"
+            ).value.trim(),
 
         locale:
-            document
-                .getElementById(
-                    "entryLocale"
-                )
-                .value
-                .trim(),
+            document.getElementById(
+                "entryLocale"
+            ).value.trim(),
 
         tags:
             splitList(
-                document
-                    .getElementById(
-                        "entryTags"
-                    )
-                    .value
+                document.getElementById(
+                    "entryTags"
+                ).value
             ),
 
         features:
             splitList(
-                document
-                    .getElementById(
-                        "entryFeatures"
-                    )
-                    .value
+                document.getElementById(
+                    "entryFeatures"
+                ).value
             ),
 
         relations
@@ -1582,24 +1545,21 @@ function readEntryForm() {
 }
 
 
-function submitEntryForm(
-    event
-) {
+function submitEntryForm(event) {
 
     event.preventDefault();
-
 
     const errorBox =
         document.getElementById(
             "entryFormError"
         );
 
-
     try {
 
         const entry =
-            readEntryForm();
-
+            cleanEntry(
+                readEntryForm()
+            );
 
         if (
             !entry.id ||
@@ -1612,16 +1572,12 @@ function submitEntryForm(
             );
         }
 
-
         const duplicate =
             vocabulary.some(
                 existing =>
-                    existing.id ===
-                        entry.id &&
-                    existing.id !==
-                        editingId
+                    existing.id === entry.id &&
+                    existing.id !== editingId
             );
-
 
         if (duplicate) {
 
@@ -1630,16 +1586,13 @@ function submitEntryForm(
             );
         }
 
-
         if (editingId) {
 
             const index =
                 vocabulary.findIndex(
                     item =>
-                        item.id ===
-                        editingId
+                        item.id === editingId
                 );
-
 
             if (index === -1) {
 
@@ -1647,7 +1600,6 @@ function submitEntryForm(
                     "Entry not found."
                 );
             }
-
 
             vocabulary[index] =
                 entry;
@@ -1659,23 +1611,17 @@ function submitEntryForm(
             );
         }
 
-
         saveVocabulary();
-
 
         closeModal(
             "entryModal"
         );
 
-
         refreshInterface();
-
 
     } catch (error) {
 
-        errorBox.hidden =
-            false;
-
+        errorBox.hidden = false;
 
         errorBox.textContent =
             error.message;
@@ -1689,16 +1635,13 @@ function addVocabularyEntry() {
 }
 
 
-function editVocabularyEntry(
-    id
-) {
+function editVocabularyEntry(id) {
 
     const entry =
         vocabulary.find(
             item =>
                 item.id === id
         );
-
 
     if (entry) {
 
@@ -1709,9 +1652,7 @@ function editVocabularyEntry(
 }
 
 
-function deleteVocabularyEntry(
-    id
-) {
+function deleteVocabularyEntry(id) {
 
     const entry =
         vocabulary.find(
@@ -1719,11 +1660,7 @@ function deleteVocabularyEntry(
                 item.id === id
         );
 
-
-    if (!entry) {
-        return;
-    }
-
+    if (!entry) return;
 
     if (!confirm(
         `Delete "${entry.concept}" (${id})?`
@@ -1732,16 +1669,13 @@ function deleteVocabularyEntry(
         return;
     }
 
-
     vocabulary =
         vocabulary.filter(
             item =>
                 item.id !== id
         );
 
-
     saveVocabulary();
-
 
     refreshInterface();
 }
@@ -1751,7 +1685,6 @@ function deleteVocabularyEntry(
 // MODALS / UI
 // ============================================================
 
-
 function closeModal(id) {
 
     document.getElementById(
@@ -1760,38 +1693,26 @@ function closeModal(id) {
 }
 
 
-function setDatabaseStatus(
-    text
-) {
+function setDatabaseStatus(text) {
 
     document.getElementById(
         "databaseStatus"
-    ).textContent =
-        text;
+    ).textContent = text;
 }
 
 
-function showError(
-    message
-) {
+function showError(message) {
 
     const element =
         document.getElementById(
             "errorMessage"
         );
 
-
     element.hidden = false;
-
 
     element.textContent =
         message;
 }
-
-
-// ============================================================
-// REFRESH
-// ============================================================
 
 
 function refreshInterface() {
@@ -1808,7 +1729,6 @@ function refreshInterface() {
 // RESET
 // ============================================================
 
-
 function resetVocabulary() {
 
     if (!confirm(
@@ -1818,11 +1738,9 @@ function resetVocabulary() {
         return;
     }
 
-
     localStorage.removeItem(
         STORAGE_KEY
     );
-
 
     location.reload();
 }
@@ -1831,7 +1749,6 @@ function resetVocabulary() {
 // ============================================================
 // INITIALIZATION
 // ============================================================
-
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -1846,7 +1763,6 @@ document.addEventListener(
                 applyFilters
             );
 
-
         document
             .getElementById(
                 "sortAttribute"
@@ -1855,7 +1771,6 @@ document.addEventListener(
                 "change",
                 applySorting
             );
-
 
         document
             .getElementById(
@@ -1866,7 +1781,6 @@ document.addEventListener(
                 applySorting
             );
 
-
         document
             .getElementById(
                 "reloadVocabulary"
@@ -1875,7 +1789,6 @@ document.addEventListener(
                 "click",
                 reloadVocabularyFromJSON
             );
-
 
         document
             .getElementById(
@@ -1886,7 +1799,6 @@ document.addEventListener(
                 openAppendPicker
             );
 
-
         document
             .getElementById(
                 "appendFileInput"
@@ -1896,7 +1808,6 @@ document.addEventListener(
                 handleAppendFile
             );
 
-
         document
             .getElementById(
                 "confirmAppend"
@@ -1905,7 +1816,6 @@ document.addEventListener(
                 "click",
                 confirmAppend
             );
-
 
         document
             .getElementById(
@@ -1919,7 +1829,6 @@ document.addEventListener(
                     )
             );
 
-
         document
             .getElementById(
                 "addVocabulary"
@@ -1928,7 +1837,6 @@ document.addEventListener(
                 "click",
                 addVocabularyEntry
             );
-
 
         document
             .getElementById(
@@ -1939,7 +1847,6 @@ document.addEventListener(
                 exportVocabulary
             );
 
-
         document
             .getElementById(
                 "resetVocabulary"
@@ -1949,7 +1856,6 @@ document.addEventListener(
                 resetVocabulary
             );
 
-
         document
             .getElementById(
                 "entryForm"
@@ -1958,7 +1864,6 @@ document.addEventListener(
                 "submit",
                 submitEntryForm
             );
-
 
         document
             .querySelectorAll(
@@ -1971,13 +1876,11 @@ document.addEventListener(
                         "click",
                         () =>
                             closeModal(
-                                button.dataset
-                                    .closeModal
+                                button.dataset.closeModal
                             )
                     );
                 }
             );
-
 
         loadVocabulary();
     }
