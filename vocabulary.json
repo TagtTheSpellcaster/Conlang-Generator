@@ -1,5 +1,5 @@
 {
-  "universal": [
+  "vocabulary": [
     {
       "id": "adjective.alive",
       "category": "adjective",
@@ -3581,9 +3581,7 @@
       "scope": "universal",
       "tags": [],
       "relations": {}
-    }
-  ],
-  "animals": [
+    },
     {
       "id": "animal.bear",
       "concept": "bear",
@@ -3599,7 +3597,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.bee",
@@ -3614,7 +3613,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.boar",
@@ -3630,7 +3630,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.bull",
@@ -3646,7 +3647,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.butterfly",
@@ -3661,7 +3663,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.cat",
@@ -3677,7 +3680,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.chicken",
@@ -3693,7 +3697,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.chimpanzee",
@@ -3709,7 +3714,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.cow",
@@ -3725,7 +3731,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.crocodile",
@@ -3741,7 +3748,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.crow",
@@ -3757,7 +3765,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.deer",
@@ -3773,7 +3782,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.dog",
@@ -3789,7 +3799,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.dolphin",
@@ -3806,7 +3817,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.donkey",
@@ -3822,7 +3834,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.dove",
@@ -3838,7 +3851,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.duck",
@@ -3854,7 +3868,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.eagle",
@@ -3871,7 +3886,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.elephant",
@@ -3887,7 +3903,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.fish",
@@ -3902,7 +3919,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.fox",
@@ -3919,7 +3937,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.frog",
@@ -3935,7 +3954,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.giraffe",
@@ -3951,7 +3971,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.goat",
@@ -3967,7 +3988,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.goose",
@@ -3983,7 +4005,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.gorilla",
@@ -3999,7 +4022,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.hawk",
@@ -4016,7 +4040,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.hippopotamus",
@@ -4032,7 +4057,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.horse",
@@ -4048,7 +4074,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.kangaroo",
@@ -4064,7 +4091,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.koala",
@@ -4080,7 +4108,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.lion",
@@ -4097,7 +4126,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.lizard",
@@ -4113,7 +4143,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.monkey",
@@ -4129,7 +4160,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.moth",
@@ -4144,7 +4176,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.mouse",
@@ -4160,7 +4193,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.octopus",
@@ -4176,7 +4210,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.owl",
@@ -4193,7 +4228,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.panda",
@@ -4209,7 +4245,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.pig",
@@ -4225,7 +4262,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.rabbit",
@@ -4241,7 +4279,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.rabbit_hare",
@@ -4257,7 +4296,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.rat",
@@ -4273,7 +4313,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.raven",
@@ -4289,7 +4330,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.rhino",
@@ -4305,7 +4347,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.rooster",
@@ -4321,7 +4364,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.salmon",
@@ -4337,7 +4381,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.scorpion",
@@ -4352,7 +4397,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.seal",
@@ -4368,7 +4414,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.shark",
@@ -4386,7 +4433,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.sheep",
@@ -4402,7 +4450,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.snake",
@@ -4418,7 +4467,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.spider",
@@ -4433,7 +4483,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.swan",
@@ -4449,7 +4500,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.tiger",
@@ -4466,7 +4518,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.trout",
@@ -4482,7 +4535,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.turtle",
@@ -4498,7 +4552,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.wasp",
@@ -4513,7 +4568,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.whale",
@@ -4530,7 +4586,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.wolf",
@@ -4547,7 +4604,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.wolf_arctic",
@@ -4564,7 +4622,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal.zebra",
@@ -4580,7 +4639,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "animal_ant",
@@ -4595,7 +4655,8 @@
       "word_type": "noun",
       "semantic_group": "animals",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.basilisk",
@@ -4612,7 +4673,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.centaur",
@@ -4628,7 +4690,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.chimera",
@@ -4644,7 +4707,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.dragon",
@@ -4661,7 +4725,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.ghoul",
@@ -4677,7 +4742,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.giant",
@@ -4692,7 +4758,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.goblin",
@@ -4707,7 +4774,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.griffin",
@@ -4724,7 +4792,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.hydra",
@@ -4741,7 +4810,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.kraken",
@@ -4758,7 +4828,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.manticore",
@@ -4774,7 +4845,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.minotaur",
@@ -4790,7 +4862,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.ogre",
@@ -4805,7 +4878,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.orc",
@@ -4820,7 +4894,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.pegasus",
@@ -4837,7 +4912,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.roc",
@@ -4854,7 +4930,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.sea_serpent",
@@ -4872,7 +4949,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.skeleton",
@@ -4888,7 +4966,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.sphinx",
@@ -4904,7 +4983,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.troll",
@@ -4919,7 +4999,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.unicorn",
@@ -4936,7 +5017,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.vampire",
@@ -4952,7 +5034,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.werebear",
@@ -4969,7 +5052,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.werewolf",
@@ -4986,7 +5070,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.wyvern",
@@ -5003,7 +5088,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     },
     {
       "id": "monster.zombie",
@@ -5019,7 +5105,8 @@
       "word_type": "noun",
       "semantic_group": "monsters",
       "features": [],
-      "relations": {}
+      "relations": {},
+      "scope": "domain"
     }
   ]
 }
