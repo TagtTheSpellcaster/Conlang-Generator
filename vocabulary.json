@@ -1,6 +1,1697 @@
 {
   "universal": [
     {
+      "id": "pronoun.first_person_singular",
+      "category": "pronouns",
+      "concept": "I",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["person", "first_person", "singular"]
+    },
+    {
+      "id": "pronoun.second_person_singular",
+      "category": "pronouns",
+      "concept": "you",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["person", "second_person", "singular"]
+    },
+    {
+      "id": "pronoun.third_person_singular_male",
+      "category": "pronouns",
+      "concept": "he",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["person", "third_person", "singular", "male"]
+    },
+    {
+      "id": "pronoun.third_person_singular_female",
+      "category": "pronouns",
+      "concept": "she",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["person", "third_person", "singular", "female"]
+    },
+    {
+      "id": "pronoun.third_person_singular_neutral",
+      "category": "pronouns",
+      "concept": "it",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["third_person", "singular", "neutral"]
+    },
+    {
+      "id": "pronoun.first_person_plural",
+      "category": "pronouns",
+      "concept": "we",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["person", "first_person", "plural"]
+    },
+    {
+      "id": "pronoun.second_person_plural",
+      "category": "pronouns",
+      "concept": "you plural",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["person", "second_person", "plural"]
+    },
+    {
+      "id": "pronoun.third_person_plural",
+      "category": "pronouns",
+      "concept": "they",
+      "word_type": "pronoun",
+      "semantic_group": "personal_pronouns",
+      "features": ["person", "third_person", "plural"]
+    },
+    {
+      "id": "demonstrative.this",
+      "category": "demonstratives",
+      "concept": "this",
+      "word_type": "determiner",
+      "semantic_group": "demonstratives",
+      "features": ["proximal", "singular"]
+    },
+    {
+      "id": "demonstrative.that",
+      "category": "demonstratives",
+      "concept": "that",
+      "word_type": "determiner",
+      "semantic_group": "demonstratives",
+      "features": ["distal", "singular"]
+    },
+    {
+      "id": "interrogative.who",
+      "category": "interrogatives",
+      "concept": "who",
+      "word_type": "pronoun",
+      "semantic_group": "interrogatives",
+      "features": ["person", "question"]
+    },
+    {
+      "id": "interrogative.what",
+      "category": "interrogatives",
+      "concept": "what",
+      "word_type": "pronoun",
+      "semantic_group": "interrogatives",
+      "features": ["thing", "question"]
+    },
+    {
+      "id": "interrogative.where",
+      "category": "interrogatives",
+      "concept": "where",
+      "word_type": "adverb",
+      "semantic_group": "interrogatives",
+      "features": ["location", "question"]
+    },
+    {
+      "id": "interrogative.when",
+      "category": "interrogatives",
+      "concept": "when",
+      "word_type": "adverb",
+      "semantic_group": "interrogatives",
+      "features": ["time", "question"]
+    },
+    {
+      "id": "interrogative.why",
+      "category": "interrogatives",
+      "concept": "why",
+      "word_type": "adverb",
+      "semantic_group": "interrogatives",
+      "features": ["reason", "question"]
+    },
+    {
+      "id": "interrogative.how",
+      "category": "interrogatives",
+      "concept": "how",
+      "word_type": "adverb",
+      "semantic_group": "interrogatives",
+      "features": ["manner", "question"]
+    },
+    {
+      "id": "body.head",
+      "category": "body",
+      "concept": "head",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person",
+        "related_to": ["body.face", "body.hair"]
+      }
+    },
+    {
+      "id": "body.hair",
+      "category": "body",
+      "concept": "hair",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "mass_noun"],
+      "relations": {
+        "part_of": "body.head"
+      }
+    },
+    {
+      "id": "body.face",
+      "category": "body",
+      "concept": "face",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.head",
+        "related_to": ["body.eye", "body.nose", "body.mouth"]
+      }
+    },
+    {
+      "id": "body.eye",
+      "category": "body",
+      "concept": "eye",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "sense_organ", "animate", "countable"],
+      "relations": {
+        "part_of": "body.face",
+        "related_to": ["verb.see"]
+      }
+    },
+    {
+      "id": "body.ear",
+      "category": "body",
+      "concept": "ear",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "sense_organ", "animate", "countable"],
+      "relations": {
+        "part_of": "body.head",
+        "related_to": ["verb.hear"]
+      }
+    },
+    {
+      "id": "body.nose",
+      "category": "body",
+      "concept": "nose",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "sense_organ", "animate", "countable"],
+      "relations": {
+        "part_of": "body.face"
+      }
+    },
+    {
+      "id": "body.mouth",
+      "category": "body",
+      "concept": "mouth",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.face",
+        "related_to": ["body.tooth", "body.tongue", "verb.eat", "verb.speak"]
+      }
+    },
+    {
+      "id": "body.tooth",
+      "category": "body",
+      "concept": "tooth",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.mouth",
+        "related_to": ["verb.eat"]
+      }
+    },
+    {
+      "id": "body.tongue",
+      "category": "body",
+      "concept": "tongue",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.mouth",
+        "related_to": ["verb.speak", "verb.eat"]
+      }
+    },
+    {
+      "id": "body.neck",
+      "category": "body",
+      "concept": "neck",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person"
+      }
+    },
+    {
+      "id": "body.shoulder",
+      "category": "body",
+      "concept": "shoulder",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person",
+        "related_to": ["body.arm"]
+      }
+    },
+    {
+      "id": "body.arm",
+      "category": "body",
+      "concept": "arm",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "limb", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person",
+        "related_to": ["body.shoulder", "body.hand"]
+      }
+    },
+    {
+      "id": "body.hand",
+      "category": "body",
+      "concept": "hand",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "limb", "animate", "countable"],
+      "relations": {
+        "part_of": "body.arm",
+        "related_to": ["body.finger"]
+      }
+    },
+    {
+      "id": "body.finger",
+      "category": "body",
+      "concept": "finger",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "limb", "animate", "countable"],
+      "relations": {
+        "part_of": "body.hand"
+      }
+    },
+    {
+      "id": "body.chest",
+      "category": "body",
+      "concept": "chest",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person"
+      }
+    },
+    {
+      "id": "body.back",
+      "category": "body",
+      "concept": "back",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person"
+      }
+    },
+    {
+      "id": "body.belly",
+      "category": "body",
+      "concept": "belly",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person",
+        "related_to": ["verb.eat", "verb.drink"]
+      }
+    },
+    {
+      "id": "body.leg",
+      "category": "body",
+      "concept": "leg",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "limb", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person",
+        "related_to": ["body.foot", "verb.go"]
+      }
+    },
+    {
+      "id": "body.foot",
+      "category": "body",
+      "concept": "foot",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "limb", "animate", "countable"],
+      "relations": {
+        "part_of": "body.leg",
+        "related_to": ["body.toe", "verb.go"]
+      }
+    },
+    {
+      "id": "body.toe",
+      "category": "body",
+      "concept": "toe",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "limb", "animate", "countable"],
+      "relations": {
+        "part_of": "body.foot"
+      }
+    },
+    {
+      "id": "body.skin",
+      "category": "body",
+      "concept": "skin",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "mass_noun"],
+      "relations": {
+        "part_of": "body.person"
+      }
+    },
+    {
+      "id": "body.blood",
+      "category": "body",
+      "concept": "blood",
+      "word_type": "noun",
+      "semantic_group": "body_substances",
+      "features": ["body_substance", "animate", "mass_noun"],
+      "relations": {
+        "part_of": "body.person"
+      }
+    },
+    {
+      "id": "body.bone",
+      "category": "body",
+      "concept": "bone",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person"
+      }
+    },
+    {
+      "id": "body.heart",
+      "category": "body",
+      "concept": "heart",
+      "word_type": "noun",
+      "semantic_group": "body_parts",
+      "features": ["body_part", "organ", "animate", "countable"],
+      "relations": {
+        "part_of": "body.person",
+        "related_to": ["body.blood"]
+      }
+    },
+    {
+      "id": "family.mother",
+      "category": "family",
+      "concept": "mother",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "female", "parent"],
+      "relations": {
+        "gender_pair": "family.father",
+        "related_to": ["family.parent", "family.child"]
+      }
+    },
+    {
+      "id": "family.father",
+      "category": "family",
+      "concept": "father",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "male", "parent"],
+      "relations": {
+        "gender_pair": "family.mother",
+        "related_to": ["family.parent", "family.child"]
+      }
+    },
+    {
+      "id": "family.parent",
+      "category": "family",
+      "concept": "parent",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "parent"],
+      "relations": {
+        "related_to": ["family.mother", "family.father", "family.child"]
+      }
+    },
+    {
+      "id": "family.child",
+      "category": "family",
+      "concept": "child",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "offspring", "young"],
+      "relations": {
+        "related_to": ["family.parent", "family.son", "family.daughter"]
+      }
+    },
+    {
+      "id": "family.son",
+      "category": "family",
+      "concept": "son",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "offspring", "male"],
+      "relations": {
+        "gender_pair": "family.daughter",
+        "derived_from": "family.child"
+      }
+    },
+    {
+      "id": "family.daughter",
+      "category": "family",
+      "concept": "daughter",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "offspring", "female"],
+      "relations": {
+        "gender_pair": "family.son",
+        "derived_from": "family.child"
+      }
+    },
+    {
+      "id": "family.brother",
+      "category": "family",
+      "concept": "brother",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "sibling", "male"],
+      "relations": {
+        "gender_pair": "family.sister",
+        "related_to": ["family.sister"]
+      }
+    },
+    {
+      "id": "family.sister",
+      "category": "family",
+      "concept": "sister",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "sibling", "female"],
+      "relations": {
+        "gender_pair": "family.brother",
+        "related_to": ["family.brother"]
+      }
+    },
+    {
+      "id": "family.husband",
+      "category": "family",
+      "concept": "husband",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "male", "spouse"],
+      "relations": {
+        "gender_pair": "family.wife"
+      }
+    },
+    {
+      "id": "family.wife",
+      "category": "family",
+      "concept": "wife",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "female", "spouse"],
+      "relations": {
+        "gender_pair": "family.husband"
+      }
+    },
+    {
+      "id": "family.grandfather",
+      "category": "family",
+      "concept": "grandfather",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "male", "grandparent"],
+      "relations": {
+        "gender_pair": "family.grandmother",
+        "related_to": ["family.father", "family.mother"]
+      }
+    },
+    {
+      "id": "family.grandmother",
+      "category": "family",
+      "concept": "grandmother",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "female", "grandparent"],
+      "relations": {
+        "gender_pair": "family.grandfather",
+        "related_to": ["family.father", "family.mother"]
+      }
+    },
+    {
+      "id": "family.uncle",
+      "category": "family",
+      "concept": "uncle",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "male", "extended_family"],
+      "relations": {
+        "gender_pair": "family.aunt"
+      }
+    },
+    {
+      "id": "family.aunt",
+      "category": "family",
+      "concept": "aunt",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "female", "extended_family"],
+      "relations": {
+        "gender_pair": "family.uncle"
+      }
+    },
+    {
+      "id": "family.cousin",
+      "category": "family",
+      "concept": "cousin",
+      "word_type": "noun",
+      "semantic_group": "kinship",
+      "features": ["person", "kinship", "extended_family"]
+    },
+    {
+      "id": "number.one",
+      "category": "numbers",
+      "concept": "one",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity", "singular"]
+    },
+    {
+      "id": "number.two",
+      "category": "numbers",
+      "concept": "two",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity", "dual_candidate"]
+    },
+    {
+      "id": "number.three",
+      "category": "numbers",
+      "concept": "three",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "number.four",
+      "category": "numbers",
+      "concept": "four",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "number.five",
+      "category": "numbers",
+      "concept": "five",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "number.six",
+      "category": "numbers",
+      "concept": "six",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "number.seven",
+      "category": "numbers",
+      "concept": "seven",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "number.eight",
+      "category": "numbers",
+      "concept": "eight",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "number.nine",
+      "category": "numbers",
+      "concept": "nine",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "number.ten",
+      "category": "numbers",
+      "concept": "ten",
+      "word_type": "numeral",
+      "semantic_group": "cardinal_numbers",
+      "features": ["number", "cardinal", "quantity"]
+    },
+    {
+      "id": "space.here",
+      "category": "space",
+      "concept": "here",
+      "word_type": "adverb",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "proximal"]
+    },
+    {
+      "id": "space.there",
+      "category": "space",
+      "concept": "there",
+      "word_type": "adverb",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "distal"]
+    },
+    {
+      "id": "space.inside",
+      "category": "space",
+      "concept": "inside",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "interior"]
+    },
+    {
+      "id": "space.outside",
+      "category": "space",
+      "concept": "outside",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "exterior"]
+    },
+    {
+      "id": "space.above",
+      "category": "space",
+      "concept": "above",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "vertical", "higher"]
+    },
+    {
+      "id": "space.below",
+      "category": "space",
+      "concept": "below",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "vertical", "lower"]
+    },
+    {
+      "id": "space.front",
+      "category": "space",
+      "concept": "front",
+      "word_type": "noun",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "relative_position"]
+    },
+    {
+      "id": "space.back",
+      "category": "space",
+      "concept": "back",
+      "word_type": "noun",
+      "semantic_group": "spatial_relations",
+      "features": ["location", "relative_position"]
+    },
+    {
+      "id": "space.near",
+      "category": "space",
+      "concept": "near",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "features": ["distance", "short"]
+    },
+    {
+      "id": "space.far",
+      "category": "space",
+      "concept": "far",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "features": ["distance", "long"]
+    },
+    {
+      "id": "time.now",
+      "category": "time",
+      "concept": "now",
+      "word_type": "adverb",
+      "semantic_group": "temporal_relations",
+      "features": ["time", "present"]
+    },
+    {
+      "id": "time.today",
+      "category": "time",
+      "concept": "today",
+      "word_type": "noun",
+      "semantic_group": "temporal_units",
+      "features": ["time", "day", "present"]
+    },
+    {
+      "id": "time.yesterday",
+      "category": "time",
+      "concept": "yesterday",
+      "word_type": "noun",
+      "semantic_group": "temporal_relations",
+      "features": ["time", "past", "day"]
+    },
+    {
+      "id": "time.tomorrow",
+      "category": "time",
+      "concept": "tomorrow",
+      "word_type": "noun",
+      "semantic_group": "temporal_relations",
+      "features": ["time", "future", "day"]
+    },
+    {
+      "id": "time.day",
+      "category": "time",
+      "concept": "day",
+      "word_type": "noun",
+      "semantic_group": "temporal_units",
+      "features": ["time", "day", "cycle"]
+    },
+    {
+      "id": "time.night",
+      "category": "time",
+      "concept": "night",
+      "word_type": "noun",
+      "semantic_group": "temporal_units",
+      "features": ["time", "night", "cycle"],
+      "relations": {
+        "opposite": "time.day"
+      }
+    },
+    {
+      "id": "time.morning",
+      "category": "time",
+      "concept": "morning",
+      "word_type": "noun",
+      "semantic_group": "temporal_units",
+      "features": ["time", "day_period"]
+    },
+    {
+      "id": "time.evening",
+      "category": "time",
+      "concept": "evening",
+      "word_type": "noun",
+      "semantic_group": "temporal_units",
+      "features": ["time", "day_period"]
+    },
+    {
+      "id": "time.year",
+      "category": "time",
+      "concept": "year",
+      "word_type": "noun",
+      "semantic_group": "temporal_units",
+      "features": ["time", "cycle", "long_period"]
+    },
+    {
+      "id": "nature.sun",
+      "category": "nature",
+      "concept": "sun",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": ["natural", "celestial", "light", "hot"],
+      "relations": {
+        "related_to": ["time.day"]
+      }
+    },
+    {
+      "id": "nature.moon",
+      "category": "nature",
+      "concept": "moon",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": ["natural", "celestial", "night"],
+      "relations": {
+        "related_to": ["time.night"]
+      }
+    },
+    {
+      "id": "nature.star",
+      "category": "nature",
+      "concept": "star",
+      "word_type": "noun",
+      "semantic_group": "celestial",
+      "features": ["natural", "celestial", "light"]
+    },
+    {
+      "id": "nature.sky",
+      "category": "nature",
+      "concept": "sky",
+      "word_type": "noun",
+      "semantic_group": "environment",
+      "features": ["natural", "environment", "spatial"]
+    },
+    {
+      "id": "nature.cloud",
+      "category": "nature",
+      "concept": "cloud",
+      "word_type": "noun",
+      "semantic_group": "weather",
+      "features": ["natural", "weather", "sky"]
+    },
+    {
+      "id": "nature.rain",
+      "category": "nature",
+      "concept": "rain",
+      "word_type": "noun",
+      "semantic_group": "weather",
+      "features": ["natural", "weather", "water"],
+      "relations": {
+        "related_to": ["nature.water", "nature.cloud"]
+      }
+    },
+    {
+      "id": "nature.wind",
+      "category": "nature",
+      "concept": "wind",
+      "word_type": "noun",
+      "semantic_group": "weather",
+      "features": ["natural", "weather", "air"]
+    },
+    {
+      "id": "nature.fire",
+      "category": "nature",
+      "concept": "fire",
+      "word_type": "noun",
+      "semantic_group": "elements",
+      "features": ["natural", "element", "hot", "dangerous"]
+    },
+    {
+      "id": "nature.water",
+      "category": "nature",
+      "concept": "water",
+      "word_type": "noun",
+      "semantic_group": "elements",
+      "features": ["natural", "element", "liquid", "essential"]
+    },
+    {
+      "id": "nature.earth",
+      "category": "nature",
+      "concept": "earth",
+      "word_type": "noun",
+      "semantic_group": "elements",
+      "features": ["natural", "element", "ground"]
+    },
+    {
+      "id": "nature.stone",
+      "category": "nature",
+      "concept": "stone",
+      "word_type": "noun",
+      "semantic_group": "natural_materials",
+      "features": ["natural", "material", "solid"]
+    },
+    {
+      "id": "nature.tree",
+      "category": "nature",
+      "concept": "tree",
+      "word_type": "noun",
+      "semantic_group": "plants",
+      "features": ["natural", "plant", "living", "countable"],
+      "relations": {
+        "related_to": ["nature.leaf", "nature.flower"]
+      }
+    },
+    {
+      "id": "nature.leaf",
+      "category": "nature",
+      "concept": "leaf",
+      "word_type": "noun",
+      "semantic_group": "plants",
+      "features": ["natural", "plant_part", "living", "countable"],
+      "relations": {
+        "part_of": "nature.tree"
+      }
+    },
+    {
+      "id": "nature.flower",
+      "category": "nature",
+      "concept": "flower",
+      "word_type": "noun",
+      "semantic_group": "plants",
+      "features": ["natural", "plant_part", "living", "countable"]
+    },
+    {
+      "id": "nature.animal",
+      "category": "nature",
+      "concept": "animal",
+      "word_type": "noun",
+      "semantic_group": "animals",
+      "features": ["living", "animate", "countable"]
+    },
+    {
+      "id": "nature.bird",
+      "category": "nature",
+      "concept": "bird",
+      "word_type": "noun",
+      "semantic_group": "animals",
+      "features": ["living", "animate", "animal", "flying", "countable"],
+      "relations": {
+        "is_a": "nature.animal"
+      }
+    },
+    {
+      "id": "nature.fish",
+      "category": "nature",
+      "concept": "fish",
+      "word_type": "noun",
+      "semantic_group": "animals",
+      "features": ["living", "animate", "animal", "aquatic", "countable"],
+      "relations": {
+        "is_a": "nature.animal"
+      }
+    },
+    {
+      "id": "nature.dog",
+      "category": "nature",
+      "concept": "dog",
+      "word_type": "noun",
+      "semantic_group": "animals",
+      "features": ["living", "animate", "animal", "domestic", "countable"],
+      "relations": {
+        "is_a": "nature.animal"
+      }
+    },
+    {
+      "id": "nature.cat",
+      "category": "nature",
+      "concept": "cat",
+      "word_type": "noun",
+      "semantic_group": "animals",
+      "features": ["living", "animate", "animal", "domestic", "countable"],
+      "relations": {
+        "is_a": "nature.animal"
+      }
+    },
+    {
+      "id": "verb.be",
+      "category": "verbs",
+      "concept": "be",
+      "word_type": "verb",
+      "semantic_group": "existence",
+      "features": ["state", "existence", "intransitive"]
+    },
+    {
+      "id": "verb.have",
+      "category": "verbs",
+      "concept": "have",
+      "word_type": "verb",
+      "semantic_group": "possession",
+      "features": ["state", "possession", "transitive"]
+    },
+    {
+      "id": "verb.do",
+      "category": "verbs",
+      "concept": "do",
+      "word_type": "verb",
+      "semantic_group": "action",
+      "features": ["action", "general"]
+    },
+    {
+      "id": "verb.go",
+      "category": "verbs",
+      "concept": "go",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": ["action", "motion", "animate_agent"]
+    },
+    {
+      "id": "verb.come",
+      "category": "verbs",
+      "concept": "come",
+      "word_type": "verb",
+      "semantic_group": "motion",
+      "features": ["action", "motion", "toward_reference"]
+    },
+    {
+      "id": "verb.see",
+      "category": "verbs",
+      "concept": "see",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": ["perception", "vision", "animate_agent"],
+      "relations": {
+        "related_to": ["body.eye"]
+      }
+    },
+    {
+      "id": "verb.hear",
+      "category": "verbs",
+      "concept": "hear",
+      "word_type": "verb",
+      "semantic_group": "perception",
+      "features": ["perception", "hearing", "animate_agent"],
+      "relations": {
+        "related_to": ["body.ear"]
+      }
+    },
+    {
+      "id": "verb.speak",
+      "category": "verbs",
+      "concept": "speak",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": ["communication", "speech", "animate_agent"],
+      "relations": {
+        "related_to": ["body.mouth", "body.tongue"]
+      }
+    },
+    {
+      "id": "verb.say",
+      "category": "verbs",
+      "concept": "say",
+      "word_type": "verb",
+      "semantic_group": "communication",
+      "features": ["communication", "speech", "animate_agent"]
+    },
+    {
+      "id": "verb.know",
+      "category": "verbs",
+      "concept": "know",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": ["mental_state", "knowledge", "animate_agent"]
+    },
+    {
+      "id": "verb.think",
+      "category": "verbs",
+      "concept": "think",
+      "word_type": "verb",
+      "semantic_group": "cognition",
+      "features": ["mental_action", "thought", "animate_agent"]
+    },
+    {
+      "id": "verb.want",
+      "category": "verbs",
+      "concept": "want",
+      "word_type": "verb",
+      "semantic_group": "desire",
+      "features": ["mental_state", "desire", "animate_agent"]
+    },
+    {
+      "id": "verb.like",
+      "category": "verbs",
+      "concept": "like",
+      "word_type": "verb",
+      "semantic_group": "emotion",
+      "features": ["emotion", "positive", "animate_agent"]
+    },
+    {
+      "id": "verb.give",
+      "category": "verbs",
+      "concept": "give",
+      "word_type": "verb",
+      "semantic_group": "transfer",
+      "features": ["action", "transfer", "transitive"]
+    },
+    {
+      "id": "verb.take",
+      "category": "verbs",
+      "concept": "take",
+      "word_type": "verb",
+      "semantic_group": "transfer",
+      "features": ["action", "transfer", "transitive"]
+    },
+    {
+      "id": "verb.make",
+      "category": "verbs",
+      "concept": "make",
+      "word_type": "verb",
+      "semantic_group": "creation",
+      "features": ["action", "creation", "transitive"]
+    },
+    {
+      "id": "verb.eat",
+      "category": "verbs",
+      "concept": "eat",
+      "word_type": "verb",
+      "semantic_group": "bodily_functions",
+      "features": ["action", "bodily_function", "consumption", "animate_agent"],
+      "relations": {
+        "related_to": ["body.mouth", "body.tooth", "need.food"]
+      }
+    },
+    {
+      "id": "verb.drink",
+      "category": "verbs",
+      "concept": "drink",
+      "word_type": "verb",
+      "semantic_group": "bodily_functions",
+      "features": ["action", "bodily_function", "consumption", "animate_agent"],
+      "relations": {
+        "related_to": ["nature.water", "need.drink"]
+      }
+    },
+    {
+      "id": "verb.sleep",
+      "category": "verbs",
+      "concept": "sleep",
+      "word_type": "verb",
+      "semantic_group": "bodily_functions",
+      "features": ["state", "bodily_function", "animate_agent"],
+      "relations": {
+        "related_to": ["need.sleep", "time.night"]
+      }
+    },
+    {
+      "id": "verb.live",
+      "category": "verbs",
+      "concept": "live",
+      "word_type": "verb",
+      "semantic_group": "existence",
+      "features": ["state", "life", "animate_agent"],
+      "relations": {
+        "opposite": "verb.die"
+      }
+    },
+    {
+      "id": "verb.die",
+      "category": "verbs",
+      "concept": "die",
+      "word_type": "verb",
+      "semantic_group": "life_and_death",
+      "features": ["state_change", "death", "animate_agent"],
+      "relations": {
+        "opposite": "verb.live"
+      }
+    },
+    {
+      "id": "verb.kill",
+      "category": "verbs",
+      "concept": "kill",
+      "word_type": "verb",
+      "semantic_group": "life_and_death",
+      "features": ["action", "death", "causative", "transitive"],
+      "relations": {
+        "related_to": ["verb.die"]
+      }
+    },
+    {
+      "id": "verb.love",
+      "category": "verbs",
+      "concept": "love",
+      "word_type": "verb",
+      "semantic_group": "emotion",
+      "features": ["emotion", "positive", "animate_agent"]
+    },
+    {
+      "id": "adjective.big",
+      "category": "adjectives",
+      "concept": "big",
+      "word_type": "adjective",
+      "semantic_group": "size",
+      "features": ["property", "size", "large"],
+      "relations": {
+        "opposite": "adjective.small"
+      }
+    },
+    {
+      "id": "adjective.small",
+      "category": "adjectives",
+      "concept": "small",
+      "word_type": "adjective",
+      "semantic_group": "size",
+      "features": ["property", "size", "small"],
+      "relations": {
+        "opposite": "adjective.big"
+      }
+    },
+    {
+      "id": "adjective.good",
+      "category": "adjectives",
+      "concept": "good",
+      "word_type": "adjective",
+      "semantic_group": "evaluation",
+      "features": ["property", "positive"],
+      "relations": {
+        "opposite": "adjective.bad"
+      }
+    },
+    {
+      "id": "adjective.bad",
+      "category": "adjectives",
+      "concept": "bad",
+      "word_type": "adjective",
+      "semantic_group": "evaluation",
+      "features": ["property", "negative"],
+      "relations": {
+        "opposite": "adjective.good"
+      }
+    },
+    {
+      "id": "adjective.new",
+      "category": "adjectives",
+      "concept": "new",
+      "word_type": "adjective",
+      "semantic_group": "age",
+      "features": ["property", "age", "recent"],
+      "relations": {
+        "opposite": "adjective.old"
+      }
+    },
+    {
+      "id": "adjective.old",
+      "category": "adjectives",
+      "concept": "old",
+      "word_type": "adjective",
+      "semantic_group": "age",
+      "features": ["property", "age", "past"],
+      "relations": {
+        "opposite": "adjective.new"
+      }
+    },
+    {
+      "id": "adjective.hot",
+      "category": "adjectives",
+      "concept": "hot",
+      "word_type": "adjective",
+      "semantic_group": "temperature",
+      "features": ["property", "temperature", "high"],
+      "relations": {
+        "opposite": "adjective.cold"
+      }
+    },
+    {
+      "id": "adjective.cold",
+      "category": "adjectives",
+      "concept": "cold",
+      "word_type": "adjective",
+      "semantic_group": "temperature",
+      "features": ["property", "temperature", "low"],
+      "relations": {
+        "opposite": "adjective.hot"
+      }
+    },
+    {
+      "id": "adjective.long",
+      "category": "adjectives",
+      "concept": "long",
+      "word_type": "adjective",
+      "semantic_group": "dimension",
+      "features": ["property", "dimension", "length"],
+      "relations": {
+        "opposite": "adjective.short"
+      }
+    },
+    {
+      "id": "adjective.short",
+      "category": "adjectives",
+      "concept": "short",
+      "word_type": "adjective",
+      "semantic_group": "dimension",
+      "features": ["property", "dimension", "length"],
+      "relations": {
+        "opposite": "adjective.long"
+      }
+    },
+    {
+      "id": "adjective.many",
+      "category": "adjectives",
+      "concept": "many",
+      "word_type": "determiner",
+      "semantic_group": "quantity",
+      "features": ["quantity", "large"]
+    },
+    {
+      "id": "adjective.few",
+      "category": "adjectives",
+      "concept": "few",
+      "word_type": "determiner",
+      "semantic_group": "quantity",
+      "features": ["quantity", "small"],
+      "relations": {
+        "opposite": "adjective.many"
+      }
+    },
+    {
+      "id": "adjective.full",
+      "category": "adjectives",
+      "concept": "full",
+      "word_type": "adjective",
+      "semantic_group": "state",
+      "features": ["property", "state", "filled"],
+      "relations": {
+        "opposite": "adjective.empty"
+      }
+    },
+    {
+      "id": "adjective.empty",
+      "category": "adjectives",
+      "concept": "empty",
+      "word_type": "adjective",
+      "semantic_group": "state",
+      "features": ["property", "state", "unfilled"],
+      "relations": {
+        "opposite": "adjective.full"
+      }
+    },
+    {
+      "id": "adjective.same",
+      "category": "adjectives",
+      "concept": "same",
+      "word_type": "adjective",
+      "semantic_group": "comparison",
+      "features": ["property", "identity"],
+      "relations": {
+        "opposite": "adjective.different"
+      }
+    },
+    {
+      "id": "adjective.different",
+      "category": "adjectives",
+      "concept": "different",
+      "word_type": "adjective",
+      "semantic_group": "comparison",
+      "features": ["property", "difference"],
+      "relations": {
+        "opposite": "adjective.same"
+      }
+    },
+    {
+      "id": "adjective.alive",
+      "category": "adjectives",
+      "concept": "alive",
+      "word_type": "adjective",
+      "semantic_group": "life",
+      "features": ["property", "life", "animate"],
+      "relations": {
+        "opposite": "adjective.dead"
+      }
+    },
+    {
+      "id": "adjective.dead",
+      "category": "adjectives",
+      "concept": "dead",
+      "word_type": "adjective",
+      "semantic_group": "life",
+      "features": ["property", "death"],
+      "relations": {
+        "opposite": "adjective.alive"
+      }
+    },
+    {
+      "id": "need.food",
+      "category": "needs",
+      "concept": "food",
+      "word_type": "noun",
+      "semantic_group": "basic_needs",
+      "features": ["need", "nutrition", "essential"],
+      "relations": {
+        "related_to": ["verb.eat"]
+      }
+    },
+    {
+      "id": "need.drink",
+      "category": "needs",
+      "concept": "drink",
+      "word_type": "noun",
+      "semantic_group": "basic_needs",
+      "features": ["need", "hydration", "essential"],
+      "relations": {
+        "related_to": ["verb.drink", "nature.water"]
+      }
+    },
+    {
+      "id": "need.home",
+      "category": "needs",
+      "concept": "home",
+      "word_type": "noun",
+      "semantic_group": "basic_needs",
+      "features": ["shelter", "place", "possession"],
+      "relations": {
+        "related_to": ["object.house"]
+      }
+    },
+    {
+      "id": "need.sleep",
+      "category": "needs",
+      "concept": "sleep",
+      "word_type": "noun",
+      "semantic_group": "basic_needs",
+      "features": ["need", "rest", "bodily_function"],
+      "relations": {
+        "related_to": ["verb.sleep"]
+      }
+    },
+    {
+      "id": "need.help",
+      "category": "needs",
+      "concept": "help",
+      "word_type": "noun",
+      "semantic_group": "social_needs",
+      "features": ["need", "assistance", "social"]
+    },
+    {
+      "id": "need.name",
+      "category": "needs",
+      "concept": "name",
+      "word_type": "noun",
+      "semantic_group": "identity",
+      "features": ["identity", "person", "social"]
+    },
+    {
+      "id": "object.house",
+      "category": "objects",
+      "concept": "house",
+      "word_type": "noun",
+      "semantic_group": "shelter",
+      "features": ["object", "place", "shelter", "human_made"],
+      "relations": {
+        "related_to": ["need.home", "object.door"]
+      }
+    },
+    {
+      "id": "object.door",
+      "category": "objects",
+      "concept": "door",
+      "word_type": "noun",
+      "semantic_group": "architecture",
+      "features": ["object", "human_made", "opening"],
+      "relations": {
+        "part_of": "object.house"
+      }
+    },
+    {
+      "id": "object.road",
+      "category": "objects",
+      "concept": "road",
+      "word_type": "noun",
+      "semantic_group": "infrastructure",
+      "features": ["object", "place", "human_made", "path"],
+      "relations": {
+        "related_to": ["verb.go"]
+      }
+    },
+    {
+      "id": "object.tool",
+      "category": "objects",
+      "concept": "tool",
+      "word_type": "noun",
+      "semantic_group": "objects",
+      "features": ["object", "human_made", "instrument"]
+    },
+    {
+      "id": "object.weapon",
+      "category": "objects",
+      "concept": "weapon",
+      "word_type": "noun",
+      "semantic_group": "objects",
+      "features": ["object", "human_made", "dangerous"],
+      "relations": {
+        "related_to": ["verb.kill"]
+      }
+    },
+    {
+      "id": "object.clothing",
+      "category": "objects",
+      "concept": "clothing",
+      "word_type": "noun",
+      "semantic_group": "objects",
+      "features": ["object", "human_made", "body_related"]
+    },
+    {
+      "id": "object.food",
+      "category": "objects",
+      "concept": "food",
+      "word_type": "noun",
+      "semantic_group": "basic_needs",
+      "features": ["object", "nutrition", "consumable"],
+      "relations": {
+        "related_to": ["need.food", "verb.eat"]
+      }
+    },
+    {
+      "id": "object.container",
+      "category": "objects",
+      "concept": "container",
+      "word_type": "noun",
+      "semantic_group": "objects",
+      "features": ["object", "human_made", "container"]
+    },
+    {
+      "id": "social.person",
+      "category": "people",
+      "concept": "person",
+      "word_type": "noun",
+      "semantic_group": "people",
+      "features": ["person", "animate", "human", "countable"]
+    },
+    {
+      "id": "social.man",
+      "category": "people",
+      "concept": "man",
+      "word_type": "noun",
+      "semantic_group": "people",
+      "features": ["person", "animate", "human", "male"],
+      "relations": {
+        "gender_pair": "social.woman"
+      }
+    },
+    {
+      "id": "social.woman",
+      "category": "people",
+      "concept": "woman",
+      "word_type": "noun",
+      "semantic_group": "people",
+      "features": ["person", "animate", "human", "female"],
+      "relations": {
+        "gender_pair": "social.man"
+      }
+    },
+    {
+      "id": "social.child",
+      "category": "people",
+      "concept": "child",
+      "word_type": "noun",
+      "semantic_group": "people",
+      "features": ["person", "animate", "human", "young"],
+      "relations": {
+        "related_to": ["family.child"]
+      }
+    },
+    {
+      "id": "social.friend",
+      "category": "people",
+      "concept": "friend",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": ["person", "social", "positive_relation"]
+    },
+    {
+      "id": "social.enemy",
+      "category": "people",
+      "concept": "enemy",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": ["person", "social", "negative_relation"],
+      "relations": {
+        "opposite": "social.friend"
+      }
+    },
+    {
+      "id": "social.stranger",
+      "category": "people",
+      "concept": "stranger",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": ["person", "social", "unknown_relation"]
+    },
+    {
+      "id": "logic.yes",
+      "category": "function_words",
+      "concept": "yes",
+      "word_type": "particle",
+      "semantic_group": "affirmation_negation",
+      "features": ["affirmation"]
+    },
+    {
+      "id": "logic.no",
+      "category": "function_words",
+      "concept": "no",
+      "word_type": "particle",
+      "semantic_group": "affirmation_negation",
+      "features": ["negation", "answer"]
+    },
+    {
+      "id": "logic.not",
+      "category": "function_words",
+      "concept": "not",
+      "word_type": "particle",
+      "semantic_group": "negation",
+      "features": ["negation"]
+    },
+    {
+      "id": "logic.and",
+      "category": "function_words",
+      "concept": "and",
+      "word_type": "conjunction",
+      "semantic_group": "coordination",
+      "features": ["coordination", "addition"]
+    },
+    {
+      "id": "logic.or",
+      "category": "function_words",
+      "concept": "or",
+      "word_type": "conjunction",
+      "semantic_group": "coordination",
+      "features": ["coordination", "alternative"]
+    },
+    {
+      "id": "logic.if",
+      "category": "function_words",
+      "concept": "if",
+      "word_type": "conjunction",
+      "semantic_group": "condition",
+      "features": ["condition"]
+    },
+    {
+      "id": "logic.because",
+      "category": "function_words",
+      "concept": "because",
+      "word_type": "conjunction",
+      "semantic_group": "causation",
+      "features": ["causation", "reason"]
+    },
+    {
+      "id": "logic.all",
+      "category": "function_words",
+      "concept": "all",
+      "word_type": "determiner",
+      "semantic_group": "quantity",
+      "features": ["quantity", "universal"]
+    },
+    {
+      "id": "logic.some",
+      "category": "function_words",
+      "concept": "some",
+      "word_type": "determiner",
+      "semantic_group": "quantity",
+      "features": ["quantity", "indefinite"]
+    },
+    {
+      "id": "logic.none",
+      "category": "function_words",
+      "concept": "none",
+      "word_type": "determiner",
+      "semantic_group": "quantity",
+      "features": ["quantity", "zero", "negative"]
+    },
+    {
+      "id": "logic.maybe",
+      "category": "function_words",
+      "concept": "maybe",
+      "word_type": "particle",
+      "semantic_group": "modality",
+      "features": ["modality", "uncertainty"]
+    },
+    {
       "id": "body.head",
       "category": "body",
       "concept": "head",
@@ -999,1946 +2690,6 @@
       ],
       "features": [
         "bodily_substance",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.dog",
-      "category": "animals",
-      "concept": "dog",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.cat",
-      "category": "animals",
-      "concept": "cat",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.horse",
-      "category": "animals",
-      "concept": "horse",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.donkey",
-      "category": "animals",
-      "concept": "donkey",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.cow",
-      "category": "animals",
-      "concept": "cow",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.bull",
-      "category": "animals",
-      "concept": "bull",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.goat",
-      "category": "animals",
-      "concept": "goat",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.sheep",
-      "category": "animals",
-      "concept": "sheep",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.pig",
-      "category": "animals",
-      "concept": "pig",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.chicken",
-      "category": "animals",
-      "concept": "chicken",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.rooster",
-      "category": "animals",
-      "concept": "rooster",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.duck",
-      "category": "animals",
-      "concept": "duck",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.goose",
-      "category": "animals",
-      "concept": "goose",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.turkey",
-      "category": "animals",
-      "concept": "turkey",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "north_america",
-      "tags": [
-        "animal",
-        "natural",
-        "north_america"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.rabbit",
-      "category": "animals",
-      "concept": "rabbit",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.mouse",
-      "category": "animals",
-      "concept": "mouse",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.rat",
-      "category": "animals",
-      "concept": "rat",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.squirrel",
-      "category": "animals",
-      "concept": "squirrel",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.deer",
-      "category": "animals",
-      "concept": "deer",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.wolf",
-      "category": "animals",
-      "concept": "wolf",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.fox",
-      "category": "animals",
-      "concept": "fox",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.bear",
-      "category": "animals",
-      "concept": "bear",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.boar",
-      "category": "animals",
-      "concept": "boar",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.lynx",
-      "category": "animals",
-      "concept": "lynx",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.badger",
-      "category": "animals",
-      "concept": "badger",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.otter",
-      "category": "animals",
-      "concept": "otter",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.beaver",
-      "category": "animals",
-      "concept": "beaver",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "north_america",
-      "tags": [
-        "animal",
-        "natural",
-        "north_america"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.hedgehog",
-      "category": "animals",
-      "concept": "hedgehog",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.lion",
-      "category": "animals",
-      "concept": "lion",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.elephant",
-      "category": "animals",
-      "concept": "elephant",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.giraffe",
-      "category": "animals",
-      "concept": "giraffe",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.zebra",
-      "category": "animals",
-      "concept": "zebra",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.hippopotamus",
-      "category": "animals",
-      "concept": "hippopotamus",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.rhinoceros",
-      "category": "animals",
-      "concept": "rhinoceros",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.cheetah",
-      "category": "animals",
-      "concept": "cheetah",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.leopard",
-      "category": "animals",
-      "concept": "leopard",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.hyena",
-      "category": "animals",
-      "concept": "hyena",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.gorilla",
-      "category": "animals",
-      "concept": "gorilla",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.chimpanzee",
-      "category": "animals",
-      "concept": "chimpanzee",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.tiger",
-      "category": "animals",
-      "concept": "tiger",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "asia",
-      "tags": [
-        "animal",
-        "natural",
-        "asia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.panda",
-      "category": "animals",
-      "concept": "panda",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "asia",
-      "tags": [
-        "animal",
-        "natural",
-        "asia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.orangutan",
-      "category": "animals",
-      "concept": "orangutan",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "asia",
-      "tags": [
-        "animal",
-        "natural",
-        "asia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.camel",
-      "category": "animals",
-      "concept": "camel",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.dromedary",
-      "category": "animals",
-      "concept": "dromedary",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.kangaroo",
-      "category": "animals",
-      "concept": "kangaroo",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "australia",
-      "tags": [
-        "animal",
-        "natural",
-        "australia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.koala",
-      "category": "animals",
-      "concept": "koala",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "australia",
-      "tags": [
-        "animal",
-        "natural",
-        "australia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.emu",
-      "category": "animals",
-      "concept": "emu",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "australia",
-      "tags": [
-        "animal",
-        "natural",
-        "australia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.ostrich",
-      "category": "animals",
-      "concept": "ostrich",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.eagle",
-      "category": "animals",
-      "concept": "eagle",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.hawk",
-      "category": "animals",
-      "concept": "hawk",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.owl",
-      "category": "animals",
-      "concept": "owl",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.raven",
-      "category": "animals",
-      "concept": "raven",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.crow",
-      "category": "animals",
-      "concept": "crow",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.pigeon",
-      "category": "animals",
-      "concept": "pigeon",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.sparrow",
-      "category": "animals",
-      "concept": "sparrow",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.swan",
-      "category": "animals",
-      "concept": "swan",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.falcon",
-      "category": "animals",
-      "concept": "falcon",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.parrot",
-      "category": "animals",
-      "concept": "parrot",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "south_america",
-      "tags": [
-        "animal",
-        "natural",
-        "south_america"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.peacock",
-      "category": "animals",
-      "concept": "peacock",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "asia",
-      "tags": [
-        "animal",
-        "natural",
-        "asia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.vulture",
-      "category": "animals",
-      "concept": "vulture",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.snake",
-      "category": "animals",
-      "concept": "snake",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.cobra",
-      "category": "animals",
-      "concept": "cobra",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "asia",
-      "tags": [
-        "animal",
-        "natural",
-        "asia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.python",
-      "category": "animals",
-      "concept": "python",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "asia",
-      "tags": [
-        "animal",
-        "natural",
-        "asia"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.lizard",
-      "category": "animals",
-      "concept": "lizard",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.turtle",
-      "category": "animals",
-      "concept": "turtle",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.crocodile",
-      "category": "animals",
-      "concept": "crocodile",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.frog",
-      "category": "animals",
-      "concept": "frog",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.toad",
-      "category": "animals",
-      "concept": "toad",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "europe",
-      "tags": [
-        "animal",
-        "natural",
-        "europe"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.fish",
-      "category": "animals",
-      "concept": "fish",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.shark",
-      "category": "animals",
-      "concept": "shark",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.whale",
-      "category": "animals",
-      "concept": "whale",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.dolphin",
-      "category": "animals",
-      "concept": "dolphin",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.octopus",
-      "category": "animals",
-      "concept": "octopus",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.crab",
-      "category": "animals",
-      "concept": "crab",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.lobster",
-      "category": "animals",
-      "concept": "lobster",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.spider",
-      "category": "animals",
-      "concept": "spider",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.scorpion",
-      "category": "animals",
-      "concept": "scorpion",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "africa",
-      "tags": [
-        "animal",
-        "natural",
-        "africa"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.bee",
-      "category": "animals",
-      "concept": "bee",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.ant",
-      "category": "animals",
-      "concept": "ant",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.butterfly",
-      "category": "animals",
-      "concept": "butterfly",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.moth",
-      "category": "animals",
-      "concept": "moth",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.beetle",
-      "category": "animals",
-      "concept": "beetle",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "natural",
-      "locale": "world",
-      "tags": [
-        "animal",
-        "natural",
-        "world"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.dragon",
-      "category": "animals",
-      "concept": "dragon",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.wyvern",
-      "category": "animals",
-      "concept": "wyvern",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.griffin",
-      "category": "animals",
-      "concept": "griffin",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.unicorn",
-      "category": "animals",
-      "concept": "unicorn",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.pegasus",
-      "category": "animals",
-      "concept": "pegasus",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.kelpie",
-      "category": "animals",
-      "concept": "kelpie",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.hippogriff",
-      "category": "animals",
-      "concept": "hippogriff",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.manticore",
-      "category": "animals",
-      "concept": "manticore",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.chimera",
-      "category": "animals",
-      "concept": "chimera",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.minotaur",
-      "category": "animals",
-      "concept": "minotaur",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.cerberus",
-      "category": "animals",
-      "concept": "cerberus",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.basilisk",
-      "category": "animals",
-      "concept": "basilisk",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.kraken",
-      "category": "animals",
-      "concept": "kraken",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.giant_spider",
-      "category": "animals",
-      "concept": "giant spider",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
-        "animate"
-      ],
-      "relations": {}
-    },
-    {
-      "id": "animal.werewolf",
-      "category": "animals",
-      "concept": "werewolf",
-      "word_type": "noun",
-      "semantic_group": "animals",
-      "scope": "common",
-      "type": "monster",
-      "locale": "fantasy",
-      "tags": [
-        "animal",
-        "monster",
-        "fantasy"
-      ],
-      "features": [
-        "living",
         "animate"
       ],
       "relations": {}
