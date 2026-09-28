@@ -15916,6 +15916,1762 @@
       "tags": [
         "food"
       ]
+    },
+    {
+      "id": "material.material",
+      "concept": "material",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.substance",
+      "concept": "substance",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.matter",
+      "concept": "matter",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.resource",
+      "concept": "resource",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.raw_material",
+      "concept": "raw_material",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.natural_material",
+      "concept": "natural_material",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.synthetic_material",
+      "concept": "synthetic_material",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.composite_material",
+      "concept": "composite_material",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.gravel",
+      "concept": "gravel",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.limestone",
+      "concept": "limestone",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.slate",
+      "concept": "slate",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.basalt",
+      "concept": "basalt",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.flint",
+      "concept": "flint",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.chalk",
+      "concept": "chalk",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.soapstone",
+      "concept": "soapstone",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.alabaster",
+      "concept": "alabaster",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.graphite",
+      "concept": "graphite",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.sulfur",
+      "concept": "sulfur",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "stone_mineral",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.metal",
+      "concept": "metal",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.cast_iron",
+      "concept": "cast_iron",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.wrought_iron",
+      "concept": "wrought_iron",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.mercury",
+      "concept": "mercury",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.nickel",
+      "concept": "nickel",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.titanium",
+      "concept": "titanium",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.chromium",
+      "concept": "chromium",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.electrum",
+      "concept": "electrum",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "metal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.timber",
+      "concept": "timber",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.hardwood",
+      "concept": "hardwood",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.softwood",
+      "concept": "softwood",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.bark",
+      "concept": "bark",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.cork",
+      "concept": "cork",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.paper",
+      "concept": "paper",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.cardboard",
+      "concept": "cardboard",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.pitch",
+      "concept": "pitch",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.tar",
+      "concept": "tar",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "plant_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.hide",
+      "concept": "hide",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "animal_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.tortoiseshell",
+      "concept": "tortoiseshell",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "animal_derived",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.jute",
+      "concept": "jute",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.yarn",
+      "concept": "yarn",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.felt",
+      "concept": "felt",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.canvas",
+      "concept": "canvas",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.velvet",
+      "concept": "velvet",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.satin",
+      "concept": "satin",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.denim",
+      "concept": "denim",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.textile",
+      "concept": "textile",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "fiber_textile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.pottery",
+      "concept": "pottery",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.terracotta",
+      "concept": "terracotta",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.porcelain",
+      "concept": "porcelain",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.earthenware",
+      "concept": "earthenware",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.stoneware",
+      "concept": "stoneware",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.glass_fiber",
+      "concept": "glass_fiber",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.enamel",
+      "concept": "enamel",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.glaze",
+      "concept": "glaze",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "ceramic_glass",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.glue",
+      "concept": "glue",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.adhesive",
+      "concept": "adhesive",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.beeswax",
+      "concept": "beeswax",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.varnish",
+      "concept": "varnish",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.pigment",
+      "concept": "pigment",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.ink",
+      "concept": "ink",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.mortar",
+      "concept": "mortar",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.lime",
+      "concept": "lime",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.asphalt",
+      "concept": "asphalt",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.bitumen",
+      "concept": "bitumen",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "binder_coating",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.brick",
+      "concept": "brick",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "building_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.tile",
+      "concept": "tile",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "building_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.roof_tile",
+      "concept": "roof_tile",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "building_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.thatch",
+      "concept": "thatch",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "building_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.wooden_beam",
+      "concept": "wooden_beam",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "building_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.stone_block",
+      "concept": "stone_block",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "building_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.steel_beam",
+      "concept": "steel_beam",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "building_material",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.plastic",
+      "concept": "plastic",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.rubber",
+      "concept": "rubber",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.synthetic_rubber",
+      "concept": "synthetic_rubber",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.nylon",
+      "concept": "nylon",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.polyester",
+      "concept": "polyester",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.acrylic",
+      "concept": "acrylic",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.polyethylene",
+      "concept": "polyethylene",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.polycarbonate",
+      "concept": "polycarbonate",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.silicone",
+      "concept": "silicone",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.foam",
+      "concept": "foam",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.fiberglass",
+      "concept": "fiberglass",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.carbon_fiber",
+      "concept": "carbon_fiber",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.graphene",
+      "concept": "graphene",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.ceramic_composite",
+      "concept": "ceramic_composite",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "synthetic",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.nanomaterial",
+      "concept": "nanomaterial",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.smart_material",
+      "concept": "smart_material",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.memory_metal",
+      "concept": "memory_metal",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.superconductor",
+      "concept": "superconductor",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.metamaterial",
+      "concept": "metamaterial",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.aerogel",
+      "concept": "aerogel",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.carbon_nanotube",
+      "concept": "carbon_nanotube",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.nanotube",
+      "concept": "nanotube",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.graphene_composite",
+      "concept": "graphene_composite",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.energy_crystal",
+      "concept": "energy_crystal",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.force_field",
+      "concept": "force_field",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.plasma",
+      "concept": "plasma",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.antimatter",
+      "concept": "antimatter",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.dark_matter",
+      "concept": "dark_matter",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "noun",
+      "semantic_group": "advanced_speculative",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "material.rigid",
+      "concept": "rigid",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.flexible",
+      "concept": "flexible",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.brittle",
+      "concept": "brittle",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.elastic",
+      "concept": "elastic",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.tough",
+      "concept": "tough",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.sticky",
+      "concept": "sticky",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.slippery",
+      "concept": "slippery",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.transparent",
+      "concept": "transparent",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.opaque",
+      "concept": "opaque",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.reflective",
+      "concept": "reflective",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.absorbent",
+      "concept": "absorbent",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.waterproof",
+      "concept": "waterproof",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.flammable",
+      "concept": "flammable",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.fireproof",
+      "concept": "fireproof",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.corrosive",
+      "concept": "corrosive",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.poisonous",
+      "concept": "poisonous",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.conductive",
+      "concept": "conductive",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.insulating",
+      "concept": "insulating",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.magnetic",
+      "concept": "magnetic",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.radioactive",
+      "concept": "radioactive",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "adjective",
+      "semantic_group": "material_property",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.forge",
+      "concept": "forge",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.cast",
+      "concept": "cast",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.hammer",
+      "concept": "hammer",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.carve",
+      "concept": "carve",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.saw",
+      "concept": "saw",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.polish",
+      "concept": "polish",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.grind",
+      "concept": "grind",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.weave",
+      "concept": "weave",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.spin",
+      "concept": "spin",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.sew",
+      "concept": "sew",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.tan",
+      "concept": "tan",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.crush",
+      "concept": "crush",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.weld",
+      "concept": "weld",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.temper",
+      "concept": "temper",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.harden",
+      "concept": "harden",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
+    },
+    {
+      "id": "material.soften",
+      "concept": "soften",
+      "scope": "domain",
+      "category": "material",
+      "word_type": "verb",
+      "semantic_group": "material_process",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "material"
+      ]
     }
   ]
 }
