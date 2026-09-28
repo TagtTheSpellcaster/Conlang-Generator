@@ -5107,6 +5107,2156 @@
       "features": [],
       "relations": {},
       "scope": "domain"
+    },
+    {
+      "id": "transport.foot",
+      "concept": "walking",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "human_power",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "movement",
+        "primitive"
+      ]
+    },
+    {
+      "id": "transport.horse",
+      "concept": "horse",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "animal_power",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "animal_power",
+        "mount"
+      ]
+    },
+    {
+      "id": "transport.donkey",
+      "concept": "donkey",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "animal_power",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "animal_power",
+        "pack_animal"
+      ]
+    },
+    {
+      "id": "transport.camel",
+      "concept": "camel",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "animal_power",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "africa",
+      "tags": [
+        "transport",
+        "animal_power",
+        "mount",
+        "pack_animal"
+      ]
+    },
+    {
+      "id": "transport.elephant",
+      "concept": "elephant",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "animal_power",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "asia",
+      "tags": [
+        "transport",
+        "animal_power",
+        "mount"
+      ]
+    },
+    {
+      "id": "transport.sled",
+      "concept": "sled",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "animal_power",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "arctic",
+      "tags": [
+        "transport",
+        "land",
+        "animal_power"
+      ]
+    },
+    {
+      "id": "transport.cart",
+      "concept": "cart",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "wheeled",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "wheeled",
+        "primitive"
+      ]
+    },
+    {
+      "id": "transport.wagon",
+      "concept": "wagon",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "wheeled",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "wheeled"
+      ]
+    },
+    {
+      "id": "transport.carriage",
+      "concept": "carriage",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "wheeled",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "land",
+        "wheeled",
+        "animal_power"
+      ]
+    },
+    {
+      "id": "transport.chariot",
+      "concept": "chariot",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "wheeled",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "mediterranean",
+      "tags": [
+        "transport",
+        "land",
+        "wheeled",
+        "animal_power",
+        "war"
+      ]
+    },
+    {
+      "id": "transport.raft",
+      "concept": "raft",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "water",
+        "primitive"
+      ]
+    },
+    {
+      "id": "transport.canoe",
+      "concept": "canoe",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "water",
+        "paddle"
+      ]
+    },
+    {
+      "id": "transport.kayak",
+      "concept": "kayak",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "arctic",
+      "tags": [
+        "transport",
+        "water",
+        "paddle"
+      ]
+    },
+    {
+      "id": "transport.boat",
+      "concept": "boat",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "water"
+      ]
+    },
+    {
+      "id": "transport.rowboat",
+      "concept": "rowboat",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "water",
+        "oar"
+      ]
+    },
+    {
+      "id": "transport.sailboat",
+      "concept": "sailboat",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "water",
+        "sail"
+      ]
+    },
+    {
+      "id": "transport.ship",
+      "concept": "ship",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "water",
+        "sail"
+      ]
+    },
+    {
+      "id": "transport.galley",
+      "concept": "galley",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "mediterranean",
+      "tags": [
+        "transport",
+        "water",
+        "oar",
+        "sail",
+        "ancient"
+      ]
+    },
+    {
+      "id": "transport.viking_longship",
+      "concept": "longship",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "water",
+        "sail",
+        "oar",
+        "medieval"
+      ]
+    },
+    {
+      "id": "transport.boat_house",
+      "concept": "houseboat",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "watercraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "water"
+      ]
+    },
+    {
+      "id": "transport.bicycle",
+      "concept": "bicycle",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "wheeled",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "land",
+        "wheeled",
+        "human_power"
+      ]
+    },
+    {
+      "id": "transport.tricycle",
+      "concept": "tricycle",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "wheeled",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "land",
+        "wheeled",
+        "human_power"
+      ]
+    },
+    {
+      "id": "transport.motorcycle",
+      "concept": "motorcycle",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "motor_vehicle",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "motor"
+      ]
+    },
+    {
+      "id": "transport.car",
+      "concept": "car",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "motor_vehicle",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "motor"
+      ]
+    },
+    {
+      "id": "transport.truck",
+      "concept": "truck",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "motor_vehicle",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "motor",
+        "cargo"
+      ]
+    },
+    {
+      "id": "transport.bus",
+      "concept": "bus",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "motor_vehicle",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "motor",
+        "passenger"
+      ]
+    },
+    {
+      "id": "transport.taxi",
+      "concept": "taxi",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "motor_vehicle",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "motor",
+        "passenger"
+      ]
+    },
+    {
+      "id": "transport.train",
+      "concept": "train",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "rail"
+      ]
+    },
+    {
+      "id": "transport.locomotive",
+      "concept": "locomotive",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "rail",
+        "motor"
+      ]
+    },
+    {
+      "id": "transport.tram",
+      "concept": "tram",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "land",
+        "rail",
+        "urban"
+      ]
+    },
+    {
+      "id": "transport.subway",
+      "concept": "subway",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "rail",
+        "urban"
+      ]
+    },
+    {
+      "id": "transport.monorail",
+      "concept": "monorail",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "rail",
+        "urban"
+      ]
+    },
+    {
+      "id": "transport.hot_air_balloon",
+      "concept": "hot-air balloon",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "aircraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "air",
+        "lighter_than_air"
+      ]
+    },
+    {
+      "id": "transport.airship",
+      "concept": "airship",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "aircraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "air",
+        "lighter_than_air"
+      ]
+    },
+    {
+      "id": "transport.airplane",
+      "concept": "airplane",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "aircraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "air",
+        "motor"
+      ]
+    },
+    {
+      "id": "transport.helicopter",
+      "concept": "helicopter",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "aircraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "air",
+        "rotorcraft"
+      ]
+    },
+    {
+      "id": "transport.glider",
+      "concept": "glider",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "aircraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "air"
+      ]
+    },
+    {
+      "id": "transport.seaplane",
+      "concept": "seaplane",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "aircraft",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "air",
+        "water"
+      ]
+    },
+    {
+      "id": "transport.mine_cart",
+      "concept": "mine cart",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "rail",
+        "cargo",
+        "industrial"
+      ]
+    },
+    {
+      "id": "transport.elevator",
+      "concept": "elevator",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "vertical",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "vertical",
+        "mechanical"
+      ]
+    },
+    {
+      "id": "transport.cable_car",
+      "concept": "cable car",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "rail",
+        "mountain"
+      ]
+    },
+    {
+      "id": "transport.funicular",
+      "concept": "funicular",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "rail",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "europe",
+      "tags": [
+        "transport",
+        "land",
+        "rail",
+        "mountain"
+      ]
+    },
+    {
+      "id": "transport.hovercraft",
+      "concept": "hovercraft",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "speculative_vehicle",
+      "word_type": "noun",
+      "type": "natural",
+      "locale": "world",
+      "tags": [
+        "transport",
+        "land",
+        "water",
+        "air_cushion"
+      ]
+    },
+    {
+      "id": "transport.hovercar",
+      "concept": "hovercar",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "speculative_vehicle",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "land",
+        "air",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.flying_car",
+      "concept": "flying car",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "speculative_vehicle",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "air",
+        "land",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.jetpack",
+      "concept": "jetpack",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "personal_flight",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "air",
+        "personal",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.teleporter",
+      "concept": "teleporter",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "teleportation",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "instant",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.teleportation_gate",
+      "concept": "teleportation gate",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "teleportation",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "instant",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.spacecraft",
+      "concept": "spacecraft",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "spacecraft",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "space",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.spaceship",
+      "concept": "spaceship",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "spacecraft",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "space",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.starship",
+      "concept": "starship",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "spacecraft",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "space",
+        "interstellar",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.shuttle",
+      "concept": "space shuttle",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "spacecraft",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "space",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.escape_pod",
+      "concept": "escape pod",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "spacecraft",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "space",
+        "emergency",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.warp_drive",
+      "concept": "warp drive",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "faster_than_light",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "space",
+        "faster_than_light",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.wormhole",
+      "concept": "wormhole",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "faster_than_light",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "space",
+        "faster_than_light",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.portal",
+      "concept": "portal",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "teleportation",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "instant",
+        "fantasy",
+        "science_fiction"
+      ]
+    },
+    {
+      "id": "transport.magic_carpet",
+      "concept": "magic carpet",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "fantasy_vehicle",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "air",
+        "magic"
+      ]
+    },
+    {
+      "id": "transport.flying_ship",
+      "concept": "flying ship",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "fantasy_vehicle",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "air",
+        "fantasy"
+      ]
+    },
+    {
+      "id": "transport.dragon_mount",
+      "concept": "dragon mount",
+      "scope": "domain",
+      "category": "transport",
+      "semantic_group": "animal_power",
+      "word_type": "noun",
+      "type": "fictional",
+      "locale": "fantasy",
+      "tags": [
+        "transport",
+        "air",
+        "animal_power",
+        "mount",
+        "fantasy"
+      ]
+    },
+    {
+      "id": "adjective.large",
+      "concept": "large",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "size",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "size"
+      ]
+    },
+    {
+      "id": "adjective.tiny",
+      "concept": "tiny",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "size",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "size"
+      ]
+    },
+    {
+      "id": "adjective.tall",
+      "concept": "tall",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "size",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "size"
+      ]
+    },
+    {
+      "id": "adjective.thick",
+      "concept": "thick",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "size",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "size"
+      ]
+    },
+    {
+      "id": "adjective.thin",
+      "concept": "thin",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "size",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "size"
+      ]
+    },
+    {
+      "id": "adjective.narrow",
+      "concept": "narrow",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "size",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "size"
+      ]
+    },
+    {
+      "id": "adjective.wide",
+      "concept": "wide",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "size",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "size"
+      ]
+    },
+    {
+      "id": "adjective.hard",
+      "concept": "hard",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.soft",
+      "concept": "soft",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.heavy",
+      "concept": "heavy",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.light",
+      "concept": "light",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.strong",
+      "concept": "strong",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.weak",
+      "concept": "weak",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.sharp",
+      "concept": "sharp",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.dull",
+      "concept": "dull",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.warm",
+      "concept": "warm",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "temperature",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "temperature"
+      ]
+    },
+    {
+      "id": "adjective.cool",
+      "concept": "cool",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "temperature",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "temperature"
+      ]
+    },
+    {
+      "id": "adjective.wet",
+      "concept": "wet",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.dry",
+      "concept": "dry",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "physical_property",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "physical"
+      ]
+    },
+    {
+      "id": "adjective.clean",
+      "concept": "clean",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "condition",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "condition"
+      ]
+    },
+    {
+      "id": "adjective.dirty",
+      "concept": "dirty",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "condition",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "condition"
+      ]
+    },
+    {
+      "id": "adjective.round",
+      "concept": "round",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "shape",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "shape"
+      ]
+    },
+    {
+      "id": "adjective.flat",
+      "concept": "flat",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "shape",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "shape"
+      ]
+    },
+    {
+      "id": "adjective.straight",
+      "concept": "straight",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "shape",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "shape"
+      ]
+    },
+    {
+      "id": "adjective.crooked",
+      "concept": "crooked",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "shape",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "shape"
+      ]
+    },
+    {
+      "id": "adjective.bent",
+      "concept": "bent",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "shape",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "shape"
+      ]
+    },
+    {
+      "id": "adjective.deep",
+      "concept": "deep",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "dimension",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "dimension"
+      ]
+    },
+    {
+      "id": "adjective.shallow",
+      "concept": "shallow",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "dimension",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "dimension"
+      ]
+    },
+    {
+      "id": "adjective.high",
+      "concept": "high",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "dimension",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "dimension"
+      ]
+    },
+    {
+      "id": "adjective.low",
+      "concept": "low",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "dimension",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "dimension"
+      ]
+    },
+    {
+      "id": "adjective.red",
+      "concept": "red",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.orange",
+      "concept": "orange",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.yellow",
+      "concept": "yellow",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.green",
+      "concept": "green",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.blue",
+      "concept": "blue",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.purple",
+      "concept": "purple",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.brown",
+      "concept": "brown",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.black",
+      "concept": "black",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.white",
+      "concept": "white",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.gray",
+      "concept": "gray",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "color",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "color"
+      ]
+    },
+    {
+      "id": "adjective.bright",
+      "concept": "bright",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "light",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "light",
+        "sensory",
+        "vision"
+      ]
+    },
+    {
+      "id": "adjective.dark",
+      "concept": "dark",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "light",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "light"
+      ]
+    },
+    {
+      "id": "adjective.fast",
+      "concept": "fast",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "speed",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "speed"
+      ]
+    },
+    {
+      "id": "adjective.slow",
+      "concept": "slow",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "speed",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "speed"
+      ]
+    },
+    {
+      "id": "adjective.quick",
+      "concept": "quick",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "speed",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "speed"
+      ]
+    },
+    {
+      "id": "adjective.still",
+      "concept": "still",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "motion",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "motion"
+      ]
+    },
+    {
+      "id": "adjective.young",
+      "concept": "young",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "age",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "age"
+      ]
+    },
+    {
+      "id": "adjective.ancient",
+      "concept": "ancient",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "age",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "age"
+      ]
+    },
+    {
+      "id": "adjective.modern",
+      "concept": "modern",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "age",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "age"
+      ]
+    },
+    {
+      "id": "adjective.beautiful",
+      "concept": "beautiful",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "value",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "adjective.ugly",
+      "concept": "ugly",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "value",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "adjective.right",
+      "concept": "right",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "value",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "adjective.wrong",
+      "concept": "wrong",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "value",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "adjective.true",
+      "concept": "true",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "truth",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "abstract"
+      ]
+    },
+    {
+      "id": "adjective.false",
+      "concept": "false",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "truth",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "abstract"
+      ]
+    },
+    {
+      "id": "adjective.useful",
+      "concept": "useful",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "value",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "adjective.useless",
+      "concept": "useless",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "value",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "adjective.happy",
+      "concept": "happy",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "emotion",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "emotion"
+      ]
+    },
+    {
+      "id": "adjective.sad",
+      "concept": "sad",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "emotion",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "emotion"
+      ]
+    },
+    {
+      "id": "adjective.angry",
+      "concept": "angry",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "emotion",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "emotion"
+      ]
+    },
+    {
+      "id": "adjective.afraid",
+      "concept": "afraid",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "emotion",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "emotion"
+      ]
+    },
+    {
+      "id": "adjective.brave",
+      "concept": "brave",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "personality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "personality"
+      ]
+    },
+    {
+      "id": "adjective.calm",
+      "concept": "calm",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "personality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "personality"
+      ]
+    },
+    {
+      "id": "adjective.kind",
+      "concept": "kind",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "personality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "personality"
+      ]
+    },
+    {
+      "id": "adjective.cruel",
+      "concept": "cruel",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "personality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "personality"
+      ]
+    },
+    {
+      "id": "adjective.friendly",
+      "concept": "friendly",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.hostile",
+      "concept": "hostile",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.lonely",
+      "concept": "lonely",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "emotion",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "emotion"
+      ]
+    },
+    {
+      "id": "adjective.tired",
+      "concept": "tired",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "state",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "state"
+      ]
+    },
+    {
+      "id": "adjective.hungry",
+      "concept": "hungry",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "state",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "state"
+      ]
+    },
+    {
+      "id": "adjective.thirsty",
+      "concept": "thirsty",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "state",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "state"
+      ]
+    },
+    {
+      "id": "adjective.loud",
+      "concept": "loud",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "sound",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "sound"
+      ]
+    },
+    {
+      "id": "adjective.quiet",
+      "concept": "quiet",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "sound",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "sound"
+      ]
+    },
+    {
+      "id": "adjective.sweet",
+      "concept": "sweet",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "taste",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "taste"
+      ]
+    },
+    {
+      "id": "adjective.sour",
+      "concept": "sour",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "taste",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "taste"
+      ]
+    },
+    {
+      "id": "adjective.bitter",
+      "concept": "bitter",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "taste",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "taste"
+      ]
+    },
+    {
+      "id": "adjective.salty",
+      "concept": "salty",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "taste",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "taste"
+      ]
+    },
+    {
+      "id": "adjective.spicy",
+      "concept": "spicy",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "taste",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "taste"
+      ]
+    },
+    {
+      "id": "adjective.smelly",
+      "concept": "smelly",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "smell",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "smell"
+      ]
+    },
+    {
+      "id": "adjective.fragrant",
+      "concept": "fragrant",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "smell",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "sensory",
+        "smell"
+      ]
+    },
+    {
+      "id": "adjective.more",
+      "concept": "more",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "quantity",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "quantity"
+      ]
+    },
+    {
+      "id": "adjective.less",
+      "concept": "less",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "quantity",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "quantity"
+      ]
+    },
+    {
+      "id": "adjective.first",
+      "concept": "first",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "order",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "order"
+      ]
+    },
+    {
+      "id": "adjective.last",
+      "concept": "last",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "order",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "order"
+      ]
+    },
+    {
+      "id": "adjective.rich",
+      "concept": "rich",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social_status",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.poor",
+      "concept": "poor",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social_status",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.free",
+      "concept": "free",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social_status",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.bound",
+      "concept": "bound",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social_status",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.powerful",
+      "concept": "powerful",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "power",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.powerless",
+      "concept": "powerless",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "power",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.important",
+      "concept": "important",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social_status",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.common",
+      "concept": "common",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "social_status",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "social"
+      ]
+    },
+    {
+      "id": "adjective.honest",
+      "concept": "honest",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "morality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "morality"
+      ]
+    },
+    {
+      "id": "adjective.dishonest",
+      "concept": "dishonest",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "morality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "morality"
+      ]
+    },
+    {
+      "id": "adjective.loyal",
+      "concept": "loyal",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "morality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "morality"
+      ]
+    },
+    {
+      "id": "adjective.disloyal",
+      "concept": "disloyal",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "morality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "morality"
+      ]
+    },
+    {
+      "id": "adjective.goodhearted",
+      "concept": "good-hearted",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "morality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "morality"
+      ]
+    },
+    {
+      "id": "adjective.evil",
+      "concept": "evil",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "morality",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "morality"
+      ]
+    },
+    {
+      "id": "adjective.wild",
+      "concept": "wild",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "nature",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "nature"
+      ]
+    },
+    {
+      "id": "adjective.tame",
+      "concept": "tame",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "nature",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "nature"
+      ]
+    },
+    {
+      "id": "adjective.natural",
+      "concept": "natural",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "nature",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "nature"
+      ]
+    },
+    {
+      "id": "adjective.artificial",
+      "concept": "artificial",
+      "scope": "domain",
+      "category": "adjective",
+      "semantic_group": "nature",
+      "word_type": "adjective",
+      "tags": [
+        "adjective",
+        "nature"
+      ]
     }
   ]
 }
