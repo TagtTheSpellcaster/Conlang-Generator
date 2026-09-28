@@ -3,30 +3,26 @@ let filteredVocabulary = [];
 
 const STORAGE_KEY = "conlang_vocabulary";
 
+
+// ============================================================
+// LOAD VOCABULARY
+// ============================================================
+
 async function loadVocabulary() {
+
     try {
+
         const stored = localStorage.getItem(STORAGE_KEY);
 
         if (stored) {
+
             vocabulary = JSON.parse(stored);
+
             console.log("Vocabulary loaded from localStorage.");
+
         } else {
-            const response = await fetch("vocabulary.json");
 
-            if (!response.ok) {
-                throw new Error(`HTTP error ${response.status}`);
-            }
-
-            const data = await response.json();
-
-            // Supports:
-            // { "universal": [...] }
-            // and directly [...]
-            if (Array.isArray(data)) {
-                vocabulary = data;
-            } else {
-                vocabulary = flattenVocabulary(data);
-            }
+            await loadVocabularyFromJSON();
 
             saveVocabulary();
         }
@@ -34,19 +30,111 @@ async function loadVocabulary() {
         filteredVocabulary = [...vocabulary];
 
         populateFilters();
+        populateSortAttributes();
         renderVocabulary();
 
     } catch (error) {
-        console.error("Unable to load vocabulary:", error);
-        showError("Unable to load vocabulary.json");
+
+        console.error(
+            "Unable to load vocabulary:",
+            error
+        );
+
+        showError(
+            "Unable to load vocabulary.json"
+        );
     }
 }
 
 
+// ============================================================
+// LOAD DIRECTLY FROM JSON
+// ============================================================
+
+async function loadVocabularyFromJSON() {
+
+    const response = await fetch(
+        "vocabulary.json?cacheBust=" + Date.now()
+    );
+
+    if (!response.ok) {
+
+        throw new Error(
+            `HTTP error ${response.status}`
+        );
+    }
+
+    const data = await response.json();
+
+    if (Array.isArray(data)) {
+
+        vocabulary = data;
+
+    } else {
+
+        vocabulary = flattenVocabulary(data);
+    }
+}
+
+
+// ============================================================
+// RELOAD FROM SERVER
+// ============================================================
+
+async function reloadVocabularyFromJSON() {
+
+    const confirmed = confirm(
+        "Reload vocabulary.json from the server?\n\n" +
+        "Any local changes stored in this browser will be discarded."
+    );
+
+    if (!confirmed) {
+        return;
+    }
+
+    try {
+
+        await loadVocabularyFromJSON();
+
+        saveVocabulary();
+
+        filteredVocabulary = [...vocabulary];
+
+        populateFilters();
+        populateSortAttributes();
+        renderVocabulary();
+
+        console.log(
+            "Vocabulary reloaded from vocabulary.json."
+        );
+
+    } catch (error) {
+
+        console.error(
+            "Unable to reload vocabulary:",
+            error
+        );
+
+        alert(
+            "Unable to reload vocabulary.json:\n\n" +
+            error.message
+        );
+    }
+}
+
+
+// ============================================================
+// CONVERT GROUPED JSON INTO FLAT ARRAY
+// ============================================================
+
 function flattenVocabulary(data) {
+
     const result = [];
 
-    for (const [group, entries] of Object.entries(data)) {
+    for (
+        const [group, entries]
+        of Object.entries(data)
+    ) {
 
         if (!Array.isArray(entries)) {
             continue;
@@ -58,7 +146,6 @@ function flattenVocabulary(data) {
                 ...entry
             };
 
-            // Preserve the database group.
             if (!item.scope) {
                 item.scope = group;
             }
@@ -71,40 +158,70 @@ function flattenVocabulary(data) {
 }
 
 
+// ============================================================
+// SAVE LOCAL COPY
+// ============================================================
+
 function saveVocabulary() {
+
     localStorage.setItem(
         STORAGE_KEY,
-        JSON.stringify(vocabulary, null, 2)
+        JSON.stringify(
+            vocabulary,
+            null,
+            2
+        )
     );
 }
 
 
+// ============================================================
+// GET ALL ATTRIBUTES
+// ============================================================
+
 function getAllAttributes() {
+
     const attributes = new Set();
 
     vocabulary.forEach(word => {
+
         Object.keys(word).forEach(key => {
+
             attributes.add(key);
+
         });
+
     });
 
     return [...attributes].sort();
 }
 
 
-function getAttributeValue(word, attribute) {
+// ============================================================
+// GET ATTRIBUTE VALUE
+// ============================================================
+
+function getAttributeValue(
+    word,
+    attribute
+) {
 
     const value = word[attribute];
 
-    if (value === undefined || value === null) {
+    if (
+        value === undefined ||
+        value === null
+    ) {
         return "";
     }
 
     if (Array.isArray(value)) {
+
         return value.join(", ");
     }
 
     if (typeof value === "object") {
+
         return JSON.stringify(value);
     }
 
@@ -112,14 +229,21 @@ function getAttributeValue(word, attribute) {
 }
 
 
+// ============================================================
+// CREATE FILTERS
+// ============================================================
+
 function populateFilters() {
 
     const filterContainer =
-        document.getElementById("attributeFilters");
+        document.getElementById(
+            "attributeFilters"
+        );
 
     filterContainer.innerHTML = "";
 
-    const attributes = getAllAttributes();
+    const attributes =
+        getAllAttributes();
 
     attributes.forEach(attribute => {
 
@@ -127,66 +251,110 @@ function populateFilters() {
 
         vocabulary.forEach(word => {
 
-            const value = word[attribute];
+            const value =
+                word[attribute];
 
             if (Array.isArray(value)) {
-                value.forEach(v => values.add(String(v)));
+
+                value.forEach(v =>
+                    values.add(String(v))
+                );
+
             } else if (
                 value !== undefined &&
                 value !== null &&
                 typeof value !== "object"
             ) {
-                values.add(String(value));
+
+                values.add(
+                    String(value)
+                );
             }
+
         });
 
         if (values.size === 0) {
             return;
         }
 
-        const wrapper = document.createElement("div");
-        wrapper.className = "filter-group";
+        const wrapper =
+            document.createElement("div");
 
-        const label = document.createElement("label");
-        label.textContent = attribute;
+        wrapper.className =
+            "filter-group";
 
-        const select = document.createElement("select");
+        const label =
+            document.createElement("label");
 
-        select.dataset.attribute = attribute;
+        label.textContent =
+            attribute;
 
-        const allOption = document.createElement("option");
+        const select =
+            document.createElement("select");
+
+        select.dataset.attribute =
+            attribute;
+
+        const allOption =
+            document.createElement("option");
+
         allOption.value = "";
-        allOption.textContent = "All";
 
-        select.appendChild(allOption);
+        allOption.textContent =
+            "All";
+
+        select.appendChild(
+            allOption
+        );
 
         [...values]
-            .sort((a, b) => a.localeCompare(b))
+            .sort((a, b) =>
+                a.localeCompare(b)
+            )
             .forEach(value => {
 
-                const option = document.createElement("option");
+                const option =
+                    document.createElement(
+                        "option"
+                    );
 
-                option.value = value;
-                option.textContent = value;
+                option.value =
+                    value;
 
-                select.appendChild(option);
+                option.textContent =
+                    value;
+
+                select.appendChild(
+                    option
+                );
             });
 
-        select.addEventListener("change", applyFilters);
+        select.addEventListener(
+            "change",
+            applyFilters
+        );
 
         wrapper.appendChild(label);
         wrapper.appendChild(select);
 
-        filterContainer.appendChild(wrapper);
+        filterContainer.appendChild(
+            wrapper
+        );
     });
 }
 
+
+// ============================================================
+// FILTER
+// ============================================================
 
 function applyFilters() {
 
     const search =
         document
-            .getElementById("searchVocabulary")
+            .getElementById(
+                "searchVocabulary"
+            )
             .value
             .trim()
             .toLowerCase();
@@ -196,242 +364,420 @@ function applyFilters() {
             "#attributeFilters select"
         );
 
-    filteredVocabulary = vocabulary.filter(word => {
+    filteredVocabulary =
+        vocabulary.filter(word => {
 
-        // Global search
-        if (search) {
+            // Global search
 
-            const text = JSON.stringify(word)
-                .toLowerCase();
+            if (search) {
 
-            if (!text.includes(search)) {
-                return false;
-            }
-        }
+                const text =
+                    JSON.stringify(word)
+                        .toLowerCase();
 
-        // Attribute filters
-        for (const select of selects) {
+                if (!text.includes(search)) {
 
-            const attribute = select.dataset.attribute;
-            const selectedValue = select.value;
-
-            if (!selectedValue) {
-                continue;
-            }
-
-            const value = word[attribute];
-
-            if (Array.isArray(value)) {
-
-                if (!value.map(String).includes(selectedValue)) {
-                    return false;
-                }
-
-            } else {
-
-                if (String(value) !== selectedValue) {
                     return false;
                 }
             }
-        }
 
-        return true;
-    });
+
+            // Attribute filters
+
+            for (const select of selects) {
+
+                const attribute =
+                    select.dataset.attribute;
+
+                const selectedValue =
+                    select.value;
+
+                if (!selectedValue) {
+                    continue;
+                }
+
+                const value =
+                    word[attribute];
+
+                if (Array.isArray(value)) {
+
+                    if (
+                        !value
+                            .map(String)
+                            .includes(
+                                selectedValue
+                            )
+                    ) {
+
+                        return false;
+                    }
+
+                } else {
+
+                    if (
+                        String(value) !==
+                        selectedValue
+                    ) {
+
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        });
 
     applySorting();
 }
 
 
+// ============================================================
+// SORT
+// ============================================================
+
 function applySorting() {
 
     const attribute =
-        document.getElementById("sortAttribute").value;
+        document.getElementById(
+            "sortAttribute"
+        ).value;
 
     const direction =
-        document.getElementById("sortDirection").value;
+        document.getElementById(
+            "sortDirection"
+        ).value;
 
     if (!attribute) {
+
         renderVocabulary();
+
         return;
     }
 
-    filteredVocabulary.sort((a, b) => {
+    filteredVocabulary.sort(
+        (a, b) => {
 
-        const valueA = getAttributeValue(a, attribute);
-        const valueB = getAttributeValue(b, attribute);
+            const valueA =
+                getAttributeValue(
+                    a,
+                    attribute
+                );
 
-        const comparison =
-            valueA.localeCompare(
-                valueB,
-                undefined,
-                {
-                    numeric: true,
-                    sensitivity: "base"
-                }
-            );
+            const valueB =
+                getAttributeValue(
+                    b,
+                    attribute
+                );
 
-        return direction === "desc"
-            ? -comparison
-            : comparison;
-    });
+            const comparison =
+                valueA.localeCompare(
+                    valueB,
+                    undefined,
+                    {
+                        numeric: true,
+                        sensitivity: "base"
+                    }
+                );
+
+            return direction === "desc"
+                ? -comparison
+                : comparison;
+        }
+    );
 
     renderVocabulary();
 }
 
 
+// ============================================================
+// RENDER TABLE
+// ============================================================
+
 function renderVocabulary() {
 
     const tbody =
-        document.getElementById("vocabularyBody");
+        document.getElementById(
+            "vocabularyBody"
+        );
 
     tbody.innerHTML = "";
 
-    filteredVocabulary.forEach((word, index) => {
+    filteredVocabulary.forEach(
+        (word, index) => {
 
-        const row = document.createElement("tr");
+            const row =
+                document.createElement(
+                    "tr"
+                );
 
-        const numberCell =
-            document.createElement("td");
 
-        numberCell.textContent = index + 1;
+            // Number
 
-        row.appendChild(numberCell);
+            const numberCell =
+                document.createElement(
+                    "td"
+                );
 
-        const idCell =
-            document.createElement("td");
+            numberCell.textContent =
+                index + 1;
 
-        idCell.textContent = word.id || "";
+            row.appendChild(
+                numberCell
+            );
 
-        row.appendChild(idCell);
 
-        const conceptCell =
-            document.createElement("td");
+            // ID
 
-        conceptCell.textContent =
-            word.concept || "";
+            const idCell =
+                document.createElement(
+                    "td"
+                );
 
-        row.appendChild(conceptCell);
+            idCell.textContent =
+                word.id || "";
 
-        const categoryCell =
-            document.createElement("td");
+            row.appendChild(
+                idCell
+            );
 
-        categoryCell.textContent =
-            word.category || "";
 
-        row.appendChild(categoryCell);
+            // Concept
 
-        const typeCell =
-            document.createElement("td");
+            const conceptCell =
+                document.createElement(
+                    "td"
+                );
 
-        typeCell.textContent =
-            word.word_type || "";
+            conceptCell.textContent =
+                word.concept || "";
 
-        row.appendChild(typeCell);
+            row.appendChild(
+                conceptCell
+            );
 
-        const groupCell =
-            document.createElement("td");
 
-        groupCell.textContent =
-            word.semantic_group || "";
+            // Category
 
-        row.appendChild(groupCell);
+            const categoryCell =
+                document.createElement(
+                    "td"
+                );
 
-        const featuresCell =
-            document.createElement("td");
+            categoryCell.textContent =
+                word.category || "";
 
-        featuresCell.textContent =
-            Array.isArray(word.features)
-                ? word.features.join(", ")
-                : "";
+            row.appendChild(
+                categoryCell
+            );
 
-        row.appendChild(featuresCell);
 
-        const actionsCell =
-            document.createElement("td");
+            // Word type
 
-        actionsCell.className = "actions";
+            const typeCell =
+                document.createElement(
+                    "td"
+                );
 
-        const editButton =
-            document.createElement("button");
+            typeCell.textContent =
+                word.word_type || "";
 
-        editButton.textContent = "Edit";
+            row.appendChild(
+                typeCell
+            );
 
-        editButton.addEventListener(
-            "click",
-            () => editVocabularyEntry(word.id)
-        );
 
-        const deleteButton =
-            document.createElement("button");
+            // Semantic group
 
-        deleteButton.textContent = "Delete";
+            const groupCell =
+                document.createElement(
+                    "td"
+                );
 
-        deleteButton.addEventListener(
-            "click",
-            () => deleteVocabularyEntry(word.id)
-        );
+            groupCell.textContent =
+                word.semantic_group || "";
 
-        actionsCell.appendChild(editButton);
-        actionsCell.appendChild(deleteButton);
+            row.appendChild(
+                groupCell
+            );
 
-        row.appendChild(actionsCell);
 
-        tbody.appendChild(row);
-    });
+            // Features
+
+            const featuresCell =
+                document.createElement(
+                    "td"
+                );
+
+            featuresCell.textContent =
+                Array.isArray(
+                    word.features
+                )
+                    ? word.features.join(", ")
+                    : "";
+
+            row.appendChild(
+                featuresCell
+            );
+
+
+            // Actions
+
+            const actionsCell =
+                document.createElement(
+                    "td"
+                );
+
+            actionsCell.className =
+                "actions";
+
+
+            // Edit button
+
+            const editButton =
+                document.createElement(
+                    "button"
+                );
+
+            editButton.textContent =
+                "Edit";
+
+            editButton.addEventListener(
+                "click",
+                () =>
+                    editVocabularyEntry(
+                        word.id
+                    )
+            );
+
+
+            // Delete button
+
+            const deleteButton =
+                document.createElement(
+                    "button"
+                );
+
+            deleteButton.textContent =
+                "Delete";
+
+            deleteButton.addEventListener(
+                "click",
+                () =>
+                    deleteVocabularyEntry(
+                        word.id
+                    )
+            );
+
+
+            actionsCell.appendChild(
+                editButton
+            );
+
+            actionsCell.appendChild(
+                deleteButton
+            );
+
+            row.appendChild(
+                actionsCell
+            );
+
+            tbody.appendChild(
+                row
+            );
+        }
+    );
 
     updateCounters();
 }
 
 
+// ============================================================
+// COUNTERS
+// ============================================================
+
 function updateCounters() {
 
-    document.getElementById("totalCount").textContent =
+    document.getElementById(
+        "totalCount"
+    ).textContent =
         vocabulary.length;
 
-    document.getElementById("visibleCount").textContent =
+    document.getElementById(
+        "visibleCount"
+    ).textContent =
         filteredVocabulary.length;
 }
 
 
+// ============================================================
+// SORT ATTRIBUTES
+// ============================================================
+
 function populateSortAttributes() {
 
     const select =
-        document.getElementById("sortAttribute");
+        document.getElementById(
+            "sortAttribute"
+        );
 
     select.innerHTML = "";
 
     const none =
-        document.createElement("option");
+        document.createElement(
+            "option"
+        );
 
     none.value = "";
-    none.textContent = "Default order";
 
-    select.appendChild(none);
+    none.textContent =
+        "Default order";
 
-    getAllAttributes().forEach(attribute => {
+    select.appendChild(
+        none
+    );
 
-        const option =
-            document.createElement("option");
+    getAllAttributes()
+        .forEach(attribute => {
 
-        option.value = attribute;
-        option.textContent = attribute;
+            const option =
+                document.createElement(
+                    "option"
+                );
 
-        select.appendChild(option);
-    });
+            option.value =
+                attribute;
+
+            option.textContent =
+                attribute;
+
+            select.appendChild(
+                option
+            );
+        });
 }
 
+
+// ============================================================
+// EDIT ENTRY
+// ============================================================
 
 function editVocabularyEntry(id) {
 
     const word =
-        vocabulary.find(entry => entry.id === id);
+        vocabulary.find(
+            entry => entry.id === id
+        );
 
     if (!word) {
         return;
     }
 
     const json =
-        JSON.stringify(word, null, 2);
+        JSON.stringify(
+            word,
+            null,
+            2
+        );
 
     const edited =
         prompt(
@@ -449,21 +795,28 @@ function editVocabularyEntry(id) {
             JSON.parse(edited);
 
         if (!newWord.id) {
-            throw new Error("Entry must have an id.");
+
+            throw new Error(
+                "Entry must have an id."
+            );
         }
 
         const index =
             vocabulary.findIndex(
-                entry => entry.id === id
+                entry =>
+                    entry.id === id
             );
 
-        vocabulary[index] = newWord;
+        vocabulary[index] =
+            newWord;
 
         saveVocabulary();
 
         populateFilters();
         populateSortAttributes();
-        filteredVocabulary = [...vocabulary];
+
+        filteredVocabulary =
+            [...vocabulary];
 
         renderVocabulary();
 
@@ -477,10 +830,16 @@ function editVocabularyEntry(id) {
 }
 
 
+// ============================================================
+// DELETE ENTRY
+// ============================================================
+
 function deleteVocabularyEntry(id) {
 
     const word =
-        vocabulary.find(entry => entry.id === id);
+        vocabulary.find(
+            entry => entry.id === id
+        );
 
     if (!word) {
         return;
@@ -509,22 +868,42 @@ function deleteVocabularyEntry(id) {
 }
 
 
+// ============================================================
+// ADD ENTRY
+// ============================================================
+
 function addVocabularyEntry() {
 
     const template = {
+
         id: "example.new_word",
+
         category: "example",
+
         concept: "new word",
+
         word_type: "noun",
+
         semantic_group: "example",
+
+        scope: "common",
+
+        tags: [],
+
         features: [],
+
         relations: {}
+
     };
 
     const json =
         prompt(
             "Enter the new vocabulary entry as JSON:",
-            JSON.stringify(template, null, 2)
+            JSON.stringify(
+                template,
+                null,
+                2
+            )
         );
 
     if (json === null) {
@@ -537,20 +916,28 @@ function addVocabularyEntry() {
             JSON.parse(json);
 
         if (!newWord.id) {
-            throw new Error("Entry must have an id.");
+
+            throw new Error(
+                "Entry must have an id."
+            );
         }
 
         if (
             vocabulary.some(
-                entry => entry.id === newWord.id
+                entry =>
+                    entry.id ===
+                    newWord.id
             )
         ) {
+
             throw new Error(
                 `The ID "${newWord.id}" already exists.`
             );
         }
 
-        vocabulary.push(newWord);
+        vocabulary.push(
+            newWord
+        );
 
         saveVocabulary();
 
@@ -569,6 +956,10 @@ function addVocabularyEntry() {
 }
 
 
+// ============================================================
+// EXPORT JSON
+// ============================================================
+
 function exportVocabulary() {
 
     const data = {};
@@ -576,9 +967,11 @@ function exportVocabulary() {
     vocabulary.forEach(word => {
 
         const scope =
-            word.scope || "universal";
+            word.scope ||
+            "universal";
 
         if (!data[scope]) {
+
             data[scope] = [];
         }
 
@@ -588,34 +981,53 @@ function exportVocabulary() {
 
         delete copy.scope;
 
-        data[scope].push(copy);
+        data[scope].push(
+            copy
+        );
     });
 
     const json =
-        JSON.stringify(data, null, 2);
+        JSON.stringify(
+            data,
+            null,
+            2
+        );
 
     const blob =
         new Blob(
             [json],
             {
-                type: "application/json"
+                type:
+                    "application/json"
             }
         );
 
     const url =
-        URL.createObjectURL(blob);
+        URL.createObjectURL(
+            blob
+        );
 
     const link =
-        document.createElement("a");
+        document.createElement(
+            "a"
+        );
 
     link.href = url;
-    link.download = "vocabulary.json";
+
+    link.download =
+        "vocabulary.json";
 
     link.click();
 
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(
+        url
+    );
 }
 
+
+// ============================================================
+// RESET LOCAL CHANGES
+// ============================================================
 
 function resetVocabulary() {
 
@@ -628,67 +1040,112 @@ function resetVocabulary() {
         return;
     }
 
-    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem(
+        STORAGE_KEY
+    );
 
     location.reload();
 }
 
 
+// ============================================================
+// ERROR DISPLAY
+// ============================================================
+
 function showError(message) {
 
     const error =
-        document.getElementById("errorMessage");
+        document.getElementById(
+            "errorMessage"
+        );
 
-    error.textContent = message;
-    error.style.display = "block";
+    error.textContent =
+        message;
+
+    error.style.display =
+        "block";
 }
 
 
-document.addEventListener("DOMContentLoaded", () => {
+// ============================================================
+// INITIALIZATION
+// ============================================================
 
-    document
-        .getElementById("searchVocabulary")
-        .addEventListener(
-            "input",
-            applyFilters
-        );
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
 
-    document
-        .getElementById("sortAttribute")
-        .addEventListener(
-            "change",
-            applySorting
-        );
+        document
+            .getElementById(
+                "searchVocabulary"
+            )
+            .addEventListener(
+                "input",
+                applyFilters
+            );
 
-    document
-        .getElementById("sortDirection")
-        .addEventListener(
-            "change",
-            applySorting
-        );
 
-    document
-        .getElementById("addVocabulary")
-        .addEventListener(
-            "click",
-            addVocabularyEntry
-        );
+        document
+            .getElementById(
+                "sortAttribute"
+            )
+            .addEventListener(
+                "change",
+                applySorting
+            );
 
-    document
-        .getElementById("exportVocabulary")
-        .addEventListener(
-            "click",
-            exportVocabulary
-        );
 
-    document
-        .getElementById("resetVocabulary")
-        .addEventListener(
-            "click",
-            resetVocabulary
-        );
+        document
+            .getElementById(
+                "sortDirection"
+            )
+            .addEventListener(
+                "change",
+                applySorting
+            );
 
-    loadVocabulary().then(() => {
-        populateSortAttributes();
-    });
-});
+
+        document
+            .getElementById(
+                "addVocabulary"
+            )
+            .addEventListener(
+                "click",
+                addVocabularyEntry
+            );
+
+
+        document
+            .getElementById(
+                "exportVocabulary"
+            )
+            .addEventListener(
+                "click",
+                exportVocabulary
+            );
+
+
+        document
+            .getElementById(
+                "resetVocabulary"
+            )
+            .addEventListener(
+                "click",
+                resetVocabulary
+            );
+
+
+        document
+            .getElementById(
+                "reloadVocabulary"
+            )
+            .addEventListener(
+                "click",
+                reloadVocabularyFromJSON
+            );
+
+
+        loadVocabulary();
+
+    }
+);
