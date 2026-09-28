@@ -25407,6 +25407,8300 @@
       "tags": [
         "clothing"
       ]
+    },
+    {
+      "id": "weapon.arm",
+      "concept": "arm",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.arms",
+      "concept": "arms",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.weaponry",
+      "concept": "weaponry",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.arsenal",
+      "concept": "arsenal",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.munition",
+      "concept": "munition",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.ammunition",
+      "concept": "ammunition",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.shortsword",
+      "concept": "shortsword",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.longsword",
+      "concept": "longsword",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.greatsword",
+      "concept": "greatsword",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.broadsword",
+      "concept": "broadsword",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.rapier",
+      "concept": "rapier",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.saber",
+      "concept": "saber",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.scimitar",
+      "concept": "scimitar",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.falchion",
+      "concept": "falchion",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.cutlass",
+      "concept": "cutlass",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.dirk",
+      "concept": "dirk",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.stiletto",
+      "concept": "stiletto",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.glaive",
+      "concept": "glaive",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.polearm",
+      "concept": "polearm",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.quarterstaff",
+      "concept": "quarterstaff",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.flail",
+      "concept": "flail",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.warhammer",
+      "concept": "warhammer",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.morningstar",
+      "concept": "morningstar",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.battleaxe",
+      "concept": "battleaxe",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.hatchet",
+      "concept": "hatchet",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.pick",
+      "concept": "pick",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.trident",
+      "concept": "trident",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.fork",
+      "concept": "fork",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.whip",
+      "concept": "whip",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.chain",
+      "concept": "chain",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "melee",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.longbow",
+      "concept": "longbow",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.shortbow",
+      "concept": "shortbow",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.composite_bow",
+      "concept": "composite_bow",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.blowgun",
+      "concept": "blowgun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.javelin",
+      "concept": "javelin",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.throwing_knife",
+      "concept": "throwing_knife",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.throwing_axe",
+      "concept": "throwing_axe",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.boomerang",
+      "concept": "boomerang",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.harpoon",
+      "concept": "harpoon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ranged",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bolt",
+      "concept": "bolt",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "projectile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.quarrel",
+      "concept": "quarrel",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "projectile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.sling_stone",
+      "concept": "sling_stone",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "projectile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.pellet",
+      "concept": "pellet",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "projectile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.shot",
+      "concept": "shot",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "projectile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bullet",
+      "concept": "bullet",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "projectile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.projectile",
+      "concept": "projectile",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "projectile",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.firearm",
+      "concept": "firearm",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.revolver",
+      "concept": "revolver",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.carbine",
+      "concept": "carbine",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.musket",
+      "concept": "musket",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.arquebus",
+      "concept": "arquebus",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.blunderbuss",
+      "concept": "blunderbuss",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.shotgun",
+      "concept": "shotgun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.submachine_gun",
+      "concept": "submachine_gun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.machine_gun",
+      "concept": "machine_gun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.sniper_rifle",
+      "concept": "sniper_rifle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.assault_rifle",
+      "concept": "assault_rifle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.handgun",
+      "concept": "handgun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.cannonball",
+      "concept": "cannonball",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.mortar",
+      "concept": "mortar",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.artillery",
+      "concept": "artillery",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "firearms",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.explosive",
+      "concept": "explosive",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "explosive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.dynamite",
+      "concept": "dynamite",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "explosive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.rocket",
+      "concept": "rocket",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "explosive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.warhead",
+      "concept": "warhead",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "explosive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.torpedo",
+      "concept": "torpedo",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "explosive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.depth_charge",
+      "concept": "depth_charge",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "explosive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.gladius",
+      "concept": "gladius",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.pilum",
+      "concept": "pilum",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.kopis",
+      "concept": "kopis",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.xiphos",
+      "concept": "xiphos",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.khopesh",
+      "concept": "khopesh",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.macuahuitl",
+      "concept": "macuahuitl",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.chakram",
+      "concept": "chakram",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.kusarigama",
+      "concept": "kusarigama",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.naginata",
+      "concept": "naginata",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.katana",
+      "concept": "katana",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.wakizashi",
+      "concept": "wakizashi",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.yari",
+      "concept": "yari",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.nodachi",
+      "concept": "nodachi",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.dao",
+      "concept": "dao",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.jian",
+      "concept": "jian",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.partisan",
+      "concept": "partisan",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bill",
+      "concept": "bill",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.voulge",
+      "concept": "voulge",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bardiche",
+      "concept": "bardiche",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bec_de_corbin",
+      "concept": "bec_de_corbin",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ancient_and_historical",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.magic_sword",
+      "concept": "magic_sword",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.enchanted_blade",
+      "concept": "enchanted_blade",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.runeblade",
+      "concept": "runeblade",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.flaming_sword",
+      "concept": "flaming_sword",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.ice_sword",
+      "concept": "ice_sword",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.thunder_hammer",
+      "concept": "thunder_hammer",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.holy_weapon",
+      "concept": "holy_weapon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.cursed_weapon",
+      "concept": "cursed_weapon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.wand",
+      "concept": "wand",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.magic_bow",
+      "concept": "magic_bow",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.arcane_dagger",
+      "concept": "arcane_dagger",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.crystal_spear",
+      "concept": "crystal_spear",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.dragon_slayer",
+      "concept": "dragon_slayer",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.vorpal_blade",
+      "concept": "vorpal_blade",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "fantasy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.laser_gun",
+      "concept": "laser_gun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.laser_rifle",
+      "concept": "laser_rifle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.laser_pistol",
+      "concept": "laser_pistol",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.plasma_gun",
+      "concept": "plasma_gun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.plasma_rifle",
+      "concept": "plasma_rifle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.plasma_cannon",
+      "concept": "plasma_cannon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.blaster",
+      "concept": "blaster",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.ray_gun",
+      "concept": "ray_gun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.particle_beam",
+      "concept": "particle_beam",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.ion_cannon",
+      "concept": "ion_cannon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.railgun",
+      "concept": "railgun",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.gauss_rifle",
+      "concept": "gauss_rifle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.energy_weapon",
+      "concept": "energy_weapon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.beam_weapon",
+      "concept": "beam_weapon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.phaser",
+      "concept": "phaser",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.disruptor",
+      "concept": "disruptor",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.pulse_rifle",
+      "concept": "pulse_rifle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.sonic_weapon",
+      "concept": "sonic_weapon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.gravity_weapon",
+      "concept": "gravity_weapon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.antimatter_weapon",
+      "concept": "antimatter_weapon",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.missile_launcher",
+      "concept": "missile_launcher",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.rocket_launcher",
+      "concept": "rocket_launcher",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "science_fiction",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.buckler",
+      "concept": "buckler",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.round_shield",
+      "concept": "round_shield",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.kite_shield",
+      "concept": "kite_shield",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.tower_shield",
+      "concept": "tower_shield",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.body_armor",
+      "concept": "body_armor",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.breastplate",
+      "concept": "breastplate",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.cuirass",
+      "concept": "cuirass",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.plate_armor",
+      "concept": "plate_armor",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.scale_armor",
+      "concept": "scale_armor",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.brigandine",
+      "concept": "brigandine",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.shield_wall",
+      "concept": "shield_wall",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "defensive",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.point",
+      "concept": "point",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.edge",
+      "concept": "edge",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.tip",
+      "concept": "tip",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.hilt",
+      "concept": "hilt",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.handle",
+      "concept": "handle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.grip",
+      "concept": "grip",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.pommel",
+      "concept": "pommel",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.shaft",
+      "concept": "shaft",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.haft",
+      "concept": "haft",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.spearhead",
+      "concept": "spearhead",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.arrowhead",
+      "concept": "arrowhead",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bowstring",
+      "concept": "bowstring",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.trigger",
+      "concept": "trigger",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.barrel",
+      "concept": "barrel",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.stock",
+      "concept": "stock",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.magazine",
+      "concept": "magazine",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.chamber",
+      "concept": "chamber",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bolt_action",
+      "concept": "bolt_action",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.sight",
+      "concept": "sight",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.scope",
+      "concept": "scope",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.muzzle",
+      "concept": "muzzle",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.butt",
+      "concept": "butt",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.crossguard",
+      "concept": "crossguard",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "weapon_parts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.holster",
+      "concept": "holster",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.cartridge",
+      "concept": "cartridge",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.buckshot",
+      "concept": "buckshot",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.casing",
+      "concept": "casing",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.primer",
+      "concept": "primer",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.fuse",
+      "concept": "fuse",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.ramrod",
+      "concept": "ramrod",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.powder_horn",
+      "concept": "powder_horn",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.bandolier",
+      "concept": "bandolier",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "ammunition_and_accessories",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.enchanted",
+      "concept": "enchanted",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "adjective",
+      "semantic_group": "combat_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.poisoned",
+      "concept": "poisoned",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "adjective",
+      "semantic_group": "combat_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.broken",
+      "concept": "broken",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "adjective",
+      "semantic_group": "combat_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.loaded",
+      "concept": "loaded",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "adjective",
+      "semantic_group": "combat_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.unloaded",
+      "concept": "unloaded",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "adjective",
+      "semantic_group": "combat_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.smash",
+      "concept": "smash",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.draw",
+      "concept": "draw",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.launch",
+      "concept": "launch",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.cock",
+      "concept": "cock",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.wield",
+      "concept": "wield",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.sheathe",
+      "concept": "sheathe",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.unsheathe",
+      "concept": "unsheathe",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.brandish",
+      "concept": "brandish",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "verb",
+      "semantic_group": "combat_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.defense",
+      "concept": "defense",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "combat_and_warfare",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.fighter",
+      "concept": "fighter",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "combat_and_warfare",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.spearman",
+      "concept": "spearman",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "combat_and_warfare",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.militia",
+      "concept": "militia",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "combat_and_warfare",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "weapon.weapon_master",
+      "concept": "weapon_master",
+      "scope": "domain",
+      "category": "weapon",
+      "word_type": "noun",
+      "semantic_group": "combat_and_warfare",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "weapon"
+      ]
+    },
+    {
+      "id": "society.population",
+      "concept": "population",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.citizen",
+      "concept": "citizen",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.resident",
+      "concept": "resident",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.individual",
+      "concept": "individual",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.group",
+      "concept": "group",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.class",
+      "concept": "class",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.caste",
+      "concept": "caste",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.tribe",
+      "concept": "tribe",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.clan",
+      "concept": "clan",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.nation",
+      "concept": "nation",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.state",
+      "concept": "state",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.country",
+      "concept": "country",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.territory",
+      "concept": "territory",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.culture",
+      "concept": "culture",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.custom",
+      "concept": "custom",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.tradition",
+      "concept": "tradition",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.authority",
+      "concept": "authority",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.power",
+      "concept": "power",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "general",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.household",
+      "concept": "household",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.grandparent",
+      "concept": "grandparent",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.grandchild",
+      "concept": "grandchild",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.nephew",
+      "concept": "nephew",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.niece",
+      "concept": "niece",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.descendant",
+      "concept": "descendant",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.kin",
+      "concept": "kin",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.heir",
+      "concept": "heir",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.heiress",
+      "concept": "heiress",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.adoptive_parent",
+      "concept": "adoptive_parent",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.adopted_child",
+      "concept": "adopted_child",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.widow",
+      "concept": "widow",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.widower",
+      "concept": "widower",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.orphan",
+      "concept": "orphan",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "family_and_kinship",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.stranger",
+      "concept": "stranger",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.ally",
+      "concept": "ally",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.rival",
+      "concept": "rival",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.follower",
+      "concept": "follower",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.customer",
+      "concept": "customer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.client",
+      "concept": "client",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.partner",
+      "concept": "partner",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.companion",
+      "concept": "companion",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.rank",
+      "concept": "rank",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.status",
+      "concept": "status",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.nobility",
+      "concept": "nobility",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.aristocracy",
+      "concept": "aristocracy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.commoner",
+      "concept": "commoner",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.peasant",
+      "concept": "peasant",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.artisan",
+      "concept": "artisan",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.craftsman",
+      "concept": "craftsman",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.slave",
+      "concept": "slave",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.freedman",
+      "concept": "freedman",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.elite",
+      "concept": "elite",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.minority",
+      "concept": "minority",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.majority",
+      "concept": "majority",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.citizenship",
+      "concept": "citizenship",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.membership",
+      "concept": "membership",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_structure",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.government",
+      "concept": "government",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.administration",
+      "concept": "administration",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.regime",
+      "concept": "regime",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.monarchy",
+      "concept": "monarchy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.kingdom",
+      "concept": "kingdom",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.empire",
+      "concept": "empire",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.republic",
+      "concept": "republic",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.democracy",
+      "concept": "democracy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.dictatorship",
+      "concept": "dictatorship",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.theocracy",
+      "concept": "theocracy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.oligarchy",
+      "concept": "oligarchy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.council",
+      "concept": "council",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.parliament",
+      "concept": "parliament",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.assembly",
+      "concept": "assembly",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.senate",
+      "concept": "senate",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.ministry",
+      "concept": "ministry",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.bureaucracy",
+      "concept": "bureaucracy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.province",
+      "concept": "province",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.region",
+      "concept": "region",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.district",
+      "concept": "district",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.municipality",
+      "concept": "municipality",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.colony",
+      "concept": "colony",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.capital",
+      "concept": "capital",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "government",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.emperor",
+      "concept": "emperor",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.empress",
+      "concept": "empress",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.duke",
+      "concept": "duke",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.duchess",
+      "concept": "duchess",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.baron",
+      "concept": "baron",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.baroness",
+      "concept": "baroness",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.count",
+      "concept": "count",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.countess",
+      "concept": "countess",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.governor",
+      "concept": "governor",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.mayor",
+      "concept": "mayor",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.minister",
+      "concept": "minister",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.senator",
+      "concept": "senator",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.councilor",
+      "concept": "councilor",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.official",
+      "concept": "official",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.ambassador",
+      "concept": "ambassador",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.diplomat",
+      "concept": "diplomat",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.representative",
+      "concept": "representative",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.magistrate",
+      "concept": "magistrate",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "political_roles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.regulation",
+      "concept": "regulation",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.decree",
+      "concept": "decree",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.edict",
+      "concept": "edict",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.constitution",
+      "concept": "constitution",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.right",
+      "concept": "right",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.duty",
+      "concept": "duty",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.offense",
+      "concept": "offense",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.victim",
+      "concept": "victim",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.prisoner",
+      "concept": "prisoner",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.penalty",
+      "concept": "penalty",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.hearing",
+      "concept": "hearing",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.jury",
+      "concept": "jury",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.verdict",
+      "concept": "verdict",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.sentence",
+      "concept": "sentence",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.testimony",
+      "concept": "testimony",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.dispute",
+      "concept": "dispute",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.jail",
+      "concept": "jail",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.execution",
+      "concept": "execution",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.pardon",
+      "concept": "pardon",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.amnesty",
+      "concept": "amnesty",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "law_and_justice",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.economy",
+      "concept": "economy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.wealth",
+      "concept": "wealth",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.currency",
+      "concept": "currency",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.banknote",
+      "concept": "banknote",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.credit",
+      "concept": "credit",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.loan",
+      "concept": "loan",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.tribute",
+      "concept": "tribute",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.loss",
+      "concept": "loss",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.commerce",
+      "concept": "commerce",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.property",
+      "concept": "property",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.ownership",
+      "concept": "ownership",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.rent",
+      "concept": "rent",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.lease",
+      "concept": "lease",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.resource",
+      "concept": "resource",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.commodity",
+      "concept": "commodity",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "economy",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.store",
+      "concept": "store",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.trader",
+      "concept": "trader",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.buyer",
+      "concept": "buyer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.seller",
+      "concept": "seller",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.supplier",
+      "concept": "supplier",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.deal",
+      "concept": "deal",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.bargain",
+      "concept": "bargain",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.sale",
+      "concept": "sale",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.purchase",
+      "concept": "purchase",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.export",
+      "concept": "export",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.import",
+      "concept": "import",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.cargo",
+      "concept": "cargo",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "trade_and_business",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.work",
+      "concept": "work",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.job",
+      "concept": "job",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.labor",
+      "concept": "labor",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.profession",
+      "concept": "profession",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.occupation",
+      "concept": "occupation",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.smith",
+      "concept": "smith",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.carpenter",
+      "concept": "carpenter",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.mason",
+      "concept": "mason",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.baker",
+      "concept": "baker",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.brewer",
+      "concept": "brewer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.weaver",
+      "concept": "weaver",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.fisherman",
+      "concept": "fisherman",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.sailor",
+      "concept": "sailor",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.healer",
+      "concept": "healer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.scribe",
+      "concept": "scribe",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.scholar",
+      "concept": "scholar",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.engineer",
+      "concept": "engineer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.architect",
+      "concept": "architect",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "labor_and_professions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.institution",
+      "concept": "institution",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.organization",
+      "concept": "organization",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.association",
+      "concept": "association",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.union",
+      "concept": "union",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.corporation",
+      "concept": "corporation",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.academy",
+      "concept": "academy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.orphanage",
+      "concept": "orphanage",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.archive",
+      "concept": "archive",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.museum",
+      "concept": "museum",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.military",
+      "concept": "military",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "institutions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.religion",
+      "concept": "religion",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.faith",
+      "concept": "faith",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.belief",
+      "concept": "belief",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.god",
+      "concept": "god",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.goddess",
+      "concept": "goddess",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.deity",
+      "concept": "deity",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.spirit",
+      "concept": "spirit",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.soul",
+      "concept": "soul",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.priestess",
+      "concept": "priestess",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.monk",
+      "concept": "monk",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.nun",
+      "concept": "nun",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.clergy",
+      "concept": "clergy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.shrine",
+      "concept": "shrine",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.ritual",
+      "concept": "ritual",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.ceremony",
+      "concept": "ceremony",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.prayer",
+      "concept": "prayer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.worship",
+      "concept": "worship",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.sacrifice",
+      "concept": "sacrifice",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.holy",
+      "concept": "holy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.sacred",
+      "concept": "sacred",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.heretic",
+      "concept": "heretic",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.heresy",
+      "concept": "heresy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.blessing",
+      "concept": "blessing",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.curse",
+      "concept": "curse",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.afterlife",
+      "concept": "afterlife",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "religion",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.education",
+      "concept": "education",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.student",
+      "concept": "student",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.lesson",
+      "concept": "lesson",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.study",
+      "concept": "study",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.knowledge",
+      "concept": "knowledge",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.wisdom",
+      "concept": "wisdom",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.book",
+      "concept": "book",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.writing",
+      "concept": "writing",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.reading",
+      "concept": "reading",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.exam",
+      "concept": "exam",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.degree",
+      "concept": "degree",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.apprentice",
+      "concept": "apprentice",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "education_and_knowledge",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.navy",
+      "concept": "navy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.warrior",
+      "concept": "warrior",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.officer",
+      "concept": "officer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.commander",
+      "concept": "commander",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.general",
+      "concept": "general",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.captain",
+      "concept": "captain",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.guardhouse",
+      "concept": "guardhouse",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.patrol",
+      "concept": "patrol",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.militia",
+      "concept": "militia",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.mercenary",
+      "concept": "mercenary",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.recruit",
+      "concept": "recruit",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.barracks",
+      "concept": "barracks",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.fort",
+      "concept": "fort",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.fortress",
+      "concept": "fortress",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.garrison",
+      "concept": "garrison",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.border",
+      "concept": "border",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.fleet",
+      "concept": "fleet",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.unit",
+      "concept": "unit",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.squad",
+      "concept": "squad",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.medal",
+      "concept": "medal",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.veteran",
+      "concept": "veteran",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "military_and_security",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.feast",
+      "concept": "feast",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_events_and_customs",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.banquet",
+      "concept": "banquet",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_events_and_customs",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.celebration",
+      "concept": "celebration",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_events_and_customs",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.parade",
+      "concept": "parade",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_events_and_customs",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.gathering",
+      "concept": "gathering",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_events_and_customs",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.meeting",
+      "concept": "meeting",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_events_and_customs",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.epidemic",
+      "concept": "epidemic",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.unemployment",
+      "concept": "unemployment",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.homelessness",
+      "concept": "homelessness",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.violence",
+      "concept": "violence",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.corruption",
+      "concept": "corruption",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.slavery",
+      "concept": "slavery",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.conflict",
+      "concept": "conflict",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.riot",
+      "concept": "riot",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.exile",
+      "concept": "exile",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "social_problems",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.govern",
+      "concept": "govern",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.appoint",
+      "concept": "appoint",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.depose",
+      "concept": "depose",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.rebel",
+      "concept": "rebel",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.revolt",
+      "concept": "revolt",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.demonstrate",
+      "concept": "demonstrate",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.negotiate",
+      "concept": "negotiate",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.invade",
+      "concept": "invade",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.occupy",
+      "concept": "occupy",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.conquer",
+      "concept": "conquer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.liberate",
+      "concept": "liberate",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.ban",
+      "concept": "ban",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.permit",
+      "concept": "permit",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.forbid",
+      "concept": "forbid",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "political_actions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.belong",
+      "concept": "belong",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "social_processes",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.fire",
+      "concept": "fire",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "social_processes",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.employ",
+      "concept": "employ",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "social_processes",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.cooperate",
+      "concept": "cooperate",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "social_processes",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "society.compete",
+      "concept": "compete",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "verb",
+      "semantic_group": "social_processes",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ]
+    },
+    {
+      "id": "abstract.existence",
+      "concept": "existence",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.being",
+      "concept": "being",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.reality",
+      "concept": "reality",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.falsehood",
+      "concept": "falsehood",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.fact",
+      "concept": "fact",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.possibility",
+      "concept": "possibility",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.impossibility",
+      "concept": "impossibility",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.certainty",
+      "concept": "certainty",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.uncertainty",
+      "concept": "uncertainty",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.necessity",
+      "concept": "necessity",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.chance",
+      "concept": "chance",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.fate",
+      "concept": "fate",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.destiny",
+      "concept": "destiny",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.nothingness",
+      "concept": "nothingness",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.void",
+      "concept": "void",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.essence",
+      "concept": "essence",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.identity",
+      "concept": "identity",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.self",
+      "concept": "self",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.other",
+      "concept": "other",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.universe",
+      "concept": "universe",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.infinity",
+      "concept": "infinity",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.finite",
+      "concept": "finite",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.limit",
+      "concept": "limit",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.origin",
+      "concept": "origin",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "existence_and_reality",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.survival",
+      "concept": "survival",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.mortality",
+      "concept": "mortality",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.immortality",
+      "concept": "immortality",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.decay",
+      "concept": "decay",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.continuity",
+      "concept": "continuity",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.renewal",
+      "concept": "renewal",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.rebirth",
+      "concept": "rebirth",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.extinction",
+      "concept": "extinction",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "life_and_death",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.duration",
+      "concept": "duration",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.moment",
+      "concept": "moment",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.eternity",
+      "concept": "eternity",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.stability",
+      "concept": "stability",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.movement",
+      "concept": "movement",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.stillness",
+      "concept": "stillness",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.cycle",
+      "concept": "cycle",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.progress",
+      "concept": "progress",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.decline",
+      "concept": "decline",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.development",
+      "concept": "development",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.transformation",
+      "concept": "transformation",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.transition",
+      "concept": "transition",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "time_and_change",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.information",
+      "concept": "information",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.understanding",
+      "concept": "understanding",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.ignorance",
+      "concept": "ignorance",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.opinion",
+      "concept": "opinion",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.concept",
+      "concept": "concept",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.theory",
+      "concept": "theory",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.hypothesis",
+      "concept": "hypothesis",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.proof",
+      "concept": "proof",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.evidence",
+      "concept": "evidence",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.attention",
+      "concept": "attention",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.awareness",
+      "concept": "awareness",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.intention",
+      "concept": "intention",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.decision",
+      "concept": "decision",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "knowledge_and_thought",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.distrust",
+      "concept": "distrust",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.longing",
+      "concept": "longing",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.regret",
+      "concept": "regret",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.sympathy",
+      "concept": "sympathy",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.surprise",
+      "concept": "surprise",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.disgust",
+      "concept": "disgust",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.calm",
+      "concept": "calm",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.anxiety",
+      "concept": "anxiety",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.loneliness",
+      "concept": "loneliness",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "emotion_and_feeling",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.injustice",
+      "concept": "injustice",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "morality_and_ethics",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.innocence",
+      "concept": "innocence",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "morality_and_ethics",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.dishonor",
+      "concept": "dishonor",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "morality_and_ethics",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.fairness",
+      "concept": "fairness",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "morality_and_ethics",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.principle",
+      "concept": "principle",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "morality_and_ethics",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.rights",
+      "concept": "rights",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.obligation",
+      "concept": "obligation",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.obedience",
+      "concept": "obedience",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.rebellion",
+      "concept": "rebellion",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.revolution",
+      "concept": "revolution",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "social_and_political",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.friendship",
+      "concept": "friendship",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.kinship",
+      "concept": "kinship",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.partnership",
+      "concept": "partnership",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.marriage",
+      "concept": "marriage",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.respect",
+      "concept": "respect",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.rivalry",
+      "concept": "rivalry",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.enmity",
+      "concept": "enmity",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.alliance",
+      "concept": "alliance",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.belonging",
+      "concept": "belonging",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.isolation",
+      "concept": "isolation",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "relationships",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.request",
+      "concept": "request",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.disagreement",
+      "concept": "disagreement",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.rumor",
+      "concept": "rumor",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.sign",
+      "concept": "sign",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "language_and_communication",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.degree",
+      "concept": "degree",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.level",
+      "concept": "level",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.measure",
+      "concept": "measure",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.half",
+      "concept": "half",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.pair",
+      "concept": "pair",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.proportion",
+      "concept": "proportion",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.excess",
+      "concept": "excess",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.lack",
+      "concept": "lack",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "quantity_and_comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.union",
+      "concept": "union",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "space_and_relation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.division",
+      "concept": "division",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "space_and_relation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.arrangement",
+      "concept": "arrangement",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "space_and_relation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.pattern",
+      "concept": "pattern",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "space_and_relation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.shape",
+      "concept": "shape",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "space_and_relation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.form",
+      "concept": "form",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "space_and_relation",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.ugliness",
+      "concept": "ugliness",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.worth",
+      "concept": "worth",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.uselessness",
+      "concept": "uselessness",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.imperfection",
+      "concept": "imperfection",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.elegance",
+      "concept": "elegance",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.rarity",
+      "concept": "rarity",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.fame",
+      "concept": "fame",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.glory",
+      "concept": "glory",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.prestige",
+      "concept": "prestige",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "beauty_and_value",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.liberty",
+      "concept": "liberty",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "freedom_and_control",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.constraint",
+      "concept": "constraint",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "freedom_and_control",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.restriction",
+      "concept": "restriction",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "freedom_and_control",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.autonomy",
+      "concept": "autonomy",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "freedom_and_control",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.domination",
+      "concept": "domination",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "freedom_and_control",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.dispute",
+      "concept": "dispute",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.argument",
+      "concept": "argument",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.struggle",
+      "concept": "struggle",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.truce",
+      "concept": "truce",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.compromise",
+      "concept": "compromise",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.negotiation",
+      "concept": "negotiation",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.reconciliation",
+      "concept": "reconciliation",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.resolution",
+      "concept": "resolution",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "noun",
+      "semantic_group": "conflict_and_resolution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.bad",
+      "concept": "bad",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "adjective",
+      "semantic_group": "abstract_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.simple",
+      "concept": "simple",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "adjective",
+      "semantic_group": "abstract_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.complex",
+      "concept": "complex",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "adjective",
+      "semantic_group": "abstract_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.important",
+      "concept": "important",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "adjective",
+      "semantic_group": "abstract_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.ordinary",
+      "concept": "ordinary",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "adjective",
+      "semantic_group": "abstract_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "abstract.special",
+      "concept": "special",
+      "scope": "domain",
+      "category": "abstract",
+      "word_type": "adjective",
+      "semantic_group": "abstract_properties",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "abstract"
+      ]
+    },
+    {
+      "id": "function.whose",
+      "concept": "whose",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "interrogatives",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.somebody",
+      "concept": "somebody",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "indefinite_pronouns",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.somewhere",
+      "concept": "somewhere",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "indefinite_pronouns",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.anybody",
+      "concept": "anybody",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "indefinite_pronouns",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.anywhere",
+      "concept": "anywhere",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "indefinite_pronouns",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.everybody",
+      "concept": "everybody",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "indefinite_pronouns",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.everywhere",
+      "concept": "everywhere",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "indefinite_pronouns",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.nowhere",
+      "concept": "nowhere",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "indefinite_pronouns",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.myself",
+      "concept": "myself",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.yourself",
+      "concept": "yourself",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.himself",
+      "concept": "himself",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.herself",
+      "concept": "herself",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.itself",
+      "concept": "itself",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.ourselves",
+      "concept": "ourselves",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.themselves",
+      "concept": "themselves",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.each_other",
+      "concept": "each_other",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.one_another",
+      "concept": "one_another",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "reflexive_and_reciprocal",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.every",
+      "concept": "every",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "articles_and_determiners",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.enough",
+      "concept": "enough",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "articles_and_determiners",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.much",
+      "concept": "much",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "articles_and_determiners",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.little",
+      "concept": "little",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "articles_and_determiners",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.several",
+      "concept": "several",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "articles_and_determiners",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.so",
+      "concept": "so",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "conjunctions_coordination",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.whereas",
+      "concept": "whereas",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "subordinators",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.whenever",
+      "concept": "whenever",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "subordinators",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.wherever",
+      "concept": "wherever",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "subordinators",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.as",
+      "concept": "as",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "subordinators",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.than",
+      "concept": "than",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "subordinators",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.in_front_of",
+      "concept": "in_front_of",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.far_from",
+      "concept": "far_from",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.away_from",
+      "concept": "away_from",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.beyond",
+      "concept": "beyond",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.within",
+      "concept": "within",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.despite",
+      "concept": "despite",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.except",
+      "concept": "except",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.per",
+      "concept": "per",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "prepositions",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.up",
+      "concept": "up",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_place",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.down",
+      "concept": "down",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_place",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.away",
+      "concept": "away",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_place",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.far",
+      "concept": "far",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_place",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.together",
+      "concept": "together",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_place",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.apart",
+      "concept": "apart",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_place",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.rather",
+      "concept": "rather",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_manner_degree",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.well",
+      "concept": "well",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_manner_degree",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.badly",
+      "concept": "badly",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_manner_degree",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.quickly",
+      "concept": "quickly",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_manner_degree",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.slowly",
+      "concept": "slowly",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "adverbs_manner_degree",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.shall",
+      "concept": "shall",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.need",
+      "concept": "need",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.dare",
+      "concept": "dare",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.used_to",
+      "concept": "used_to",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.indeed",
+      "concept": "indeed",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "discourse_particles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.otherwise",
+      "concept": "otherwise",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "discourse_particles",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.especially",
+      "concept": "especially",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "focus_and_emphasis",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.exactly",
+      "concept": "exactly",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "focus_and_emphasis",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.equally",
+      "concept": "equally",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.similarly",
+      "concept": "similarly",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "comparison",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.besides",
+      "concept": "besides",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "connective_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
+    },
+    {
+      "id": "function.moreover",
+      "concept": "moreover",
+      "scope": "domain",
+      "category": "function_word",
+      "word_type": "function",
+      "semantic_group": "connective_relations",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "function_word"
+      ]
     }
   ]
 }
