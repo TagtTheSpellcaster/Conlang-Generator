@@ -1398,7 +1398,9 @@
       "word_type": "determiner",
       "semantic_group": "demonstratives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "distal",
         "singular"
@@ -1412,7 +1414,9 @@
       "word_type": "determiner",
       "semantic_group": "demonstratives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "proximal",
         "singular"
@@ -1724,7 +1728,9 @@
       "word_type": "determiner",
       "semantic_group": "quantity",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "quantity",
         "universal"
@@ -1738,7 +1744,9 @@
       "word_type": "conjunction",
       "semantic_group": "coordination",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "coordination",
         "addition"
@@ -1752,7 +1760,9 @@
       "word_type": "conjunction",
       "semantic_group": "causation",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "causation",
         "reason"
@@ -1766,7 +1776,9 @@
       "word_type": "conjunction",
       "semantic_group": "condition",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "condition"
       ],
@@ -1779,7 +1791,9 @@
       "word_type": "particle",
       "semantic_group": "modality",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "modality",
         "uncertainty"
@@ -1793,7 +1807,9 @@
       "word_type": "particle",
       "semantic_group": "affirmation_negation",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "negation",
         "answer"
@@ -1807,7 +1823,9 @@
       "word_type": "determiner",
       "semantic_group": "quantity",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "quantity",
         "zero",
@@ -1822,7 +1840,9 @@
       "word_type": "particle",
       "semantic_group": "negation",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "negation"
       ],
@@ -1835,7 +1855,9 @@
       "word_type": "conjunction",
       "semantic_group": "coordination",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "coordination",
         "alternative"
@@ -1849,7 +1871,9 @@
       "word_type": "determiner",
       "semantic_group": "quantity",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "quantity",
         "indefinite"
@@ -1863,7 +1887,9 @@
       "word_type": "particle",
       "semantic_group": "affirmation_negation",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "affirmation"
       ],
@@ -1876,7 +1902,9 @@
       "word_type": "adverb",
       "semantic_group": "interrogatives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "manner",
         "question"
@@ -1890,7 +1918,9 @@
       "word_type": "pronoun",
       "semantic_group": "interrogatives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "thing",
         "question"
@@ -1904,7 +1934,9 @@
       "word_type": "adverb",
       "semantic_group": "interrogatives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "time",
         "question"
@@ -1918,7 +1950,9 @@
       "word_type": "adverb",
       "semantic_group": "interrogatives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "location",
         "question"
@@ -1932,7 +1966,9 @@
       "word_type": "pronoun",
       "semantic_group": "interrogatives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "question"
@@ -1946,7 +1982,9 @@
       "word_type": "adverb",
       "semantic_group": "interrogatives",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "reason",
         "question"
@@ -2807,7 +2845,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "first_person",
@@ -2822,7 +2862,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "first_person",
@@ -2837,7 +2879,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "second_person",
@@ -2852,7 +2896,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "second_person",
@@ -2867,7 +2913,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "third_person",
@@ -2882,7 +2930,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "third_person",
@@ -2898,7 +2948,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "person",
         "third_person",
@@ -2914,7 +2966,9 @@
       "word_type": "pronoun",
       "semantic_group": "personal_pronouns",
       "scope": "universal",
-      "tags": [],
+      "tags": [
+        "grammar"
+      ],
       "features": [
         "third_person",
         "singular",
@@ -3593,11 +3647,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3609,11 +3663,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect",
-        "natural"
+        "insect"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3626,11 +3680,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3643,11 +3697,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3659,11 +3713,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect",
-        "natural"
+        "insect"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3676,11 +3730,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3693,11 +3747,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3710,11 +3764,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -3727,11 +3781,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3744,11 +3798,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile",
-        "natural"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -3761,11 +3815,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3778,11 +3832,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3795,11 +3849,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3813,11 +3867,11 @@
         "animal",
         "wild",
         "mammal",
-        "aquatic",
-        "natural"
+        "aquatic"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3830,11 +3884,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3847,11 +3901,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3864,11 +3918,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3882,11 +3936,11 @@
         "animal",
         "wild",
         "bird",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3899,11 +3953,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -3915,11 +3969,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "aquatic",
-        "natural"
+        "aquatic"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3933,11 +3987,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -3950,11 +4004,11 @@
       "tags": [
         "animal",
         "wild",
-        "amphibian",
-        "natural"
+        "amphibian"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -3967,11 +4021,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -3984,11 +4038,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4001,11 +4055,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4018,11 +4072,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4036,11 +4090,11 @@
         "animal",
         "wild",
         "bird",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4053,11 +4107,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4070,11 +4124,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4087,11 +4141,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "australia"
     },
     {
@@ -4104,11 +4158,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "australia"
     },
     {
@@ -4122,11 +4176,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4139,11 +4193,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile",
-        "natural"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4156,11 +4210,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4172,11 +4226,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect",
-        "natural"
+        "insect"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4189,11 +4243,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4206,11 +4260,11 @@
       "tags": [
         "animal",
         "wild",
-        "aquatic",
-        "natural"
+        "aquatic"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4224,11 +4278,11 @@
         "animal",
         "wild",
         "bird",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4241,11 +4295,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "asia"
     },
     {
@@ -4258,11 +4312,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4275,11 +4329,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4292,11 +4346,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4309,11 +4363,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4326,11 +4380,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4343,11 +4397,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -4360,11 +4414,11 @@
       "tags": [
         "animal",
         "domestic",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4377,11 +4431,11 @@
       "tags": [
         "animal",
         "fish",
-        "aquatic",
-        "natural"
+        "aquatic"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4393,11 +4447,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "arachnid",
-        "natural"
+        "arachnid"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4410,11 +4464,11 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -4429,11 +4483,11 @@
         "wild",
         "fish",
         "aquatic",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4446,11 +4500,11 @@
       "tags": [
         "animal",
         "domestic",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4463,11 +4517,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile",
-        "natural"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4479,11 +4533,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "arachnid",
-        "natural"
+        "arachnid"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4496,11 +4550,11 @@
       "tags": [
         "animal",
         "wild",
-        "bird",
-        "natural"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4514,11 +4568,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "asia"
     },
     {
@@ -4531,11 +4585,11 @@
       "tags": [
         "animal",
         "fish",
-        "aquatic",
-        "natural"
+        "aquatic"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4548,11 +4602,11 @@
       "tags": [
         "animal",
         "wild",
-        "reptile",
-        "natural"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4564,11 +4618,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect",
-        "natural"
+        "insect"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4582,11 +4636,11 @@
         "animal",
         "wild",
         "mammal",
-        "aquatic",
-        "natural"
+        "aquatic"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4600,11 +4654,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -4618,11 +4672,11 @@
         "animal",
         "wild",
         "mammal",
-        "predator",
-        "natural"
+        "predator"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -4635,15 +4689,15 @@
       "tags": [
         "animal",
         "wild",
-        "mammal",
-        "natural"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
-      "id": "animal.ant",
+      "id": "animal_ant",
       "concept": "ant",
       "category": "animal",
       "word_type": "noun",
@@ -4651,11 +4705,11 @@
       "scope": "domain",
       "tags": [
         "animal",
-        "insect",
-        "natural"
+        "insect"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -4669,11 +4723,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile",
-        "fantasy"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4686,11 +4740,11 @@
       "tags": [
         "monster",
         "mythical",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4703,11 +4757,11 @@
       "tags": [
         "animal",
         "monster",
-        "mythical",
-        "fantasy"
+        "mythical"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4721,11 +4775,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile",
-        "fantasy"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4738,11 +4792,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4754,11 +4808,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4770,11 +4824,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4788,11 +4842,11 @@
         "animal",
         "monster",
         "mythical",
-        "bird",
-        "fantasy"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4806,11 +4860,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile",
-        "fantasy"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4824,11 +4878,11 @@
         "animal",
         "monster",
         "mythical",
-        "aquatic",
-        "fantasy"
+        "aquatic"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4841,11 +4895,11 @@
       "tags": [
         "animal",
         "monster",
-        "mythical",
-        "fantasy"
+        "mythical"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4858,11 +4912,11 @@
       "tags": [
         "monster",
         "mythical",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4874,11 +4928,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4890,11 +4944,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4908,11 +4962,11 @@
         "animal",
         "monster",
         "mythical",
-        "bird",
-        "fantasy"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4926,11 +4980,11 @@
         "animal",
         "monster",
         "mythical",
-        "bird",
-        "fantasy"
+        "bird"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4945,11 +4999,11 @@
         "monster",
         "mythical",
         "aquatic",
-        "reptile",
-        "fantasy"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4962,11 +5016,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4979,11 +5033,11 @@
       "tags": [
         "animal",
         "monster",
-        "mythical",
-        "fantasy"
+        "mythical"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -4995,11 +5049,11 @@
       "scope": "domain",
       "tags": [
         "monster",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5013,11 +5067,11 @@
         "animal",
         "monster",
         "mythical",
-        "mammal",
-        "fantasy"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5030,11 +5084,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5048,11 +5102,11 @@
         "animal",
         "monster",
         "mythical",
-        "mammal",
-        "fantasy"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5066,11 +5120,11 @@
         "animal",
         "monster",
         "mythical",
-        "mammal",
-        "fantasy"
+        "mammal"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5084,11 +5138,11 @@
         "animal",
         "monster",
         "mythical",
-        "reptile",
-        "fantasy"
+        "reptile"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5101,11 +5155,11 @@
       "tags": [
         "monster",
         "undead",
-        "humanoid",
-        "fantasy"
+        "humanoid"
       ],
       "features": [],
       "relations": {},
+      "type": "monster",
       "locale": "fantasy"
     },
     {
@@ -5118,11 +5172,11 @@
       "tags": [
         "transport",
         "movement",
-        "primitive",
-        "natural"
+        "primitive"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5135,11 +5189,11 @@
       "tags": [
         "transport",
         "animal_power",
-        "mount",
-        "natural"
+        "mount"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5152,11 +5206,11 @@
       "tags": [
         "transport",
         "animal_power",
-        "pack_animal",
-        "natural"
+        "pack_animal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5170,11 +5224,11 @@
         "transport",
         "animal_power",
         "mount",
-        "pack_animal",
-        "natural"
+        "pack_animal"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "africa"
     },
     {
@@ -5187,11 +5241,11 @@
       "tags": [
         "transport",
         "animal_power",
-        "mount",
-        "natural"
+        "mount"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "asia"
     },
     {
@@ -5204,11 +5258,11 @@
       "tags": [
         "transport",
         "land",
-        "animal_power",
-        "natural"
+        "animal_power"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -5222,11 +5276,11 @@
         "transport",
         "land",
         "wheeled",
-        "primitive",
-        "natural"
+        "primitive"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5239,11 +5293,11 @@
       "tags": [
         "transport",
         "land",
-        "wheeled",
-        "natural"
+        "wheeled"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5257,11 +5311,11 @@
         "transport",
         "land",
         "wheeled",
-        "animal_power",
-        "natural"
+        "animal_power"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5276,11 +5330,11 @@
         "land",
         "wheeled",
         "animal_power",
-        "war",
-        "natural"
+        "war"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "mediterranean"
     },
     {
@@ -5293,11 +5347,11 @@
       "tags": [
         "transport",
         "water",
-        "primitive",
-        "natural"
+        "primitive"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5310,11 +5364,11 @@
       "tags": [
         "transport",
         "water",
-        "paddle",
-        "natural"
+        "paddle"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5327,11 +5381,11 @@
       "tags": [
         "transport",
         "water",
-        "paddle",
-        "natural"
+        "paddle"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "arctic"
     },
     {
@@ -5343,11 +5397,11 @@
       "scope": "domain",
       "tags": [
         "transport",
-        "water",
-        "natural"
+        "water"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5360,11 +5414,11 @@
       "tags": [
         "transport",
         "water",
-        "oar",
-        "natural"
+        "oar"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5377,11 +5431,11 @@
       "tags": [
         "transport",
         "water",
-        "sail",
-        "natural"
+        "sail"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5394,11 +5448,11 @@
       "tags": [
         "transport",
         "water",
-        "sail",
-        "natural"
+        "sail"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5413,11 +5467,11 @@
         "water",
         "oar",
         "sail",
-        "ancient",
-        "natural"
+        "ancient"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "mediterranean"
     },
     {
@@ -5432,11 +5486,11 @@
         "water",
         "sail",
         "oar",
-        "medieval",
-        "natural"
+        "medieval"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5448,11 +5502,11 @@
       "scope": "domain",
       "tags": [
         "transport",
-        "water",
-        "natural"
+        "water"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5466,11 +5520,11 @@
         "transport",
         "land",
         "wheeled",
-        "human_power",
-        "natural"
+        "human_power"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5484,11 +5538,11 @@
         "transport",
         "land",
         "wheeled",
-        "human_power",
-        "natural"
+        "human_power"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5501,11 +5555,11 @@
       "tags": [
         "transport",
         "land",
-        "motor",
-        "natural"
+        "motor"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5518,11 +5572,11 @@
       "tags": [
         "transport",
         "land",
-        "motor",
-        "natural"
+        "motor"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5536,11 +5590,11 @@
         "transport",
         "land",
         "motor",
-        "cargo",
-        "natural"
+        "cargo"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5554,11 +5608,11 @@
         "transport",
         "land",
         "motor",
-        "passenger",
-        "natural"
+        "passenger"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5572,11 +5626,11 @@
         "transport",
         "land",
         "motor",
-        "passenger",
-        "natural"
+        "passenger"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5589,11 +5643,11 @@
       "tags": [
         "transport",
         "land",
-        "rail",
-        "natural"
+        "rail"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5607,11 +5661,11 @@
         "transport",
         "land",
         "rail",
-        "motor",
-        "natural"
+        "motor"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5625,11 +5679,11 @@
         "transport",
         "land",
         "rail",
-        "urban",
-        "natural"
+        "urban"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5643,11 +5697,11 @@
         "transport",
         "land",
         "rail",
-        "urban",
-        "natural"
+        "urban"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5661,11 +5715,11 @@
         "transport",
         "land",
         "rail",
-        "urban",
-        "natural"
+        "urban"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5678,11 +5732,11 @@
       "tags": [
         "transport",
         "air",
-        "lighter_than_air",
-        "natural"
+        "lighter_than_air"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5695,11 +5749,11 @@
       "tags": [
         "transport",
         "air",
-        "lighter_than_air",
-        "natural"
+        "lighter_than_air"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5712,11 +5766,11 @@
       "tags": [
         "transport",
         "air",
-        "motor",
-        "natural"
+        "motor"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5729,11 +5783,11 @@
       "tags": [
         "transport",
         "air",
-        "rotorcraft",
-        "natural"
+        "rotorcraft"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5745,11 +5799,11 @@
       "scope": "domain",
       "tags": [
         "transport",
-        "air",
-        "natural"
+        "air"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5762,11 +5816,11 @@
       "tags": [
         "transport",
         "air",
-        "water",
-        "natural"
+        "water"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5781,11 +5835,11 @@
         "land",
         "rail",
         "cargo",
-        "industrial",
-        "natural"
+        "industrial"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5798,11 +5852,11 @@
       "tags": [
         "transport",
         "vertical",
-        "mechanical",
-        "natural"
+        "mechanical"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5816,11 +5870,11 @@
         "transport",
         "land",
         "rail",
-        "mountain",
-        "natural"
+        "mountain"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5834,11 +5888,11 @@
         "transport",
         "land",
         "rail",
-        "mountain",
-        "natural"
+        "mountain"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "europe"
     },
     {
@@ -5852,11 +5906,11 @@
         "transport",
         "land",
         "water",
-        "air_cushion",
-        "natural"
+        "air_cushion"
       ],
       "features": [],
       "relations": {},
+      "type": "natural",
       "locale": "world"
     },
     {
@@ -5870,10 +5924,11 @@
         "transport",
         "land",
         "air",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5887,10 +5942,11 @@
         "transport",
         "air",
         "land",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5904,10 +5960,11 @@
         "transport",
         "air",
         "personal",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5920,10 +5977,11 @@
       "tags": [
         "transport",
         "instant",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5936,10 +5994,11 @@
       "tags": [
         "transport",
         "instant",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5952,10 +6011,11 @@
       "tags": [
         "transport",
         "space",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5968,10 +6028,11 @@
       "tags": [
         "transport",
         "space",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -5985,10 +6046,11 @@
         "transport",
         "space",
         "interstellar",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6001,10 +6063,11 @@
       "tags": [
         "transport",
         "space",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6018,10 +6081,11 @@
         "transport",
         "space",
         "emergency",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6035,10 +6099,11 @@
         "transport",
         "space",
         "faster_than_light",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6052,10 +6117,11 @@
         "transport",
         "space",
         "faster_than_light",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6069,10 +6135,11 @@
         "transport",
         "instant",
         "fantasy",
-        "sci-fi"
+        "science_fiction"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6085,11 +6152,11 @@
       "tags": [
         "transport",
         "air",
-        "magic",
-        "fantasy"
+        "magic"
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6106,6 +6173,7 @@
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -6124,6 +6192,7 @@
       ],
       "features": [],
       "relations": {},
+      "type": "fictional",
       "locale": "fantasy"
     },
     {
@@ -17005,7 +17074,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17019,7 +17088,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17033,7 +17102,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17047,7 +17116,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17061,7 +17130,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17075,7 +17144,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17089,7 +17158,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17103,7 +17172,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17117,7 +17186,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17131,7 +17200,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17145,7 +17214,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17159,7 +17228,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17173,7 +17242,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -17187,7 +17256,7 @@
       "relations": {},
       "tags": [
         "material",
-        "sci-fi"
+        "science_fiction"
       ]
     },
     {
@@ -32923,27 +32992,29 @@
     {
       "id": "function.whose",
       "concept": "whose",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "interrogatives",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.somebody",
       "concept": "somebody",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "indefinite_pronouns",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -32956,20 +33027,22 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.anybody",
       "concept": "anybody",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "indefinite_pronouns",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -32982,20 +33055,22 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.everybody",
       "concept": "everybody",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "indefinite_pronouns",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33008,7 +33083,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33021,7 +33097,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33034,7 +33111,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33047,7 +33125,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33060,7 +33139,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33073,7 +33153,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33086,7 +33167,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33099,7 +33181,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33112,7 +33195,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33125,7 +33209,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33138,72 +33223,78 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.every",
       "concept": "every",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "articles_and_determiners",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.enough",
       "concept": "enough",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "articles_and_determiners",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.much",
       "concept": "much",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "articles_and_determiners",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.little",
       "concept": "little",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "articles_and_determiners",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
       "id": "function.several",
       "concept": "several",
-      "scope": "domain",
+      "scope": "universal",
       "category": "function_word",
       "word_type": "function",
       "semantic_group": "articles_and_determiners",
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33216,7 +33307,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33229,7 +33321,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33242,7 +33335,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33255,7 +33349,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33268,7 +33363,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33281,7 +33377,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33294,7 +33391,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33307,7 +33405,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33320,7 +33419,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33333,7 +33433,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33346,7 +33447,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33359,7 +33461,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33372,7 +33475,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33385,7 +33489,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33398,7 +33503,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33411,7 +33517,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33424,7 +33531,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33437,7 +33545,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33450,7 +33559,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33463,7 +33573,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33476,7 +33587,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33489,7 +33601,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33502,7 +33615,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33515,7 +33629,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33528,7 +33643,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33541,7 +33657,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33554,7 +33671,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33567,7 +33685,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33580,7 +33699,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33593,7 +33713,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33606,7 +33727,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33619,7 +33741,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33632,7 +33755,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33645,7 +33769,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33658,7 +33783,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33671,7 +33797,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
     },
     {
@@ -33684,8 +33811,1428 @@
       "features": [],
       "relations": {},
       "tags": [
-        "function_word"
+        "function_word",
+        "grammar"
       ]
+    },
+    {
+      "id": "function.in",
+      "concept": "in",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.at",
+      "concept": "at",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.on",
+      "concept": "on",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.under",
+      "concept": "under",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.over",
+      "concept": "over",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.behind",
+      "concept": "behind",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.beside",
+      "concept": "beside",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.between",
+      "concept": "between",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.among",
+      "concept": "among",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.around",
+      "concept": "around",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.through",
+      "concept": "through",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "path"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.across",
+      "concept": "across",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "path"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.along",
+      "concept": "along",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "path"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.toward",
+      "concept": "toward",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "direction"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.to",
+      "concept": "to",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "direction",
+        "goal"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.from",
+      "concept": "from",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "direction",
+        "source"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.into",
+      "concept": "into",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "direction",
+        "goal"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.onto",
+      "concept": "onto",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "direction",
+        "goal"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.out_of",
+      "concept": "out_of",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "direction",
+        "source"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.off",
+      "concept": "off",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "direction",
+        "source"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.against",
+      "concept": "against",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "contact",
+        "opposition"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.near",
+      "concept": "near",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "location"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.with",
+      "concept": "with",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "social_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "association"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.without",
+      "concept": "without",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "social_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "absence"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.for",
+      "concept": "for",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "social_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "benefactive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.of",
+      "concept": "of",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "possession"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.by",
+      "concept": "by",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "transfer",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "agent"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.about",
+      "concept": "about",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "language_and_communication",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "topic"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.before",
+      "concept": "before",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "time"
+      ],
+      "relations": {
+        "grammatical_roles": [
+          "adposition",
+          "subordinator"
+        ]
+      }
+    },
+    {
+      "id": "function.after",
+      "concept": "after",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "time"
+      ],
+      "relations": {
+        "grammatical_roles": [
+          "adposition",
+          "subordinator"
+        ]
+      }
+    },
+    {
+      "id": "function.during",
+      "concept": "during",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "time"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.until",
+      "concept": "until",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "time"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.since",
+      "concept": "since",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "time"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.like",
+      "concept": "like",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "comparison",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "similarity"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.via",
+      "concept": "via",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "spatial_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "path"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.according_to",
+      "concept": "according_to",
+      "category": "function_word",
+      "word_type": "adposition",
+      "semantic_group": "language_and_communication",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "source"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.a",
+      "concept": "a",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "indefinite",
+        "singular"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.the",
+      "concept": "the",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "definite"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.each",
+      "concept": "each",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "distributive",
+        "singular"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.both",
+      "concept": "both",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "dual",
+        "plural"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.either",
+      "concept": "either",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "choice"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.neither",
+      "concept": "neither",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "negative",
+        "choice"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.any",
+      "concept": "any",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "indefinite"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.another",
+      "concept": "another",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "indefinite",
+        "additional"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.few",
+      "concept": "few",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "quantity"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.many",
+      "concept": "many",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "articles_and_determiners",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "quantity"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.but",
+      "concept": "but",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "coordination",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "contrast"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.although",
+      "concept": "although",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "subordinators",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "contrast"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.though",
+      "concept": "though",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "subordinators",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "contrast"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.while",
+      "concept": "while",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "subordinators",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "simultaneous",
+        "contrast"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.when",
+      "concept": "when",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "subordinators",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "time"
+      ],
+      "relations": {
+        "grammatical_roles": [
+          "adverb",
+          "subordinator"
+        ]
+      }
+    },
+    {
+      "id": "function.unless",
+      "concept": "unless",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "subordinators",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "condition",
+        "negative"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.whether",
+      "concept": "whether",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "subordinators",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "alternative"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.therefore",
+      "concept": "therefore",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "connective_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "consequence"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.then",
+      "concept": "then",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "connective_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "sequence"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.also",
+      "concept": "also",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "connective_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "addition"
+      ],
+      "relations": {
+        "grammatical_roles": [
+          "particle",
+          "conjunction"
+        ]
+      }
+    },
+    {
+      "id": "function.however",
+      "concept": "however",
+      "category": "function_word",
+      "word_type": "conjunction",
+      "semantic_group": "connective_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "contrast"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.which",
+      "concept": "which",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "interrogatives",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "question",
+        "choice"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.whom",
+      "concept": "whom",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "interrogatives",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "question",
+        "person",
+        "object"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.how_many",
+      "concept": "how_many",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "interrogatives",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "question",
+        "quantity"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.how_much",
+      "concept": "how_much",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "interrogatives",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "question",
+        "quantity"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.that_relative",
+      "concept": "that_relative",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "relative_pronouns",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "relative"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.whoever",
+      "concept": "whoever",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "indefinite_pronouns",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "person",
+        "indefinite"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.whatever",
+      "concept": "whatever",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "indefinite_pronouns",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "thing",
+        "indefinite"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.only",
+      "concept": "only",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "focus_and_emphasis",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "restriction"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.even",
+      "concept": "even",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "focus_and_emphasis",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "emphasis"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.still",
+      "concept": "still",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "continuation"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.already",
+      "concept": "already",
+      "category": "function_word",
+      "word_type": "adverb",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "completed",
+        "time"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.again",
+      "concept": "again",
+      "category": "function_word",
+      "word_type": "adverb",
+      "semantic_group": "temporal_relations",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "repetition"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.perhaps",
+      "concept": "perhaps",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "modality",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "uncertainty"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.must",
+      "concept": "must",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "necessity"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.can",
+      "concept": "can",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "ability",
+        "possibility"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.may",
+      "concept": "may",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "possibility",
+        "permission"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.want",
+      "concept": "want",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "desire"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.should",
+      "concept": "should",
+      "category": "function_word",
+      "word_type": "particle",
+      "semantic_group": "modal_and_auxiliary_concepts",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "obligation",
+        "recommendation"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.my",
+      "concept": "my",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "first_person",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.your",
+      "concept": "your",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "second_person",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.his",
+      "concept": "his",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "third_person",
+        "male",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.her",
+      "concept": "her",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "third_person",
+        "female",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.its",
+      "concept": "its",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "third_person",
+        "neutral",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.our",
+      "concept": "our",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "first_person",
+        "plural",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.their",
+      "concept": "their",
+      "category": "function_word",
+      "word_type": "determiner",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "third_person",
+        "plural",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.mine",
+      "concept": "mine",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "first_person",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.yours",
+      "concept": "yours",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "second_person",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.ours",
+      "concept": "ours",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "first_person",
+        "plural",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.theirs",
+      "concept": "theirs",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "possession",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "third_person",
+        "plural",
+        "possessive"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.nothing",
+      "concept": "nothing",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "indefinite_pronouns",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "thing",
+        "negative",
+        "indefinite"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.nobody",
+      "concept": "nobody",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "indefinite_pronouns",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "person",
+        "negative",
+        "indefinite"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.someone",
+      "concept": "someone",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "indefinite_pronouns",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "person",
+        "indefinite"
+      ],
+      "relations": {}
+    },
+    {
+      "id": "function.something",
+      "concept": "something",
+      "category": "function_word",
+      "word_type": "pronoun",
+      "semantic_group": "indefinite_pronouns",
+      "scope": "universal",
+      "tags": [
+        "grammar"
+      ],
+      "features": [
+        "thing",
+        "indefinite"
+      ],
+      "relations": {}
     }
   ]
 }
