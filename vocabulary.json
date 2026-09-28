@@ -10664,6 +10664,1566 @@
         "number",
         "quantity"
       ]
+    },
+    {
+      "id": "time.time",
+      "concept": "time",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.moment",
+      "concept": "moment",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.instant",
+      "concept": "instant",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.second",
+      "concept": "second",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.minute",
+      "concept": "minute",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.hour",
+      "concept": "hour",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.week",
+      "concept": "week",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.month",
+      "concept": "month",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.decade",
+      "concept": "decade",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.century",
+      "concept": "century",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.millennium",
+      "concept": "millennium",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "time_unit",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.dawn",
+      "concept": "dawn",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.sunrise",
+      "concept": "sunrise",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.noon",
+      "concept": "noon",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.midday",
+      "concept": "midday",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.afternoon",
+      "concept": "afternoon",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.sunset",
+      "concept": "sunset",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.dusk",
+      "concept": "dusk",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.midnight",
+      "concept": "midnight",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "day_period",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.weekday",
+      "concept": "weekday",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.weekend",
+      "concept": "weekend",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.season",
+      "concept": "season",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.spring",
+      "concept": "spring",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.summer",
+      "concept": "summer",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.autumn",
+      "concept": "autumn",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.winter",
+      "concept": "winter",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.birthday",
+      "concept": "birthday",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.anniversary",
+      "concept": "anniversary",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.calendar",
+      "concept": "calendar",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.date",
+      "concept": "date",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.age",
+      "concept": "age",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.generation",
+      "concept": "generation",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.era",
+      "concept": "era",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.period",
+      "concept": "period",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.beginning",
+      "concept": "beginning",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.middle",
+      "concept": "middle",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.end",
+      "concept": "end",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "calendar",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.tonight",
+      "concept": "tonight",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.the_day_before_yesterday",
+      "concept": "the_day_before_yesterday",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.the_day_after_tomorrow",
+      "concept": "the_day_after_tomorrow",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.earlier",
+      "concept": "earlier",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.later",
+      "concept": "later",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.already",
+      "concept": "already",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.still",
+      "concept": "still",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.yet",
+      "concept": "yet",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.soon",
+      "concept": "soon",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.eventually",
+      "concept": "eventually",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.recently",
+      "concept": "recently",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.formerly",
+      "concept": "formerly",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.previously",
+      "concept": "previously",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.currently",
+      "concept": "currently",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.immediately",
+      "concept": "immediately",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "relative_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.duration",
+      "concept": "duration",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.while",
+      "concept": "while",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.long_time",
+      "concept": "long_time",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.short_time",
+      "concept": "short_time",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.forever",
+      "concept": "forever",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.eternity",
+      "concept": "eternity",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.temporary",
+      "concept": "temporary",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.permanent",
+      "concept": "permanent",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.brief",
+      "concept": "brief",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.continuous",
+      "concept": "continuous",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.momentary",
+      "concept": "momentary",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.lasting",
+      "concept": "lasting",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.delay",
+      "concept": "delay",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.pause",
+      "concept": "pause",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.interval",
+      "concept": "interval",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "duration",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.usually",
+      "concept": "usually",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.rarely",
+      "concept": "rarely",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.frequently",
+      "concept": "frequently",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.occasionally",
+      "concept": "occasionally",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.daily",
+      "concept": "daily",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.weekly",
+      "concept": "weekly",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.monthly",
+      "concept": "monthly",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.yearly",
+      "concept": "yearly",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.once",
+      "concept": "once",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.twice",
+      "concept": "twice",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.repeat",
+      "concept": "repeat",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.recurrence",
+      "concept": "recurrence",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "frequency",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.next",
+      "concept": "next",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.previous",
+      "concept": "previous",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.following",
+      "concept": "following",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.preceding",
+      "concept": "preceding",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.past",
+      "concept": "past",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.present",
+      "concept": "present",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.future",
+      "concept": "future",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.meanwhile",
+      "concept": "meanwhile",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.simultaneous",
+      "concept": "simultaneous",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.simultaneously",
+      "concept": "simultaneously",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.earliest",
+      "concept": "earliest",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.latest",
+      "concept": "latest",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.begin",
+      "concept": "begin",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.continue",
+      "concept": "continue",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.finish",
+      "concept": "finish",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.return",
+      "concept": "return",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "sequence",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.daylight",
+      "concept": "daylight",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.darkness",
+      "concept": "darkness",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.sun",
+      "concept": "sun",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.moon",
+      "concept": "moon",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.phase",
+      "concept": "phase",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.full_moon",
+      "concept": "full_moon",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.new_moon",
+      "concept": "new_moon",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.tide",
+      "concept": "tide",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.seasonal_cycle",
+      "concept": "seasonal_cycle",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.cycle",
+      "concept": "cycle",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "natural_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.history",
+      "concept": "history",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.past_age",
+      "concept": "past_age",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.future_age",
+      "concept": "future_age",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.ancient_times",
+      "concept": "ancient_times",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.modern_times",
+      "concept": "modern_times",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.tradition",
+      "concept": "tradition",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.change",
+      "concept": "change",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.event",
+      "concept": "event",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.occasion",
+      "concept": "occasion",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.holiday",
+      "concept": "holiday",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.festival",
+      "concept": "festival",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.ceremony",
+      "concept": "ceremony",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.appointment",
+      "concept": "appointment",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.deadline",
+      "concept": "deadline",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
+    },
+    {
+      "id": "time.schedule",
+      "concept": "schedule",
+      "scope": "domain",
+      "category": "time",
+      "word_type": "noun",
+      "semantic_group": "social_time",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "time"
+      ]
     }
   ]
 }
