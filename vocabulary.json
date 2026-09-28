@@ -9373,6 +9373,1297 @@
       "tags": [
         "verb"
       ]
+    },
+    {
+      "id": "number.zero",
+      "concept": "zero",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.eleven",
+      "concept": "eleven",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.twelve",
+      "concept": "twelve",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.thirteen",
+      "concept": "thirteen",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.fourteen",
+      "concept": "fourteen",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.fifteen",
+      "concept": "fifteen",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.sixteen",
+      "concept": "sixteen",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.seventeen",
+      "concept": "seventeen",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.eighteen",
+      "concept": "eighteen",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.nineteen",
+      "concept": "nineteen",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.twenty",
+      "concept": "twenty",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.thirty",
+      "concept": "thirty",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.forty",
+      "concept": "forty",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.fifty",
+      "concept": "fifty",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.sixty",
+      "concept": "sixty",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.seventy",
+      "concept": "seventy",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.eighty",
+      "concept": "eighty",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.ninety",
+      "concept": "ninety",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.hundred",
+      "concept": "hundred",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.thousand",
+      "concept": "thousand",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.million",
+      "concept": "million",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "cardinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "number_system"
+      ]
+    },
+    {
+      "id": "number.number",
+      "concept": "number",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.numeral",
+      "concept": "numeral",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.digit",
+      "concept": "digit",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.count",
+      "concept": "count",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.counting",
+      "concept": "counting",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.amount",
+      "concept": "amount",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.quantity",
+      "concept": "quantity",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.total",
+      "concept": "total",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.sum",
+      "concept": "sum",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.part",
+      "concept": "part",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.quarter",
+      "concept": "quarter",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.third",
+      "concept": "third",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.pair",
+      "concept": "pair",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.double",
+      "concept": "double",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.triple",
+      "concept": "triple",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.single",
+      "concept": "single",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.multiple",
+      "concept": "multiple",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "numerical_concept",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.any",
+      "concept": "any",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.several",
+      "concept": "several",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.much",
+      "concept": "much",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.little",
+      "concept": "little",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.enough",
+      "concept": "enough",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.too_many",
+      "concept": "too_many",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.too_few",
+      "concept": "too_few",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.another",
+      "concept": "another",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantifier",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.second",
+      "concept": "second",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.fourth",
+      "concept": "fourth",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.fifth",
+      "concept": "fifth",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.sixth",
+      "concept": "sixth",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.seventh",
+      "concept": "seventh",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.eighth",
+      "concept": "eighth",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.ninth",
+      "concept": "ninth",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.tenth",
+      "concept": "tenth",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.next",
+      "concept": "next",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.previous",
+      "concept": "previous",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "number",
+      "semantic_group": "ordinal_number",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity",
+        "order"
+      ]
+    },
+    {
+      "id": "number.many_times",
+      "concept": "many_times",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.once",
+      "concept": "once",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.twice",
+      "concept": "twice",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.again",
+      "concept": "again",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.always",
+      "concept": "always",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.never",
+      "concept": "never",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.often",
+      "concept": "often",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.sometimes",
+      "concept": "sometimes",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.usually",
+      "concept": "usually",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.rarely",
+      "concept": "rarely",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.every_time",
+      "concept": "every_time",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.once_more",
+      "concept": "once_more",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.half_of",
+      "concept": "half_of",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.most",
+      "concept": "most",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.minority",
+      "concept": "minority",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.majority",
+      "concept": "majority",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.equal",
+      "concept": "equal",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.unequal",
+      "concept": "unequal",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.exact",
+      "concept": "exact",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.approximately",
+      "concept": "approximately",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.about",
+      "concept": "about",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.per",
+      "concept": "per",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.each_one",
+      "concept": "each_one",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "quantity_distribution",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.fraction",
+      "concept": "fraction",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.decimal",
+      "concept": "decimal",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.percentage",
+      "concept": "percentage",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.percent",
+      "concept": "percent",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.ratio",
+      "concept": "ratio",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.proportion",
+      "concept": "proportion",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.zero_point",
+      "concept": "zero_point",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.negative",
+      "concept": "negative",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.positive",
+      "concept": "positive",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.infinite",
+      "concept": "infinite",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
+    },
+    {
+      "id": "number.infinity",
+      "concept": "infinity",
+      "scope": "domain",
+      "category": "number_quantity",
+      "word_type": "quantifier",
+      "semantic_group": "mathematical_quantity",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "number",
+        "quantity"
+      ]
     }
   ]
 }
