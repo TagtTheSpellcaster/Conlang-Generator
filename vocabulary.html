@@ -1,160 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conlang Vocabulary</title>
-
-    <link
-        rel="stylesheet"
-        href="vocabulary.css"
-    >
+    <link rel="stylesheet" href="vocabulary.css">
 </head>
 
 <body>
-
-    <header>
+<header>
+    <div>
         <h1>Conlang Vocabulary</h1>
+        <div id="databaseStatus" class="database-status">Loading...</div>
+    </div>
 
-        <div class="statistics">
-            <span>
-                Total:
-                <strong id="totalCount">0</strong>
-            </span>
+    <div class="statistics">
+        <span>Total: <strong id="totalCount">0</strong></span>
+        <span>Visible: <strong id="visibleCount">0</strong></span>
+    </div>
+</header>
 
-            <span>
-                Visible:
-                <strong id="visibleCount">0</strong>
-            </span>
+<main>
+    <section class="controls">
+        <div class="search">
+            <label for="searchVocabulary">Search</label>
+            <input id="searchVocabulary" type="search" placeholder="Search vocabulary...">
         </div>
-    </header>
 
+        <div id="attributeFilters" class="filters"></div>
 
-    <main>
-
-        <section class="controls">
-
-            <div class="search">
-                <label for="searchVocabulary">
-                    Search
-                </label>
-
-                <input
-                    id="searchVocabulary"
-                    type="search"
-                    placeholder="Search vocabulary..."
-                >
+        <div class="sorting">
+            <div>
+                <label for="sortAttribute">Sort by</label>
+                <select id="sortAttribute"></select>
             </div>
-
-
-            <div
-                id="attributeFilters"
-                class="filters"
-            ></div>
-
-
-            <div class="sorting">
-
-                <label for="sortAttribute">
-                    Sort by
-                </label>
-
-                <select id="sortAttribute">
-                    <option value="">
-                        Default order
-                    </option>
-                </select>
-
+            <div>
+                <label for="sortDirection">Direction</label>
                 <select id="sortDirection">
-                    <option value="asc">
-                        A → Z
-                    </option>
-
-                    <option value="desc">
-                        Z → A
-                    </option>
+                    <option value="asc">A → Z</option>
+                    <option value="desc">Z → A</option>
                 </select>
+            </div>
+        </div>
+    </section>
 
+    <section class="actions">
+        <button id="reloadVocabulary">Reload from JSON</button>
+        <button id="appendVocabulary">Append JSON</button>
+        <button id="addVocabulary">Add term</button>
+        <button id="exportVocabulary">Export vocabulary.json</button>
+        <button id="resetVocabulary">Reset local changes</button>
+    </section>
+
+    <div id="errorMessage" class="error" hidden></div>
+
+    <section class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>ID</th>
+                    <th>Concept</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Semantic Group</th>
+                    <th>Scope</th>
+                    <th>Locale</th>
+                    <th>Tags</th>
+                    <th>Features</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="vocabularyBody"></tbody>
+        </table>
+    </section>
+</main>
+
+<!-- Append modal -->
+<div id="appendModal" class="modal" hidden>
+    <div class="modal-panel">
+        <div class="modal-header">
+            <h2>Append vocabulary</h2>
+            <button class="modal-close" data-close-modal="appendModal" aria-label="Close">×</button>
+        </div>
+
+        <p id="appendFilename"></p>
+        <div id="appendSummary" class="append-summary"></div>
+
+        <div id="appendErrors" class="validation-errors" hidden></div>
+
+        <div class="modal-actions">
+            <button id="cancelAppend">Cancel</button>
+            <button id="confirmAppend" disabled>Append entries</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit modal -->
+<div id="entryModal" class="modal" hidden>
+    <div class="modal-panel modal-panel-large">
+        <div class="modal-header">
+            <h2 id="entryModalTitle">Add vocabulary entry</h2>
+            <button class="modal-close" data-close-modal="entryModal" aria-label="Close">×</button>
+        </div>
+
+        <form id="entryForm">
+            <div class="form-grid">
+                <label>ID
+                    <input id="entryId" required>
+                </label>
+                <label>Concept
+                    <input id="entryConcept" required>
+                </label>
+                <label>Category
+                    <input id="entryCategory" required>
+                </label>
+                <label>Word type
+                    <input id="entryWordType">
+                </label>
+                <label>Semantic group
+                    <input id="entrySemanticGroup">
+                </label>
+                <label>Scope
+                    <input id="entryScope">
+                </label>
+                <label>Type
+                    <input id="entryType">
+                </label>
+                <label>Locale
+                    <input id="entryLocale">
+                </label>
             </div>
 
-        </section>
+            <label>Tags
+                <input id="entryTags" placeholder="animal, natural, europe">
+            </label>
 
+            <label>Features
+                <input id="entryFeatures" placeholder="living, animate">
+            </label>
 
-        <section class="actions">
+            <label>Relations (JSON)
+                <textarea id="entryRelations">{}</textarea>
+            </label>
 
-            <button id="addVocabulary">
-                Add term
-            </button>
+            <div id="entryFormError" class="validation-errors" hidden></div>
 
-            <button id="exportVocabulary">
-                Export vocabulary.json
-            </button>
+            <div class="modal-actions">
+                <button type="button" data-close-modal="entryModal">Cancel</button>
+                <button type="submit">Save entry</button>
+            </div>
+        </form>
+    </div>
+</div>
 
-            <button id="resetVocabulary">
-                Reset local changes
-            </button>
-            <button id="reloadVocabulary">
-                Reload from JSON
-            </button>
-            
-            <button id="addVocabulary">
-                Add term
-            </button>
-            
-            <button id="exportVocabulary">
-                Export vocabulary.json
-            </button>
-            
-            <button id="resetVocabulary">
-                Reset local changes
-            </button>
+<input id="appendFileInput" type="file" accept=".json,application/json" hidden>
 
-        </section>
-
-
-        <div
-            id="errorMessage"
-            class="error"
-            style="display:none"
-        ></div>
-
-
-        <section class="table-container">
-
-            <table>
-
-                <thead>
-
-                    <tr>
-                        <th>#</th>
-                        <th>ID</th>
-                        <th>Concept</th>
-                        <th>Category</th>
-                        <th>Type</th>
-                        <th>Semantic Group</th>
-                        <th>Features</th>
-                        <th>Actions</th>
-                    </tr>
-
-                </thead>
-
-                <tbody id="vocabularyBody">
-                </tbody>
-
-            </table>
-
-        </section>
-
-    </main>
-
-
-    <script src="vocabulary-manager.js"></script>
-
+<script src="vocabulary-manager.js"></script>
 </body>
-
 </html>
