@@ -199,7 +199,7 @@
     } catch(err) { $('db-status').textContent='Vocabulary load failed'; $('message').textContent=`Unable to load vocabulary.json: ${err.message}`; }
   }
 
-  function generate() { if(!vocabulary.length) return; state=config(); render(state,generateLexicon(state),buildSentences(state,generateLexicon(state))); }
+  function generate() { if(!vocabulary.length) return; state=config(); const lex=generateLexicon(state); render(state,lex,buildSentences(state,lex)); }
   function setPresetValue(id,candidates){ const available=new Set([...$(id).options].map(o=>o.value)); setSelected(id,candidates.filter(v=>available.has(v))); }
   function preset(kind) {
     ['region','culture','biome','temporal_setting','tags'].forEach(id=>setSelected(id,[]));
