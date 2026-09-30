@@ -3,17 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Conlang Generator Studio</title>
+<title>Conlang Generator</title>
 <style>
 :root{--bg:#0b1020;--panel:#11182a;--panel2:#0d1424;--line:#26324a;--text:#e7edf7;--muted:#8fa0ba;--accent:#55c7ff;--good:#55d6a0}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif}button,select,input{font:inherit}button{cursor:pointer}
-header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}h2{font-size:14px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em}.sub{color:var(--muted);font-size:12px;margin-top:3px}
-.layout{display:grid;grid-template-columns:350px 1fr;min-height:calc(100vh - 75px)}aside{border-right:1px solid var(--line);padding:18px;overflow:auto;background:var(--panel2)}main{padding:22px;overflow:auto}.section{padding:16px 0;border-bottom:1px solid var(--line)}.section:first-child{padding-top:0}.field{margin-top:12px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field select,.field input{width:100%;background:#090f1c;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:8px 10px}.multi{min-height:110px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted);margin-top:10px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:115px 1fr;gap:5px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:520px;overflow:auto}.lex-row{display:grid;grid-template-columns:150px 1fr 110px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.sentence{padding:10px 0;border-bottom:1px solid #1d2739}.sentence .con{font-family:ui-monospace,monospace;color:#77d6ff;font-size:15px}.sentence .eng{color:var(--muted);font-size:12px}.empty{padding:30px;text-align:center;color:var(--muted)}.notice{padding:10px 12px;border:1px solid #6a5126;background:#211b0f;color:#d9bd7b;border-radius:8px;font-size:12px;margin-top:12px}
-@media(max-width:900px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}.hero{flex-direction:column}.row{grid-template-columns:1fr}}
+header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);background:#0e1526;padding:0 22px}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:13px 18px}.tab.active{color:var(--text);border-bottom-color:var(--accent)}
+.tab-panel{display:none}.tab-panel.active{display:block}.layout{display:grid;grid-template-columns:350px 1fr;min-height:calc(100vh - 120px)}aside{border-right:1px solid var(--line);padding:18px;overflow:auto;background:var(--panel2)}main{padding:22px;overflow:auto}.section{padding:16px 0;border-bottom:1px solid var(--line)}.section:first-child{padding-top:0}.field{margin-top:12px}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field select,.field input{width:100%;background:#090f1c;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:8px 10px}.multi{min-height:105px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted);margin-top:10px}
+.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:125px 1fr;gap:6px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:620px;overflow:auto}.lex-row{display:grid;grid-template-columns:170px 1fr 150px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.dictionary-controls{display:flex;gap:10px;align-items:end;margin-bottom:14px}.dictionary-controls .field{margin:0;flex:0 0 260px}.dictionary-controls .search{flex:1}.dictionary{max-height:680px;overflow:auto}.dict-row{display:grid;grid-template-columns:1fr 1fr 160px;gap:12px;padding:9px 4px;border-bottom:1px solid #1d2739}.dict-row strong{color:#77d6ff;font-family:ui-monospace,monospace}.dict-row .meta{color:var(--muted);font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:12px;border:1px solid #743c3c;background:#281516;color:#e5a5a5;border-radius:8px;margin-top:12px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid var(--line)}.hero{flex-direction:column}.row{grid-template-columns:1fr}.dictionary-controls{flex-direction:column;align-items:stretch}.dictionary-controls .field{flex:auto}.dict-row{grid-template-columns:1fr 1fr}.dict-row .meta{display:none}}
 </style>
 </head>
 <body>
-<header><div><h1>Conlang Generator Studio</h1><div class="sub">Vocabulary-driven generation · semantic context · phonology · morphology · grammar</div></div><div id="db-status" class="sub">Loading vocabulary…</div></header>
+<header><div><h1>Conlang Generator</h1><div class="sub">Vocabulary-driven language generation</div></div><div id="db-status" class="sub">Loading vocabulary…</div></header>
+<nav class="tabs" aria-label="Main sections">
+<button class="tab active" data-tab="generator">Generation</button>
+<button class="tab" data-tab="lexicon">Generated Lexicon</button>
+<button class="tab" data-tab="dictionary">Dictionary</button>
+</nav>
+<section id="generator" class="tab-panel active">
 <div class="layout">
 <aside>
 <section class="section"><h2>Semantic profile</h2>
@@ -22,7 +30,7 @@ header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <div class="field"><label>Biome</label><select id="biome" class="multi" multiple></select></div>
 <div class="field"><label>Temporal setting</label><select id="temporal_setting" class="multi" multiple></select></div>
 <div class="field"><label>Tags</label><select id="tags" class="multi" multiple></select></div>
-<div class="buttons"><button class="btn ghost" id="clear-filters">Clear semantic filters</button><button class="btn" id="preset-historical">Historical</button><button class="btn" id="preset-fantasy">Fantasy</button><button class="btn" id="preset-modern">Modern</button><button class="btn" id="preset-scifi">Science fiction</button></div>
+<div class="buttons"><button class="btn ghost" id="clear-filters">Clear filters</button><button class="btn" id="preset-historical">Historical</button><button class="btn" id="preset-fantasy">Fantasy</button><button class="btn" id="preset-modern">Modern</button><button class="btn" id="preset-scifi">Science fiction</button></div>
 </section>
 <section class="section"><h2>Phonology</h2>
 <div class="row"><div class="field"><label>Vowels</label><select id="vowels"><option value="standard">a e i o u</option><option value="minimal">a i u</option><option value="extended">a e i o u y ø æ</option></select></div><div class="field"><label>Consonants</label><select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant / liquid</option><option value="soft">Soft / approximant</option></select></div></div>
@@ -37,7 +45,17 @@ header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <div class="buttons"><button class="btn good" id="generate">Generate language</button><button class="btn" id="regenerate">Regenerate lexicon</button></div>
 <div id="message" class="status"></div>
 </aside>
-<main><div id="output" class="empty">Generate a language to begin.</div></main>
+<main><div id="generation-output" class="empty">Set the parameters and generate a language.</div></main>
 </div>
+</section>
+<section id="lexicon" class="tab-panel"><main><div id="lexicon-output" class="empty">Generate a language to populate the lexicon.</div></main></section>
+<section id="dictionary" class="tab-panel"><main>
+<div class="dictionary-controls">
+<div class="field"><label>Direction</label><select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></div>
+<div class="field search"><label>Search</label><input id="dictionary-search" type="search" placeholder="Search the dictionary…"></div>
+</div>
+<div id="dictionary-output" class="empty">Generate a language to populate the dictionary.</div>
+</main></section>
 <script src="conlang_engine.js"></script>
-</body></html>
+</body>
+</html>
