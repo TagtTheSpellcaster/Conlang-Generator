@@ -48599,6 +48599,367 @@
       "culture": [],
       "biome": [],
       "temporal_setting": []
+    },
+    {
+      "id": "society.agrarian",
+      "concept": "agrarian",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "agrarian"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.animism",
+      "concept": "animism",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "animist"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.colonial",
+      "concept": "colonial",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "colonial"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.communal",
+      "concept": "communal",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "communal"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.feudal",
+      "concept": "feudal",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "feudal"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.industrial",
+      "concept": "industrial",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "industrial"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.maritime",
+      "concept": "maritime",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "maritime"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.merchant",
+      "concept": "merchant",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "mercantile"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.militarism",
+      "concept": "militarism",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "militaristic"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.monastic",
+      "concept": "monastic",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "monastic"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.nomad",
+      "concept": "nomad",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "nomadic"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.post_industrial",
+      "concept": "post_industrial",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "post_industrial"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.posthuman",
+      "concept": "posthuman",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "posthuman"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.rural",
+      "concept": "rural",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "rural"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.shaman",
+      "concept": "shaman",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "shamanic"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.spacefarer",
+      "concept": "spacefarer",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "spacefaring"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.technocrat",
+      "concept": "technocrat",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "technocratic"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.theocrat",
+      "concept": "theocrat",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "noun",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "theocratic"
+      ],
+      "biome": [],
+      "temporal_setting": []
+    },
+    {
+      "id": "society.urban",
+      "concept": "urban",
+      "scope": "domain",
+      "category": "society",
+      "word_type": "adjective",
+      "semantic_group": "society",
+      "features": [],
+      "relations": {},
+      "tags": [
+        "society"
+      ],
+      "region": [],
+      "culture": [
+        "urban"
+      ],
+      "biome": [],
+      "temporal_setting": []
     }
   ]
 }
