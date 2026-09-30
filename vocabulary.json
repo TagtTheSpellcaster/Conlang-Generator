@@ -1903,11 +1903,13 @@
       "temporal_setting": [],
       "tags": [
         "grammar",
-        "universal"
+        "universal",
+        "demonstrative"
       ],
       "features": [
         "distal",
-        "singular"
+        "singular",
+        "pronoun"
       ],
       "relations": {}
     },
@@ -1924,11 +1926,13 @@
       "temporal_setting": [],
       "tags": [
         "grammar",
-        "universal"
+        "universal",
+        "demonstrative"
       ],
       "features": [
         "proximal",
-        "singular"
+        "singular",
+        "pronoun"
       ],
       "relations": {}
     },
@@ -2622,7 +2626,8 @@
       "temporal_setting": [],
       "tags": [
         "grammar",
-        "universal"
+        "universal",
+        "function_word"
       ],
       "features": [
         "manner",
@@ -2664,7 +2669,8 @@
       "temporal_setting": [],
       "tags": [
         "grammar",
-        "universal"
+        "universal",
+        "function_word"
       ],
       "features": [
         "time",
@@ -2685,7 +2691,8 @@
       "temporal_setting": [],
       "tags": [
         "grammar",
-        "universal"
+        "universal",
+        "function_word"
       ],
       "features": [
         "location",
@@ -2727,7 +2734,8 @@
       "temporal_setting": [],
       "tags": [
         "grammar",
-        "universal"
+        "universal",
+        "function_word"
       ],
       "features": [
         "reason",
@@ -29073,8 +29081,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29092,8 +29099,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29111,8 +29117,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29130,8 +29135,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29149,8 +29153,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29168,8 +29171,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29187,8 +29189,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29206,8 +29207,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29225,8 +29225,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29244,8 +29243,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29263,8 +29261,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29282,8 +29279,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29301,8 +29297,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -29324,8 +29319,7 @@
       "temporal_setting": [],
       "tags": [
         "person",
-        "entity",
-        "inanimate_object"
+        "entity"
       ],
       "features": [],
       "relations": {}
@@ -40581,7 +40575,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40598,7 +40593,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40615,7 +40611,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40632,7 +40629,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40649,7 +40647,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40666,7 +40665,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40683,7 +40683,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40702,7 +40703,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40722,7 +40724,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40739,7 +40742,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40756,7 +40760,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40776,7 +40781,8 @@
         "society",
         "geographical_place",
         "place",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40793,7 +40799,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40810,7 +40817,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40827,7 +40835,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40844,7 +40853,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40861,7 +40871,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40880,7 +40891,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40899,7 +40911,8 @@
       "tags": [
         "society",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40920,7 +40933,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40941,7 +40955,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40962,7 +40977,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -40983,7 +40999,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41004,7 +41021,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41028,7 +41046,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41049,7 +41068,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41070,7 +41090,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41091,7 +41112,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41112,7 +41134,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41133,7 +41156,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41154,7 +41178,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41175,7 +41200,8 @@
         "person",
         "living_being",
         "entity",
-        "relationship"
+        "relationship",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41194,7 +41220,8 @@
       "tags": [
         "society",
         "relationship",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41215,7 +41242,8 @@
         "relationship",
         "person",
         "entity",
-        "living_being"
+        "living_being",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41234,7 +41262,8 @@
       "tags": [
         "society",
         "relationship",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41253,7 +41282,8 @@
       "tags": [
         "society",
         "relationship",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41272,7 +41302,8 @@
       "tags": [
         "society",
         "relationship",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41291,7 +41322,8 @@
       "tags": [
         "society",
         "relationship",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41312,7 +41344,8 @@
         "relationship",
         "person",
         "entity",
-        "living_being"
+        "living_being",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41331,7 +41364,8 @@
       "tags": [
         "society",
         "relationship",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41348,7 +41382,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41365,7 +41400,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41385,7 +41421,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41402,7 +41439,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41419,7 +41457,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41436,7 +41475,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41453,7 +41493,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41470,7 +41511,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41487,7 +41529,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41504,7 +41547,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41521,7 +41565,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41538,7 +41583,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41555,7 +41601,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41572,7 +41619,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41589,7 +41637,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41606,7 +41655,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41623,7 +41673,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41640,7 +41691,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41657,7 +41709,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41680,7 +41733,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41707,7 +41761,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41724,7 +41779,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41741,7 +41797,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41758,7 +41815,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41775,7 +41833,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41792,7 +41851,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41813,7 +41873,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41832,7 +41893,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41849,7 +41911,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41868,7 +41931,8 @@
         "ancient"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41887,7 +41951,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41908,7 +41973,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41925,7 +41991,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41942,7 +42009,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41959,7 +42027,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41978,7 +42047,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -41998,7 +42068,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42015,7 +42086,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42044,7 +42116,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42073,7 +42146,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42093,7 +42167,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42113,7 +42188,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42133,7 +42209,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42153,7 +42230,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42173,7 +42251,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42193,7 +42272,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42217,7 +42297,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42237,7 +42318,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42257,7 +42339,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42279,7 +42362,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42299,7 +42383,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42321,7 +42406,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42341,7 +42427,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42361,7 +42448,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42381,7 +42469,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42401,7 +42490,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42418,7 +42508,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42435,7 +42526,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42452,7 +42544,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42469,7 +42562,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42486,7 +42580,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42503,7 +42598,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42520,7 +42616,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42537,7 +42634,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42554,7 +42652,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42571,7 +42670,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42588,7 +42688,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42605,7 +42706,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42622,7 +42724,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42639,7 +42742,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42656,7 +42760,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42673,7 +42778,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42690,7 +42796,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42707,7 +42814,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42724,7 +42832,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42741,7 +42850,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42758,7 +42868,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42775,7 +42886,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42792,7 +42904,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42809,7 +42922,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42826,7 +42940,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42843,7 +42958,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42860,7 +42976,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42877,7 +42994,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42894,7 +43012,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42911,7 +43030,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42928,7 +43048,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42945,7 +43066,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42962,7 +43084,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42979,7 +43102,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -42996,7 +43120,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43013,7 +43138,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43033,7 +43159,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43050,7 +43177,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43067,7 +43195,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43084,7 +43213,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43101,7 +43231,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43118,7 +43249,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43135,7 +43267,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43152,7 +43285,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43169,7 +43303,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43186,7 +43321,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43203,7 +43339,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43221,7 +43358,8 @@
       "temporal_setting": [],
       "tags": [
         "society",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43239,7 +43377,8 @@
       "temporal_setting": [],
       "tags": [
         "society",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43257,7 +43396,8 @@
       "temporal_setting": [],
       "tags": [
         "society",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43275,7 +43415,8 @@
       "temporal_setting": [],
       "tags": [
         "society",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43293,7 +43434,8 @@
       "temporal_setting": [],
       "tags": [
         "society",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43313,7 +43455,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43333,7 +43476,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43353,7 +43497,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43373,7 +43518,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43393,7 +43539,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43413,7 +43560,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43436,7 +43584,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43458,7 +43607,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43478,7 +43628,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43502,7 +43653,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43524,7 +43676,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43547,7 +43700,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43567,7 +43721,8 @@
         "society",
         "person",
         "living_being",
-        "entity"
+        "entity",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43584,7 +43739,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43601,7 +43757,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43618,7 +43775,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43635,7 +43793,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43659,7 +43818,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43681,7 +43841,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43698,7 +43859,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43717,7 +43879,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43736,7 +43899,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43753,7 +43917,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43770,7 +43935,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43787,7 +43953,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43804,7 +43971,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43824,7 +43992,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43844,7 +44013,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43864,7 +44034,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43885,7 +44056,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43902,7 +44074,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43922,7 +44095,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43944,7 +44118,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43966,7 +44141,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -43983,7 +44159,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44005,7 +44182,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44027,7 +44205,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44044,7 +44223,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44063,7 +44243,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44080,7 +44261,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44102,7 +44284,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44122,7 +44305,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44143,7 +44327,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44160,7 +44345,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44177,7 +44363,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44194,7 +44381,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44211,7 +44399,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44228,7 +44417,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44245,7 +44435,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44262,7 +44453,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44279,7 +44471,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44298,7 +44491,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44317,7 +44511,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44334,7 +44529,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44358,7 +44554,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44375,7 +44572,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44392,7 +44590,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44409,7 +44608,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44428,7 +44628,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44447,7 +44648,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44467,7 +44669,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44487,7 +44690,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44504,7 +44708,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44521,7 +44726,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44538,7 +44744,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44555,7 +44762,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44572,7 +44780,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44589,7 +44798,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44608,7 +44818,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44627,7 +44838,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44644,7 +44856,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44661,7 +44874,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44681,7 +44895,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44704,7 +44919,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44723,7 +44939,8 @@
         "medieval"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44740,7 +44957,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44757,7 +44975,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44774,7 +44993,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44791,7 +45011,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44808,7 +45029,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44825,7 +45047,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44842,7 +45065,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44859,7 +45083,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44876,7 +45101,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44893,7 +45119,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44910,7 +45137,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44927,7 +45155,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44946,7 +45175,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44965,7 +45195,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -44984,7 +45215,8 @@
         "modern"
       ],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -45001,7 +45233,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -45018,7 +45251,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -45035,7 +45269,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -45052,7 +45287,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -45069,7 +45305,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -45086,7 +45323,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52507,7 +52745,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52621,7 +52860,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52640,7 +52880,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52678,7 +52919,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52754,7 +52996,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52775,7 +53018,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52794,7 +53038,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -52813,7 +53058,8 @@
       "biome": [],
       "temporal_setting": [],
       "tags": [
-        "society"
+        "society",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -54725,7 +54971,8 @@
       ],
       "tags": [
         "writing",
-        "communication"
+        "communication",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -54792,7 +55039,8 @@
       ],
       "tags": [
         "education",
-        "profession"
+        "profession",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -55536,7 +55784,8 @@
       "temporal_setting": [],
       "tags": [
         "music",
-        "profession"
+        "profession",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -55554,7 +55803,8 @@
       "temporal_setting": [],
       "tags": [
         "music",
-        "profession"
+        "profession",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -55575,7 +55825,8 @@
       ],
       "tags": [
         "music",
-        "profession"
+        "profession",
+        "social_role"
       ],
       "features": [],
       "relations": {}
@@ -56155,7 +56406,8 @@
       ],
       "tags": [
         "hunting",
-        "profession"
+        "profession",
+        "social_role"
       ],
       "features": [],
       "relations": {}
