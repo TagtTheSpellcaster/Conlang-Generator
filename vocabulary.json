@@ -1357,7 +1357,11 @@
       "relations": {},
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tropical_forest",
+        "tropical_grassland",
+        "coastal"
+      ],
       "temporal_setting": []
     },
     {
@@ -4802,7 +4806,11 @@
         "europe"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "alpine",
+        "taiga",
+        "temperate_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -4954,7 +4962,9 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -4998,7 +5008,11 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tropical_grassland",
+        "wetland",
+        "riverine"
+      ],
       "temporal_setting": []
     },
     {
@@ -5087,7 +5101,10 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -5176,7 +5193,10 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "alpine",
+        "temperate_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -5198,7 +5218,10 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "savanna",
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -5264,7 +5287,10 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "wetland",
+        "freshwater"
+      ],
       "temporal_setting": []
     },
     {
@@ -5286,7 +5312,10 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "savanna",
+        "tropical_grassland"
+      ],
       "temporal_setting": []
     },
     {
@@ -5352,7 +5381,9 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -5375,7 +5406,11 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "alpine",
+        "temperate_forest",
+        "temperate_grassland"
+      ],
       "temporal_setting": []
     },
     {
@@ -5397,7 +5432,11 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "savanna",
+        "wetland",
+        "riverine"
+      ],
       "temporal_setting": []
     },
     {
@@ -5446,7 +5485,10 @@
         "australia"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "semi_arid",
+        "savanna"
+      ],
       "temporal_setting": []
     },
     {
@@ -5468,7 +5510,9 @@
         "australia"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "temperate_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -5491,7 +5535,10 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "savanna",
+        "tropical_grassland"
+      ],
       "temporal_setting": []
     },
     {
@@ -5535,7 +5582,9 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -5602,7 +5651,10 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "marine",
+        "coral_reef"
+      ],
       "temporal_setting": []
     },
     {
@@ -5625,7 +5677,10 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "taiga",
+        "temperate_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -5647,7 +5702,9 @@
         "asia"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "temperate_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -5779,7 +5836,10 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "savanna",
+        "tropical_grassland"
+      ],
       "temporal_setting": []
     },
     {
@@ -5823,7 +5883,11 @@
         "europe"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "riverine",
+        "freshwater",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -5844,7 +5908,10 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "desert",
+        "semi_arid"
+      ],
       "temporal_setting": []
     },
     {
@@ -5866,7 +5933,11 @@
         "arctic"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "arctic",
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -5890,7 +5961,10 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -6000,7 +6074,10 @@
         "asia"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "temperate_forest",
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -6022,7 +6099,10 @@
         "europe"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "riverine",
+        "freshwater"
+      ],
       "temporal_setting": []
     },
     {
@@ -6088,7 +6168,9 @@
         "world"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -6111,7 +6193,11 @@
         "europe"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tundra",
+        "taiga",
+        "temperate_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -6156,7 +6242,10 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "savanna",
+        "tropical_grassland"
+      ],
       "temporal_setting": []
     },
     {
@@ -6851,7 +6940,10 @@
         "africa"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "desert",
+        "semi_arid"
+      ],
       "temporal_setting": []
     },
     {
@@ -6873,7 +6965,10 @@
         "asia"
       ],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "savanna",
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -15741,7 +15836,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16140,7 +16238,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "desert",
+        "semi_arid"
+      ],
       "temporal_setting": []
     },
     {
@@ -16225,7 +16326,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "cave",
+        "subterranean"
+      ],
       "temporal_setting": [
         "prehistoric"
       ]
@@ -16278,7 +16382,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "desert"
+      ],
       "temporal_setting": []
     },
     {
@@ -16295,7 +16401,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "desert",
+        "semi_arid"
+      ],
       "temporal_setting": []
     },
     {
@@ -16346,7 +16455,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "wetland"
+      ],
       "temporal_setting": []
     },
     {
@@ -16363,7 +16474,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "wetland"
+      ],
       "temporal_setting": []
     },
     {
@@ -16397,7 +16510,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal"
+      ],
       "temporal_setting": []
     },
     {
@@ -16414,7 +16529,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal"
+      ],
       "temporal_setting": []
     },
     {
@@ -16431,7 +16548,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal"
+      ],
       "temporal_setting": []
     },
     {
@@ -16533,7 +16652,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "riverine",
+        "freshwater"
+      ],
       "temporal_setting": []
     },
     {
@@ -16567,7 +16689,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "riverine",
+        "freshwater"
+      ],
       "temporal_setting": []
     },
     {
@@ -16584,7 +16709,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "riverine",
+        "freshwater"
+      ],
       "temporal_setting": []
     },
     {
@@ -16601,7 +16729,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "wetland",
+        "freshwater"
+      ],
       "temporal_setting": []
     },
     {
@@ -16618,7 +16749,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "freshwater"
+      ],
       "temporal_setting": []
     },
     {
@@ -16669,7 +16802,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16686,7 +16821,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16754,7 +16891,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "marine",
+        "coral_reef"
+      ],
       "temporal_setting": []
     },
     {
@@ -16771,7 +16911,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "marine",
+        "coral_reef"
+      ],
       "temporal_setting": []
     },
     {
@@ -16805,7 +16948,11 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "wetland",
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16822,7 +16969,11 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "wetland",
+        "riverine",
+        "coastal"
+      ],
       "temporal_setting": []
     },
     {
@@ -16839,7 +16990,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16856,7 +17010,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16873,7 +17030,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "riverine",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16890,7 +17050,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "arctic",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
@@ -16907,7 +17070,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "arctic",
+        "alpine"
+      ],
       "temporal_setting": []
     },
     {
@@ -17383,7 +17549,12 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tundra",
+        "taiga",
+        "temperate_forest",
+        "wetland"
+      ],
       "temporal_setting": []
     },
     {
@@ -17400,7 +17571,11 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "temperate_forest",
+        "tropical_forest",
+        "wetland"
+      ],
       "temporal_setting": []
     },
     {
@@ -17417,7 +17592,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "temperate_forest",
+        "mediterranean"
+      ],
       "temporal_setting": []
     },
     {
@@ -17638,7 +17816,12 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "arctic",
+        "alpine",
+        "tundra",
+        "taiga"
+      ],
       "temporal_setting": []
     },
     {
@@ -17689,7 +17872,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "temperate_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -17723,7 +17908,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -17740,7 +17927,9 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "tropical_forest"
+      ],
       "temporal_setting": []
     },
     {
@@ -18624,7 +18813,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "temperate_grassland",
+        "semi_arid"
+      ],
       "temporal_setting": []
     },
     {
@@ -18658,7 +18850,10 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "taiga",
+        "temperate_grassland"
+      ],
       "temporal_setting": []
     },
     {
@@ -19151,7 +19346,11 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [],
+      "biome": [
+        "wetland",
+        "coastal",
+        "marine"
+      ],
       "temporal_setting": []
     },
     {
