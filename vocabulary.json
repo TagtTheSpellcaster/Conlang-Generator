@@ -1357,11 +1357,7 @@
       "relations": {},
       "region": [],
       "culture": [],
-      "biome": [
-        "tropical_forest",
-        "tropical_grassland",
-        "coastal"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -3527,7 +3523,10 @@
         ]
       },
       "region": [],
-      "culture": [],
+      "culture": [
+        "warrior",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -4806,11 +4805,7 @@
         "europe"
       ],
       "culture": [],
-      "biome": [
-        "alpine",
-        "taiga",
-        "temperate_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -4962,9 +4957,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5008,11 +5001,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "tropical_grassland",
-        "wetland",
-        "riverine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5101,10 +5090,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5193,10 +5179,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "alpine",
-        "temperate_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5218,10 +5201,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "savanna",
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5287,10 +5267,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "wetland",
-        "freshwater"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5312,10 +5289,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "savanna",
-        "tropical_grassland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5381,9 +5355,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5406,11 +5378,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "alpine",
-        "temperate_forest",
-        "temperate_grassland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5432,11 +5400,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "savanna",
-        "wetland",
-        "riverine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5485,10 +5449,7 @@
         "australia"
       ],
       "culture": [],
-      "biome": [
-        "semi_arid",
-        "savanna"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5510,9 +5471,7 @@
         "australia"
       ],
       "culture": [],
-      "biome": [
-        "temperate_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5535,10 +5494,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "savanna",
-        "tropical_grassland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5582,9 +5538,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5651,10 +5605,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "marine",
-        "coral_reef"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5677,10 +5628,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "taiga",
-        "temperate_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5702,9 +5650,7 @@
         "asia"
       ],
       "culture": [],
-      "biome": [
-        "temperate_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5836,10 +5782,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "savanna",
-        "tropical_grassland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5883,11 +5826,7 @@
         "europe"
       ],
       "culture": [],
-      "biome": [
-        "riverine",
-        "freshwater",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5908,10 +5847,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "desert",
-        "semi_arid"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5933,11 +5869,7 @@
         "arctic"
       ],
       "culture": [],
-      "biome": [
-        "arctic",
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -5961,10 +5893,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -6074,10 +6003,7 @@
         "asia"
       ],
       "culture": [],
-      "biome": [
-        "temperate_forest",
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -6099,10 +6025,7 @@
         "europe"
       ],
       "culture": [],
-      "biome": [
-        "riverine",
-        "freshwater"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -6168,9 +6091,7 @@
         "world"
       ],
       "culture": [],
-      "biome": [
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -6193,11 +6114,7 @@
         "europe"
       ],
       "culture": [],
-      "biome": [
-        "tundra",
-        "taiga",
-        "temperate_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -6242,10 +6159,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "savanna",
-        "tropical_grassland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -6940,10 +6854,7 @@
         "africa"
       ],
       "culture": [],
-      "biome": [
-        "desert",
-        "semi_arid"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -6965,10 +6876,7 @@
         "asia"
       ],
       "culture": [],
-      "biome": [
-        "savanna",
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -7170,7 +7078,9 @@
       "region": [
         "world"
       ],
-      "culture": [],
+      "culture": [
+        "maritime"
+      ],
       "biome": [],
       "temporal_setting": [
         "prehistoric",
@@ -7242,7 +7152,10 @@
       "region": [
         "world"
       ],
-      "culture": [],
+      "culture": [
+        "maritime",
+        "mercantile"
+      ],
       "biome": [],
       "temporal_setting": [
         "ancient",
@@ -7414,7 +7327,10 @@
       "region": [
         "world"
       ],
-      "culture": [],
+      "culture": [
+        "industrial",
+        "urban"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -7507,7 +7423,9 @@
       "region": [
         "world"
       ],
-      "culture": [],
+      "culture": [
+        "industrial"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -7582,7 +7500,10 @@
       "region": [
         "world"
       ],
-      "culture": [],
+      "culture": [
+        "urban",
+        "industrial"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -8004,7 +7925,10 @@
       "region": [
         "fantasy"
       ],
-      "culture": [],
+      "culture": [
+        "spacefaring",
+        "technocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "futuristic",
@@ -8028,7 +7952,10 @@
       "region": [
         "fantasy"
       ],
-      "culture": [],
+      "culture": [
+        "spacefaring",
+        "technocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "futuristic",
@@ -15836,10 +15763,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16238,10 +16162,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "desert",
-        "semi_arid"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16326,10 +16247,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "cave",
-        "subterranean"
-      ],
+      "biome": [],
       "temporal_setting": [
         "prehistoric"
       ]
@@ -16382,9 +16300,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "desert"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16401,10 +16317,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "desert",
-        "semi_arid"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16455,9 +16368,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "wetland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16474,9 +16385,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "wetland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16510,9 +16419,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "coastal"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16529,9 +16436,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "coastal"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16548,9 +16453,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "coastal"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16652,10 +16555,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "riverine",
-        "freshwater"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16689,10 +16589,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "riverine",
-        "freshwater"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16709,10 +16606,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "riverine",
-        "freshwater"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16729,10 +16623,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "wetland",
-        "freshwater"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16749,9 +16640,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "freshwater"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16802,9 +16691,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16821,9 +16708,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16891,10 +16776,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "marine",
-        "coral_reef"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16911,10 +16793,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "marine",
-        "coral_reef"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16948,11 +16827,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "wetland",
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16969,11 +16844,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "wetland",
-        "riverine",
-        "coastal"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -16990,10 +16861,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17010,10 +16878,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17030,10 +16895,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "riverine",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17050,10 +16912,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "arctic",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17070,10 +16929,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "arctic",
-        "alpine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17549,12 +17405,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "tundra",
-        "taiga",
-        "temperate_forest",
-        "wetland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17571,11 +17422,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "temperate_forest",
-        "tropical_forest",
-        "wetland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17592,10 +17439,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "temperate_forest",
-        "mediterranean"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17816,12 +17660,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "arctic",
-        "alpine",
-        "tundra",
-        "taiga"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17872,9 +17711,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "temperate_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17908,9 +17745,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -17927,9 +17762,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "tropical_forest"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -18813,10 +18646,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "temperate_grassland",
-        "semi_arid"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -18850,10 +18680,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "taiga",
-        "temperate_grassland"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -19346,11 +19173,7 @@
       ],
       "region": [],
       "culture": [],
-      "biome": [
-        "wetland",
-        "coastal",
-        "marine"
-      ],
+      "biome": [],
       "temporal_setting": []
     },
     {
@@ -21051,7 +20874,10 @@
         "food"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "agrarian",
+        "rural"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -23708,7 +23534,11 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "bureaucratic",
+        "corporate",
+        "urban"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -24704,7 +24534,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "urban",
+        "industrial"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -24789,7 +24622,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "warrior",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -24944,7 +24780,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "mercantile",
+        "nomadic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -25018,7 +24857,11 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "urban",
+        "industrial",
+        "corporate"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -25088,7 +24931,11 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "agrarian",
+        "rural",
+        "communal"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -25105,7 +24952,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "urban",
+        "mercantile"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -25122,7 +24972,9 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "urban"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -25192,7 +25044,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "urban",
+        "communal"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -25228,7 +25083,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "colonial",
+        "imperial"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -25296,7 +25154,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "monastic",
+        "religious"
+      ],
       "biome": [],
       "temporal_setting": [
         "medieval"
@@ -25353,7 +25214,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "mercantile",
+        "urban"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -25510,7 +25374,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "industrial",
+        "urban"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -25586,7 +25453,10 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "animist"
+      ],
       "biome": [],
       "temporal_setting": [
         "medieval"
@@ -26835,7 +26705,11 @@
         "settlement"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "imperial",
+        "bureaucratic",
+        "colonial"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -29289,7 +29163,9 @@
         "technology"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "technocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -29346,7 +29222,10 @@
         "technology"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "post_industrial",
+        "technocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern",
@@ -29423,7 +29302,11 @@
         "technology"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "technocratic",
+        "corporate",
+        "posthuman"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern",
@@ -29838,7 +29721,10 @@
         "technology"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "scholarly",
+        "technocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -29971,7 +29857,10 @@
         "technology"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "technocratic",
+        "posthuman"
+      ],
       "biome": [],
       "temporal_setting": [
         "futuristic"
@@ -29990,7 +29879,10 @@
         "technology"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "technocratic",
+        "posthuman"
+      ],
       "biome": [],
       "temporal_setting": [
         "futuristic",
@@ -30165,7 +30057,10 @@
         "technology"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "spacefaring",
+        "technocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "futuristic",
@@ -32199,7 +32094,10 @@
         "clothing"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "warrior",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": [
         "prehistoric",
@@ -37224,7 +37122,9 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "tribal"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -37241,7 +37141,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "tribal",
+        "communal"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -37515,7 +37418,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "tribal",
+        "communal"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -37821,7 +37727,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "aristocratic",
+        "feudal"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -38110,7 +38019,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "monarchical",
+        "aristocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "medieval"
@@ -38129,7 +38041,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "imperial",
+        "bureaucratic",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": [
         "ancient",
@@ -38236,7 +38152,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "tribal",
+        "communal",
+        "bureaucratic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -38327,7 +38247,9 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "bureaucratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -38416,7 +38338,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "colonial",
+        "imperial"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -38450,7 +38375,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "imperial",
+        "monarchical",
+        "aristocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "ancient",
@@ -38472,7 +38401,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "imperial",
+        "monarchical",
+        "aristocratic"
+      ],
       "biome": [],
       "temporal_setting": [
         "ancient",
@@ -38596,7 +38529,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "imperial",
+        "bureaucratic",
+        "colonial"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -38683,7 +38620,9 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "bureaucratic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -39380,7 +39319,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "mercantile",
+        "maritime"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -39754,7 +39696,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "maritime",
+        "rural"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -39771,7 +39716,9 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "maritime"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -39805,7 +39752,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "scholarly",
+        "bureaucratic",
+        "religious"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -39822,7 +39773,9 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "scholarly"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -39839,7 +39792,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "technocratic",
+        "industrial"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -39941,7 +39897,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "corporate",
+        "bureaucratic",
+        "urban"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -39960,7 +39920,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "scholarly",
+        "urban"
+      ],
       "biome": [],
       "temporal_setting": [
         "modern"
@@ -40102,7 +40065,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "theocratic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40119,7 +40085,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "theocratic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40136,7 +40105,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "theocratic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40153,7 +40125,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "animist",
+        "shamanic",
+        "religious"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40187,7 +40163,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "theocratic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40204,7 +40183,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "monastic",
+        "religious"
+      ],
       "biome": [],
       "temporal_setting": [
         "medieval"
@@ -40223,7 +40205,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "monastic",
+        "religious"
+      ],
       "biome": [],
       "temporal_setting": [
         "medieval"
@@ -40259,7 +40244,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "animist"
+      ],
       "biome": [],
       "temporal_setting": [
         "medieval"
@@ -40278,7 +40266,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "shamanic",
+        "animist"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40346,7 +40338,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "shamanic",
+        "theocratic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40363,7 +40359,9 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40380,7 +40378,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "religious",
+        "animist"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40584,7 +40585,9 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "scholarly"
+      ],
       "biome": [],
       "temporal_setting": [
         "ancient",
@@ -40695,7 +40698,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "maritime",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40712,7 +40718,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "warrior",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40903,7 +40912,10 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "warrior",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": []
     },
@@ -40920,7 +40932,11 @@
         "society"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "warrior",
+        "militaristic",
+        "feudal"
+      ],
       "biome": [],
       "temporal_setting": [
         "medieval"
@@ -47049,7 +47065,10 @@
         "verb"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "warrior",
+        "militaristic"
+      ],
       "biome": [],
       "temporal_setting": [
         "prehistoric",
@@ -47289,7 +47308,9 @@
         "universal"
       ],
       "region": [],
-      "culture": [],
+      "culture": [
+        "mercantile"
+      ],
       "biome": [],
       "temporal_setting": []
     },
