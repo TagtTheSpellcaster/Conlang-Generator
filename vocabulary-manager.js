@@ -1,85 +1,82 @@
 let vocabulary = [];
 let filteredVocabulary = [];
+let pendingAppendEntries = null;
+let editingId = null;
 
 const STORAGE_KEY = "conlang_vocabulary";
 
-// Canonical vocabulary fields. `locale` is optional metadata retained for the
-// manager UI and for backwards compatibility with entries that already have it.
-const CANONICAL_PROPERTIES = [
+const ARRAY_FIELDS = [
+    "region",
+    "culture",
+    "biome",
+    "temporal_setting",
+    "tags",
+    "features"
+];
+
+const REQUIRED_FIELDS = [
     "id",
     "concept",
     "category",
     "word_type",
     "semantic_group",
     "scope",
-    "tags",
-    "features",
+    ...ARRAY_FIELDS,
     "relations"
 ];
 
-const UI_PROPERTIES = ["locale"];
-
-const FILTER_PROPERTIES = [
+const FILTER_FIELDS = [
     "category",
     "word_type",
     "semantic_group",
     "scope",
-    "locale",
+    "region",
+    "culture",
+    "biome",
+    "temporal_setting",
     "tags",
     "features"
 ];
 
-const SORT_PROPERTIES = [
+const SORT_FIELDS = [
     "id",
     "concept",
     "category",
     "word_type",
     "semantic_group",
     "scope",
-    "locale",
+    "region",
+    "culture",
+    "biome",
+    "temporal_setting",
     "tags",
     "features"
 ];
 
-let pendingAppendEntries = null;
-let editingEntryId = null;
-
-// ============================================================
-// CANONICAL DATABASE VALIDATION
-// ============================================================
-
 function assertCanonicalVocabulary(data, sourceName = "vocabulary.json") {
     if (!data || Array.isArray(data) || !Array.isArray(data.vocabulary)) {
-        throw new Error(
-            `${sourceName}: unsupported JSON structure. Expected { "vocabulary": [...] }.`
-        );
+        throw new Error(`${sourceName}: unsupported JSON structure. Expected { "vocabulary": [...] }.`);
     }
-
     validateEntries(data.vocabulary, sourceName);
     return data.vocabulary;
 }
 
 function validateEntries(entries, sourceName = "vocabulary") {
-    if (!Array.isArray(entries)) {
-        throw new Error(`${sourceName}: "vocabulary" must be an array.`);
-    }
+    if (!Array.isArray(entries)) throw new Error(`${sourceName}: "vocabulary" must be an array.`);
 
     const ids = new Set();
     const errors = [];
 
     entries.forEach((entry, index) => {
         const label = `${sourceName}, entry ${index + 1}`;
-
         if (!entry || typeof entry !== "object" || Array.isArray(entry)) {
             errors.push(`${label}: entry must be an object.`);
             return;
         }
 
-        for (const field of CANONICAL_PROPERTIES) {
-            if (!(field in entry)) {
-                errors.push(`${label}: missing "${field}".`);
-            }
-        }
+        REQUIRED_FIELDS.forEach(field => {
+            if (!(field in entry)) errors.push(`${label}: missing "${field}".`);
+        });
 
         if (typeof entry.id !== "string" || !entry.id.trim()) {
             errors.push(`${label}: "id" must be a non-empty string.`);
@@ -89,57 +86,34 @@ function validateEntries(entries, sourceName = "vocabulary") {
             ids.add(entry.id);
         }
 
-        if (typeof entry.concept !== "string" || !entry.concept.trim()) {
-            errors.push(`${label}: "concept" must be a non-empty string.`);
-        }
+        ["concept", "category", "word_type", "semantic_group"].forEach(field => {
+            if (typeof entry[field] !== "string" || !entry[field].trim()) {
+                errors.push(`${label}: "${field}" must be a non-empty string.`);
+            }
+        });
 
-        if (typeof entry.category !== "string" || !entry.category.trim()) {
-            errors.push(`${label}: "category" must be a non-empty string.`);
-        }
-
-        if (typeof entry.word_type !== "string" || !entry.word_type.trim()) {
-            errors.push(`${label}: "word_type" must be a non-empty string.`);
-        }
-
-        if (
-            entry.word_type === "verb" &&
-            !entry.concept.trim().toLowerCase().startsWith("to ")
-        ) {
+        if (entry.word_type === "verb" && typeof entry.concept === "string" && !entry.concept.trim().toLowerCase().startsWith("to ")) {
             errors.push(`${label}: verb concept must begin with "to ".`);
-        }
-
-        if (typeof entry.semantic_group !== "string" || !entry.semantic_group.trim()) {
-            errors.push(`${label}: "semantic_group" must be a non-empty string.`);
         }
 
         if (entry.scope !== "universal" && entry.scope !== "domain") {
             errors.push(`${label}: "scope" must be "universal" or "domain".`);
         }
 
-        if (!Array.isArray(entry.tags)) {
-            errors.push(`${label}: "tags" must be an array.`);
-        }
+        ARRAY_FIELDS.forEach(field => {
+            if (!Array.isArray(entry[field])) errors.push(`${label}: "${field}" must be an array.`);
+        });
 
-        if (!Array.isArray(entry.features)) {
-            errors.push(`${label}: "features" must be an array.`);
-        }
-
-        if (
-            !entry.relations ||
-            typeof entry.relations !== "object" ||
-            Array.isArray(entry.relations)
-        ) {
+        if (!entry.relations || typeof entry.relations !== "object" || Array.isArray(entry.relations)) {
             errors.push(`${label}: "relations" must be an object.`);
         }
 
-        if ("locale" in entry && entry.locale !== undefined && entry.locale !== null && typeof entry.locale !== "string") {
-            errors.push(`${label}: optional "locale" must be a string when present.`);
+        if ("locale" in entry || "type" in entry) {
+            errors.push(`${label}: legacy field detected (locale/type). Use region/culture/biome/temporal_setting instead.`);
         }
     });
 
-    if (errors.length) {
-        throw new Error(errors.join("\n"));
-    }
+    if (errors.length) throw new Error(errors.join("\n"));
 }
 
 function validateRelationTargets(entries, sourceName = "vocabulary") {
@@ -147,75 +121,50 @@ function validateRelationTargets(entries, sourceName = "vocabulary") {
     const errors = [];
 
     entries.forEach(entry => {
-        for (const [relation, rawValue] of Object.entries(entry.relations || {})) {
+        Object.entries(entry.relations || {}).forEach(([relation, rawValue]) => {
+            if (relation === "grammatical_roles") return;
             const values = Array.isArray(rawValue) ? rawValue : [rawValue];
-
-            if (relation === "grammatical_roles") continue;
-
-            for (const target of values) {
+            values.forEach(target => {
                 if (typeof target !== "string" || !ids.has(target)) {
-                    errors.push(
-                        `${sourceName}: ${entry.id}.${relation} references unknown ID "${target}".`
-                    );
+                    errors.push(`${sourceName}: ${entry.id}.${relation} references unknown ID "${target}".`);
+                } else if (target === entry.id) {
+                    errors.push(`${sourceName}: ${entry.id}.${relation} references itself.`);
                 }
-
-                if (target === entry.id) {
-                    errors.push(
-                        `${sourceName}: ${entry.id}.${relation} references itself.`
-                    );
-                }
-            }
-        }
+            });
+        });
     });
 
-    if (errors.length) {
-        throw new Error(errors.join("\n"));
-    }
+    if (errors.length) throw new Error(errors.join("\n"));
 }
 
 function cloneEntry(entry) {
-    const cloned = {
+    return {
         id: entry.id,
         concept: entry.concept,
         category: entry.category,
         word_type: entry.word_type,
         semantic_group: entry.semantic_group,
         scope: entry.scope,
+        region: [...entry.region],
+        culture: [...entry.culture],
+        biome: [...entry.biome],
+        temporal_setting: [...entry.temporal_setting],
         tags: [...entry.tags],
         features: [...entry.features],
         relations: JSON.parse(JSON.stringify(entry.relations))
     };
-
-    // Preserve locale when it exists, but do not add an empty locale property
-    // to canonical entries that do not define one.
-    if (Object.prototype.hasOwnProperty.call(entry, "locale")) {
-        cloned.locale = entry.locale;
-    }
-
-    return cloned;
 }
 
 function serializeVocabulary() {
-    return {
-        vocabulary: vocabulary.map(cloneEntry)
-    };
+    return { vocabulary: vocabulary.map(cloneEntry) };
 }
-
-// ============================================================
-// LOAD / SAVE
-// ============================================================
 
 async function loadVocabularyFromJSON() {
     const response = await fetch(`vocabulary.json?cacheBust=${Date.now()}`);
-
-    if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
     const data = await response.json();
     const entries = assertCanonicalVocabulary(data, "vocabulary.json");
     validateRelationTargets(entries, "vocabulary.json");
-
     vocabulary = entries.map(cloneEntry);
 }
 
@@ -249,20 +198,11 @@ async function loadVocabulary() {
 }
 
 function saveVocabulary() {
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(serializeVocabulary(), null, 2)
-    );
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeVocabulary(), null, 2));
 }
 
 async function reloadVocabularyFromJSON() {
-    if (!confirm(
-        "Reload vocabulary.json from the server?\n\n" +
-        "All local changes stored in this browser will be discarded."
-    )) {
-        return;
-    }
-
+    if (!confirm("Reload vocabulary.json from the server?\n\nAll local changes stored in this browser will be discarded.")) return;
     try {
         localStorage.removeItem(STORAGE_KEY);
         await loadVocabularyFromJSON();
@@ -274,21 +214,11 @@ async function reloadVocabularyFromJSON() {
     }
 }
 
-function resetLocalVocabulary() {
-    if (!confirm(
-        "Reset local changes and reload vocabulary.json?\n\n" +
-        "All changes stored in this browser will be discarded."
-    )) {
-        return;
-    }
-
+function resetVocabulary() {
+    if (!confirm("Clear local changes and reload vocabulary.json?")) return;
     localStorage.removeItem(STORAGE_KEY);
     loadVocabulary();
 }
-
-// ============================================================
-// APPEND JSON
-// ============================================================
 
 function openAppendPicker() {
     document.getElementById("appendFileInput").click();
@@ -297,29 +227,16 @@ function openAppendPicker() {
 async function handleAppendFile(event) {
     const file = event.target.files[0];
     event.target.value = "";
-
     if (!file) return;
 
     try {
         const parsed = JSON.parse(await file.text());
         const imported = assertCanonicalVocabulary(parsed, file.name).map(cloneEntry);
-
         const existingIds = new Set(vocabulary.map(entry => entry.id));
-        const duplicateIds = imported
-            .filter(entry => existingIds.has(entry.id))
-            .map(entry => entry.id);
+        const duplicateIds = [...new Set(imported.filter(entry => existingIds.has(entry.id)).map(entry => entry.id))];
         const newEntries = imported.filter(entry => !existingIds.has(entry.id));
-        const combined = [...vocabulary, ...newEntries];
-
-        validateRelationTargets(combined, file.name);
-
-        pendingAppendEntries = {
-            fileName: file.name,
-            imported,
-            newEntries,
-            duplicateIds: [...new Set(duplicateIds)]
-        };
-
+        validateRelationTargets([...vocabulary, ...newEntries], file.name);
+        pendingAppendEntries = { fileName: file.name, imported, newEntries, duplicateIds };
         showAppendModal();
     } catch (error) {
         alert("The selected file could not be appended.\n\n" + error.message);
@@ -327,39 +244,22 @@ async function handleAppendFile(event) {
 }
 
 function showAppendModal() {
-    const modal = document.getElementById("appendModal");
-    const summary = document.getElementById("appendSummary");
-    const errors = document.getElementById("appendErrors");
-    const confirmButton = document.getElementById("confirmAppend");
-
     const { fileName, imported, newEntries, duplicateIds } = pendingAppendEntries;
-
     document.getElementById("appendFilename").textContent = `File: ${fileName}`;
-    summary.textContent =
-        `Entries found: ${imported.length}\n` +
-        `New entries: ${newEntries.length}\n` +
-        `Existing IDs: ${duplicateIds.length}`;
+    document.getElementById("appendSummary").textContent = `Entries found: ${imported.length}\nNew entries: ${newEntries.length}\nExisting IDs: ${duplicateIds.length}`;
 
+    const errors = document.getElementById("appendErrors");
     errors.hidden = duplicateIds.length === 0;
-    errors.textContent = duplicateIds.length
-        ? "The following IDs already exist and will not be appended:\n\n" + duplicateIds.join("\n")
-        : "";
-
-    confirmButton.disabled = newEntries.length === 0;
-    modal.hidden = false;
+    errors.textContent = duplicateIds.length ? "The following IDs already exist and will not be appended:\n\n" + duplicateIds.join("\n") : "";
+    document.getElementById("confirmAppend").disabled = newEntries.length === 0;
+    document.getElementById("appendModal").hidden = false;
 }
 
 function confirmAppend() {
     if (!pendingAppendEntries) return;
-
-    const candidate = [
-        ...vocabulary,
-        ...pendingAppendEntries.newEntries.map(cloneEntry)
-    ];
-
+    const candidate = [...vocabulary, ...pendingAppendEntries.newEntries.map(cloneEntry)];
     validateEntries(candidate, "Appended vocabulary");
     validateRelationTargets(candidate, "Appended vocabulary");
-
     vocabulary = candidate;
     saveVocabulary();
     setDatabaseStatus(`${pendingAppendEntries.newEntries.length} entries appended locally`);
@@ -368,16 +268,10 @@ function confirmAppend() {
     refreshInterface();
 }
 
-// ============================================================
-// EXPORT
-// ============================================================
-
 function exportVocabulary() {
-    const json = JSON.stringify(serializeVocabulary(), null, 2);
-    const blob = new Blob([json], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(serializeVocabulary(), null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-
     link.href = url;
     link.download = "vocabulary.json";
     document.body.appendChild(link);
@@ -386,61 +280,47 @@ function exportVocabulary() {
     URL.revokeObjectURL(url);
 }
 
-// ============================================================
-// FILTERS / SORTING
-// ============================================================
-
-function getAllAttributes() {
-    return [...CANONICAL_PROPERTIES, ...UI_PROPERTIES];
-}
-
 function valueToArray(value) {
     if (Array.isArray(value)) return value.map(String);
-    if (value !== undefined && value !== null && typeof value !== "object") {
-        return [String(value)];
-    }
+    if (value !== undefined && value !== null && typeof value !== "object") return [String(value)];
     return [];
 }
 
 function getAttributeValue(entry, attribute) {
     const value = entry[attribute];
-
     if (value === undefined || value === null) return "";
     if (Array.isArray(value)) return value.join(", ");
     if (typeof value === "object") return JSON.stringify(value);
     return String(value);
 }
 
+function formatAttributeName(attribute) {
+    return attribute.replace(/_/g, " ").replace(/\b\w/g, char => char.toUpperCase());
+}
+
 function populateFilters() {
     const container = document.getElementById("attributeFilters");
     container.innerHTML = "";
 
-    FILTER_PROPERTIES.forEach(attribute => {
+    FILTER_FIELDS.forEach(attribute => {
         const values = new Set();
-
-        vocabulary.forEach(entry => {
-            valueToArray(entry[attribute]).forEach(value => {
-                if (value !== "") values.add(value);
-            });
-        });
+        vocabulary.forEach(entry => valueToArray(entry[attribute]).forEach(value => { if (value) values.add(value); }));
 
         const wrapper = document.createElement("div");
         wrapper.className = "filter-group";
-
         const label = document.createElement("label");
-        label.textContent = attribute;
+        label.textContent = formatAttributeName(attribute);
         label.htmlFor = `filter-${attribute}`;
 
         const select = document.createElement("select");
         select.id = `filter-${attribute}`;
         select.dataset.attribute = attribute;
+        const all = document.createElement("option");
+        all.value = "";
+        all.textContent = `All ${formatAttributeName(attribute)}`;
+        select.appendChild(all);
 
-        const allOption = document.createElement("option");
-        allOption.value = "";
-        allOption.textContent = `All ${attribute}`;
-        select.appendChild(allOption);
-
-        [...values].sort((a, b) => a.localeCompare(b)).forEach(value => {
+        [...values].sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" })).forEach(value => {
             const option = document.createElement("option");
             option.value = value;
             option.textContent = value;
@@ -456,21 +336,22 @@ function populateFilters() {
 function populateSortOptions() {
     const select = document.getElementById("sortAttribute");
     select.innerHTML = "";
+    const none = document.createElement("option");
+    none.value = "";
+    none.textContent = "Default order";
+    select.appendChild(none);
 
-    SORT_PROPERTIES.forEach(attribute => {
+    SORT_FIELDS.forEach(attribute => {
         const option = document.createElement("option");
         option.value = attribute;
-        option.textContent = attribute;
+        option.textContent = formatAttributeName(attribute);
         select.appendChild(option);
     });
 }
 
 function matchesSearch(entry, query) {
     if (!query) return true;
-
-    return [...CANONICAL_PROPERTIES, ...UI_PROPERTIES].some(attribute => {
-        return getAttributeValue(entry, attribute).toLowerCase().includes(query);
-    });
+    return [...SORT_FIELDS, "relations"].some(attribute => getAttributeValue(entry, attribute).toLowerCase().includes(query));
 }
 
 function applyFiltersAndSort() {
@@ -478,30 +359,21 @@ function applyFiltersAndSort() {
 
     filteredVocabulary = vocabulary.filter(entry => {
         if (!matchesSearch(entry, query)) return false;
-
-        return FILTER_PROPERTIES.every(attribute => {
+        return FILTER_FIELDS.every(attribute => {
             const select = document.getElementById(`filter-${attribute}`);
             if (!select || !select.value) return true;
             return valueToArray(entry[attribute]).includes(select.value);
         });
     });
 
-    const attribute = document.getElementById("sortAttribute").value || "id";
-    const direction = document.getElementById("sortDirection").value || "asc";
-    const factor = direction === "desc" ? -1 : 1;
-
-    filteredVocabulary.sort((a, b) => {
-        const av = getAttributeValue(a, attribute).toLowerCase();
-        const bv = getAttributeValue(b, attribute).toLowerCase();
-        return av.localeCompare(bv, undefined, { numeric: true }) * factor;
-    });
-
+    const attribute = document.getElementById("sortAttribute").value;
+    const direction = document.getElementById("sortDirection").value;
+    if (attribute) {
+        const factor = direction === "desc" ? -1 : 1;
+        filteredVocabulary.sort((a, b) => getAttributeValue(a, attribute).localeCompare(getAttributeValue(b, attribute), undefined, { numeric: true, sensitivity: "base" }) * factor);
+    }
     renderVocabulary();
 }
-
-// ============================================================
-// TABLE RENDERING
-// ============================================================
 
 function renderVocabulary() {
     const body = document.getElementById("vocabularyBody");
@@ -509,7 +381,6 @@ function renderVocabulary() {
 
     filteredVocabulary.forEach((entry, index) => {
         const row = document.createElement("tr");
-
         const values = [
             index + 1,
             entry.id,
@@ -518,9 +389,12 @@ function renderVocabulary() {
             entry.word_type,
             entry.semantic_group,
             entry.scope,
-            entry.locale || "",
-            entry.tags.join(", "),
-            entry.features.join(", ")
+            getAttributeValue(entry, "region"),
+            getAttributeValue(entry, "culture"),
+            getAttributeValue(entry, "biome"),
+            getAttributeValue(entry, "temporal_setting"),
+            getAttributeValue(entry, "tags"),
+            getAttributeValue(entry, "features")
         ];
 
         values.forEach(value => {
@@ -531,131 +405,96 @@ function renderVocabulary() {
 
         const actions = document.createElement("td");
         actions.className = "row-actions";
-
-        const editButton = document.createElement("button");
-        editButton.textContent = "Edit";
-        editButton.addEventListener("click", () => openEditModal(entry.id));
-
-        const deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
-        deleteButton.addEventListener("click", () => deleteEntry(entry.id));
-
-        actions.append(editButton, deleteButton);
+        const edit = document.createElement("button");
+        edit.textContent = "Edit";
+        edit.addEventListener("click", () => editVocabularyEntry(entry.id));
+        const remove = document.createElement("button");
+        remove.textContent = "Delete";
+        remove.addEventListener("click", () => deleteVocabularyEntry(entry.id));
+        actions.append(edit, remove);
         row.appendChild(actions);
         body.appendChild(row);
     });
 
+    updateCounters();
+}
+
+function updateCounters() {
     document.getElementById("totalCount").textContent = vocabulary.length;
     document.getElementById("visibleCount").textContent = filteredVocabulary.length;
 }
 
-function refreshInterface() {
-    populateFilters();
-    populateSortOptions();
-    applyFiltersAndSort();
-}
+function openEntryModal(entry = null) {
+    editingId = entry ? entry.id : null;
+    document.getElementById("entryModalTitle").textContent = entry ? "Edit vocabulary entry" : "Add vocabulary entry";
 
-// ============================================================
-// ADD / EDIT / DELETE
-// ============================================================
+    const values = entry || {
+        id: "", concept: "", category: "", word_type: "noun", semantic_group: "", scope: "domain",
+        region: [], culture: [], biome: [], temporal_setting: [], tags: [], features: [], relations: {}
+    };
 
-function openAddModal() {
-    editingEntryId = null;
-    document.getElementById("entryModalTitle").textContent = "Add vocabulary entry";
-    document.getElementById("entryForm").reset();
-    document.getElementById("entryRelations").value = "{}";
+    document.getElementById("entryId").value = values.id || "";
+    document.getElementById("entryConcept").value = values.concept || "";
+    document.getElementById("entryCategory").value = values.category || "";
+    document.getElementById("entryWordType").value = values.word_type || "";
+    document.getElementById("entrySemanticGroup").value = values.semantic_group || "";
+    document.getElementById("entryScope").value = values.scope || "domain";
+    document.getElementById("entryRegion").value = (values.region || []).join(", ");
+    document.getElementById("entryCulture").value = (values.culture || []).join(", ");
+    document.getElementById("entryBiome").value = (values.biome || []).join(", ");
+    document.getElementById("entryTemporalSetting").value = (values.temporal_setting || []).join(", ");
+    document.getElementById("entryTags").value = (values.tags || []).join(", ");
+    document.getElementById("entryFeatures").value = (values.features || []).join(", ");
+    document.getElementById("entryRelations").value = JSON.stringify(values.relations || {}, null, 2);
     document.getElementById("entryFormError").hidden = true;
-    document.getElementById("entryFormError").textContent = "";
     document.getElementById("entryModal").hidden = false;
-}
-
-function openEditModal(id) {
-    const entry = vocabulary.find(item => item.id === id);
-    if (!entry) return;
-
-    editingEntryId = id;
-    document.getElementById("entryModalTitle").textContent = "Edit vocabulary entry";
-    document.getElementById("entryId").value = entry.id;
-    document.getElementById("entryConcept").value = entry.concept;
-    document.getElementById("entryCategory").value = entry.category;
-    document.getElementById("entryWordType").value = entry.word_type;
-    document.getElementById("entrySemanticGroup").value = entry.semantic_group;
-    document.getElementById("entryScope").value = entry.scope;
-    document.getElementById("entryLocale").value = entry.locale || "";
-    document.getElementById("entryTags").value = entry.tags.join(", ");
-    document.getElementById("entryFeatures").value = entry.features.join(", ");
-    document.getElementById("entryRelations").value = JSON.stringify(entry.relations, null, 2);
-    document.getElementById("entryFormError").hidden = true;
-    document.getElementById("entryFormError").textContent = "";
-    document.getElementById("entryModal").hidden = false;
-}
-
-function splitList(value) {
-    return value
-        .split(",")
-        .map(item => item.trim())
-        .filter(Boolean);
 }
 
 function readEntryForm() {
-    let relations;
+    const relationsText = document.getElementById("entryRelations").value.trim();
+    const relations = relationsText ? JSON.parse(relationsText) : {};
+    if (!relations || typeof relations !== "object" || Array.isArray(relations)) throw new Error("Relations must be a JSON object.");
+    const splitList = value => value.split(",").map(item => item.trim()).filter(Boolean);
 
-    try {
-        relations = JSON.parse(document.getElementById("entryRelations").value || "{}");
-    } catch (error) {
-        throw new Error(`Relations are not valid JSON: ${error.message}`);
-    }
-
-    const entry = {
+    return {
         id: document.getElementById("entryId").value.trim(),
         concept: document.getElementById("entryConcept").value.trim(),
         category: document.getElementById("entryCategory").value.trim(),
         word_type: document.getElementById("entryWordType").value.trim(),
         semantic_group: document.getElementById("entrySemanticGroup").value.trim(),
         scope: document.getElementById("entryScope").value.trim(),
+        region: splitList(document.getElementById("entryRegion").value),
+        culture: splitList(document.getElementById("entryCulture").value),
+        biome: splitList(document.getElementById("entryBiome").value),
+        temporal_setting: splitList(document.getElementById("entryTemporalSetting").value),
         tags: splitList(document.getElementById("entryTags").value),
         features: splitList(document.getElementById("entryFeatures").value),
         relations
     };
-
-    const locale = document.getElementById("entryLocale").value.trim();
-    if (locale) entry.locale = locale;
-
-    return entry;
 }
 
-function saveEntryFromForm(event) {
+function submitEntryForm(event) {
     event.preventDefault();
-
     const errorBox = document.getElementById("entryFormError");
-    errorBox.hidden = true;
-    errorBox.textContent = "";
 
     try {
         const entry = readEntryForm();
-        const candidate = editingEntryId
-            ? vocabulary.map(item => item.id === editingEntryId ? entry : item)
-            : [...vocabulary, entry];
+        const candidate = vocabulary.map(cloneEntry);
 
-        validateEntries(candidate, "Entry form");
-        validateRelationTargets(candidate, "Entry form");
-
-        if (editingEntryId && entry.id !== editingEntryId) {
-            for (const item of candidate) {
-                for (const [relation, rawValue] of Object.entries(item.relations || {})) {
-                    const values = Array.isArray(rawValue) ? rawValue : [rawValue];
-                    if (values.includes(editingEntryId)) {
-                        throw new Error(
-                            `Cannot change ID "${editingEntryId}" because it is referenced by ${item.id}.${relation}.`
-                        );
-                    }
-                }
-            }
+        if (editingId) {
+            const index = candidate.findIndex(item => item.id === editingId);
+            if (index === -1) throw new Error("Entry not found.");
+            if (entry.id !== editingId && candidate.some(item => item.id === entry.id)) throw new Error(`The ID "${entry.id}" already exists.`);
+            candidate[index] = entry;
+        } else {
+            if (candidate.some(item => item.id === entry.id)) throw new Error(`The ID "${entry.id}" already exists.`);
+            candidate.push(entry);
         }
 
-        vocabulary = candidate.map(cloneEntry);
+        validateEntries(candidate, "Vocabulary");
+        validateRelationTargets(candidate, "Vocabulary");
+        vocabulary = candidate;
         saveVocabulary();
-        setDatabaseStatus("Local working copy");
         closeModal("entryModal");
         refreshInterface();
     } catch (error) {
@@ -664,83 +503,61 @@ function saveEntryFromForm(event) {
     }
 }
 
-function deleteEntry(id) {
+function addVocabularyEntry() { openEntryModal(); }
+function editVocabularyEntry(id) {
+    const entry = vocabulary.find(item => item.id === id);
+    if (entry) openEntryModal(entry);
+}
+
+function deleteVocabularyEntry(id) {
     const entry = vocabulary.find(item => item.id === id);
     if (!entry) return;
 
-    const references = [];
+    const dependents = vocabulary.filter(item => Object.entries(item.relations || {}).some(([relation, rawValue]) => {
+        if (relation === "grammatical_roles") return false;
+        const values = Array.isArray(rawValue) ? rawValue : [rawValue];
+        return values.includes(id);
+    }));
 
-    vocabulary.forEach(item => {
-        for (const [relation, rawValue] of Object.entries(item.relations || {})) {
-            const values = Array.isArray(rawValue) ? rawValue : [rawValue];
-            if (values.includes(id)) {
-                references.push(`${item.id}.${relation}`);
-            }
-        }
-    });
-
-    if (references.length) {
-        alert(
-            `Cannot delete "${id}" because it is referenced by:\n\n` +
-            references.join("\n")
-        );
+    if (dependents.length) {
+        alert(`Cannot delete "${entry.concept}" (${id}) because it is referenced by:\n\n` + dependents.map(item => `${item.id} — ${item.concept}`).join("\n"));
         return;
     }
 
-    if (!confirm(`Delete vocabulary entry "${entry.concept}"?`)) return;
-
+    if (!confirm(`Delete "${entry.concept}" (${id})?`)) return;
     vocabulary = vocabulary.filter(item => item.id !== id);
     saveVocabulary();
-    setDatabaseStatus("Local working copy");
     refreshInterface();
 }
 
-// ============================================================
-// UI HELPERS / EVENTS
-// ============================================================
-
-function setDatabaseStatus(text) {
-    const element = document.getElementById("databaseStatus");
-    if (element) element.textContent = text;
-}
-
+function closeModal(id) { document.getElementById(id).hidden = true; }
+function setDatabaseStatus(text) { document.getElementById("databaseStatus").textContent = text; }
 function showError(message) {
     const element = document.getElementById("errorMessage");
-    element.textContent = message;
     element.hidden = false;
+    element.textContent = message;
+}
+function refreshInterface() {
+    populateFilters();
+    populateSortOptions();
+    applyFiltersAndSort();
 }
 
-function closeModal(id) {
-    const modal = document.getElementById(id);
-    if (modal) modal.hidden = true;
-}
-
-function initializeVocabularyManager() {
+document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("searchVocabulary").addEventListener("input", applyFiltersAndSort);
     document.getElementById("sortAttribute").addEventListener("change", applyFiltersAndSort);
     document.getElementById("sortDirection").addEventListener("change", applyFiltersAndSort);
-
     document.getElementById("reloadVocabulary").addEventListener("click", reloadVocabularyFromJSON);
     document.getElementById("appendVocabulary").addEventListener("click", openAppendPicker);
-    document.getElementById("addVocabulary").addEventListener("click", openAddModal);
-    document.getElementById("exportVocabulary").addEventListener("click", exportVocabulary);
-    document.getElementById("resetVocabulary").addEventListener("click", resetLocalVocabulary);
     document.getElementById("appendFileInput").addEventListener("change", handleAppendFile);
     document.getElementById("confirmAppend").addEventListener("click", confirmAppend);
     document.getElementById("cancelAppend").addEventListener("click", () => closeModal("appendModal"));
-    document.getElementById("entryForm").addEventListener("submit", saveEntryFromForm);
-
+    document.getElementById("addVocabulary").addEventListener("click", addVocabularyEntry);
+    document.getElementById("exportVocabulary").addEventListener("click", exportVocabulary);
+    document.getElementById("resetVocabulary").addEventListener("click", resetVocabulary);
+    document.getElementById("entryForm").addEventListener("submit", submitEntryForm);
     document.querySelectorAll("[data-close-modal]").forEach(button => {
         button.addEventListener("click", () => closeModal(button.dataset.closeModal));
     });
-
-    document.querySelectorAll(".modal").forEach(modal => {
-        modal.addEventListener("click", event => {
-            if (event.target === modal) closeModal(modal.id);
-        });
-    });
-
     loadVocabulary();
-}
-
-document.addEventListener("DOMContentLoaded", initializeVocabularyManager);
+});
