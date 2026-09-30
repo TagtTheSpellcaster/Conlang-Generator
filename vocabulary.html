@@ -6,7 +6,6 @@
     <title>Conlang Vocabulary</title>
     <link rel="stylesheet" href="vocabulary.css">
 </head>
-
 <body>
 <header>
     <div>
@@ -15,9 +14,7 @@
         <div id="databaseFormatNote" class="database-format-note">
             Database format: canonical <code>{"vocabulary":[...]}</code>
         </div>
-
     </div>
-
     <div class="statistics">
         <span>Total: <strong id="totalCount">0</strong></span>
         <span>Visible: <strong id="visibleCount">0</strong></span>
@@ -30,9 +27,7 @@
             <label for="searchVocabulary">Search</label>
             <input id="searchVocabulary" type="search" placeholder="Search vocabulary...">
         </div>
-
         <div id="attributeFilters" class="filters"></div>
-
         <div class="sorting">
             <div>
                 <label for="sortAttribute">Sort by</label>
@@ -69,7 +64,10 @@
                     <th>Word Type</th>
                     <th>Semantic Group</th>
                     <th>Scope</th>
-                    <th>Locale</th>
+                    <th>Region</th>
+                    <th>Culture</th>
+                    <th>Biome</th>
+                    <th>Temporal Setting</th>
                     <th>Tags</th>
                     <th>Features</th>
                     <th>Actions</th>
@@ -80,19 +78,15 @@
     </section>
 </main>
 
-<!-- Append modal -->
 <div id="appendModal" class="modal" hidden>
     <div class="modal-panel">
         <div class="modal-header">
             <h2>Append vocabulary</h2>
             <button class="modal-close" data-close-modal="appendModal" aria-label="Close">×</button>
         </div>
-
         <p id="appendFilename"></p>
         <div id="appendSummary" class="append-summary"></div>
-
         <div id="appendErrors" class="validation-errors" hidden></div>
-
         <div class="modal-actions">
             <button id="cancelAppend">Cancel</button>
             <button id="confirmAppend" disabled>Append entries</button>
@@ -100,53 +94,29 @@
     </div>
 </div>
 
-<!-- Add/Edit modal -->
 <div id="entryModal" class="modal" hidden>
     <div class="modal-panel modal-panel-large">
         <div class="modal-header">
             <h2 id="entryModalTitle">Add vocabulary entry</h2>
             <button class="modal-close" data-close-modal="entryModal" aria-label="Close">×</button>
         </div>
-
         <form id="entryForm">
             <div class="form-grid">
-                <label>ID
-                    <input id="entryId" required>
-                </label>
-                <label>Concept
-                    <input id="entryConcept" required>
-                </label>
-                <label>Category
-                    <input id="entryCategory" required>
-                </label>
-                <label>Word type
-                    <input id="entryWordType">
-                </label>
-                <label>Semantic group
-                    <input id="entrySemanticGroup">
-                </label>
-                <label>Scope
-                    <input id="entryScope">
-                </label>
-                <label>Locale
-                    <input id="entryLocale">
-                </label>
+                <label>ID<input id="entryId" required></label>
+                <label>Concept<input id="entryConcept" required></label>
+                <label>Category<input id="entryCategory" required></label>
+                <label>Word type<input id="entryWordType" required></label>
+                <label>Semantic group<input id="entrySemanticGroup" required></label>
+                <label>Scope<input id="entryScope" required></label>
+                <label>Region<input id="entryRegion" placeholder="africa, mars, space"></label>
+                <label>Culture<input id="entryCulture" placeholder="tribal, nomadic, urban"></label>
+                <label>Biome<input id="entryBiome" placeholder="savanna, desert, tundra"></label>
+                <label>Temporal setting<input id="entryTemporalSetting" placeholder="prehistoric, medieval, futuristic"></label>
             </div>
-
-            <label>Tags
-                <input id="entryTags" placeholder="animal, natural, europe">
-            </label>
-
-            <label>Features
-                <input id="entryFeatures" placeholder="living, animate">
-            </label>
-
-            <label>Relations (JSON)
-                <textarea id="entryRelations">{}</textarea>
-            </label>
-
+            <label>Tags<input id="entryTags" placeholder="animal, natural, fantasy"></label>
+            <label>Features<input id="entryFeatures" placeholder="living, animate"></label>
+            <label>Relations (JSON)<textarea id="entryRelations">{}</textarea></label>
             <div id="entryFormError" class="validation-errors" hidden></div>
-
             <div class="modal-actions">
                 <button type="button" data-close-modal="entryModal">Cancel</button>
                 <button type="submit">Save entry</button>
@@ -156,7 +126,6 @@
 </div>
 
 <input id="appendFileInput" type="file" accept=".json,application/json" hidden>
-
 <script src="vocabulary-manager.js"></script>
 </body>
 </html>
