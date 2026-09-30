@@ -30,12 +30,9 @@
   const arr = value => Array.isArray(value)
     ? value.filter(Boolean).map(String)
     : (value == null || value === '' ? [] : [String(value)]);
-  const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[c]));
   const unique = values => [...new Set(values)];
   const choice = (values, rng) => values[Math.floor(rng() * values.length)];
-  const randomChoice = values => values[Math.floor(Math.random() * values.length)];
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   function hashSeed(seed) {
     let h = 2166136261;
@@ -62,15 +59,6 @@
     return element ? [...element.selectedOptions].map(o => o.value) : [];
   }
 
-  function setSelected(id, values) {
-    const element = $(id);
-    if (!element) return;
-    const wanted = new Set(values);
-    [...element.options].forEach(option => {
-      option.selected = wanted.has(option.value);
-    });
-  }
-
   function valuesForField(field) {
     return unique(vocabulary.flatMap(entry => arr(entry[field]))).sort((a,b) => a.localeCompare(b));
   }
@@ -79,39 +67,24 @@
     ['region','culture','biome','temporal_setting','tags'].forEach(field => {
       const element = $(field);
       if (!element) return;
-      element.innerHTML = '';
-      valuesForField(field).forEach(value => {
-        const option = document.createElement('option');
-        option.value = value;
-        option.textContent = value;
-        element.appendChild(option);
-      });
+      const values = valuesForField(field);
+      element.innerHTML = '<option value="">Any</option>' + values.map(value => `<option value="${esc(value)}">${esc(value)}</option>`).join('');
     });
   }
 
+  function randomChoice(values) {
+    return values[Math.floor(Math.random() * values.length)];
+  }
+
   function randomizeGenerationParameters() {
-    const semanticFields = ['region','culture','biome','temporal_setting','tags'];
-    semanticFields.forEach(id => {
+    ['region','culture','biome','temporal_setting','tags'].forEach(id => {
       const element = $(id);
-      if (!element || !element.options.length) return;
-      setSelected(id, [randomChoice([...element.options].map(option => option.value))]);
+      if (element && element.options.length > 1) element.value = randomChoice([...element.options].slice(1).map(o => o.value));
     });
-
-    const randomSelect = id => {
+    ['vowels','consonants','word-order','morphology','adj-position','articles','plural','relations'].forEach(id => {
       const element = $(id);
-      if (!element || !element.options.length) return;
-      element.value = randomChoice([...element.options].map(option => option.value));
-    };
-
-    randomSelect('vowels');
-    randomSelect('consonants');
-    randomSelect('word-order');
-    randomSelect('morphology');
-    randomSelect('adj-position');
-    randomSelect('articles');
-    randomSelect('plural');
-    randomSelect('relations');
-
+      if (element) element.value = randomChoice([...element.options].map(o => o.value));
+    });
     $('mean').value = (1 + Math.random() * 2.5).toFixed(1);
     $('seed').value = `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
   }
@@ -145,11 +118,8 @@
     let score = entry.scope === 'universal' ? 1 : 0;
     for (const field of ['region','culture','biome','temporal_setting','tags']) {
       if (!c[field].length) continue;
-      if (overlap(entry, field, c[field])) {
-        score += field === 'tags' ? 1.25 : 2;
-      } else {
-        score -= 0.15;
-      }
+      if (overlap(entry, field, c[field])) score += field === 'tags' ? 1.25 : 2;
+      else score -= 0.15;
     }
     return score;
   }
@@ -158,7 +128,6 @@
     const type = String(entry.word_type || '').toLowerCase();
     const category = String(entry.category || '').toLowerCase();
     const concept = String(entry.concept || '');
-
     if (type === 'verb' || /^to\s+/i.test(concept)) return 'verb';
     if (type === 'adjective' || category.includes('adjective')) return 'adjective';
     if (type === 'pronoun' || category.includes('pronoun')) return 'pronoun';
@@ -168,74 +137,78 @@
   }
 
   function englishForm(entry) {
-    const concept = String(entry.concept || '');
-    return concept.replace(/^to\s+/i, '');
+    return String(entry.concept || '').replace(/^to\s+/i, '');
   }
 
   function makeWordFactory(c, salt = '') {
     const vowels = PHONETICS.vowels[c.vowels] || PHONETICS.vowels.standard;
     const consonants = PHONETICS.consonants[c.consonants] || PHONETICS.consonants.balanced;
-    const style = c.consonants === 'guttural'
-      ? 'guttural'
-      : c.consonants === 'soft'
-        ? 'soft'
-        : c.vowels === 'extended' ? 'musical' : 'standard';
+    const style = c.consonants === 'guttural' ? 'guttural' : c.consonants === 'soft' ? 'soft' : c.vowels === 'extended' ? 'musical' : 'standard';
     const structures = STRUCTURES[style];
     const rng = rngFactory(`${c.seed}|${salt}`);
     const used = new Set();
-    const C = () => choice(consonants, rng);
-    const V = () => choice(vowels, rng);
-
-    const build = pattern => pattern.replace(/[CV]/g, token => token === 'C' ? C() : V());
-
+    const build = pattern => pattern.replace(/[CV]/g, token => token === 'C' ? choice(consonants, rng) : choice(vowels, rng));
     return () => {
-      for (let tries = 0; tries < 150; tries++) {
-        const syllables = Math.max(1, Math.min(5,
-          Math.round(c.mean + (rng() - 0.5) * 1.6)));
+      for (let tries = 0; tries < 200; tries++) {
+        const syllables = Math.max(1, Math.min(5, Math.round(c.mean + (rng() - 0.5) * 1.6)));
         let word = '';
-        for (let i = 0; i < syllables; i++) {
-          word += build(choice(structures, rng));
-        }
+        for (let i = 0; i < syllables; i++) word += build(choice(structures, rng));
         word = word.toLowerCase();
-        if (word.length > 1 && !used.has(word)) {
-          used.add(word);
-          return word;
-        }
+        if (word.length > 1 && !used.has(word)) { used.add(word); return word; }
       }
       return build('CVC') + Math.floor(rng() * 10);
     };
   }
 
+  /*
+   * Select a large lexicon by weighted sampling rather than simply taking
+   * the first N ranked entries. This preserves semantic relevance while
+   * preventing the 600-entry lexicon from being dominated by one category,
+   * culture, biome, or period.
+   */
+  function weightedSample(c, ranked, target) {
+    const rng = rngFactory(`${c.seed}|semantic-sampling`);
+    const pool = ranked.map(item => ({...item}));
+    const selectedItems = [];
+    while (pool.length && selectedItems.length < target) {
+      const weights = pool.map(item => Math.exp(Math.max(-2, Math.min(7, item.score)) * 0.72));
+      const total = weights.reduce((a,b) => a + b, 0);
+      let needle = rng() * total;
+      let index = pool.length - 1;
+      for (let i = 0; i < weights.length; i++) {
+        needle -= weights[i];
+        if (needle <= 0) { index = i; break; }
+      }
+      selectedItems.push(pool[index]);
+      pool.splice(index, 1);
+    }
+    return selectedItems;
+  }
+
   function generateLexicon(c) {
     const make = makeWordFactory(c, 'lexicon');
     const ranked = vocabulary
-      .map(entry => ({ entry, score: semanticScore(entry, c) }))
+      .map(entry => ({entry, score: semanticScore(entry, c)}))
+      .filter(item => String(item.entry.concept || '').trim())
       .sort((a,b) => b.score - a.score || String(a.entry.concept).localeCompare(String(b.entry.concept)));
 
+    /* The database is large enough for this target. If a smaller custom
+       database is imported later, use every available entry instead. */
+    const targetSize = Math.min(600, ranked.length);
+    const sampled = weightedSample(c, ranked, targetSize);
     const lexicon = [];
     const usedEntryIds = new Set();
     const usedConceptKinds = new Set();
-    const targetSize = Math.min(320, ranked.length);
 
-    for (let i = 0; i < ranked.length && lexicon.length < targetSize; i++) {
-      const {entry, score} = ranked[i];
+    for (const {entry, score} of sampled) {
       const concept = String(entry.concept || '').trim();
-      if (!concept) continue;
       const kind = classify(entry);
       const entryKey = String(entry.id || `${concept}|${kind}`);
-      if (usedEntryIds.has(entryKey)) continue;
       const conceptKey = `${concept.toLowerCase()}|${kind}`;
-      if (usedConceptKinds.has(conceptKey) && !entry.id) continue;
-
+      if (usedEntryIds.has(entryKey) || usedConceptKinds.has(conceptKey)) continue;
       usedEntryIds.add(entryKey);
       usedConceptKinds.add(conceptKey);
-      lexicon.push({
-        ...entry,
-        english: englishForm(entry),
-        kind,
-        word: make(),
-        score
-      });
+      lexicon.push({...entry, english: englishForm(entry), kind, word: make(), score});
     }
 
     return lexicon;
@@ -243,10 +216,7 @@
 
   function findWords(term, kind, lexicon) {
     const normalized = String(term).toLowerCase().replace(/^to\s+/, '');
-    return lexicon
-      .filter(item => item.english.toLowerCase() === normalized)
-      .filter(item => !kind || item.kind === kind)
-      .sort((a,b) => b.score - a.score);
+    return lexicon.filter(item => item.english.toLowerCase() === normalized).filter(item => !kind || item.kind === kind).sort((a,b) => b.score - a.score);
   }
 
   function affix(base, kind, c) {
@@ -255,21 +225,9 @@
     return kind === 'verb' ? `${base}-ta` : base;
   }
 
-  function renderNoun(entry) {
-    return entry ? entry.word : '—';
-  }
-
-  function renderVerb(entry, c) {
-    return entry ? affix(entry.word, 'verb', c) : '—';
-  }
-
-  function buildSentence(subject, verb, object, c) {
-    const forms = {
-      S: renderNoun(subject),
-      V: renderVerb(verb, c),
-      O: renderNoun(object)
-    };
-    return c.order.split('').map(part => forms[part]).join(' ');
+  function sentence(subject, verb, object, c) {
+    const forms = {S: subject?.word || '—', V: verb ? affix(verb.word, 'verb', c) : '—', O: object?.word || '—'};
+    return c.order.split('').map(x => forms[x]).join(' ');
   }
 
   function buildSamples(c, lexicon) {
@@ -285,20 +243,18 @@
       ['person','to live','house','The person lives in the house.'],
       ['you','to have','water','You have water.']
     ];
-
     return templates.map(([s,v,o,english]) => {
       const subject = findWords(s, null, lexicon)[0];
       const verb = findWords(v, 'verb', lexicon)[0];
       const object = findWords(o, null, lexicon)[0];
-      if (!subject || !verb || !object) return null;
-      return { conlang: buildSentence(subject, verb, object, c), english };
+      return subject && verb && object ? {conlang: sentence(subject, verb, object, c), english} : null;
     }).filter(Boolean);
   }
 
   function grammar(c) {
     return {
       'Word order': c.order,
-      'Morphology': c.morphology === 'agglutinative' ? 'Agglutinative' : c.morphology === 'fusional' ? 'Fusional' : 'Isolating',
+      'Morphology': c.morphology,
       'Adjectives': c.adjectivePosition === 'before' ? 'Before noun' : 'After noun',
       'Articles': c.articles,
       'Plural': c.plural === 'none' ? 'No productive plural' : c.plural === 'prefix' ? 'Prefix' : 'Suffix',
@@ -320,97 +276,47 @@
     const name = languageName(c);
     const chips = semanticChips(c);
     $('db-status').textContent = `Vocabulary: ${vocabulary.length} entries · Generated lexicon: ${lexicon.length}`;
+    $('generation-output').className = 'result';
     $('generation-output').innerHTML = `
-      <div class="hero">
-        <div><div class="lang-name">${esc(name)}</div><div class="sub">Generated from the current semantic profile and phonological / grammatical parameters.</div><div class="chips">${chips.length ? chips.map(v => `<span class="chip">${esc(v)}</span>`).join('') : '<span class="chip">No semantic restrictions</span>'}</div></div>
-        <div class="kv">${Object.entries(grammarData).map(([k,v]) => `<b>${esc(k)}</b><span>${esc(v)}</span>`).join('')}</div>
-      </div>
-      <div class="grid">
-        <div class="card"><h3>Phonology</h3><div class="kv"><b>Vowels</b><span>${esc(PHONETICS.vowels[c.vowels].join(' '))}</span><b>Consonants</b><span>${esc(PHONETICS.consonants[c.consonants].join(' '))}</span><b>Mean syllables</b><span>${esc(c.mean)}</span></div></div>
-        <div class="card"><h3>Generation</h3><div class="kv"><b>Lexicon size</b><span>${lexicon.length}</span><b>Seed</b><span>${esc(c.seed)}</span><b>Relations</b><span>${esc(c.relations)}</span></div></div>
-      </div>
+      <div class="hero"><div><div class="lang-name">${esc(name)}</div><div class="sub">Generated from the current semantic profile and phonological / grammatical parameters.</div><div class="chips">${chips.length ? chips.map(v => `<span class="chip">${esc(v)}</span>`).join('') : '<span class="chip">No semantic restrictions</span>'}</div></div><div class="kv">${Object.entries(grammarData).map(([k,v]) => `<b>${esc(k)}</b><span>${esc(v)}</span>`).join('')}</div></div>
+      <div class="grid"><div class="card"><h3>Phonology</h3><div class="kv"><b>Vowels</b><span>${esc(PHONETICS.vowels[c.vowels].join(' '))}</span><b>Consonants</b><span>${esc(PHONETICS.consonants[c.consonants].join(' '))}</span><b>Mean syllables</b><span>${esc(c.mean)}</span></div></div><div class="card"><h3>Generation</h3><div class="kv"><b>Lexicon size</b><span>${lexicon.length}</span><b>Seed</b><span>${esc(c.seed)}</span><b>Relations</b><span>${esc(c.relations)}</span></div></div></div>
       <div class="card" style="margin-top:14px"><h3>Sample sentences</h3>${samples.length ? samples.map(s => `<div class="sentence"><div class="con">${esc(s.conlang)}</div><div class="eng">${esc(s.english)}</div></div>`).join('') : '<div class="empty">Not enough matching vocabulary to build sample sentences.</div>'}</div>`;
   }
 
   function renderLexicon(lexicon) {
     const rows = [...lexicon].sort((a,b) => a.english.localeCompare(b.english));
-    $('lexicon-output').innerHTML = `<div class="card"><h3>Generated lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} generated entries</div><div class="lexicon">${rows.map(item => `<div class="lex-row"><div class="word">${esc(item.word)}</div><div class="eng">${esc(item.english)}</div><div class="meta">${esc(item.category || '')} · ${esc(item.kind)}</div></div>`).join('')}</div></div>`;
+    $('lexicon-output').innerHTML = `<div class="card"><h3>Generated lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} generated entries</div><div class="lexicon">${rows.map(item => `<div class="lex-row"><div class="word">${esc(item.word)}</div><div class="eng">${esc(item.english)}</div><div class="meta">${esc(item.category || '')} · ${esc(item.kind || '')}</div></div>`).join('')}</div></div>`;
   }
 
-  function renderDictionary() {
-    if (!generated) {
-      $('dictionary-output').innerHTML = '<div class="empty">Generate a language to populate the dictionary.</div>';
-      return;
-    }
+  function renderDictionary(lexicon) {
     const direction = $('dictionary-direction').value;
     const query = $('dictionary-search').value.trim().toLowerCase();
-    let rows = generated.lexicon.map(item => ({left: direction === 'conlang-en' ? item.word : item.english,right: direction === 'conlang-en' ? item.english : item.word,meta: `${item.category || ''} · ${item.kind}`,sort: direction === 'conlang-en' ? item.word : item.english}));
-    if (query) rows = rows.filter(row => `${row.left} ${row.right} ${row.meta}`.toLowerCase().includes(query));
-    rows.sort((a,b) => a.sort.localeCompare(b.sort));
-    $('dictionary-output').innerHTML = `<div class="card"><h3>${direction === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.length ? rows.map(row => `<div class="dict-row"><strong>${esc(row.left)}</strong><span>${esc(row.right)}</span><span class="meta">${esc(row.meta)}</span></div>`).join('') : '<div class="empty">No matching entries.</div>'}</div></div>`;
+    let rows = [...lexicon];
+    rows = rows.filter(item => !query || (direction === 'conlang-en' ? item.word.toLowerCase().includes(query) || item.english.toLowerCase().includes(query) : item.english.toLowerCase().includes(query) || item.word.toLowerCase().includes(query)));
+    rows.sort((a,b) => direction === 'conlang-en' ? a.word.localeCompare(b.word) : a.english.localeCompare(b.english));
+    $('dictionary-output').innerHTML = rows.length ? `<div class="dictionary">${rows.map(item => direction === 'conlang-en' ? `<div class="dict-row"><strong>${esc(item.word)}</strong><span>${esc(item.english)}</span><span class="meta">${esc(item.category || '')}</span></div>` : `<div class="dict-row"><span>${esc(item.english)}</span><strong>${esc(item.word)}</strong><span class="meta">${esc(item.category || '')}</span></div>`).join('')}</div>` : '<div class="empty">No matching entries.</div>';
   }
 
-  function switchTab(tabName) {
-    document.querySelectorAll('.tab').forEach(button => button.classList.toggle('active', button.dataset.tab === tabName));
-    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === tabName));
+  function switchTab(tab) {
+    document.querySelectorAll('.tab').forEach(button => { const active = button.dataset.tab === tab; button.classList.toggle('active', active); button.setAttribute('aria-selected', String(active)); });
+    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === tab));
   }
 
-  function generate() {
-    if (!vocabulary.length) return;
+  function runGeneration({rerollParameters = false} = {}) {
+    if (!vocabulary.length) { $('message').textContent = 'Vocabulary is not loaded.'; return; }
+    if (rerollParameters) randomizeGenerationParameters();
     const c = config();
-    const lexicon = generateLexicon(c);
-    const samples = buildSamples(c, lexicon);
-    generated = { config: c, lexicon, samples, name: languageName(c) };
-    renderGeneration(c, lexicon, samples);
-    renderLexicon(lexicon);
-    renderDictionary();
-  }
-
-  function regenerate() {
-    $('seed').value = String(Date.now());
-    generate();
-  }
-
-  function setPresetValue(id, candidates) {
-    const available = new Set([...$(id).options].map(o => o.value));
-    setSelected(id, candidates.filter(value => available.has(value)));
-  }
-
-  function preset(kind) {
-    ['region','culture','biome','temporal_setting','tags'].forEach(id => setSelected(id, []));
-    if (kind === 'historical') setPresetValue('temporal_setting', ['ancient','medieval','renaissance']);
-    if (kind === 'modern') setPresetValue('temporal_setting', ['modern']);
-    if (kind === 'fantasy') {
-      setPresetValue('temporal_setting', ['medieval','renaissance']);
-      setPresetValue('tags', ['fantasy']);
-    }
-    if (kind === 'scifi') {
-      setPresetValue('region', ['space','alien']);
-      setPresetValue('temporal_setting', ['modern','futuristic']);
-      setPresetValue('tags', ['sci-fi','science_fiction','space']);
-    }
-    generate();
-  }
-
-  function removeActionFrame() {
-    const actions = document.querySelector('.generation-actions');
-    if (!actions) return;
-    actions.style.background = 'transparent';
-    actions.style.border = '0';
-    actions.style.borderRadius = '0';
-    actions.style.padding = '0';
-    actions.style.boxShadow = 'none';
-    actions.style.alignItems = 'flex-end';
-    actions.style.justifyContent = 'flex-start';
-    actions.style.minWidth = '0';
-    actions.querySelectorAll('.btn').forEach(button => {
-      button.style.width = 'auto';
-    });
+    generated = {config: c, lexicon: generateLexicon(c)};
+    generated.samples = buildSamples(c, generated.lexicon);
+    renderGeneration(c, generated.lexicon, generated.samples);
+    renderLexicon(generated.lexicon);
+    renderDictionary(generated.lexicon);
+    $('message').textContent = `${generated.lexicon.length} lemmas generated.`;
   }
 
   async function loadVocabulary() {
     try {
-      const response = await fetch('vocabulary.json', {cache:'no-store'});
+      const response = await fetch('vocabulary.json', {cache: 'no-store'});
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
       vocabulary = Array.isArray(data) ? data : Array.isArray(data.vocabulary) ? data.vocabulary : [];
@@ -424,28 +330,29 @@
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
-    document.querySelectorAll('.tab').forEach(button => button.addEventListener('click', () => switchTab(button.dataset.tab)));
-    removeActionFrame();
+    $('generate').addEventListener('click', () => runGeneration({rerollParameters: true}));
+    $('regenerate').addEventListener('click', () => runGeneration({rerollParameters: false}));
+    $('dictionary-direction').addEventListener('change', () => generated && renderDictionary(generated.lexicon));
+    $('dictionary-search').addEventListener('input', () => generated && renderDictionary(generated.lexicon));
 
-    $('generate').addEventListener('click', () => {
-      randomizeGenerationParameters();
-      generate();
-      switchTab('generator');
+    ['region','culture','biome','temporal_setting','tags'].forEach(id => $(id)?.addEventListener('change', () => {
+      if (generated) runGeneration({rerollParameters: false});
+    }));
+
+    $('clear-filters')?.addEventListener('click', () => {
+      ['region','culture','biome','temporal_setting','tags'].forEach(id => { if ($(id)) $(id).value = ''; });
     });
-    $('regenerate').addEventListener('click', () => {
-      regenerate();
-      switchTab('lexicon');
-    });
-    $('clear-filters').addEventListener('click', () => {
-      ['region','culture','biome','temporal_setting','tags'].forEach(id => setSelected(id, []));
-      generate();
-    });
-    $('preset-historical').addEventListener('click', () => preset('historical'));
-    $('preset-fantasy').addEventListener('click', () => preset('fantasy'));
-    $('preset-modern').addEventListener('click', () => preset('modern'));
-    $('preset-scifi').addEventListener('click', () => preset('scifi'));
-    $('dictionary-direction').addEventListener('change', renderDictionary);
-    $('dictionary-search').addEventListener('input', renderDictionary);
+
+    const presets = {
+      'preset-historical': {temporal_setting:'ancient'},
+      'preset-fantasy': {tags:'fantasy'},
+      'preset-modern': {temporal_setting:'modern'},
+      'preset-scifi': {region:'space'}
+    };
+    Object.entries(presets).forEach(([buttonId, values]) => $(buttonId)?.addEventListener('click', () => {
+      Object.entries(values).forEach(([id, value]) => { if ($(id)) $(id).value = [...$(id).options].some(o => o.value === value) ? value : ''; });
+      if (generated) runGeneration({rerollParameters: false});
+    }));
 
     await loadVocabulary();
   });
