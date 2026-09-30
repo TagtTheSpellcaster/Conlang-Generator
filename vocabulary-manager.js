@@ -3,7 +3,8 @@ let filteredVocabulary = [];
 
 const STORAGE_KEY = "conlang_vocabulary";
 
-// Canonical vocabulary fields. `locale` is not part of the current JSON schema.
+// Canonical vocabulary fields. `locale` is optional metadata retained for the
+// manager UI and for backwards compatibility with entries that already have it.
 const CANONICAL_PROPERTIES = [
     "id",
     "concept",
@@ -16,11 +17,14 @@ const CANONICAL_PROPERTIES = [
     "relations"
 ];
 
+const UI_PROPERTIES = ["locale"];
+
 const FILTER_PROPERTIES = [
     "category",
     "word_type",
     "semantic_group",
     "scope",
+    "locale",
     "tags",
     "features"
 ];
@@ -32,6 +36,7 @@ const SORT_PROPERTIES = [
     "word_type",
     "semantic_group",
     "scope",
+    "locale",
     "tags",
     "features"
 ];
@@ -126,6 +131,10 @@ function validateEntries(entries, sourceName = "vocabulary") {
         ) {
             errors.push(`${label}: "relations" must be an object.`);
         }
+
+        if ("locale" in entry && entry.locale !== undefined && entry.locale !== null && typeof entry.locale !== "string") {
+            errors.push(`${label}: optional "locale" must be a string when present.`);
+        }
     });
 
     if (errors.length) {
@@ -141,7 +150,6 @@ function validateRelationTargets(entries, sourceName = "vocabulary") {
         for (const [relation, rawValue] of Object.entries(entry.relations || {})) {
             const values = Array.isArray(rawValue) ? rawValue : [rawValue];
 
-            // These values are grammatical-role labels, not vocabulary IDs.
             if (relation === "grammatical_roles") continue;
 
             for (const target of values) {
@@ -166,7 +174,7 @@ function validateRelationTargets(entries, sourceName = "vocabulary") {
 }
 
 function cloneEntry(entry) {
-    return {
+    const cloned = {
         id: entry.id,
         concept: entry.concept,
         category: entry.category,
@@ -177,6 +185,14 @@ function cloneEntry(entry) {
         features: [...entry.features],
         relations: JSON.parse(JSON.stringify(entry.relations))
     };
+
+    // Preserve locale when it exists, but do not add an empty locale property
+    // to canonical entries that do not define one.
+    if (Object.prototype.hasOwnProperty.call(entry, "locale")) {
+        cloned.locale = entry.locale;
+    }
+
+    return cloned;
 }
 
 function serializeVocabulary() {
@@ -216,8 +232,6 @@ async function loadVocabulary() {
             refreshInterface();
             return;
         } catch (error) {
-            // Old/incompatible local data must not prevent the canonical
-            // vocabulary.json from loading. Discard only the invalid cache.
             console.warn("Ignoring incompatible local vocabulary:", error);
             localStorage.removeItem(STORAGE_KEY);
         }
@@ -290,8 +304,6 @@ async function handleAppendFile(event) {
         const parsed = JSON.parse(await file.text());
         const imported = assertCanonicalVocabulary(parsed, file.name).map(cloneEntry);
 
-        // Relations in an append file may legitimately point to entries
-        // already present in the main database. Validate against the combined set.
         const existingIds = new Set(vocabulary.map(entry => entry.id));
         const duplicateIds = imported
             .filter(entry => existingIds.has(entry.id))
@@ -379,7 +391,7 @@ function exportVocabulary() {
 // ============================================================
 
 function getAllAttributes() {
-    return [...CANONICAL_PROPERTIES];
+    return [...CANONICAL_PROPERTIES, ...UI_PROPERTIES];
 }
 
 function valueToArray(value) {
@@ -456,7 +468,7 @@ function populateSortOptions() {
 function matchesSearch(entry, query) {
     if (!query) return true;
 
-    return CANONICAL_PROPERTIES.some(attribute => {
+    return [...CANONICAL_PROPERTIES, ...UI_PROPERTIES].some(attribute => {
         return getAttributeValue(entry, attribute).toLowerCase().includes(query);
     });
 }
@@ -506,6 +518,7 @@ function renderVocabulary() {
             entry.word_type,
             entry.semantic_group,
             entry.scope,
+            entry.locale || "",
             entry.tags.join(", "),
             entry.features.join(", ")
         ];
@@ -568,6 +581,7 @@ function openEditModal(id) {
     document.getElementById("entryWordType").value = entry.word_type;
     document.getElementById("entrySemanticGroup").value = entry.semantic_group;
     document.getElementById("entryScope").value = entry.scope;
+    document.getElementById("entryLocale").value = entry.locale || "";
     document.getElementById("entryTags").value = entry.tags.join(", ");
     document.getElementById("entryFeatures").value = entry.features.join(", ");
     document.getElementById("entryRelations").value = JSON.stringify(entry.relations, null, 2);
@@ -592,7 +606,7 @@ function readEntryForm() {
         throw new Error(`Relations are not valid JSON: ${error.message}`);
     }
 
-    return {
+    const entry = {
         id: document.getElementById("entryId").value.trim(),
         concept: document.getElementById("entryConcept").value.trim(),
         category: document.getElementById("entryCategory").value.trim(),
@@ -603,6 +617,11 @@ function readEntryForm() {
         features: splitList(document.getElementById("entryFeatures").value),
         relations
     };
+
+    const locale = document.getElementById("entryLocale").value.trim();
+    if (locale) entry.locale = locale;
+
+    return entry;
 }
 
 function saveEntryFromForm(event) {
