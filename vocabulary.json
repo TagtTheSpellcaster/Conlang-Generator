@@ -402,7 +402,6 @@
         "countable"
       ],
       "relations": {
-        "part_of": "body.person",
         "related_to": [
           "body.shoulder",
           "body.hand"
@@ -425,9 +424,7 @@
         "animate",
         "countable"
       ],
-      "relations": {
-        "part_of": "body.person"
-      }
+      "relations": {}
     },
     {
       "id": "body.belly",
@@ -445,7 +442,6 @@
         "countable"
       ],
       "relations": {
-        "part_of": "body.person",
         "related_to": [
           "verb.eat",
           "verb.drink"
@@ -469,9 +465,7 @@
         "mass_noun",
         "bodily_substance"
       ],
-      "relations": {
-        "part_of": "body.person"
-      }
+      "relations": {}
     },
     {
       "id": "body.bone",
@@ -489,9 +483,7 @@
         "animate",
         "countable"
       ],
-      "relations": {
-        "part_of": "body.person"
-      }
+      "relations": {}
     },
     {
       "id": "body.brain",
@@ -594,9 +586,7 @@
         "animate",
         "countable"
       ],
-      "relations": {
-        "part_of": "body.person"
-      }
+      "relations": {}
     },
     {
       "id": "body.clitoris",
@@ -863,7 +853,6 @@
         "countable"
       ],
       "relations": {
-        "part_of": "body.person",
         "related_to": [
           "body.face",
           "body.hair"
@@ -888,7 +877,6 @@
         "countable"
       ],
       "relations": {
-        "part_of": "body.person",
         "related_to": [
           "body.blood"
         ]
@@ -963,7 +951,6 @@
         "countable"
       ],
       "relations": {
-        "part_of": "body.person",
         "related_to": [
           "body.foot",
           "verb.go"
@@ -1080,9 +1067,7 @@
         "animate",
         "countable"
       ],
-      "relations": {
-        "part_of": "body.person"
-      }
+      "relations": {}
     },
     {
       "id": "body.nipple",
@@ -1173,7 +1158,6 @@
         "countable"
       ],
       "relations": {
-        "part_of": "body.person",
         "related_to": [
           "body.arm"
         ]
@@ -1195,9 +1179,7 @@
         "animate",
         "mass_noun"
       ],
-      "relations": {
-        "part_of": "body.person"
-      }
+      "relations": {}
     },
     {
       "id": "body.sole",
@@ -2537,12 +2519,12 @@
       "features": [
         "need",
         "nutrition",
-        "essential"
+        "essential",
+        "object",
+        "consumable"
       ],
       "relations": {
-        "related_to": [
-          "verb.eat"
-        ]
+        "related_to": "verb.eat"
       }
     },
     {
@@ -2844,28 +2826,6 @@
       ],
       "relations": {
         "part_of": "object.house"
-      }
-    },
-    {
-      "id": "object.food",
-      "concept": "food",
-      "category": "object",
-      "word_type": "noun",
-      "semantic_group": "basic_needs",
-      "scope": "universal",
-      "tags": [
-        "universal"
-      ],
-      "features": [
-        "object",
-        "nutrition",
-        "consumable"
-      ],
-      "relations": {
-        "related_to": [
-          "need.food",
-          "verb.eat"
-        ]
       }
     },
     {
@@ -3352,11 +3312,13 @@
       "semantic_group": "spatial_relations",
       "scope": "universal",
       "tags": [
-        "universal"
+        "universal",
+        "grammar"
       ],
       "features": [
         "distance",
-        "short"
+        "short",
+        "location"
       ],
       "relations": {}
     },
@@ -3546,7 +3508,7 @@
     },
     {
       "id": "verb.be",
-      "concept": "be",
+      "concept": "to be",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "existence",
@@ -3563,7 +3525,7 @@
     },
     {
       "id": "verb.come",
-      "concept": "come",
+      "concept": "to come",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "motion",
@@ -3580,7 +3542,7 @@
     },
     {
       "id": "verb.die",
-      "concept": "die",
+      "concept": "to die",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "life_and_death",
@@ -3599,7 +3561,7 @@
     },
     {
       "id": "verb.do",
-      "concept": "do",
+      "concept": "to do",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "action",
@@ -3615,7 +3577,7 @@
     },
     {
       "id": "verb.drink",
-      "concept": "drink",
+      "concept": "to drink",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "bodily_functions",
@@ -3638,7 +3600,7 @@
     },
     {
       "id": "verb.eat",
-      "concept": "eat",
+      "concept": "to eat",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "bodily_functions",
@@ -3662,7 +3624,7 @@
     },
     {
       "id": "verb.give",
-      "concept": "give",
+      "concept": "to give",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "transfer",
@@ -3679,7 +3641,7 @@
     },
     {
       "id": "verb.go",
-      "concept": "go",
+      "concept": "to go",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "motion",
@@ -3696,7 +3658,7 @@
     },
     {
       "id": "verb.have",
-      "concept": "have",
+      "concept": "to have",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "possession",
@@ -3713,7 +3675,7 @@
     },
     {
       "id": "verb.hear",
-      "concept": "hear",
+      "concept": "to hear",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "perception",
@@ -3734,13 +3696,15 @@
     },
     {
       "id": "verb.kill",
-      "concept": "kill",
+      "concept": "to kill",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "life_and_death",
       "scope": "universal",
       "tags": [
-        "universal"
+        "universal",
+        "abstract",
+        "life_and_death"
       ],
       "features": [
         "action",
@@ -3756,7 +3720,7 @@
     },
     {
       "id": "verb.know",
-      "concept": "know",
+      "concept": "to know",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "cognition",
@@ -3773,7 +3737,7 @@
     },
     {
       "id": "verb.like",
-      "concept": "like",
+      "concept": "to like",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "emotion",
@@ -3790,7 +3754,7 @@
     },
     {
       "id": "verb.live",
-      "concept": "live",
+      "concept": "to live",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "existence",
@@ -3809,7 +3773,7 @@
     },
     {
       "id": "verb.love",
-      "concept": "love",
+      "concept": "to love",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "emotion",
@@ -3826,7 +3790,7 @@
     },
     {
       "id": "verb.make",
-      "concept": "make",
+      "concept": "to make",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "creation",
@@ -3843,7 +3807,7 @@
     },
     {
       "id": "verb.say",
-      "concept": "say",
+      "concept": "to say",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "communication",
@@ -3860,7 +3824,7 @@
     },
     {
       "id": "verb.see",
-      "concept": "see",
+      "concept": "to see",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "perception",
@@ -3881,7 +3845,7 @@
     },
     {
       "id": "verb.sleep",
-      "concept": "sleep",
+      "concept": "to sleep",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "bodily_functions",
@@ -3903,7 +3867,7 @@
     },
     {
       "id": "verb.speak",
-      "concept": "speak",
+      "concept": "to speak",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "communication",
@@ -3925,7 +3889,7 @@
     },
     {
       "id": "verb.take",
-      "concept": "take",
+      "concept": "to take",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "transfer",
@@ -3942,7 +3906,7 @@
     },
     {
       "id": "verb.think",
-      "concept": "think",
+      "concept": "to think",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "cognition",
@@ -3959,7 +3923,7 @@
     },
     {
       "id": "verb.want",
-      "concept": "want",
+      "concept": "to want",
       "category": "verb",
       "word_type": "verb",
       "semantic_group": "desire",
@@ -7959,7 +7923,7 @@
     },
     {
       "id": "verb.arrive",
-      "concept": "arrive",
+      "concept": "to arrive",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -7972,7 +7936,7 @@
     },
     {
       "id": "verb.leave",
-      "concept": "leave",
+      "concept": "to leave",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -7985,7 +7949,7 @@
     },
     {
       "id": "verb.enter",
-      "concept": "enter",
+      "concept": "to enter",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -7998,7 +7962,7 @@
     },
     {
       "id": "verb.exit",
-      "concept": "exit",
+      "concept": "to exit",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8011,7 +7975,7 @@
     },
     {
       "id": "verb.return",
-      "concept": "return",
+      "concept": "to return",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8024,7 +7988,7 @@
     },
     {
       "id": "verb.travel",
-      "concept": "travel",
+      "concept": "to travel",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8037,7 +8001,7 @@
     },
     {
       "id": "verb.walk",
-      "concept": "walk",
+      "concept": "to walk",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8050,7 +8014,7 @@
     },
     {
       "id": "verb.run",
-      "concept": "run",
+      "concept": "to run",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8063,7 +8027,7 @@
     },
     {
       "id": "verb.climb",
-      "concept": "climb",
+      "concept": "to climb",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8076,7 +8040,7 @@
     },
     {
       "id": "verb.fall",
-      "concept": "fall",
+      "concept": "to fall",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8089,7 +8053,7 @@
     },
     {
       "id": "verb.jump",
-      "concept": "jump",
+      "concept": "to jump",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8102,7 +8066,7 @@
     },
     {
       "id": "verb.swim",
-      "concept": "swim",
+      "concept": "to swim",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8115,7 +8079,7 @@
     },
     {
       "id": "verb.fly",
-      "concept": "fly",
+      "concept": "to fly",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8128,7 +8092,7 @@
     },
     {
       "id": "verb.cross",
-      "concept": "cross",
+      "concept": "to cross",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8141,7 +8105,7 @@
     },
     {
       "id": "verb.follow",
-      "concept": "follow",
+      "concept": "to follow",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8154,7 +8118,7 @@
     },
     {
       "id": "verb.lead",
-      "concept": "lead",
+      "concept": "to lead",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8167,7 +8131,7 @@
     },
     {
       "id": "verb.stop",
-      "concept": "stop",
+      "concept": "to stop",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8180,7 +8144,7 @@
     },
     {
       "id": "verb.start",
-      "concept": "start",
+      "concept": "to start",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8193,7 +8157,7 @@
     },
     {
       "id": "verb.turn",
-      "concept": "turn",
+      "concept": "to turn",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8206,7 +8170,7 @@
     },
     {
       "id": "verb.move",
-      "concept": "move",
+      "concept": "to move",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8219,7 +8183,7 @@
     },
     {
       "id": "verb.look",
-      "concept": "look",
+      "concept": "to look",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8232,7 +8196,7 @@
     },
     {
       "id": "verb.watch",
-      "concept": "watch",
+      "concept": "to watch",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8245,7 +8209,7 @@
     },
     {
       "id": "verb.smell",
-      "concept": "smell",
+      "concept": "to smell",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8258,7 +8222,7 @@
     },
     {
       "id": "verb.taste",
-      "concept": "taste",
+      "concept": "to taste",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8271,7 +8235,7 @@
     },
     {
       "id": "verb.touch",
-      "concept": "touch",
+      "concept": "to touch",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8284,7 +8248,7 @@
     },
     {
       "id": "verb.feel",
-      "concept": "feel",
+      "concept": "to feel",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8297,7 +8261,7 @@
     },
     {
       "id": "verb.remember",
-      "concept": "remember",
+      "concept": "to remember",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8310,7 +8274,7 @@
     },
     {
       "id": "verb.forget",
-      "concept": "forget",
+      "concept": "to forget",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8323,7 +8287,7 @@
     },
     {
       "id": "verb.understand",
-      "concept": "understand",
+      "concept": "to understand",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8336,7 +8300,7 @@
     },
     {
       "id": "verb.learn",
-      "concept": "learn",
+      "concept": "to learn",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8349,7 +8313,7 @@
     },
     {
       "id": "verb.teach",
-      "concept": "teach",
+      "concept": "to teach",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8362,7 +8326,7 @@
     },
     {
       "id": "verb.believe",
-      "concept": "believe",
+      "concept": "to believe",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8375,7 +8339,7 @@
     },
     {
       "id": "verb.hope",
-      "concept": "hope",
+      "concept": "to hope",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8388,7 +8352,7 @@
     },
     {
       "id": "verb.fear",
-      "concept": "fear",
+      "concept": "to fear",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8401,7 +8365,7 @@
     },
     {
       "id": "verb.choose",
-      "concept": "choose",
+      "concept": "to choose",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8414,7 +8378,7 @@
     },
     {
       "id": "verb.decide",
-      "concept": "decide",
+      "concept": "to decide",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8427,7 +8391,7 @@
     },
     {
       "id": "verb.imagine",
-      "concept": "imagine",
+      "concept": "to imagine",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8440,7 +8404,7 @@
     },
     {
       "id": "verb.dream",
-      "concept": "dream",
+      "concept": "to dream",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8453,7 +8417,7 @@
     },
     {
       "id": "verb.ask",
-      "concept": "ask",
+      "concept": "to ask",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8466,7 +8430,7 @@
     },
     {
       "id": "verb.answer",
-      "concept": "answer",
+      "concept": "to answer",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8479,7 +8443,7 @@
     },
     {
       "id": "verb.tell",
-      "concept": "tell",
+      "concept": "to tell",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8492,7 +8456,7 @@
     },
     {
       "id": "verb.call",
-      "concept": "call",
+      "concept": "to call",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8505,7 +8469,7 @@
     },
     {
       "id": "verb.listen",
-      "concept": "listen",
+      "concept": "to listen",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8518,7 +8482,7 @@
     },
     {
       "id": "verb.read",
-      "concept": "read",
+      "concept": "to read",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8531,7 +8495,7 @@
     },
     {
       "id": "verb.write",
-      "concept": "write",
+      "concept": "to write",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8544,7 +8508,7 @@
     },
     {
       "id": "verb.sing",
-      "concept": "sing",
+      "concept": "to sing",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8557,7 +8521,7 @@
     },
     {
       "id": "verb.shout",
-      "concept": "shout",
+      "concept": "to shout",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8570,7 +8534,7 @@
     },
     {
       "id": "verb.whisper",
-      "concept": "whisper",
+      "concept": "to whisper",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8583,7 +8547,7 @@
     },
     {
       "id": "verb.show",
-      "concept": "show",
+      "concept": "to show",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8596,7 +8560,7 @@
     },
     {
       "id": "verb.meet",
-      "concept": "meet",
+      "concept": "to meet",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8609,7 +8573,7 @@
     },
     {
       "id": "verb.help",
-      "concept": "help",
+      "concept": "to help",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8622,7 +8586,7 @@
     },
     {
       "id": "verb.trust",
-      "concept": "trust",
+      "concept": "to trust",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8635,7 +8599,7 @@
     },
     {
       "id": "verb.betray",
-      "concept": "betray",
+      "concept": "to betray",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8648,7 +8612,7 @@
     },
     {
       "id": "verb.marry",
-      "concept": "marry",
+      "concept": "to marry",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8661,7 +8625,7 @@
     },
     {
       "id": "verb.separate",
-      "concept": "separate",
+      "concept": "to separate",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8674,7 +8638,7 @@
     },
     {
       "id": "verb.visit",
-      "concept": "visit",
+      "concept": "to visit",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8687,7 +8651,7 @@
     },
     {
       "id": "verb.invite",
-      "concept": "invite",
+      "concept": "to invite",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8700,7 +8664,7 @@
     },
     {
       "id": "verb.use",
-      "concept": "use",
+      "concept": "to use",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8713,7 +8677,7 @@
     },
     {
       "id": "verb.hold",
-      "concept": "hold",
+      "concept": "to hold",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8726,7 +8690,7 @@
     },
     {
       "id": "verb.carry",
-      "concept": "carry",
+      "concept": "to carry",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8739,7 +8703,7 @@
     },
     {
       "id": "verb.put",
-      "concept": "put",
+      "concept": "to put",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8752,7 +8716,7 @@
     },
     {
       "id": "verb.bring",
-      "concept": "bring",
+      "concept": "to bring",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8765,7 +8729,7 @@
     },
     {
       "id": "verb.send",
-      "concept": "send",
+      "concept": "to send",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8778,7 +8742,7 @@
     },
     {
       "id": "verb.receive",
-      "concept": "receive",
+      "concept": "to receive",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8791,7 +8755,7 @@
     },
     {
       "id": "verb.find",
-      "concept": "find",
+      "concept": "to find",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8804,7 +8768,7 @@
     },
     {
       "id": "verb.lose",
-      "concept": "lose",
+      "concept": "to lose",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8817,7 +8781,7 @@
     },
     {
       "id": "verb.keep",
-      "concept": "keep",
+      "concept": "to keep",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8830,7 +8794,7 @@
     },
     {
       "id": "verb.open",
-      "concept": "open",
+      "concept": "to open",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8843,7 +8807,7 @@
     },
     {
       "id": "verb.close",
-      "concept": "close",
+      "concept": "to close",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8856,7 +8820,7 @@
     },
     {
       "id": "verb.break",
-      "concept": "break",
+      "concept": "to break",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8869,7 +8833,7 @@
     },
     {
       "id": "verb.cut",
-      "concept": "cut",
+      "concept": "to cut",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8882,7 +8846,7 @@
     },
     {
       "id": "verb.tie",
-      "concept": "tie",
+      "concept": "to tie",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8895,7 +8859,7 @@
     },
     {
       "id": "verb.untie",
-      "concept": "untie",
+      "concept": "to untie",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8908,7 +8872,7 @@
     },
     {
       "id": "verb.throw",
-      "concept": "throw",
+      "concept": "to throw",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8921,7 +8885,7 @@
     },
     {
       "id": "verb.catch",
-      "concept": "catch",
+      "concept": "to catch",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8934,7 +8898,7 @@
     },
     {
       "id": "verb.pull",
-      "concept": "pull",
+      "concept": "to pull",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8947,7 +8911,7 @@
     },
     {
       "id": "verb.push",
-      "concept": "push",
+      "concept": "to push",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8960,7 +8924,7 @@
     },
     {
       "id": "verb.build",
-      "concept": "build",
+      "concept": "to build",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8973,7 +8937,7 @@
     },
     {
       "id": "verb.create",
-      "concept": "create",
+      "concept": "to create",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8986,7 +8950,7 @@
     },
     {
       "id": "verb.draw",
-      "concept": "draw",
+      "concept": "to draw",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -8999,7 +8963,7 @@
     },
     {
       "id": "verb.paint",
-      "concept": "paint",
+      "concept": "to paint",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9012,7 +8976,7 @@
     },
     {
       "id": "verb.grow",
-      "concept": "grow",
+      "concept": "to grow",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9025,7 +8989,7 @@
     },
     {
       "id": "verb.plant",
-      "concept": "plant",
+      "concept": "to plant",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9038,7 +9002,7 @@
     },
     {
       "id": "verb.repair",
-      "concept": "repair",
+      "concept": "to repair",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9051,7 +9015,7 @@
     },
     {
       "id": "verb.destroy",
-      "concept": "destroy",
+      "concept": "to destroy",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9064,7 +9028,7 @@
     },
     {
       "id": "verb.burn",
-      "concept": "burn",
+      "concept": "to burn",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9077,7 +9041,7 @@
     },
     {
       "id": "verb.dig",
-      "concept": "dig",
+      "concept": "to dig",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9090,7 +9054,7 @@
     },
     {
       "id": "verb.shape",
-      "concept": "shape",
+      "concept": "to shape",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9103,7 +9067,7 @@
     },
     {
       "id": "verb.change",
-      "concept": "change",
+      "concept": "to change",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9116,7 +9080,7 @@
     },
     {
       "id": "verb.fight",
-      "concept": "fight",
+      "concept": "to fight",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9129,7 +9093,7 @@
     },
     {
       "id": "verb.attack",
-      "concept": "attack",
+      "concept": "to attack",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9142,7 +9106,7 @@
     },
     {
       "id": "verb.defend",
-      "concept": "defend",
+      "concept": "to defend",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9155,7 +9119,7 @@
     },
     {
       "id": "verb.hurt",
-      "concept": "hurt",
+      "concept": "to hurt",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9168,7 +9132,7 @@
     },
     {
       "id": "verb.wound",
-      "concept": "wound",
+      "concept": "to wound",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9181,7 +9145,7 @@
     },
     {
       "id": "verb.shoot",
-      "concept": "shoot",
+      "concept": "to shoot",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9194,7 +9158,7 @@
     },
     {
       "id": "verb.stab",
-      "concept": "stab",
+      "concept": "to stab",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9207,7 +9171,7 @@
     },
     {
       "id": "verb.strike",
-      "concept": "strike",
+      "concept": "to strike",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9220,7 +9184,7 @@
     },
     {
       "id": "verb.escape",
-      "concept": "escape",
+      "concept": "to escape",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9233,7 +9197,7 @@
     },
     {
       "id": "verb.hide",
-      "concept": "hide",
+      "concept": "to hide",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9246,7 +9210,7 @@
     },
     {
       "id": "verb.chase",
-      "concept": "chase",
+      "concept": "to chase",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9259,7 +9223,7 @@
     },
     {
       "id": "verb.capture",
-      "concept": "capture",
+      "concept": "to capture",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9272,7 +9236,7 @@
     },
     {
       "id": "verb.rescue",
-      "concept": "rescue",
+      "concept": "to rescue",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9285,7 +9249,7 @@
     },
     {
       "id": "verb.survive",
-      "concept": "survive",
+      "concept": "to survive",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9298,7 +9262,7 @@
     },
     {
       "id": "verb.wake",
-      "concept": "wake",
+      "concept": "to wake",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9311,7 +9275,7 @@
     },
     {
       "id": "verb.wash",
-      "concept": "wash",
+      "concept": "to wash",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9324,7 +9288,7 @@
     },
     {
       "id": "verb.bathe",
-      "concept": "bathe",
+      "concept": "to bathe",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9337,7 +9301,7 @@
     },
     {
       "id": "verb.dress",
-      "concept": "dress",
+      "concept": "to dress",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9350,7 +9314,7 @@
     },
     {
       "id": "verb.undress",
-      "concept": "undress",
+      "concept": "to undress",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9363,7 +9327,7 @@
     },
     {
       "id": "verb.sit",
-      "concept": "sit",
+      "concept": "to sit",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9376,7 +9340,7 @@
     },
     {
       "id": "verb.stand",
-      "concept": "stand",
+      "concept": "to stand",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9389,7 +9353,7 @@
     },
     {
       "id": "verb.kneel",
-      "concept": "kneel",
+      "concept": "to kneel",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9402,7 +9366,7 @@
     },
     {
       "id": "verb.rest",
-      "concept": "rest",
+      "concept": "to rest",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9415,7 +9379,7 @@
     },
     {
       "id": "verb.breathe",
-      "concept": "breathe",
+      "concept": "to breathe",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9428,7 +9392,7 @@
     },
     {
       "id": "verb.cough",
-      "concept": "cough",
+      "concept": "to cough",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9441,7 +9405,7 @@
     },
     {
       "id": "verb.laugh",
-      "concept": "laugh",
+      "concept": "to laugh",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9454,7 +9418,7 @@
     },
     {
       "id": "verb.cry",
-      "concept": "cry",
+      "concept": "to cry",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9467,7 +9431,7 @@
     },
     {
       "id": "verb.smile",
-      "concept": "smile",
+      "concept": "to smile",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9480,7 +9444,7 @@
     },
     {
       "id": "verb.kiss",
-      "concept": "kiss",
+      "concept": "to kiss",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9493,7 +9457,7 @@
     },
     {
       "id": "verb.buy",
-      "concept": "buy",
+      "concept": "to buy",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9506,7 +9470,7 @@
     },
     {
       "id": "verb.sell",
-      "concept": "sell",
+      "concept": "to sell",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9519,7 +9483,7 @@
     },
     {
       "id": "verb.pay",
-      "concept": "pay",
+      "concept": "to pay",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9532,7 +9496,7 @@
     },
     {
       "id": "verb.cost",
-      "concept": "cost",
+      "concept": "to cost",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9545,7 +9509,7 @@
     },
     {
       "id": "verb.trade",
-      "concept": "trade",
+      "concept": "to trade",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9558,7 +9522,7 @@
     },
     {
       "id": "verb.work",
-      "concept": "work",
+      "concept": "to work",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9571,7 +9535,7 @@
     },
     {
       "id": "verb.hunt",
-      "concept": "hunt",
+      "concept": "to hunt",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9584,7 +9548,7 @@
     },
     {
       "id": "verb.fish",
-      "concept": "fish",
+      "concept": "to fish",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9597,7 +9561,7 @@
     },
     {
       "id": "verb.farm",
-      "concept": "farm",
+      "concept": "to farm",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9610,7 +9574,7 @@
     },
     {
       "id": "verb.cook",
-      "concept": "cook",
+      "concept": "to cook",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9623,7 +9587,7 @@
     },
     {
       "id": "verb.gather",
-      "concept": "gather",
+      "concept": "to gather",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9636,7 +9600,7 @@
     },
     {
       "id": "verb.steal",
-      "concept": "steal",
+      "concept": "to steal",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9649,7 +9613,7 @@
     },
     {
       "id": "verb.own",
-      "concept": "own",
+      "concept": "to own",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9662,7 +9626,7 @@
     },
     {
       "id": "verb.rain",
-      "concept": "rain",
+      "concept": "to rain",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9675,7 +9639,7 @@
     },
     {
       "id": "verb.snow",
-      "concept": "snow",
+      "concept": "to snow",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9688,7 +9652,7 @@
     },
     {
       "id": "verb.freeze",
-      "concept": "freeze",
+      "concept": "to freeze",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9701,7 +9665,7 @@
     },
     {
       "id": "verb.melt",
-      "concept": "melt",
+      "concept": "to melt",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9714,7 +9678,7 @@
     },
     {
       "id": "verb.flow",
-      "concept": "flow",
+      "concept": "to flow",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9727,7 +9691,7 @@
     },
     {
       "id": "verb.shine",
-      "concept": "shine",
+      "concept": "to shine",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -9740,7 +9704,7 @@
     },
     {
       "id": "verb.blow",
-      "concept": "blow",
+      "concept": "to blow",
       "scope": "domain",
       "category": "verb",
       "word_type": "verb",
@@ -14361,7 +14325,7 @@
       "id": "nature.reproduction",
       "concept": "reproduction",
       "scope": "domain",
-      "category": "nature",
+      "category": "reproduction",
       "word_type": "noun",
       "semantic_group": "ecology",
       "features": [],
@@ -15646,7 +15610,7 @@
     },
     {
       "id": "food.boil",
-      "concept": "boil",
+      "concept": "to boil",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15659,7 +15623,7 @@
     },
     {
       "id": "food.fry",
-      "concept": "fry",
+      "concept": "to fry",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15672,7 +15636,7 @@
     },
     {
       "id": "food.roast",
-      "concept": "roast",
+      "concept": "to roast",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15685,7 +15649,7 @@
     },
     {
       "id": "food.bake",
-      "concept": "bake",
+      "concept": "to bake",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15698,7 +15662,7 @@
     },
     {
       "id": "food.grill",
-      "concept": "grill",
+      "concept": "to grill",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15711,7 +15675,7 @@
     },
     {
       "id": "food.steam",
-      "concept": "steam",
+      "concept": "to steam",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15724,7 +15688,7 @@
     },
     {
       "id": "food.stew",
-      "concept": "stew",
+      "concept": "to stew",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15737,7 +15701,7 @@
     },
     {
       "id": "food.smoke",
-      "concept": "smoke",
+      "concept": "to smoke",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15750,7 +15714,7 @@
     },
     {
       "id": "food.ferment",
-      "concept": "ferment",
+      "concept": "to ferment",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15763,7 +15727,7 @@
     },
     {
       "id": "food.preserve",
-      "concept": "preserve",
+      "concept": "to preserve",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15776,7 +15740,7 @@
     },
     {
       "id": "food.dry",
-      "concept": "dry",
+      "concept": "to dry",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15789,7 +15753,7 @@
     },
     {
       "id": "food.peel",
-      "concept": "peel",
+      "concept": "to peel",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15802,7 +15766,7 @@
     },
     {
       "id": "food.cut",
-      "concept": "cut",
+      "concept": "to cut",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15815,7 +15779,7 @@
     },
     {
       "id": "food.chop",
-      "concept": "chop",
+      "concept": "to chop",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15828,7 +15792,7 @@
     },
     {
       "id": "food.grind",
-      "concept": "grind",
+      "concept": "to grind",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15841,7 +15805,7 @@
     },
     {
       "id": "food.mix",
-      "concept": "mix",
+      "concept": "to mix",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15854,7 +15818,7 @@
     },
     {
       "id": "food.knead",
-      "concept": "knead",
+      "concept": "to knead",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -15867,7 +15831,7 @@
     },
     {
       "id": "food.serve",
-      "concept": "serve",
+      "concept": "to serve",
       "scope": "domain",
       "category": "food",
       "word_type": "verb",
@@ -17844,7 +17808,7 @@
     },
     {
       "id": "material.forge",
-      "concept": "forge",
+      "concept": "to forge",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17857,7 +17821,7 @@
     },
     {
       "id": "material.cast",
-      "concept": "cast",
+      "concept": "to cast",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17870,7 +17834,7 @@
     },
     {
       "id": "material.hammer",
-      "concept": "hammer",
+      "concept": "to hammer",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17883,7 +17847,7 @@
     },
     {
       "id": "material.carve",
-      "concept": "carve",
+      "concept": "to carve",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17896,7 +17860,7 @@
     },
     {
       "id": "material.saw",
-      "concept": "saw",
+      "concept": "to saw",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17909,7 +17873,7 @@
     },
     {
       "id": "material.polish",
-      "concept": "polish",
+      "concept": "to polish",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17922,7 +17886,7 @@
     },
     {
       "id": "material.grind",
-      "concept": "grind",
+      "concept": "to grind",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17935,7 +17899,7 @@
     },
     {
       "id": "material.weave",
-      "concept": "weave",
+      "concept": "to weave",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17948,7 +17912,7 @@
     },
     {
       "id": "material.spin",
-      "concept": "spin",
+      "concept": "to spin",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17961,7 +17925,7 @@
     },
     {
       "id": "material.sew",
-      "concept": "sew",
+      "concept": "to sew",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17974,7 +17938,7 @@
     },
     {
       "id": "material.tan",
-      "concept": "tan",
+      "concept": "to tan",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -17987,7 +17951,7 @@
     },
     {
       "id": "material.crush",
-      "concept": "crush",
+      "concept": "to crush",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -18000,7 +17964,7 @@
     },
     {
       "id": "material.weld",
-      "concept": "weld",
+      "concept": "to weld",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -18013,7 +17977,7 @@
     },
     {
       "id": "material.temper",
-      "concept": "temper",
+      "concept": "to temper",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -18026,7 +17990,7 @@
     },
     {
       "id": "material.harden",
-      "concept": "harden",
+      "concept": "to harden",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -18039,7 +18003,7 @@
     },
     {
       "id": "material.soften",
-      "concept": "soften",
+      "concept": "to soften",
       "scope": "domain",
       "category": "material",
       "word_type": "verb",
@@ -20301,7 +20265,7 @@
     },
     {
       "id": "settlement.construct",
-      "concept": "construct",
+      "concept": "to construct",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20314,7 +20278,7 @@
     },
     {
       "id": "settlement.demolish",
-      "concept": "demolish",
+      "concept": "to demolish",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20327,7 +20291,7 @@
     },
     {
       "id": "settlement.renovate",
-      "concept": "renovate",
+      "concept": "to renovate",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20340,7 +20304,7 @@
     },
     {
       "id": "settlement.move_in",
-      "concept": "move_in",
+      "concept": "to move_in",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20353,7 +20317,7 @@
     },
     {
       "id": "settlement.move_out",
-      "concept": "move_out",
+      "concept": "to move_out",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20366,7 +20330,7 @@
     },
     {
       "id": "settlement.found",
-      "concept": "found",
+      "concept": "to found",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20379,7 +20343,7 @@
     },
     {
       "id": "settlement.expand",
-      "concept": "expand",
+      "concept": "to expand",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20392,7 +20356,7 @@
     },
     {
       "id": "settlement.abandon",
-      "concept": "abandon",
+      "concept": "to abandon",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20405,7 +20369,7 @@
     },
     {
       "id": "settlement.occupy",
-      "concept": "occupy",
+      "concept": "to occupy",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -20418,7 +20382,7 @@
     },
     {
       "id": "settlement.evacuate",
-      "concept": "evacuate",
+      "concept": "to evacuate",
       "scope": "domain",
       "category": "settlement",
       "word_type": "verb",
@@ -22896,7 +22860,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "technology"
+        "technology",
+        "weapon"
       ]
     },
     {
@@ -22922,7 +22887,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "technology"
+        "technology",
+        "weapon"
       ]
     },
     {
@@ -23065,7 +23031,8 @@
       "features": [],
       "relations": {},
       "tags": [
-        "technology"
+        "technology",
+        "weapon"
       ]
     },
     {
@@ -23122,7 +23089,7 @@
     },
     {
       "id": "technology.assemble",
-      "concept": "assemble",
+      "concept": "to assemble",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23135,7 +23102,7 @@
     },
     {
       "id": "technology.install",
-      "concept": "install",
+      "concept": "to install",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23148,7 +23115,7 @@
     },
     {
       "id": "technology.operate",
-      "concept": "operate",
+      "concept": "to operate",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23161,7 +23128,7 @@
     },
     {
       "id": "technology.activate",
-      "concept": "activate",
+      "concept": "to activate",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23174,7 +23141,7 @@
     },
     {
       "id": "technology.deactivate",
-      "concept": "deactivate",
+      "concept": "to deactivate",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23187,7 +23154,7 @@
     },
     {
       "id": "technology.disconnect",
-      "concept": "disconnect",
+      "concept": "to disconnect",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23200,7 +23167,7 @@
     },
     {
       "id": "technology.calibrate",
-      "concept": "calibrate",
+      "concept": "to calibrate",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23213,7 +23180,7 @@
     },
     {
       "id": "technology.encode",
-      "concept": "encode",
+      "concept": "to encode",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23226,7 +23193,7 @@
     },
     {
       "id": "technology.decode",
-      "concept": "decode",
+      "concept": "to decode",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23239,7 +23206,7 @@
     },
     {
       "id": "technology.manufacture",
-      "concept": "manufacture",
+      "concept": "to manufacture",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -23252,7 +23219,7 @@
     },
     {
       "id": "technology.invent",
-      "concept": "invent",
+      "concept": "to invent",
       "scope": "domain",
       "category": "technology",
       "word_type": "verb",
@@ -25449,7 +25416,7 @@
     },
     {
       "id": "clothing.put_on",
-      "concept": "put_on",
+      "concept": "to put_on",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25462,7 +25429,7 @@
     },
     {
       "id": "clothing.take_off",
-      "concept": "take_off",
+      "concept": "to take_off",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25475,7 +25442,7 @@
     },
     {
       "id": "clothing.unbutton",
-      "concept": "unbutton",
+      "concept": "to unbutton",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25488,7 +25455,7 @@
     },
     {
       "id": "clothing.untie",
-      "concept": "untie",
+      "concept": "to untie",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25501,7 +25468,7 @@
     },
     {
       "id": "clothing.fasten",
-      "concept": "fasten",
+      "concept": "to fasten",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25514,7 +25481,7 @@
     },
     {
       "id": "clothing.unfasten",
-      "concept": "unfasten",
+      "concept": "to unfasten",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25527,7 +25494,7 @@
     },
     {
       "id": "clothing.stitch",
-      "concept": "stitch",
+      "concept": "to stitch",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25540,7 +25507,7 @@
     },
     {
       "id": "clothing.weave",
-      "concept": "weave",
+      "concept": "to weave",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25553,7 +25520,7 @@
     },
     {
       "id": "clothing.knit",
-      "concept": "knit",
+      "concept": "to knit",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25566,7 +25533,7 @@
     },
     {
       "id": "clothing.iron",
-      "concept": "iron",
+      "concept": "to iron",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25579,7 +25546,7 @@
     },
     {
       "id": "clothing.fold",
-      "concept": "fold",
+      "concept": "to fold",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25592,7 +25559,7 @@
     },
     {
       "id": "clothing.mend",
-      "concept": "mend",
+      "concept": "to mend",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25605,7 +25572,7 @@
     },
     {
       "id": "clothing.dye",
-      "concept": "dye",
+      "concept": "to dye",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25618,7 +25585,7 @@
     },
     {
       "id": "clothing.bleach",
-      "concept": "bleach",
+      "concept": "to bleach",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -25631,7 +25598,7 @@
     },
     {
       "id": "clothing.cut",
-      "concept": "cut",
+      "concept": "to cut",
       "scope": "domain",
       "category": "clothing",
       "word_type": "verb",
@@ -27164,34 +27131,8 @@
       ]
     },
     {
-      "id": "weapon.plasma_cannon",
-      "concept": "plasma_cannon",
-      "scope": "domain",
-      "category": "weapon",
-      "word_type": "noun",
-      "semantic_group": "science_fiction",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "weapon"
-      ]
-    },
-    {
       "id": "weapon.blaster",
       "concept": "blaster",
-      "scope": "domain",
-      "category": "weapon",
-      "word_type": "noun",
-      "semantic_group": "science_fiction",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "weapon"
-      ]
-    },
-    {
-      "id": "weapon.ray_gun",
-      "concept": "ray_gun",
       "scope": "domain",
       "category": "weapon",
       "word_type": "noun",
@@ -27244,19 +27185,6 @@
     {
       "id": "weapon.gauss_rifle",
       "concept": "gauss_rifle",
-      "scope": "domain",
-      "category": "weapon",
-      "word_type": "noun",
-      "semantic_group": "science_fiction",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "weapon"
-      ]
-    },
-    {
-      "id": "weapon.energy_weapon",
-      "concept": "energy_weapon",
       "scope": "domain",
       "category": "weapon",
       "word_type": "noun",
@@ -28010,7 +27938,7 @@
     },
     {
       "id": "weapon.smash",
-      "concept": "smash",
+      "concept": "to smash",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -28023,7 +27951,7 @@
     },
     {
       "id": "weapon.draw",
-      "concept": "draw",
+      "concept": "to draw",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -28036,7 +27964,7 @@
     },
     {
       "id": "weapon.launch",
-      "concept": "launch",
+      "concept": "to launch",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -28049,7 +27977,7 @@
     },
     {
       "id": "weapon.cock",
-      "concept": "cock",
+      "concept": "to cock",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -28062,7 +27990,7 @@
     },
     {
       "id": "weapon.wield",
-      "concept": "wield",
+      "concept": "to wield",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -28075,7 +28003,7 @@
     },
     {
       "id": "weapon.sheathe",
-      "concept": "sheathe",
+      "concept": "to sheathe",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -28088,7 +28016,7 @@
     },
     {
       "id": "weapon.unsheathe",
-      "concept": "unsheathe",
+      "concept": "to unsheathe",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -28101,7 +28029,7 @@
     },
     {
       "id": "weapon.brandish",
-      "concept": "brandish",
+      "concept": "to brandish",
       "scope": "domain",
       "category": "weapon",
       "word_type": "verb",
@@ -31351,7 +31279,7 @@
     },
     {
       "id": "society.govern",
-      "concept": "govern",
+      "concept": "to govern",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31364,7 +31292,7 @@
     },
     {
       "id": "society.appoint",
-      "concept": "appoint",
+      "concept": "to appoint",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31377,7 +31305,7 @@
     },
     {
       "id": "society.depose",
-      "concept": "depose",
+      "concept": "to depose",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31390,7 +31318,7 @@
     },
     {
       "id": "society.rebel",
-      "concept": "rebel",
+      "concept": "to rebel",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31403,7 +31331,7 @@
     },
     {
       "id": "society.revolt",
-      "concept": "revolt",
+      "concept": "to revolt",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31416,7 +31344,7 @@
     },
     {
       "id": "society.demonstrate",
-      "concept": "demonstrate",
+      "concept": "to demonstrate",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31429,7 +31357,7 @@
     },
     {
       "id": "society.negotiate",
-      "concept": "negotiate",
+      "concept": "to negotiate",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31442,7 +31370,7 @@
     },
     {
       "id": "society.invade",
-      "concept": "invade",
+      "concept": "to invade",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31455,7 +31383,7 @@
     },
     {
       "id": "society.occupy",
-      "concept": "occupy",
+      "concept": "to occupy",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31468,7 +31396,7 @@
     },
     {
       "id": "society.conquer",
-      "concept": "conquer",
+      "concept": "to conquer",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31481,7 +31409,7 @@
     },
     {
       "id": "society.liberate",
-      "concept": "liberate",
+      "concept": "to liberate",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31494,7 +31422,7 @@
     },
     {
       "id": "society.ban",
-      "concept": "ban",
+      "concept": "to ban",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31507,7 +31435,7 @@
     },
     {
       "id": "society.permit",
-      "concept": "permit",
+      "concept": "to permit",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31520,7 +31448,7 @@
     },
     {
       "id": "society.forbid",
-      "concept": "forbid",
+      "concept": "to forbid",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31533,7 +31461,7 @@
     },
     {
       "id": "society.belong",
-      "concept": "belong",
+      "concept": "to belong",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31546,7 +31474,7 @@
     },
     {
       "id": "society.fire",
-      "concept": "fire",
+      "concept": "to fire",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31559,7 +31487,7 @@
     },
     {
       "id": "society.employ",
-      "concept": "employ",
+      "concept": "to employ",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31572,7 +31500,7 @@
     },
     {
       "id": "society.cooperate",
-      "concept": "cooperate",
+      "concept": "to cooperate",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -31585,7 +31513,7 @@
     },
     {
       "id": "society.compete",
-      "concept": "compete",
+      "concept": "to compete",
       "scope": "domain",
       "category": "society",
       "word_type": "verb",
@@ -34491,22 +34419,6 @@
       "relations": {}
     },
     {
-      "id": "function.near",
-      "concept": "near",
-      "category": "function_word",
-      "word_type": "adposition",
-      "semantic_group": "spatial_relations",
-      "scope": "universal",
-      "tags": [
-        "grammar",
-        "universal"
-      ],
-      "features": [
-        "location"
-      ],
-      "relations": {}
-    },
-    {
       "id": "function.with",
       "concept": "with",
       "category": "function_word",
@@ -35683,22 +35595,8 @@
       "tags": [
         "abstract",
         "emotion_and_feeling",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.hate",
-      "concept": "hate",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "emotion_and_feeling",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "emotion_and_feeling",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35758,22 +35656,8 @@
       "tags": [
         "abstract",
         "knowledge_and_thought",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.doubt",
-      "concept": "doubt",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "knowledge_and_thought",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "knowledge_and_thought",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35788,22 +35672,8 @@
       "tags": [
         "abstract",
         "emotion_and_feeling",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.desire",
-      "concept": "desire",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "emotion_and_feeling",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "emotion_and_feeling",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35818,22 +35688,8 @@
       "tags": [
         "abstract",
         "emotion_and_feeling",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.anger",
-      "concept": "anger",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "emotion_and_feeling",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "emotion_and_feeling",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35848,22 +35704,8 @@
       "tags": [
         "abstract",
         "emotion_and_feeling",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.envy",
-      "concept": "envy",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "emotion_and_feeling",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "emotion_and_feeling",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35878,22 +35720,8 @@
       "tags": [
         "abstract",
         "emotion_and_feeling",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.shame",
-      "concept": "shame",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "emotion_and_feeling",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "emotion_and_feeling",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35908,22 +35736,8 @@
       "tags": [
         "abstract",
         "emotion_and_feeling",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.grief",
-      "concept": "grief",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "emotion_and_feeling",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "emotion_and_feeling",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35938,22 +35752,8 @@
       "tags": [
         "abstract",
         "social_and_political",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.peace",
-      "concept": "peace",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "social_and_political",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "social_and_political",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -35968,22 +35768,8 @@
       "tags": [
         "abstract",
         "social_and_political",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.war",
-      "concept": "war",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "social_and_political",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "social_and_political",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36028,27 +35814,13 @@
       "tags": [
         "abstract",
         "relationships",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.support",
-      "concept": "support",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "relationships",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "relationships",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
       "id": "verb.respect",
-      "concept": "respect",
+      "concept": "to respect",
       "scope": "universal",
       "category": "verb",
       "word_type": "verb",
@@ -36073,22 +35845,8 @@
       "tags": [
         "abstract",
         "language_and_communication",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.promise",
-      "concept": "promise",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "language_and_communication",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "language_and_communication",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36103,27 +35861,13 @@
       "tags": [
         "abstract",
         "social_and_political",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.command",
-      "concept": "command",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "social_and_political",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "social_and_political",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
       "id": "verb.request",
-      "concept": "request",
+      "concept": "to request",
       "scope": "universal",
       "category": "verb",
       "word_type": "verb",
@@ -36148,22 +35892,8 @@
       "tags": [
         "abstract",
         "language_and_communication",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.question",
-      "concept": "question",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "language_and_communication",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "language_and_communication",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36193,22 +35923,8 @@
       "tags": [
         "abstract",
         "activity",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.play",
-      "concept": "play",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "activity",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "activity",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36223,22 +35939,8 @@
       "tags": [
         "abstract",
         "relationships",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.care",
-      "concept": "care",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "relationships",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "relationships",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36268,22 +35970,8 @@
       "tags": [
         "abstract",
         "beauty_and_value",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.value",
-      "concept": "value",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "beauty_and_value",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "beauty_and_value",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36298,22 +35986,8 @@
       "tags": [
         "abstract",
         "freedom_and_control",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.control",
-      "concept": "control",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "freedom_and_control",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "freedom_and_control",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36328,22 +36002,8 @@
       "tags": [
         "abstract",
         "social_and_political",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.order",
-      "concept": "order",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "social_and_political",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "social_and_political",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36358,22 +36018,8 @@
       "tags": [
         "abstract",
         "social_and_political",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.rule",
-      "concept": "rule",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "social_and_political",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "social_and_political",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36418,22 +36064,8 @@
       "tags": [
         "abstract",
         "relationships",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.join",
-      "concept": "join",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "relationships",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "relationships",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36478,22 +36110,8 @@
       "tags": [
         "abstract",
         "relationships",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.divorce",
-      "concept": "divorce",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "relationships",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "relationships",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36508,22 +36126,8 @@
       "tags": [
         "abstract",
         "family",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.adopt",
-      "concept": "adopt",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "family",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "family",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36538,22 +36142,8 @@
       "tags": [
         "abstract",
         "family",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.inherit",
-      "concept": "inherit",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "family",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "family",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36568,22 +36158,8 @@
       "tags": [
         "abstract",
         "conflict_and_resolution",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.protect",
-      "concept": "protect",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "conflict_and_resolution",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "conflict_and_resolution",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36598,37 +36174,8 @@
       "tags": [
         "abstract",
         "life_and_death",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.save",
-      "concept": "save",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "life_and_death",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "life_and_death",
-        "universal"
-      ]
-    },
-    {
-      "id": "abstract.kill",
-      "concept": "kill",
-      "scope": "universal",
-      "category": "abstract",
-      "word_type": "noun",
-      "semantic_group": "life_and_death",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "abstract",
-        "life_and_death",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36688,22 +36235,8 @@
       "tags": [
         "abstract",
         "movement",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.rise",
-      "concept": "rise",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "movement",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "movement",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -36753,7 +36286,7 @@
     },
     {
       "id": "verb.begin",
-      "concept": "begin",
+      "concept": "to begin",
       "scope": "universal",
       "category": "verb",
       "word_type": "verb",
@@ -36768,7 +36301,7 @@
     },
     {
       "id": "verb.end",
-      "concept": "end",
+      "concept": "to end",
       "scope": "universal",
       "category": "verb",
       "word_type": "verb",
@@ -36828,7 +36361,7 @@
     },
     {
       "id": "verb.name",
-      "concept": "name",
+      "concept": "to name",
       "scope": "universal",
       "category": "verb",
       "word_type": "verb",
@@ -36853,22 +36386,8 @@
       "tags": [
         "abstract",
         "language_and_communication",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.talk",
-      "concept": "talk",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "language_and_communication",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "language_and_communication",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
@@ -37228,22 +36747,8 @@
       "tags": [
         "abstract",
         "activity",
-        "universal"
-      ]
-    },
-    {
-      "id": "verb.clean",
-      "concept": "clean",
-      "scope": "universal",
-      "category": "verb",
-      "word_type": "verb",
-      "semantic_group": "activity",
-      "features": [],
-      "relations": {},
-      "tags": [
-        "verb",
-        "activity",
-        "universal"
+        "universal",
+        "verb"
       ]
     },
     {
