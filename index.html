@@ -7,21 +7,32 @@
 <style>
 :root{--bg:#0b1020;--panel:#11182a;--panel2:#0d1424;--line:#26324a;--text:#e7edf7;--muted:#8fa0ba;--accent:#55c7ff;--good:#55d6a0}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif}button,select,input{font:inherit}button{cursor:pointer}
-header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.header-tools{display:flex;gap:8px;align-items:center}.header-tools .btn{white-space:nowrap}
 .tabs{display:flex;gap:0;border-bottom:1px solid var(--line);background:#0e1526;padding:0 22px}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:13px 18px}.tab:hover{color:var(--text);background:#11182a}.tab.active{color:var(--text);border-bottom-color:var(--accent)}
 .tab-panel{display:none}.tab-panel.active{display:block}main{padding:22px;max-width:1240px;margin:0 auto}.controls{width:100%}
-.parameter-grid{display:grid;grid-template-columns:1.25fr 1fr 1.25fr;gap:14px;align-items:start}.section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;min-width:0}.section h2{font-size:14px;margin-bottom:13px}
-.field{margin-top:10px}.field:first-of-type{margin-top:0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field select,.field input{width:100%;height:36px;background:#090f1c;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 10px}.field select:focus,.field input:focus{outline:1px solid var(--accent);border-color:var(--accent)}
-.semantic-fields{display:grid;grid-template-columns:1fr;gap:0}.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
-.compact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.full{grid-column:1/-1}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted)}
-.generation-actions{display:flex;align-items:center;gap:10px;margin:14px 0 0}.result{margin-top:16px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:125px 1fr;gap:6px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:620px;overflow:auto}.lex-row{display:grid;grid-template-columns:170px 1fr 150px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.dictionary-controls{display:flex;gap:10px;align-items:end;margin-bottom:14px}.dictionary-controls .field{margin:0;flex:0 0 260px}.dictionary-controls .search{flex:1}.dictionary{max-height:680px;overflow:auto}.dict-row{display:grid;grid-template-columns:1fr 1fr 160px;gap:12px;padding:9px 4px;border-bottom:1px solid #1d2739}.dict-row strong{color:#77d6ff;font-family:ui-monospace,monospace}.dict-row .meta{color:var(--muted);font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:12px;border:1px solid #743c3c;background:#281516;color:#e5a5a5;border-radius:8px;margin-top:12px}
-@media(max-width:1050px){.parameter-grid{grid-template-columns:1fr 1fr}.parameter-grid .section:first-child{grid-column:1/-1}.semantic-fields{grid-template-columns:repeat(2,1fr);column-gap:10px}.preset-row{grid-column:1/-1}}
-@media(max-width:700px){.parameter-grid{grid-template-columns:1fr}.parameter-grid .section:first-child{grid-column:auto}.semantic-fields,.compact-grid,.row{grid-template-columns:1fr}.full{grid-column:auto}.preset-row{grid-column:auto}.hero{flex-direction:column}.dictionary-controls{flex-direction:column;align-items:stretch}.dictionary-controls .field{flex:auto}.dict-row{grid-template-columns:1fr 1fr}.dict-row .meta{display:none}main{padding:16px}}
+.parameter-grid{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(480px,1.5fr);gap:14px;align-items:start}.section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;min-width:0}.section h2{font-size:14px;margin-bottom:13px}
+.semantic-fields{display:grid;grid-template-columns:1fr;gap:0}.field{margin-top:10px}.field:first-of-type{margin-top:0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field select,.field input{width:100%;height:36px;background:#090f1c;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 10px}.field select:focus,.field input:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.parameter-stack{display:grid;gap:14px}.compact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.full{grid-column:1/-1}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted)}
+.generation-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin:14px 0 0}.generation-actions .status{margin-right:auto}
+.result{margin-top:16px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:125px 1fr;gap:6px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:620px;overflow:auto}.lex-row{display:grid;grid-template-columns:170px 1fr 150px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.dictionary-controls{display:flex;gap:10px;align-items:end;margin-bottom:14px}.dictionary-controls .field{margin:0;flex:0 0 260px}.dictionary-controls .search{flex:1}.dictionary{max-height:680px;overflow:auto}.dict-row{display:grid;grid-template-columns:1fr 1fr 160px;gap:12px;padding:9px 4px;border-bottom:1px solid #1d2739}.dict-row strong{color:#77d6ff;font-family:ui-monospace,monospace}.dict-row .meta{color:var(--muted);font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:12px;border:1px solid #743c3c;background:#281516;color:#e5a5a5;border-radius:8px;margin-top:12px}
+@media(max-width:900px){.parameter-grid{grid-template-columns:1fr}.parameter-stack{grid-template-columns:1fr}.generation-actions{justify-content:flex-start}.generation-actions .status{margin-right:0}}
+@media(max-width:700px){.compact-grid,.row{grid-template-columns:1fr}.full{grid-column:auto}.hero{flex-direction:column}.dictionary-controls{flex-direction:column;align-items:stretch}.dictionary-controls .field{flex:auto}.dict-row{grid-template-columns:1fr 1fr}.dict-row .meta{display:none}main{padding:16px}.header-tools{flex-wrap:wrap;justify-content:flex-end}.header-tools .status{display:none}}
 </style>
 </head>
 <body>
-<header><div><h1>Conlang Generator</h1><div class="sub">Vocabulary-driven language generation</div></div><div id="db-status" class="sub">Loading vocabulary…</div></header>
+<header>
+  <div><h1>Conlang Generator</h1><div class="sub">Vocabulary-driven language generation</div></div>
+  <div class="header-tools">
+    <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
+    <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
+    <button type="button" class="btn" id="import-vocabulary">Import vocabulary</button>
+    <input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
+    <div id="db-status" class="sub">Loading vocabulary…</div>
+  </div>
+</header>
 <nav class="tabs" aria-label="Main sections">
 <button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button>
 <button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button>
@@ -42,6 +53,7 @@ header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <div class="preset-row"><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Science fiction</button></div>
 </section>
 
+<div class="parameter-stack">
 <section class="section">
 <h2>Phonology</h2>
 <div class="compact-grid">
@@ -64,8 +76,9 @@ header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 </div>
 </section>
 </div>
+</div>
 
-<div class="generation-actions"><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Regenerate lexicon</button><span id="message" class="status"></span></div>
+<div class="generation-actions"><span id="message" class="status"></span><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Regenerate lexicon</button></div>
 <div id="generation-output" class="result empty">Set the parameters and generate a language.</div>
 </div></main>
 </section>
