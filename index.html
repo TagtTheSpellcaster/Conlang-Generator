@@ -9,8 +9,15 @@
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif}button,select,input{font:inherit}button{cursor:pointer}
 header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
 .tabs{display:flex;gap:0;border-bottom:1px solid var(--line);background:#0e1526;padding:0 22px}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:13px 18px}.tab:hover{color:var(--text);background:#11182a}.tab.active{color:var(--text);border-bottom-color:var(--accent)}
-.tab-panel{display:none}.tab-panel.active{display:block}.layout{display:grid;grid-template-columns:minmax(0,1fr);min-height:calc(100vh - 120px)}main{padding:22px;overflow:auto}.controls{max-width:1200px;margin:0 auto}.parameter-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}.section h2{font-size:14px;margin-bottom:12px}.field{margin-top:12px}.field:first-of-type{margin-top:0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field select,.field input{width:100%;background:#090f1c;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:8px 10px}.multi{min-height:112px}.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted);margin-top:10px}.generation-actions{display:flex;align-items:center;gap:12px;max-width:1200px;margin:16px auto 0}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:125px 1fr;gap:6px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:620px;overflow:auto}.lex-row{display:grid;grid-template-columns:170px 1fr 150px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.dictionary-controls{display:flex;gap:10px;align-items:end;margin-bottom:14px}.dictionary-controls .field{margin:0;flex:0 0 260px}.dictionary-controls .search{flex:1}.dictionary{max-height:680px;overflow:auto}.dict-row{display:grid;grid-template-columns:1fr 1fr 160px;gap:12px;padding:9px 4px;border-bottom:1px solid #1d2739}.dict-row strong{color:#77d6ff;font-family:ui-monospace,monospace}.dict-row .meta{color:var(--muted);font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:12px;border:1px solid #743c3c;background:#281516;color:#e5a5a5;border-radius:8px;margin-top:12px}
-@media(max-width:1000px){.parameter-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:700px){.parameter-grid{grid-template-columns:1fr}.row{grid-template-columns:1fr}.hero{flex-direction:column}.dictionary-controls{flex-direction:column;align-items:stretch}.dictionary-controls .field{flex:auto}.dict-row{grid-template-columns:1fr 1fr}.dict-row .meta{display:none}}
+.tab-panel{display:none}.tab-panel.active{display:block}main{padding:22px;max-width:1240px;margin:0 auto}.controls{width:100%}
+.parameter-grid{display:grid;grid-template-columns:1.25fr 1fr 1.25fr;gap:14px;align-items:start}.section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;min-width:0}.section h2{font-size:14px;margin-bottom:13px}
+.field{margin-top:10px}.field:first-of-type{margin-top:0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field select,.field input{width:100%;height:36px;background:#090f1c;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 10px}.field select:focus,.field input:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.semantic-fields{display:grid;grid-template-columns:1fr;gap:0}.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.compact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.full{grid-column:1/-1}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.buttons{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}.btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted)}
+.generation-actions{display:flex;align-items:center;gap:10px;margin:14px 0 0}.result{margin-top:16px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:125px 1fr;gap:6px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:620px;overflow:auto}.lex-row{display:grid;grid-template-columns:170px 1fr 150px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.dictionary-controls{display:flex;gap:10px;align-items:end;margin-bottom:14px}.dictionary-controls .field{margin:0;flex:0 0 260px}.dictionary-controls .search{flex:1}.dictionary{max-height:680px;overflow:auto}.dict-row{display:grid;grid-template-columns:1fr 1fr 160px;gap:12px;padding:9px 4px;border-bottom:1px solid #1d2739}.dict-row strong{color:#77d6ff;font-family:ui-monospace,monospace}.dict-row .meta{color:var(--muted);font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:12px;border:1px solid #743c3c;background:#281516;color:#e5a5a5;border-radius:8px;margin-top:12px}
+@media(max-width:1050px){.parameter-grid{grid-template-columns:1fr 1fr}.parameter-grid .section:first-child{grid-column:1/-1}.semantic-fields{grid-template-columns:repeat(2,1fr);column-gap:10px}.preset-row{grid-column:1/-1}}
+@media(max-width:700px){.parameter-grid{grid-template-columns:1fr}.parameter-grid .section:first-child{grid-column:auto}.semantic-fields,.compact-grid,.row{grid-template-columns:1fr}.full{grid-column:auto}.preset-row{grid-column:auto}.hero{flex-direction:column}.dictionary-controls{flex-direction:column;align-items:stretch}.dictionary-controls .field{flex:auto}.dict-row{grid-template-columns:1fr 1fr}.dict-row .meta{display:none}main{padding:16px}}
 </style>
 </head>
 <body>
@@ -21,34 +28,51 @@ header{padding:18px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button>
 </nav>
 <section id="generator" class="tab-panel active">
-<div class="layout"><main><div class="controls">
+<main><div class="controls">
 <div class="parameter-grid">
-<section class="section"><h2>Semantic profile</h2>
-<div class="field"><label>Region</label><select id="region" class="multi" multiple></select></div>
-<div class="field"><label>Culture</label><select id="culture" class="multi" multiple></select></div>
-<div class="field"><label>Biome</label><select id="biome" class="multi" multiple></select></div>
-<div class="field"><label>Temporal setting</label><select id="temporal_setting" class="multi" multiple></select></div>
-<div class="field"><label>Tags</label><select id="tags" class="multi" multiple></select></div>
-<div class="buttons"><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Science fiction</button></div>
+<section class="section">
+<h2>Semantic profile</h2>
+<div class="semantic-fields">
+<div class="field"><label for="region">Region</label><select id="region"></select></div>
+<div class="field"><label for="culture">Culture</label><select id="culture"></select></div>
+<div class="field"><label for="biome">Biome</label><select id="biome"></select></div>
+<div class="field"><label for="temporal_setting">Temporal setting</label><select id="temporal_setting"></select></div>
+<div class="field"><label for="tags">Tags</label><select id="tags"></select></div>
+</div>
+<div class="preset-row"><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Science fiction</button></div>
 </section>
-<section class="section"><h2>Phonology</h2>
-<div class="row"><div class="field"><label>Vowels</label><select id="vowels"><option value="standard">a e i o u</option><option value="minimal">a i u</option><option value="extended">a e i o u y ø æ</option></select></div><div class="field"><label>Consonants</label><select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant / liquid</option><option value="soft">Soft / approximant</option></select></div></div>
-<div class="row"><div class="field"><label>Mean syllables</label><input id="mean" type="number" min="1" max="5" step=".1" value="2.2"></div><div class="field"><label>Seed</label><input id="seed" type="text" value="auto"></div></div>
+
+<section class="section">
+<h2>Phonology</h2>
+<div class="compact-grid">
+<div class="field"><label for="vowels">Vowels</label><select id="vowels"><option value="standard">a e i o u</option><option value="minimal">a i u</option><option value="extended">a e i o u y ø æ</option></select></div>
+<div class="field"><label for="consonants">Consonants</label><select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant / liquid</option><option value="soft">Soft / approximant</option></select></div>
+<div class="field"><label for="mean">Mean syllables</label><input id="mean" type="number" min="1" max="5" step=".1" value="2.2"></div>
+<div class="field"><label for="seed">Seed</label><input id="seed" type="text" value="auto"></div>
+</div>
 </section>
-<section class="section"><h2>Morphosyntax</h2>
-<div class="field"><label>Word order</label><select id="word-order"><option>SVO</option><option>SOV</option><option>VSO</option><option>VOS</option><option>OSV</option><option>OVS</option></select></div>
-<div class="row"><div class="field"><label>Morphology</label><select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></div><div class="field"><label>Adjective position</label><select id="adj-position"><option value="after">Noun + adjective</option><option value="before">Adjective + noun</option></select></div></div>
-<div class="row"><div class="field"><label>Articles</label><select id="articles"><option value="none">None</option><option value="both">Definite + indefinite</option><option value="definite">Definite only</option><option value="indefinite">Indefinite only</option><option value="partitive">Definite + indefinite + partitive</option></select></div><div class="field"><label>Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div></div>
-<div class="field"><label>Grammatical relations</label><select id="relations"><option value="prepositions">Prepositions / word order</option><option value="cases">Case endings</option></select></div>
+
+<section class="section">
+<h2>Morphosyntax</h2>
+<div class="field"><label for="word-order">Word order</label><select id="word-order"><option>SVO</option><option>SOV</option><option>VSO</option><option>VOS</option><option>OSV</option><option>OVS</option></select></div>
+<div class="compact-grid">
+<div class="field"><label for="morphology">Morphology</label><select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></div>
+<div class="field"><label for="adj-position">Adjective position</label><select id="adj-position"><option value="after">Noun + adjective</option><option value="before">Adjective + noun</option></select></div>
+<div class="field"><label for="articles">Articles</label><select id="articles"><option value="none">None</option><option value="both">Definite + indefinite</option><option value="definite">Definite only</option><option value="indefinite">Indefinite only</option><option value="partitive">Definite + indefinite + partitive</option></select></div>
+<div class="field"><label for="plural">Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div>
+<div class="field full"><label for="relations">Grammatical relations</label><select id="relations"><option value="prepositions">Prepositions / word order</option><option value="cases">Case endings</option></select></div>
+</div>
 </section>
 </div>
+
 <div class="generation-actions"><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Regenerate lexicon</button><span id="message" class="status"></span></div>
 <div id="generation-output" class="result empty">Set the parameters and generate a language.</div>
-</div></main></div>
+</div></main>
 </section>
+
 <section id="lexicon" class="tab-panel"><main><div id="lexicon-output" class="empty">Generate a language to populate the lexicon.</div></main></section>
 <section id="dictionary" class="tab-panel"><main>
-<div class="dictionary-controls"><div class="field"><label>Direction</label><select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></div><div class="field search"><label>Search</label><input id="dictionary-search" type="search" placeholder="Search the dictionary…"></div></div>
+<div class="dictionary-controls"><div class="field"><label for="dictionary-direction">Direction</label><select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></div><div class="field search"><label for="dictionary-search">Search</label><input id="dictionary-search" type="search" placeholder="Search the dictionary…"></div></div>
 <div id="dictionary-output" class="empty">Generate a language to populate the dictionary.</div>
 </main></section>
 <script src="conlang_engine.js"></script>
@@ -57,7 +81,7 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
  document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
  tab.classList.add('active');tab.setAttribute('aria-selected','true');
- const panel=document.getElementById(tab.dataset.tab); if(panel) panel.classList.add('active');
+ const panel=document.getElementById(tab.dataset.tab);if(panel)panel.classList.add('active');
 }));
 </script>
 </body>
