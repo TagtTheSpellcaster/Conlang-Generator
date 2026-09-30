@@ -1,171 +1,39 @@
-/* Conlang Generator — vocabulary-driven engine v0.6.0 */
-(() => {
-  'use strict';
-
-  const VERSION = '0.6.0';
-  const $ = id => document.getElementById(id);
-  const arr = value => Array.isArray(value) ? value.filter(Boolean).map(String) : (value == null || value === '' ? [] : [String(value)]);
-  const unique = values => [...new Set(values)];
-  const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const choice = (values, rng) => values[Math.floor(rng() * values.length)];
-
-  const PHONETICS = {
-    vowels: { standard:['a','e','i','o','u'], minimal:['a','i','u'], extended:['a','e','i','o','u','y','ø','æ'] },
-    consonants: {
-      balanced:['p','t','k','b','d','g','m','n','s','r','l','f','v'],
-      guttural:['k','q','x','g','r','kh','gh','t','d'],
-      sibilant:['s','z','sh','zh','f','v','r','l','th'],
-      soft:['m','n','l','r','w','j','v','dh']
-    }
-  };
-  const STRUCTURES = {
-    standard:['CV','CVC','CVV','VC'], musical:['CV','V','CVV','CVC'],
-    guttural:['CVC','CCVC','CVCC'], soft:['CV','CVV','CVC','V']
-  };
-
-  let vocabulary = [];
-  let generated = null;
-
-  function hashSeed(seed) {
-    let h = 2166136261;
-    for (let i=0;i<seed.length;i++) { h ^= seed.charCodeAt(i); h = Math.imul(h,16777619); }
-    return h >>> 0;
-  }
-  function rngFactory(seed) {
-    let x = hashSeed(seed) || 1;
-    return () => { x += 0x6D2B79F5; let t=x; t=Math.imul(t^(t>>>15),t|1); t^=t+Math.imul(t^(t>>>7),t|61); return ((t^(t>>>14))>>>0)/4294967296; };
-  }
-
-  function selected(id) {
-    const el=$(id); return el ? [...el.selectedOptions].map(o=>o.value).filter(Boolean) : [];
-  }
-  function valuesForField(field) { return unique(vocabulary.flatMap(e=>arr(e[field]))).sort((a,b)=>a.localeCompare(b)); }
-  function populateFilters() {
-    ['region','culture','biome','temporal_setting','tags'].forEach(field=>{
-      const el=$(field); if(!el)return;
-      el.innerHTML='<option value="">Any</option>'+valuesForField(field).map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('');
-    });
-  }
-
-  function randomChoice(values) { return values[Math.floor(Math.random()*values.length)]; }
-  function randomizeGenerationParameters() {
-    ['region','culture','biome','temporal_setting','tags'].forEach(id=>{ const el=$(id); if(el&&el.options.length>1)el.value=randomChoice([...el.options].slice(1).map(o=>o.value)); });
-    ['vowels','consonants','word-order','morphology','adj-position','articles','plural','relations'].forEach(id=>{ const el=$(id); if(el)el.value=randomChoice([...el.options].map(o=>o.value)); });
-    $('mean').value=(1+Math.random()*2.5).toFixed(1);
-    $('seed').value=`${Date.now()}-${Math.floor(Math.random()*1000000)}`;
-  }
-  function config() {
-    return {
-      region:selected('region'),culture:selected('culture'),biome:selected('biome'),temporal_setting:selected('temporal_setting'),tags:selected('tags'),
-      vowels:$('vowels').value,consonants:$('consonants').value,mean:Math.max(1,Math.min(5,Number($('mean').value)||2.2)),seed:$('seed').value.trim()||String(Date.now()),
-      order:$('word-order').value,morphology:$('morphology').value,adjectivePosition:$('adj-position').value,articles:$('articles').value,plural:$('plural').value,relations:$('relations').value
-    };
-  }
-  function overlap(entry,field,wanted) { return wanted.length && arr(entry[field]).some(v=>wanted.includes(v)) ? 1 : 0; }
-  function semanticScore(entry,c) {
-    let score=entry.scope==='universal'?1:0;
-    for(const field of ['region','culture','biome','temporal_setting','tags']) { if(!c[field].length)continue; score += overlap(entry,field,c[field]) ? (field==='tags'?1.25:2) : -0.15; }
-    return score;
-  }
-  function classify(entry) {
-    const type=String(entry.word_type||'').toLowerCase(), category=String(entry.category||'').toLowerCase(), concept=String(entry.concept||'');
-    if(type==='verb'||/^to\s+/i.test(concept))return'verb';
-    if(type==='adjective'||category.includes('adjective'))return'adjective';
-    if(type==='pronoun'||category.includes('pronoun'))return'pronoun';
-    if(type==='preposition'||category.includes('preposition'))return'function';
-    if(category.includes('number')||category.includes('quantity'))return'number';
-    return'noun';
-  }
-  function englishForm(entry){return String(entry.concept||'').replace(/^to\s+/i,'').trim();}
-
-  function makeWordFactory(c,salt='') {
-    const vowels=PHONETICS.vowels[c.vowels]||PHONETICS.vowels.standard, consonants=PHONETICS.consonants[c.consonants]||PHONETICS.consonants.balanced;
-    const style=c.consonants==='guttural'?'guttural':c.consonants==='soft'?'soft':c.vowels==='extended'?'musical':'standard', structures=STRUCTURES[style], rng=rngFactory(`${c.seed}|${salt}`), used=new Set();
-    const build=p=>p.replace(/[CV]/g,t=>t==='C'?choice(consonants,rng):choice(vowels,rng));
-    return()=>{for(let tries=0;tries<200;tries++){const syllables=Math.max(1,Math.min(5,Math.round(c.mean+(rng()-.5)*1.6)));let word='';for(let i=0;i<syllables;i++)word+=build(choice(structures,rng));word=word.toLowerCase();if(word.length>1&&!used.has(word)){used.add(word);return word;}}return build('CVC')+Math.floor(rng()*10);};
-  }
-  function weightedSample(c,ranked,target) {
-    const rng=rngFactory(`${c.seed}|semantic-sampling`), pool=ranked.map(x=>({...x})), out=[];
-    while(pool.length&&out.length<target){const weights=pool.map(x=>Math.exp(Math.max(-2,Math.min(7,x.score))*.72)),total=weights.reduce((a,b)=>a+b,0);let n=rng()*total,i=pool.length-1;for(let j=0;j<weights.length;j++){n-=weights[j];if(n<=0){i=j;break;}}out.push(pool[i]);pool.splice(i,1);}return out;
-  }
-  function generateLexicon(c) {
-    const make=makeWordFactory(c,'lexicon'), ranked=vocabulary.map(entry=>({entry,score:semanticScore(entry,c)})).filter(x=>String(x.entry.concept||'').trim()).sort((a,b)=>b.score-a.score||String(a.entry.concept).localeCompare(String(b.entry.concept))), sampled=weightedSample(c,ranked,Math.min(600,ranked.length));
-    const lexicon=[],used=new Set();
-    for(const {entry,score} of sampled){const concept=String(entry.concept||'').trim(),kind=classify(entry),key=`${concept.toLowerCase()}|${kind}|${entry.id||''}`;if(used.has(key))continue;used.add(key);lexicon.push({...entry,english:englishForm(entry),kind,word:make(),score});}
-    return lexicon;
-  }
-
-  function findByKind(lexicon,kind){return lexicon.filter(x=>x.kind===kind);}
-  function cleanVerb(v){return String(v||'').replace(/^to\s+/i,'').trim();}
-  function englishSubject(x){return /^(you|i|we|they|he|she|it)$/i.test(x.english)?x.english:`the ${x.english}`;}
-  function englishObject(x){return /^(you|me|us|them|him|her|it)$/i.test(x.english)?x.english:`the ${x.english}`;}
-  function englishThirdPerson(v){const w=cleanVerb(v);if(/(s|x|z|ch|sh)$/.test(w))return `${w}es`;if(/[^aeiou]y$/.test(w))return `${w.slice(0,-1)}ies`;return `${w}s`;}
-  function affix(base,kind,c){if(c.morphology==='isolating')return base;if(c.morphology==='fusional')return kind==='verb'?`${base}a`:`${base}i`;return kind==='verb'?`${base}-ta`:base;}
-  function sentence(subject,verb,object,c){const forms={S:subject.word,V:affix(verb.word,'verb',c),O:object?.word||''};return c.order.split('').map(x=>forms[x]).filter(Boolean).join(' ');}
-
-  /* Sample sentences are generated entirely from the current generated lexicon.
-     There are no required English concepts or fixed vocabulary items. The engine
-     selects available grammatical categories and semantic entries, then builds
-     sentence frames from whatever the current lexicon actually contains. */
-  function buildSamples(c,lexicon) {
-    const rng=rngFactory(`${c.seed}|samples`), nouns=findByKind(lexicon,'noun').filter(x=>x.english), verbs=findByKind(lexicon,'verb').filter(x=>x.english), adjs=findByKind(lexicon,'adjective').filter(x=>x.english);
-    const samples=[], used=new Set();
-    const shuffled=a=>a.map(x=>({x,k:rng()})).sort((a,b)=>a.k-b.k).map(y=>y.x);
-    const ns=shuffled(nouns), vs=shuffled(verbs), as=shuffled(adjs);
-    const push=(key,con,eng)=>{if(!used.has(key)){used.add(key);samples.push({conlang:con,english:eng});}};
-    if(ns.length>=2&&vs.length>=1){for(let i=0;i<Math.min(4,vs.length,ns.length-1);i++){const s=ns[i%ns.length],o=ns[(i+1)%ns.length],v=vs[i];push(`svo${i}`,sentence(s,v,o,c),`${englishSubject(s)} ${englishThirdPerson(v)} ${englishObject(o)}.`);}}
-    if(ns.length>=1&&vs.length>=1){for(let i=0;i<Math.min(2,vs.length);i++){const s=ns[(i+4)%ns.length],v=vs[(i+4)%vs.length];push(`sv${i}`,sentence(s,v,null,c),`${englishSubject(s)} ${englishThirdPerson(v)}.`);}}
-    if(ns.length>=1&&as.length>=1){const s=ns[0],a=as[0],con=c.adjectivePosition==='before'?`${a.word} ${s.word}`:`${s.word} ${a.word}`;push('adj',con,`${englishSubject(s)} is ${a.english}.`);}
-    if(ns.length>=2&&vs.length>=2){const s=ns[ns.length-1],v=vs[vs.length-1],o=ns[ns.length-2];push('extra',sentence(s,v,o,c),`${englishSubject(s)} ${englishThirdPerson(v)} ${englishObject(o)}.`);}
-    return samples.slice(0,8);
-  }
-
-  function grammar(c){return {'Word order':c.order,'Morphology':c.morphology,'Adjectives':c.adjectivePosition==='before'?'Before noun':'After noun','Articles':c.articles,'Plural':c.plural==='none'?'No productive plural':c.plural==='prefix'?'Prefix':'Suffix','Relations':c.relations==='cases'?'Case endings':'Prepositions / word order'};}
-  function languageName(c){const make=makeWordFactory({...c,mean:2},'language-name');return`${make().replace(/^./,ch=>ch.toUpperCase())}ic`;}
-  function semanticChips(c){return['region','culture','biome','temporal_setting','tags'].flatMap(f=>c[f].map(v=>`${f}: ${v}`));}
-
-  function renderGeneration(c,lexicon,samples){
-    const chips=semanticChips(c),g=grammar(c),name=languageName(c);$('db-status').textContent=`Vocabulary: ${vocabulary.length} entries · Generated lexicon: ${lexicon.length}`;$('generation-output').className='result';
-    $('generation-output').innerHTML=`<div class="hero"><div><div class="lang-name">${esc(name)}</div><div class="sub">Generated from the current semantic profile and phonological / grammatical parameters.</div><div class="chips">${chips.length?chips.map(v=>`<span class="chip">${esc(v)}</span>`).join(''):'<span class="chip">No semantic restrictions</span>'}</div></div><div class="kv">${Object.entries(g).map(([k,v])=>`<b>${esc(k)}</b><span>${esc(v)}</span>`).join('')}</div></div><div class="grid"><div class="card"><h3>Phonology</h3><div class="kv"><b>Vowels</b><span>${esc(PHONETICS.vowels[c.vowels].join(' '))}</span><b>Consonants</b><span>${esc(PHONETICS.consonants[c.consonants].join(' '))}</span><b>Mean syllables</b><span>${esc(c.mean)}</span></div></div><div class="card"><h3>Generation</h3><div class="kv"><b>Lexicon size</b><span>${lexicon.length}</span><b>Seed</b><span>${esc(c.seed)}</span></div></div></div><div class="card" style="margin-top:14px"><h3>Sample sentences</h3>${samples.length?samples.map(s=>`<div class="sentence"><div class="con">${esc(s.conlang)}</div><div class="eng">${esc(s.english)}</div></div>`).join(''):'<div class="empty">The generated lexicon does not contain enough grammatical categories to build sample sentences.</div>'}</div>`;
-  }
-  function renderLexicon(lexicon){const rows=[...lexicon].sort((a,b)=>a.english.localeCompare(b.english));$('lexicon-output').innerHTML=`<div class="card"><h3>Generated lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} generated entries</div><div class="lexicon">${rows.map(x=>`<div class="lex-row"><div class="word">${esc(x.word)}</div><div class="eng">${esc(x.english)}</div><div class="meta">${esc(x.category||'')} · ${esc(x.kind||'')}</div></div>`).join('')}</div></div>`;}
-  function renderDictionary(lexicon){
-    const dir=$('dictionary-direction').value,q=($('dictionary-search').value||'').trim().toLowerCase();let rows=lexicon.map(x=>({a:dir==='conlang-en'?x.word:x.english,b:dir==='conlang-en'?x.english:x.word,meta:`${x.category||''}${x.kind?` · ${x.kind}`:''}`}));if(q)rows=rows.filter(x=>`${x.a} ${x.b} ${x.meta}`.toLowerCase().includes(q));rows.sort((a,b)=>a.a.localeCompare(b.a));
-    $('dictionary-output').innerHTML=rows.length?`<div class="card"><div class="dictionary">${rows.map(x=>`<div class="dict-row"><strong>${esc(x.a)}</strong><span>${esc(x.b)}</span><span class="meta">${esc(x.meta)}</span></div>`).join('')}</div></div>`:'<div class="empty">No dictionary entries match the search.</div>';
-  }
-  function renderAll(c,lexicon,samples){generated={config:c,lexicon,samples};renderGeneration(c,lexicon,samples);renderLexicon(lexicon);renderDictionary(lexicon);}
-
-  function generate(randomize=true){
-    if(!vocabulary.length){$('message').textContent='Vocabulary is not loaded.';return;}
-    if(randomize)randomizeGenerationParameters();
-    const c=config(),lexicon=generateLexicon(c),samples=buildSamples(c,lexicon);renderAll(c,lexicon,samples);$('message').textContent=`Generated ${lexicon.length} lemmas.`;
-  }
-  function regenerateLexicon(){
-    if(!vocabulary.length){$('message').textContent='Vocabulary is not loaded.';return;}
-    if(!generated){generate(true);return;}
-    $('seed').value=`${Date.now()}-${Math.floor(Math.random()*1000000)}`;const c=config(),lexicon=generateLexicon(c),samples=buildSamples(c,lexicon);renderAll(c,lexicon,samples);$('message').textContent=`Regenerated ${lexicon.length} lemmas with the current semantic profile.`;
-  }
-
-  function setPreset(name){
-    const maps={historical:{temporal_setting:'ancient'},fantasy:{tags:'fantasy'},modern:{temporal_setting:'modern'},scifi:{region:'space'}};const m=maps[name];if(!m)return;Object.entries(m).forEach(([id,v])=>{const el=$(id);if(el&&[...el.options].some(o=>o.value===v))el.value=v;});
-  }
-  function clearFilters(){['region','culture','biome','temporal_setting','tags'].forEach(id=>$(id).value='');}
-
-  async function loadVocabulary(){
-    try{
-      const response=await fetch(`vocabulary.json?v=${Date.now()}`,{cache:'no-store'});if(!response.ok)throw new Error(`HTTP ${response.status}`);const data=await response.json();
-      vocabulary=Array.isArray(data)?data:(Array.isArray(data.vocabulary)?data.vocabulary:[]);if(!vocabulary.length)throw new Error('No vocabulary entries found.');populateFilters();$('db-status').textContent=`Vocabulary: ${vocabulary.length} entries · v${VERSION}`;
-    }catch(err){$('db-status').textContent='Vocabulary load failed';$('generation-output').innerHTML=`<div class="error">Unable to load vocabulary.json: ${esc(err.message)}</div>`;}
-  }
-
-  const title=document.querySelector('h1');if(title&&!title.querySelector('.version')){const badge=document.createElement('span');badge.className='version';badge.textContent=VERSION;title.appendChild(badge);}
-  $('generate').addEventListener('click',()=>generate(true));
-  $('regenerate').addEventListener('click',regenerateLexicon);
-  $('clear-filters').addEventListener('click',clearFilters);
-  [['preset-historical','historical'],['preset-fantasy','fantasy'],['preset-modern','modern'],['preset-scifi','scifi']].forEach(([id,n])=>$(id)?.addEventListener('click',()=>setPreset(n)));
-  $('dictionary-direction').addEventListener('change',()=>generated&&renderDictionary(generated.lexicon));
-  $('dictionary-search').addEventListener('input',()=>generated&&renderDictionary(generated.lexicon));
-
-  window.ConlangGenerator={version:VERSION,getVocabulary:()=>vocabulary,getGenerated:()=>generated,generate:()=>generate(true)};
-  loadVocabulary();
+/* Conlang Generator — vocabulary-driven engine v0.7.0 */
+(()=>{
+'use strict';
+const VERSION='0.7.0',$=id=>document.getElementById(id),arr=v=>Array.isArray(v)?v.filter(Boolean).map(String):(v==null||v===''?[]:[String(v)]),uniq=a=>[...new Set(a)],norm=v=>String(v??'').toLowerCase().replace(/^to\s+/,'').trim(),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const P={vowels:{standard:['a','e','i','o','u'],minimal:['a','i','u'],extended:['a','e','i','o','u','y','ø','æ']},consonants:{balanced:['p','t','k','b','d','g','m','n','s','r','l','f','v'],guttural:['k','q','x','g','r','kh','gh','t','d'],sibilant:['s','z','sh','zh','f','v','r','l','th'],soft:['m','n','l','r','w','j','v','dh']}},S={standard:['CV','CVC','CVV','VC'],musical:['CV','V','CVV','CVC'],guttural:['CVC','CCVC','CVCC'],soft:['CV','CVV','CVC','V']};
+let vocabulary=[],generated=null;
+function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}function rng(s){let x=hash(s)||1;return()=>{x+=0x6D2B79F5;let t=x;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}function choice(a,r){return a[Math.floor(r()*a.length)]}
+function selected(id){let e=$(id);return e?[...e.selectedOptions].map(o=>o.value).filter(Boolean):[]}function vals(f){return uniq(vocabulary.flatMap(e=>arr(e[f]))).sort((a,b)=>a.localeCompare(b))}function populate(){['region','culture','biome','temporal_setting','tags'].forEach(f=>{let e=$(f);if(e)e.innerHTML='<option value="">Any</option>'+vals(f).map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')})}
+function randomize(){['region','culture','biome','temporal_setting','tags'].forEach(id=>{let e=$(id);if(e&&e.options.length>1)e.value=choice([...e.options].slice(1).map(o=>o.value),Math.random)});['vowels','consonants','word-order','morphology','adj-position','articles','plural','relations'].forEach(id=>{let e=$(id);if(e)e.value=choice([...e.options].map(o=>o.value),Math.random)});$('mean').value=(1+Math.random()*2.5).toFixed(1);$('seed').value=`${Date.now()}-${Math.floor(Math.random()*1e6)}`}
+function config(){return{region:selected('region'),culture:selected('culture'),biome:selected('biome'),temporal_setting:selected('temporal_setting'),tags:selected('tags'),vowels:$('vowels').value,consonants:$('consonants').value,mean:Math.max(1,Math.min(5,Number($('mean').value)||2.2)),seed:$('seed').value.trim()||String(Date.now()),order:$('word-order').value,morphology:$('morphology').value,adjectivePosition:$('adj-position').value,articles:$('articles').value,plural:$('plural').value,relations:$('relations').value}}
+function score(e,c){let s=e.scope==='universal'?1:0;for(let f of ['region','culture','biome','temporal_setting','tags'])if(c[f].length)s+=arr(e[f]).some(v=>c[f].includes(v))?(f==='tags'?1.25:2):-0.15;return s}
+function classify(e){let t=norm(e.word_type),c=norm(e.category),x=String(e.concept||'');if(t==='verb'||/^to\s+/i.test(x)||c.includes('verb'))return'verb';if(t==='adjective'||c.includes('adjective'))return'adjective';if(t==='pronoun'||c.includes('pronoun'))return'pronoun';if(t==='preposition'||c.includes('preposition')||c.includes('particle')||c.includes('conjunction')||c.includes('determiner')||c.includes('interrogative')||c.includes('adverb'))return'function';if(c.includes('number')||c.includes('quantity'))return'number';return'noun'}
+function factory(c,salt){let vs=P.vowels[c.vowels]||P.vowels.standard,cs=P.consonants[c.consonants]||P.consonants.balanced,style=c.consonants==='guttural'?'guttural':c.consonants==='soft'?'soft':c.vowels==='extended'?'musical':'standard',ss=S[style],r=rng(`${c.seed}|${salt}`),used=new Set();let build=p=>p.replace(/[CV]/g,x=>x==='C'?choice(cs,r):choice(vs,r));return()=>{for(let i=0;i<300;i++){let w='',n=Math.max(1,Math.min(5,Math.round(c.mean+(r()-.5)*1.6)));for(let j=0;j<n;j++)w+=build(choice(ss,r));if(w.length>1&&!used.has(w)){used.add(w);return w.toLowerCase()}}return build('CVC')+Math.floor(r()*10)}}
+function weighted(c,a,n){let r=rng(`${c.seed}|sample`),pool=a.slice(),out=[];while(pool.length&&out.length<n){let w=pool.map(x=>Math.exp(Math.max(-2,Math.min(7,x.score))*.72)),t=w.reduce((a,b)=>a+b,0),q=r()*t,i=pool.length-1;for(let j=0;j<w.length;j++){q-=w[j];if(q<=0){i=j;break}}out.push(pool[i]);pool.splice(i,1)}return out}
+const REQUIRED=['i','you','we','they','me','my','this','that','here','there','today','tomorrow','yesterday','who','what','where','when','why','how','many','all','nothing','not','can','have','be','to','from','with'];
+function required(e){let x=norm(e.concept);return REQUIRED.some(q=>x===q||x===`to ${q}`)}
+function generateLexicon(c){let make=factory(c,'lexicon'),rank=vocabulary.filter(e=>String(e.concept||'').trim()).map(e=>({entry:e,score:score(e,c)})),req=rank.filter(x=>required(x.entry)),rest=weighted(c,rank.filter(x=>!required(x.entry)),Math.max(0,Math.min(600,rank.length)-req.length)),entries=uniq([...req,...rest].map(x=>x.entry)),out=[],seen=new Set();for(let e of entries){let k=`${norm(e.concept)}|${e.id||''}`;if(seen.has(k))continue;seen.add(k);out.push({...e,english:String(e.concept||'').replace(/^to\s+/i,'').trim(),kind:classify(e),word:make(),score:score(e,c)})}return out}
+function pool(lex,kind,terms=[]){let p=lex.filter(x=>x.kind===kind);if(terms.length){let q=p.filter(x=>terms.some(t=>{let s=norm(x.english)+' '+norm(x.category)+' '+arr(x.tags).join(' ');return s.includes(t)}));if(q.length)p=q}return p}function pick(lex,r,kind,terms=[]){let p=pool(lex,kind,terms);return p.length?choice(p,r):null}function fn(lex,r,terms){let p=lex.filter(x=>{let s=norm(x.english)+' '+norm(x.concept)+' '+norm(x.category)+' '+arr(x.tags).join(' ');return terms.some(t=>s===t||s.includes(t))});return p.length?choice(p,r):null}
+function w(x,label){return x?.word||`<${label}>`}function reorder(s,v,o,c){let m={S:s,V:v,O:o};return c.order.split('').map(k=>m[k]).filter(Boolean).join(' ')}function verb(v,c){if(!v)return'<verb>';return c.morphology==='isolating'?v.word:c.morphology==='agglutinative'?`${v.word}-ta`:c.morphology==='fusional'?`${v.word}a`:v.word}
+/* 50 controlled sentence frames. English keeps translated placeholders; conlang
+   uses only entries selected into the current generated lexicon. */
+function samples(c,lex){let r=rng(`${c.seed}|sentences`),N=()=>pick(lex,r,'noun'),A=()=>pick(lex,r,'adjective'),V=()=>pick(lex,r,'verb'),F=a=>fn(lex,r,a),P=a=>fn(lex,r,a)||pick(lex,r,'pronoun'),out=[],add=(con,en)=>out.push({conlang:con,english:en});
+let I=P(['i']),YOU=P(['you']),WE=P(['we']),THEY=P(['they']),ME=P(['me']),MY=P(['my']),THIS=P(['this']),THAT=P(['that']),HERE=F(['here']),THERE=F(['there']),WHO=P(['who']),WHAT=P(['what']),WHERE=P(['where']),WHEN=P(['when']),WHY=P(['why']),HOW=P(['how']),MANY=P(['many']),ALL=P(['all']),NOTHING=P(['nothing']),NOT=F(['not']),CAN=F(['can']),HAVE=F(['have']),BE=F(['be','is','are']),TO=F(['to','toward']),FROM=F(['from']),WITH=F(['with']),TODAY=F(['today']),TOMORROW=F(['tomorrow']),YESTERDAY=F(['yesterday']);
+let n=[...Array(18)].map(N),a=[...Array(4)].map(A),v=[...Array(20)].map(V),role=n[0],rel=n[1],near=n[2],far=n[3],natural1=n[4],natural2=n[5],food=n[6],liquid=n[7],live1=n[8],live2=n[9],resource=n[10],threat=n[11],place=n[12],cosmic=n[13],inert=n[14],direction=n[15],zone=n[16],organ=n[17],S1=w(I,'i'),S2=w(YOU,'you'),SW=w(WE,'we'),ST=w(THEY,'they');let cop=(s,o)=>reorder(w(s),w(BE,'be'),w(o),c),tr=(s,vv,o)=>reorder(w(s),verb(vv,c),w(o),c);
+add(cop(I,role),'I am <name/role>.');add(`${S2} ${w(BE,'be')} ${w(MY,'my')} ${w(rel,'relationship/friendship')}`,'You are my <relationship/friendship>.');add(cop(THIS,near),'This is <near object>.');add(cop(THAT,far),'That is <distant object>.');add(`${SW} ${w(BE,'be')} ${w(HERE,'here')}`,'We are <near place adverb>.');add(`${ST} ${w(BE,'be')} ${w(THERE,'there')}`,'They are <distant place adverb>.');add(tr(I,HAVE,resource),'I have <fundamental resource>.');add(tr(YOU,HAVE,resource),'You have <fundamental resource>.');add(cop(natural1,a[0]),'<natural element> is <physical adjective 1>.');add(cop(natural2,a[1]),'<natural element> is <physical adjective 2>.');
+add(tr(live1,v[0],food),'<living being 1> <consumption verb> <food resource>.');add(tr(live2,v[1],liquid),'<living being 2> <consumption verb> <liquid>.');add(tr(I,v[2],YOU),'I <perception verb> you.');add(tr(YOU,v[3],ME),'You <perception verb> me.');add(tr(live1,v[4],live2),'<living being 1> <violence/hunting verb> <living being 2>.');add(tr(WE,v[5],THIS),'We <generic action verb> this.');add(tr(I,v[6],live1),'I <positive emotion verb> <living being 1>.');add(tr(I,v[7],threat),'I <negative emotion verb> <threat>.');
+add(`${S1} ${verb(v[8],c)} ${w(TO,'to')} ${w(place,'geographical place')}`,'I <movement verb> toward <geographical place>.');add(`${S2} ${verb(v[9],c)} ${w(FROM,'from')} ${w(place,'geographical place')}`,'You <movement verb> from <geographical place>.');add(`${w(cosmic,'cosmic element')} ${verb(v[10],c)}`,'<cosmic element> <natural movement verb>.');add(`${w(inert,'inanimate object')} ${verb(v[11],c)}`,'<inanimate object> <gravity movement verb>.');add(`${w(live1,'animal')} ${verb(v[12],c)} ${w(TO,'in')} ${w(direction,'vertical direction')}`,'<animal> <air/water movement verb> in <vertical direction>.');add(`${w(live2,'living being')} ${verb(v[13],c)} ${w(zone,'natural zone')}`,'<living being> <ground movement verb> in the <natural zone>.');add(`${verb(v[14],c)} ${w(HERE,'here')}`,'<stop imperative verb> here.');add(`${verb(v[15],c)} ${w(WITH,'with')} ${w(ME,'me')}`,'<movement imperative verb> with me.');
+add(`${w(WHO,'who')} ${w(BE,'be')} ${S2}?`,'Who are you?');add(`${w(WHAT,'what')} ${w(BE,'be')} ${w(THIS,'this')}?`,'What is this?');add(`${w(WHERE,'where')} ${w(BE,'be')} ${SW}?`,'Where are we?');add(`${w(WHEN,'when')} ${verb(v[16],c)} ${S2}?`,'When <future movement verb> you?');add(`${w(WHY,'why')} ${verb(v[17],c)} ${w(THIS,'this')}?`,'Why <action verb> this?');add(`${w(MANY,'how many')} ${w(BE,'be')} ${w(n[0],'plural entities')}?`,'How many are <plural entities>?');add(`${w(HOW,'how')} ${verb(v[18],c)} ${w(THIS,'this')}?`,'How is this <process verb>?');add(`${w(WHERE,'where')} ${w(BE,'be')} ${w(resource,'vital resource')}?`,'Where is <vital resource>?');
+add(`${S1} ${w(NOT,'not')} ${verb(v[19],c)} ${w(THIS,'this')}`,'I do not <will verb> this.');add(`${S2} ${w(NOT,'not')} ${w(CAN,'can')} ${verb(v[0],c)}`,'You cannot <limited action verb>.');add(`${S1} ${w(NOT,'not')} ${verb(v[1],c)}`,'I do not <cognition verb>.');add(`${S1} ${verb(v[2],c)} ${w(THIS,'this')} ${w(place,'path/road')}`,'I <cognition verb> this <path/road>.');add(`${S1} ${w(CAN,'can')} ${verb(v[3],c)} ${w(YOU,'you')}`,'I can <help action verb> you.');add(`${w(NOT,'not')} ${verb(v[4],c)} ${w(THIS,'this')}`,'Do not <forbidden action verb> this.');
+add(`${S1} ${w(HAVE,'have')} ${w(N[0],'physical need/state')}`,'I have <physical need/state>.');add(`${w(MY,'my')} ${w(organ,'organ/body part')} ${verb(v[5],c)}`,'My <organ/body part> <pain verb>.');add(`${S1} ${verb(v[6],c)} ${verb(v[7],c)}`,'I <will verb> <rest verb>.');add(cop(THIS,n[6]),'This is <large quantity>.');add(cop(THIS,n[7]),'This is <small quantity>.');add(`${w(ALL,'all')} ${w(BE,'be')} ${w(a[2],'readiness state')}`,'Everything is <readiness state>.');add(`${w(NOTHING,'nothing')} ${verb(v[8],c)}`,'Nothing <negative existence verb>.');add(`${w(TODAY,'today')} ${SW} ${verb(v[9],c)}`,'Today we <present activity verb>.');add(`${w(TOMORROW,'tomorrow')} ${SW} ${verb(v[10],c)}`,'Tomorrow we <future activity verb>.');add(`${w(YESTERDAY,'yesterday')} ${verb(v[11],c)} ${w(n[8],'entity')}`,'Yesterday <past event verb> <entity>.');return out.slice(0,50)}
+function grammar(c){return{'Word order':c.order,'Morphology':c.morphology,'Adjectives':c.adjectivePosition==='before'?'Before noun':'After noun','Articles':c.articles,'Plural':c.plural==='none'?'No productive plural':c.plural==='prefix'?'Prefix':'Suffix','Relations':c.relations==='cases'?'Case endings':'Prepositions / word order'}}
+function name(c){let f=factory({...c,mean:2},'name');return f().replace(/^./,x=>x.toUpperCase())+'ic'}function render(c,lex,s){let g=grammar(c),n=name(c),ch=['region','culture','biome','temporal_setting','tags'].flatMap(f=>c[f].map(v=>`${f}: ${v}`));$('db-status').textContent=`Vocabulary: ${vocabulary.length} entries · Generated lexicon: ${lex.length}`;$('generation-output').className='result';$('generation-output').innerHTML=`<div class="hero"><div><div class="lang-name">${esc(n)}</div><div class="sub">Generated from the current semantic profile and grammatical parameters.</div><div class="chips">${ch.map(x=>`<span class="chip">${esc(x)}</span>`).join('')||'<span class="chip">No semantic restrictions</span>'}</div></div><div class="kv">${Object.entries(g).map(([k,v])=>`<b>${esc(k)}</b><span>${esc(v)}</span>`).join('')}</div></div><div class="card" style="margin-top:14px"><h3>Sample sentences</h3>${s.map(x=>`<div class="sentence"><div class="con">${esc(x.conlang)}</div><div class="eng">${esc(x.english)}</div></div>`).join('')}</div>`}
+function lexRender(lex){let r=[...lex].sort((a,b)=>a.english.localeCompare(b.english));$('lexicon-output').innerHTML=`<div class="card"><h3>Generated lexicon</h3><div class="sub" style="margin-bottom:10px">${r.length} generated entries</div><div class="lexicon">${r.map(x=>`<div class="lex-row"><div class="word">${esc(x.word)}</div><div class="eng">${esc(x.english)}</div><div class="meta">${esc(x.category||'')} · ${esc(x.kind||'')}</div></div>`).join('')}</div></div>`}
+function dictRender(lex){let d=$('dictionary-direction').value,q=norm($('dictionary-search').value),r=lex.map(x=>({a:d==='conlang-en'?x.word:x.english,b:d==='conlang-en'?x.english:x.word,m:`${x.category||''}${x.kind?` · ${x.kind}`:''}`}));if(q)r=r.filter(x=>`${x.a} ${x.b} ${x.m}`.toLowerCase().includes(q));r.sort((a,b)=>a.a.localeCompare(b.a));$('dictionary-output').innerHTML=r.length?`<div class="card"><div class="dictionary">${r.map(x=>`<div class="dict-row"><strong>${esc(x.a)}</strong><span>${esc(x.b)}</span><span class="meta">${esc(x.m)}</span></div>`).join('')}</div></div>`:'<div class="empty">No dictionary entries match the search.</div>'}
+function generate(random=true){if(!vocabulary.length){$('message').textContent='Vocabulary is not loaded.';return}if(random)randomize();let c=config(),lex=generateLexicon(c),s=samples(c,lex);generated={config:c,lexicon:lex,samples:s};render(c,lex,s);lexRender(lex);dictRender(lex);$('message').textContent=`Generated ${lex.length} lemmas and ${s.length} sample sentences.`}
+function load(){fetch(`vocabulary.json?v=${Date.now()}`,{cache:'no-store'}).then(r=>{if(!r.ok)throw Error(`HTTP ${r.status}`);return r.json()}).then(d=>{vocabulary=Array.isArray(d)?d:(Array.isArray(d.vocabulary)?d.vocabulary:[]);if(!vocabulary.length)throw Error('No vocabulary entries found.');populate();$('db-status').textContent=`Vocabulary: ${vocabulary.length} entries · v${VERSION}`}).catch(e=>{$('db-status').textContent='Vocabulary load failed';$('generation-output').innerHTML=`<div class="error">Unable to load vocabulary.json: ${esc(e.message)}</div>`})}
+function bind(){let h=document.querySelector('header h1');if(h&&!h.querySelector('.version-pill')){let b=document.createElement('span');b.className='version-pill';b.textContent=`v${VERSION}`;b.style.cssText='display:inline-block;margin-left:9px;padding:2px 8px;border-radius:999px;background:#18243a;border:1px solid #2a3b59;color:#a9c4e8;font-size:11px;font-weight:600;vertical-align:middle';h.appendChild(b)}$('generate').addEventListener('click',()=>generate(true));$('regenerate').addEventListener('click',()=>generate(false));$('clear-filters').addEventListener('click',()=>['region','culture','biome','temporal_setting','tags'].forEach(id=>$(id).value=''));$('dictionary-direction').addEventListener('change',()=>generated&&dictRender(generated.lexicon));$('dictionary-search').addEventListener('input',()=>generated&&dictRender(generated.lexicon))}
+window.ConlangGenerator={version:VERSION,getVocabulary:()=>vocabulary,getGenerated:()=>generated,generate:()=>generate(true),regenerate:()=>generate(false)};document.addEventListener('DOMContentLoaded',()=>{bind();load()});
 })();
