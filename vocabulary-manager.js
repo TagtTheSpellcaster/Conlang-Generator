@@ -3,6 +3,7 @@ let filteredVocabulary = [];
 
 const STORAGE_KEY = "conlang_vocabulary";
 
+// Canonical vocabulary fields. `locale` is not part of the current JSON schema.
 const CANONICAL_PROPERTIES = [
     "id",
     "concept",
@@ -10,7 +11,6 @@ const CANONICAL_PROPERTIES = [
     "word_type",
     "semantic_group",
     "scope",
-    "locale",
     "tags",
     "features",
     "relations"
@@ -21,7 +21,6 @@ const FILTER_PROPERTIES = [
     "word_type",
     "semantic_group",
     "scope",
-    "locale",
     "tags",
     "features"
 ];
@@ -33,7 +32,6 @@ const SORT_PROPERTIES = [
     "word_type",
     "semantic_group",
     "scope",
-    "locale",
     "tags",
     "features"
 ];
@@ -45,14 +43,14 @@ let editingEntryId = null;
 // CANONICAL DATABASE VALIDATION
 // ============================================================
 
-function assertCanonicalVocabulary(data) {
+function assertCanonicalVocabulary(data, sourceName = "vocabulary.json") {
     if (!data || Array.isArray(data) || !Array.isArray(data.vocabulary)) {
         throw new Error(
-            'Unsupported vocabulary JSON structure. Expected { "vocabulary": [...] }.'
+            `${sourceName}: unsupported JSON structure. Expected { "vocabulary": [...] }.`
         );
     }
 
-    validateEntries(data.vocabulary, "vocabulary.json");
+    validateEntries(data.vocabulary, sourceName);
     return data.vocabulary;
 }
 
@@ -72,7 +70,7 @@ function validateEntries(entries, sourceName = "vocabulary") {
             return;
         }
 
-        for (const field of ["id", "concept", "category", "word_type", "semantic_group", "scope", "locale", "features", "relations", "tags"]) {
+        for (const field of CANONICAL_PROPERTIES) {
             if (!(field in entry)) {
                 errors.push(`${label}: missing "${field}".`);
             }
@@ -98,7 +96,10 @@ function validateEntries(entries, sourceName = "vocabulary") {
             errors.push(`${label}: "word_type" must be a non-empty string.`);
         }
 
-        if (entry.word_type === "verb" && !entry.concept.trim().toLowerCase().startsWith("to ")) {
+        if (
+            entry.word_type === "verb" &&
+            !entry.concept.trim().toLowerCase().startsWith("to ")
+        ) {
             errors.push(`${label}: verb concept must begin with "to ".`);
         }
 
@@ -110,10 +111,6 @@ function validateEntries(entries, sourceName = "vocabulary") {
             errors.push(`${label}: "scope" must be "universal" or "domain".`);
         }
 
-        if (typeof entry.locale !== "string") {
-            errors.push(`${label}: "locale" must be a string.`);
-        }
-
         if (!Array.isArray(entry.tags)) {
             errors.push(`${label}: "tags" must be an array.`);
         }
@@ -122,7 +119,11 @@ function validateEntries(entries, sourceName = "vocabulary") {
             errors.push(`${label}: "features" must be an array.`);
         }
 
-        if (!entry.relations || typeof entry.relations !== "object" || Array.isArray(entry.relations)) {
+        if (
+            !entry.relations ||
+            typeof entry.relations !== "object" ||
+            Array.isArray(entry.relations)
+        ) {
             errors.push(`${label}: "relations" must be an object.`);
         }
     });
@@ -140,9 +141,8 @@ function validateRelationTargets(entries, sourceName = "vocabulary") {
         for (const [relation, rawValue] of Object.entries(entry.relations || {})) {
             const values = Array.isArray(rawValue) ? rawValue : [rawValue];
 
-            if (relation === "grammatical_roles") {
-                continue;
-            }
+            // These values are grammatical-role labels, not vocabulary IDs.
+            if (relation === "grammatical_roles") continue;
 
             for (const target of values) {
                 if (typeof target !== "string" || !ids.has(target)) {
@@ -150,6 +150,7 @@ function validateRelationTargets(entries, sourceName = "vocabulary") {
                         `${sourceName}: ${entry.id}.${relation} references unknown ID "${target}".`
                     );
                 }
+
                 if (target === entry.id) {
                     errors.push(
                         `${sourceName}: ${entry.id}.${relation} references itself.`
@@ -166,7 +167,12 @@ function validateRelationTargets(entries, sourceName = "vocabulary") {
 
 function cloneEntry(entry) {
     return {
-        ...entry,
+        id: entry.id,
+        concept: entry.concept,
+        category: entry.category,
+        word_type: entry.word_type,
+        semantic_group: entry.semantic_group,
+        scope: entry.scope,
         tags: [...entry.tags],
         features: [...entry.features],
         relations: JSON.parse(JSON.stringify(entry.relations))
@@ -191,28 +197,36 @@ async function loadVocabularyFromJSON() {
     }
 
     const data = await response.json();
-    const entries = assertCanonicalVocabulary(data);
-    validateRelationTargets(entries);
+    const entries = assertCanonicalVocabulary(data, "vocabulary.json");
+    validateRelationTargets(entries, "vocabulary.json");
 
     vocabulary = entries.map(cloneEntry);
 }
 
 async function loadVocabulary() {
-    try {
-        const stored = localStorage.getItem(STORAGE_KEY);
+    const stored = localStorage.getItem(STORAGE_KEY);
 
-        if (stored) {
+    if (stored) {
+        try {
             const parsed = JSON.parse(stored);
-            const entries = assertCanonicalVocabulary(parsed);
+            const entries = assertCanonicalVocabulary(parsed, "localStorage");
             validateRelationTargets(entries, "localStorage");
             vocabulary = entries.map(cloneEntry);
             setDatabaseStatus("Local working copy");
-        } else {
-            await loadVocabularyFromJSON();
-            saveVocabulary();
-            setDatabaseStatus("Loaded from vocabulary.json");
+            refreshInterface();
+            return;
+        } catch (error) {
+            // Old/incompatible local data must not prevent the canonical
+            // vocabulary.json from loading. Discard only the invalid cache.
+            console.warn("Ignoring incompatible local vocabulary:", error);
+            localStorage.removeItem(STORAGE_KEY);
         }
+    }
 
+    try {
+        await loadVocabularyFromJSON();
+        saveVocabulary();
+        setDatabaseStatus("Loaded from vocabulary.json");
         refreshInterface();
     } catch (error) {
         console.error(error);
@@ -221,7 +235,10 @@ async function loadVocabulary() {
 }
 
 function saveVocabulary() {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(serializeVocabulary(), null, 2));
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(serializeVocabulary(), null, 2)
+    );
 }
 
 async function reloadVocabularyFromJSON() {
@@ -233,6 +250,7 @@ async function reloadVocabularyFromJSON() {
     }
 
     try {
+        localStorage.removeItem(STORAGE_KEY);
         await loadVocabularyFromJSON();
         saveVocabulary();
         setDatabaseStatus("Reloaded from vocabulary.json");
@@ -251,7 +269,7 @@ function resetLocalVocabulary() {
     }
 
     localStorage.removeItem(STORAGE_KEY);
-    reloadVocabularyFromJSON();
+    loadVocabulary();
 }
 
 // ============================================================
@@ -270,14 +288,18 @@ async function handleAppendFile(event) {
 
     try {
         const parsed = JSON.parse(await file.text());
-        const imported = assertCanonicalVocabulary(parsed).map(cloneEntry);
-        validateRelationTargets(imported, file.name);
+        const imported = assertCanonicalVocabulary(parsed, file.name).map(cloneEntry);
 
+        // Relations in an append file may legitimately point to entries
+        // already present in the main database. Validate against the combined set.
         const existingIds = new Set(vocabulary.map(entry => entry.id));
         const duplicateIds = imported
             .filter(entry => existingIds.has(entry.id))
             .map(entry => entry.id);
         const newEntries = imported.filter(entry => !existingIds.has(entry.id));
+        const combined = [...vocabulary, ...newEntries];
+
+        validateRelationTargets(combined, file.name);
 
         pendingAppendEntries = {
             fileName: file.name,
@@ -318,7 +340,15 @@ function showAppendModal() {
 function confirmAppend() {
     if (!pendingAppendEntries) return;
 
-    vocabulary.push(...pendingAppendEntries.newEntries.map(cloneEntry));
+    const candidate = [
+        ...vocabulary,
+        ...pendingAppendEntries.newEntries.map(cloneEntry)
+    ];
+
+    validateEntries(candidate, "Appended vocabulary");
+    validateRelationTargets(candidate, "Appended vocabulary");
+
+    vocabulary = candidate;
     saveVocabulary();
     setDatabaseStatus(`${pendingAppendEntries.newEntries.length} entries appended locally`);
     pendingAppendEntries = null;
@@ -476,7 +506,6 @@ function renderVocabulary() {
             entry.word_type,
             entry.semantic_group,
             entry.scope,
-            entry.locale,
             entry.tags.join(", "),
             entry.features.join(", ")
         ];
@@ -539,7 +568,6 @@ function openEditModal(id) {
     document.getElementById("entryWordType").value = entry.word_type;
     document.getElementById("entrySemanticGroup").value = entry.semantic_group;
     document.getElementById("entryScope").value = entry.scope;
-    document.getElementById("entryLocale").value = entry.locale;
     document.getElementById("entryTags").value = entry.tags.join(", ");
     document.getElementById("entryFeatures").value = entry.features.join(", ");
     document.getElementById("entryRelations").value = JSON.stringify(entry.relations, null, 2);
@@ -571,7 +599,6 @@ function readEntryForm() {
         word_type: document.getElementById("entryWordType").value.trim(),
         semantic_group: document.getElementById("entrySemanticGroup").value.trim(),
         scope: document.getElementById("entryScope").value.trim(),
-        locale: document.getElementById("entryLocale").value.trim(),
         tags: splitList(document.getElementById("entryTags").value),
         features: splitList(document.getElementById("entryFeatures").value),
         relations
