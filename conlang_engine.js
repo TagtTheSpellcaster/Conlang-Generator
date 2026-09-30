@@ -35,6 +35,7 @@
   }[c]));
   const unique = values => [...new Set(values)];
   const choice = (values, rng) => values[Math.floor(rng() * values.length)];
+  const randomChoice = values => values[Math.floor(Math.random() * values.length)];
 
   function hashSeed(seed) {
     let h = 2166136261;
@@ -88,6 +89,33 @@
     });
   }
 
+  function randomizeGenerationParameters() {
+    const semanticFields = ['region','culture','biome','temporal_setting','tags'];
+    semanticFields.forEach(id => {
+      const element = $(id);
+      if (!element || !element.options.length) return;
+      setSelected(id, [randomChoice([...element.options].map(option => option.value))]);
+    });
+
+    const randomSelect = id => {
+      const element = $(id);
+      if (!element || !element.options.length) return;
+      element.value = randomChoice([...element.options].map(option => option.value));
+    };
+
+    randomSelect('vowels');
+    randomSelect('consonants');
+    randomSelect('word-order');
+    randomSelect('morphology');
+    randomSelect('adj-position');
+    randomSelect('articles');
+    randomSelect('plural');
+    randomSelect('relations');
+
+    $('mean').value = (1 + Math.random() * 2.5).toFixed(1);
+    $('seed').value = `${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+  }
+
   function config() {
     return {
       region: selected('region'),
@@ -108,8 +136,6 @@
     };
   }
 
-  /* A selected array value means membership. An entry with several values
-     therefore matches if at least one of its values matches the selection. */
   function overlap(entry, field, wanted) {
     if (!wanted.length) return 0;
     return arr(entry[field]).some(value => wanted.includes(value)) ? 1 : 0;
@@ -198,9 +224,6 @@
       const kind = classify(entry);
       const entryKey = String(entry.id || `${concept}|${kind}`);
       if (usedEntryIds.has(entryKey)) continue;
-
-      /* Keep genuinely distinct database entries, including legitimate
-         homonyms such as school used for different semantic concepts. */
       const conceptKey = `${concept.toLowerCase()}|${kind}`;
       if (usedConceptKinds.has(conceptKey) && !entry.id) continue;
 
@@ -232,9 +255,8 @@
     return kind === 'verb' ? `${base}-ta` : base;
   }
 
-  function renderNoun(entry, c) {
-    if (!entry) return '—';
-    return entry.word;
+  function renderNoun(entry) {
+    return entry ? entry.word : '—';
   }
 
   function renderVerb(entry, c) {
@@ -243,9 +265,9 @@
 
   function buildSentence(subject, verb, object, c) {
     const forms = {
-      S: renderNoun(subject, c),
+      S: renderNoun(subject),
       V: renderVerb(verb, c),
-      O: renderNoun(object, c)
+      O: renderNoun(object)
     };
     return c.order.split('').map(part => forms[part]).join(' ');
   }
@@ -276,9 +298,7 @@
   function grammar(c) {
     return {
       'Word order': c.order,
-      'Morphology': c.morphology === 'agglutinative'
-        ? 'Agglutinative'
-        : c.morphology === 'fusional' ? 'Fusional' : 'Isolating',
+      'Morphology': c.morphology === 'agglutinative' ? 'Agglutinative' : c.morphology === 'fusional' ? 'Fusional' : 'Isolating',
       'Adjectives': c.adjectivePosition === 'before' ? 'Before noun' : 'After noun',
       'Articles': c.articles,
       'Plural': c.plural === 'none' ? 'No productive plural' : c.plural === 'prefix' ? 'Prefix' : 'Suffix',
@@ -292,8 +312,7 @@
   }
 
   function semanticChips(c) {
-    return ['region','culture','biome','temporal_setting','tags']
-      .flatMap(field => c[field].map(value => `${field}: ${value}`));
+    return ['region','culture','biome','temporal_setting','tags'].flatMap(field => c[field].map(value => `${field}: ${value}`));
   }
 
   function renderGeneration(c, lexicon, samples) {
@@ -301,46 +320,21 @@
     const name = languageName(c);
     const chips = semanticChips(c);
     $('db-status').textContent = `Vocabulary: ${vocabulary.length} entries · Generated lexicon: ${lexicon.length}`;
-
     $('generation-output').innerHTML = `
       <div class="hero">
-        <div>
-          <div class="lang-name">${esc(name)}</div>
-          <div class="sub">Generated from the current semantic profile and phonological / grammatical parameters.</div>
-          <div class="chips">${chips.length ? chips.map(v => `<span class="chip">${esc(v)}</span>`).join('') : '<span class="chip">No semantic restrictions</span>'}</div>
-        </div>
+        <div><div class="lang-name">${esc(name)}</div><div class="sub">Generated from the current semantic profile and phonological / grammatical parameters.</div><div class="chips">${chips.length ? chips.map(v => `<span class="chip">${esc(v)}</span>`).join('') : '<span class="chip">No semantic restrictions</span>'}</div></div>
         <div class="kv">${Object.entries(grammarData).map(([k,v]) => `<b>${esc(k)}</b><span>${esc(v)}</span>`).join('')}</div>
       </div>
       <div class="grid">
-        <div class="card"><h3>Phonology</h3><div class="kv">
-          <b>Vowels</b><span>${esc(PHONETICS.vowels[c.vowels].join(' '))}</span>
-          <b>Consonants</b><span>${esc(PHONETICS.consonants[c.consonants].join(' '))}</span>
-          <b>Mean syllables</b><span>${esc(c.mean)}</span>
-        </div></div>
-        <div class="card"><h3>Generation</h3><div class="kv">
-          <b>Lexicon size</b><span>${lexicon.length}</span>
-          <b>Seed</b><span>${esc(c.seed)}</span>
-          <b>Relations</b><span>${esc(c.relations)}</span>
-        </div></div>
+        <div class="card"><h3>Phonology</h3><div class="kv"><b>Vowels</b><span>${esc(PHONETICS.vowels[c.vowels].join(' '))}</span><b>Consonants</b><span>${esc(PHONETICS.consonants[c.consonants].join(' '))}</span><b>Mean syllables</b><span>${esc(c.mean)}</span></div></div>
+        <div class="card"><h3>Generation</h3><div class="kv"><b>Lexicon size</b><span>${lexicon.length}</span><b>Seed</b><span>${esc(c.seed)}</span><b>Relations</b><span>${esc(c.relations)}</span></div></div>
       </div>
-      <div class="card" style="margin-top:14px"><h3>Sample sentences</h3>
-        ${samples.length ? samples.map(s => `<div class="sentence"><div class="con">${esc(s.conlang)}</div><div class="eng">${esc(s.english)}</div></div>`).join('') : '<div class="empty">Not enough matching vocabulary to build sample sentences.</div>'}
-      </div>`;
+      <div class="card" style="margin-top:14px"><h3>Sample sentences</h3>${samples.length ? samples.map(s => `<div class="sentence"><div class="con">${esc(s.conlang)}</div><div class="eng">${esc(s.english)}</div></div>`).join('') : '<div class="empty">Not enough matching vocabulary to build sample sentences.</div>'}</div>`;
   }
 
   function renderLexicon(lexicon) {
     const rows = [...lexicon].sort((a,b) => a.english.localeCompare(b.english));
-    $('lexicon-output').innerHTML = `
-      <div class="card"><h3>Generated lexicon</h3>
-        <div class="sub" style="margin-bottom:10px">${rows.length} generated entries</div>
-        <div class="lexicon">${rows.map(item => `
-          <div class="lex-row">
-            <div class="word">${esc(item.word)}</div>
-            <div class="eng">${esc(item.english)}</div>
-            <div class="meta">${esc(item.category || '')} · ${esc(item.kind)}</div>
-          </div>`).join('')}
-        </div>
-      </div>`;
+    $('lexicon-output').innerHTML = `<div class="card"><h3>Generated lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} generated entries</div><div class="lexicon">${rows.map(item => `<div class="lex-row"><div class="word">${esc(item.word)}</div><div class="eng">${esc(item.english)}</div><div class="meta">${esc(item.category || '')} · ${esc(item.kind)}</div></div>`).join('')}</div></div>`;
   }
 
   function renderDictionary() {
@@ -348,36 +342,17 @@
       $('dictionary-output').innerHTML = '<div class="empty">Generate a language to populate the dictionary.</div>';
       return;
     }
-
     const direction = $('dictionary-direction').value;
     const query = $('dictionary-search').value.trim().toLowerCase();
-    let rows = generated.lexicon.map(item => ({
-      left: direction === 'conlang-en' ? item.word : item.english,
-      right: direction === 'conlang-en' ? item.english : item.word,
-      meta: `${item.category || ''} · ${item.kind}`,
-      sort: direction === 'conlang-en' ? item.word : item.english
-    }));
-
-    if (query) {
-      rows = rows.filter(row => `${row.left} ${row.right} ${row.meta}`.toLowerCase().includes(query));
-    }
-
+    let rows = generated.lexicon.map(item => ({left: direction === 'conlang-en' ? item.word : item.english,right: direction === 'conlang-en' ? item.english : item.word,meta: `${item.category || ''} · ${item.kind}`,sort: direction === 'conlang-en' ? item.word : item.english}));
+    if (query) rows = rows.filter(row => `${row.left} ${row.right} ${row.meta}`.toLowerCase().includes(query));
     rows.sort((a,b) => a.sort.localeCompare(b.sort));
-    $('dictionary-output').innerHTML = `
-      <div class="card"><h3>${direction === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3>
-        <div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div>
-        <div class="dictionary">${rows.length ? rows.map(row => `
-          <div class="dict-row"><strong>${esc(row.left)}</strong><span>${esc(row.right)}</span><span class="meta">${esc(row.meta)}</span></div>`).join('') : '<div class="empty">No matching entries.</div>'}</div>
-      </div>`;
+    $('dictionary-output').innerHTML = `<div class="card"><h3>${direction === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.length ? rows.map(row => `<div class="dict-row"><strong>${esc(row.left)}</strong><span>${esc(row.right)}</span><span class="meta">${esc(row.meta)}</span></div>`).join('') : '<div class="empty">No matching entries.</div>'}</div></div>`;
   }
 
   function switchTab(tabName) {
-    document.querySelectorAll('.tab').forEach(button => {
-      button.classList.toggle('active', button.dataset.tab === tabName);
-    });
-    document.querySelectorAll('.tab-panel').forEach(panel => {
-      panel.classList.toggle('active', panel.id === tabName);
-    });
+    document.querySelectorAll('.tab').forEach(button => button.classList.toggle('active', button.dataset.tab === tabName));
+    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('active', panel.id === tabName));
   }
 
   function generate() {
@@ -417,14 +392,28 @@
     generate();
   }
 
+  function removeActionFrame() {
+    const actions = document.querySelector('.generation-actions');
+    if (!actions) return;
+    actions.style.background = 'transparent';
+    actions.style.border = '0';
+    actions.style.borderRadius = '0';
+    actions.style.padding = '0';
+    actions.style.boxShadow = 'none';
+    actions.style.alignItems = 'flex-end';
+    actions.style.justifyContent = 'flex-start';
+    actions.style.minWidth = '0';
+    actions.querySelectorAll('.btn').forEach(button => {
+      button.style.width = 'auto';
+    });
+  }
+
   async function loadVocabulary() {
     try {
       const response = await fetch('vocabulary.json', {cache:'no-store'});
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const data = await response.json();
-      vocabulary = Array.isArray(data)
-        ? data
-        : Array.isArray(data.vocabulary) ? data.vocabulary : [];
+      vocabulary = Array.isArray(data) ? data : Array.isArray(data.vocabulary) ? data.vocabulary : [];
       if (!vocabulary.length) throw new Error('No vocabulary entries found.');
       populateFilters();
       $('db-status').textContent = `Vocabulary: ${vocabulary.length} entries`;
@@ -435,11 +424,11 @@
   }
 
   document.addEventListener('DOMContentLoaded', async () => {
-    document.querySelectorAll('.tab').forEach(button => {
-      button.addEventListener('click', () => switchTab(button.dataset.tab));
-    });
+    document.querySelectorAll('.tab').forEach(button => button.addEventListener('click', () => switchTab(button.dataset.tab)));
+    removeActionFrame();
 
     $('generate').addEventListener('click', () => {
+      randomizeGenerationParameters();
       generate();
       switchTab('generator');
     });
