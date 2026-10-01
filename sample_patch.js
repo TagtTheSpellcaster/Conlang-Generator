@@ -1,7 +1,7 @@
-/* ConLang Generator sample integrity patch — v0.7.22 */
+/* ConLang Generator sample integrity patch — v0.7.23 */
 (() => {
   'use strict';
-  const VERSION='0.7.22';
+  const VERSION='0.7.23';
   const norm=v=>String(v??'').toLowerCase().trim().replace(/^to\s+/,'');
   const arr=v=>Array.isArray(v)?v:(v==null||v===''?[]:[v]);
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -73,7 +73,7 @@
     ['We build [a house|a boat].',`${F(m,'we')} ${tag('construction')} ${A(m,['house','boat'])}`],
     ['The [bird|fish] is [small|large].',`${F(m,'the')} ${A(m,['bird','fish'])} ${F(m,'be')} ${A(m,['small','large'])}`]
   ];return rows.map(([english,html],i)=>({number:i+1,english,html}))}
-  function render(rows){const box=document.getElementById('generation-output');if(!box)return;const old=box.querySelector('.sample-frame');if(old)old.remove();let style=document.getElementById('sample-v722');if(!style){style=document.createElement('style');style.id='sample-v722';style.textContent='.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}box.insertAdjacentHTML('beforeend',`<div class="sample-frame"><h3>Sample sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`)}
+  function render(rows){const box=document.getElementById('generation-output');if(!box)return;const old=box.querySelector('.sample-frame');if(old)old.remove();let style=document.getElementById('sample-v723');if(!style){style=document.createElement('style');style.id='sample-v723';style.textContent='.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}box.insertAdjacentHTML('beforeend',`<div class="sample-frame"><h3>Sample sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`)}
   async function patch(detail){
     const list=detail?.lexicon;if(!Array.isArray(list))return;
     try{
@@ -85,9 +85,9 @@
       for(const c of SAMPLE_CONCEPTS){
         const key=norm(c), current=map.get(key);
         if(valid(current))continue;
-        const src=source.find(e=>norm(e.concept||e.english)===key);
-        if(!src)continue;
-        const e={...src,conlang:make()};
+        const src=source.find(e=>norm(e.concept||e.english||e.term||e.word||e.label)===key);
+        const base=src?{...src}:{concept:key,word_type:key==='be'||key==='have'||key==='can'||key==='eat'||key==='drink'||key==='kill'||key==='hunt'||key==='love'||key==='trust'||key==='help'||key==='eat'||key==='build'?'verb':'noun',scope:'universal',tags:[]};
+        const e={...base,concept:base.concept||base.english||base.term||base.word||base.label||key,conlang:make()};
         list.push(e);
         map.set(key,e);
       }
@@ -98,9 +98,6 @@
         list.push({...src,conlang:make()});
       }
       map=exactMap(list);
-      const lex=document.getElementById('lexicon-output');
-      const target=lex?.querySelector('.lexicon');
-      if(target){const rows=list.slice().sort((a,b)=>String(a.concept||'').localeCompare(String(b.concept||'')));target.innerHTML=rows.map(e=>`<div class="lex-row"><div class="word">${esc(e.conlang)}</div><div class="eng">${esc(e.concept||e.english||'')}</div><div class="meta">${esc(e.category||e.semantic_group||e.word_type||'')}</div></div>`).join('')}
       render(build(list));
       const h1=document.querySelector('header h1');if(h1){let b=h1.querySelector('.version-badge');if(!b){b=document.createElement('span');b.className='chip version-badge';b.style.marginLeft='8px';h1.appendChild(b)}b.textContent='v'+VERSION}
     }catch(err){console.error('Sample vocabulary patch:',err)}
