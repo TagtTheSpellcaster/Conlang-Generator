@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.9.5 */
+/* ConLang Generator — core engine v0.10.0 */
 (() => {
     'use strict';
 
-    const VERSION = '0.9.5';
+    const VERSION = '0.10.0';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -121,7 +121,7 @@
             temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [],
             tags: Array.isArray(c?.tags) ? c.tags : [],
             vowels: c?.vowels || 'standard',
-            consonants: c?.consonants || 'balanced',
+            consonants: c?.consonants || 'european',
             mean: Number(c?.mean) || 2.2,
             seed: String(c?.seed ?? 'auto'),
             order: c?.order || 'SVO',
@@ -149,8 +149,24 @@
         return vocabulary.slice();
     }
 
-    function languageName(seed) {
-        return 'Language ' + String(Math.floor(rng(seed)() * 900) + 100);
+    function languageName(seed, options = {}) {
+        const requestedSeed = String(seed ?? 'auto');
+        const modelKey = options.consonants || 'european';
+        const vowels = options.vowels || 'standard';
+        const mean = Number(options.mean) || 2.2;
+        const nameSeed = requestedSeed + '|language-name';
+
+        if (window.ConlangPhonology?.createWordFactory) {
+            const make = window.ConlangPhonology.createWordFactory({
+                consonants: modelKey,
+                vowels,
+                mean: Math.max(1, Math.min(4, mean * 0.8)),
+                seed: nameSeed
+            });
+            return make();
+        }
+
+        return 'language-' + String(Math.floor(rng(nameSeed)() * 900) + 100);
     }
 
     window.ConlangEngine = Object.freeze({
