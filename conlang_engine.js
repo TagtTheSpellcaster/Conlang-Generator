@@ -1,8 +1,8 @@
-/* ConLang Generator — self-contained engine v0.7.17 */
+/* ConLang Generator — self-contained engine v0.7.18 */
 (() => {
   'use strict';
 
-  const VERSION = '0.7.17';
+  const VERSION = '0.7.18';
   const $ = id => document.getElementById(id);
   const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
   const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
@@ -56,10 +56,14 @@
 
   function candidates(list, q={}) {
     let out=list.filter(e => !q.kinds || !q.kinds.length || q.kinds.includes(e.kind));
+
+    // A concept query is an exact lookup. Never fall back to an arbitrary
+    // vocabulary entry when the requested concept is absent: that was the
+    // source of false translations such as wolf -> heel and milk -> year.
     if (q.concepts?.length) {
-      const exact=out.filter(e=>concept(e,q.concepts));
-      if (exact.length) return exact;
+      return out.filter(e => concept(e,q.concepts));
     }
+
     return out.filter(e=>{
       const m=meta(e);
       if(q.anyTags?.length && !has(m.tags,q.anyTags)) return false;
@@ -130,21 +134,17 @@
 
   function translateConcreteTemplates(list,c) {
     const r=rng(c.seed+'|samples');
-    const pick=(q,fallback)=>find(list,q,r)||find(list,{kinds:[f].filter(Boolean)},r)||null;
+    const verbTag=x=>find(list,{kinds:['verb'],anyTags:[x]},r);
     const byConcept=(...x)=>find(list,{concepts:x},r);
     const pron=x=>byConcept(x);
-    const verbTag=x=>find(list,{kinds:['verb'],anyTags:[x]},r);
-    const nounTag=x=>find(list,{kinds:['noun'],anyTags:[x]},r);
-    const func=x=>find(list,{concepts:[x]},r);
+    const func=x=>byConcept(x);
     const alt=(...concepts)=>concepts.map(x=>byConcept(x)).filter(Boolean);
-    const W=e=>e?{word:e.conlang,english:e.concept||e.english}:null;
     const T=e=>e?`<span class="sample-word" data-meaning="${esc(e.concept||e.english)}">${esc(e.conlang)}</span>`:'';
     const A=es=>`[${es.map(T).join('|')}]`;
     const I=pron('i'), YOU=pron('you'), WE=pron('we'), THEY=pron('they'), ME=pron('me'), MY=func('my'), THIS=pron('this'), THAT=pron('that'), HERE=func('here'), THERE=func('there');
     const BE=byConcept('be')||verbTag('copula'), HAVE=byConcept('have'), CAN=byConcept('can'), NOT=byConcept('not'), TO=func('to'), FROM=func('from'), WITH=func('with'), IN=func('in'), THE=func('the');
-    const F=(e)=>e?T(e):'';
-    const V=(e)=>e?T(e):'';
-    const N=(e)=>e?T(e):'';
+    const F=e=>e?T(e):'';
+    const V=e=>e?T(e):'';
     const variants={friend:alt('friend','sister','father'),resource:alt('water','food','bread'),animal:alt('wolf','dog','horse'),living:alt('wolf','dog','hunter'),liquid:alt('water','milk'),place:alt('village','city','forest'),threat:alt('sword','enemy','wolf'),action:alt('eat','drink','build'),emotion:alt('love','trust','help'),adjective:alt('hot','cold','bright'),quantity:alt('many','little')};
     const arrT=e=>e.length?A(e):'';
     const rows=[
@@ -208,7 +208,7 @@
   function renderSamples(c,list) {
     const box=$('generation-output'); if(!box) return;
     const rows=translateConcreteTemplates(list,c);
-    const style=`<style id="sample-v717">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}`+'</style>';
+    const style=`<style id="sample-v718">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}`+'</style>';
     const html=rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('');
     const existing=box.innerHTML;
     box.innerHTML=existing+style+`<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`;
