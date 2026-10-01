@@ -247,6 +247,27 @@
         return null;
     }
 
+    function createWordFactory(c = {}) {
+        const modelKey = MODEL[c.consonants] ? c.consonants : 'european';
+        const model = MODEL[modelKey];
+        const vowels = VOWELS[c.vowels] || VOWELS.standard;
+        const mean = Number(c.mean) || 2.2;
+        const seed = String(c.seed || 'auto') + '|phonology|' + modelKey + '|words';
+        const r = rng(seed);
+        const used = new Set();
+
+        return () => {
+            for (let guard = 0; guard < 100; guard++) {
+                const word = makeWord(model, vowels, mean, r);
+                if (word && !used.has(word)) {
+                    used.add(word);
+                    return word;
+                }
+            }
+            return 'lex' + Math.floor(r() * 1e6);
+        };
+    }
+
     function resetCycle() {
         phonologyCycleSeed = null;
         document.querySelectorAll('#lexicon-output .lex-row .word[data-phonologized="1"]').forEach(cell => {
@@ -320,6 +341,7 @@
         version: '0.9.6',
         models: MODEL,
         modelOptions: MODEL_OPTIONS,
+        createWordFactory,
         resetCycle,
         phonologize
     });
