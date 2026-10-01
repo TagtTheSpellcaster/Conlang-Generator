@@ -1,7 +1,7 @@
-/* ConLang Generator sample integrity patch — v0.7.25 */
+/* ConLang Generator sample integrity patch — v0.7.26 */
 (() => {
   'use strict';
-  const VERSION='0.7.25';
+  const VERSION='0.7.26';
   const norm=v=>String(v??'').toLowerCase().trim().replace(/^to\s+/,'');
   const arr=v=>Array.isArray(v)?v:(v==null||v===''?[]:[v]);
   const valid=e=>!!e&&!!String(e.conlang??'').trim();
@@ -19,7 +19,19 @@
   function exactMap(list){const m=new Map();for(const e of list){const k=norm(e.concept||e.english||e.term||e.word||e.label);if(k&&valid(e)&&!m.has(k))m.set(k,e)}return m}
   function conceptVerb(list,names){for(const name of names){const e=list.find(x=>valid(x)&&norm(x.word_type)==='verb'&&norm(x.concept||x.english||x.term||x.word||x.label)===norm(name));if(e)return e}return null}
   function taggedVerb(list,tag){const e=list.find(e=>valid(e)&&norm(e.word_type)==='verb'&&hasSemantic(e,tag));if(e)return e;for(const alias of TAG_ALIASES[tag]||[]){const x=conceptVerb(list,[alias]);if(x)return x}return null}
-  function T(e){if(!valid(e))return'';const meaning=e.concept||e.english||e.term||'';return`<span class="sample-word" data-meaning="${esc(meaning)}" title="${esc(meaning)}">${esc(e.conlang)}</span>`}
+  function verbTooltip(e){
+    const raw=String(e?.concept||e?.english||e?.term||'').trim();
+    const n=norm(raw);
+    if(!raw||norm(e?.word_type)!=='verb')return raw;
+    const modal=new Set(['can','cannot','must','may','might','should','would','will','shall']);
+    if(modal.has(n))return raw;
+    let lemma=n;
+    if(lemma.endsWith('ies')&&lemma.length>3)lemma=lemma.slice(0,-3)+'y';
+    else if(lemma.endsWith('es')&&/(s|x|z|ch|sh|o)es$/.test(lemma))lemma=lemma.slice(0,-2);
+    else if(lemma.endsWith('s')&&lemma.length>3)lemma=lemma.slice(0,-1);
+    return `to ${lemma}`;
+  }
+  function T(e){if(!valid(e))return'';const meaning=verbTooltip(e);return`<span class="sample-word" data-meaning="${esc(meaning)}" title="${esc(meaning)}">${esc(e.conlang)}</span>`}
   function F(m,c){return T(m.get(norm(c)))}
   function A(m,cs){return'['+cs.map(c=>T(m.get(norm(c)))).join('|')+']'}
   function build(list){const m=exactMap(list),tag=t=>T(taggedVerb(list,t));const rows=[
@@ -77,7 +89,7 @@
     ['We build [a house|a boat].',`${F(m,'we')} ${tag('construction')} ${A(m,['house','boat'])}`],
     ['The [bird|fish] is [small|large].',`${F(m,'the')} ${A(m,['bird','fish'])} ${F(m,'be')} ${A(m,['small','large'])}`]
   ];return rows.map(([english,html],i)=>({number:i+1,english,html}))}
-  function render(rows){const box=document.getElementById('generation-output');if(!box)return;const old=box.querySelector('.sample-frame');if(old)old.remove();let style=document.getElementById('sample-v725');if(!style){style=document.createElement('style');style.id='sample-v725';style.textContent='.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}box.insertAdjacentHTML('beforeend',`<div class="sample-frame"><h3>Sample sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`)}
+  function render(rows){const box=document.getElementById('generation-output');if(!box)return;const old=box.querySelector('.sample-frame');if(old)old.remove();let style=document.getElementById('sample-v726');if(!style){style=document.createElement('style');style.id='sample-v726';style.textContent='.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}box.insertAdjacentHTML('beforeend',`<div class="sample-frame"><h3>Sample sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`)}
   async function patch(detail){
     const list=detail?.lexicon;if(!Array.isArray(list))return;
     try{
@@ -101,7 +113,6 @@
         if(!src)continue;
         list.push({...src,conlang:make()});
       }
-      map=exactMap(list);
       render(build(list));
       const h1=document.querySelector('header h1');if(h1){let b=h1.querySelector('.version-badge');if(!b){b=document.createElement('span');b.className='chip version-badge';b.style.marginLeft='8px';h1.appendChild(b)}b.textContent='v'+VERSION}
     }catch(err){console.error('Sample vocabulary patch:',err)}
