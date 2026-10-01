@@ -1,7 +1,7 @@
-/* ConLang Generator sample integrity patch — v0.7.27 */
+/* ConLang Generator sample integrity patch — v0.8.0 */
 (() => {
   'use strict';
-  const VERSION='0.7.27';
+  const VERSION='0.8.0';
   const norm=v=>String(v??'').toLowerCase().trim().replace(/^to\s+/,'');
   const arr=v=>Array.isArray(v)?v:(v==null||v===''?[]:[v]);
   const valid=e=>!!e&&!!String(e.conlang??'').trim();
@@ -89,7 +89,22 @@
     ['We build [a house|a boat].',`${F(m,'we')} ${tag('construction')} ${A(m,['house','boat'])}`],
     ['The [bird|fish] is [small|large].',`${F(m,'the')} ${A(m,['bird','fish'])} ${F(m,'be')} ${A(m,['small','large'])}`]
   ];return rows.map(([english,html],i)=>({number:i+1,english,html}))}
-  function render(rows){const box=document.getElementById('generation-output');if(!box)return;const old=box.querySelector('.sample-frame');if(old)old.remove();let style=document.getElementById('sample-v727');if(!style){style=document.createElement('style');style.id='sample-v727';style.textContent='.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}box.insertAdjacentHTML('beforeend',`<div class="sample-frame"><h3>Sample sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`)}
+  function ensureSamplesTab(){
+    if(document.getElementById('samples'))return document.getElementById('samples');
+    const tabs=document.querySelector('.tabs');
+    const dictionaryTab=tabs?.querySelector('[data-tab="dictionary"]');
+    const tab=document.createElement('button');tab.type='button';tab.className='tab';tab.dataset.tab='samples';tab.setAttribute('aria-selected','false');tab.textContent='Sample Sentences';
+    if(dictionaryTab)dictionaryTab.insertAdjacentElement('afterend',tab);else tabs?.appendChild(tab);
+    const panel=document.createElement('section');panel.id='samples';panel.className='tab-panel';panel.innerHTML='<main><div id="samples-output" class="result empty">Generate a language to populate the sample sentences.</div></main>';
+    document.body.insertBefore(panel,document.querySelector('script[src="conlang_engine.js"]')||document.body.lastElementChild);
+    tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');tab.setAttribute('aria-selected','true');panel.classList.add('active')});
+    return panel;
+  }
+  function render(rows){
+    const panel=ensureSamplesTab();const box=panel?.querySelector('#samples-output');if(!box)return;
+    let style=document.getElementById('sample-v80');if(!style){style=document.createElement('style');style.id='sample-v80';style.textContent='.sample-frame{margin-top:0;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}
+    box.classList.remove('empty');box.innerHTML=`<div class="sample-frame"><h3>Sample Sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`;
+  }
   async function patch(detail){
     const list=detail?.lexicon;if(!Array.isArray(list))return;
     try{
@@ -99,17 +114,15 @@
       const make=factory(detail.config||{},used);
       let map=exactMap(list);
       for(const c of SAMPLE_CONCEPTS){
-        const key=norm(c), current=map.get(key);
-        if(valid(current))continue;
+        const key=norm(c),current=map.get(key);if(valid(current))continue;
         const src=source.find(e=>norm(e.concept||e.english||e.term||e.word||e.label)===key);
         const base=src?{...src}:{concept:key,word_type:['be','have','can','eat','drink','kill','hunt','love','trust','help','rise','rises','fall','falls'].includes(key)?'verb':'noun',scope:'universal',tags:[]};
-        const e={...base,concept:base.concept||base.english||base.term||base.word||base.label||key,conlang:make()};
-        list.push(e);map.set(key,e);
+        const e={...base,concept:base.concept||base.english||base.term||base.word||base.label||key,conlang:make()};list.push(e);map.set(key,e);
       }
       for(const requiredTag of SAMPLE_TAGS){
         if(taggedVerb(list,requiredTag))continue;
         const src=source.find(e=>norm(e.word_type)==='verb'&&hasSemantic(e,requiredTag));
-        if(!src)continue;
+        if(!src){const aliases=TAG_ALIASES[requiredTag]||[];const fallback=source.find(e=>norm(e.word_type)==='verb'&&aliases.includes(norm(e.concept||e.english||'')));if(fallback)list.push({...fallback,conlang:make()});continue}
         list.push({...src,conlang:make()});
       }
       render(build(list));
@@ -117,5 +130,6 @@
     }catch(err){console.error('Sample vocabulary patch:',err)}
   }
   window.addEventListener('conlang:generated',e=>patch(e.detail));
+  ensureSamplesTab();
   const h1=document.querySelector('header h1');if(h1){let b=h1.querySelector('.version-badge');if(!b){b=document.createElement('span');b.className='chip version-badge';b.style.marginLeft='8px';h1.appendChild(b)}b.textContent='v'+VERSION}
 })();
