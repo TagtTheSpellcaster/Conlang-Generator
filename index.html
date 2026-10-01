@@ -85,6 +85,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <div id="dictionary-output" class="empty">Generate a language to populate the dictionary.</div>
 </main></section>
 <script src="conlang_engine.js"></script>
+<script src="sample_patch.js"></script>
 <script>
 document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{
  document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
@@ -102,19 +103,14 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
 
   function currentVisibleLexicon(){
     const rows=[...document.querySelectorAll('#lexicon-output .lex-row')];
-    return rows.map(row=>{
-      const cells=row.children;
-      return {word:cells[0]?.textContent.trim()||'',english:cells[1]?.textContent.trim()||'',meta:cells[2]?.textContent.trim()||''};
-    }).filter(x=>x.word&&x.english);
+    return rows.map(row=>{const cells=row.children;return {word:cells[0]?.textContent.trim()||'',english:cells[1]?.textContent.trim()||'',meta:cells[2]?.textContent.trim()||''};}).filter(x=>x.word&&x.english);
   }
 
   $('export-vocabulary').addEventListener('click',()=>{
     const lexicon=imported||currentVisibleLexicon();
     if(!lexicon.length){$('message').textContent='Generate a language before exporting its vocabulary.';return;}
     const payload={format:'Conlang Generator vocabulary',version:1,exported_at:new Date().toISOString(),lexicon};
-    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
-    const url=URL.createObjectURL(blob);const a=document.createElement('a');
-    a.href=url;a.download='conlang-vocabulary.json';a.click();URL.revokeObjectURL(url);
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='conlang-vocabulary.json';a.click();URL.revokeObjectURL(url);
     $('message').textContent=`Exported ${lexicon.length} entries.`;
   });
 
@@ -126,27 +122,21 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
       const raw=Array.isArray(data)?data:(Array.isArray(data.lexicon)?data.lexicon:(Array.isArray(data.vocabulary)?data.vocabulary:[]));
       const lexicon=raw.map(item=>({word:item.word??item.conlang,english:item.english??item.concept,meta:item.meta??`${item.category||''}${item.kind?` · ${item.kind}`:''}`})).filter(x=>x.word&&x.english);
       if(!lexicon.length)throw new Error('No valid lexicon entries found.');
-      imported=lexicon;
-      renderImported(lexicon);
-      $('db-status').textContent=`Imported vocabulary: ${lexicon.length} entries`;
-      $('message').textContent=`Imported ${lexicon.length} entries.`;
-      document.querySelector('[data-tab="lexicon"]').click();
+      imported=lexicon;renderImported(lexicon);$('db-status').textContent=`Imported vocabulary: ${lexicon.length} entries`;$('message').textContent=`Imported ${lexicon.length} entries.`;document.querySelector('[data-tab="lexicon"]').click();
     }catch(err){$('message').textContent=`Import failed: ${err.message}`;}
     e.target.value='';
   });
 
   function renderImported(lexicon){
     const rows=[...lexicon].sort((a,b)=>a.english.localeCompare(b.english));
-    $('lexicon-output').innerHTML=`<div class="card"><h3>Imported lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} imported entries</div><div class="lexicon">${rows.map(x=>`<div class="lex-row"><div class="word">${esc(x.word)}</div><div class="eng">${esc(x.english)}</div><div class="meta">${esc(x.meta)}</div></div>`).join('')}</div></div>`;
-    renderImportedDictionary();
+    $('lexicon-output').innerHTML=`<div class="card"><h3>Imported lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} imported entries</div><div class="lexicon">${rows.map(x=>`<div class="lex-row"><div class="word">${esc(x.word)}</div><div class="eng">${esc(x.english)}</div><div class="meta">${esc(x.meta)}</div></div>`).join('')}</div></div>`;renderImportedDictionary();
   }
 
   function renderImportedDictionary(){
     if(!imported)return;
     const direction=$('dictionary-direction').value,q=$('dictionary-search').value.trim().toLowerCase();
     let rows=imported.map(x=>({left:direction==='conlang-en'?x.word:x.english,right:direction==='conlang-en'?x.english:x.word,meta:x.meta}));
-    if(q)rows=rows.filter(x=>`${x.left} ${x.right} ${x.meta}`.toLowerCase().includes(q));
-    rows.sort((a,b)=>a.left.localeCompare(b.left));
+    if(q)rows=rows.filter(x=>`${x.left} ${x.right} ${x.meta}`.toLowerCase().includes(q));rows.sort((a,b)=>a.left.localeCompare(b.left));
     $('dictionary-output').innerHTML=`<div class="card"><h3>${direction==='conlang-en'?'Conlang → English':'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.length?rows.map(x=>`<div class="dict-row"><strong>${esc(x.left)}</strong><span>${esc(x.right)}</span><span class="meta">${esc(x.meta)}</span></div>`).join(''):'<div class="empty">No matching entries.</div>'}</div></div>`;
   }
 
