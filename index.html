@@ -33,6 +33,10 @@
         .dictionary-toolbar { display:flex; gap:12px; margin-bottom:12px; align-items:end; }
         .dictionary-toolbar label { margin:0; }
         .dictionary-toolbar select, .dictionary-toolbar input { margin-top:5px; }
+        #generation-output { margin-top:16px; }
+        #lexicon-output { margin-top:12px; }
+        #dictionary-output { min-height:40px; }
+        #message { margin-top:8px; font-size:12px; color:#666; }
         @media(max-width:900px){ .generation-grid{grid-template-columns:1fr;} .form-grid{grid-template-columns:1fr;} .header-actions{justify-content:flex-start;} }
     </style>
 </head>
@@ -95,14 +99,16 @@
                 <button id="regenerate-lexicon" type="button">Regenerate Lexicon</button>
                 <button id="randomize" type="button">Randomize Parameters</button>
                 <div id="db-status" class="status" aria-live="polite">Loading vocabulary…</div>
+                <div id="message" aria-live="polite"></div>
                 <input id="mean" type="hidden" value="2.2">
                 <input id="seed" type="hidden" value="">
             </section>
         </div>
+        <div id="generation-output"></div>
     </section>
 
     <section id="panel-lexicon" class="tab-panel" hidden>
-        <div id="generated-lexicon" class="table-wrap"></div>
+        <div id="lexicon-output" class="table-wrap"></div>
     </section>
 
     <section id="panel-dictionary" class="tab-panel" hidden>
@@ -110,7 +116,7 @@
             <label>Dictionary direction<select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></label>
             <input id="dictionary-search" type="search" placeholder="Search…" autocomplete="off">
         </div>
-        <div id="dictionary-results" class="table-wrap"></div>
+        <div id="dictionary-output" class="table-wrap"></div>
     </section>
 </main>
 
@@ -127,14 +133,6 @@
         tabs.forEach(t => t.classList.toggle('active', t === tab));
         Object.entries(panels).forEach(([id, panel]) => { panel.hidden = id !== tab.id; });
     }));
-
-    window.addEventListener('conlang:generated', event => {
-        const lexicon = event.detail?.lexicon || [];
-        const target = document.getElementById('generated-lexicon');
-        target.innerHTML = lexicon.map((entry, index) =>
-            `<div class="lexicon-row"><span>${index + 1}</span><strong>${entry.conlang ?? entry.word ?? ''}</strong><span>${entry.concept ?? entry.english ?? ''}</span></div>`
-        ).join('');
-    });
 })();
 </script>
 </body>
