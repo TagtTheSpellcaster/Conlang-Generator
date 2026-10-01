@@ -1,0 +1,125 @@
+name: Complete Phase 3
+
+on:
+  push:
+    paths:
+      - '.github/workflows/complete-phase3.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  refactor:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Refactor phonology ownership
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          engine = Path('conlang_engine.js')
+          s = engine.read_text(encoding='utf-8')
+
+          s = s.replace(
+              '/* ConLang Generator — self-contained engine v0.9.5 */',
+              '/* ConLang Generator — engine v0.9.6 */',
+              1,
+          )
+          s = s.replace("const VERSION = '0.9.5';", "const VERSION = '0.9.6';", 1)
+
+          old_constants = '''    const VOWELS = {
+        standard: ['a', 'e', 'i', 'o', 'u'],
+        minimal: ['a', 'i', 'u'],
+        extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ']
+    };
+    const CONSONANTS = {
+        balanced: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l', 'f', 'v'],
+        guttural: ['k', 'q', 'x', 'g', 'r', 'kh', 'gh', 't', 'd'],
+        sibilant: ['s', 'z', 'sh', 'zh', 'f', 'v', 'r', 'l', 'th'],
+        soft: ['m', 'n', 'l', 'r', 'w', 'j', 'v', 'dh']
+    };
+
+'''
+          if old_constants not in s:
+              raise SystemExit('Expected legacy phonology constants not found')
+          s = s.replace(old_constants, '', 1)
+
+          start = s.find('    function makeWordFactory(c) {')
+          end_marker = '    function selectVocabulary(c) {'
+          end = s.find(end_marker, start)
+          if start < 0 or end < 0:
+              raise SystemExit('Expected makeWordFactory block not found')
+          s = s[:start] + s[end:]
+
+          old_call = '            const make = makeWordFactory(c);'
+          new_call = '''            if (!window.ConlangPhonology?.createWordFactory) {
+                throw new Error('Shared phonology engine is not available.');
+            }
+            const make = window.ConlangPhonology.createWordFactory(c);'''
+          if old_call not in s:
+              raise SystemExit('Expected makeWordFactory call not found')
+          s = s.replace(old_call, new_call, 1)
+
+          engine.write_text(s, encoding='utf-8')
+
+          phon = Path('phonology.js')
+          p = phon.read_text(encoding='utf-8')
+          marker = '''    window.ConlangPhonology = Object.freeze({
+        version: '0.9.6',
+        models: MODEL,
+        modelOptions: MODEL_OPTIONS,
+        resetCycle,
+        phonologize
+    });'''
+          replacement = '''    function createWordFactory(c) {
+        const modelKey = MODEL[c?.consonants] ? c.consonants : 'european';
+        const model = MODEL[modelKey];
+        const vowels = VOWELS[c?.vowels] || model.vowels || VOWELS.standard;
+        const mean = Number(c?.mean) || 2.2;
+        const seed = String(c?.seed || 'auto') + '|phonology|' + modelKey + '|words';
+        const r = rng(seed);
+        const used = new Set();
+
+        return () => {
+            for (let guard = 0; guard < 100; guard++) {
+                const word = makeWord(model, vowels, mean, r);
+                if (word && !used.has(word)) {
+                    used.add(word);
+                    return word;
+                }
+            }
+            return 'lex' + Math.floor(r() * 1e6);
+        };
+    }
+
+    window.ConlangPhonology = Object.freeze({
+        version: '0.9.6',
+        models: MODEL,
+        modelOptions: MODEL_OPTIONS,
+        resetCycle,
+        phonologize,
+        createWordFactory
+    });'''
+          if marker not in p:
+              raise SystemExit('Expected phonology API marker not found')
+          p = p.replace(marker, replacement, 1)
+          phon.write_text(p, encoding='utf-8')
+          PY
+
+      - name: Verify JavaScript
+        run: |
+          node --check conlang_engine.js
+          node --check phonology.js
+          node --check sample_patch.js
+
+      - name: Commit and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add conlang_engine.js phonology.js
+          git rm .github/workflows/complete-phase3.yml
+          git commit -m 'Complete Phase 3 phonology refactor'
+          git push
