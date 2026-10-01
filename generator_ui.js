@@ -49,11 +49,13 @@
         };
     }
 
-    function renderSamples(list) {
+    function renderSamples(list, config) {
         const box = $('generation-output');
         if (!box || !window.ConlangSentenceEngine) return;
-        const samples = window.ConlangSentenceEngine.generateSamples(list);
-        box.insertAdjacentHTML('beforeend', `<div class="card"><h3>Sample sentences</h3><div class="dictionary">${samples.map(({ english, conlang }) => `<div class="dict-row"><strong>${esc(english)}</strong><span>${esc(conlang)}</span></div>`).join('')}</div></div>`);
+        const samples = window.ConlangSentenceEngine.generateSamples(list, config);
+        const style = `<style id="sample-v718">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}</style>`;
+        const html = samples.map(x => `<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('');
+        box.insertAdjacentHTML('beforeend', style + `<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`);
     }
 
     function renderLexicon(list) {
@@ -85,7 +87,7 @@
         const chips = [c.region[0], c.culture[0], c.biome[0], c.temporal_setting[0], c.order].filter(Boolean);
         box.className = 'result';
         box.innerHTML = `<div class="hero"><div><div class="lang-name">${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`;
-        renderSamples(list);
+        renderSamples(list, c);
         renderLexicon(list);
         renderDictionary(list);
     }
