@@ -1,0 +1,45 @@
+name: Fix auto seed
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-auto-seed.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Patch engine
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('conlang_engine.js')
+          s = p.read_text(encoding='utf-8')
+
+          s = s.replace("/* ConLang Generator — self-contained engine v0.7.18 */", "/* ConLang Generator — self-contained engine v0.9.5 */", 1)
+          s = s.replace("const VERSION = '0.7.18';", "const VERSION = '0.9.5';", 1)
+          s = s.replace(
+              """    function config() {\n        const selected = id => {\n            const e = $(id);\n            return e ? [...e.selectedOptions].map(o => o.value).filter(Boolean) : [];\n        };\n        return {""",
+              """    function freshSeed() {\n        if (globalThis.crypto?.getRandomValues) {\n            const values = new Uint32Array(2);\n            globalThis.crypto.getRandomValues(values);\n            return `auto-${Date.now()}-${values[0].toString(36)}-${values[1].toString(36)}`;\n        }\n        return `auto-${Date.now()}-${Math.random().toString(36).slice(2)}`;\n    }\n\n    function config() {\n        const selected = id => {\n            const e = $(id);\n            return e ? [...e.selectedOptions].map(o => o.value).filter(Boolean) : [];\n        };\n        const requestedSeed = $(\'seed\')?.value.trim() || '';\n        const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto'\n            ? requestedSeed\n            : freshSeed();\n        return {""",
+              1
+          )
+          s = s.replace("seed: $('seed')?.value.trim() || String(Date.now()),", "seed,", 1)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Commit engine fix and remove one-shot workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add conlang_engine.js
+          git rm .github/workflows/fix-auto-seed.yml
+          git commit -m 'Fix auto seed regeneration and bump to v0.9.5'
+          git push
