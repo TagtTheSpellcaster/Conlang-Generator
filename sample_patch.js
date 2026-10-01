@@ -1,13 +1,14 @@
-/* ConLang Generator sample integrity patch — v0.7.24 */
+/* ConLang Generator sample integrity patch — v0.7.25 */
 (() => {
   'use strict';
-  const VERSION='0.7.24';
+  const VERSION='0.7.25';
   const norm=v=>String(v??'').toLowerCase().trim().replace(/^to\s+/,'');
   const arr=v=>Array.isArray(v)?v:(v==null||v===''?[]:[v]);
   const valid=e=>!!e&&!!String(e.conlang??'').trim();
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-  const SAMPLE_CONCEPTS=['i','you','we','they','me','my','your','this','that','here','there','today','tomorrow','yesterday','who','what','where','when','why','how','many','all','nothing','not','can','have','be','to','from','with','in','the','friend','sister','father','water','food','bread','sword','house','tree','sun','moon','stone','hot','cold','bright','eat','drink','wolf','dog','horse','hunter','kill','hunt','love','trust','help','enemy','village','city','forest','bird','fish','up','down','way','road','hungry','hand','much','little','ready','farmer','boat','small','large','dark','milk'];
+  const SAMPLE_CONCEPTS=['i','you','we','they','me','my','your','this','that','here','there','today','tomorrow','yesterday','who','what','where','when','why','how','many','all','nothing','not','can','have','be','to','from','with','in','the','friend','sister','father','water','food','bread','sword','house','tree','sun','moon','stone','hot','cold','bright','rise','rises','fall','falls','eat','drink','wolf','dog','horse','hunter','kill','hunt','love','trust','help','enemy','village','city','forest','bird','fish','up','down','way','road','hungry','hand','much','little','ready','farmer','boat','small','large','dark','milk'];
   const SAMPLE_TAGS=['consumption','perception','emotion_negative','movement','natural_movement','gravity','air_water_movement','ground_movement','stasis','activity','process','volition','cognition','help','prohibition','pain','rest','existence','construction'];
+  const TAG_ALIASES={natural_movement:['rise','rises','ascend','ascends','go_up','goes_up'],gravity:['fall','falls','descend','descends','drop','drops']};
   const VOWELS={standard:['a','e','i','o','u'],minimal:['a','i','u'],extended:['a','e','i','o','u','y','ø','æ']};
   const CONSONANTS={balanced:['p','t','k','b','d','g','m','n','s','r','l','f','v'],guttural:['k','q','x','g','r','kh','gh','t','d'],sibilant:['s','z','sh','zh','f','v','r','l','th'],soft:['m','n','l','r','w','j','v','dh']};
   function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
@@ -16,7 +17,8 @@
   function semanticValues(e){return [...arr(e?.tags),...arr(e?.semantic_group),...arr(e?.features)].flatMap(v=>typeof v==='object'&&v?Object.values(v):[v]).map(norm).filter(Boolean)}
   function hasSemantic(e,tag){return semanticValues(e).includes(norm(tag))}
   function exactMap(list){const m=new Map();for(const e of list){const k=norm(e.concept||e.english||e.term||e.word||e.label);if(k&&valid(e)&&!m.has(k))m.set(k,e)}return m}
-  function taggedVerb(list,tag){return list.find(e=>valid(e)&&norm(e.word_type)==='verb'&&hasSemantic(e,tag))||null}
+  function conceptVerb(list,names){for(const name of names){const e=list.find(x=>valid(x)&&norm(x.word_type)==='verb'&&norm(x.concept||x.english||x.term||x.word||x.label)===norm(name));if(e)return e}return null}
+  function taggedVerb(list,tag){const e=list.find(e=>valid(e)&&norm(e.word_type)==='verb'&&hasSemantic(e,tag));if(e)return e;for(const alias of TAG_ALIASES[tag]||[]){const x=conceptVerb(list,[alias]);if(x)return x}return null}
   function T(e){if(!valid(e))return'';const meaning=e.concept||e.english||e.term||'';return`<span class="sample-word" data-meaning="${esc(meaning)}" title="${esc(meaning)}">${esc(e.conlang)}</span>`}
   function F(m,c){return T(m.get(norm(c)))}
   function A(m,cs){return'['+cs.map(c=>T(m.get(norm(c)))).join('|')+']'}
@@ -75,7 +77,7 @@
     ['We build [a house|a boat].',`${F(m,'we')} ${tag('construction')} ${A(m,['house','boat'])}`],
     ['The [bird|fish] is [small|large].',`${F(m,'the')} ${A(m,['bird','fish'])} ${F(m,'be')} ${A(m,['small','large'])}`]
   ];return rows.map(([english,html],i)=>({number:i+1,english,html}))}
-  function render(rows){const box=document.getElementById('generation-output');if(!box)return;const old=box.querySelector('.sample-frame');if(old)old.remove();let style=document.getElementById('sample-v724');if(!style){style=document.createElement('style');style.id='sample-v724';style.textContent='.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}box.insertAdjacentHTML('beforeend',`<div class="sample-frame"><h3>Sample sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`)}
+  function render(rows){const box=document.getElementById('generation-output');if(!box)return;const old=box.querySelector('.sample-frame');if(old)old.remove();let style=document.getElementById('sample-v725');if(!style){style=document.createElement('style');style.id='sample-v725';style.textContent='.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}';document.head.appendChild(style)}box.insertAdjacentHTML('beforeend',`<div class="sample-frame"><h3>Sample sentences <span class="chip">v${VERSION}</span></h3>${rows.map(x=>`<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${x.english}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('')}</div>`)}
   async function patch(detail){
     const list=detail?.lexicon;if(!Array.isArray(list))return;
     try{
@@ -88,14 +90,14 @@
         const key=norm(c), current=map.get(key);
         if(valid(current))continue;
         const src=source.find(e=>norm(e.concept||e.english||e.term||e.word||e.label)===key);
-        const base=src?{...src}:{concept:key,word_type:['be','have','can','eat','drink','kill','hunt','love','trust','help','build'].includes(key)?'verb':'noun',scope:'universal',tags:[]};
+        const base=src?{...src}:{concept:key,word_type:['be','have','can','eat','drink','kill','hunt','love','trust','help','build','rise','rises','fall','falls'].includes(key)?'verb':'noun',scope:'universal',tags:[]};
         const e={...base,concept:base.concept||base.english||base.term||base.word||base.label||key,conlang:make()};
-        list.push(e);
-        map.set(key,e);
+        list.push(e);map.set(key,e);
       }
       for(const requiredTag of SAMPLE_TAGS){
         if(taggedVerb(list,requiredTag))continue;
-        const src=source.find(e=>norm(e.word_type)==='verb'&&hasSemantic(e,requiredTag));
+        const aliases=TAG_ALIASES[requiredTag]||[];
+        const src=source.find(e=>norm(e.word_type)==='verb'&&(hasSemantic(e,requiredTag)||aliases.includes(norm(e.concept||e.english||e.term||e.word||e.label))));
         if(!src)continue;
         list.push({...src,conlang:make()});
       }
