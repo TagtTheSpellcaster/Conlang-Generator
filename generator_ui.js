@@ -49,27 +49,11 @@
         };
     }
 
-    function findConcept(list, ...names) {
-        const e = list.find(x => names.includes(norm(x.concept)) || names.includes(norm(x.concept).replace(/^to\s+/, '')));
-        return e?.conlang || '—';
-    }
-
     function renderSamples(list) {
         const box = $('generation-output');
-        if (!box) return;
-        const samples = [
-            ['I am here.', `${findConcept(list, 'i')} ${findConcept(list, 'be')} ${findConcept(list, 'here')}.`],
-            ['You are there.', `${findConcept(list, 'you')} ${findConcept(list, 'be')} ${findConcept(list, 'there')}.`],
-            ['This is my home.', `${findConcept(list, 'this')} ${findConcept(list, 'be')} ${findConcept(list, 'my')} ${findConcept(list, 'home')}.`],
-            ['We have water.', `${findConcept(list, 'we')} ${findConcept(list, 'have')} ${findConcept(list, 'water')}.`],
-            ['They see the forest.', `${findConcept(list, 'they')} ${findConcept(list, 'see')} ${findConcept(list, 'the')} ${findConcept(list, 'forest')}.`],
-            ['Who is there?', `${findConcept(list, 'who')} ${findConcept(list, 'be')} ${findConcept(list, 'there')}?`],
-            ['Where is the river?', `${findConcept(list, 'where')} ${findConcept(list, 'be')} ${findConcept(list, 'the')} ${findConcept(list, 'river')}?`],
-            ['I do not know.', `${findConcept(list, 'i')} ${findConcept(list, 'do')} ${findConcept(list, 'not')} ${findConcept(list, 'know')}.`],
-            ['We can go today.', `${findConcept(list, 'we')} ${findConcept(list, 'can')} ${findConcept(list, 'go')} ${findConcept(list, 'today')}.`],
-            ['How many are there?', `${findConcept(list, 'how')} ${findConcept(list, 'many')} ${findConcept(list, 'be')} ${findConcept(list, 'there')}?`]
-        ];
-        box.insertAdjacentHTML('beforeend', `<div class="card"><h3>Sample sentences</h3><div class="dictionary">${samples.map(([en, co]) => `<div class="dict-row"><strong>${esc(en)}</strong><span>${esc(co)}</span></div>`).join('')}</div></div>`);
+        if (!box || !window.ConlangSentenceEngine) return;
+        const samples = window.ConlangSentenceEngine.generateSamples(list);
+        box.insertAdjacentHTML('beforeend', `<div class="card"><h3>Sample sentences</h3><div class="dictionary">${samples.map(({ english, conlang }) => `<div class="dict-row"><strong>${esc(english)}</strong><span>${esc(conlang)}</span></div>`).join('')}</div></div>`);
     }
 
     function renderLexicon(list) {
@@ -184,7 +168,29 @@
         }
     }
 
+    function loadSentenceEngine() {
+        if (window.ConlangSentenceEngine) return Promise.resolve();
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = 'sentence_engine.js';
+            script.onload = resolve;
+            script.onerror = () => reject(new Error('Unable to load sentence_engine.js.'));
+            document.head.appendChild(script);
+        });
+    }
+
     window.ConlangGeneratorUI = Object.freeze({ generate, regenerate, randomize, renderLexicon, renderDictionary });
-    wire();
-    loadVocabulary();
+
+    async function start() {
+        try {
+            await loadSentenceEngine();
+            wire();
+            await loadVocabulary();
+        } catch (e) {
+            console.error(e);
+            if ($('message')) $('message').textContent = e.message;
+        }
+    }
+
+    start();
 })();
