@@ -1,4 +1,4 @@
-/* ConLang Generator — generator UI controller v0.10.0 */
+/* ConLang Generator — generator UI controller v0.10.1 */
 (() => {
     'use strict';
 
@@ -35,17 +35,11 @@
         const requestedSeed = $('seed')?.value.trim() || '';
         const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto' ? requestedSeed : freshSeed();
         return {
-            region: selected('region'),
-            culture: selected('culture'),
-            biome: selected('biome'),
-            temporal_setting: selected('temporal_setting'),
-            tags: selected('tags'),
-            vowels: $('vowels')?.value || 'standard',
-            consonants: $('consonants')?.value || 'european',
-            mean: Number($('mean')?.value) || 2.2,
-            seed,
-            order: $('word-order')?.value || 'SVO',
-            morphology: $('morphology')?.value || 'isolating'
+            region: selected('region'), culture: selected('culture'), biome: selected('biome'),
+            temporal_setting: selected('temporal_setting'), tags: selected('tags'),
+            vowels: $('vowels')?.value || 'standard', consonants: $('consonants')?.value || 'european',
+            mean: Number($('mean')?.value) || 2.2, seed,
+            order: $('word-order')?.value || 'SVO', morphology: $('morphology')?.value || 'isolating'
         };
     }
 
@@ -86,7 +80,7 @@
         const name = window.ConlangEngine.languageName(c.seed, c);
         const chips = [c.region[0], c.culture[0], c.biome[0], c.temporal_setting[0], c.order].filter(Boolean);
         box.className = 'result';
-        box.innerHTML = `<div class="hero"><div><div class="lang-name">${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`;
+        box.innerHTML = `<div class="hero"><div><div class="lang-name">Name of language: ${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`;
         renderSamples(list, c);
         renderLexicon(list);
         renderDictionary(list);
@@ -108,10 +102,7 @@
         }
     }
 
-    function regenerate() {
-        if (!window.ConlangEngine.getVocabulary().length) return;
-        generate();
-    }
+    function regenerate() { if (window.ConlangEngine.getVocabulary().length) generate(); }
 
     function randomize() {
         ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
@@ -130,18 +121,9 @@
     }
 
     function preset(type) {
-        const map = {
-            historical: { temporal_setting: 'historical', tags: 'historical' },
-            fantasy: { tags: 'fantasy' },
-            modern: { temporal_setting: 'modern' },
-            scifi: { tags: 'sci-fi' }
-        };
-        const p = map[type];
-        if (!p) return;
-        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
-            const e = $(id);
-            if (e) e.value = p[id] || '';
-        });
+        const map = { historical: { temporal_setting: 'historical', tags: 'historical' }, fantasy: { tags: 'fantasy' }, modern: { temporal_setting: 'modern' }, scifi: { tags: 'sci-fi' } };
+        const p = map[type]; if (!p) return;
+        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const e = $(id); if (e) e.value = p[id] || ''; });
     }
 
     function wire() {
@@ -184,14 +166,8 @@
     window.ConlangGeneratorUI = Object.freeze({ generate, regenerate, randomize, renderLexicon, renderDictionary });
 
     async function start() {
-        try {
-            await loadSentenceEngine();
-            wire();
-            await loadVocabulary();
-        } catch (e) {
-            console.error(e);
-            if ($('message')) $('message').textContent = e.message;
-        }
+        try { await loadSentenceEngine(); wire(); await loadVocabulary(); }
+        catch (e) { console.error(e); if ($('message')) $('message').textContent = e.message; }
     }
 
     start();
