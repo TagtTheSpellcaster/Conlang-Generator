@@ -18,18 +18,6 @@
     let vocabulary = [];
     let generated = [];
 
-    const VOWELS = {
-        standard: ['a', 'e', 'i', 'o', 'u'],
-        minimal: ['a', 'i', 'u'],
-        extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ']
-    };
-    const CONSONANTS = {
-        balanced: ['p', 't', 'k', 'b', 'd', 'g', 'm', 'n', 's', 'r', 'l', 'f', 'v'],
-        guttural: ['k', 'q', 'x', 'g', 'r', 'kh', 'gh', 't', 'd'],
-        sibilant: ['s', 'z', 'sh', 'zh', 'f', 'v', 'r', 'l', 'th'],
-        soft: ['m', 'n', 'l', 'r', 'w', 'j', 'v', 'dh']
-    };
-
     function hash(s) {
         let h = 2166136261;
         for (let i = 0; i < s.length; i++) {
@@ -153,28 +141,6 @@
         return s;
     }
 
-    function makeWordFactory(c) {
-        const vowels = VOWELS[c.vowels] || VOWELS.standard;
-        const consonants = CONSONANTS[c.consonants] || CONSONANTS.balanced;
-        const patterns = c.consonants === 'guttural' ? ['CVC', 'CCVC', 'CVCC'] : c.consonants === 'soft' ? ['CV', 'CVV', 'CVC', 'V'] : ['CV', 'CVC', 'CVV', 'VC'];
-        const r = rng(c.seed + '|words'),
-            used = new Set();
-        return () => {
-            for (let n = 0; n < 300; n++) {
-                let w = '';
-                const count = Math.max(1, Math.min(5, Math.round(c.mean + (r() - .5) * 1.6)));
-                for (let i = 0; i < count; i++)
-                    for (const ch of choice(patterns, r)) w += ch === 'C' ? choice(consonants, r) : choice(vowels, r);
-                w = w.toLowerCase();
-                if (w.length > 1 && !used.has(w)) {
-                    used.add(w);
-                    return w;
-                }
-            }
-            return 'lex' + Math.floor(r() * 1e6);
-        };
-    }
-
     function selectVocabulary(c) {
         const ranked = vocabulary.map(e => ({
             ...e,
@@ -190,165 +156,63 @@
                 selected.push(e);
             }
         });
-        const r = rng(c.seed + '|selection');
-        const pool = ranked.filter(e => !seen.has(e.id)).sort((a, b) => b.score - a.score);
-        while (pool.length && selected.length < 600) {
-            const top = pool.slice(0, Math.min(40, pool.length));
-            const e = choice(top, r);
-            selected.push(e);
-            seen.add(e.id);
-            pool.splice(pool.indexOf(e), 1);
+        const groups = ['verb', 'adjective', 'pronoun', 'function', 'number', 'noun'];
+        for (const kind of groups) {
+            const pool = ranked.filter(e => e.kind === kind && !seen.has(e.id)).sort((a, b) => b.score - a.score);
+            for (const e of pool.slice(0, kind === 'noun' ? 180 : 60)) {
+                seen.add(e.id);
+                selected.push(e);
+            }
         }
-        return selected;
-    }
-
-    function find(list, q, r) {
-        const a = candidates(list, q);
-        return choice(a, r);
-    }
-
-    function word(e) {
-        return e?.conlang || '';
-    }
-
-    function translateConcreteTemplates(list, c) {
-        const r = rng(c.seed + '|samples');
-        const verbTag = x => find(list, {
-            kinds: ['verb'],
-            anyTags: [x]
-        }, r);
-        const byConcept = (...x) => find(list, {
-            concepts: x
-        }, r);
-        const pron = x => byConcept(x);
-        const func = x => byConcept(x);
-        const alt = (...concepts) => concepts.map(x => byConcept(x)).filter(Boolean);
-        const T = e => e ? `<span class="sample-word" data-meaning="${esc(e.concept||e.english)}">${esc(e.conlang)}</span>` : '';
-        const A = es => `[${es.map(T).join('|')}]`;
-        const I = pron('i'),
-            YOU = pron('you'),
-            WE = pron('we'),
-            THEY = pron('they'),
-            ME = pron('me'),
-            MY = func('my'),
-            THIS = pron('this'),
-            THAT = pron('that'),
-            HERE = func('here'),
-            THERE = func('there');
-        const BE = byConcept('be') || verbTag('copula'),
-            HAVE = byConcept('have'),
-            CAN = byConcept('can'),
-            NOT = byConcept('not'),
-            TO = func('to'),
-            FROM = func('from'),
-            WITH = func('with'),
-            IN = func('in'),
-            THE = func('the');
-        const F = e => e ? T(e) : '';
-        const V = e => e ? T(e) : '';
-        const variants = {
-            friend: alt('friend', 'sister', 'father'),
-            resource: alt('water', 'food', 'bread'),
-            animal: alt('wolf', 'dog', 'horse'),
-            living: alt('wolf', 'dog', 'hunter'),
-            liquid: alt('water', 'milk'),
-            place: alt('village', 'city', 'forest'),
-            threat: alt('sword', 'enemy', 'wolf'),
-            action: alt('eat', 'drink', 'build'),
-            emotion: alt('love', 'trust', 'help'),
-            adjective: alt('hot', 'cold', 'bright'),
-            quantity: alt('many', 'little')
-        };
-        const arrT = e => e.length ? A(e) : '';
-        const rows = [
-            ['I am your [friend|sister|father].', `${F(I)} ${F(BE)} ${F(MY)} ${arrT(variants.friend)}`],
-            ['You are my [friend|sister|father].', `${F(YOU)} ${F(BE)} ${F(MY)} ${arrT(variants.friend)}`],
-            ['This is [water|food|bread].', `${F(THIS)} ${F(BE)} ${arrT(variants.resource)}`],
-            ['That is [a sword|a house|a tree].', `${F(THAT)} ${F(BE)} ${A([byConcept('sword'),byConcept('house'),byConcept('tree')].filter(Boolean))}`],
-            ['We are here.', `${F(WE)} ${F(BE)} ${F(HERE)}`],
-            ['They are there.', `${F(THEY)} ${F(BE)} ${F(THERE)}`],
-            ['I have [water|food|bread].', `${F(I)} ${F(HAVE)} ${arrT(variants.resource)}`],
-            ['You have [water|food|bread].', `${F(YOU)} ${F(HAVE)} ${arrT(variants.resource)}`],
-            ['The [sun|moon|stone] is [hot|cold|bright].', `${F(THE)} ${arrT([byConcept('sun'),byConcept('moon'),byConcept('stone')].filter(Boolean))} ${F(BE)} ${arrT([byConcept('hot'),byConcept('cold'),byConcept('bright')].filter(Boolean))}`],
-            ['I eat [food|bread].', `${F(I)} ${V(verbTag('consumption'))} ${arrT([byConcept('food'),byConcept('bread')].filter(Boolean))}`],
-            ['[The wolf|the dog] drinks [water|milk].', `${F(THE)} ${arrT([byConcept('wolf'),byConcept('dog')].filter(Boolean))} ${V(verbTag('consumption'))} ${arrT(variants.liquid)}`],
-            ['I see you.', `${F(I)} ${V(verbTag('perception'))} ${F(YOU)}`],
-            ['You see me.', `${F(YOU)} ${V(verbTag('perception'))} ${F(ME)}`],
-            ['The hunter [kills|hunts] the wolf.', `${F(THE)} ${F(byConcept('hunter'))} ${arrT([byConcept('kill'),byConcept('hunt')].filter(Boolean))} ${F(THE)} ${F(byConcept('wolf'))}`],
-            ['I [love|trust|help] you.', `${F(I)} ${arrT([byConcept('love'),byConcept('trust'),byConcept('help')].filter(Boolean))} ${F(YOU)}`],
-            ['I fear [the sword|the enemy].', `${F(I)} ${V(verbTag('emotion_negative'))} ${F(THE)} ${arrT([byConcept('sword'),byConcept('enemy')].filter(Boolean))}`],
-            ['I go to the [village|city|forest].', `${F(I)} ${V(verbTag('movement'))} ${F(TO)} ${F(THE)} ${arrT(variants.place)}`],
-            ['You come from the [village|city].', `${F(YOU)} ${V(verbTag('movement'))} ${F(FROM)} ${F(THE)} ${arrT([byConcept('village'),byConcept('city')].filter(Boolean))}`],
-            ['The sun rises.', `${F(THE)} ${F(byConcept('sun'))} ${V(verbTag('natural_movement'))}`],
-            ['The stone falls.', `${F(THE)} ${F(byConcept('stone'))} ${V(verbTag('gravity'))}`],
-            ['The [bird|fish] moves [up|down].', `${F(THE)} ${arrT([byConcept('bird'),byConcept('fish')].filter(Boolean))} ${V(verbTag('air_water_movement'))} ${arrT([byConcept('up'),byConcept('down')].filter(Boolean))}`],
-            ['The wolf walks in the forest.', `${F(THE)} ${F(byConcept('wolf'))} ${V(verbTag('ground_movement'))} ${F(IN)} ${F(THE)} ${F(byConcept('forest'))}`],
-            ['Stay here.', `${V(verbTag('stasis'))} ${F(HERE)}`],
-            ['Come with me.', `${V(verbTag('movement'))} ${F(WITH)} ${F(ME)}`],
-            ['Who are you?', `${F(byConcept('who'))} ${F(BE)} ${F(YOU)}`],
-            ['What is this?', `${F(byConcept('what'))} ${F(BE)} ${F(THIS)}`],
-            ['Where are we?', `${F(byConcept('where'))} ${F(BE)} ${F(WE)}`],
-            ['When do you go?', `${F(byConcept('when'))} ${V(verbTag('movement'))} ${F(YOU)}`],
-            ['Why do you do this?', `${F(byConcept('why'))} ${V(verbTag('activity'))} ${F(THIS)}`],
-            ['How does this work?', `${F(byConcept('how'))} ${V(verbTag('process'))} ${F(THIS)}`],
-            ['Where is the water?', `${F(byConcept('where'))} ${F(BE)} ${F(THE)} ${F(byConcept('water'))}`],
-            ['I do not want this.', `${F(I)} ${F(NOT)} ${V(verbTag('volition'))} ${F(THIS)}`],
-            ['You cannot enter.', `${F(YOU)} ${F(NOT)} ${F(CAN)} ${V(verbTag('movement'))}`],
-            ['I do not know.', `${F(I)} ${F(NOT)} ${V(verbTag('cognition'))}`],
-            ['I know the way.', `${F(I)} ${V(verbTag('cognition'))} ${F(THE)} ${F(byConcept('way')||byConcept('road'))}`],
-            ['I can help you.', `${F(I)} ${F(CAN)} ${V(verbTag('help'))} ${F(YOU)}`],
-            ['Do not touch this.', `${F(NOT)} ${V(verbTag('prohibition'))} ${F(THIS)}`],
-            ['I am hungry.', `${F(I)} ${F(BE)} ${F(byConcept('hungry'))}`],
-            ['My hand hurts.', `${F(MY)} ${F(byConcept('hand'))} ${V(verbTag('pain'))}`],
-            ['I want to sleep.', `${F(I)} ${V(verbTag('volition'))} ${V(verbTag('rest'))}`],
-            ['This is [much|little].', `${F(THIS)} ${F(BE)} ${arrT([byConcept('much'),byConcept('little')].filter(Boolean))}`],
-            ['Everything is ready.', `${F(byConcept('all'))} ${F(BE)} ${F(byConcept('ready'))}`],
-            ['Nothing exists.', `${F(byConcept('nothing'))} ${V(verbTag('existence'))}`],
-            ['Today we work.', `${F(byConcept('today'))} ${F(WE)} ${V(verbTag('activity'))}`],
-            ['Tomorrow we travel.', `${F(byConcept('tomorrow'))} ${F(WE)} ${V(verbTag('movement'))}`],
-            ['Yesterday the hunter came.', `${F(byConcept('yesterday'))} ${F(THE)} ${F(byConcept('hunter'))} ${V(verbTag('movement'))}`],
-            ['The [dog|wolf|horse] sees the [hunter|farmer].', `${F(THE)} ${arrT([byConcept('dog'),byConcept('wolf'),byConcept('horse')].filter(Boolean))} ${V(verbTag('perception'))} ${F(THE)} ${arrT([byConcept('hunter'),byConcept('farmer')].filter(Boolean))}`],
-            ['I [eat|drink] [food|water].', `${F(I)} ${arrT([byConcept('eat'),byConcept('drink')].filter(Boolean))} ${arrT([byConcept('food'),byConcept('water')].filter(Boolean))}`],
-            ['The [sun|moon] is [bright|dark].', `${F(THE)} ${arrT([byConcept('sun'),byConcept('moon')].filter(Boolean))} ${F(BE)} ${arrT([byConcept('bright'),byConcept('dark')].filter(Boolean))}`],
-            ['[The hunter|the farmer] has [food|water].', `${F(THE)} ${arrT([byConcept('hunter'),byConcept('farmer')].filter(Boolean))} ${F(HAVE)} ${arrT([byConcept('food'),byConcept('water')].filter(Boolean))}`],
-            ['I see [the house|the village].', `${F(I)} ${V(verbTag('perception'))} ${F(THE)} ${arrT([byConcept('house'),byConcept('village')].filter(Boolean))}`],
-            ['We build [a house|a boat].', `${F(WE)} ${V(verbTag('construction'))} ${arrT([byConcept('house'),byConcept('boat')].filter(Boolean))}`],
-            ['The [bird|fish] is [small|large].', `${F(THE)} ${arrT([byConcept('bird'),byConcept('fish')].filter(Boolean))} ${F(BE)} ${arrT([byConcept('small'),byConcept('large')].filter(Boolean))}`]
-        ];
-        return rows.map(([english, html], i) => ({
-            number: i + 1,
-            english,
-            html
-        }));
+        const rest = ranked.filter(e => !seen.has(e.id)).sort((a, b) => b.score - a.score);
+        for (const e of rest) {
+            if (selected.length >= 600) break;
+            seen.add(e.id);
+            selected.push(e);
+        }
+        return selected.slice(0, 600);
     }
 
     function renderSamples(c, list) {
         const box = $('generation-output');
         if (!box) return;
-        const rows = translateConcreteTemplates(list, c);
-        const style = `<style id="sample-v718">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}` + '</style>';
-        const html = rows.map(x => `<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('');
-        const existing = box.innerHTML;
-        box.innerHTML = existing + style + `<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`;
+        const by = k => list.find(e => e.kind === k)?.conlang || list.find(e => norm(e.concept) === k)?.conlang || '—';
+        const findConcept = (...names) => {
+            const e = list.find(x => names.includes(norm(x.concept)) || names.includes(norm(x.concept).replace(/^to\s+/, '')));
+            return e?.conlang || '—';
+        };
+        const samples = [
+            ['I am here.', `${findConcept('i')} ${findConcept('be')} ${findConcept('here')}.`],
+            ['You are there.', `${findConcept('you')} ${findConcept('be')} ${findConcept('there')}.`],
+            ['This is my home.', `${findConcept('this')} ${findConcept('be')} ${findConcept('my')} ${findConcept('home')}.`],
+            ['We have water.', `${findConcept('we')} ${findConcept('have')} ${findConcept('water')}.`],
+            ['They see the forest.', `${findConcept('they')} ${findConcept('see')} ${findConcept('the')} ${findConcept('forest')}.`],
+            ['Who is there?', `${findConcept('who')} ${findConcept('be')} ${findConcept('there')}?`],
+            ['Where is the river?', `${findConcept('where')} ${findConcept('be')} ${findConcept('the')} ${findConcept('river')}?`],
+            ['I do not know.', `${findConcept('i')} ${findConcept('do')} ${findConcept('not')} ${findConcept('know')}.`],
+            ['We can go today.', `${findConcept('we')} ${findConcept('can')} ${findConcept('go')} ${findConcept('today')}.`],
+            ['How many are there?', `${findConcept('how')} ${findConcept('many')} ${findConcept('be')} ${findConcept('there')}?`]
+        ];
+        box.insertAdjacentHTML('beforeend', `<div class="card"><h3>Sample sentences</h3><div class="dictionary">${samples.map(([en, co]) => `<div class="dict-row"><strong>${esc(en)}</strong><span>${esc(co)}</span></div>`).join('')}</div></div>`);
     }
 
     function renderLexicon(list) {
         const box = $('lexicon-output');
         if (!box) return;
-        const rows = list.slice().sort((a, b) => String(a.concept || '').localeCompare(String(b.concept || '')));
-        box.innerHTML = `<div class="card"><h3>Generated lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} entries</div><div class="lexicon">${rows.map(e=>`<div class="lex-row"><div class="word">${esc(e.conlang)}</div><div class="eng">${esc(e.concept||e.english||'')}</div><div class="meta">${esc(e.category||e.semantic_group||e.word_type||'')}</div></div>`).join('')}</div></div>`;
+        box.className = 'card';
+        box.innerHTML = `<h3>Generated lexicon</h3><div class="lexicon">${list.map(e => `<div class="lex-row"><span class="word">${esc(e.conlang || '—')}</span><span class="eng">${esc(e.concept || '—')}</span><span class="meta">${esc(e.category || e.semantic_group || e.word_type || '')}</span></div>`).join('')}</div>`;
     }
 
     function renderDictionary(list) {
         const box = $('dictionary-output');
         if (!box) return;
         const dir = $('dictionary-direction')?.value || 'conlang-en';
-        const q = ($('dictionary-search')?.value || '').trim().toLowerCase();
+        const q = norm($('dictionary-search')?.value || '');
         let rows = list.map(e => ({
-            l: dir === 'conlang-en' ? e.conlang : (e.concept || e.english || ''),
-            r: dir === 'conlang-en' ? (e.concept || e.english || '') : e.conlang,
+            l: dir === 'conlang-en' ? e.conlang : e.concept,
+            r: dir === 'conlang-en' ? e.concept : e.conlang,
             m: e.category || e.semantic_group || e.word_type || ''
-        }));
+        })).filter(x => x.l && x.r);
         if (q) rows = rows.filter(x => `${x.l} ${x.r} ${x.m}`.toLowerCase().includes(q));
         rows.sort((a, b) => xlocale(a.l, b.l));
         box.innerHTML = `<div class="card"><h3>${dir==='conlang-en'?'Conlang → English':'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.map(x=>`<div class="dict-row"><strong>${esc(x.l)}</strong><span>${esc(x.r)}</span><span class="meta">${esc(x.m)}</span></div>`).join('')}</div></div>`;
@@ -369,7 +233,7 @@
             const c = config();
             if (!vocabulary.length) throw new Error('Vocabulary is not loaded yet.');
             generated = selectVocabulary(c);
-            const make = makeWordFactory(c);
+            const make = window.ConlangPhonology.createWordFactory(c);
             const seen = new Set();
             generated = generated.map(e => {
                 const x = {
@@ -408,51 +272,68 @@
             if (e) e.value = choice([...e.options].map(o => o.value), Math.random);
         });
         if ($('mean')) $('mean').value = (1 + Math.random() * 2.5).toFixed(1);
-        if ($('seed')) $('seed').value = Date.now() + '-' + Math.floor(Math.random() * 1e6);
+        if ($('seed')) $('seed').value = 'auto';
+    }
+
+    function preset(type) {
+        const map = {
+            historical: { temporal_setting: 'historical', tags: 'historical' },
+            fantasy: { tags: 'fantasy' },
+            modern: { temporal_setting: 'modern' },
+            scifi: { tags: 'sci-fi' }
+        };
+        const p = map[type];
+        if (!p) return;
+        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
+            const e = $(id);
+            if (e) e.value = p[id] || '';
+        });
+    }
+
+    function regenerate() {
+        if (!vocabulary.length) return;
+        generate();
+    }
+
+    function wire() {
+        $('generate')?.addEventListener('click', generate);
+        $('regenerate')?.addEventListener('click', regenerate);
+        $('randomize')?.addEventListener('click', randomize);
+        $('clear-filters')?.addEventListener('click', () => ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
+            const e = $(id);
+            if (e) e.value = '';
+        }));
+        [['preset-historical', 'historical'], ['preset-fantasy', 'fantasy'], ['preset-modern', 'modern'], ['preset-scifi', 'scifi']].forEach(([id, type]) => $(id)?.addEventListener('click', () => preset(type)));
+        $('dictionary-direction')?.addEventListener('change', () => renderDictionary(generated));
+        $('dictionary-search')?.addEventListener('input', () => renderDictionary(generated));
+        window.addEventListener('conlang:phonology-reset', () => window.ConlangPhonology?.resetCycle());
     }
 
     async function loadVocabulary() {
-        const res = await fetch('vocabulary.json', {
-            cache: 'no-store'
-        });
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
-        vocabulary = Array.isArray(data) ? data : (Array.isArray(data.vocabulary) ? data.vocabulary : (Array.isArray(data.entries) ? data.entries : []));
-        if (!vocabulary.length) throw new Error('No vocabulary entries found.');
-        vocabulary = vocabulary.map(e => ({
-            ...e,
-            kind: classify(e)
-        }));
-        populateFilters();
-        if ($('db-status')) $('db-status').textContent = `Vocabulary loaded: ${vocabulary.length} entries`;
-    }
-
-    function init() {
-        $('generate')?.addEventListener('click', generate);
-        $('regenerate')?.addEventListener('click', generate);
-        $('dictionary-direction')?.addEventListener('change', () => renderDictionary(generated));
-        $('dictionary-search')?.addEventListener('input', () => renderDictionary(generated));
-        $('clear-filters')?.addEventListener('click', () => ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
-            if ($(id)) $(id).value = '';
-        }));
-        ['preset-historical', 'preset-fantasy', 'preset-modern', 'preset-scifi'].forEach(id => $(id)?.addEventListener('click', () => randomize()));
-        const h1 = document.querySelector('header h1');
-        if (h1 && !h1.querySelector('.version-badge')) {
-            const b = document.createElement('span');
-            b.className = 'chip version-badge';
-            b.textContent = 'v' + VERSION;
-            b.style.marginLeft = '8px';
-            h1.appendChild(b);
-        }
-        loadVocabulary().catch(e => {
+        const status = $('db-status');
+        try {
+            const response = await fetch('vocabulary.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            vocabulary = Array.isArray(data) ? data : (Array.isArray(data.vocabulary) ? data.vocabulary : []);
+            populateFilters();
+            if (status) status.textContent = `Vocabulary loaded: ${vocabulary.length} entries`;
+        } catch (e) {
             console.error(e);
-            if ($('db-status')) $('db-status').textContent = 'Vocabulary load error: ' + e.message;
-            if ($('message')) $('message').textContent = 'Vocabulary load error: ' + e.message;
-        });
+            if (status) status.textContent = 'Vocabulary load failed';
+            if ($('message')) $('message').textContent = 'Vocabulary load failed: ' + e.message;
+        }
     }
 
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, {
-        once: true
+    window.ConlangEngine = Object.freeze({
+        version: VERSION,
+        generate,
+        regenerate,
+        randomize,
+        getVocabulary: () => vocabulary.slice(),
+        getGenerated: () => generated.slice()
     });
-    else init();
+
+    wire();
+    loadVocabulary();
 })();
