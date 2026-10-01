@@ -1,48 +1,136 @@
-/* ConLang Generator — vocabulary-driven engine v0.7.6 */
+/* ConLang Generator compatibility shell v0.7.7 */
 (() => {
-'use strict';
-const VERSION='0.7.6';
-const $=id=>document.getElementById(id);
-const arr=v=>Array.isArray(v)?v.filter(Boolean).map(String):(v==null||v==='')?[]:[String(v)];
-const norm=v=>String(v??'').toLowerCase().replace(/^to\s+/,'').trim();
-const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const uniq=a=>[...new Set(a)];
-let vocabulary=[]; let generated=null;
-const P={vowels:{standard:['a','e','i','o','u'],minimal:['a','i','u'],extended:['a','e','i','o','u','y','ø','æ']},consonants:{balanced:['p','t','k','b','d','g','m','n','s','r','l','f','v'],guttural:['k','q','x','g','r','kh','gh','t','d'],sibilant:['s','z','sh','zh','f','v','r','l','th'],soft:['m','n','l','r','w','j','v','dh']}};
-const S={standard:['CV','CVC','CVV','VC'],guttural:['CVC','CCVC','CVCC'],soft:['CV','CVV','CVC','V'],musical:['CV','V','CVV','CVC']};
-function hash(s){let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
-function rng(seed){let x=hash(seed)||1;return()=>{x+=0x6D2B79F5;let t=x;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
-function choice(a,r){return a.length?a[Math.floor(r()*a.length)]:null}
-function vals(field){return uniq(vocabulary.flatMap(e=>arr(e[field]))).sort((a,b)=>a.localeCompare(b))}
-function populate(){for(const f of ['region','culture','biome','temporal_setting']){const e=$(f);if(!e)continue;e.innerHTML='<option value="">Any</option>'+vals(f).map(v=>`<option value="${esc(v)}">${esc(v)}</option>`).join('')}}
-function selected(id){const e=$(id);return e?[...e.selectedOptions].map(o=>o.value).filter(Boolean):[]}
-function config(){return{region:selected('region'),culture:selected('culture'),biome:selected('biome'),temporal_setting:selected('temporal_setting'),vowels:$('vowels')?.value||'standard',consonants:$('consonants')?.value||'balanced',mean:Math.max(1,Math.min(5,Number($('mean')?.value)||2.2)),seed:$('seed')?.value.trim()||String(Date.now()),order:$('word-order')?.value||'SVO',morphology:$('morphology')?.value||'isolating',adjectivePosition:$('adj-position')?.value||'after',articles:$('articles')?.value||'none',plural:$('plural')?.value||'none',relations:$('relations')?.value||'prepositions'}}
-function randomize(){for(const id of ['region','culture','biome','temporal_setting']){const e=$(id);if(e&&e.options.length>1)e.value=choice([...e.options].slice(1).map(o=>o.value),Math.random)};for(const id of ['vowels','consonants','word-order','morphology','adj-position','articles','plural','relations']){const e=$(id);if(e)e.value=choice([...e.options].map(o=>o.value),Math.random)};if($('mean'))$('mean').value=(1+Math.random()*2.5).toFixed(1);if($('seed'))$('seed').value=`${Date.now()}-${Math.floor(Math.random()*1e6)}`}
-function profileScore(e,c){let s=e.scope==='universal'?3:0;for(const f of ['region','culture','biome','temporal_setting']){if(!c[f].length)continue;s+=arr(e[f]).some(v=>c[f].includes(v))?5:-1}return s}
-function kind(e){const t=norm(e.word_type),cat=norm(e.category);if(t==='verb'||cat.includes('verb'))return'verb';if(t==='adjective'||cat.includes('adjective'))return'adjective';if(t==='pronoun'||cat.includes('pronoun'))return'pronoun';if(['preposition','particle','conjunction','determiner','interrogative','adverb'].includes(t)||cat.includes('function'))return'function';return'noun'}
-function meta(e){return new Set([...arr(e.tags),...arr(e.features),e.semantic_group,e.category].map(norm).filter(Boolean))}
-function match(e,q){const m=meta(e);if(q.kinds&&!q.kinds.includes(kind(e)))return false;if(q.concepts?.length&&!q.concepts.some(c=>norm(e.concept)===norm(c)))return false;if(q.any?.length&&!q.any.some(c=>m.has(norm(c))))return false;return true}
-function pick(lex,r,q){let a=lex.filter(e=>match(e,q));if(!a.length&&q.concepts?.length)a=lex.filter(e=>q.concepts.some(c=>norm(e.concept)===norm(c)));return choice(a,r)}
-function makeWordFactory(c){const vs=P.vowels[c.vowels]||P.vowels.standard,cs=P.consonants[c.consonants]||P.consonants.balanced;const style=c.consonants==='guttural'?'guttural':c.consonants==='soft'?'soft':c.vowels==='extended'?'musical':'standard';const syl=S[style],r=rng(c.seed+'|words'),used=new Set();return()=>{for(let n=0;n<300;n++){let w='';const count=Math.max(1,Math.min(5,Math.round(c.mean+(r()-.5)*1.6)));for(let i=0;i<count;i++)w+=choice(syl,r).replace(/C|V/g,x=>x==='C'?choice(cs,r):choice(vs,r));if(!used.has(w)&&w.length>1){used.add(w);return w.toLowerCase()}}return 'a'+Math.floor(r()*9999)}}
-function morphology(word,c){if(c.morphology==='agglutinative'||c.morphology==='suffixing')return word+'-ta';if(c.morphology==='fusional'||c.morphology==='prefixing')return word+'a';return word}
-function generateLexicon(c){const r=rng(c.seed+'|lexicon'),make=makeWordFactory(c),size=Math.max(100,Math.min(2000,Number($('lexicon-size')?.value)||600));const ranked=vocabulary.map(e=>({e,s:profileScore(e,c)})).sort((a,b)=>b.s-a.s);const pool=[];const used=new Set();for(const x of ranked){if(pool.length>=size)break;if(!used.has(x.e.id)){used.add(x.e.id);pool.push(x.e)}}const required=['i','you','we','they','me','my','this','that','here','there','today','tomorrow','yesterday','who','what','where','when','why','how','many','all','nothing','not','can','have','be','to','from','with','in','the'];for(const concept of required){const e=vocabulary.find(x=>norm(x.concept)===concept);if(e&&!used.has(e.id)){const idx=Math.floor(r()*Math.max(1,pool.length));pool.splice(idx,0,e);used.add(e.id)}}return pool.slice(0,size).map(e=>({...e,kind:kind(e),word:make(),english:e.concept}))}
-function find(lex,random,concepts,groups=[],kinds){return pick(lex,random,{concepts,any:groups,kinds})}
-function token(word,english){return{word,english}}
-function ph(label){return{placeholder:true,text:`<${label}>`}}
-function samples(c,lex){const r=rng(c.seed+'|samples'),V=(g,cx)=>find(lex,r,cx,g,['verb']),F=(cx,g)=>find(lex,r,cx,g,['function','pronoun']),p=ph,E=e=>e?token(morphology(e.word,c),e.english):null,W=e=>e?token(e.word,e.english):null;
-const be=V(['copula'],['be']),have=V(['possession'],['have']),not=F(['not']),can=F(['can']),to=F(['to']),from=F(['from']),with=F(['with']),inside=F(['in']),the=F(['the']),here=F(['here']),today=F(['today']),tomorrow=F(['tomorrow']),yesterday=F(['yesterday']);
-const I=F(['i']),YOU=F(['you']),WE=F(['we']),THEY=F(['they']),ME=F(['me']),MY=F(['my']),THIS=F(['this']),THAT=F(['that']),WHO=F(['who']),WHAT=F(['what']),WHERE=F(['where']),WHEN=F(['when']),WHY=F(['why']),HOW=F(['how']),MANY=F(['many']),ALL=F(['all']),NOTHING=F(['nothing']);
-const noun=g=>find(lex,r,[],g,['noun']),verb=g=>find(lex,r,[],g,['verb']);
-const consume=verb(['consumption']),perception=verb(['perception']),violence=verb(['violence','hunting']),generic=verb(['activity','action']),emoP=verb(['emotion_positive']),emoN=verb(['emotion_negative']),movement=verb(['movement']),naturalMove=verb(['natural_movement','movement']),gravity=verb(['gravity']),airWater=verb(['air_water_movement']),ground=verb(['ground_movement']),stop=verb(['stasis']),will=verb(['volition']),cognition=verb(['cognition']),help=verb(['help']),forbid=verb(['prohibition']),pain=verb(['pain']),rest=verb(['rest']),exist=verb(['existence']),process=verb(['process']),present=verb(['activity','action']),future=verb(['activity','action']),past=verb(['event','change','activity']);
-const out=[];const add=(english,S,V,O,extra=[],extraIndex=99)=>out.push({english,S,V,O,extra,extraIndex});
-add('I am <name/role>.',W(I),E(be),p('name/role'));add('You are my <relationship/friendship>.',W(YOU),E(be),p('relationship/friendship'),[W(MY)],1);add('This is <near object>.',W(THIS),E(be),p('near object'));add('That is <distant object>.',W(THAT),E(be),p('distant object'));add('We are <near place adverb>.',W(WE),E(be),p('near place adverb'));add('They are <distant place adverb>.',W(THEY),E(be),p('distant place adverb'));add('I have <fundamental resource>.',W(I),E(have),p('fundamental resource'));add('You have <fundamental resource>.',W(YOU),E(have),p('fundamental resource'));add('<natural element> is <physical adjective 1>.',p('natural element'),E(be),p('physical adjective 1'));add('<natural element> is <physical adjective 2>.',p('natural element'),E(be),p('physical adjective 2'));add('<living being 1> <consumption verb> <food resource>.',p('living being 1'),E(consume),p('food resource'));add('<living being 2> <consumption verb> <liquid>.',p('living being 2'),E(consume),p('liquid'));add('I <perception verb> you.',W(I),E(perception),W(YOU));add('You <perception verb> me.',W(YOU),E(perception),W(ME));add('<living being 1> <violence/hunting verb> <living being 2>.',p('living being 1'),E(violence),p('living being 2'));add('We <generic action verb> this.',W(WE),E(generic),W(THIS));add('I <positive emotion verb> <living being 1>.',W(I),E(emoP),p('living being 1'));add('I <negative emotion verb> <threat>.',W(I),E(emoN),p('threat'));add('I <movement verb> toward <geographical place>.',W(I),E(movement),p('geographical place'),[W(to)],2);add('You <movement verb> from <geographical place>.',W(YOU),E(movement),p('geographical place'),[W(from)],2);add('<cosmic element> <natural movement verb>.',p('cosmic element'),E(naturalMove));add('<inanimate object> <gravity movement verb>.',p('inanimate object'),E(gravity));add('<animal> <air/water movement verb> in <vertical direction>.',p('animal'),E(airWater),p('vertical direction'),[W(inside)],2);add('<living being> <ground movement verb> in the <natural zone>.',p('living being'),E(ground),p('natural zone'),[W(inside),W(the)],2);add('<stop imperative verb> here.',E(stop),null,W(here));add('<movement imperative verb> with me.',E(movement),null,W(ME),[W(with)],1);add('Who are you?',W(WHO),E(be),W(YOU));add('What is this?',W(WHAT),E(be),W(THIS));add('Where are we?',W(WHERE),E(be),W(WE));add('When <future movement verb> you?',W(WHEN),E(movement),W(YOU));add('Why <action verb> this?',W(WHY),E(generic),W(THIS));add('How many are <plural entities>?',W(MANY),E(be),p('plural entities'));add('How is this <process verb>?',W(HOW),E(process),W(THIS));add('Where is <vital resource>?',W(WHERE),E(be),p('vital resource'));add('I do not <will verb> this.',W(I),E(will),W(THIS),[W(not)],1);add('You cannot <limited action verb>.',W(YOU),E(generic),null,[W(not),W(can)],0);add('I do not <cognition verb>.',W(I),E(cognition),null,[W(not)],1);add('I <cognition verb> this <path/road>.',W(I),E(cognition),W(THIS),[p('path/road')],2);add('I can <help action verb> you.',W(I),E(help),W(YOU),[W(can)],1);add('Do not <forbidden action verb> this.',E(forbid),W(THIS),null,[W(not)],0);add('I have <physical need/state>.',W(I),E(have),p('physical need/state'));add('My <organ/body part> <pain verb>.',W(MY),E(pain),p('organ/body part'));add('I <will verb> <rest verb>.',W(I),E(will),E(rest));add('This is <large quantity>.',W(THIS),E(be),p('large quantity'));add('This is <small quantity>.',W(THIS),E(be),p('small quantity'));add('Everything is <readiness state>.',W(ALL),E(be),p('readiness state'));add('Nothing <negative existence verb>.',W(NOTHING),E(exist));add('Today we <present activity verb>.',W(WE),E(present),null,[W(today)],0);add('Tomorrow we <future activity verb>.',W(WE),E(future),null,[W(tomorrow)],0);add('Yesterday <past event verb> <entity>.',W(yesterday),E(past),p('entity'));return out.map((s,i)=>({...s,number:i+1}))}
-function order(s,c){const core={S:s.S,V:s.V,O:s.O};let a=c.order.split('').map(k=>core[k]).filter(Boolean);if(s.extra?.length)a.splice(Math.min(a.length,s.extraIndex??a.length),0,...s.extra.filter(Boolean));return a}
-function sentenceHtml(s,c){return order(s,c).map(x=>x.placeholder?`<span class="sample-placeholder">${esc(x.text)}</span>`:`<span class="sample-word" data-meaning="${esc(x.english)}">${esc(x.word)}</span>`).join(' ')}
-function renderSamples(list){return `<div class="sample-list">${list.map(s=>`<div class="sample-pill"><span class="sample-number">${s.number}.</span><span class="sample-english">${esc(s.english)}</span><span class="sample-arrow">→</span><strong class="sample-conlang">${sentenceHtml(s,generated.config)}</strong></div>`).join('')}</div>`}
-function renderDictionary(){const out=$('dictionary-output');if(!out)return;if(!generated){out.textContent='Generate a language to populate the dictionary.';return}const dir=$('dictionary-direction')?.value||'conlang-en',q=norm($('dictionary-search')?.value);let rows=generated.lexicon.filter(e=>!q||norm(dir==='conlang-en'?e.word:e.english).includes(q)).sort((a,b)=>(dir==='conlang-en'?a.word:a.english).localeCompare(dir==='conlang-en'?b.word:b.english));out.innerHTML=rows.map(e=>dir==='conlang-en'?`<div class="dict-row"><strong>${esc(e.word)}</strong><span>${esc(e.english)}</span><span class="meta">${esc(e.kind)}</span></div>`:`<div class="dict-row"><strong>${esc(e.english)}</strong><span>${esc(e.word)}</span><span class="meta">${esc(e.kind)}</span></div>`).join('')||'<div class="empty">No matches.</div>'}
-function render(){if(!generated)return;const out=$('generation-output');if(out)out.innerHTML=`<div class="hero"><div><div class="lang-name">${esc(generated.name)} <span class="chip">v${VERSION}</span></div><div class="sub">${esc(generated.config.order)} · ${esc(generated.config.morphology)}</div></div></div>`;const lx=$('lexicon-output');if(lx)lx.innerHTML=`<div class="lexicon">${generated.lexicon.map(e=>`<div class="lex-row"><div class="word">${esc(e.word)}</div><div class="eng">${esc(e.english)}</div><div class="meta">${esc(e.kind)} · ${esc(e.category||'')}</div></div>`).join('')}</div>`;const ss=$('sample-sentences');if(ss)ss.innerHTML=renderSamples(generated.samples);renderDictionary();document.querySelectorAll('.sample-word').forEach(el=>{el.onmouseenter=()=>{let t=$('sample-tooltip');if(!t){t=document.createElement('div');t.id='sample-tooltip';t.className='sample-tooltip';document.body.appendChild(t)}t.textContent=el.dataset.meaning;t.style.display='block';const r=el.getBoundingClientRect();t.style.left=`${r.left}px`;t.style.top=`${Math.max(8,r.top-34)}px`};el.onmouseleave=()=>{const t=$('sample-tooltip');if(t)t.style.display='none'}})}
-async function loadVocabulary(){try{const r=await fetch('vocabulary.json?v='+VERSION,{cache:'no-store'});if(!r.ok)throw Error(`HTTP ${r.status}`);const d=await r.json();vocabulary=Array.isArray(d)?d:Array.isArray(d.vocabulary)?d.vocabulary:[];if(!vocabulary.length)throw Error('Unsupported vocabulary JSON structure.');populate();$('db-status').textContent=`Vocabulary loaded: ${vocabulary.length} entries`;$('message').textContent='Dictionary ready.'}catch(e){$('db-status').textContent='Vocabulary load failed';$('message').textContent=e.message}}
-function generate(){if(!vocabulary.length){$('message').textContent='Vocabulary is not loaded yet.';return}const c=config(),make=makeWordFactory(c);generated={config:c,name:`${make()} ${make()}`,lexicon:generateLexicon(c),samples:[]};generated.samples=samples(c,generated.lexicon);render();$('message').textContent=`Generated ${generated.name} · ${generated.lexicon.length} lemmas · ${generated.samples.length} sample sentences.`}
-function bind(){$('generate-language')?.addEventListener('click',()=>{randomize();generate()});$('regenerate-lexicon')?.addEventListener('click',()=>generate());$('randomize')?.addEventListener('click',randomize);$('dictionary-direction')?.addEventListener('change',renderDictionary);$('dictionary-search')?.addEventListener('input',renderDictionary);const h=document.querySelector('header h1');if(h&&!h.querySelector('.version-badge'))h.insertAdjacentHTML('beforeend',` <span class="version-badge">v${VERSION}</span>`)}
-bind();loadVocabulary();
+  'use strict';
+
+  const VERSION = '0.7.7';
+  const $ = id => document.getElementById(id);
+  const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({
+    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+  }[c]));
+
+  /* The vocabulary database is currently stored as { vocabulary: [...] }.
+     The legacy engine expects the array itself. Normalize only this response. */
+  const nativeFetch = window.fetch.bind(window);
+  window.fetch = async (input, init) => {
+    const response = await nativeFetch(input, init);
+    const url = typeof input === 'string' ? input : input?.url || '';
+    if (!url.includes('vocabulary.json')) return response;
+
+    try {
+      const data = await response.clone().json();
+      const list = Array.isArray(data) ? data : data?.vocabulary;
+      if (!Array.isArray(list)) throw new Error('vocabulary.json does not contain a vocabulary array.');
+      const status = $('db-status');
+      if (status) status.textContent = `Vocabulary loaded: ${list.length} entries`;
+      return new Response(JSON.stringify(list), {
+        status: response.status,
+        statusText: response.statusText,
+        headers: response.headers
+      });
+    } catch (error) {
+      const status = $('db-status');
+      if (status) status.textContent = `Vocabulary load error: ${error.message}`;
+      throw error;
+    }
+  };
+
+  function addVersionBadge() {
+    const heading = document.querySelector('h1');
+    if (!heading || heading.querySelector('.version-badge')) return;
+    const badge = document.createElement('span');
+    badge.className = 'version-badge';
+    badge.textContent = `v${VERSION}`;
+    badge.style.cssText = 'display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;background:#18243a;border:1px solid #2a3b59;color:#a9c4e8;font-size:11px;vertical-align:middle;';
+    heading.appendChild(badge);
+  }
+
+  function renderGenerated(event) {
+    const detail = event.detail || {};
+    const config = detail.config || {};
+    const lexicon = detail.lexicon || [];
+    const engine = window.ConLangEngine;
+    const generation = $('generation-output');
+    const lexiconOutput = $('lexicon-output');
+    const dictionaryOutput = $('dictionary-output');
+
+    if (!engine) return;
+
+    const escWord = value => esc(value);
+    const meta = entry => [entry.category, entry.kind].filter(Boolean).join(' · ');
+
+    if (generation && engine.samples && engine.sentenceHtml) {
+      const sentences = engine.samples(config, lexicon);
+      generation.classList.remove('empty');
+      generation.innerHTML = `
+        <div class="card">
+          <h3>Sample Sentences</h3>
+          <div class="sample-list">
+            ${sentences.map(sentence => `
+              <div class="sample-pill">
+                <span class="sample-number">${sentence.number}.</span>
+                <span class="sample-english">${esc(sentence.english)}</span>
+                <span class="sample-arrow">→</span>
+                <span class="sample-conlang">${engine.sentenceHtml(sentence, config)}</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>`;
+    }
+
+    if (lexiconOutput) {
+      const rows = [...lexicon].sort((a,b) => String(a.concept || '').localeCompare(String(b.concept || '')));
+      lexiconOutput.classList.remove('empty');
+      lexiconOutput.innerHTML = `<div class="card"><h3>Generated Lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} entries</div><div class="lexicon">${rows.map(entry => `<div class="lex-row"><div class="word">${escWord(entry.conlang)}</div><div class="eng">${escWord(entry.concept)}</div><div class="meta">${esc(meta(entry))}</div></div>`).join('')}</div></div>`;
+    }
+
+    if (dictionaryOutput) {
+      const rows = [...lexicon].sort((a,b) => String(a.conlang || '').localeCompare(String(b.conlang || '')));
+      dictionaryOutput.classList.remove('empty');
+      dictionaryOutput.innerHTML = `<div class="card"><h3>Conlang → English</h3><div class="sub" style="margin-bottom:10px">${rows.length} entries</div><div class="dictionary">${rows.map(entry => `<div class="dict-row"><strong>${escWord(entry.conlang)}</strong><span>${escWord(entry.concept)}</span><span class="meta">${esc(meta(entry))}</span></div>`).join('')}</div></div>`;
+    }
+
+    const message = $('message');
+    if (message) message.textContent = `Generated ${lexicon.length} lexical entries.`;
+  }
+
+  function connectControls() {
+    const engine = window.ConLangEngine;
+    if (!engine) {
+      const message = $('message');
+      if (message) message.textContent = 'Engine failed to load.';
+      return;
+    }
+
+    $('generate')?.addEventListener('click', () => {
+      try { engine.generate(); }
+      catch (error) { console.error(error); if ($('message')) $('message').textContent = `Generation error: ${error.message}`; }
+    });
+
+    $('regenerate')?.addEventListener('click', () => {
+      try { engine.generate(); }
+      catch (error) { console.error(error); if ($('message')) $('message').textContent = `Generation error: ${error.message}`; }
+    });
+
+    $('randomize')?.addEventListener('click', () => {
+      try { engine.randomize(); }
+      catch (error) { console.error(error); if ($('message')) $('message').textContent = `Randomization error: ${error.message}`; }
+    });
+
+    window.addEventListener('conlang:generated', renderGenerated);
+    if (engine.VERSION !== VERSION) engine.VERSION = VERSION;
+  }
+
+  addVersionBadge();
+
+  const legacy = document.createElement('script');
+  legacy.src = `conlang_engine_legacy.js?v=${VERSION}`;
+  legacy.onload = () => {
+    addVersionBadge();
+    connectControls();
+  };
+  legacy.onerror = () => {
+    const status = $('db-status');
+    if (status) status.textContent = 'Engine load error.';
+  };
+  document.head.appendChild(legacy);
 })();

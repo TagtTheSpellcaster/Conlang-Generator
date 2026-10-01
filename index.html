@@ -1,147 +1,157 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Conlang Generator</title>
-    <link rel="stylesheet" href="vocabulary.css">
-    <style>
-        .app-header { padding:18px 28px; display:flex; justify-content:space-between; align-items:center; gap:24px; }
-        .brand h1 { display:flex; align-items:center; gap:10px; }
-        .version-badge { display:inline-flex; align-items:center; padding:3px 9px; border-radius:999px; background:rgba(255,255,255,.16); color:#fff; font-size:12px; line-height:1.4; font-weight:600; }
-        .header-actions { display:flex; gap:8px; flex-wrap:wrap; }
-        .app-shell { padding:20px 28px; }
-        .tabs { display:flex; gap:6px; margin-bottom:18px; border-bottom:1px solid #d8ddd8; }
-        .tab { border:0; border-radius:7px 7px 0 0; background:transparent; padding:10px 16px; font-weight:600; cursor:pointer; }
-        .tab.active { background:#fff; border:1px solid #d8ddd8; border-bottom-color:#fff; margin-bottom:-1px; }
-        .tab-panel[hidden] { display:none; }
-        .generation-grid { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(190px,.55fr); gap:16px; align-items:start; }
-        .generation-middle { display:grid; gap:16px; }
-        .card { background:#fff; border:1px solid #d8ddd8; border-radius:9px; padding:16px; }
-        .card h2 { margin:0 0 14px; font-size:16px; }
-        .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
-        .form-grid.compact { grid-template-columns:1fr; }
-        .card label { margin:0; }
-        .card select,.card input { width:100%; margin-top:5px; }
-        .generation-actions { display:flex; flex-direction:column; gap:8px; }
-        .generation-actions button { width:100%; }
-        .generation-actions .primary { background:#26382c; color:#fff; border-color:#26382c; }
-        .status { font-size:12px; color:#666; padding:4px 2px; min-height:18px; }
-        .table-wrap { background:#fff; border:1px solid #d8ddd8; border-radius:9px; overflow:auto; }
-        .dictionary-toolbar { display:flex; gap:12px; margin-bottom:12px; align-items:end; }
-        .dictionary-toolbar label { margin:0; }
-        .dictionary-toolbar select,.dictionary-toolbar input { margin-top:5px; }
-        #generation-output { margin-top:16px; }
-        #sample-sentences { margin-top:16px; display:grid; gap:10px; }
-        #lexicon-output { margin-top:12px; }
-        #dictionary-output { min-height:40px; }
-        #message { margin-top:8px; font-size:12px; color:#666; }
-        .sample-list{display:grid;gap:10px}
-        .sample-pill{background:#fff;border:1px solid #d8ddd8;border-radius:999px;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.45}
-        .sample-pill .sample-number{font-weight:700;min-width:26px}
-        .sample-pill .sample-english{font-weight:500}
-        .sample-pill .sample-arrow{color:#777}
-        .sample-pill .sample-conlang{font-weight:700}
-        .sample-word{cursor:help;border-bottom:1px dotted #777}
-        .sample-placeholder{color:#666;font-weight:500}
-        .sample-tooltip{position:fixed;z-index:9999;pointer-events:none;background:#070b14;color:#fff;border:1px solid #444;border-radius:6px;padding:5px 8px;font-size:12px;box-shadow:0 4px 18px rgba(0,0,0,.35);display:none}
-        @media(max-width:900px){ .generation-grid{grid-template-columns:1fr;} .form-grid{grid-template-columns:1fr;} .header-actions{justify-content:flex-start;} }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conlang Generator</title>
+<style>
+:root{--bg:#0b1020;--panel:#11182a;--panel2:#0d1424;--line:#26324a;--text:#e7edf7;--muted:#8fa0ba;--accent:#55c7ff;--good:#55d6a0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif}button,select,input{font:inherit}button{cursor:pointer}
+header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+.header-tools{display:flex;gap:8px;align-items:center}.header-tools .btn{white-space:nowrap}
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--line);background:#0e1526;padding:0 22px}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:13px 18px}.tab:hover{color:var(--text);background:#11182a}.tab.active{color:var(--text);border-bottom-color:var(--accent)}
+.tab-panel{display:none}.tab-panel.active{display:block}main{padding:22px;max-width:1240px;margin:0 auto}.controls{width:100%}
+.parameter-grid{display:grid;grid-template-columns:minmax(250px,1fr) minmax(320px,1.15fr) minmax(190px,.65fr);gap:14px;align-items:start}.section{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;min-width:0}.section h2{font-size:14px;margin-bottom:13px}
+.semantic-fields{display:grid;grid-template-columns:1fr;gap:0}.field{margin-top:10px}.field:first-of-type{margin-top:0}.field label{display:block;color:var(--muted);font-size:12px;margin-bottom:5px}.field select,.field input{width:100%;height:36px;background:#090f1c;color:var(--text);border:1px solid var(--line);border-radius:7px;padding:7px 10px}.field select:focus,.field input:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.preset-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.parameter-stack{display:grid;gap:14px}.compact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.full{grid-column:1/-1}
+.btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted)}
+.generation-actions{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:8px;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;min-width:0}.generation-actions .status{margin-bottom:4px;min-height:18px}.generation-actions .btn{width:100%}
+.result{margin-top:16px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:125px 1fr;gap:6px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:620px;overflow:auto}.lex-row{display:grid;grid-template-columns:170px 1fr 150px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.dictionary-controls{display:flex;gap:10px;align-items:end;margin-bottom:14px}.dictionary-controls .field{margin:0;flex:0 0 260px}.dictionary-controls .search{flex:1}.dictionary{max-height:680px;overflow:auto}.dict-row{display:grid;grid-template-columns:1fr 1fr 160px;gap:12px;padding:9px 4px;border-bottom:1px solid #1d2739}.dict-row strong{color:#77d6ff;font-family:ui-monospace,monospace}.dict-row .meta{color:var(--muted);font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:12px;border:1px solid #743c3c;background:#281516;color:#e5a5a5;border-radius:8px;margin-top:12px}
+@media(max-width:950px){.parameter-grid{grid-template-columns:1fr 1fr}.generation-actions{grid-column:1/-1;flex-direction:row;align-items:center}.generation-actions .status{margin-right:auto;margin-bottom:0}.generation-actions .btn{width:auto}}
+@media(max-width:700px){.parameter-grid{grid-template-columns:1fr}.parameter-stack{grid-template-columns:1fr}.generation-actions{grid-column:auto;flex-direction:column;align-items:stretch}.generation-actions .status{margin-right:0;margin-bottom:4px}.generation-actions .btn{width:100%}.compact-grid{grid-template-columns:1fr}.full{grid-column:auto}.hero{flex-direction:column}.dictionary-controls{flex-direction:column;align-items:stretch}.dictionary-controls .field{flex:auto}.dict-row{grid-template-columns:1fr 1fr}.dict-row .meta{display:none}main{padding:16px}.header-tools{flex-wrap:wrap;justify-content:flex-end}.header-tools .status{display:none}}
+</style>
 </head>
 <body>
-<header class="app-header">
-    <div class="brand">
-        <h1>Conlang Generator <span class="version-badge">v0.7.6</span></h1>
-    </div>
-    <div class="header-actions">
-        <button id="open-vocabulary-manager" type="button">Vocabulary Manager</button>
-        <button id="export-vocabulary" type="button">Export Vocabulary</button>
-        <button id="import-vocabulary" type="button">Import Vocabulary</button>
-        <input id="import-vocabulary-file" type="file" accept=".json,application/json" hidden>
-    </div>
+<header>
+  <div><h1>Conlang Generator</h1><div class="sub">Vocabulary-driven language generation</div></div>
+  <div class="header-tools">
+    <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
+    <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
+    <button type="button" class="btn" id="import-vocabulary">Import vocabulary</button>
+    <input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
+    <div id="db-status" class="sub">Loading vocabulary…</div>
+  </div>
 </header>
-
-<main class="app-shell">
-    <nav class="tabs" role="tablist">
-        <button class="tab active" id="tab-generation" type="button">Generation</button>
-        <button class="tab" id="tab-lexicon" type="button">Generated Lexicon</button>
-        <button class="tab" id="tab-dictionary" type="button">Dictionary</button>
-    </nav>
-
-    <section id="panel-generation" class="tab-panel">
-        <div class="generation-grid">
-            <section class="card semantic-profile">
-                <h2>Semantic Profile</h2>
-                <div class="form-grid">
-                    <label>Region<select id="region"><option value="">Any</option></select></label>
-                    <label>Culture<select id="culture"><option value="">Any</option></select></label>
-                    <label>Biome<select id="biome"><option value="">Any</option></select></label>
-                    <label>Temporal Setting<select id="temporal_setting"><option value="">Any</option></select></label>
-                    <label>Lexicon Size<input id="lexicon-size" type="number" min="100" max="2000" value="600"></label>
-                </div>
-            </section>
-
-            <div class="generation-middle">
-                <section class="card">
-                    <h2>Phonology</h2>
-                    <div class="form-grid compact">
-                        <label>Vowels<select id="vowels"><option value="standard">Standard</option><option value="minimal">Minimal</option><option value="extended">Extended</option></select></label>
-                        <label>Consonants<select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant</option><option value="soft">Soft</option></select></label>
-                    </div>
-                </section>
-                <section class="card">
-                    <h2>Morphosyntax</h2>
-                    <div class="form-grid compact">
-                        <label>Word Order<select id="word-order"><option value="SVO">SVO</option><option value="SOV">SOV</option><option value="VSO">VSO</option><option value="VOS">VOS</option><option value="OSV">OSV</option><option value="OVS">OVS</option></select></label>
-                        <label>Morphological Type<select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></label>
-                        <label>Adjective Position<select id="adj-position"><option value="after">After noun</option><option value="before">Before noun</option></select></label>
-                        <label>Articles<select id="articles"><option value="none">None</option><option value="definite">Definite</option></select></label>
-                        <label>Plural<select id="plural"><option value="none">None</option><option value="suffix">Suffix</option><option value="prefix">Prefix</option></select></label>
-                        <label>Relations<select id="relations"><option value="prepositions">Prepositions</option><option value="postpositions">Postpositions</option></select></label>
-                    </div>
-                </section>
-            </div>
-
-            <section class="generation-actions">
-                <button id="generate-language" class="primary" type="button">Generate Language</button>
-                <button id="regenerate-lexicon" type="button">Regenerate Lexicon</button>
-                <button id="randomize" type="button">Randomize Parameters</button>
-                <div id="db-status" class="status" aria-live="polite">Loading vocabulary…</div>
-                <div id="message" aria-live="polite"></div>
-                <input id="mean" type="hidden" value="2.2">
-                <input id="seed" type="hidden" value="">
-            </section>
-        </div>
-        <div id="generation-output"></div>
-        <div id="sample-sentences"></div>
-    </section>
-
-    <section id="panel-lexicon" class="tab-panel" hidden>
-        <div id="lexicon-output" class="table-wrap"></div>
-    </section>
-
-    <section id="panel-dictionary" class="tab-panel" hidden>
-        <div class="dictionary-toolbar">
-            <label>Dictionary direction<select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></label>
-            <input id="dictionary-search" type="search" placeholder="Search…" autocomplete="off">
-        </div>
-        <div id="dictionary-output" class="table-wrap"></div>
-    </section>
-</main>
-
-<script src="conlang_engine.js?v=0.7.6"></script>
+<nav class="tabs" aria-label="Main sections">
+<button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button>
+<button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button>
+<button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button>
+</nav>
+<section id="generator" class="tab-panel active">
+<main><div class="controls">
+<div class="parameter-grid">
+<section class="section">
+<h2>Semantic profile</h2>
+<div class="semantic-fields">
+<div class="field"><label for="region">Region</label><select id="region"></select></div>
+<div class="field"><label for="culture">Culture</label><select id="culture"></select></div>
+<div class="field"><label for="biome">Biome</label><select id="biome"></select></div>
+<div class="field"><label for="temporal_setting">Temporal setting</label><select id="temporal_setting"></select></div>
+<div class="field"><label for="tags">Tags</label><select id="tags"></select></div>
+</div>
+<div class="preset-row"><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Science fiction</button></div>
+</section>
+<div class="parameter-stack">
+<section class="section">
+<h2>Phonology</h2>
+<div class="compact-grid">
+<div class="field"><label for="vowels">Vowels</label><select id="vowels"><option value="standard">a e i o u</option><option value="minimal">a i u</option><option value="extended">a e i o u y ø æ</option></select></div>
+<div class="field"><label for="consonants">Consonants</label><select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant / liquid</option><option value="soft">Soft / approximant</option></select></div>
+<div class="field"><label for="mean">Mean syllables</label><input id="mean" type="number" min="1" max="5" step=".1" value="2.2"></div>
+<div class="field"><label for="seed">Seed</label><input id="seed" type="text" value="auto"></div>
+</div>
+</section>
+<section class="section">
+<h2>Morphosyntax</h2>
+<div class="field"><label for="word-order">Word order</label><select id="word-order"><option>SVO</option><option>SOV</option><option>VSO</option><option>VOS</option><option>OSV</option><option>OVS</option></select></div>
+<div class="compact-grid">
+<div class="field"><label for="morphology">Morphology</label><select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></div>
+<div class="field"><label for="adj-position">Adjective position</label><select id="adj-position"><option value="after">Noun + adjective</option><option value="before">Adjective + noun</option></select></div>
+<div class="field"><label for="articles">Articles</label><select id="articles"><option value="none">None</option><option value="both">Definite + indefinite</option><option value="definite">Definite only</option><option value="indefinite">Indefinite only</option><option value="partitive">Definite + indefinite + partitive</option></select></div>
+<div class="field"><label for="plural">Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div>
+<div class="field full"><label for="relations">Grammatical relations</label><select id="relations"><option value="prepositions">Prepositions / word order</option><option value="cases">Case endings</option></select></div>
+</div>
+</section>
+</div>
+<div class="generation-actions"><span id="message" class="status"></span><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Regenerate lexicon</button></div>
+</div>
+<div id="generation-output" class="result empty">Set the parameters and generate a language.</div>
+</div></main>
+</section>
+<section id="lexicon" class="tab-panel"><main><div id="lexicon-output" class="empty">Generate a language to populate the lexicon.</div></main></section>
+<section id="dictionary" class="tab-panel"><main>
+<div class="dictionary-controls"><div class="field"><label for="dictionary-direction">Direction</label><select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></div><div class="field search"><label for="dictionary-search">Search</label><input id="dictionary-search" type="search" placeholder="Search the dictionary…"></div></div>
+<div id="dictionary-output" class="empty">Generate a language to populate the dictionary.</div>
+</main></section>
+<script src="conlang_engine.js"></script>
 <script>
+document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{
+ document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
+ document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+ tab.classList.add('active');tab.setAttribute('aria-selected','true');
+ const panel=document.getElementById(tab.dataset.tab);if(panel)panel.classList.add('active');
+}));
+
 (() => {
-    const tabs = [...document.querySelectorAll('.tab')];
-    const panels = {
-        'tab-generation': document.getElementById('panel-generation'),
-        'tab-lexicon': document.getElementById('panel-lexicon'),
-        'tab-dictionary': document.getElementById('panel-dictionary')
-    };
-    tabs.forEach(tab => tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.toggle('active', t === tab));
-        Object.entries(panels).forEach(([id, panel]) => { panel.hidden = id !== tab.id; });
-    }));
+  const $=id=>document.getElementById(id);
+  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  let imported=null;
+
+  $('open-vocabulary').addEventListener('click',()=>{window.location.href='vocabulary.html';});
+
+  function currentVisibleLexicon(){
+    const rows=[...document.querySelectorAll('#lexicon-output .lex-row')];
+    return rows.map(row=>{
+      const cells=row.children;
+      return {word:cells[0]?.textContent.trim()||'',english:cells[1]?.textContent.trim()||'',meta:cells[2]?.textContent.trim()||''};
+    }).filter(x=>x.word&&x.english);
+  }
+
+  $('export-vocabulary').addEventListener('click',()=>{
+    const lexicon=imported||currentVisibleLexicon();
+    if(!lexicon.length){$('message').textContent='Generate a language before exporting its vocabulary.';return;}
+    const payload={format:'Conlang Generator vocabulary',version:1,exported_at:new Date().toISOString(),lexicon};
+    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    const url=URL.createObjectURL(blob);const a=document.createElement('a');
+    a.href=url;a.download='conlang-vocabulary.json';a.click();URL.revokeObjectURL(url);
+    $('message').textContent=`Exported ${lexicon.length} entries.`;
+  });
+
+  $('import-vocabulary').addEventListener('click',()=>$('import-vocabulary-file').click());
+  $('import-vocabulary-file').addEventListener('change',async e=>{
+    const file=e.target.files?.[0];if(!file)return;
+    try{
+      const data=JSON.parse(await file.text());
+      const raw=Array.isArray(data)?data:(Array.isArray(data.lexicon)?data.lexicon:(Array.isArray(data.vocabulary)?data.vocabulary:[]));
+      const lexicon=raw.map(item=>({word:item.word??item.conlang,english:item.english??item.concept,meta:item.meta??`${item.category||''}${item.kind?` · ${item.kind}`:''}`})).filter(x=>x.word&&x.english);
+      if(!lexicon.length)throw new Error('No valid lexicon entries found.');
+      imported=lexicon;
+      renderImported(lexicon);
+      $('db-status').textContent=`Imported vocabulary: ${lexicon.length} entries`;
+      $('message').textContent=`Imported ${lexicon.length} entries.`;
+      document.querySelector('[data-tab="lexicon"]').click();
+    }catch(err){$('message').textContent=`Import failed: ${err.message}`;}
+    e.target.value='';
+  });
+
+  function renderImported(lexicon){
+    const rows=[...lexicon].sort((a,b)=>a.english.localeCompare(b.english));
+    $('lexicon-output').innerHTML=`<div class="card"><h3>Imported lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} imported entries</div><div class="lexicon">${rows.map(x=>`<div class="lex-row"><div class="word">${esc(x.word)}</div><div class="eng">${esc(x.english)}</div><div class="meta">${esc(x.meta)}</div></div>`).join('')}</div></div>`;
+    renderImportedDictionary();
+  }
+
+  function renderImportedDictionary(){
+    if(!imported)return;
+    const direction=$('dictionary-direction').value,q=$('dictionary-search').value.trim().toLowerCase();
+    let rows=imported.map(x=>({left:direction==='conlang-en'?x.word:x.english,right:direction==='conlang-en'?x.english:x.word,meta:x.meta}));
+    if(q)rows=rows.filter(x=>`${x.left} ${x.right} ${x.meta}`.toLowerCase().includes(q));
+    rows.sort((a,b)=>a.left.localeCompare(b.left));
+    $('dictionary-output').innerHTML=`<div class="card"><h3>${direction==='conlang-en'?'Conlang → English':'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.length?rows.map(x=>`<div class="dict-row"><strong>${esc(x.left)}</strong><span>${esc(x.right)}</span><span class="meta">${esc(x.meta)}</span></div>`).join(''):'<div class="empty">No matching entries.</div>'}</div></div>`;
+  }
+
+  $('dictionary-direction').addEventListener('change',()=>{if(imported)renderImportedDictionary();});
+  $('dictionary-search').addEventListener('input',()=>{if(imported)renderImportedDictionary();});
 })();
 </script>
 </body>
