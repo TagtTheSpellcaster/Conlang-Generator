@@ -28,43 +28,57 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
   <div class="header-tools">
     <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
     <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
+    <button type="button" class="btn" id="import-vocabulary">Import vocabulary</button>
+    <input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
+    <div id="db-status" class="sub">Loading vocabulary…</div>
   </div>
 </header>
-<nav class="tabs" aria-label="Generator sections">
-  <button type="button" class="tab active" data-tab="generator" aria-selected="true">Generator</button>
-  <button type="button" class="tab" data-tab="lexicon" aria-selected="false">Lexicon</button>
-  <button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button>
+<nav class="tabs" aria-label="Main sections">
+<button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button>
+<button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button>
+<button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button>
 </nav>
-<section id="generator" class="tab-panel active"><main>
+<section id="generator" class="tab-panel active">
+<main><div class="controls">
 <div class="parameter-grid">
-  <div class="section"><h2>Semantic profile</h2><div class="semantic-fields">
-    <div class="field"><label for="region">Region</label><select id="region"></select></div>
-    <div class="field"><label for="culture">Culture</label><select id="culture"></select></div>
-    <div class="field"><label for="biome">Biome</label><select id="biome"></select></div>
-    <div class="field"><label for="temporal_setting">Temporal setting</label><select id="temporal_setting"></select></div>
-    <div class="field"><label for="tags">Tags</label><select id="tags"></select></div>
-    <div class="preset-row"><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Sci-Fi</button></div>
-  </div></div>
-  <div class="parameter-stack">
-    <div class="section"><h2>Phonology</h2><div class="compact-grid">
-      <div class="field"><label for="vowels">Vowels</label><select id="vowels"><option value="standard">Standard</option><option value="minimal">Minimal</option><option value="extended">Extended</option></select></div>
-      <div class="field"><label for="consonants">Consonants</label><select id="consonants"><option value="balanced">Balanced</option></select></div>
-      <div class="field"><label for="mean">Mean syllables</label><input id="mean" type="number" min="1" max="6" step="0.1" value="2.2"></div>
-      <div class="field"><label for="seed">Seed</label><input id="seed" type="text" value="auto"></div>
-    </div></div>
-    <div class="section"><h2>Morphosyntax</h2><div class="compact-grid">
-      <div class="field"><label for="word-order">Word order</label><select id="word-order"><option>SVO</option><option>SOV</option><option>VSO</option><option>VOS</option><option>OSV</option><option>OVS</option></select></div>
-      <div class="field"><label for="morphology">Morphology</label><select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></div>
-      <div class="field"><label for="adj-position">Adjective position</label><select id="adj-position"><option>Before noun</option><option>After noun</option></select></div>
-      <div class="field"><label for="articles">Articles</label><select id="articles"><option>None</option><option>Definite</option><option>Definite + indefinite</option></select></div>
-      <div class="field"><label for="plural">Plural</label><select id="plural"><option>No marking</option><option>Suffix</option><option>Prefix</option><option>Particle</option></select></div>
-      <div class="field"><label for="relations">Grammatical relations</label><select id="relations"><option>Word order</option><option>Case</option><option>Adpositions</option><option>Mixed</option></select></div>
-    </div></div>
-  </div>
-  <div class="generation-actions"><div class="status" id="db-status">Loading vocabulary…</div><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Regenerate lexicon</button><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><div class="status" id="message"></div></div>
+<section class="section">
+<h2>Semantic profile</h2>
+<div class="semantic-fields">
+<div class="field"><label for="region">Region</label><select id="region"></select></div>
+<div class="field"><label for="culture">Culture</label><select id="culture"></select></div>
+<div class="field"><label for="biome">Biome</label><select id="biome"></select></div>
+<div class="field"><label for="temporal_setting">Temporal setting</label><select id="temporal_setting"></select></div>
+<div class="field"><label for="tags">Tags</label><select id="tags"></select></div>
 </div>
-<div id="generation-output" class="result empty">Generate a language to see the result.</div>
-</main></section>
+<div class="preset-row"><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Science fiction</button></div>
+</section>
+<div class="parameter-stack">
+<section class="section">
+<h2>Phonology</h2>
+<div class="compact-grid">
+<div class="field"><label for="vowels">Vowels</label><select id="vowels"><option value="standard">a e i o u</option><option value="minimal">a i u</option><option value="extended">a e i o u y ø æ</option></select></div>
+<div class="field"><label for="consonants">Consonants</label><select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant / liquid</option><option value="soft">Soft / approximant</option></select></div>
+<div class="field"><label for="mean">Mean syllables</label><input id="mean" type="number" min="1" max="5" step=".1" value="2.2"></div>
+<div class="field"><label for="seed">Seed</label><input id="seed" type="text" value="auto"></div>
+</div>
+</section>
+<section class="section">
+<h2>Morphosyntax</h2>
+<div class="field"><label for="word-order">Word order</label><select id="word-order"><option>SVO</option><option>SOV</option><option>VSO</option><option>VOS</option><option>OSV</option><option>OVS</option></select></div>
+<div class="compact-grid">
+<div class="field"><label for="morphology">Morphology</label><select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></div>
+<div class="field"><label for="adj-position">Adjective position</label><select id="adj-position"><option value="after">Noun + adjective</option><option value="before">Adjective + noun</option></select></div>
+<div class="field"><label for="articles">Articles</label><select id="articles"><option value="none">None</option><option value="both">Definite + indefinite</option><option value="definite">Definite only</option><option value="indefinite">Indefinite only</option><option value="partitive">Definite + indefinite + partitive</option></select></div>
+<div class="field"><label for="plural">Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div>
+<div class="field full"><label for="relations">Grammatical relations</label><select id="relations"><option value="prepositions">Prepositions / word order</option><option value="cases">Case endings</option></select></div>
+</div>
+</section>
+</div>
+<div class="generation-actions"><span id="message" class="status"></span><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Regenerate lexicon</button></div>
+</div>
+<div id="generation-output" class="result empty">Set the parameters and generate a language.</div>
+</div></main>
+</section>
 <section id="lexicon" class="tab-panel"><main><div id="lexicon-output" class="empty">Generate a language to populate the lexicon.</div></main></section>
 <section id="dictionary" class="tab-panel"><main>
 <div class="dictionary-controls"><div class="field"><label for="dictionary-direction">Direction</label><select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></div><div class="field search"><label for="dictionary-search">Search</label><input id="dictionary-search" type="search" placeholder="Search the dictionary…"></div></div>
@@ -83,7 +97,7 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
 
 (() => {
   const $=id=>document.getElementById(id);
-  const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const esc=v=>String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
   let imported=null;
 
   $('open-vocabulary').addEventListener('click',()=>{window.location.href='vocabulary.html';});
