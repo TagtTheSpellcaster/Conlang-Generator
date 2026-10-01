@@ -1,0 +1,12 @@
+name: 0.9.6 test
+on:
+  push:
+    paths:
+      - '.github/workflows/096-test.yml'
+permissions:
+  contents: write
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "0.9.6 workflow test"
