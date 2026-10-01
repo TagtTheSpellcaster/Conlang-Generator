@@ -1,7 +1,7 @@
-/* ConLang Generator UI + phonology patch — v0.9.2 */
+/* ConLang Generator UI + phonology patch — v0.9.3 */
 (() => {
 'use strict';
-const VERSION='0.9.2';
+const VERSION='0.9.3';
 let phonologyBusy=false;
 const $=id=>document.getElementById(id);
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -36,22 +36,42 @@ const isC=c=>!!CINFO[c];
 function consonantRuns(w){const out=[];let i=0;while(i<w.length){if(isC(w[i])){let j=i+1;while(j<w.length&&isC(w[j]))j++;out.push({start:i,end:j,text:w.slice(i,j)});i=j}else i++}return out}
 function globalPhonotactics(w){
  const runs=consonantRuns(w);
- // Macro 1: identical geminates are internal only.
  if(runs.length&&runs[0].start===0&&runs[0].text.length>=2&&runs[0].text[0]===runs[0].text[1])return false;
- // Macro 2: fricative/sibilant clusters. s/z are universal first-position wildcards.
  for(const run of runs){for(let i=0;i<run.text.length-1;i++){const a=run.text[i],b=run.text[i+1];if(FRIC.has(a)&&FRIC.has(b)){if(a!==b&&a!=='s'&&a!=='z')return false;if(a===b&&run.start===0&&i===0)return false}}}
- // Macro 3: anatomical homophony. Pairs sharing a place must be identical; triplets may contain a shared-place pair only when that pair is an adjacent identical geminate.
  for(const run of runs){const q=run.text;for(let i=0;i<q.length-1;i++){const a=CINFO[q[i]],b=CINFO[q[i+1]];if(a.place===b.place&&q[i]!==q[i+1])return false}
   for(let i=0;i<q.length-2;i++){for(let j=i+1;j<i+3;j++){if(CINFO[q[i]].place===CINFO[q[j]].place){const adjacentGem=(j===i+1&&q[i]===q[j])||(j===i-1&&q[i]===q[j]);if(!adjacentGem)return false}}}
  }
  return true
 }
 function countRuns(w,re){let max=0;for(const m of w.matchAll(re))max=Math.max(max,m[0].length);return max}
-function modelValid(w,m){const runs=consonantRuns(w),V='aeiouyøæ';
+function europeanNexusValid(q){
+ if(q.length===0)return true;
+ if(q.length>3)return false;
+ if(q.length===2){
+  const [a,b]=q.split('');
+  const firstSoft=['r','l','m','n','s'].includes(a);
+  const identical=a===b;
+  if(!firstSoft&&!identical)return false;
+  if(CINFO[a]?.place===CINFO[b]?.place&&!identical)return false;
+  return true;
+ }
+ if(q.length===3){
+  const [a,,c]=q.split('');
+  if(!['r','l','m','n','s'].includes(a))return false;
+  if(!['r','l','j','w'].includes(c))return false;
+  return true;
+ }
+ return false;
+}
+function modelValid(w,m){
+ const runs=consonantRuns(w),V='aeiouyøæ';
  if(!w||!/[aeiouyøæ]/i.test(w)&&!m.liquids?.some(x=>w.includes(x)))return false;
  if(m===MODEL.isolated){if(countRuns(w,/[^aeiouyøæ]/gi)>1||countRuns(w,/[aeiouyøæ]/gi)>3)return false;if(/([aeiouyøæ])\1{2,}/i.test(w))return false}
  if(m===MODEL.japanese){if(countRuns(w,/[^aeiouyøæ]/gi)>3||countRuns(w,/[aeiouyøæ]/gi)>2)return false;for(const x of runs){const q=x.text;if(q.length===2&&!m.nasals.includes(q[0]))return false;if(q.length===3&&!(m.nasals.includes(q[0])&&m.obstruents.includes(q[1])&&m.glides.includes(q[2])))return false;if(q.length>3)return false}}
- if(m===MODEL.european){if(countRuns(w,/[^aeiouyøæ]/gi)>3||countRuns(w,/[aeiouyøæ]/gi)>2)return false;for(const x of runs){const q=x.text;if(q.length===2&&!(['r','l','m','n','s'].includes(q[0])||q[0]===q[1]))return false;if(q.length===3&&!(['r','l','m','n','s'].includes(q[0])&&['r','l','j','w'].includes(q[2])))return false;if(q.length>3)return false}}
+ if(m===MODEL.european){
+  if(countRuns(w,/[^aeiouyøæ]/gi)>3||countRuns(w,/[aeiouyøæ]/gi)>2)return false;
+  for(const x of runs){if(!europeanNexusValid(x.text))return false}
+ }
  if(m===MODEL.english){if(countRuns(w,/[^aeiouyøæ]/gi)>4||countRuns(w,/[aeiouyøæ]/gi)>1)return false;if(runs.some(x=>x.text.length>4))return false}
  if(m===MODEL.slavic){if(countRuns(w,/[^aeiouyøæ]/gi)>4||countRuns(w,/[aeiouyøæ]/gi)>1)return false;if(runs.some(x=>x.text.length>4))return false;for(const x of runs){const q=x.text;let bil=q.split('').filter(c=>CINFO[c]?.place==='Labiale').length;if(bil>2)return false}}
  if(m===MODEL.semitic){if(!/^[^aeiouyøæ][aeiouyøæ]/i.test(w))return false;if(/[aeiouyøæ][^aeiouyøæ]$/i.test(w)&&!/[aeiouyøæ]$/.test(w))return false;if(runs.some(x=>x.start===0&&x.text.length>1))return false;if(runs.some(x=>x.text.length>2))return false;if(/[aeiouyøæ]{2}/i.test(w))return false}
@@ -59,12 +79,9 @@ function modelValid(w,m){const runs=consonantRuns(w),V='aeiouyøæ';
 }
 function validWord(w,m){return globalPhonotactics(w)&&modelValid(w,m)}
 function makeSyllable(m,v,r){const p=pick(m.make,r);let out='';for(const ch of p){if(ch==='C')out+=pick(m.c,r);else if(ch==='V')out+=pick(v,r);else if(ch==='G')out+=pick(m.glides||['j','w'],r);else if(ch==='N')out+=pick(m.nasals||['n','m'],r);else if(ch==='L')out+=pick(m.liquids||['r','l'],r)}return out}
-function makeWord(m,v,mean,r){for(let tries=0;tries<5000;tries++){const n=Math.max(1,Math.min(6,Math.round(mean+(r()-.5)*1.4)));let w='';for(let i=0;i<n;i++)w+=makeSyllable(m,v,r);w=w.toLowerCase();if(validWord(w,m))return w}
- for(let tries=0;tries<1000;tries++){let w=makeSyllable(m,v,r).toLowerCase();if(validWord(w,m))return w}
- return null
-}
+function makeWord(m,v,mean,r){for(let tries=0;tries<5000;tries++){const n=Math.max(1,Math.min(6,Math.round(mean+(r()-.5)*1.4)));let w='';for(let i=0;i<n;i++)w+=makeSyllable(m,v,r);w=w.toLowerCase();if(validWord(w,m))return w}return null}
 function installModelOptions(){const e=$('consonants');if(!e)return;const current=e.value;const opts=[['isolated','1 — Minimalist Isolating (Hawaiian-type)'],['japanese','2 — Controlled Open Syllable (Japanese-type)'],['european','3 — Balanced European (Italian/Finnish-type)'],['english','4 — Dynamic Anglo-Saxon (English-type)'],['slavic','5 — Compact Slavic (Croatian/Polish-type)'],['semitic','6 — Semitic Root-and-Pattern (Arabic-type)']];e.innerHTML=opts.map(([v,t])=>`<option value="${v}">${t}</option>`).join('');e.value=MODEL[current]?current:'european'}
-function phonologize(){if(phonologyBusy)return;const rows=[...document.querySelectorAll('#lexicon-output .lex-row')];if(!rows.length||rows.every(row=>row.children[0]?.dataset.phonologized==='1'))return;phonologyBusy=true;const model=modelFor(),v=vowelSet(),seed=$('seed')?.value.trim()||'auto',mean=Number($('mean')?.value)||2.2,r=rng(seed+'|phonology|'+Object.keys(MODEL).find(k=>MODEL[k]===model));const map=new Map(),used=new Set();rows.forEach(row=>{const meaning=row.children[1]?.textContent.trim();if(!meaning)return;let w=map.get(norm(meaning));if(!w){for(let guard=0;guard<100;guard++){w=makeWord(model,v,mean,r);if(w&&!used.has(w))break;w=null}if(!w)w='naka';used.add(w);map.set(norm(meaning),w)}const cell=row.children[0];if(cell){cell.textContent=w;cell.dataset.phonologized='1'}});document.querySelectorAll('.sample-word').forEach(el=>{const meaning=norm(el.getAttribute('data-meaning')||el.textContent);const w=map.get(meaning);if(w)el.textContent=w});document.querySelectorAll('#dictionary-output .dict-row').forEach(row=>{const strong=row.querySelector('strong');const span=row.querySelector('span');if(!strong||!span)return;const meaning=norm(span.textContent);if(map.has(meaning))strong.textContent=map.get(meaning)});phonologyBusy=false}
+function phonologize(){if(phonologyBusy)return;const rows=[...document.querySelectorAll('#lexicon-output .lex-row')];if(!rows.length||rows.every(row=>row.children[0]?.dataset.phonologized==='1'))return;phonologyBusy=true;const model=modelFor(),v=vowelSet(),seed=$('seed')?.value.trim()||'auto',mean=Number($('mean')?.value)||2.2,r=rng(seed+'|phonology|'+Object.keys(MODEL).find(k=>MODEL[k]===model));const map=new Map(),used=new Set();rows.forEach(row=>{const meaning=row.children[1]?.textContent.trim();if(!meaning)return;let w=map.get(norm(meaning));if(!w){for(let guard=0;guard<100;guard++){w=makeWord(model,v,mean,r);if(w&&!used.has(w))break;w=null}if(!w)return;used.add(w);map.set(norm(meaning),w)}const cell=row.children[0];if(cell){cell.textContent=w;cell.dataset.phonologized='1'}});document.querySelectorAll('.sample-word').forEach(el=>{const meaning=norm(el.getAttribute('data-meaning')||el.textContent);const w=map.get(meaning);if(w)el.textContent=w});document.querySelectorAll('#dictionary-output .dict-row').forEach(row=>{const strong=row.querySelector('strong');const span=row.querySelector('span');if(!strong||!span)return;const meaning=norm(span.textContent);if(map.has(meaning))strong.textContent=map.get(meaning)});phonologyBusy=false}
 function init(){styles();installModelOptions();tab();const o=$('generation-output');if(o)new MutationObserver(()=>requestAnimationFrame(move)).observe(o,{childList:true,subtree:true});const l=$('lexicon-output');if(l)new MutationObserver(()=>requestAnimationFrame(phonologize)).observe(l,{childList:true,subtree:true});move();const h=document.querySelector('header h1');if(h){let b=h.querySelector('.version-badge');if(!b){b=document.createElement('span');b.className='chip version-badge';b.style.marginLeft='8px';h.appendChild(b)}b.textContent='v'+VERSION}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
