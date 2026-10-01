@@ -1,8 +1,8 @@
-/* ConLang Generator — vocabulary-driven engine v0.7.2 */
+/* ConLang Generator — vocabulary-driven engine v0.7.3 */
 (() => {
     'use strict';
 
-    const VERSION = '0.7.2';
+    const VERSION = '0.7.3';
     const $ = id => document.getElementById(id);
 
     const arr = value =>
@@ -200,12 +200,6 @@
         return concepts.some(value => concept === norm(value));
     }
 
-    /*
-     * Strict semantic selector.
-     * Exact concepts are checked before semantic metadata. Metadata values
-     * are matched as complete values, never as substrings. A grammatical
-     * kind is a hard constraint whenever one is supplied.
-     */
     function selectCandidates(lexicon, query) {
         let candidates = lexicon.slice();
 
@@ -387,309 +381,90 @@
             if (!candidates.length) continue;
 
             const candidate = choice(candidates, random);
-            const original = ranked.find(item => item.entry.id === candidate.id);
-
-            if (original && !chosen.has(original.entry.id)) {
-                selected.push(original);
-                chosen.add(original.entry.id);
+            if (candidate && !chosen.has(candidate.id)) {
+                selected.push({
+                    entry: candidate,
+                    score: 100
+                });
+                chosen.add(candidate.id);
             }
         }
-
-        return selected;
     }
 
     function generateLexicon(config) {
-        const make = factory(config, 'lexicon');
-
+        const random = rng(`${config.seed}|selection`);
         const ranked = vocabulary
-            .filter(entry => String(entry.concept || '').trim())
             .map(entry => ({
-                entry,
+                entry: { ...entry, kind: classify(entry) },
                 score: score(entry, config)
-            }));
+            }))
+            .sort((a, b) => b.score - a.score);
 
         const required = ranked.filter(item => isRequired(item.entry));
         const selected = required.slice();
 
-        addSemanticRequirements(
-            ranked,
-            selected,
-            rng(`${config.seed}|semantic-requirements`)
-        );
+        addSemanticRequirements(ranked, selected, random);
 
-        const target = Math.min(600, ranked.length);
-        const selectedIds = new Set(selected.map(item => item.entry.id));
-        const remaining = ranked.filter(item => !selectedIds.has(item.entry.id));
+        const target = 600;
+        if (selected.length < target) {
+            const selectedIds = new Set(selected.map(item => item.entry.id));
+            const remaining = ranked.filter(item => !selectedIds.has(item.entry.id));
+            selected.push(...weighted(config, remaining, target - selected.length));
+        }
 
-        selected.push(...weighted(
-            config,
-            remaining,
-            Math.max(0, target - selected.length)
-        ));
-
+        const makeWord = factory(config, 'words');
         const seen = new Set();
-        const result = [];
 
-        for (const item of selected) {
-            const entry = item.entry;
-            const key = `${norm(entry.concept)}|${entry.id || ''}`;
+        return selected.map(item => {
+            let word = item.entry.conlang;
 
-            if (seen.has(key)) continue;
-            seen.add(key);
+            if (!word || seen.has(word)) {
+                word = makeWord();
+            }
 
-            result.push({
-                ...entry,
-                english: String(entry.concept || '').replace(/^to\s+/i, '').trim(),
-                kind: classify(entry),
-                word: make(),
-                score: score(entry, config)
-            });
-        }
+            seen.add(word);
 
-        return result;
-    }
-
-    /* Strict semantic helpers used by the 50 sample sentence frames. */
-    function noun(lexicon, random, terms) {
-        const lower = terms.map(norm);
-
-        if (lower.includes('person') || lower.includes('occupation') || lower.includes('profession') || lower.includes('role')) {
-            return selectOne(lexicon, random, {
-                kinds: ['noun'],
-                anyTags: ['person', 'social_role'],
-                excludeTags: ['inanimate_object']
-            });
-        }
-
-        if (lower.includes('animal')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['animal'] });
-        }
-
-        if (lower.includes('living_being')) {
-            return selectOne(lexicon, random, {
-                kinds: ['noun'],
-                anyTags: ['living_being'],
-                excludeTags: ['inanimate_object']
-            });
-        }
-
-        if (lower.includes('inanimate_object') || lower.includes('object')) {
-            return selectOne(lexicon, random, {
-                kinds: ['noun'],
-                anyTags: ['inanimate_object'],
-                excludeTags: ['person', 'living_being']
-            });
-        }
-
-        if (lower.includes('natural_zone')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['natural_zone'] });
-        }
-
-        if (lower.includes('geographical_feature') || lower.includes('geographical_place')) {
-            return selectOne(lexicon, random, {
-                kinds: ['noun'],
-                anyTags: ['geographical_feature', 'geographical_place']
-            });
-        }
-
-        if (lower.includes('place')) {
-            return selectOne(lexicon, random, {
-                kinds: ['noun'],
-                anyTags: ['place', 'geographical_place', 'geographical_feature']
-            });
-        }
-
-        if (lower.includes('liquid')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['liquid'] });
-        }
-
-        if (lower.includes('food')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['food'] });
-        }
-
-        if (lower.includes('vital_resource') || lower.includes('fundamental_resource')) {
-            return selectOne(lexicon, random, {
-                kinds: ['noun'],
-                anyTags: ['vital_resource', 'fundamental_resource']
-            });
-        }
-
-        if (lower.includes('resource')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['resource'] });
-        }
-
-        if (lower.includes('threat') || lower.includes('danger')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['threat'] });
-        }
-
-        if (lower.includes('body_part')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['body_part'] });
-        }
-
-        if (lower.includes('path') || lower.includes('road')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['path'] });
-        }
-
-        if (lower.includes('cosmic') || lower.includes('space') || lower.includes('astronomical')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['cosmic'] });
-        }
-
-        if (lower.includes('natural_element')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['natural_element'] });
-        }
-
-        if (lower.includes('relationship') || lower.includes('friend') || lower.includes('kinship')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['relationship'] });
-        }
-
-        if (lower.includes('need') || lower.includes('bodily_function')) {
-            return selectOne(lexicon, random, {
-                kinds: ['noun'],
-                anyFeatures: ['need', 'bodily_function']
-            });
-        }
-
-        if (lower.includes('entity')) {
-            return selectOne(lexicon, random, { kinds: ['noun'], anyTags: ['entity'] });
-        }
-
-        return selectOne(lexicon, random, { kinds: ['noun'], anyTags: terms });
-    }
-
-    function adjective(lexicon, random, terms) {
-        const lower = terms.map(norm);
-
-        if (lower.includes('physical')) {
-            return selectOne(lexicon, random, { kinds: ['adjective'], anyTags: ['physical'] });
-        }
-
-        if (lower.includes('large') || lower.includes('many')) {
-            return selectOne(lexicon, random, {
-                kinds: ['adjective', 'function'],
-                anyFeatures: ['large', 'quantity']
-            });
-        }
-
-        if (lower.includes('small') || lower.includes('few')) {
-            return selectOne(lexicon, random, {
-                kinds: ['adjective', 'function'],
-                anyFeatures: ['small', 'quantity']
-            });
-        }
-
-        if (lower.includes('readiness') || lower.includes('ready')) {
-            return selectOne(lexicon, random, {
-                kinds: ['adjective'],
-                anyFeatures: ['readiness']
-            });
-        }
-
-        return selectOne(lexicon, random, { kinds: ['adjective'], anyTags: terms });
-    }
-
-    function verbCandidate(lexicon, random, terms) {
-        const lower = terms.map(norm);
-
-        if (lower.includes('be') || lower.includes('copula')) {
-            return selectOne(lexicon, random, {
-                kinds: ['verb'],
-                concepts: ['be', 'to be'],
-                anyTags: ['copula']
-            }) || selectOne(lexicon, random, {
-                kinds: ['verb'],
-                anyTags: ['copula']
-            });
-        }
-
-        if (lower.includes('air') || lower.includes('water')) {
-            return selectOne(lexicon, random, {
-                kinds: ['verb'],
-                anyTags: ['air_water_movement']
-            });
-        }
-
-        if (lower.includes('ground') || lower.includes('locomotion')) {
-            return selectOne(lexicon, random, {
-                kinds: ['verb'],
-                anyTags: ['ground_movement']
-            });
-        }
-
-        if (lower.includes('gravity') || lower.includes('fall')) {
-            return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['gravity'] });
-        }
-
-        if (lower.includes('stasis') || lower.includes('stop')) {
-            return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['stasis'] });
-        }
-
-        if (lower.includes('consumption')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['consumption'] });
-        if (lower.includes('perception')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['perception'] });
-        if (lower.includes('violence') || lower.includes('hunting')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['violence', 'hunting'] });
-        if (lower.includes('emotion_positive')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['emotion_positive'] });
-        if (lower.includes('emotion_negative')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['emotion_negative'] });
-        if (lower.includes('volition') || lower.includes('desire')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['volition'] });
-        if (lower.includes('cognition') || lower.includes('know')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['cognition'] });
-        if (lower.includes('help')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['help'] });
-        if (lower.includes('prohibition')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['prohibition'] });
-        if (lower.includes('pain')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['pain'] });
-        if (lower.includes('rest')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['rest'] });
-        if (lower.includes('process')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['process'] });
-        if (lower.includes('activity') || lower.includes('action')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['activity', 'action'] });
-        if (lower.includes('event') || lower.includes('change')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['event', 'change', 'activity'] });
-        if (lower.includes('movement') || lower.includes('motion') || lower.includes('natural_movement')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['movement'] });
-        if (lower.includes('existence')) return selectOne(lexicon, random, { kinds: ['verb'], anyTags: ['existence'] });
-
-        return selectOne(lexicon, random, { kinds: ['verb'], anyTags: terms });
-    }
-
-    function functionWord(lexicon, random, terms) {
-        const exact = selectOne(lexicon, random, {
-            kinds: ['function', 'pronoun'],
-            concepts: terms
+            return {
+                ...item.entry,
+                conlang: word,
+                score: item.score
+            };
         });
-
-        if (exact) return exact;
-
-        return selectOne(lexicon, random, {
-            kinds: ['function', 'pronoun'],
-            anyTags: terms
-        });
-    }
-
-    function pronoun(lexicon, random, terms) {
-        const exact = selectOne(lexicon, random, {
-            kinds: ['pronoun', 'function'],
-            concepts: terms
-        });
-
-        if (exact) return exact;
-
-        const lower = terms.map(norm);
-
-        if (lower.includes('i') || lower.includes('me')) {
-            return selectOne(lexicon, random, {
-                kinds: ['pronoun'],
-                anyFeatures: ['first_person']
-            });
-        }
-
-        if (lower.includes('you')) {
-            return selectOne(lexicon, random, {
-                kinds: ['pronoun'],
-                anyFeatures: ['second_person']
-            });
-        }
-
-        return functionWord(lexicon, random, terms);
     }
 
     function applyVerbMorphology(entry, config) {
-        if (!entry) return null;
-        if (config.morphology === 'isolating') return entry.word;
-        if (config.morphology === 'agglutinative') return `${entry.word}-ta`;
-        if (config.morphology === 'fusional') return `${entry.word}a`;
-        return entry.word;
+        const word = entry.conlang;
+        if (!word) return null;
+
+        if (config.morphology === 'analytic') return word;
+        if (config.morphology === 'suffixing') return `${word}-ta`;
+        if (config.morphology === 'prefixing') return `ka-${word}`;
+        return word;
+    }
+
+    function findGenerated(lexicon, query, random) {
+        const candidates = selectCandidates(lexicon, query);
+        return candidates.length ? choice(candidates, random) : null;
+    }
+
+    function noun(lexicon, random, groups) {
+        return findGenerated(lexicon, { kinds: ['noun'], anyGroups: groups }, random);
+    }
+
+    function adjective(lexicon, random, groups) {
+        return findGenerated(lexicon, { kinds: ['adjective'], anyGroups: groups }, random);
+    }
+
+    function verbCandidate(lexicon, random, groups) {
+        return findGenerated(lexicon, { kinds: ['verb'], anyGroups: groups }, random);
+    }
+
+    function functionWord(lexicon, random, concepts) {
+        return findGenerated(lexicon, { kinds: ['function'], concepts }, random);
+    }
+
+    function pronoun(lexicon, random, concepts) {
+        return findGenerated(lexicon, { kinds: ['pronoun'], concepts }, random);
     }
 
     function token(word, english) {
@@ -764,12 +539,15 @@
         const place = N(['geographical_feature', 'geographical_place']);
         const cosmic = N(['cosmic']);
         const inert = N(['inanimate_object']);
+        const animal = N(['animal']);
         const direction = N(['entity']);
         const zone = N(['natural_zone']);
         const organ = N(['body_part']);
         const path = N(['path']);
         const need = N(['need', 'bodily_function']);
         const entity = N(['entity']);
+        const pluralEntities = N(['entity']);
+        const vitalResource = N(['vital_resource']);
 
         const consume = V(['consumption']);
         const perception = V(['perception']);
@@ -801,11 +579,21 @@
         const quantitySmall = A(['small']);
         const readiness = A(['readiness']);
 
+        void role; void relation; void natural1; void natural2; void food; void liquid;
+        void living1; void living2; void resource; void threat; void place; void cosmic;
+        void inert; void animal; void direction; void zone; void organ; void path; void need;
+        void entity; void pluralEntities; void vitalResource; void consume; void perception;
+        void violence; void generic; void emotionPos; void emotionNeg; void movement;
+        void naturalMove; void gravity; void airWater; void ground; void stop; void moveImp;
+        void futureMove; void will; void limited; void cognition; void help; void forbidden;
+        void pain; void rest; void negativeExist; void presentAct; void futureAct; void pastEvent;
+        void process; void quantityLarge; void quantitySmall; void readiness;
+
         const out = [];
         const add = (english, parts) => ({ ...parts, english });
 
         out.push(add('I am <name/role>.', { S: subject(I), V: verb(BE, 'be'), O: ph('name/role') }));
-        out.push(add('You are my <relationship/friendship>.', { S: subject(YOU), V: verb(BE, 'be'), O: token(MY?.word || placeholder('my'), 'my'), extra: [ph('relationship/friendship')], extraIndex: 3 }));
+        out.push(add('You are my <relationship/friendship>.', { S: subject(YOU), V: verb(BE, 'be'), O: ph('relationship/friendship'), extra: [token(MY?.word || placeholder('my'), 'my')], extraIndex: 2 }));
         out.push(add('This is <near object>.', { S: subject(THIS), V: verb(BE, 'be'), O: ph('near object') }));
         out.push(add('That is <distant object>.', { S: subject(THAT), V: verb(BE, 'be'), O: ph('distant object') }));
         out.push(add('We are <near place adverb>.', { S: subject(WE), V: verb(BE, 'be'), O: ph('near place adverb') }));
@@ -814,46 +602,46 @@
         out.push(add('You have <fundamental resource>.', { S: subject(YOU), V: verb(HAVE, 'have'), O: ph('fundamental resource') }));
         out.push(add('<natural element> is <physical adjective 1>.', { S: ph('natural element'), V: verb(BE, 'be'), O: ph('physical adjective 1') }));
         out.push(add('<natural element> is <physical adjective 2>.', { S: ph('natural element'), V: verb(BE, 'be'), O: ph('physical adjective 2') }));
-        out.push(add('<living being 1> <consumption verb> <food resource>.', { S: subject(living1), V: verb(consume, 'consumption verb'), O: ph('food resource') }));
-        out.push(add('<living being 2> <consumption verb> <liquid>.', { S: subject(living2), V: verb(consume, 'consumption verb'), O: ph('liquid') }));
-        out.push(add('I <perception verb> you.', { S: subject(I), V: verb(perception, 'perception verb'), O: subject(YOU) }));
-        out.push(add('You <perception verb> me.', { S: subject(YOU), V: verb(perception, 'perception verb'), O: subject(ME) }));
-        out.push(add('<living being 1> <violence/hunting verb> <living being 2>.', { S: subject(living1), V: verb(violence, 'violence/hunting verb'), O: subject(living2) }));
-        out.push(add('We <generic action verb> this.', { S: subject(WE), V: verb(generic, 'generic action verb'), O: subject(THIS) }));
-        out.push(add('I <positive emotion verb> <living being 1>.', { S: subject(I), V: verb(emotionPos, 'positive emotion verb'), O: subject(living1) }));
-        out.push(add('I <negative emotion verb> <threat>.', { S: subject(I), V: verb(emotionNeg, 'negative emotion verb'), O: ph('threat') }));
-        out.push(add('I <movement verb> toward <geographical place>.', { S: subject(I), V: verb(movement, 'movement verb'), O: ph('geographical place'), extra: [token(TO?.word || placeholder('to'), 'to')], extraIndex: 2 }));
-        out.push(add('You <movement verb> from <geographical place>.', { S: subject(YOU), V: verb(movement, 'movement verb'), O: ph('geographical place'), extra: [token(FROM?.word || placeholder('from'), 'from')], extraIndex: 2 }));
-        out.push(add('<cosmic element> <natural movement verb>.', { S: ph('cosmic element'), V: verb(naturalMove, 'natural movement verb') }));
-        out.push(add('<inanimate object> <gravity movement verb>.', { S: ph('inanimate object'), V: verb(gravity, 'gravity movement verb') }));
-        out.push(add('<animal> <air/water movement verb> in <vertical direction>.', { S: ph('animal'), V: verb(airWater, 'air/water movement verb'), O: ph('vertical direction'), extra: [token(IN?.word || placeholder('in'), 'in')], extraIndex: 2 }));
-        out.push(add('<living being> <ground movement verb> in the <natural zone>.', { S: ph('living being'), V: verb(ground, 'ground movement verb'), O: ph('natural zone'), extra: [token(IN?.word || placeholder('in'), 'in'), token(THE?.word || placeholder('the'), 'the')], extraIndex: 2 }));
-        out.push(add('<stop imperative verb> here.', { V: verb(stop, 'stop imperative verb'), O: subject(HERE) }));
-        out.push(add('<movement imperative verb> with me.', { V: verb(moveImp, 'movement imperative verb'), O: subject(ME), extra: [token(WITH?.word || placeholder('with'), 'with')], extraIndex: 1 }));
+        out.push(add('<living being 1> <consumption verb> <food resource>.', { S: ph('living being 1'), V: ph('consumption verb'), O: ph('food resource') }));
+        out.push(add('<living being 2> <consumption verb> <liquid>.', { S: ph('living being 2'), V: ph('consumption verb'), O: ph('liquid') }));
+        out.push(add('I <perception verb> you.', { S: subject(I), V: ph('perception verb'), O: subject(YOU) }));
+        out.push(add('You <perception verb> me.', { S: subject(YOU), V: ph('perception verb'), O: subject(ME) }));
+        out.push(add('<living being 1> <violence/hunting verb> <living being 2>.', { S: ph('living being 1'), V: ph('violence/hunting verb'), O: ph('living being 2') }));
+        out.push(add('We <generic action verb> this.', { S: subject(WE), V: ph('generic action verb'), O: subject(THIS) }));
+        out.push(add('I <positive emotion verb> <living being 1>.', { S: subject(I), V: ph('positive emotion verb'), O: ph('living being 1') }));
+        out.push(add('I <negative emotion verb> <threat>.', { S: subject(I), V: ph('negative emotion verb'), O: ph('threat') }));
+        out.push(add('I <movement verb> toward <geographical place>.', { S: subject(I), V: ph('movement verb'), O: ph('geographical place'), extra: [token(TO?.word || placeholder('to'), 'to')], extraIndex: 2 }));
+        out.push(add('You <movement verb> from <geographical place>.', { S: subject(YOU), V: ph('movement verb'), O: ph('geographical place'), extra: [token(FROM?.word || placeholder('from'), 'from')], extraIndex: 2 }));
+        out.push(add('<cosmic element> <natural movement verb>.', { S: ph('cosmic element'), V: ph('natural movement verb') }));
+        out.push(add('<inanimate object> <gravity movement verb>.', { S: ph('inanimate object'), V: ph('gravity movement verb') }));
+        out.push(add('<animal> <air/water movement verb> in <vertical direction>.', { S: ph('animal'), V: ph('air/water movement verb'), O: ph('vertical direction'), extra: [token(IN?.word || placeholder('in'), 'in')], extraIndex: 2 }));
+        out.push(add('<living being> <ground movement verb> in the <natural zone>.', { S: ph('living being'), V: ph('ground movement verb'), O: ph('natural zone'), extra: [token(IN?.word || placeholder('in'), 'in'), token(THE?.word || placeholder('the'), 'the')], extraIndex: 2 }));
+        out.push(add('<stop imperative verb> here.', { V: ph('stop imperative verb'), O: subject(HERE) }));
+        out.push(add('<movement imperative verb> with me.', { V: ph('movement imperative verb'), O: subject(ME), extra: [token(WITH?.word || placeholder('with'), 'with')], extraIndex: 1 }));
         out.push(add('Who are you?', { S: subject(WHO), V: verb(BE, 'be'), O: subject(YOU) }));
         out.push(add('What is this?', { S: subject(WHAT), V: verb(BE, 'be'), O: subject(THIS) }));
         out.push(add('Where are we?', { S: subject(WHERE), V: verb(BE, 'be'), O: subject(WE) }));
-        out.push(add('When <future movement verb> you?', { S: subject(WHEN), V: verb(futureMove, 'future movement verb'), O: subject(YOU) }));
-        out.push(add('Why <action verb> this?', { S: subject(WHY), V: verb(generic, 'action verb'), O: subject(THIS) }));
+        out.push(add('When <future movement verb> you?', { S: subject(WHEN), V: ph('future movement verb'), O: subject(YOU) }));
+        out.push(add('Why <action verb> this?', { S: subject(WHY), V: ph('action verb'), O: subject(THIS) }));
         out.push(add('How many are <plural entities>?', { S: token(MANY?.word || placeholder('how many'), 'how many'), V: verb(BE, 'be'), O: ph('plural entities') }));
-        out.push(add('How is this <process verb>?', { S: subject(HOW), V: verb(process, 'process verb'), O: subject(THIS) }));
+        out.push(add('How is this <process verb>?', { S: subject(HOW), V: ph('process verb'), O: subject(THIS) }));
         out.push(add('Where is <vital resource>?', { S: subject(WHERE), V: verb(BE, 'be'), O: ph('vital resource') }));
-        out.push(add('I do not <will verb> this.', { S: subject(I), V: verb(will, 'will verb'), O: subject(THIS), extra: [token(NOT?.word || placeholder('not'), 'not')], extraIndex: 1 }));
-        out.push(add('You cannot <limited action verb>.', { S: subject(YOU), V: verb(limited, 'limited action verb'), extra: [token(NOT?.word || placeholder('not'), 'not'), token(CAN?.word || placeholder('can'), 'can')], extraIndex: 1 }));
-        out.push(add('I do not <cognition verb>.', { S: subject(I), V: verb(cognition, 'cognition verb'), extra: [token(NOT?.word || placeholder('not'), 'not')], extraIndex: 1 }));
-        out.push(add('I <cognition verb> this <path/road>.', { S: subject(I), V: verb(cognition, 'cognition verb'), O: subject(THIS), extra: [ph('path/road')], extraIndex: 3 }));
-        out.push(add('I can <help action verb> you.', { S: subject(I), V: verb(help, 'help action verb'), O: subject(YOU), extra: [token(CAN?.word || placeholder('can'), 'can')], extraIndex: 1 }));
-        out.push(add('Do not <forbidden action verb> this.', { V: verb(forbidden, 'forbidden action verb'), O: subject(THIS), extra: [token(NOT?.word || placeholder('not'), 'not')], extraIndex: 0 }));
+        out.push(add('I do not <will verb> this.', { S: subject(I), V: ph('will verb'), O: subject(THIS), extra: [token(NOT?.word || placeholder('not'), 'not')], extraIndex: 1 }));
+        out.push(add('You cannot <limited action verb>.', { S: subject(YOU), V: ph('limited action verb'), extra: [token(NOT?.word || placeholder('not'), 'not'), token(CAN?.word || placeholder('can'), 'can')], extraIndex: 1 }));
+        out.push(add('I do not <cognition verb>.', { S: subject(I), V: ph('cognition verb'), extra: [token(NOT?.word || placeholder('not'), 'not')], extraIndex: 1 }));
+        out.push(add('I <cognition verb> this <path/road>.', { S: subject(I), V: ph('cognition verb'), O: subject(THIS), extra: [ph('path/road')], extraIndex: 3 }));
+        out.push(add('I can <help action verb> you.', { S: subject(I), V: ph('help action verb'), O: subject(YOU), extra: [token(CAN?.word || placeholder('can'), 'can')], extraIndex: 1 }));
+        out.push(add('Do not <forbidden action verb> this.', { V: ph('forbidden action verb'), O: subject(THIS), extra: [token(NOT?.word || placeholder('not'), 'not')], extraIndex: 0 }));
         out.push(add('I have <physical need/state>.', { S: subject(I), V: verb(HAVE, 'have'), O: ph('physical need/state') }));
-        out.push(add('My <organ/body part> <pain verb>.', { S: token(MY?.word || placeholder('my'), 'my'), V: verb(pain, 'pain verb'), O: ph('organ/body part') }));
-        out.push(add('I <will verb> <rest verb>.', { S: subject(I), V: verb(will, 'will verb'), O: verb(rest, 'rest verb') }));
-        out.push(add('This is <large quantity>.', { S: subject(THIS), V: verb(BE, 'be'), O: quantityLarge ? token(quantityLarge.word, quantityLarge.english) : ph('large quantity') }));
-        out.push(add('This is <small quantity>.', { S: subject(THIS), V: verb(BE, 'be'), O: quantitySmall ? token(quantitySmall.word, quantitySmall.english) : ph('small quantity') }));
-        out.push(add('Everything is <readiness state>.', { S: token(ALL?.word || placeholder('everything'), 'everything'), V: verb(BE, 'be'), O: readiness ? token(readiness.word, readiness.english) : ph('readiness state') }));
-        out.push(add('Nothing <negative existence verb>.', { S: token(NOTHING?.word || placeholder('nothing'), 'nothing'), V: verb(negativeExist, 'negative existence verb') }));
-        out.push(add('Today we <present activity verb>.', { S: subject(WE), V: verb(presentAct, 'present activity verb'), extra: [token(TODAY?.word || placeholder('today'), 'today')], extraIndex: 0 }));
-        out.push(add('Tomorrow we <future activity verb>.', { S: subject(WE), V: verb(futureAct, 'future activity verb'), extra: [token(TOMORROW?.word || placeholder('tomorrow'), 'tomorrow')], extraIndex: 0 }));
-        out.push(add('Yesterday <past event verb> <entity>.', { S: token(YESTERDAY?.word || placeholder('yesterday'), 'yesterday'), V: verb(pastEvent, 'past event verb'), O: ph('entity') }));
+        out.push(add('My <organ/body part> <pain verb>.', { S: token(MY?.word || placeholder('my'), 'my'), V: ph('pain verb'), O: ph('organ/body part') }));
+        out.push(add('I <will verb> <rest verb>.', { S: subject(I), V: ph('will verb'), O: ph('rest verb') }));
+        out.push(add('This is <large quantity>.', { S: subject(THIS), V: verb(BE, 'be'), O: ph('large quantity') }));
+        out.push(add('This is <small quantity>.', { S: subject(THIS), V: verb(BE, 'be'), O: ph('small quantity') }));
+        out.push(add('Everything is <readiness state>.', { S: token(ALL?.word || placeholder('everything'), 'everything'), V: verb(BE, 'be'), O: ph('readiness state') }));
+        out.push(add('Nothing <negative existence verb>.', { S: token(NOTHING?.word || placeholder('nothing'), 'nothing'), V: ph('negative existence verb') }));
+        out.push(add('Today we <present activity verb>.', { S: subject(WE), V: ph('present activity verb'), extra: [token(TODAY?.word || placeholder('today'), 'today')], extraIndex: 0 }));
+        out.push(add('Tomorrow we <future activity verb>.', { S: subject(WE), V: ph('future activity verb'), extra: [token(TOMORROW?.word || placeholder('tomorrow'), 'tomorrow')], extraIndex: 0 }));
+        out.push(add('Yesterday <past event verb> <entity>.', { S: token(YESTERDAY?.word || placeholder('yesterday'), 'yesterday'), V: ph('past event verb'), O: ph('entity') }));
 
         return out.map((sentence, index) => ({ ...sentence, number: index + 1 }));
     }
@@ -884,182 +672,78 @@
         const style = document.createElement('style');
         style.id = 'sample-sentence-styles';
         style.textContent = `
-            .sample-list{display:grid;gap:10px}
-            .sample-pill{background:var(--panel);border:1px solid var(--line);border-radius:999px;padding:10px 16px;display:flex;flex-wrap:wrap;align-items:center;gap:8px;line-height:1.45}
-            .sample-pill .sample-number{font-weight:700;color:var(--accent);min-width:26px}
-            .sample-pill .sample-english{color:var(--text);font-weight:500}
-            .sample-pill .sample-arrow{color:var(--muted)}
-            .sample-pill .sample-conlang{font-weight:700}
-            .sample-word{position:relative;cursor:help;border-bottom:1px dotted var(--muted)}
-            .sample-placeholder{color:var(--muted);font-weight:500}
-            .sample-tooltip{position:fixed;z-index:9999;pointer-events:none;background:#070b14;color:#fff;border:1px solid var(--line);border-radius:6px;padding:5px 8px;font-size:12px;box-shadow:0 4px 18px rgba(0,0,0,.35);display:none}
+            .sample-sentence { display: flex; flex-direction: column; gap: 0.45rem; }
+            .sample-line { display: flex; gap: 0.45rem; align-items: baseline; flex-wrap: wrap; }
+            .sample-number { font-weight: 700; min-width: 2rem; }
+            .sample-english { opacity: 0.8; }
+            .sample-conlang { font-weight: 700; }
+            .sample-word { cursor: help; }
+            .sample-placeholder { font-weight: 700; font-style: italic; }
         `;
         document.head.appendChild(style);
-
-        const tooltip = document.createElement('div');
-        tooltip.id = 'sample-tooltip';
-        tooltip.className = 'sample-tooltip';
-        document.body.appendChild(tooltip);
     }
 
-    function renderSamples(list) {
+    function renderSamples(config, lexicon) {
+        const container = $('sample-sentences');
+        if (!container) return;
+
         ensureStyles();
-        return `<div class="sample-list">${list.map(sentence => `<div class="sample-pill"><span class="sample-number">${sentence.number}.</span><span class="sample-english">${esc(sentence.english)}</span><span class="sample-arrow">→</span><span class="sample-conlang">${sentenceHtml(sentence, generated.config)}</span></div>`).join('')}</div>`;
-    }
-
-    function bindTooltips() {
-        document.querySelectorAll('.sample-word').forEach(element => {
-            element.addEventListener('mouseenter', () => {
-                const tooltip = $('sample-tooltip');
-                if (!tooltip) return;
-                tooltip.textContent = element.dataset.meaning || element.title;
-                tooltip.style.display = 'block';
-                const rect = element.getBoundingClientRect();
-                tooltip.style.left = `${Math.min(window.innerWidth - 180, Math.max(8, rect.left))}px`;
-                tooltip.style.top = `${Math.max(8, rect.top - 34)}px`;
-            });
-            element.addEventListener('mouseleave', () => {
-                const tooltip = $('sample-tooltip');
-                if (tooltip) tooltip.style.display = 'none';
-            });
-        });
-    }
-
-    function addVersionTag() {
-        const heading = document.querySelector('header h1');
-        if (!heading || heading.querySelector('.version-tag')) return;
-        const tag = document.createElement('span');
-        tag.className = 'chip version-tag';
-        tag.textContent = `v${VERSION}`;
-        tag.style.marginLeft = '8px';
-        tag.style.verticalAlign = 'middle';
-        heading.appendChild(tag);
-    }
-
-    function render() {
-        if (!generated) return;
-
-        const chips = [
-            ...generated.config.region,
-            ...generated.config.culture,
-            ...generated.config.biome,
-            ...generated.config.temporal_setting,
-            ...generated.config.tags
-        ];
-
-        $('generation-output').className = 'result';
-        $('generation-output').innerHTML = `
-            <div class="hero"><div>
-                <div class="lang-name">${esc(generated.name)} <span class="chip">v${VERSION}</span></div>
-                <div class="sub">${esc(generated.config.order)} · ${esc(generated.config.morphology)}</div>
-                <div class="chips">${chips.map(value => `<span class="chip">${esc(value)}</span>`).join('')}</div>
-            </div></div>
-            <div class="grid">
-                <div class="card"><h3>Phonology</h3><div class="kv">
-                    <b>Vowels</b><span>${esc(generated.config.vowels)}</span>
-                    <b>Consonants</b><span>${esc(generated.config.consonants)}</span>
-                    <b>Mean syllables</b><span>${esc(generated.config.mean)}</span>
-                </div></div>
-                <div class="card"><h3>Sample sentences</h3>${renderSamples(generated.samples)}</div>
-            </div>`;
-
-        $('lexicon-output').innerHTML = `<div class="lexicon">${generated.lexicon.map(entry => `<div class="lex-row"><div class="word">${esc(entry.word)}</div><div class="eng">${esc(entry.english)}</div><div class="meta">${esc(entry.kind)} · ${esc(entry.category || '')}</div></div>`).join('')}</div>`;
-        renderDictionary();
-        bindTooltips();
-    }
-
-    function renderDictionary() {
-        if (!generated) {
-            $('dictionary-output').className = 'empty';
-            $('dictionary-output').textContent = 'Generate a language to populate the dictionary.';
-            return;
-        }
-
-        const direction = $('dictionary-direction').value;
-        const query = norm($('dictionary-search').value);
-        const rows = generated.lexicon
-            .filter(entry => {
-                const searchable = direction === 'conlang-en' ? norm(entry.word) : norm(entry.english);
-                return !query || searchable.includes(query);
-            })
-            .sort((a, b) => {
-                const aa = direction === 'conlang-en' ? a.word : a.english;
-                const bb = direction === 'conlang-en' ? b.word : b.english;
-                return aa.localeCompare(bb);
-            });
-
-        $('dictionary-output').className = 'dictionary';
-        $('dictionary-output').innerHTML = rows.map(entry => direction === 'conlang-en'
-            ? `<div class="dict-row"><strong>${esc(entry.word)}</strong><span>${esc(entry.english)}</span><span class="meta">${esc(entry.kind)}</span></div>`
-            : `<div class="dict-row"><strong>${esc(entry.english)}</strong><span>${esc(entry.word)}</span><span class="meta">${esc(entry.kind)}</span></div>`
-        ).join('') || '<div class="empty">No matches.</div>';
-    }
-
-    async function loadVocabulary() {
-        try {
-            const response = await fetch('vocabulary.json', { cache: 'no-store' });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-            const data = await response.json();
-            vocabulary = Array.isArray(data)
-                ? data
-                : Array.isArray(data.vocabulary)
-                    ? data.vocabulary
-                    : [];
-
-            if (!vocabulary.length) throw new Error('Unsupported vocabulary JSON structure.');
-
-            populate();
-            $('db-status').textContent = `Vocabulary loaded: ${vocabulary.length} entries`;
-        } catch (error) {
-            $('db-status').textContent = 'Vocabulary load failed';
-            $('message').textContent = error.message;
-        }
-    }
-
-    function makeName(config) {
-        const make = factory(config, 'name');
-        return `${make()} ${make()}`;
+        const sentences = samples(config, lexicon);
+        container.innerHTML = sentences.map(sentence => {
+            const conlang = sentenceHtml(sentence, config);
+            return `
+                <div class="sample-sentence">
+                    <div class="sample-line">
+                        <span class="sample-number">${sentence.number}.</span>
+                        <span class="sample-english">${esc(sentence.english)}</span>
+                    </div>
+                    <div class="sample-line sample-conlang">
+                        <span class="sample-number">${sentence.number}.</span>
+                        <span>${conlang}</span>
+                    </div>
+                </div>
+            `;
+        }).join('');
     }
 
     function generate() {
         const config = configFromUI();
-        generated = {
-            config,
-            name: makeName(config),
-            lexicon: generateLexicon(config),
-            samples: []
-        };
-        generated.samples = samples(config, generated.lexicon);
-        render();
-        $('message').textContent = `Generated ${generated.name} · ${generated.lexicon.length} lemmas · ${generated.samples.length} sample sentences.`;
+        generated = generateLexicon(config);
+        renderSamples(config, generated);
+        window.dispatchEvent(new CustomEvent('conlang:generated', {
+            detail: { config, lexicon: generated }
+        }));
     }
 
-    $('generate')?.addEventListener('click', () => {
-        randomize();
-        generate();
+    async function loadVocabulary() {
+        const response = await fetch('vocabulary.json', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        vocabulary = await response.json();
+        populate();
+    }
+
+    function getGeneratedVocabulary() {
+        return generated || [];
+    }
+
+    window.ConLangEngine = {
+        VERSION,
+        loadVocabulary,
+        generate,
+        randomize,
+        configFromUI,
+        getGeneratedVocabulary,
+        samples,
+        sentenceHtml
+    };
+
+    document.addEventListener('DOMContentLoaded', () => {
+        loadVocabulary().catch(error => {
+            console.error('Unable to load vocabulary.json:', error);
+        });
+
+        $('generate-language')?.addEventListener('click', generate);
+        $('regenerate-lexicon')?.addEventListener('click', generate);
+        $('randomize')?.addEventListener('click', randomize);
     });
-
-    $('regenerate')?.addEventListener('click', () => {
-        if (!generated) {
-            generate();
-            return;
-        }
-
-        const config = configFromUI();
-        generated = {
-            ...generated,
-            config,
-            lexicon: generateLexicon(config)
-        };
-        generated.samples = samples(config, generated.lexicon);
-        render();
-        $('message').textContent = `Regenerated ${generated.lexicon.length} lemmas.`;
-    });
-
-    $('dictionary-direction')?.addEventListener('change', renderDictionary);
-    $('dictionary-search')?.addEventListener('input', renderDictionary);
-
-    addVersionTag();
-    loadVocabulary();
 })();
