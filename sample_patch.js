@@ -1,8 +1,9 @@
-/* ConLang Generator UI + phonology patch — v0.9.3 */
+/* ConLang Generator UI + phonology patch — v0.9.4 */
 (() => {
     'use strict';
-    const VERSION = '0.9.3';
+    const VERSION = '0.9.4';
     let phonologyBusy = false;
+    let phonologyCycleSeed = null;
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({
         '&': '&amp;',
@@ -272,6 +273,24 @@
             return ((t ^ (t >>> 14)) >>> 0) / 4294967296
         }
     }
+
+    function resetPhonologyCycle() {
+        phonologyCycleSeed = null;
+        document.querySelectorAll('#lexicon-output .lex-row .word[data-phonologized="1"]').forEach(cell => {
+            delete cell.dataset.phonologized;
+        });
+    }
+
+    function phonologySeed(requestedSeed, modelKey) {
+        if (requestedSeed && requestedSeed !== 'auto') {
+            return requestedSeed + '|phonology|' + modelKey;
+        }
+        if (!phonologyCycleSeed) {
+            phonologyCycleSeed = 'auto-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2) + '|phonology|' + modelKey;
+        }
+        return phonologyCycleSeed;
+    }
+
     const pick = (a, r) => a[Math.floor(r() * a.length)];
     const isV = c => VOWELS.standard.includes(c) || 'yøæ'.includes(c);
     const isC = c => !!CINFO[c];
@@ -450,8 +469,9 @@
         const model = modelFor(),
             v = vowelSet(),
             seed = $('seed')?.value.trim() || 'auto',
+            modelKey = Object.keys(MODEL).find(k => MODEL[k] === model),
             mean = Number($('mean')?.value) || 2.2,
-            r = rng(seed + '|phonology|' + Object.keys(MODEL).find(k => MODEL[k] === model));
+            r = rng(phonologySeed(seed, modelKey));
         const map = new Map(),
             used = new Set();
         rows.forEach(row => {
@@ -498,6 +518,14 @@
             childList: true,
             subtree: true
         });
+        document.addEventListener('click', event => {
+            const button = event.target.closest('button');
+            if (!button) return;
+            const label = button.textContent.trim().toLowerCase();
+            if (label.includes('generate language') || label.includes('regenerate lexicon')) {
+                resetPhonologyCycle();
+            }
+        }, true);
         const l = $('lexicon-output');
         if (l) new MutationObserver(() => requestAnimationFrame(phonologize)).observe(l, {
             childList: true,
