@@ -1,8 +1,8 @@
-/* ConLang Generator — self-contained engine v0.7.18 */
+/* ConLang Generator — self-contained engine v0.9.5 */
 (() => {
     'use strict';
 
-    const VERSION = '0.7.18';
+    const VERSION = '0.9.5';
     const $ = id => document.getElementById(id);
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
@@ -110,11 +110,24 @@
         });
     }
 
+    function freshSeed() {
+        if (globalThis.crypto?.getRandomValues) {
+            const values = new Uint32Array(2);
+            globalThis.crypto.getRandomValues(values);
+            return `auto-${Date.now()}-${values[0].toString(36)}-${values[1].toString(36)}`;
+        }
+        return `auto-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+
     function config() {
         const selected = id => {
             const e = $(id);
             return e ? [...e.selectedOptions].map(o => o.value).filter(Boolean) : [];
         };
+        const requestedSeed = $('seed')?.value.trim() || '';
+        const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto'
+            ? requestedSeed
+            : freshSeed();
         return {
             region: selected('region'),
             culture: selected('culture'),
@@ -124,7 +137,7 @@
             vowels: $('vowels')?.value || 'standard',
             consonants: $('consonants')?.value || 'balanced',
             mean: Number($('mean')?.value) || 2.2,
-            seed: $('seed')?.value.trim() || String(Date.now()),
+            seed,
             order: $('word-order')?.value || 'SVO',
             morphology: $('morphology')?.value || 'isolating'
         };
