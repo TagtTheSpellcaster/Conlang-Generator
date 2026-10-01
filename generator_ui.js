@@ -1,1 +1,190 @@
-PLACEHOLDER
+/* ConLang Generator — generator UI controller v0.9.6 */
+(() => {
+    'use strict';
+
+    const $ = id => document.getElementById(id);
+    const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
+    const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
+    const uniq = a => [...new Set(a)];
+    const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    function populateFilters(vocabulary) {
+        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
+            const el = $(id);
+            if (!el) return;
+            const values = uniq(vocabulary.flatMap(e => arr(e[id]))).sort((a, b) => a.localeCompare(b));
+            el.innerHTML = '<option value="">Any</option>' + values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
+        });
+    }
+
+    function selected(id) {
+        const element = $(id);
+        return element ? [...element.selectedOptions].map(o => o.value).filter(Boolean) : [];
+    }
+
+    function freshSeed() {
+        if (globalThis.crypto?.getRandomValues) {
+            const values = new Uint32Array(2);
+            globalThis.crypto.getRandomValues(values);
+            return `auto-${Date.now()}-${values[0].toString(36)}-${values[1].toString(36)}`;
+        }
+        return `auto-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+    }
+
+    function readConfig() {
+        const requestedSeed = $('seed')?.value.trim() || '';
+        const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto' ? requestedSeed : freshSeed();
+        return {
+            region: selected('region'),
+            culture: selected('culture'),
+            biome: selected('biome'),
+            temporal_setting: selected('temporal_setting'),
+            tags: selected('tags'),
+            vowels: $('vowels')?.value || 'standard',
+            consonants: $('consonants')?.value || 'balanced',
+            mean: Number($('mean')?.value) || 2.2,
+            seed,
+            order: $('word-order')?.value || 'SVO',
+            morphology: $('morphology')?.value || 'isolating'
+        };
+    }
+
+    function findConcept(list, ...names) {
+        const e = list.find(x => names.includes(norm(x.concept)) || names.includes(norm(x.concept).replace(/^to\s+/, '')));
+        return e?.conlang || '—';
+    }
+
+    function renderSamples(list) {
+        const box = $('generation-output');
+        if (!box) return;
+        const samples = [
+            ['I am here.', `${findConcept(list, 'i')} ${findConcept(list, 'be')} ${findConcept(list, 'here')}.`],
+            ['You are there.', `${findConcept(list, 'you')} ${findConcept(list, 'be')} ${findConcept(list, 'there')}.`],
+            ['This is my home.', `${findConcept(list, 'this')} ${findConcept(list, 'be')} ${findConcept(list, 'my')} ${findConcept(list, 'home')}.`],
+            ['We have water.', `${findConcept(list, 'we')} ${findConcept(list, 'have')} ${findConcept(list, 'water')}.`],
+            ['They see the forest.', `${findConcept(list, 'they')} ${findConcept(list, 'see')} ${findConcept(list, 'the')} ${findConcept(list, 'forest')}.`],
+            ['Who is there?', `${findConcept(list, 'who')} ${findConcept(list, 'be')} ${findConcept(list, 'there')}?`],
+            ['Where is the river?', `${findConcept(list, 'where')} ${findConcept(list, 'be')} ${findConcept(list, 'the')} ${findConcept(list, 'river')}?`],
+            ['I do not know.', `${findConcept(list, 'i')} ${findConcept(list, 'do')} ${findConcept(list, 'not')} ${findConcept(list, 'know')}.`],
+            ['We can go today.', `${findConcept(list, 'we')} ${findConcept(list, 'can')} ${findConcept(list, 'go')} ${findConcept(list, 'today')}.`],
+            ['How many are there?', `${findConcept(list, 'how')} ${findConcept(list, 'many')} ${findConcept(list, 'be')} ${findConcept(list, 'there')}?`]
+        ];
+        box.insertAdjacentHTML('beforeend', `<div class="card"><h3>Sample sentences</h3><div class="dictionary">${samples.map(([en, co]) => `<div class="dict-row"><strong>${esc(en)}</strong><span>${esc(co)}</span></div>`).join('')}</div></div>`);
+    }
+
+    function renderLexicon(list) {
+        const box = $('lexicon-output');
+        if (!box) return;
+        box.className = 'card';
+        box.innerHTML = `<h3>Generated lexicon</h3><div class="lexicon">${list.map(e => `<div class="lex-row"><span class="word">${esc(e.conlang || '—')}</span><span class="eng">${esc(e.concept || '—')}</span><span class="meta">${esc(e.category || e.semantic_group || e.word_type || '')}</span></div>`).join('')}</div>`;
+    }
+
+    const xlocale = (a, b) => String(a).localeCompare(String(b));
+
+    function renderDictionary(list) {
+        const box = $('dictionary-output');
+        if (!box) return;
+        const dir = $('dictionary-direction')?.value || 'conlang-en';
+        const q = norm($('dictionary-search')?.value || '');
+        let rows = list.map(e => ({ l: dir === 'conlang-en' ? e.conlang : e.concept, r: dir === 'conlang-en' ? e.concept : e.conlang, m: e.category || e.semantic_group || e.word_type || '' })).filter(x => x.l && x.r);
+        if (q) rows = rows.filter(x => `${x.l} ${x.r} ${x.m}`.toLowerCase().includes(q));
+        rows.sort((a, b) => xlocale(a.l, b.l));
+        box.innerHTML = `<div class="card"><h3>${dir === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.map(x => `<div class="dict-row"><strong>${esc(x.l)}</strong><span>${esc(x.r)}</span><span class="meta">${esc(x.m)}</span></div>`).join('')}</div></div>`;
+    }
+
+    function renderResult(result) {
+        const box = $('generation-output');
+        if (!box) return;
+        const c = result.config;
+        const list = result.lexicon;
+        const name = window.ConlangEngine.languageName(c.seed);
+        const chips = [c.region[0], c.culture[0], c.biome[0], c.temporal_setting[0], c.order].filter(Boolean);
+        box.className = 'result';
+        box.innerHTML = `<div class="hero"><div><div class="lang-name">${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`;
+        renderSamples(list);
+        renderLexicon(list);
+        renderDictionary(list);
+    }
+
+    function generate() {
+        try {
+            const result = window.ConlangEngine.generate(readConfig());
+            renderResult(result);
+            if ($('message')) $('message').textContent = `Generated ${result.lexicon.length} entries.`;
+            window.dispatchEvent(new CustomEvent('conlang:generated', { detail: result }));
+        } catch (e) {
+            console.error(e);
+            if ($('message')) $('message').textContent = 'Generation error: ' + e.message;
+            if ($('generation-output')) {
+                $('generation-output').className = 'result';
+                $('generation-output').innerHTML = `<div class="error">${esc(e.message)}</div>`;
+            }
+        }
+    }
+
+    function regenerate() {
+        if (!window.ConlangEngine.getVocabulary().length) return;
+        generate();
+    }
+
+    function randomize() {
+        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
+            const e = $(id);
+            if (e && e.options.length > 1) {
+                const options = [...e.options].slice(1).map(o => o.value);
+                e.value = options[Math.floor(Math.random() * options.length)];
+            }
+        });
+        ['vowels', 'consonants', 'word-order', 'morphology', 'adj-position', 'articles', 'plural', 'relations'].forEach(id => {
+            const e = $(id);
+            if (e && e.options.length) e.value = e.options[Math.floor(Math.random() * e.options.length)].value;
+        });
+        if ($('mean')) $('mean').value = (1 + Math.random() * 2.5).toFixed(1);
+        if ($('seed')) $('seed').value = 'auto';
+    }
+
+    function preset(type) {
+        const map = {
+            historical: { temporal_setting: 'historical', tags: 'historical' },
+            fantasy: { tags: 'fantasy' },
+            modern: { temporal_setting: 'modern' },
+            scifi: { tags: 'sci-fi' }
+        };
+        const p = map[type];
+        if (!p) return;
+        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
+            const e = $(id);
+            if (e) e.value = p[id] || '';
+        });
+    }
+
+    function wire() {
+        $('generate')?.addEventListener('click', generate);
+        $('regenerate')?.addEventListener('click', regenerate);
+        $('randomize')?.addEventListener('click', randomize);
+        $('clear-filters')?.addEventListener('click', () => ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const e = $(id); if (e) e.value = ''; }));
+        [['preset-historical', 'historical'], ['preset-fantasy', 'fantasy'], ['preset-modern', 'modern'], ['preset-scifi', 'scifi']].forEach(([id, type]) => $(id)?.addEventListener('click', () => preset(type)));
+        $('dictionary-direction')?.addEventListener('change', () => renderDictionary(window.ConlangEngine.getGenerated()));
+        $('dictionary-search')?.addEventListener('input', () => renderDictionary(window.ConlangEngine.getGenerated()));
+    }
+
+    async function loadVocabulary() {
+        const status = $('db-status');
+        try {
+            const response = await fetch('vocabulary.json', { cache: 'no-store' });
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            const vocabulary = window.ConlangEngine.loadVocabulary(data);
+            populateFilters(vocabulary);
+            if (status) status.textContent = `Vocabulary loaded: ${vocabulary.length} entries`;
+        } catch (e) {
+            console.error(e);
+            if (status) status.textContent = 'Vocabulary load failed';
+            if ($('message')) $('message').textContent = 'Vocabulary load failed: ' + e.message;
+        }
+    }
+
+    window.ConlangGeneratorUI = Object.freeze({ generate, regenerate, randomize, renderLexicon, renderDictionary });
+    wire();
+    loadVocabulary();
+})();
