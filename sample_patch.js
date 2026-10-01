@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.9.6 */
+/* ConLang Generator UI patch — v0.10.1 */
 (() => {
     'use strict';
 
-    const VERSION = '0.9.6';
+    const VERSION = '0.10.1';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
