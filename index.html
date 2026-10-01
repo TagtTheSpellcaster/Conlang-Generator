@@ -57,7 +57,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <h2>Phonology</h2>
 <div class="compact-grid">
 <div class="field"><label for="vowels">Vowels</label><select id="vowels"><option value="standard">a e i o u</option><option value="minimal">a i u</option><option value="extended">a e i o u y ø æ</option></select></div>
-<div class="field"><label for="consonants">Consonants</label><select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant / liquid</option><option value="soft">Soft / approximant</option></select></div>
+<div class="field"><label for="consonants">Consonant model</label><select id="consonants"><option value="isolated">1 — Minimalist Isolating (Hawaiian-type)</option><option value="japanese">2 — Controlled Open Syllable (Japanese-type)</option><option value="european" selected>3 — Balanced European (Italian/Finnish-type)</option><option value="english">4 — Dynamic Anglo-Saxon (English-type)</option><option value="slavic">5 — Compact Slavic (Croatian/Polish-type)</option><option value="semitic">6 — Semitic Root-and-Pattern (Arabic-type)</option></select></div>
 <div class="field"><label for="mean">Mean syllables</label><input id="mean" type="number" min="1" max="5" step=".1" value="2.2"></div>
 <div class="field"><label for="seed">Seed</label><input id="seed" type="text" value="auto"></div>
 </div>
@@ -129,20 +129,9 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
   });
 
   function renderImported(lexicon){
-    const rows=[...lexicon].sort((a,b)=>a.english.localeCompare(b.english));
-    $('lexicon-output').innerHTML=`<div class="card"><h3>Imported lexicon</h3><div class="sub" style="margin-bottom:10px">${rows.length} imported entries</div><div class="lexicon">${rows.map(x=>`<div class="lex-row"><div class="word">${esc(x.word)}</div><div class="eng">${esc(x.english)}</div><div class="meta">${esc(x.meta)}</div></div>`).join('')}</div></div>`;renderImportedDictionary();
+    $('lexicon-output').className='card';
+    $('lexicon-output').innerHTML=`<h3>Imported vocabulary</h3><div class="lexicon">${lexicon.map(x=>`<div class="lex-row"><span class="word">${esc(x.word)}</span><span class="eng">${esc(x.english)}</span><span class="meta">${esc(x.meta)}</span></div>`).join('')}</div>`;
   }
-
-  function renderImportedDictionary(){
-    if(!imported)return;
-    const direction=$('dictionary-direction').value,q=$('dictionary-search').value.trim().toLowerCase();
-    let rows=imported.map(x=>({left:direction==='conlang-en'?x.word:x.english,right:direction==='conlang-en'?x.english:x.word,meta:x.meta}));
-    if(q)rows=rows.filter(x=>`${x.left} ${x.right} ${x.meta}`.toLowerCase().includes(q));rows.sort((a,b)=>a.left.localeCompare(b.left));
-    $('dictionary-output').innerHTML=`<div class="card"><h3>${direction==='conlang-en'?'Conlang → English':'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.length?rows.map(x=>`<div class="dict-row"><strong>${esc(x.left)}</strong><span>${esc(x.right)}</span><span class="meta">${esc(x.meta)}</span></div>`).join(''):'<div class="empty">No matching entries.</div>'}</div></div>`;
-  }
-
-  $('dictionary-direction').addEventListener('change',()=>{if(imported)renderImportedDictionary();});
-  $('dictionary-search').addEventListener('input',()=>{if(imported)renderImportedDictionary();});
 })();
 </script>
 </body>
