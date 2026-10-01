@@ -1,4 +1,4 @@
-/* ConLang Generator — generator UI controller v0.9.6 */
+/* ConLang Generator — generator UI controller v0.10.0 */
 (() => {
     'use strict';
 
@@ -83,7 +83,7 @@
         if (!box) return;
         const c = result.config;
         const list = result.lexicon;
-        const name = window.ConlangEngine.languageName(c.seed);
+        const name = window.ConlangEngine.languageName(c.seed, c);
         const chips = [c.region[0], c.culture[0], c.biome[0], c.temporal_setting[0], c.order].filter(Boolean);
         box.className = 'result';
         box.innerHTML = `<div class="hero"><div><div class="lang-name">${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`;
