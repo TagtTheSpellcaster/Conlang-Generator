@@ -1,12 +1,182 @@
-name: 0.9.6 test
+name: ConLang Generator 0.9.6
+
 on:
   push:
     paths:
       - '.github/workflows/096-test.yml'
+
 permissions:
   contents: write
+
 jobs:
-  test:
+  patch:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "0.9.6 workflow test"
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Patch sample_patch.js
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('sample_patch.js')
+          source = path.read_text(encoding='utf-8')
+
+          source = source.replace(
+              '/* ConLang Generator UI + phonology patch — v0.9.4 */',
+              '/* ConLang Generator UI + phonology patch — v0.9.6 */',
+              1,
+          )
+          source = source.replace(
+              "const VERSION = '0.9.4';",
+              "const VERSION = '0.9.6';",
+              1,
+          )
+
+          old_css = """        s.textContent = '.base-parameters{margin-top:16px}.base-parameters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.base-parameters .param-group{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:11px}.base-parameters .param-title{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);margin-bottom:7px}.base-parameters .param-value{color:var(--text);line-height:1.5}';"""
+          new_css = """        s.textContent = `
+              .base-parameters {
+                  margin-top: 16px;
+              }
+
+              .base-parameters-grid {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                  gap: 12px;
+              }
+
+              .base-parameters .param-group {
+                  background: var(--panel2);
+                  border: 1px solid var(--line);
+                  border-radius: 8px;
+                  padding: 11px;
+              }
+
+              .base-parameters .param-title {
+                  font-size: 11px;
+                  text-transform: uppercase;
+                  letter-spacing: .04em;
+                  color: var(--accent);
+                  margin-bottom: 7px;
+              }
+
+              .base-parameters .param-value {
+                  color: var(--text);
+                  line-height: 1.5;
+              }
+
+              .compact-grid {
+                  align-items: start;
+              }
+
+              .compact-grid > .field {
+                  margin-top: 0;
+              }
+
+              .header-tools #copy-vocabulary {
+                  white-space: nowrap;
+              }
+          `;"""
+
+          if old_css not in source:
+              raise SystemExit('Expected CSS block not found')
+          source = source.replace(old_css, new_css, 1)
+
+          marker = "    function tab() {"
+          copy_function = r'''    function installCopyButton() {
+          const exportButton = $('export-vocabulary');
+          const existing = $('copy-vocabulary');
+
+          if (existing || !exportButton) return;
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'btn';
+          button.id = 'copy-vocabulary';
+          button.textContent = 'Copy to Clipboard';
+          exportButton.insertAdjacentElement('beforebegin', button);
+
+          button.addEventListener('click', async () => {
+              const rows = [...document.querySelectorAll('#lexicon-output .lex-row')];
+              const entries = rows
+                  .map(row => {
+                      const cells = row.children;
+                      return {
+                          word: cells[0]?.textContent.trim() || '',
+                          english: cells[1]?.textContent.trim() || '',
+                          meta: cells[2]?.textContent.trim() || ''
+                      };
+                  })
+                  .filter(entry => entry.word && entry.english);
+
+              if (!entries.length) {
+                  const message = $('message');
+                  if (message) {
+                      message.textContent =
+                          'Generate a language before copying its vocabulary.';
+                  }
+                  return;
+              }
+
+              const text = entries
+                  .map(entry => [entry.word, entry.english, entry.meta]
+                      .filter(Boolean)
+                      .join('\t'))
+                  .join('\n');
+
+              try {
+                  await navigator.clipboard.writeText(text);
+              } catch {
+                  const area = document.createElement('textarea');
+                  area.value = text;
+                  area.setAttribute('readonly', '');
+                  area.style.position = 'fixed';
+                  area.style.opacity = '0';
+                  document.body.appendChild(area);
+                  area.select();
+                  document.execCommand('copy');
+                  area.remove();
+              }
+
+              const message = $('message');
+              if (message) {
+                  message.textContent =
+                      `Copied ${entries.length} vocabulary entries to the clipboard.`;
+              }
+
+              button.textContent = 'Copied';
+              setTimeout(() => {
+                  button.textContent = 'Copy to Clipboard';
+              }, 1200);
+          });
+      }
+
+'''
+
+          if 'function installCopyButton()' not in source:
+              if marker not in source:
+                  raise SystemExit('Tab marker not found')
+              source = source.replace(marker, copy_function + marker, 1)
+
+          install_old = "        styles();\n        installModelOptions();"
+          install_new = "        styles();\n        installCopyButton();\n        installModelOptions();"
+          if install_old not in source and 'installCopyButton();' not in source:
+              raise SystemExit('Initialization marker not found')
+          source = source.replace(install_old, install_new, 1)
+
+          path.write_text(source, encoding='utf-8')
+          PY
+
+      - name: Verify JavaScript
+        run: node --check sample_patch.js
+
+      - name: Commit patch and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add sample_patch.js
+          git rm .github/workflows/096-test.yml
+          git commit -m 'Release UI 0.9.6'
+          git push
