@@ -41,7 +41,7 @@
             temporal_setting: selected('temporal_setting'),
             tags: selected('tags'),
             vowels: $('vowels')?.value || 'standard',
-            consonants: $('consonants')?.value || 'balanced',
+            consonants: $('consonants')?.value || 'european',
             mean: Number($('mean')?.value) || 2.2,
             seed,
             order: $('word-order')?.value || 'SVO',
