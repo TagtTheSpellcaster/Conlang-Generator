@@ -5,110 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conlang Generator</title>
     <link rel="stylesheet" href="vocabulary.css">
+    <style>
+        .app-header { padding: 18px 28px; display:flex; justify-content:space-between; align-items:center; gap:24px; }
+        .brand h1 { display:flex; align-items:center; gap:10px; }
+        .version-badge { display:inline-flex; align-items:center; padding:3px 9px; border-radius:999px; background:rgba(255,255,255,.16); color:#fff; font-size:12px; line-height:1.4; font-weight:600; }
+        .header-actions { display:flex; gap:8px; flex-wrap:wrap; }
+        .app-shell { padding:20px 28px; }
+        .tabs { display:flex; gap:6px; margin-bottom:18px; border-bottom:1px solid #d8ddd8; }
+        .tab { border:0; border-radius:7px 7px 0 0; background:transparent; padding:10px 16px; font-weight:600; }
+        .tab.active { background:#fff; border:1px solid #d8ddd8; border-bottom-color:#fff; margin-bottom:-1px; }
+        .tab-panel[hidden] { display:none; }
+        .generation-grid { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr) minmax(190px,.55fr); gap:16px; align-items:start; }
+        .generation-middle { display:grid; gap:16px; }
+        .card { background:#fff; border:1px solid #d8ddd8; border-radius:9px; padding:16px; }
+        .card h2 { margin:0 0 14px; font-size:16px; }
+        .form-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+        .form-grid.compact { grid-template-columns:1fr; }
+        .card label { margin:0; }
+        .card select, .card input { width:100%; margin-top:5px; }
+        .generation-actions { display:flex; flex-direction:column; gap:8px; }
+        .generation-actions button { width:100%; }
+        .generation-actions .primary { background:#26382c; color:#fff; border-color:#26382c; }
+        .status { font-size:12px; color:#666; padding:4px 2px; }
+        .table-wrap { background:#fff; border:1px solid #d8ddd8; border-radius:9px; overflow:auto; }
+        .lexicon-row { display:grid; grid-template-columns:50px 220px 1fr; gap:12px; padding:8px 12px; border-bottom:1px solid #e1e4e1; }
+        .lexicon-row strong { font-family:ui-monospace,SFMono-Regular,Consolas,monospace; }
+        .dictionary-toolbar { display:flex; gap:12px; margin-bottom:12px; align-items:end; }
+        .dictionary-toolbar label { margin:0; }
+        .dictionary-toolbar select, .dictionary-toolbar input { margin-top:5px; }
+        @media(max-width:900px){ .generation-grid{grid-template-columns:1fr;} .form-grid{grid-template-columns:1fr;} .header-actions{justify-content:flex-start;} }
+    </style>
 </head>
 <body>
-    <header class="app-header">
-        <div class="brand">
-            <h1>Conlang Generator <span id="engine-version" class="pill">v0.7.3</span></h1>
-            <div id="language-name" class="pills"></div>
-        </div>
-        <div class="header-actions">
-            <button id="open-vocabulary-manager" type="button">Vocabulary Manager</button>
-            <button id="export-vocabulary" type="button">Export Vocabulary</button>
-            <button id="import-vocabulary" type="button">Import Vocabulary</button>
-            <input id="import-vocabulary-file" type="file" accept=".json,application/json" hidden>
-        </div>
-    </header>
+<header class="app-header">
+    <div class="brand">
+        <h1>Conlang Generator <span class="version-badge">v0.7.3</span></h1>
+    </div>
+    <div class="header-actions">
+        <button id="open-vocabulary-manager" type="button">Vocabulary Manager</button>
+        <button id="export-vocabulary" type="button">Export Vocabulary</button>
+        <button id="import-vocabulary" type="button">Import Vocabulary</button>
+        <input id="import-vocabulary-file" type="file" accept=".json,application/json" hidden>
+    </div>
+</header>
 
-    <main class="app-shell">
-        <nav class="tabs" role="tablist" aria-label="Conlang Generator sections">
-            <button class="tab active" id="tab-generation" role="tab" aria-selected="true" aria-controls="panel-generation" type="button">Generation</button>
-            <button class="tab" id="tab-lexicon" role="tab" aria-selected="false" aria-controls="panel-lexicon" type="button">Generated Lexicon</button>
-            <button class="tab" id="tab-dictionary" role="tab" aria-selected="false" aria-controls="panel-dictionary" type="button">Dictionary</button>
-        </nav>
+<main class="app-shell">
+    <nav class="tabs" role="tablist">
+        <button class="tab active" id="tab-generation" type="button">Generation</button>
+        <button class="tab" id="tab-lexicon" type="button">Generated Lexicon</button>
+        <button class="tab" id="tab-dictionary" type="button">Dictionary</button>
+    </nav>
 
-        <section id="panel-generation" class="tab-panel active" role="tabpanel" aria-labelledby="tab-generation">
-            <div class="generation-grid">
-                <section class="card semantic-profile">
-                    <h2>Semantic Profile</h2>
-                    <div class="form-grid">
-                        <label>Region<select id="region"><option value="">Random</option></select></label>
-                        <label>Culture<select id="culture"><option value="">Random</option></select></label>
-                        <label>Biome<select id="biome"><option value="">Random</option></select></label>
-                        <label>Temporal Setting<select id="temporal-setting"><option value="">Random</option></select></label>
-                        <label>Lexicon Size<input id="lexicon-size" type="number" min="100" max="2000" value="600"></label>
+    <section id="panel-generation" class="tab-panel">
+        <div class="generation-grid">
+            <section class="card semantic-profile">
+                <h2>Semantic Profile</h2>
+                <div class="form-grid">
+                    <label>Region<select id="region"><option value="">Any</option></select></label>
+                    <label>Culture<select id="culture"><option value="">Any</option></select></label>
+                    <label>Biome<select id="biome"><option value="">Any</option></select></label>
+                    <label>Temporal Setting<select id="temporal_setting"><option value="">Any</option></select></label>
+                    <label>Lexicon Size<input id="lexicon-size" type="number" min="100" max="2000" value="600"></label>
+                </div>
+            </section>
+
+            <div class="generation-middle">
+                <section class="card">
+                    <h2>Phonology</h2>
+                    <div class="form-grid compact">
+                        <label>Vowels<select id="vowels"><option value="standard">Standard</option><option value="minimal">Minimal</option><option value="extended">Extended</option></select></label>
+                        <label>Consonants<select id="consonants"><option value="balanced">Balanced</option><option value="guttural">Guttural</option><option value="sibilant">Sibilant</option><option value="soft">Soft</option></select></label>
                     </div>
                 </section>
-
-                <div class="generation-middle">
-                    <section class="card">
-                        <h2>Phonology</h2>
-                        <div class="form-grid compact">
-                            <label>Consonant Profile<select id="consonant-profile"><option value="">Random</option></select></label>
-                            <label>Vowel Profile<select id="vowel-profile"><option value="">Random</option></select></label>
-                            <label>Syllable Structure<select id="syllable-structure"><option value="">Random</option></select></label>
-                        </div>
-                    </section>
-                    <section class="card">
-                        <h2>Morphosyntax</h2>
-                        <div class="form-grid compact">
-                            <label>Word Order<select id="word-order"><option value="">Random</option></select></label>
-                            <label>Morphological Type<select id="morphological-type"><option value="">Random</option></select></label>
-                            <label>Adjective Order<select id="adjective-order"><option value="">Random</option></select></label>
-                        </div>
-                    </section>
-                </div>
-
-                <section class="generation-actions">
-                    <button id="generate" class="primary" type="button">Generate Language</button>
-                    <button id="regenerate" type="button">Regenerate Lexicon</button>
-                    <button id="randomize" type="button">Randomize Parameters</button>
-                    <div id="db-status" class="status" aria-live="polite">Loading vocabulary…</div>
+                <section class="card">
+                    <h2>Morphosyntax</h2>
+                    <div class="form-grid compact">
+                        <label>Word Order<select id="word-order"><option value="SVO">SVO</option><option value="SOV">SOV</option><option value="VSO">VSO</option><option value="VOS">VOS</option><option value="OSV">OSV</option><option value="OVS">OVS</option></select></label>
+                        <label>Morphological Type<select id="morphology"><option value="analytic">Analytic</option><option value="suffixing">Suffixing</option><option value="prefixing">Prefixing</option></select></label>
+                        <label>Adjective Position<select id="adj-position"><option value="after">After noun</option><option value="before">Before noun</option></select></label>
+                        <label>Articles<select id="articles"><option value="none">None</option><option value="definite">Definite</option></select></label>
+                        <label>Plural<select id="plural"><option value="none">None</option><option value="suffix">Suffix</option><option value="prefix">Prefix</option></select></label>
+                        <label>Relations<select id="relations"><option value="prepositions">Prepositions</option><option value="postpositions">Postpositions</option></select></label>
+                    </div>
                 </section>
             </div>
-        </section>
 
-        <section id="panel-lexicon" class="tab-panel" role="tabpanel" aria-labelledby="tab-lexicon" hidden>
-            <div id="generated-lexicon" class="table-wrap"></div>
-        </section>
+            <section class="generation-actions">
+                <button id="generate-language" class="primary" type="button">Generate Language</button>
+                <button id="regenerate-lexicon" type="button">Regenerate Lexicon</button>
+                <button id="randomize" type="button">Randomize Parameters</button>
+                <div id="db-status" class="status" aria-live="polite">Loading vocabulary…</div>
+                <input id="mean" type="hidden" value="2.2">
+                <input id="seed" type="hidden" value="">
+            </section>
+        </div>
+    </section>
 
-        <section id="panel-dictionary" class="tab-panel" role="tabpanel" aria-labelledby="tab-dictionary" hidden>
-            <div class="dictionary-toolbar">
-                <label>Dictionary direction<select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></label>
-                <input id="dictionary-search" type="search" placeholder="Search…" autocomplete="off">
-            </div>
-            <div id="dictionary-results" class="table-wrap"></div>
-        </section>
-    </main>
+    <section id="panel-lexicon" class="tab-panel" hidden>
+        <div id="generated-lexicon" class="table-wrap"></div>
+    </section>
 
-    <script src="conlang_engine.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const tabs = [...document.querySelectorAll('.tab')];
-            const panels = [...document.querySelectorAll('.tab-panel')];
+    <section id="panel-dictionary" class="tab-panel" hidden>
+        <div class="dictionary-toolbar">
+            <label>Dictionary direction<select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></label>
+            <input id="dictionary-search" type="search" placeholder="Search…" autocomplete="off">
+        </div>
+        <div id="dictionary-results" class="table-wrap"></div>
+    </section>
+</main>
 
-            tabs.forEach(tab => tab.addEventListener('click', () => {
-                tabs.forEach(t => {
-                    const active = t === tab;
-                    t.classList.toggle('active', active);
-                    t.setAttribute('aria-selected', String(active));
-                });
-                panels.forEach(panel => {
-                    const active = panel.id === tab.getAttribute('aria-controls');
-                    panel.hidden = !active;
-                    panel.classList.toggle('active', active);
-                });
-            }));
+<script src="conlang_engine.js?v=0.7.3"></script>
+<script>
+(() => {
+    const tabs = [...document.querySelectorAll('.tab')];
+    const panels = {
+        'tab-generation': document.getElementById('panel-generation'),
+        'tab-lexicon': document.getElementById('panel-lexicon'),
+        'tab-dictionary': document.getElementById('panel-dictionary')
+    };
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.toggle('active', t === tab));
+        Object.entries(panels).forEach(([id, panel]) => { panel.hidden = id !== tab.id; });
+    }));
 
-            window.addEventListener('conlang:generated', event => {
-                const lexicon = event.detail?.lexicon || [];
-                const target = document.getElementById('generated-lexicon');
-                if (!target) return;
-                target.innerHTML = lexicon.map((entry, index) => `
-                    <div class="lexicon-row"><span>${index + 1}</span><strong>${entry.word ?? ''}</strong><span>${entry.concept ?? entry.english ?? ''}</span></div>
-                `).join('');
-            });
-        });
-    </script>
+    window.addEventListener('conlang:generated', event => {
+        const lexicon = event.detail?.lexicon || [];
+        const target = document.getElementById('generated-lexicon');
+        target.innerHTML = lexicon.map((entry, index) =>
+            `<div class="lexicon-row"><span>${index + 1}</span><strong>${entry.conlang ?? entry.word ?? ''}</strong><span>${entry.concept ?? entry.english ?? ''}</span></div>`
+        ).join('');
+    });
+})();
+</script>
 </body>
 </html>
