@@ -1,15 +1,15 @@
-/* ConLang Generator UI + phonology patch — v0.9.4 */
+/* ConLang Generator UI + phonology patch — v0.9.6 */
 (() => {
     'use strict';
-    const VERSION = '0.9.4';
+    const VERSION = '0.9.6';
     let phonologyBusy = false;
     let phonologyCycleSeed = null;
     const $ = id => document.getElementById(id);
-    const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({
+    const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({
         '&': '&amp;',
         '<': '&lt;',
         '>': '&gt;',
-        '"': '&quot;',
+        '\"': '&quot;',
         "'": '&#39;'
     } [c]));
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
@@ -18,9 +18,119 @@
         if ($('ui-patch-v092')) return;
         const s = document.createElement('style');
         s.id = 'ui-patch-v092';
-        s.textContent = '.base-parameters{margin-top:16px}.base-parameters-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.base-parameters .param-group{background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:11px}.base-parameters .param-title{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--accent);margin-bottom:7px}.base-parameters .param-value{color:var(--text);line-height:1.5}';
+        s.textContent = `
+              .base-parameters {
+                  margin-top: 16px;
+              }
+
+              .base-parameters-grid {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                  gap: 12px;
+              }
+
+              .base-parameters .param-group {
+                  background: var(--panel2);
+                  border: 1px solid var(--line);
+                  border-radius: 8px;
+                  padding: 11px;
+              }
+
+              .base-parameters .param-title {
+                  font-size: 11px;
+                  text-transform: uppercase;
+                  letter-spacing: .04em;
+                  color: var(--accent);
+                  margin-bottom: 7px;
+              }
+
+              .base-parameters .param-value {
+                  color: var(--text);
+                  line-height: 1.5;
+              }
+
+              .compact-grid {
+                  align-items: start;
+              }
+
+              .compact-grid > .field {
+                  margin-top: 0;
+              }
+
+              .header-tools #copy-vocabulary {
+                  white-space: nowrap;
+              }
+          `;
         document.head.appendChild(s)
     }
+
+    function installCopyButton() {
+          const exportButton = $('export-vocabulary');
+          const existing = $('copy-vocabulary');
+
+          if (existing || !exportButton) return;
+
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'btn';
+          button.id = 'copy-vocabulary';
+          button.textContent = 'Copy to Clipboard';
+          exportButton.insertAdjacentElement('beforebegin', button);
+
+          button.addEventListener('click', async () => {
+              const rows = [...document.querySelectorAll('#lexicon-output .lex-row')];
+              const entries = rows
+                  .map(row => {
+                      const cells = row.children;
+                      return {
+                          word: cells[0]?.textContent.trim() || '',
+                          english: cells[1]?.textContent.trim() || '',
+                          meta: cells[2]?.textContent.trim() || ''
+                      };
+                  })
+                  .filter(entry => entry.word && entry.english);
+
+              if (!entries.length) {
+                  const message = $('message');
+                  if (message) {
+                      message.textContent =
+                          'Generate a language before copying its vocabulary.';
+                  }
+                  return;
+              }
+
+              const text = entries
+                  .map(entry => [entry.word, entry.english, entry.meta]
+                      .filter(Boolean)
+                      .join('\t'))
+                  .join('\n');
+
+              try {
+                  await navigator.clipboard.writeText(text);
+              } catch {
+                  const area = document.createElement('textarea');
+                  area.value = text;
+                  area.setAttribute('readonly', '');
+                  area.style.position = 'fixed';
+                  area.style.opacity = '0';
+                  document.body.appendChild(area);
+                  area.select();
+                  document.execCommand('copy');
+                  area.remove();
+              }
+
+              const message = $('message');
+              if (message) {
+                  message.textContent =
+                      `Copied ${entries.length} vocabulary entries to the clipboard.`;
+              }
+
+              button.textContent = 'Copied';
+              setTimeout(() => {
+                  button.textContent = 'Copy to Clipboard';
+              }, 1200);
+          });
+      }
 
     function tab() {
         let t = document.querySelector('.tab[data-tab="samples"]'),
@@ -368,7 +478,7 @@
             if (!['r', 'l', 'j', 'w'].includes(c)) return false;
             return true;
         }
-        return false;
+        return false
     }
 
     function modelValid(w, m) {
@@ -511,6 +621,7 @@
 
     function init() {
         styles();
+        installCopyButton();
         installModelOptions();
         tab();
         const o = $('generation-output');
