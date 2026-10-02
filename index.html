@@ -86,6 +86,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 </main></section>
 <script src="phonology.js"></script>
 <script src="conlang_engine.js"></script>
+<script src="version.js"></script>
 <script src="sample_patch.js"></script>
 <script>
 document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{
@@ -118,20 +119,8 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
   $('import-vocabulary').addEventListener('click',()=>$('import-vocabulary-file').click());
   $('import-vocabulary-file').addEventListener('change',async e=>{
     const file=e.target.files?.[0];if(!file)return;
-    try{
-      const data=JSON.parse(await file.text());
-      const raw=Array.isArray(data)?data:(Array.isArray(data.lexicon)?data.lexicon:(Array.isArray(data.vocabulary)?data.vocabulary:[]));
-      const lexicon=raw.map(item=>({word:item.word??item.conlang,english:item.english??item.concept,meta:item.meta??`${item.category||''}${item.kind?` · ${item.kind}`:''}`})).filter(x=>x.word&&x.english);
-      if(!lexicon.length)throw new Error('No valid lexicon entries found.');
-      imported=lexicon;renderImported(lexicon);$('db-status').textContent=`Imported vocabulary: ${lexicon.length} entries`;$('message').textContent=`Imported ${lexicon.length} entries.`;document.querySelector('[data-tab="lexicon"]').click();
-    }catch(err){$('message').textContent=`Import failed: ${err.message}`;}
-    e.target.value='';
+    try{const data=JSON.parse(await file.text());imported=Array.isArray(data)?data:data.lexicon;if(!Array.isArray(imported))throw new Error('Invalid vocabulary format');$('db-status').textContent=`Imported ${imported.length} entries.`;}catch(err){imported=null;$('db-status').textContent='Import failed.';}
   });
-
-  function renderImported(lexicon){
-    $('lexicon-output').className='card';
-    $('lexicon-output').innerHTML=`<h3>Imported vocabulary</h3><div class="lexicon">${lexicon.map(x=>`<div class="lex-row"><span class="word">${esc(x.word)}</span><span class="eng">${esc(x.english)}</span><span class="meta">${esc(x.meta)}</span></div>`).join('')}</div>`;
-  }
 })();
 </script>
 </body>
