@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.11.9 */
+/* ConLang Generator UI patch — v0.11.10 */
 (() => {
     'use strict';
 
-    const VERSION = '0.11.9';
+    const VERSION = '0.11.10';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -25,6 +25,8 @@
             #mean[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--accent); background: var(--panel); cursor: pointer; }
             #app-version { white-space: nowrap; }
             #sample-sentences-output .sample-frame { margin-top: 0; }
+            .morph-example { margin-left: 14px; color: var(--muted); font-size: 12px; white-space: nowrap; }
+            .morph-example-label { margin-right: 5px; }
         `;
         document.head.appendChild(s);
     }
@@ -103,12 +105,42 @@
         }
     }
 
+    function installMorphemeExamples(event) {
+        const detail = event?.detail;
+        const morphemes = detail?.morphemes;
+        if (!morphemes?.cases?.length) return;
+        const grid = document.querySelector('#generation-output .morph-inventory');
+        if (!grid) return;
+        const rows = [...grid.querySelectorAll('.morph-row')];
+        if (!rows.length) return;
+        const lexicon = Array.isArray(detail?.lexicon) ? detail.lexicon : [];
+        const noun = lexicon.find(entry => {
+            const type = String(entry.word_type ?? '').toLowerCase();
+            const category = String(entry.category ?? '').toLowerCase();
+            return type === 'noun' || category.includes('noun');
+        }) || lexicon.find(entry => entry?.conlang);
+        const stem = String(noun?.conlang || 'tal');
+        rows.forEach((row, index) => {
+            row.querySelector('.morph-example')?.remove();
+            const caseName = morphemes.cases[index];
+            const ending = String(morphemes.caseEndings?.[caseName] || '');
+            const example = document.createElement('span');
+            example.className = 'morph-example';
+            example.innerHTML = `<span class="morph-example-label">Example:</span><span class="morph-stem">${esc(stem)}</span>${ending ? `<span class="morph-ending">${esc(ending)}</span>` : '<span class="morph-empty">∅</span>'}`;
+            const display = row.children[1];
+            if (display) display.appendChild(example);
+        });
+    }
+
     function init() {
         styles();
         installCopyButton();
         installVersionPill();
         installSampleSentencesTab();
-        window.addEventListener('conlang:generated', moveSampleSentences);
+        window.addEventListener('conlang:generated', event => {
+            moveSampleSentences(event);
+            installMorphemeExamples(event);
+        });
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
