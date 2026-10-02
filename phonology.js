@@ -100,15 +100,10 @@
 
     function makeWord(m, vowels, mean, r, options = {}) {
         const short = Boolean(options.short);
+        const targetSyllables = short ? (r() < 0.80 ? 1 : 2) : null;
+
         for (let tries = 0; tries < 500; tries++) {
-            let syllables;
-            if (short) {
-                // Function words are overwhelmingly monosyllabic; the remaining
-                // 20% are deliberately restricted to exactly two syllables.
-                syllables = r() < 0.80 ? 1 : 2;
-            } else {
-                syllables = Math.max(1, Math.min(6, Math.round(mean + (r() - .5) * 1.4)));
-            }
+            const syllables = targetSyllables ?? Math.max(1, Math.min(6, Math.round(mean + (r() - .5) * 1.4)));
             let word = '';
             for (let i = 0; i < syllables; i++) word += makeSyllable(m, vowels, r);
             word = word.toLowerCase();
