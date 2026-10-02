@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.11.10 */
+/* ConLang Generator UI patch — v0.11.11 */
 (() => {
     'use strict';
 
-    const VERSION = '0.11.10';
+    const VERSION = '0.11.11';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -25,8 +25,12 @@
             #mean[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--accent); background: var(--panel); cursor: pointer; }
             #app-version { white-space: nowrap; }
             #sample-sentences-output .sample-frame { margin-top: 0; }
-            .morph-example { margin-left: 14px; color: var(--muted); font-size: 12px; white-space: nowrap; }
-            .morph-example-label { margin-right: 5px; }
+            .morph-example { display: grid; grid-template-columns: 62px minmax(150px, 1fr); align-items: center; column-gap: 8px; margin: 7px 0 0; color: var(--muted); font-size: 12px; white-space: nowrap; }
+            .morph-example-label { margin: 0; }
+            .morph-example-word { display: inline-flex; align-items: center; min-height: 24px; }
+            .morph-stem { color: #fff; }
+            .morph-ending { display: inline-block; color: #0b1020; background: #fff; border-radius: 4px; padding: 1px 4px; margin-left: 1px; }
+            .morph-empty { color: var(--muted); }
         `;
         document.head.appendChild(s);
     }
@@ -124,9 +128,9 @@
             row.querySelector('.morph-example')?.remove();
             const caseName = morphemes.cases[index];
             const ending = String(morphemes.caseEndings?.[caseName] || '');
-            const example = document.createElement('span');
+            const example = document.createElement('div');
             example.className = 'morph-example';
-            example.innerHTML = `<span class="morph-example-label">Example:</span><span class="morph-stem">${esc(stem)}</span>${ending ? `<span class="morph-ending">${esc(ending)}</span>` : '<span class="morph-empty">∅</span>'}`;
+            example.innerHTML = `<span class="morph-example-label">Example:</span><span class="morph-example-word"><span class="morph-stem">${esc(stem)}</span>${ending ? `<span class="morph-ending">${esc(ending)}</span>` : '<span class="morph-empty">∅</span>'}</span>`;
             const display = row.children[1];
             if (display) display.appendChild(example);
         });
