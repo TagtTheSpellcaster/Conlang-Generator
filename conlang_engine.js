@@ -1,33 +1,13 @@
-/* ConLang Generator — core engine v0.10.0 */
+/* ConLang Generator — core engine v0.10.2 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.0';
+    const VERSION = '0.10.2';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
     let vocabulary = [];
     let generated = [];
-
-    function hash(s) {
-        let h = 2166136261;
-        for (let i = 0; i < s.length; i++) {
-            h ^= s.charCodeAt(i);
-            h = Math.imul(h, 16777619);
-        }
-        return h >>> 0;
-    }
-
-    function rng(seed) {
-        let x = hash(seed) || 1;
-        return () => {
-            x += 0x6D2B79F5;
-            let t = x;
-            t = Math.imul(t ^ (t >>> 15), t | 1);
-            t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
-            return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
-        };
-    }
 
     function classify(e) {
         const t = norm(e.word_type);
@@ -48,13 +28,8 @@
         };
     }
 
-    function has(set, values) {
-        return values.some(v => set.has(norm(v)));
-    }
-
-    function concept(e, values) {
-        return values.some(v => norm(e.concept) === norm(v));
-    }
+    function has(set, values) { return values.some(v => set.has(norm(v))); }
+    function concept(e, values) { return values.some(v => norm(e.concept) === norm(v)); }
 
     function candidates(list, q = {}) {
         const out = list.filter(e => !q.kinds || !q.kinds.length || q.kinds.includes(e.kind));
@@ -86,19 +61,13 @@
         const seen = new Set();
 
         ranked.filter(e => required.some(x => norm(e.concept) === x || norm(e.concept) === 'to ' + x)).forEach(e => {
-            if (!seen.has(e.id)) {
-                seen.add(e.id);
-                selected.push(e);
-            }
+            if (!seen.has(e.id)) { seen.add(e.id); selected.push(e); }
         });
 
         const groups = ['verb', 'adjective', 'pronoun', 'function', 'number', 'noun'];
         for (const kind of groups) {
             const pool = ranked.filter(e => e.kind === kind && !seen.has(e.id)).sort((a, b) => b.score - a.score);
-            for (const e of pool.slice(0, kind === 'noun' ? 180 : 60)) {
-                seen.add(e.id);
-                selected.push(e);
-            }
+            for (const e of pool.slice(0, kind === 'noun' ? 180 : 60)) { seen.add(e.id); selected.push(e); }
         }
 
         const rest = ranked.filter(e => !seen.has(e.id)).sort((a, b) => b.score - a.score);
@@ -120,12 +89,9 @@
             biome: Array.isArray(c?.biome) ? c.biome : [],
             temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [],
             tags: Array.isArray(c?.tags) ? c.tags : [],
-            vowels: c?.vowels || 'standard',
-            consonants: c?.consonants || 'european',
-            mean: Number(c?.mean) || 2.2,
-            seed: String(c?.seed ?? 'auto'),
-            order: c?.order || 'SVO',
-            morphology: c?.morphology || 'isolating'
+            vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european',
+            mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'),
+            order: c?.order || 'SVO', morphology: c?.morphology || 'isolating'
         };
 
         const selected = selectVocabulary(config);
@@ -157,24 +123,12 @@
         const nameSeed = requestedSeed + '|language-name';
 
         if (window.ConlangPhonology?.createWordFactory) {
-            const make = window.ConlangPhonology.createWordFactory({
-                consonants: modelKey,
-                vowels,
-                mean: Math.max(1, Math.min(4, mean * 0.8)),
-                seed: nameSeed
-            });
+            const make = window.ConlangPhonology.createWordFactory({ consonants: modelKey, vowels, mean: Math.max(1, Math.min(4, mean * 0.8)), seed: nameSeed });
             return make();
         }
 
         return 'language-' + String(Math.floor(rng(nameSeed)() * 900) + 100);
     }
 
-    window.ConlangEngine = Object.freeze({
-        version: VERSION,
-        generate,
-        loadVocabulary,
-        getVocabulary: () => vocabulary.slice(),
-        getGenerated: () => generated.slice(),
-        languageName
-    });
+    window.ConlangEngine = Object.freeze({ version: VERSION, generate, loadVocabulary, getVocabulary: () => vocabulary.slice(), getGenerated: () => generated.slice(), languageName });
 })();
