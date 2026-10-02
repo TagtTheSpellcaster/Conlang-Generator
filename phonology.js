@@ -1,4 +1,4 @@
-/* ConLang Generator — shared phonology engine v0.10.2 */
+/* ConLang Generator — shared phonology engine v0.10.6 */
 (() => {
     'use strict';
 
@@ -98,9 +98,17 @@
         return true;
     }
 
-    function makeWord(m, vowels, mean, r) {
+    function makeWord(m, vowels, mean, r, options = {}) {
+        const short = Boolean(options.short);
         for (let tries = 0; tries < 500; tries++) {
-            const syllables = Math.max(1, Math.min(6, Math.round(mean + (r() - .5) * 1.4)));
+            let syllables;
+            if (short) {
+                // Function words are overwhelmingly monosyllabic; the remaining
+                // 20% are deliberately restricted to exactly two syllables.
+                syllables = r() < 0.80 ? 1 : 2;
+            } else {
+                syllables = Math.max(1, Math.min(6, Math.round(mean + (r() - .5) * 1.4)));
+            }
             let word = '';
             for (let i = 0; i < syllables; i++) word += makeSyllable(m, vowels, r);
             word = word.toLowerCase();
@@ -116,9 +124,9 @@
         const mean = Number(c.mean) || 2.2;
         const r = rng(`${String(c.seed || 'auto')}|phonology|${modelKey}|words`);
         const used = new Set();
-        return () => {
+        return (options = {}) => {
             for (let guard = 0; guard < 100; guard++) {
-                const word = makeWord(model, vowels, mean, r);
+                const word = makeWord(model, vowels, mean, r, options);
                 if (word && !used.has(word)) { used.add(word); return word; }
             }
             return 'lex' + Math.floor(r() * 1e6);
@@ -131,5 +139,5 @@
     // now come exclusively from ConlangEngine -> createWordFactory -> validWord.
     function phonologize() {}
 
-    window.ConlangPhonology = Object.freeze({ version: '0.10.2', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
+    window.ConlangPhonology = Object.freeze({ version: '0.10.6', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
 })();
