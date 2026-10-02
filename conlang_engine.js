@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.11.8 */
+/* ConLang Generator — core engine v0.11.13 */
 (() => {
     'use strict';
 
-    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.8';
+    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.13';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -98,21 +98,26 @@
     }
 
     const CASE_DEFINITIONS = Object.freeze({
-        minimal: Object.freeze(['nominative', 'accusative']),
+        accusative: Object.freeze(['nominative', 'accusative']),
         moderate: Object.freeze(['nominative', 'accusative', 'genitive', 'dative']),
-        extensive: Object.freeze(['nominative', 'accusative', 'genitive', 'dative', 'locative', 'ablative', 'instrumental'])
+        extensive: Object.freeze(['nominative', 'accusative', 'genitive', 'dative', 'locative', 'ablative', 'instrumental']),
+        ergative_minimal: Object.freeze(['absolutive', 'ergative']),
+        ergative_moderate: Object.freeze(['absolutive', 'ergative', 'genitive', 'dative']),
+        ergative_extensive: Object.freeze(['absolutive', 'ergative', 'genitive', 'dative', 'locative', 'ablative', 'instrumental'])
     });
 
     function buildMorphologyModel(c) {
-        const relationModel = ['prepositions', 'cases', 'mixed'].includes(c?.relations) ? c.relations : 'prepositions';
+        const relationModel = ['prepositions', 'cases', 'mixed', 'ergative'].includes(c?.relations) ? c.relations : 'prepositions';
         const caseSystem = ['minimal', 'moderate', 'extensive'].includes(c?.caseSystem) ? c.caseSystem : 'moderate';
-        const cases = relationModel === 'prepositions' ? [] : CASE_DEFINITIONS[caseSystem].slice();
+        const ergative = relationModel === 'ergative';
+        const cases = relationModel === 'prepositions' ? [] : (ergative ? CASE_DEFINITIONS[`ergative_${caseSystem}`].slice() : CASE_DEFINITIONS[caseSystem].slice());
         return Object.freeze({
             relationModel,
+            alignment: ergative ? 'ergative-absolutive' : 'nominative-accusative',
             caseSystem: relationModel === 'prepositions' ? null : caseSystem,
             cases,
             stemRule: 'endings attach to the lexical stem, never to an already inflected form',
-            realization: relationModel === 'prepositions' ? 'particles' : (relationModel === 'cases' ? 'case-endings' : 'mixed')
+            realization: relationModel === 'prepositions' ? 'particles' : (relationModel === 'cases' || ergative ? 'case-endings' : 'mixed')
         });
     }
 
@@ -130,14 +135,12 @@
         const used = new Set();
 
         for (const grammaticalCase of morphologyModel.cases) {
-            if (grammaticalCase === 'nominative') {
+            if (grammaticalCase === 'nominative' || grammaticalCase === 'absolutive') {
                 endings[grammaticalCase] = '';
                 continue;
             }
             let ending = '';
-            for (let guard = 0; guard < 100 && (!ending || used.has(ending)); guard++) {
-                ending = factory({ short: true });
-            }
+            for (let guard = 0; guard < 100 && (!ending || used.has(ending)); guard++) ending = factory({ short: true });
             if (!ending || used.has(ending)) throw new Error(`Unable to generate a unique ${grammaticalCase} case ending.`);
             used.add(ending);
             endings[grammaticalCase] = ending;
@@ -149,6 +152,7 @@
         const caseEndings = generateCaseEndings(config, morphologyModel);
         return Object.freeze({
             relationModel: morphologyModel.relationModel,
+            alignment: morphologyModel.alignment,
             caseSystem: morphologyModel.caseSystem,
             cases: morphologyModel.cases.slice(),
             caseEndings,
@@ -188,21 +192,12 @@
 
     function loadVocabulary(data) {
         const list = Array.isArray(data) ? data : (Array.isArray(data?.vocabulary) ? data.vocabulary : []);
-        vocabulary = list.slice();
-        generated = [];
-        return vocabulary.slice();
+        vocabulary = list.slice(); generated = []; return vocabulary.slice();
     }
 
     function languageName(seed, options = {}) {
-        const requestedSeed = String(seed ?? 'auto');
-        const modelKey = options.consonants || 'european';
-        const vowels = options.vowels || 'standard';
-        const mean = Number(options.mean) || 2.2;
-        const nameSeed = requestedSeed + '|language-name';
-        if (window.ConlangPhonology?.createWordFactory) {
-            const make = window.ConlangPhonology.createWordFactory({ consonants: modelKey, vowels, mean: Math.max(1, Math.min(4, mean * 0.8)), seed: nameSeed });
-            return make();
-        }
+        const requestedSeed = String(seed ?? 'auto'); const modelKey = options.consonants || 'european'; const vowels = options.vowels || 'standard'; const mean = Number(options.mean) || 2.2;
+        if (window.ConlangPhonology?.createWordFactory) return window.ConlangPhonology.createWordFactory({ consonants: modelKey, vowels, mean: Math.max(1, Math.min(4, mean * 0.8)), seed: requestedSeed + '|language-name' })();
         return 'language-' + String(Math.floor(Math.random() * 900) + 100);
     }
 
