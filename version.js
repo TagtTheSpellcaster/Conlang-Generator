@@ -1,19 +1,11 @@
-window.CONLANG_GENERATOR_VERSION = '0.11.2';
+window.CONLANG_GENERATOR_VERSION = '0.11.3';
 
 (() => {
     function renderVersionPill() {
-        const headerTools = document.querySelector('.header-tools');
-        if (!headerTools) return;
+        const pill = document.getElementById('app-version');
+        if (!pill) return;
 
-        let pill = document.getElementById('app-version');
-        if (!pill) {
-            pill = document.createElement('span');
-            pill.id = 'app-version';
-            pill.className = 'chip';
-            headerTools.appendChild(pill);
-        }
-
-        pill.textContent = `Conlang Generator v${window.CONLANG_GENERATOR_VERSION}`;
+        pill.textContent = `v${window.CONLANG_GENERATOR_VERSION}`;
     }
 
     if (document.readyState === 'loading') {
