@@ -1,0 +1,28 @@
+name: Bump index version
+
+on:
+  push:
+    paths:
+      - '.github/workflows/bump-index-0.11.17.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update index version
+        run: python -c "from pathlib import Path; p=Path('index.html'); s=p.read_text(encoding='utf-8'); s=s.replace('v0.11.13','v0.11.17',1); p.write_text(s,encoding='utf-8')"
+
+      - name: Commit and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git rm .github/workflows/bump-index-0.11.17.yml
+          git commit -m 'Bump index version to 0.11.17'
+          git push
