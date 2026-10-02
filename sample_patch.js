@@ -49,6 +49,7 @@
     function installModelDescription() {
         const model = $('consonants');
         if (!model || $('phonotactic-info')) return;
+        document.querySelectorAll('.compact-grid > .phonotactic-info').forEach(el => el.remove());
         const info = document.createElement('div'); info.id = 'phonotactic-info'; info.className = 'phonotactic-info';
         const update = () => {
             const descriptions = {
