@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.11.0 */
+/* ConLang Generator UI patch — v0.11.1 */
 (() => {
     'use strict';
 
-    const VERSION = '0.11.0';
+    const VERSION = '0.11.1';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -119,11 +119,16 @@
     function updateSamplePanel() { installSampleTab(); const output = $('generation-output'); const target = $('samples-output'); if (!output || !target) return; const frame = output.querySelector('.sample-frame'); if (frame) { target.innerHTML = ''; target.appendChild(frame); } renderParameters(); window.ConlangPhonology?.phonologize(); }
     function resetGenerationPhonology() { window.ConlangPhonology?.resetCycle(); }
 
+    function installInstantGenerateLabel() {
+        const button = $('regenerate');
+        if (button) button.textContent = 'Instant generate';
+    }
+
     function init() {
-        styles(); installCopyButton(); installModelOptions(); installSampleTab();
+        styles(); installCopyButton(); installModelOptions(); installSampleTab(); installInstantGenerateLabel();
         const generationOutput = $('generation-output'); if (generationOutput) new MutationObserver(() => requestAnimationFrame(updateSamplePanel)).observe(generationOutput, { childList: true, subtree: true });
         const lexiconOutput = $('lexicon-output'); if (lexiconOutput) new MutationObserver(() => requestAnimationFrame(() => window.ConlangPhonology?.phonologize())).observe(lexiconOutput, { childList: true, subtree: true });
-        document.addEventListener('click', event => { const button = event.target.closest('button'); if (!button) return; const label = button.textContent.trim().toLowerCase(); if (label.includes('generate language') || label.includes('regenerate lexicon')) resetGenerationPhonology(); }, true);
+        document.addEventListener('click', event => { const button = event.target.closest('button'); if (!button) return; const label = button.textContent.trim().toLowerCase(); if (label.includes('generate language') || label.includes('instant generate')) resetGenerationPhonology(); }, true);
         updateSamplePanel();
         const heading = document.querySelector('header h1');
         if (heading) { let badge = heading.querySelector('.version-badge'); if (!badge) { badge = document.createElement('span'); badge.className = 'chip version-badge'; badge.style.marginLeft = '8px'; heading.appendChild(badge); } badge.textContent = 'v' + VERSION; }
