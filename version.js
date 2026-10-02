@@ -1,13 +1,5 @@
-window.CONLANG_GENERATOR_VERSION = '0.11.19';
-
-// Version synchronized with index.html by the temporary release workflow.
+// Auxiliary UI loaders. The displayed application version is hardwired in index.html.
 (() => {
-    function renderVersionPill() {
-        const pill = document.getElementById('app-version');
-        if (!pill) return;
-        pill.textContent = `v${window.CONLANG_GENERATOR_VERSION}`;
-    }
-
     function loadErgativeUI() {
         if (document.querySelector('script[data-ergative-ui]')) return;
         const script = document.createElement('script');
@@ -28,12 +20,10 @@ window.CONLANG_GENERATOR_VERSION = '0.11.19';
 
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => {
-            renderVersionPill();
             loadErgativeUI();
             loadMorphologyExamplePatch();
         }, { once: true });
     } else {
-        renderVersionPill();
         loadErgativeUI();
         loadMorphologyExamplePatch();
     }
