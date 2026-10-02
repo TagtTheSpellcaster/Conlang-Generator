@@ -1,4 +1,4 @@
-/* ConLang Generator UI patch — v0.11.21 */
+/* ConLang Generator UI patch — v0.11.22 */
 (() => {
     'use strict';
 

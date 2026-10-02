@@ -1,4 +1,4 @@
-/* ConLang Generator — fixed morphological example noun v0.11.21 */
+/* ConLang Generator — fixed morphological example noun v0.11.22 */
 (() => {
     'use strict';
 
@@ -18,7 +18,7 @@
     });
 
     function caseTranslation(caseName, numberLabel) {
-        const base = CASE_TRANSLATIONS[norm(caseName)] || 'stone';
+        const base = CASE_TRANSLATIONS[norm(caseName)] || 'forest';
         if (numberLabel === 'plural') return base.replace(/\bforest\b/g, 'forests');
         if (numberLabel === 'dual') return base.replace(/\bforest\b/g, 'two forests');
         return base;

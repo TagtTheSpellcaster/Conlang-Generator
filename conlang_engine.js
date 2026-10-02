@@ -1,4 +1,4 @@
-/* ConLang Generator — core engine v0.11.19 */
+/* ConLang Generator — core engine v0.11.22 */
 (() => {
     'use strict';
 
