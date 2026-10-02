@@ -46,30 +46,6 @@
         });
     }
 
-    function installModelDescription() {
-        const model = $('consonants');
-        if (!model || $('phonotactic-info')) return;
-        document.querySelectorAll('.compact-grid > .phonotactic-info').forEach(el => el.remove());
-        const info = document.createElement('div'); info.id = 'phonotactic-info'; info.className = 'phonotactic-info';
-        const update = () => {
-            const descriptions = {
-                isolated: ['Minimalist Isolating (Hawaiian-type)', 'The pattern categorically excludes consonant clusters and compresses the syllable to a minimum.', '(C)V'],
-                japanese: ['Controlled Open Syllable (Japanese-type)', 'Allows minimal onset clusters and only a nasal coda for clean internal transitions.', '(C)(G)V(N)'],
-                european: ['Balanced European (Italian / Finnish-type)', 'Balances open and closed syllables while keeping consonant and vowel density moderate.', '(S)(C)(L/G)V(L/N/S)'],
-                english: ['Dynamic Anglo-Saxon (English-type)', 'Allows broad consonant clusters in both onset and coda, with strong vowel compression.', '(S)(C)(L/G)V(L/N)(C)(S)'],
-                slavic: ['Compact Slavic (Croatian / Polish-type)', 'Allows dense consonant structures and permits liquids to function as syllabic nuclei.', '(C)(C)(C)(V/L)(C)(C)(C)'],
-                semitic: ['Semitic Root-and-Pattern (Arabic-type)', 'Uses a rigid alternation that prevents excessive accumulation of consonants or vowels.', 'CV(C)']
-            };
-            const d = descriptions[model.value] || descriptions.european;
-            info.innerHTML = `<strong>Model: ${esc(d[0])}</strong><br>${esc(d[1])}<br><strong>Formal pattern:</strong> <code>${esc(d[2])}</code>`;
-        };
-        model.closest('.compact-grid')?.appendChild(info);
-        model.addEventListener('change', update);
-        const mean = $('mean');
-        if (mean) mean.addEventListener('input', update);
-        update();
-    }
-
     function installSynthesisIndex() {
         const mean = $('mean'); const seed = $('seed');
         if (!mean || !seed || $('synthesis-index')) return;
@@ -94,7 +70,7 @@
     }
 
     function init() {
-        styles(); installCopyButton(); installModelDescription(); installSynthesisIndex(); installVersionPill();
+        styles(); installCopyButton(); installSynthesisIndex(); installVersionPill();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
