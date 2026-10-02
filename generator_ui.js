@@ -1,4 +1,4 @@
-/* ConLang Generator — generator UI controller v0.10.3 */
+/* ConLang Generator — generator UI controller v0.10.4 */
 (() => {
     'use strict';
     const $ = id => document.getElementById(id);
@@ -9,10 +9,10 @@
     const PHONOTACTIC_INFO = {
         isolated: { title: 'Minimalist Isolating Pattern (Hawaiian-type)', description: 'The pattern categorically excludes consonant clusters and reduces the syllable to its minimum.', pattern: '(C)V' },
         japanese: { title: 'Controlled Open Syllable Pattern (Japanese-type)', description: 'Allows minimal onsets and only the nasal in the coda, producing clean internal transitions.', pattern: '(C)(G)V(N)' },
-        european: { title: 'Balanced European Pattern (Italian / Finnish-type)', description: 'Balances open and closed syllables, distributing consonants and vowels for a smooth and stable phonotactic profile.', pattern: '(S)(C)(L/G)V(L/N/S)', constraint: 'String constraint: internal consonant sequences are limited to (L/N/S)+S+C or (L/N/S)+C+L, with a maximum of 3 consonants.' },
-        english: { title: 'Dynamic Anglo-Saxon Pattern (English-type)', description: 'Allows extensive consonant clusters in both onsets and codas, with strong vowel compression.', pattern: '(S)(C)(L/G)V(L/N)(C)(S)', constraint: 'String constraint: internal consecutive consonants are capped at a strict maximum of 4.' },
-        slavic: { title: 'Compact Slavic Pattern (Croatian / Polish-type)', description: 'Allows dense consonant structures and permits liquids to function as syllable nuclei.', pattern: '(C)(C)(C)(V/L)(C)(C)(C)', constraint: 'String constraint: two liquid-nucleus syllables may never be adjacent; internal consonant sequences are limited to 4.' },
-        semitic: { title: 'Semitic Root-and-Pattern Model (Arabic-type)', description: 'Uses a rigid alternation that prevents both consonant and vowel accumulation.', pattern: 'CV(C)', constraint: 'String constraint: V+V is forbidden; word-initial structure must begin with a clean CV sequence.' }
+        european: { title: 'Balanced European Pattern (Italian / Finnish-type)', description: 'Balances open and closed syllables, distributing consonants and vowels for a smooth and stable phonotactic profile.', pattern: '(S)(C)(L/G)V(L/N/S)' },
+        english: { title: 'Dynamic Anglo-Saxon Pattern (English-type)', description: 'Allows extensive consonant clusters in both onsets and codas, with strong vowel compression.', pattern: '(S)(C)(L/G)V(L/N)(C)(S)' },
+        slavic: { title: 'Compact Slavic Pattern (Croatian / Polish-type)', description: 'Allows dense consonant structures and permits liquids to function as syllable nuclei.', pattern: '(C)(C)(C)(V/L)(C)(C)(C)' },
+        semitic: { title: 'Semitic Root-and-Pattern Model (Arabic-type)', description: 'Uses a rigid alternation that prevents both consonant and vowel accumulation.', pattern: 'CV(C)' }
     };
     function populateFilters(vocabulary) { ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const el = $(id); if (!el) return; const values = uniq(vocabulary.flatMap(e => arr(e[id]))).sort((a, b) => a.localeCompare(b)); el.innerHTML = '<option value="">Any</option>' + values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join(''); }); }
     function selected(id) { const element = $(id); return element ? [...element.selectedOptions].map(o => o.value).filter(Boolean) : []; }
@@ -21,9 +21,22 @@
     function installPhonotacticInfo() {
         const select = $('consonants'); if (!select) return; const field = select.closest('.field'); if (!field) return;
         const label = field.querySelector('label[for="consonants"]'); if (label) label.textContent = 'Phonotactic pattern';
-        let info = field.querySelector('.phonotactic-info');
-        if (!info) { info = document.createElement('div'); info.className = 'phonotactic-info'; info.style.cssText = 'margin-top:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45'; select.insertAdjacentElement('afterend', info); }
-        const render = () => { const data = PHONOTACTIC_INFO[select.value] || PHONOTACTIC_INFO.european; info.innerHTML = `<div style="color:var(--text);font-weight:700;margin-bottom:4px">${esc(data.title)}</div><div>${esc(data.description)}</div><div style="margin-top:5px"><strong style="color:var(--text)">Formal pattern:</strong> <code>${esc(data.pattern)}</code></div>${data.constraint ? `<div style="margin-top:4px;font-style:italic">${esc(data.constraint)}</div>` : ''}`; };
+        const grid = field.closest('.compact-grid');
+        let info = grid?.querySelector('.phonotactic-info') || field.querySelector('.phonotactic-info');
+        if (!info) {
+            info = document.createElement('div');
+            info.className = 'phonotactic-info';
+            info.style.cssText = 'grid-column:1 / -1;margin-top:0;padding-top:8px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45';
+            if (grid) {
+                const fields = [...grid.querySelectorAll(':scope > .field')];
+                const firstFieldAfterTopRow = fields[2];
+                if (firstFieldAfterTopRow) grid.insertBefore(info, firstFieldAfterTopRow);
+                else grid.appendChild(info);
+            } else {
+                field.insertAdjacentElement('afterend', info);
+            }
+        }
+        const render = () => { const data = PHONOTACTIC_INFO[select.value] || PHONOTACTIC_INFO.european; info.innerHTML = `<div style="color:var(--text);font-weight:700;margin-bottom:4px">${esc(data.title)}</div><div>${esc(data.description)}</div><div style="margin-top:5px"><strong style="color:var(--text)">Formal pattern:</strong> <code>${esc(data.pattern)}</code></div>`; };
         select.addEventListener('change', render); render();
     }
     function renderSamples(list, config) { const box = $('generation-output'); if (!box || !window.ConlangSentenceEngine) return; const samples = window.ConlangSentenceEngine.generateSamples(list, config); const style = `<style id="sample-v718">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}</style>`; const html = samples.map(x => `<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join(''); box.insertAdjacentHTML('beforeend', style + `<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`); }
