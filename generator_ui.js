@@ -1,4 +1,4 @@
-/* ConLang Generator — generator UI controller v0.10.4 */
+/* ConLang Generator — generator UI controller v0.10.5 */
 (() => {
     'use strict';
     const $ = id => document.getElementById(id);
@@ -29,8 +29,10 @@
             info.style.cssText = 'grid-column:1 / -1;margin-top:0;padding-top:8px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45';
             if (grid) {
                 const fields = [...grid.querySelectorAll(':scope > .field')];
-                const firstFieldAfterTopRow = fields[2];
-                if (firstFieldAfterTopRow) grid.insertBefore(info, firstFieldAfterTopRow);
+                const meanField = fields.find(item => item.querySelector('#mean'));
+                const seedField = fields.find(item => item.querySelector('#seed'));
+                const afterField = seedField || meanField;
+                if (afterField) afterField.insertAdjacentElement('afterend', info);
                 else grid.appendChild(info);
             } else {
                 field.insertAdjacentElement('afterend', info);
