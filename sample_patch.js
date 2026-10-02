@@ -63,7 +63,11 @@
             const d = descriptions[model.value] || descriptions.european;
             info.innerHTML = `<strong>Model: ${esc(d[0])}</strong><br>${esc(d[1])}<br><strong>Formal pattern:</strong> <code>${esc(d[2])}</code>`;
         };
-        model.closest('.compact-grid')?.appendChild(info); model.addEventListener('change', update); update();
+        model.closest('.compact-grid')?.appendChild(info);
+        model.addEventListener('change', update);
+        const mean = $('mean');
+        if (mean) mean.addEventListener('input', update);
+        update();
     }
 
     function installSynthesisIndex() {
