@@ -7,7 +7,7 @@
 <style>
 :root{--bg:#0b1020;--panel:#11182a;--panel2:#0d1424;--line:#26324a;--text:#e7edf7;--muted:#8fa0ba;--accent:#55c7ff;--good:#55d6a0}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:14px/1.5 Inter,system-ui,sans-serif}button,select,input{font:inherit}button{cursor:pointer}
-header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}.sub{color:var(--muted);font-size:12px;margin-top:3px}
+header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;display:flex;justify-content:space-between;gap:16px;align-items:center}h1,h2,h3{margin:0}h1{font-size:20px}.sub{color:var(--muted);font-size:12px;margin-top:3px}.title-row{display:flex;align-items:center;gap:8px}.title-row .chip{margin:0}
 .header-tools{display:flex;gap:8px;align-items:center}.header-tools .btn{white-space:nowrap}
 .tabs{display:flex;gap:0;border-bottom:1px solid var(--line);background:#0e1526;padding:0 22px}.tab{border:0;border-bottom:2px solid transparent;background:transparent;color:var(--muted);padding:13px 18px}.tab:hover{color:var(--text);background:#11182a}.tab.active{color:var(--text);border-bottom-color:var(--accent)}
 .tab-panel{display:none}.tab-panel.active{display:block}main{padding:22px;max-width:1240px;margin:0 auto}.controls{width:100%}
@@ -24,9 +24,8 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 </head>
 <body>
 <header>
-  <div><h1>Conlang Generator</h1><div class="sub">Vocabulary-driven language generation</div></div>
+  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.2</span></div><div class="sub">Vocabulary-driven language generation</div></div>
   <div class="header-tools">
-    <span id="app-version" class="chip">Conlang Generator v0.11.2</span>
     <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
     <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
     <button type="button" class="btn" id="import-vocabulary">Import vocabulary</button>
@@ -58,77 +57,3 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <h2>Phonology</h2>
 <div class="compact-grid">
 <div class="field"><label for="vowels">Vowels</label><select id="vowels"><option value="standard">a e i o u</option><option value="minimal">a i u</option><option value="extended">a e i o u y ø æ</option></select></div>
-<div class="field"><label for="consonants">Consonant model</label><select id="consonants"><option value="isolated">1 — Minimalist Isolating (Hawaiian-type)</option><option value="japanese">2 — Controlled Open Syllable (Japanese-type)</option><option value="european" selected>3 — Balanced European (Italian/Finnish-type)</option><option value="english">4 — Dynamic Anglo-Saxon (English-type)</option><option value="slavic">5 — Compact Slavic (Croatian/Polish-type)</option><option value="semitic">6 — Semitic Root-and-Pattern (Arabic-type)</option></select></div>
-<div class="field"><label for="mean">Mean syllables</label><input id="mean" type="number" min="1" max="5" step=".1" value="2.2"></div>
-<div class="field"><label for="seed">Seed</label><input id="seed" type="text" value="auto"></div>
-</div>
-</section>
-<section class="section">
-<h2>Morphosyntax</h2>
-<div class="field"><label for="word-order">Word order</label><select id="word-order"><option>SVO</option><option>SOV</option><option>VSO</option><option>VOS</option><option>OSV</option><option>OVS</option></select></div>
-<div class="compact-grid">
-<div class="field"><label for="morphology">Morphology</label><select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></div>
-<div class="field"><label for="adj-position">Adjective position</label><select id="adj-position"><option value="after">Noun + adjective</option><option value="before">Adjective + noun</option></select></div>
-<div class="field"><label for="articles">Articles</label><select id="articles"><option value="none">None</option><option value="both">Definite + indefinite</option><option value="definite">Definite only</option><option value="indefinite">Indefinite only</option><option value="partitive">Definite + indefinite + partitive</option></select></div>
-<div class="field"><label for="plural">Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div>
-<div class="field full"><label for="relations">Grammatical relations</label><select id="relations"><option value="prepositions">Prepositions / word order</option><option value="cases">Case endings</option></select></div>
-</div>
-</section>
-</div>
-<div class="generation-actions"><span id="message" class="status"></span><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Regenerate lexicon</button></div>
-</div>
-<div id="generation-output" class="result empty">Set the parameters and generate a language.</div>
-</div></main>
-</section>
-<section id="lexicon" class="tab-panel"><main><div id="lexicon-output" class="empty">Generate a language to populate the lexicon.</div></main></section>
-<section id="dictionary" class="tab-panel"><main>
-<div class="dictionary-controls"><div class="field"><label for="dictionary-direction">Direction</label><select id="dictionary-direction"><option value="conlang-en">Conlang → English</option><option value="en-conlang">English → Conlang</option></select></div><div class="field search"><label for="dictionary-search">Search</label><input id="dictionary-search" type="search" placeholder="Search the dictionary…"></div></div>
-<div id="dictionary-output" class="empty">Generate a language to populate the dictionary.</div>
-</main></section>
-<script src="phonology.js"></script>
-<script src="conlang_engine.js"></script>
-<script src="version.js"></script>
-<script src="sample_patch.js"></script>
-<script>
-document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{
- document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});
- document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
- tab.classList.add('active');tab.setAttribute('aria-selected','true');
- const panel=document.getElementById(tab.dataset.tab);if(panel)panel.classList.add('active');
-}));
-
-(() => {
-  const $=id=>document.getElementById(id);
-  const esc=v=>String(v??'').replace(/[&<>\"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c]));
-  let imported=null;
-
-  $('open-vocabulary').addEventListener('click',()=>{window.location.href='vocabulary.html';});
-
-  function currentVisibleLexicon(){
-    const rows=[...document.querySelectorAll('#lexicon-output .lex-row')];
-    return rows.map(row=>{const cells=row.children;return {word:cells[0]?.textContent.trim()||'',english:cells[1]?.textContent.trim()||'',meta:cells[2]?.textContent.trim()||''};}).filter(x=>x.word&&x.english);
-  }
-
-  $('export-vocabulary').addEventListener('click',()=>{
-    const lexicon=imported||currentVisibleLexicon();
-    if(!lexicon.length){$('message').textContent='Generate a language before exporting its vocabulary.';return;}
-    const payload={format:'Conlang Generator vocabulary',version:1,exported_at:new Date().toISOString(),lexicon};
-    const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='conlang-vocabulary.json';a.click();URL.revokeObjectURL(url);
-    $('message').textContent=`Exported ${lexicon.length} entries.`;
-  });
-
-  $('import-vocabulary').addEventListener('click',()=>$('import-vocabulary-file').click());
-  $('import-vocabulary-file').addEventListener('change',async e=>{
-    const file=e.target.files?.[0];if(!file)return;
-    try{
-      const data=JSON.parse(await file.text());
-      if(!Array.isArray(data.lexicon))throw new Error('Invalid vocabulary file.');
-      imported=data.lexicon;
-      $('message').textContent=`Imported ${imported.length} entries.`;
-      $('db-status').textContent='Imported vocabulary loaded';
-    }catch(err){$('message').textContent=err.message||'Import failed.';}
-  });
-})();
-</script>
-</body>
-</html>
