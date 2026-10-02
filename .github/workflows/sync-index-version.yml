@@ -1,0 +1,46 @@
+name: Sync index version
+
+on:
+  push:
+    paths:
+      - 'version.js'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Sync version in index.html
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          version = Path('version.js').read_text(encoding='utf-8')
+          match = re.search(r"CONLANG_GENERATOR_VERSION\s*=\s*'([^']+)'", version)
+          if not match:
+              raise SystemExit('Version not found in version.js')
+          value = match.group(1)
+
+          path = Path('index.html')
+          text = path.read_text(encoding='utf-8')
+          updated, count = re.subn(r'(<span id="app-version" class="chip">)v[^<]+(</span>)', rf'\g<1>v{value}\g<2>', text, count=1)
+          if count != 1:
+              raise SystemExit('Version pill not found in index.html')
+          path.write_text(updated, encoding='utf-8')
+          PY
+
+      - name: Commit index and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git rm .github/workflows/sync-index-version.yml
+          git diff --cached --quiet && exit 0 || true
+          git commit -m 'Sync index version pill to 0.11.19'
+          git push
