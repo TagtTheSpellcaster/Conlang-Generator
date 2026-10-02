@@ -1,4 +1,4 @@
-name: Centralize version 0.11.2
+name: Hardwire application version 0.11.20
 on:
   push:
     paths:
@@ -6,40 +6,29 @@ on:
 permissions:
   contents: write
 jobs:
-  update-version:
+  hardwire-index:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Update version files
+      - name: Update index version only
         run: |
           python - <<'PY'
           from pathlib import Path
-          import re
-          VERSION = '0.11.2'
-          Path('version.js').write_text("window.CONLANG_GENERATOR_VERSION = '0.11.2';\n", encoding='utf-8')
-          p = Path('sample_patch.js')
+          p = Path('index.html')
           s = p.read_text(encoding='utf-8')
-          s = s.replace("/* ConLang Generator UI patch — v0.11.1 */", "/* ConLang Generator UI patch — v0.11.2 */", 1)
-          s = s.replace("const VERSION = '0.11.1';", "const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.2';", 1)
-          p.write_text(s, encoding='utf-8')
-          for filename, old in [('conlang_engine.js','0.10.9'), ('sentence_engine.js','0.10.0')]:
-              p = Path(filename)
-              s = p.read_text(encoding='utf-8')
-              s = s.replace(' v' + old, ' v' + VERSION, 1)
-              s = s.replace("const VERSION = '" + old + "';", "const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.2';", 1)
-              s = s.replace("version: '" + old + "'", "version: window.CONLANG_GENERATOR_VERSION || '0.11.2'", 1)
-              p.write_text(s, encoding='utf-8')
+          old = '<span id="app-version" class="chip">v0.11.19</span>'
+          new = '<span id="app-version" class="chip">v0.11.20</span>'
+          if old not in s:
+              raise SystemExit('Expected hardwired version not found in index.html')
+          p.write_text(s.replace(old, new, 1), encoding='utf-8')
           PY
-      - name: Verify
+      - name: Verify index version
         run: |
-          node --check version.js
-          node --check sample_patch.js
-          node --check conlang_engine.js
-          node --check sentence_engine.js
+          grep -F '<span id="app-version" class="chip">v0.11.20</span>' index.html
       - name: Commit
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add version.js sample_patch.js conlang_engine.js sentence_engine.js
-          git commit -m 'Centralize application version at 0.11.2'
+          git add index.html
+          git commit -m 'Hardwire application version 0.11.20 in index'
           git push
