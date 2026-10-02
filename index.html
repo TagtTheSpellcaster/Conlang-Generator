@@ -24,7 +24,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 </head>
 <body>
 <header>
-  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.2</span></div><div class="sub">Vocabulary-driven language generation</div></div>
+  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.3</span></div><div class="sub">Vocabulary-driven language generation</div></div>
   <div class="header-tools">
     <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
     <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
@@ -99,7 +99,7 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
   function currentVisibleLexicon(){return [...document.querySelectorAll('#lexicon-output .lex-row')].map(row=>{const c=row.children;return {word:c[0]?.textContent.trim()||'',english:c[1]?.textContent.trim()||'',meta:c[2]?.textContent.trim()||''};}).filter(x=>x.word&&x.english);}
   $('export-vocabulary')?.addEventListener('click',()=>{const lexicon=imported||currentVisibleLexicon();if(!lexicon.length){if($('message'))$('message').textContent='Generate a language before exporting its vocabulary.';return;}const payload={format:'Conlang Generator vocabulary',version:1,exported_at:new Date().toISOString(),lexicon};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='conlang-vocabulary.json';a.click();URL.revokeObjectURL(url);if($('message'))$('message').textContent=`Exported ${lexicon.length} entries.`;});
   $('import-vocabulary')?.addEventListener('click',()=>$('import-vocabulary-file')?.click());
-  $('import-vocabulary-file')?.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());const raw=Array.isArray(data)?data:(Array.isArray(data.lexicon)?data.lexicon:(Array.isArray(data.vocabulary)?data.vocabulary:[]));const lexicon=raw.map(item=>({word:item.word??item.conlang,english:item.english??item.concept,meta:item.meta??`${item.category||''}${item.kind?` · ${item.kind}`:''}`})).filter(x=>x.word&&x.english);if(!lexicon.length)throw new Error('No valid lexicon entries found.');imported=lexicon;if($('message'))$('message').textContent=`Imported ${lexicon.length} entries.`;if($('db-status'))$('db-status').textContent='Imported vocabulary loaded';}catch(err){if($('message'))$('message').textContent=err.message||'Import failed.';}});
+  $('import-vocabulary-file')?.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{const data=JSON.parse(await file.text());const raw=Array.isArray(data)?data:(Array.isArray(data.lexicon)?data.lexicon:(Array.isArray(data.vocabulary)?data.vocabulary:[]));const lexicon=raw.map(item=>({word:item.word??item.conlang,english:item.english??item.concept,meta:item.meta??`${item.category||''}${item.kind?` · ${item.kind}`:''}`})).filter(x=>x.word&&x.english);if(!lexicon.length)throw new Error('No valid lexicon entries found.');imported=lexicon;if($('message'))$('message').textContent=`Imported ${lexicon.length} entries.`;if($('db-status'))$('db-status').textContent='Imported vocabulary loaded';}catch(err){if($('message'))$('message').textContent=err.message||'Import failed.';}finally{e.target.value='';}});
 })();
 </script>
 </body>
