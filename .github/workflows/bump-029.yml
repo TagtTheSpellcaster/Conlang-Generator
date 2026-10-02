@@ -1,0 +1,51 @@
+name: Prepare v0.11.29
+
+on:
+  push:
+    paths:
+      - '.github/workflows/bump-029.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update hardwired UI version and cache bust
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          if 'v0.11.28' not in s:
+              raise SystemExit('Expected v0.11.28 in index.html')
+          s = s.replace('v0.11.28', 'v0.11.29')
+          s = s.replace('sample_patch.js?v=0.11.27', 'sample_patch.js?v=0.11.29')
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Verify JavaScript
+        run: |
+          node --check morphology_example_patch.js
+          node --check sample_patch.js
+          node --check sentence_audit_patch.js
+          node --check sentence_engine.js
+          node --check conlang_engine.js
+          node --check phonology.js
+          node --check generator_ui.js
+          node --check version.js
+
+      - name: Remove workflow
+        run: git rm .github/workflows/bump-029.yml
+
+      - name: Commit version bump
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html
+          git commit -m 'Bump UI version to 0.11.29'
+          git push
