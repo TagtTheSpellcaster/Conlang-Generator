@@ -63,20 +63,8 @@
             vowels: document.getElementById('vowels')?.value || 'standard',
             seed: document.getElementById('seed')?.value || 'auto',
             plural: document.getElementById('plural')?.value || 'suffix',
-            number: document.getElementById('morph-number')?.value || 'singular-plural'
+            number: document.getElementById('number')?.value || 'singular-plural'
         };
-    }
-
-    function installNumberSelector() {
-        if (document.getElementById('morph-number')) return;
-        const plural = document.getElementById('plural');
-        if (!plural) return;
-        const field = plural.closest('.field');
-        if (!field) return;
-        const wrapper = document.createElement('div');
-        wrapper.className = 'field';
-        wrapper.innerHTML = '<label for="morph-number">Number</label><select id="morph-number"><option value="singular">Singular only</option><option value="singular-plural" selected>Singular + plural</option><option value="singular-plural-dual">Singular + plural + dual</option></select>';
-        field.insertAdjacentElement('afterend', wrapper);
     }
 
     function getMorphCard() {
@@ -221,7 +209,6 @@
     }
 
     function start() {
-        installNumberSelector();
         let scheduled = false;
         const run = () => {
             scheduled = false;
@@ -237,7 +224,7 @@
         observer.observe(document.body, { childList: true, subtree: true });
         document.getElementById('generate')?.addEventListener('click', schedule);
         document.getElementById('regenerate')?.addEventListener('click', schedule);
-        document.getElementById('morph-number')?.addEventListener('change', schedule);
+        document.getElementById('number')?.addEventListener('change', schedule);
         document.getElementById('plural')?.addEventListener('change', schedule);
         run();
     }

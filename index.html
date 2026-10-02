@@ -25,7 +25,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 </head>
 <body>
 <header>
-  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.27</span></div><div class="sub">Vocabulary-driven language generation</div></div>
+  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.28</span></div><div class="sub">Vocabulary-driven language generation</div></div>
   <div class="header-tools">
     <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
     <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
@@ -70,7 +70,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <div class="field"><label for="morphology">Morphology</label><select id="morphology"><option value="isolating">Isolating</option><option value="agglutinative">Agglutinative</option><option value="fusional">Fusional</option></select></div>
 <div class="field"><label for="adj-position">Adjective position</label><select id="adj-position"><option value="after">Noun + adjective</option><option value="before">Adjective + noun</option></select></div>
 <div class="field"><label for="articles">Articles</label><select id="articles"><option value="none">None</option><option value="both">Definite + indefinite</option><option value="definite">Definite only</option><option value="indefinite">Indefinite only</option><option value="partitive">Definite + indefinite + partitive</option></select></div>
-<div class="field"><label for="plural">Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div>
+<div class="field"><label for="plural">Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div><div class="field"><label for="number">Number</label><select id="number"><option value="singular">Singular only</option><option value="singular-plural" selected>Singular + plural</option><option value="singular-plural-dual">Singular + plural + dual</option></select></div>
 <div class="field"><label for="relations">Grammatical relations</label><select id="relations"><option value="prepositions">Prepositional</option><option value="cases">Case-based</option><option value="mixed">Mixed</option></select></div>
 </div>
 <div id="case-options" class="case-options">
