@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.11.2 */
+/* ConLang Generator UI patch — v0.11.5 */
 (() => {
     'use strict';
 
-    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.2';
+    const VERSION = '0.11.5';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -24,6 +24,7 @@
             #mean[type="range"]::-webkit-slider-thumb { appearance: none; -webkit-appearance: none; width: 14px; height: 14px; margin-top: -6px; border-radius: 50%; border: 1px solid var(--accent); background: var(--panel); cursor: pointer; }
             #mean[type="range"]::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--accent); background: var(--panel); cursor: pointer; }
             #app-version { white-space: nowrap; }
+            #sample-sentences-output .sample-frame { margin-top: 0; }
         `;
         document.head.appendChild(s);
     }
@@ -61,8 +62,53 @@
         }
     }
 
+    function installSampleSentencesTab() {
+        if ($('sample-sentences')) return;
+        const tabs = document.querySelector('.tabs');
+        const lexiconTab = document.querySelector('.tab[data-tab="lexicon"]');
+        if (!tabs || !lexiconTab) return;
+
+        const tab = document.createElement('button');
+        tab.type = 'button';
+        tab.className = 'tab';
+        tab.dataset.tab = 'sample-sentences';
+        tab.setAttribute('aria-selected', 'false');
+        tab.textContent = 'Sample Sentences';
+        tabs.insertBefore(tab, lexiconTab);
+
+        const panel = document.createElement('section');
+        panel.id = 'sample-sentences';
+        panel.className = 'tab-panel';
+        panel.innerHTML = '<main><div id="sample-sentences-output" class="empty">Generate a language to populate the sample sentences.</div></main>';
+        const lexiconPanel = $('lexicon');
+        if (lexiconPanel?.parentNode) lexiconPanel.parentNode.insertBefore(panel, lexiconPanel);
+
+        tab.addEventListener('click', () => {
+            document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            tab.classList.add('active');
+            tab.setAttribute('aria-selected', 'true');
+            panel.classList.add('active');
+        });
+    }
+
+    function moveSampleSentences() {
+        installSampleSentencesTab();
+        const source = $('generation-output');
+        const target = $('sample-sentences-output');
+        if (!source || !target) return;
+        const frame = source.querySelector('.sample-frame');
+        if (!frame) return;
+        target.className = '';
+        target.replaceChildren(frame);
+    }
+
     function init() {
-        styles(); installCopyButton(); installVersionPill();
+        styles();
+        installCopyButton();
+        installVersionPill();
+        installSampleSentencesTab();
+        document.addEventListener('conlang:generated', moveSampleSentences);
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
