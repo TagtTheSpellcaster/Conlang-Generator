@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.11.22 */
+/* ConLang Generator — core engine v0.11.27 */
 (() => {
     'use strict';
 
-    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.19';
+    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.27';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -47,53 +47,56 @@
         return [];
     }
 
+    const REQUIRED_SAMPLE_CONCEPTS = Object.freeze([
+        'i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there',
+        'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how',
+        'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in',
+        'forest', 'good', 'friend', 'sister', 'father', 'water', 'food', 'bread', 'sun',
+        'moon', 'stone', 'hot', 'cold', 'bright', 'see', 'eat'
+    ]);
+
+    const SAMPLE_VERB_CONCEPTS = new Set(['be', 'have', 'can', 'see', 'eat']);
+
     function selectVocabulary(c) {
         const articleMode = norm(c.articles || 'none');
         const ranked = vocabulary
             .map(e => ({ ...e, kind: classify(e), score: score(e, c) }))
             .filter(e => articleAllowed(e.concept, articleMode));
 
-        const required = [
-            'i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there',
-            'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how',
-            'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in', 'forest', 'good',
-            ...requiredArticles(articleMode)
-        ];
-
         const selected = [];
         const seen = new Set();
-        ranked.filter(e => required.some(x => norm(e.concept) === x || norm(e.concept) === 'to ' + x)).forEach(e => {
-            if (!seen.has(e.id)) { seen.add(e.id); selected.push(e); }
-        });
+        const add = e => {
+            if (!e || seen.has(e.id)) return;
+            seen.add(e.id);
+            selected.push(e);
+        };
+
+        for (const concept of REQUIRED_SAMPLE_CONCEPTS) {
+            const matches = ranked.filter(e => norm(e.concept) === concept || norm(e.concept) === 'to ' + concept);
+            if (SAMPLE_VERB_CONCEPTS.has(concept)) add(matches.find(e => e.kind === 'verb') || matches[0]);
+            else add(matches[0]);
+        }
 
         const groups = ['verb', 'adjective', 'pronoun', 'function', 'number', 'noun'];
         for (const kind of groups) {
             const pool = ranked.filter(e => e.kind === kind && !seen.has(e.id)).sort((a, b) => b.score - a.score);
-            for (const e of pool.slice(0, kind === 'noun' ? 180 : 60)) { seen.add(e.id); selected.push(e); }
+            const limit = kind === 'noun' ? 220 : 60;
+            for (const e of pool.slice(0, limit)) add(e);
         }
 
         const rest = ranked.filter(e => !seen.has(e.id)).sort((a, b) => b.score - a.score);
         for (const e of rest) {
             if (selected.length >= 600) break;
-            seen.add(e.id);
-            selected.push(e);
+            add(e);
         }
 
-        const forestEntry = ranked.find(e => norm(e.concept) === 'forest');
-        if (!selected.some(e => norm(e.concept) === 'forest')) {
-            selected.unshift(forestEntry || { id: '__example_forest__', concept: 'forest', word_type: 'noun', scope: 'universal' });
-        }
-        const goodEntry = ranked.find(e => norm(e.concept) === 'good' && (e.kind === 'adjective' || norm(e.word_type) === 'adjective'));
-        if (!selected.some(e => norm(e.concept) === 'good')) {
-            selected.unshift(goodEntry || { id: '__example_good__', concept: 'good', word_type: 'adjective', scope: 'universal' });
-        }
         return selected.slice(0, 600);
     }
 
     const SHORT_WORD_CONCEPTS = new Set([
         'this', 'that', 'these', 'those', 'here', 'there',
-        'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'you', 'him', 'her', 'us', 'them',
-        'my', 'your', 'his', 'her', 'our', 'their', 'mine', 'yours', 'ours', 'theirs',
+        'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'him', 'her', 'us', 'them',
+        'my', 'your', 'his', 'our', 'their', 'mine', 'yours', 'ours', 'theirs',
         'who', 'what', 'which', 'thing', 'not', 'no', 'yes', 'already', 'maybe', 'but', 'also'
     ]);
 
@@ -124,8 +127,7 @@
 
     function countSyllables(word, vowels) {
         const v = new Set((vowels || ['a', 'e', 'i', 'o', 'u']).map(String));
-        let count = 0;
-        let previousWasVowel = false;
+        let count = 0, previousWasVowel = false;
         for (const char of String(word || '').toLowerCase()) {
             const isVowel = v.has(char);
             if (isVowel && !previousWasVowel) count++;
@@ -137,8 +139,7 @@
     function generateOneSyllableEnding(factory, vowels, used) {
         for (let guard = 0; guard < 200; guard++) {
             const candidate = factory({ short: true });
-            if (!candidate) continue;
-            if (countSyllables(candidate, vowels) <= 1 && !used.has(candidate)) return candidate;
+            if (candidate && countSyllables(candidate, vowels) <= 1 && !used.has(candidate)) return candidate;
         }
         return '';
     }
@@ -146,18 +147,13 @@
     function generateCaseEndings(config, morphologyModel) {
         if (!morphologyModel.cases.length) return {};
         if (!window.ConlangPhonology?.createWordFactory) throw new Error('Shared phonology engine is not available.');
-
         const vowelSets = { standard: ['a', 'e', 'i', 'o', 'u'], minimal: ['a', 'i', 'u'], extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ'] };
         const vowels = vowelSets[config.vowels] || vowelSets.standard;
         const factory = window.ConlangPhonology.createWordFactory({ consonants: config.consonants, vowels: config.vowels, mean: 1, seed: `${config.seed}|morphology|case-endings` });
         const endings = {};
         const used = new Set();
-
         for (const grammaticalCase of morphologyModel.cases) {
-            if (grammaticalCase === 'nominative' || grammaticalCase === 'absolutive') {
-                endings[grammaticalCase] = '';
-                continue;
-            }
+            if (grammaticalCase === 'nominative' || grammaticalCase === 'absolutive') { endings[grammaticalCase] = ''; continue; }
             const ending = generateOneSyllableEnding(factory, vowels, used);
             if (!ending) throw new Error(`Unable to generate a unique one-syllable ${grammaticalCase} case ending.`);
             used.add(ending);
@@ -166,14 +162,28 @@
         return Object.freeze(endings);
     }
 
+    function generateNumberMarkers(config, caseEndings) {
+        const result = { plural: '', dual: '', pluralMode: config.plural, dualMode: config.plural };
+        if (!window.ConlangPhonology?.createWordFactory) return result;
+        if (config.plural === 'none') return result;
+        const number = config.number || 'singular-plural';
+        const used = new Set(Object.values(caseEndings || {}).filter(Boolean));
+        const vowels = { standard: ['a', 'e', 'i', 'o', 'u'], minimal: ['a', 'i', 'u'], extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ'] }[config.vowels] || ['a', 'e', 'i', 'o', 'u'];
+        const factory = window.ConlangPhonology.createWordFactory({ consonants: config.consonants, vowels: config.vowels, mean: 1, seed: `${config.seed}|morphology|number-markers` });
+        result.plural = generateOneSyllableEnding(factory, vowels, used);
+        if (number === 'singular-plural-dual') result.dual = generateOneSyllableEnding(factory, vowels, used);
+        return result;
+    }
+
     function generateMorphemeInventory(config, morphologyModel) {
         const caseEndings = generateCaseEndings(config, morphologyModel);
-        return Object.freeze({ relationModel: morphologyModel.relationModel, alignment: morphologyModel.alignment, caseSystem: morphologyModel.caseSystem, cases: morphologyModel.cases.slice(), caseEndings, stemRule: morphologyModel.stemRule, generatedAt: 'language-generation' });
+        const numberMarkers = generateNumberMarkers(config, caseEndings);
+        return Object.freeze({ relationModel: morphologyModel.relationModel, alignment: morphologyModel.alignment, caseSystem: morphologyModel.caseSystem, cases: morphologyModel.cases.slice(), caseEndings, numberMarkers, stemRule: morphologyModel.stemRule, generatedAt: 'language-generation' });
     }
 
     function generate(c) {
         if (!vocabulary.length) throw new Error('Vocabulary is not loaded yet.');
-        const config = { region: Array.isArray(c?.region) ? c.region : [], culture: Array.isArray(c?.culture) ? c.culture : [], biome: Array.isArray(c?.biome) ? c.biome : [], temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [], tags: Array.isArray(c?.tags) ? c.tags : [], vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european', mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'), order: c?.order || 'SVO', morphology: c?.morphology || 'isolating', articles: c?.articles || 'none', plural: c?.plural || 'suffix', relations: c?.relations || 'prepositions', caseSystem: c?.caseSystem || 'moderate', adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after' };
+        const config = { region: Array.isArray(c?.region) ? c.region : [], culture: Array.isArray(c?.culture) ? c.culture : [], biome: Array.isArray(c?.biome) ? c.biome : [], temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [], tags: Array.isArray(c?.tags) ? c.tags : [], vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european', mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'), order: c?.order || 'SVO', morphology: c?.morphology || 'isolating', articles: c?.articles || 'none', plural: c?.plural || 'suffix', number: c?.number || 'singular-plural', relations: c?.relations || 'prepositions', caseSystem: c?.caseSystem || 'moderate', adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after' };
         const morphologyModel = buildMorphologyModel(config);
         const morphemes = generateMorphemeInventory(config, morphologyModel);
         const selected = selectVocabulary(config);
