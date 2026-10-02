@@ -1,4 +1,4 @@
-/* ConLang Generator — fixed morphological example noun v0.11.20 */
+/* ConLang Generator — fixed morphological example noun v0.11.21 */
 (() => {
     'use strict';
 
@@ -6,21 +6,21 @@
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
     const CASE_TRANSLATIONS = Object.freeze({
-        nominative: 'stone',
-        accusative: 'stone',
-        genitive: 'of stone',
-        dative: 'to stone',
-        locative: 'at stone',
-        ablative: 'from stone',
-        instrumental: 'with stone',
-        absolutive: 'stone',
-        ergative: 'by stone'
+        nominative: 'forest',
+        accusative: 'forest',
+        genitive: 'of the forest',
+        dative: 'to the forest',
+        locative: 'in the forest',
+        ablative: 'from the forest',
+        instrumental: 'through the forest',
+        absolutive: 'forest',
+        ergative: 'by the forest'
     });
 
     function caseTranslation(caseName, numberLabel) {
         const base = CASE_TRANSLATIONS[norm(caseName)] || 'stone';
-        if (numberLabel === 'plural') return base.replace(/\bstone\b/g, 'stones');
-        if (numberLabel === 'dual') return base.replace(/\bstone\b/g, 'two stones');
+        if (numberLabel === 'plural') return base.replace(/\bforest\b/g, 'forests');
+        if (numberLabel === 'dual') return base.replace(/\bforest\b/g, 'two forests');
         return base;
     }
 
@@ -29,12 +29,12 @@
         const engine = window.ConlangEngine;
         if (!card || !engine?.getGenerated) return;
 
-        const stone = engine.getGenerated().find(e => norm(e.concept) === 'stone');
-        if (!stone?.conlang) return;
+        const forest = engine.getGenerated().find(e => norm(e.concept) === 'forest');
+        if (!forest?.conlang) return;
 
-        const stem = String(stone.conlang);
+        const stem = String(forest.conlang);
         const nounLabel = card.querySelector('.morph-noun-label');
-        if (nounLabel) nounLabel.innerHTML = `Example noun: <strong>stone</strong> — <span class="morph-stem">${esc(stem)}</span>`;
+        if (nounLabel) nounLabel.innerHTML = `Example noun: <strong>forest</strong> — <span class="morph-stem">${esc(stem)}</span>`;
 
         const pluralMode = document.getElementById('plural')?.value || 'suffix';
         let pluralMarker = '';

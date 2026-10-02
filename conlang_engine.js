@@ -56,7 +56,7 @@
         const required = [
             'i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there',
             'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how',
-            'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in',
+            'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in', 'forest',
             ...requiredArticles(articleMode)
         ];
 
@@ -79,6 +79,10 @@
             selected.push(e);
         }
 
+        const forestEntry = ranked.find(e => norm(e.concept) === 'forest');
+        if (!selected.some(e => norm(e.concept) === 'forest')) {
+            selected.unshift(forestEntry || { id: '__example_forest__', concept: 'forest', word_type: 'noun', scope: 'universal' });
+        }
         return selected.slice(0, 600);
     }
 

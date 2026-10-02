@@ -1,8 +1,7 @@
-/* ConLang Generator UI patch — v0.11.12 */
+/* ConLang Generator UI patch — v0.11.21 */
 (() => {
     'use strict';
 
-    const VERSION = '0.11.12';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -58,7 +57,6 @@
         });
     }
 
-    function installVersionPill() { const pill = $('app-version'); if (pill) pill.textContent = `v${VERSION}`; }
 
     function installNominalCategoryControls() {
         const grid = $('morphology')?.closest('.compact-grid');
@@ -126,6 +124,6 @@
 
     function augmentResult(result){result.config.gender=$('gender')?.value||'none';result.config.number=$('number')?.value||'singular-plural';renderNominalCategories(result);}
 
-    function init(){styles();installCopyButton();installVersionPill();installNominalCategoryControls();installSampleSentencesTab();window.addEventListener('conlang:generated',event=>{augmentResult(event.detail);moveSampleSentences(event);installMorphemeExamples(event);});}
+    function init(){styles();installCopyButton();installNominalCategoryControls();installSampleSentencesTab();window.addEventListener('conlang:generated',event=>{augmentResult(event.detail);moveSampleSentences(event);installMorphemeExamples(event);});}
     if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

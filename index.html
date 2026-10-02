@@ -25,7 +25,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 </head>
 <body>
 <header>
-  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.20</span></div><div class="sub">Vocabulary-driven language generation</div></div>
+  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.21</span></div><div class="sub">Vocabulary-driven language generation</div></div>
   <div class="header-tools">
     <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
     <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
@@ -95,7 +95,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <script src="sentence_engine.js"></script>
 <script src="version.js"></script>
 <script src="generator_ui.js"></script>
-<script src="sample_patch.js"></script>
+<script src="sample_patch.js?v=0.11.21"></script>
 <script>
 document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>{document.querySelectorAll('.tab').forEach(t=>{t.classList.remove('active');t.setAttribute('aria-selected','false')});document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));tab.classList.add('active');tab.setAttribute('aria-selected','true');const panel=document.getElementById(tab.dataset.tab);if(panel)panel.classList.add('active');}));
 (() => {
