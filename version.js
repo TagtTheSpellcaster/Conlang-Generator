@@ -1,5 +1,6 @@
 window.CONLANG_GENERATOR_VERSION = '0.11.19';
 
+// Version synchronized with index.html by the temporary release workflow.
 (() => {
     function renderVersionPill() {
         const pill = document.getElementById('app-version');
