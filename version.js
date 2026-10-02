@@ -12,8 +12,17 @@
     function loadMorphologyExamplePatch() {
         if (document.querySelector('script[data-morphology-example-patch]')) return;
         const script = document.createElement('script');
-        script.src = 'morphology_example_patch.js?v=0.11.26';
+        script.src = 'morphology_example_patch.js?v=0.11.27';
         script.dataset.morphologyExamplePatch = 'true';
+        script.defer = true;
+        document.head.appendChild(script);
+    }
+
+    function loadSentenceAuditPatch() {
+        if (document.querySelector('script[data-sentence-audit-patch]')) return;
+        const script = document.createElement('script');
+        script.src = 'sentence_audit_patch.js?v=0.11.27';
+        script.dataset.sentenceAuditPatch = 'true';
         script.defer = true;
         document.head.appendChild(script);
     }
@@ -22,9 +31,11 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadErgativeUI();
             loadMorphologyExamplePatch();
+            loadSentenceAuditPatch();
         }, { once: true });
     } else {
         loadErgativeUI();
         loadMorphologyExamplePatch();
+        loadSentenceAuditPatch();
     }
 })();
