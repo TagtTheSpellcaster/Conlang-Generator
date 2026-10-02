@@ -2,7 +2,11 @@
 (() => {
     'use strict';
 
-    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.2';
+    if (!window.CONLANG_GENERATOR_VERSION) {
+        document.write('<script src="version.js"><\/script>');
+    }
+
+    const VERSION = window.CONLANG_GENERATOR_VERSION;
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
