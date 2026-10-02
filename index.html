@@ -26,6 +26,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <header>
   <div><h1>Conlang Generator</h1><div class="sub">Vocabulary-driven language generation</div></div>
   <div class="header-tools">
+    <span id="app-version" class="chip">Conlang Generator v0.11.2</span>
     <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
     <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
     <button type="button" class="btn" id="import-vocabulary">Import vocabulary</button>
@@ -119,7 +120,13 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
   $('import-vocabulary').addEventListener('click',()=>$('import-vocabulary-file').click());
   $('import-vocabulary-file').addEventListener('change',async e=>{
     const file=e.target.files?.[0];if(!file)return;
-    try{const data=JSON.parse(await file.text());imported=Array.isArray(data)?data:data.lexicon;if(!Array.isArray(imported))throw new Error('Invalid vocabulary format');$('db-status').textContent=`Imported ${imported.length} entries.`;}catch(err){imported=null;$('db-status').textContent='Import failed.';}
+    try{
+      const data=JSON.parse(await file.text());
+      if(!Array.isArray(data.lexicon))throw new Error('Invalid vocabulary file.');
+      imported=data.lexicon;
+      $('message').textContent=`Imported ${imported.length} entries.`;
+      $('db-status').textContent='Imported vocabulary loaded';
+    }catch(err){$('message').textContent=err.message||'Import failed.';}
   });
 })();
 </script>
