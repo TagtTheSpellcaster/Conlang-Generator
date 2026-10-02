@@ -1,4 +1,4 @@
-window.CONLANG_GENERATOR_VERSION = '0.11.4';
+window.CONLANG_GENERATOR_VERSION = '0.11.5';
 
 (() => {
     function renderVersionPill() {
