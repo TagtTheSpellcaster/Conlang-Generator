@@ -86,6 +86,7 @@
             articles: $('articles')?.value || 'none',
             plural: $('plural')?.value || 'suffix',
             number: $('number')?.value || 'singular-plural',
+            gender: $('gender')?.value || 'masculine-feminine',
             relations: $('relations')?.value || 'prepositions',
             caseSystem: $('case-system')?.value || 'moderate',
             adjPosition: $('adj-position')?.value || 'after'
