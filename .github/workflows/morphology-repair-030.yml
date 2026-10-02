@@ -1,0 +1,110 @@
+name: Restore morphology controls 0.11.30
+
+on:
+  push:
+    paths:
+      - '.github/workflows/morphology-repair-030.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Repair index and UI configuration
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          index = Path('index.html')
+          s = index.read_text(encoding='utf-8')
+
+          # The displayed application version is hardwired here. Do not introduce
+          # another source of truth for the UI version.
+          s = re.sub(r'v0\.11\.\d+', 'v0.11.30', s, count=1)
+
+          # Restore exactly one Gender selector, immediately before Number.
+          gender_field = '''<div class="field"><label for="gender">Gender</label><select id="gender">
+                      <option value="masculine-feminine">Masculine + feminine</option>
+                      <option value="masculine-feminine-neuter">Masculine + feminine + neuter</option>
+                    </select></div>'''
+          s = re.sub(r'\s*<div class="field"><label for="gender">Gender</label><select id="gender">.*?</select></div>', '', s, count=0, flags=re.S)
+          pattern = r'(<div class="field"><label for="number">Number</label><select id="number">)'
+          if 'id="number"' not in s:
+              raise SystemExit('Number selector not found in index.html')
+          s, n = re.subn(pattern, gender_field + r'\1', s, count=1)
+          if n != 1:
+              raise SystemExit('Could not place Gender selector immediately before Number')
+
+          # Keep the beautified index structure intact: only targeted substitutions are made.
+          s = s.replace('sample_patch.js?v=0.11.29', 'sample_patch.js?v=0.11.30')
+          s = s.replace('morphology_example_patch.js?v=0.11.29', 'morphology_example_patch.js?v=0.11.30')
+          s = s.replace('sentence_audit_patch.js?v=0.11.29', 'sentence_audit_patch.js?v=0.11.30')
+          index.write_text(s, encoding='utf-8')
+
+          ui = Path('generator_ui.js')
+          u = ui.read_text(encoding='utf-8')
+          if "gender: $('gender')?.value || 'masculine-feminine'," not in u:
+              needle = "            number: $('number')?.value || 'singular-plural',\n"
+              if needle not in u:
+                  raise SystemExit('Number config line not found in generator_ui.js')
+              u = u.replace(needle, needle + "            gender: $('gender')?.value || 'masculine-feminine',\n", 1)
+          ui.write_text(u, encoding='utf-8')
+
+          # Make the morphology patch use the engine's number markers only.
+          morph = Path('morphology_example_patch.js')
+          m = morph.read_text(encoding='utf-8')
+          m = m.replace('v0.11.29', 'v0.11.30')
+          forbidden = ['function generateNumberMarker', 'createWordFactory({', 'seed}|morphology|number']
+          if any(x in m for x in forbidden):
+              raise SystemExit('Legacy duplicate number-marker generator remains in morphology patch')
+          morph.write_text(m, encoding='utf-8')
+
+          # Synchronize auxiliary cache-busters without changing the UI version source.
+          version = Path('version.js')
+          v = version.read_text(encoding='utf-8')
+          v = re.sub(r'\.js\?v=0\.11\.\d+', lambda m: m.group(0).rsplit('0.11.', 1)[0] + '0.11.30', v)
+          version.write_text(v, encoding='utf-8')
+          PY
+
+      - name: Verify required controls and version
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          s = Path('index.html').read_text(encoding='utf-8')
+          assert s.count('id="gender"') == 1, 'Expected exactly one Gender selector'
+          assert s.count('id="number"') == 1, 'Expected exactly one Number selector'
+          assert 'v0.11.30' in s, 'UI version is not 0.11.30'
+          assert 'v0.11.29' not in s, 'Old version remains in index.html'
+          assert 'sample_patch.js?v=0.11.30' in s
+          assert 'morphology_example_patch.js?v=0.11.30' in s
+          assert 'sentence_audit_patch.js?v=0.11.30' in s
+          u = Path('generator_ui.js').read_text(encoding='utf-8')
+          assert "gender: $('gender')?.value || 'masculine-feminine'" in u
+          m = Path('morphology_example_patch.js').read_text(encoding='utf-8')
+          assert 'generateNumberMarker' not in m
+          assert 'createWordFactory({' not in m
+          PY
+
+          node --check generator_ui.js
+          node --check morphology_example_patch.js
+          node --check sentence_audit_patch.js
+          node --check sample_patch.js
+          node --check conlang_engine.js
+          node --check phonology.js
+          node --check version.js
+
+      - name: Commit and remove temporary workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html generator_ui.js morphology_example_patch.js version.js
+          git rm .github/workflows/morphology-repair-030.yml
+          git commit -m 'Restore gender control and consolidate morphology v0.11.30'
+          git push
