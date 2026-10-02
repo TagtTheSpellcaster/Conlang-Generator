@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.11.6 */
+/* ConLang Generator UI patch — v0.11.7 */
 (() => {
     'use strict';
 
-    const VERSION = '0.11.6';
+    const VERSION = '0.11.7';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -48,18 +48,8 @@
     }
 
     function installVersionPill() {
-        let pill = $('app-version');
-        if (!pill) {
-            pill = document.createElement('span');
-            pill.id = 'app-version';
-            pill.className = 'chip';
-            pill.textContent = `v${VERSION}`;
-            const titleRow = document.querySelector('.title-row');
-            if (titleRow) titleRow.appendChild(pill);
-            else return;
-        } else {
-            pill.textContent = `v${VERSION}`;
-        }
+        const pill = $('app-version');
+        if (pill) pill.textContent = `v${VERSION}`;
     }
 
     function installSampleSentencesTab() {
@@ -92,15 +82,25 @@
         });
     }
 
-    function moveSampleSentences() {
+    function moveSampleSentences(event) {
         installSampleSentencesTab();
-        const source = $('generation-output');
         const target = $('sample-sentences-output');
-        if (!source || !target) return;
-        const frame = source.querySelector('.sample-frame');
-        if (!frame) return;
-        target.className = '';
-        target.replaceChildren(frame);
+        if (!target) return;
+        const detail = event?.detail;
+        const source = $('generation-output');
+        const frame = source?.querySelector('.sample-frame');
+        if (frame) {
+            target.className = '';
+            target.replaceChildren(frame);
+            return;
+        }
+        if (detail?.lexicon && detail?.config && window.ConlangSentenceEngine) {
+            const samples = window.ConlangSentenceEngine.generateSamples(detail.lexicon, detail.config);
+            const style = `<style id="sample-v718">.sample-frame{margin-top:0;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}</style>`;
+            const html = samples.map(x => `<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('');
+            target.className = '';
+            target.innerHTML = style + `<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`;
+        }
     }
 
     function init() {
@@ -108,7 +108,7 @@
         installCopyButton();
         installVersionPill();
         installSampleSentencesTab();
-        document.addEventListener('conlang:generated', moveSampleSentences);
+        window.addEventListener('conlang:generated', moveSampleSentences);
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
