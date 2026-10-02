@@ -1,4 +1,4 @@
-/* ConLang Generator — morphology examples v0.11.26 */
+/* ConLang Generator — morphology examples v0.11.29 */
 (() => {
     'use strict';
 
@@ -89,19 +89,18 @@
     function formHTML(stem, numberMarker, caseEnding, prefix) {
         const number = numberMarker ? `<span class="morph-number-ending">${esc(numberMarker)}</span>` : '';
         const ending = caseEnding ? `<span class="morph-ending">${esc(caseEnding)}</span>` : '<span class="morph-empty">∅</span>';
-        if (prefix && numberMarker) return `<span class="morph-number-ending">${esc(numberMarker)}</span><span class="morph-stem">${esc(stem)}</span>${ending}`;
+        if (prefix && numberMarker) return `${number}<span class="morph-stem">${esc(stem)}</span>${ending}`;
         return `<span class="morph-stem">${esc(stem)}</span>${number}${ending}`;
     }
 
-    function ensureBlock(card, title, beforeNode = null) {
+    function ensureBlock(card, title) {
         let block = [...card.querySelectorAll('.morph-number-block')].find(b => norm(b.querySelector('.morph-number-title')?.textContent) === norm(title));
         if (block) return block;
         block = document.createElement('div');
         block.className = 'morph-number-block';
         block.style.marginTop = '12px';
         block.innerHTML = `<div class="morph-number-title" style="font-weight:700;color:var(--text);margin-bottom:4px">${esc(title)}</div><div class="morph-example-table"></div>`;
-        if (beforeNode) card.insertBefore(block, beforeNode);
-        else card.appendChild(block);
+        card.appendChild(block);
         return block;
     }
 
@@ -119,7 +118,7 @@
         return table;
     }
 
-    function buildNumberBlock(card, title, stem, marker, prefix, caseRows, sourceBlock) {
+    function buildNumberBlock(card, title, stem, marker, prefix, caseRows) {
         const block = ensureBlock(card, title);
         const table = ensureHeader(block);
         table.querySelectorAll('.morph-example-row').forEach(r => r.remove());
@@ -147,9 +146,6 @@
 
         const used = new Set();
         singularRows.forEach(row => { const ending = getCaseEnding(row); if (ending) used.add(ending); });
-
-        // Generate the productive number markers independently from the case endings.
-        // They are always one syllable and are attached to the lexical stem.
         const pluralMarker = config.plural === 'none' || config.number === 'singular' ? '' : uniqueMarker(config, 'plural-marker', used);
         const dualMarker = config.number === 'singular-plural-dual' ? uniqueMarker(config, 'dual-marker', used) : '';
 
@@ -168,19 +164,10 @@
             });
         }
 
-        if (pluralMarker) {
-            const block = pluralBlock || ensureBlock(card, 'Plural');
-            const sourceRows = singularRows;
-            buildNumberBlock(card, 'Plural', stem, pluralMarker, config.plural === 'prefix', sourceRows, singularBlock);
-        } else if (pluralBlock) {
-            pluralBlock.remove();
-        }
-
-        if (dualMarker) {
-            buildNumberBlock(card, 'Dual', stem, dualMarker, config.plural === 'prefix', singularRows, singularBlock);
-        } else if (dualBlock) {
-            dualBlock.remove();
-        }
+        if (pluralMarker) buildNumberBlock(card, 'Plural', stem, pluralMarker, config.plural === 'prefix', singularRows);
+        else if (pluralBlock) pluralBlock.remove();
+        if (dualMarker) buildNumberBlock(card, 'Dual', stem, dualMarker, config.plural === 'prefix', singularRows);
+        else if (dualBlock) dualBlock.remove();
 
         let note = card.querySelector('.morph-number-marker-note');
         if (!note) {
@@ -220,8 +207,10 @@
             scheduled = true;
             queueMicrotask(run);
         };
-        const observer = new MutationObserver(schedule);
-        observer.observe(document.body, { childList: true, subtree: true });
+        // Do not observe document.body here. The patch itself mutates the morphology card;
+        // observing those mutations creates a self-triggering MutationObserver loop and can
+        // freeze the page. The generator's click handlers already render the card before this
+        // listener runs, so explicit generation/parameter events are sufficient.
         document.getElementById('generate')?.addEventListener('click', schedule);
         document.getElementById('regenerate')?.addEventListener('click', schedule);
         document.getElementById('number')?.addEventListener('change', schedule);
