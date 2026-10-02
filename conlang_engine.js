@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.10.9 */
+/* ConLang Generator — core engine v0.11.2 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.9';
+    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.2';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 

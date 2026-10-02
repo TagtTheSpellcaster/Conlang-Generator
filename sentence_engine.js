@@ -1,4 +1,4 @@
-/* ConLang Generator — sentence engine v0.10.0 */
+/* ConLang Generator — sentence engine v0.11.2 */
 (() => {
     'use strict';
 
@@ -142,5 +142,5 @@
         return rows.map(([english, html], i) => ({ number: i + 1, english, html }));
     }
 
-    window.ConlangSentenceEngine = Object.freeze({ version: '0.10.0', generateSamples });
+    window.ConlangSentenceEngine = Object.freeze({ version: window.CONLANG_GENERATOR_VERSION || '0.11.2', generateSamples });
 })();
