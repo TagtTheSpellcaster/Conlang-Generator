@@ -1,4 +1,4 @@
-/* ConLang Generator — fixed morphological example noun v0.11.22 */
+/* ConLang Generator — fixed morphological examples v0.11.23 */
 (() => {
     'use strict';
 
@@ -22,6 +22,61 @@
         if (numberLabel === 'plural') return base.replace(/\bforest\b/g, 'forests');
         if (numberLabel === 'dual') return base.replace(/\bforest\b/g, 'two forests');
         return base;
+    }
+
+    function countSyllables(word, vowels) {
+        const set = new Set((vowels || ['a', 'e', 'i', 'o', 'u']).map(String));
+        let count = 0;
+        let previous = false;
+        for (const char of String(word || '').toLowerCase()) {
+            const current = set.has(char);
+            if (current && !previous) count++;
+            previous = current;
+        }
+        return count;
+    }
+
+    function getGoodAdjective(engine) {
+        const list = engine.getGenerated();
+        const existing = list.find(e => norm(e.concept) === 'good' && (norm(e.word_type) === 'adjective' || norm(e.category).includes('adjective')));
+        if (existing?.conlang) return { concept: 'good', conlang: String(existing.conlang) };
+
+        const config = {
+            consonants: document.getElementById('consonants')?.value || 'european',
+            vowels: document.getElementById('vowels')?.value || 'standard',
+            mean: Number(document.getElementById('mean')?.value) || 2.2,
+            seed: document.getElementById('seed')?.value || 'auto'
+        };
+        const vowels = { standard: ['a', 'e', 'i', 'o', 'u'], minimal: ['a', 'i', 'u'], extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ'] }[config.vowels] || ['a', 'e', 'i', 'o', 'u'];
+        const factory = window.ConlangPhonology?.createWordFactory?.({ ...config, seed: `${config.seed}|nominal|good` });
+        if (!factory) return null;
+        const used = new Set(list.map(e => String(e.conlang || '')));
+        for (let guard = 0; guard < 100; guard++) {
+            const word = factory({ short: false });
+            if (word && !used.has(word) && countSyllables(word, vowels) >= 1) return { concept: 'good', conlang: word };
+        }
+        return null;
+    }
+
+    function patchNominalCategories(engine) {
+        const card = [...document.querySelectorAll('.card')].find(card => norm(card.querySelector('h3')?.textContent) === 'nominal categories');
+        if (!card) return;
+        const adjective = getGoodAdjective(engine);
+        if (!adjective) return;
+
+        const label = [...card.querySelectorAll('.sub, .morph-noun-label, .morph-adjective-label')]
+            .find(el => /^(example noun|example adjective):/i.test(el.textContent.trim()));
+        const html = `Example adjective: <strong>good</strong> — <span class="morph-stem">${esc(adjective.conlang)}</span>`;
+        if (label) {
+            label.classList.add('morph-adjective-label');
+            label.innerHTML = html;
+        } else {
+            const heading = card.querySelector('h3');
+            const inserted = document.createElement('div');
+            inserted.className = 'sub morph-adjective-label';
+            inserted.innerHTML = html;
+            heading?.insertAdjacentElement('afterend', inserted);
+        }
     }
 
     function patchMorphologyExample() {
@@ -73,6 +128,8 @@
                 if (translation) translation.textContent = caseTranslation(caseName, label);
             }
         }
+
+        patchNominalCategories(engine);
     }
 
     let observer;
@@ -81,12 +138,14 @@
             observer.disconnect();
             try {
                 if (document.querySelector('.morph-inventory')) patchMorphologyExample();
+                else patchNominalCategories(window.ConlangEngine);
             } finally {
                 observer.observe(document.body, { childList: true, subtree: true });
             }
         });
         observer.observe(document.body, { childList: true, subtree: true });
         patchMorphologyExample();
+        patchNominalCategories(window.ConlangEngine);
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
