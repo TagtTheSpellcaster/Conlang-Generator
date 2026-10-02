@@ -1,4 +1,4 @@
-/* ConLang Generator — sentence engine v0.9.6 */
+/* ConLang Generator — sentence engine v0.9.7 */
 (() => {
     'use strict';
 
@@ -42,6 +42,87 @@
         return out.length ? out[Math.floor(r() * out.length)] : null;
     }
 
+    function getOrder(config) {
+        const raw = String(config?.order || 'SOV').toUpperCase().replace(/[^SOV]/g, '');
+        return /^[SOV]{3}$/.test(raw) && new Set(raw).size === 3 ? raw : 'SOV';
+    }
+
+    // Reorders the grammatical core while keeping determiners, prepositions,
+    // negation and other function words attached to the phrase they modify.
+    function applyWordOrder(html, order) {
+        const normalizedOrder = getOrder({ order });
+        const box = document.createElement('div');
+        box.innerHTML = html;
+        const spans = [...box.querySelectorAll('.sample-word')];
+        if (!spans.length) return html;
+
+        const verbTags = new Set(['verb']);
+        const nounLike = new Set(['noun', 'pronoun', 'name', 'adjective']);
+        const functionWords = new Set(['function', 'determiner', 'article', 'particle', 'preposition', 'conjunction']);
+
+        const info = spans.map((span, index) => ({
+            span,
+            index,
+            kind: String(span.dataset.kind || '').toLowerCase(),
+            concept: norm(span.dataset.meaning || '')
+        }));
+
+        const verbs = info.filter(x => verbTags.has(x.kind));
+        if (!verbs.length) return html;
+
+        const verb = verbs[0];
+        const candidates = info.filter(x => x.index !== verb.index && nounLike.has(x.kind));
+        if (!candidates.length) return html;
+
+        const subject = candidates[0];
+        const object = candidates[1] || null;
+        if (!object) return html;
+
+        const roleIndices = new Set([subject.index, verb.index, object.index]);
+        const used = new Set();
+
+        const phraseFor = role => {
+            const target = role === 'S' ? subject : role === 'V' ? verb : object;
+            if (!target) return [];
+            const out = [];
+            const start = target.index;
+            for (const item of info) {
+                if (used.has(item.index)) continue;
+                if (item.index === start) {
+                    out.push(item);
+                    used.add(item.index);
+                    continue;
+                }
+                // Keep a preceding determiner/possessive/function word with a noun phrase.
+                if (item.index < start && functionWords.has(item.kind)) {
+                    const next = info[item.index + 1];
+                    if (next && next.index === start && !used.has(item.index)) {
+                        out.unshift(item);
+                        used.add(item.index);
+                    }
+                }
+            }
+            return out;
+        };
+
+        const ordered = [];
+        const prefix = info.filter(x => !roleIndices.has(x.index) && !used.has(x.index));
+        const core = normalizedOrder.split('').flatMap(role => phraseFor(role));
+
+        // Preserve material that is not part of the S/V/O core, appending it
+        // after the reordered core. This covers adverbs and prepositional phrases
+        // without changing their internal order.
+        const rest = info.filter(x => !used.has(x.index));
+        ordered.push(...core, ...rest);
+
+        // If no actual reordering was possible, return the original HTML.
+        if (ordered.length !== info.length) return html;
+        const changed = ordered.some((x, i) => x.index !== info[i].index);
+        if (!changed) return html;
+
+        return ordered.map(x => x.span.outerHTML).join(' ');
+    }
+
     function generateSamples(list, config = {}) {
         const r = rng(String(config.seed || 'auto') + '|samples');
         const verbTag = x => find(list, { kinds: ['verb'], anyTags: [x] }, r);
@@ -49,103 +130,20 @@
         const pron = x => byConcept(x);
         const func = x => byConcept(x);
         const alt = (...concepts) => concepts.map(x => byConcept(x)).filter(Boolean);
-        const T = e => e ? `<span class="sample-word" data-meaning="${esc(e.concept || e.english)}">${esc(e.conlang)}</span>` : '';
+        const T = e => e ? `<span class="sample-word" data-kind="${esc(e.kind)}" data-meaning="${esc(e.concept || e.english)}">${esc(e.conlang)}</span>` : '';
         const A = es => es.length ? `[${es.map(T).join('|')}]` : '';
-        const I = pron('i'),
-            YOU = pron('you'),
-            WE = pron('we'),
-            THEY = pron('they'),
-            ME = pron('me'),
-            MY = func('my'),
-            THIS = pron('this'),
-            THAT = pron('that'),
-            HERE = func('here'),
-            THERE = func('there');
-        const BE = byConcept('be') || verbTag('copula'),
-            HAVE = byConcept('have'),
-            CAN = byConcept('can'),
-            NOT = byConcept('not'),
-            TO = func('to'),
-            FROM = func('from'),
-            WITH = func('with'),
-            IN = func('in'),
-            THE = func('the');
-        const F = e => e ? T(e) : '';
-        const V = e => e ? T(e) : '';
+        const I = pron('i'), YOU = pron('you'), WE = pron('we'), THEY = pron('they'), ME = pron('me'), MY = func('my'), THIS = pron('this'), THAT = pron('that'), HERE = func('here'), THERE = func('there');
+        const BE = byConcept('be') || verbTag('copula'), HAVE = byConcept('have'), CAN = byConcept('can'), NOT = byConcept('not'), TO = func('to'), FROM = func('from'), WITH = func('with'), IN = func('in'), THE = func('the');
+        const F = e => e ? T(e) : ''; const V = e => e ? T(e) : '';
         const variants = {
-            friend: alt('friend', 'sister', 'father'),
-            resource: alt('water', 'food', 'bread'),
-            animal: alt('wolf', 'dog', 'horse'),
-            living: alt('wolf', 'dog', 'hunter'),
-            liquid: alt('water', 'milk'),
-            place: alt('village', 'city', 'forest'),
-            threat: alt('sword', 'enemy', 'wolf'),
-            action: alt('eat', 'drink', 'build'),
-            emotion: alt('love', 'trust', 'help'),
-            adjective: alt('hot', 'cold', 'bright'),
-            quantity: alt('many', 'little')
+            friend: alt('friend', 'sister', 'father'), resource: alt('water', 'food', 'bread'), animal: alt('wolf', 'dog', 'horse'), living: alt('wolf', 'dog', 'hunter'), liquid: alt('water', 'milk'), place: alt('village', 'city', 'forest'), threat: alt('sword', 'enemy', 'wolf'), action: alt('eat', 'drink', 'build'), emotion: alt('love', 'trust', 'help'), adjective: alt('hot', 'cold', 'bright'), quantity: alt('many', 'little')
         };
         const C = (...concepts) => A(concepts.map(byConcept).filter(Boolean));
         const rows = [
-            ['I am your [friend|sister|father].', `${F(I)} ${F(BE)} ${F(MY)} ${A(variants.friend)}`],
-            ['You are my [friend|sister|father].', `${F(YOU)} ${F(BE)} ${F(MY)} ${A(variants.friend)}`],
-            ['This is [water|food|bread].', `${F(THIS)} ${F(BE)} ${A(variants.resource)}`],
-            ['That is [a sword|a house|a tree].', `${F(THAT)} ${F(BE)} ${C('sword','house','tree')}`],
-            ['We are here.', `${F(WE)} ${F(BE)} ${F(HERE)}`],
-            ['They are there.', `${F(THEY)} ${F(BE)} ${F(THERE)}`],
-            ['I have [water|food|bread].', `${F(I)} ${F(HAVE)} ${A(variants.resource)}`],
-            ['You have [water|food|bread].', `${F(YOU)} ${F(HAVE)} ${A(variants.resource)}`],
-            ['The [sun|moon|stone] is [hot|cold|bright].', `${F(THE)} ${C('sun','moon','stone')} ${F(BE)} ${C('hot','cold','bright')}`],
-            ['I eat [food|bread].', `${F(I)} ${V(verbTag('consumption'))} ${C('food','bread')}`],
-            ['[The wolf|the dog] drinks [water|milk].', `${F(THE)} ${C('wolf','dog')} ${V(verbTag('consumption'))} ${A(variants.liquid)}`],
-            ['I see you.', `${F(I)} ${V(verbTag('perception'))} ${F(YOU)}`],
-            ['You see me.', `${F(YOU)} ${V(verbTag('perception'))} ${F(ME)}`],
-            ['The hunter [kills|hunts] the wolf.', `${F(THE)} ${F(byConcept('hunter'))} ${C('kill','hunt')} ${F(THE)} ${F(byConcept('wolf'))}`],
-            ['I [love|trust|help] you.', `${F(I)} ${C('love','trust','help')} ${F(YOU)}`],
-            ['I fear [the sword|the enemy].', `${F(I)} ${V(verbTag('emotion_negative'))} ${F(THE)} ${C('sword','enemy')}`],
-            ['I go to the [village|city|forest].', `${F(I)} ${V(verbTag('movement'))} ${F(TO)} ${F(THE)} ${A(variants.place)}`],
-            ['You come from the [village|city].', `${F(YOU)} ${V(verbTag('movement'))} ${F(FROM)} ${F(THE)} ${C('village','city')}`],
-            ['The sun rises.', `${F(THE)} ${F(byConcept('sun'))} ${V(verbTag('natural_movement'))}`],
-            ['The stone falls.', `${F(THE)} ${F(byConcept('stone'))} ${V(verbTag('gravity'))}`],
-            ['The [bird|fish] moves [up|down].', `${F(THE)} ${C('bird','fish')} ${V(verbTag('air_water_movement'))} ${C('up','down')}`],
-            ['The wolf walks in the forest.', `${F(THE)} ${F(byConcept('wolf'))} ${V(verbTag('ground_movement'))} ${F(IN)} ${F(THE)} ${F(byConcept('forest'))}`],
-            ['Stay here.', `${V(verbTag('stasis'))} ${F(HERE)}`],
-            ['Come with me.', `${V(verbTag('movement'))} ${F(WITH)} ${F(ME)}`],
-            ['Who are you?', `${F(byConcept('who'))} ${F(BE)} ${F(YOU)}`],
-            ['What is this?', `${F(byConcept('what'))} ${F(BE)} ${F(THIS)}`],
-            ['Where are we?', `${F(byConcept('where'))} ${F(BE)} ${F(WE)}`],
-            ['When do you go?', `${F(byConcept('when'))} ${V(verbTag('movement'))} ${F(YOU)}`],
-            ['Why do you do this?', `${F(byConcept('why'))} ${V(verbTag('activity'))} ${F(THIS)}`],
-            ['How does this work?', `${F(byConcept('how'))} ${V(verbTag('process'))} ${F(THIS)}`],
-            ['Where is the water?', `${F(byConcept('where'))} ${F(BE)} ${F(THE)} ${F(byConcept('water'))}`],
-            ['I do not want this.', `${F(I)} ${F(NOT)} ${V(verbTag('volition'))} ${F(THIS)}`],
-            ['You cannot enter.', `${F(YOU)} ${F(NOT)} ${F(CAN)} ${V(verbTag('movement'))}`],
-            ['I do not know.', `${F(I)} ${F(NOT)} ${V(verbTag('cognition'))}`],
-            ['I know the way.', `${F(I)} ${V(verbTag('cognition'))} ${F(THE)} ${F(byConcept('way') || byConcept('road'))}`],
-            ['I can help you.', `${F(I)} ${F(CAN)} ${V(verbTag('help'))} ${F(YOU)}`],
-            ['Do not touch this.', `${F(NOT)} ${V(verbTag('prohibition'))} ${F(THIS)}`],
-            ['I am hungry.', `${F(I)} ${F(BE)} ${F(byConcept('hungry'))}`],
-            ['My hand hurts.', `${F(MY)} ${F(byConcept('hand'))} ${V(verbTag('pain'))}`],
-            ['I want to sleep.', `${F(I)} ${V(verbTag('volition'))} ${V(verbTag('rest'))}`],
-            ['This is [much|little].', `${F(THIS)} ${F(BE)} ${C('much','little')}`],
-            ['Everything is ready.', `${F(byConcept('all'))} ${F(BE)} ${F(byConcept('ready'))}`],
-            ['Nothing exists.', `${F(byConcept('nothing'))} ${V(verbTag('existence'))}`],
-            ['Today we work.', `${F(byConcept('today'))} ${F(WE)} ${V(verbTag('activity'))}`],
-            ['Tomorrow we travel.', `${F(byConcept('tomorrow'))} ${F(WE)} ${V(verbTag('movement'))}`],
-            ['Yesterday the hunter came.', `${F(byConcept('yesterday'))} ${F(THE)} ${F(byConcept('hunter'))} ${V(verbTag('movement'))}`],
-            ['The [dog|wolf|horse] sees the [hunter|farmer].', `${F(THE)} ${C('dog','wolf','horse')} ${V(verbTag('perception'))} ${F(THE)} ${C('hunter','farmer')}`],
-            ['I [eat|drink] [food|water].', `${F(I)} ${C('eat','drink')} ${C('food','water')}`],
-            ['The [sun|moon] is [bright|dark].', `${F(THE)} ${C('sun','moon')} ${F(BE)} ${C('bright','dark')}`],
-            ['[The hunter|the farmer] has [food|water].', `${F(THE)} ${C('hunter','farmer')} ${F(HAVE)} ${C('food','water')}`],
-            ['I see [the house|the village].', `${F(I)} ${V(verbTag('perception'))} ${F(THE)} ${C('house','village')}`],
-            ['We build [a house|a boat].', `${F(WE)} ${V(verbTag('construction'))} ${C('house','boat')}`],
-            ['The [bird|fish] is [small|large].', `${F(THE)} ${C('bird','fish')} ${F(BE)} ${C('small','large')}`]
+            ['I am your [friend|sister|father].', `${F(I)} ${F(BE)} ${F(MY)} ${A(variants.friend)}`], ['You are my [friend|sister|father].', `${F(YOU)} ${F(BE)} ${F(MY)} ${A(variants.friend)}`], ['This is [water|food|bread].', `${F(THIS)} ${F(BE)} ${A(variants.resource)}`], ['That is [a sword|a house|a tree].', `${F(THAT)} ${F(BE)} ${C('sword','house','tree')}`], ['We are here.', `${F(WE)} ${F(BE)} ${F(HERE)}`], ['They are there.', `${F(THEY)} ${F(BE)} ${F(THERE)}`], ['I have [water|food|bread].', `${F(I)} ${F(HAVE)} ${A(variants.resource)}`], ['You have [water|food|bread].', `${F(YOU)} ${F(HAVE)} ${A(variants.resource)}`], ['The [sun|moon|stone] is [hot|cold|bright].', `${F(THE)} ${C('sun','moon','stone')} ${F(BE)} ${C('hot','cold','bright')}`], ['I eat [food|bread].', `${F(I)} ${V(verbTag('consumption'))} ${C('food','bread')}`], ['[The wolf|the dog] drinks [water|milk].', `${F(THE)} ${C('wolf','dog')} ${V(verbTag('consumption'))} ${A(variants.liquid)}`], ['I see you.', `${F(I)} ${V(verbTag('perception'))} ${F(YOU)}`], ['You see me.', `${F(YOU)} ${V(verbTag('perception'))} ${F(ME)}`], ['The hunter [kills|hunts] the wolf.', `${F(THE)} ${F(byConcept('hunter'))} ${C('kill','hunt')} ${F(THE)} ${F(byConcept('wolf'))}`], ['I [love|trust|help] you.', `${F(I)} ${C('love','trust','help')} ${F(YOU)}`], ['I fear [the sword|the enemy].', `${F(I)} ${V(verbTag('emotion_negative'))} ${F(THE)} ${C('sword','enemy')}`], ['I go to the [village|city|forest].', `${F(I)} ${V(verbTag('movement'))} ${F(TO)} ${F(THE)} ${A(variants.place)}`], ['You come from the [village|city].', `${F(YOU)} ${V(verbTag('movement'))} ${F(FROM)} ${F(THE)} ${C('village','city')}`], ['The sun rises.', `${F(THE)} ${F(byConcept('sun'))} ${V(verbTag('natural_movement'))}`], ['The stone falls.', `${F(THE)} ${F(byConcept('stone'))} ${V(verbTag('gravity'))}`], ['The [bird|fish] moves [up|down].', `${F(THE)} ${C('bird','fish')} ${V(verbTag('air_water_movement'))} ${C('up','down')}`], ['The wolf walks in the forest.', `${F(THE)} ${F(byConcept('wolf'))} ${V(verbTag('ground_movement'))} ${F(IN)} ${F(THE)} ${F(byConcept('forest'))}`], ['Stay here.', `${V(verbTag('stasis'))} ${F(HERE)}`], ['Come with me.', `${V(verbTag('movement'))} ${F(WITH)} ${F(ME)}`], ['Who are you?', `${F(byConcept('who'))} ${F(BE)} ${F(YOU)}`], ['What is this?', `${F(byConcept('what'))} ${F(BE)} ${F(THIS)}`], ['Where are we?', `${F(byConcept('where'))} ${F(BE)} ${F(WE)}`], ['When do you go?', `${F(byConcept('when'))} ${V(verbTag('movement'))} ${F(YOU)}`], ['Why do you do this?', `${F(byConcept('why'))} ${V(verbTag('activity'))} ${F(THIS)}`], ['How does this work?', `${F(byConcept('how'))} ${V(verbTag('process'))} ${F(THIS)}`], ['Where is the water?', `${F(byConcept('where'))} ${F(BE)} ${F(THE)} ${F(byConcept('water'))}`], ['I do not want this.', `${F(I)} ${F(NOT)} ${V(verbTag('volition'))} ${F(THIS)}`], ['You cannot enter.', `${F(YOU)} ${F(NOT)} ${F(CAN)} ${V(verbTag('movement'))}`], ['I do not know.', `${F(I)} ${F(NOT)} ${V(verbTag('cognition'))}`], ['I know the way.', `${F(I)} ${V(verbTag('cognition'))} ${F(THE)} ${F(byConcept('way') || byConcept('road'))}`], ['I can help you.', `${F(I)} ${F(CAN)} ${V(verbTag('help'))} ${F(YOU)}`], ['Do not touch this.', `${F(NOT)} ${V(verbTag('prohibition'))} ${F(THIS)}`], ['I am hungry.', `${F(I)} ${F(BE)} ${F(byConcept('hungry'))}`], ['My hand hurts.', `${F(MY)} ${F(byConcept('hand'))} ${V(verbTag('pain'))}`], ['I want to sleep.', `${F(I)} ${V(verbTag('volition'))} ${V(verbTag('rest'))}`], ['This is [much|little].', `${F(THIS)} ${F(BE)} ${C('much','little')}`], ['Everything is ready.', `${F(byConcept('all'))} ${F(BE)} ${F(byConcept('ready'))}`], ['Nothing exists.', `${F(byConcept('nothing'))} ${V(verbTag('existence'))}`], ['Today we work.', `${F(byConcept('today'))} ${F(WE)} ${V(verbTag('activity'))}`], ['Tomorrow we travel.', `${F(byConcept('tomorrow'))} ${F(WE)} ${V(verbTag('movement'))}`], ['Yesterday the hunter came.', `${F(byConcept('yesterday'))} ${F(THE)} ${F(byConcept('hunter'))} ${V(verbTag('movement'))}`], ['The [dog|wolf|horse] sees the [hunter|farmer].', `${F(THE)} ${C('dog','wolf','horse')} ${V(verbTag('perception'))} ${F(THE)} ${C('hunter','farmer')}`], ['I [eat|drink] [food|water].', `${F(I)} ${C('eat','drink')} ${C('food','water')}`], ['The [sun|moon] is [bright|dark].', `${F(THE)} ${C('sun','moon')} ${F(BE)} ${C('bright','dark')}`], ['[The hunter|the farmer] has [food|water].', `${F(THE)} ${C('hunter','farmer')} ${F(HAVE)} ${C('food','water')}`], ['I see [the house|the village].', `${F(I)} ${V(verbTag('perception'))} ${F(THE)} ${C('house','village')}`], ['We build [a house|a boat].', `${F(WE)} ${V(verbTag('construction'))} ${C('house','boat')}`], ['The [bird|fish] is [small|large].', `${F(THE)} ${C('bird','fish')} ${F(BE)} ${C('small','large')}`]
         ];
-        return rows.map(([english, html], i) => ({ number: i + 1, english, html }));
+        return rows.map(([english, html], i) => ({ number: i + 1, english, html: applyWordOrder(html, config.order) }));
     }
 
-    window.ConlangSentenceEngine = Object.freeze({
-        version: '0.9.6',
-        generateSamples
-    });
+    window.ConlangSentenceEngine = Object.freeze({ version: '0.9.7', generateSamples });
 })();
