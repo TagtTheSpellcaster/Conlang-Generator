@@ -1,9 +1,28 @@
-/* ConLang Generator — fixed morphological example noun v0.11.19 */
+/* ConLang Generator — fixed morphological example noun v0.11.20 */
 (() => {
     'use strict';
 
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    const CASE_TRANSLATIONS = Object.freeze({
+        nominative: 'stone',
+        accusative: 'stone',
+        genitive: 'of stone',
+        dative: 'to stone',
+        locative: 'at stone',
+        ablative: 'from stone',
+        instrumental: 'with stone',
+        absolutive: 'stone',
+        ergative: 'by stone'
+    });
+
+    function caseTranslation(caseName, numberLabel) {
+        const base = CASE_TRANSLATIONS[norm(caseName)] || 'stone';
+        if (numberLabel === 'plural') return base.replace(/\bstone\b/g, 'stones');
+        if (numberLabel === 'dual') return base.replace(/\bstone\b/g, 'two stones');
+        return base;
+    }
 
     function patchMorphologyExample() {
         const card = document.querySelector('.morph-inventory');
@@ -36,19 +55,23 @@
         for (const block of card.querySelectorAll('.morph-number-block')) {
             const label = block.querySelector('.morph-number-title')?.textContent.trim().toLowerCase() || '';
             let base = stem;
-            let translation = 'stone';
             if (label === 'plural') {
                 base = pluralMode === 'prefix' ? pluralMarker + stem : stem + pluralMarker;
-                translation = 'stones';
             } else if (label === 'dual') {
-                translation = 'two stones';
+                const dualMode = document.getElementById('dual')?.value || 'suffix';
+                const dualMarker = card.dataset.dualMarker || '';
+                base = dualMode === 'prefix' ? dualMarker + stem : stem + dualMarker;
             }
 
             for (const form of block.querySelectorAll('.morph-form')) {
                 const ending = form.querySelector('.morph-ending');
                 form.innerHTML = `${esc(base)}${ending ? ending.outerHTML : '<span class="morph-empty">∅</span>'}`;
             }
-            for (const cell of block.querySelectorAll('.morph-translation')) cell.textContent = translation;
+            for (const row of block.querySelectorAll('.morph-example-row')) {
+                const caseName = row.querySelector('.morph-case')?.textContent.trim() || '';
+                const translation = row.querySelector('.morph-translation');
+                if (translation) translation.textContent = caseTranslation(caseName, label);
+            }
         }
     }
 
