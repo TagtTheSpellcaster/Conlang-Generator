@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.10.7 */
+/* ConLang Generator UI patch — v0.10.8 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.7';
+    const VERSION = '0.10.8';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -18,6 +18,7 @@
             .compact-grid > .field { margin-top: 0; }
             .phonotactic-info { grid-column: 1 / -1; }
             .header-tools #copy-vocabulary { white-space: nowrap; }
+            #mean[type="range"] { width: 100%; height: 36px; padding: 7px 0; background: transparent; border: 0; accent-color: var(--accent); }
         `; document.head.appendChild(s);
     }
 
