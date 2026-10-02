@@ -1,240 +1,44 @@
 /* ConLang Generator — generator UI controller v0.10.3 */
 (() => {
     'use strict';
-
     const $ = id => document.getElementById(id);
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
     const uniq = a => [...new Set(a)];
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-
     const PHONOTACTIC_INFO = {
-        isolated: {
-            title: 'Minimalist Isolating Pattern (Hawaiian-type)',
-            description: 'The pattern categorically excludes consonant clusters and reduces the syllable to its minimum.',
-            pattern: '(C)V'
-        },
-        japanese: {
-            title: 'Controlled Open Syllable Pattern (Japanese-type)',
-            description: 'Allows minimal onsets and only the nasal in the coda, producing clean internal transitions.',
-            pattern: '(C)(G)V(N)'
-        },
-        european: {
-            title: 'Balanced European Pattern (Italian / Finnish-type)',
-            description: 'Balances open and closed syllables, distributing consonants and vowels for a smooth and stable phonotactic profile.',
-            pattern: '(S)(C)(L/G)V(L/N/S)',
-            constraint: 'String constraint: internal consonant sequences are limited to (L/N/S)+S+C or (L/N/S)+C+L, with a maximum of 3 consonants.'
-        },
-        english: {
-            title: 'Dynamic Anglo-Saxon Pattern (English-type)',
-            description: 'Allows extensive consonant clusters in both onsets and codas, with strong vowel compression.',
-            pattern: '(S)(C)(L/G)V(L/N)(C)(S)',
-            constraint: 'String constraint: internal consecutive consonants are capped at a strict maximum of 4.'
-        },
-        slavic: {
-            title: 'Compact Slavic Pattern (Croatian / Polish-type)',
-            description: 'Allows dense consonant structures and permits liquids to function as syllable nuclei.',
-            pattern: '(C)(C)(C)(V/L)(C)(C)(C)',
-            constraint: 'String constraint: two liquid-nucleus syllables may never be adjacent; internal consonant sequences are limited to 4.'
-        },
-        semitic: {
-            title: 'Semitic Root-and-Pattern Model (Arabic-type)',
-            description: 'Uses a rigid alternation that prevents both consonant and vowel accumulation.',
-            pattern: 'CV(C)',
-            constraint: 'String constraint: V+V is forbidden; word-initial structure must begin with a clean CV sequence.'
-        }
+        isolated: { title: 'Minimalist Isolating Pattern (Hawaiian-type)', description: 'The pattern categorically excludes consonant clusters and reduces the syllable to its minimum.', pattern: '(C)V' },
+        japanese: { title: 'Controlled Open Syllable Pattern (Japanese-type)', description: 'Allows minimal onsets and only the nasal in the coda, producing clean internal transitions.', pattern: '(C)(G)V(N)' },
+        european: { title: 'Balanced European Pattern (Italian / Finnish-type)', description: 'Balances open and closed syllables, distributing consonants and vowels for a smooth and stable phonotactic profile.', pattern: '(S)(C)(L/G)V(L/N/S)', constraint: 'String constraint: internal consonant sequences are limited to (L/N/S)+S+C or (L/N/S)+C+L, with a maximum of 3 consonants.' },
+        english: { title: 'Dynamic Anglo-Saxon Pattern (English-type)', description: 'Allows extensive consonant clusters in both onsets and codas, with strong vowel compression.', pattern: '(S)(C)(L/G)V(L/N)(C)(S)', constraint: 'String constraint: internal consecutive consonants are capped at a strict maximum of 4.' },
+        slavic: { title: 'Compact Slavic Pattern (Croatian / Polish-type)', description: 'Allows dense consonant structures and permits liquids to function as syllable nuclei.', pattern: '(C)(C)(C)(V/L)(C)(C)(C)', constraint: 'String constraint: two liquid-nucleus syllables may never be adjacent; internal consonant sequences are limited to 4.' },
+        semitic: { title: 'Semitic Root-and-Pattern Model (Arabic-type)', description: 'Uses a rigid alternation that prevents both consonant and vowel accumulation.', pattern: 'CV(C)', constraint: 'String constraint: V+V is forbidden; word-initial structure must begin with a clean CV sequence.' }
     };
-
-    function populateFilters(vocabulary) {
-        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
-            const el = $(id);
-            if (!el) return;
-            const values = uniq(vocabulary.flatMap(e => arr(e[id]))).sort((a, b) => a.localeCompare(b));
-            el.innerHTML = '<option value="">Any</option>' + values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join('');
-        });
-    }
-
-    function selected(id) {
-        const element = $(id);
-        return element ? [...element.selectedOptions].map(o => o.value).filter(Boolean) : [];
-    }
-
-    function freshSeed() {
-        if (globalThis.crypto?.getRandomValues) {
-            const values = new Uint32Array(2);
-            globalThis.crypto.getRandomValues(values);
-            return `auto-${Date.now()}-${values[0].toString(36)}-${values[1].toString(36)}`;
-        }
-        return `auto-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-    }
-
-    function readConfig() {
-        const requestedSeed = $('seed')?.value.trim() || '';
-        const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto' ? requestedSeed : freshSeed();
-        return {
-            region: selected('region'), culture: selected('culture'), biome: selected('biome'),
-            temporal_setting: selected('temporal_setting'), tags: selected('tags'),
-            vowels: $('vowels')?.value || 'standard', consonants: $('consonants')?.value || 'european',
-            mean: Number($('mean')?.value) || 2.2, seed,
-            order: $('word-order')?.value || 'SVO', morphology: $('morphology')?.value || 'isolating'
-        };
-    }
-
+    function populateFilters(vocabulary) { ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const el = $(id); if (!el) return; const values = uniq(vocabulary.flatMap(e => arr(e[id]))).sort((a, b) => a.localeCompare(b)); el.innerHTML = '<option value="">Any</option>' + values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join(''); }); }
+    function selected(id) { const element = $(id); return element ? [...element.selectedOptions].map(o => o.value).filter(Boolean) : []; }
+    function freshSeed() { if (globalThis.crypto?.getRandomValues) { const values = new Uint32Array(2); globalThis.crypto.getRandomValues(values); return `auto-${Date.now()}-${values[0].toString(36)}-${values[1].toString(36)}`; } return `auto-${Date.now()}-${Math.random().toString(36).slice(2)}`; }
+    function readConfig() { const requestedSeed = $('seed')?.value.trim() || ''; const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto' ? requestedSeed : freshSeed(); return { region: selected('region'), culture: selected('culture'), biome: selected('biome'), temporal_setting: selected('temporal_setting'), tags: selected('tags'), vowels: $('vowels')?.value || 'standard', consonants: $('consonants')?.value || 'european', mean: Number($('mean')?.value) || 2.2, seed, order: $('word-order')?.value || 'SVO', morphology: $('morphology')?.value || 'isolating' }; }
     function installPhonotacticInfo() {
-        const select = $('consonants');
-        if (!select) return;
-        const field = select.closest('.field');
-        if (!field) return;
-
-        const label = field.querySelector('label[for="consonants"]');
-        if (label) label.textContent = 'Phonotactic pattern';
-
+        const select = $('consonants'); if (!select) return; const field = select.closest('.field'); if (!field) return;
+        const label = field.querySelector('label[for="consonants"]'); if (label) label.textContent = 'Phonotactic pattern';
         let info = field.querySelector('.phonotactic-info');
-        if (!info) {
-            info = document.createElement('div');
-            info.className = 'phonotactic-info';
-            info.style.cssText = 'margin-top:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45';
-            select.insertAdjacentElement('afterend', info);
-        }
-
-        const render = () => {
-            const data = PHONOTACTIC_INFO[select.value] || PHONOTACTIC_INFO.european;
-            info.innerHTML = `<div style="color:var(--text);font-weight:700;margin-bottom:4px">${esc(data.title)}</div><div>${esc(data.description)}</div><div style="margin-top:5px"><strong style="color:var(--text)">Formal pattern:</strong> <code>${esc(data.pattern)}</code></div>${data.constraint ? `<div style="margin-top:4px;font-style:italic">${esc(data.constraint)}</div>` : ''}`;
-        };
-
-        select.addEventListener('change', render);
-        render();
+        if (!info) { info = document.createElement('div'); info.className = 'phonotactic-info'; info.style.cssText = 'margin-top:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45'; select.insertAdjacentElement('afterend', info); }
+        const render = () => { const data = PHONOTACTIC_INFO[select.value] || PHONOTACTIC_INFO.european; info.innerHTML = `<div style="color:var(--text);font-weight:700;margin-bottom:4px">${esc(data.title)}</div><div>${esc(data.description)}</div><div style="margin-top:5px"><strong style="color:var(--text)">Formal pattern:</strong> <code>${esc(data.pattern)}</code></div>${data.constraint ? `<div style="margin-top:4px;font-style:italic">${esc(data.constraint)}</div>` : ''}`; };
+        select.addEventListener('change', render); render();
     }
-
-    function renderSamples(list, config) {
-        const box = $('generation-output');
-        if (!box || !window.ConlangSentenceEngine) return;
-        const samples = window.ConlangSentenceEngine.generateSamples(list, config);
-        const style = `<style id="sample-v718">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}</style>`;
-        const html = samples.map(x => `<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join('');
-        box.insertAdjacentHTML('beforeend', style + `<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`);
-    }
-
-    function renderLexicon(list) {
-        const box = $('lexicon-output');
-        if (!box) return;
-        box.className = 'card';
-        box.innerHTML = `<h3>Generated lexicon</h3><div class="lexicon">${list.map(e => `<div class="lex-row"><span class="word">${esc(e.conlang || '—')}</span><span class="eng">${esc(e.concept || '—')}</span><span class="meta">${esc(e.category || e.semantic_group || e.word_type || '')}</span></div>`).join('')}</div>`;
-    }
-
+    function renderSamples(list, config) { const box = $('generation-output'); if (!box || !window.ConlangSentenceEngine) return; const samples = window.ConlangSentenceEngine.generateSamples(list, config); const style = `<style id="sample-v718">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}</style>`; const html = samples.map(x => `<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join(''); box.insertAdjacentHTML('beforeend', style + `<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`); }
+    function renderLexicon(list) { const box = $('lexicon-output'); if (!box) return; box.className = 'card'; box.innerHTML = `<h3>Generated lexicon</h3><div class="lexicon">${list.map(e => `<div class="lex-row"><span class="word">${esc(e.conlang || '—')}</span><span class="eng">${esc(e.concept || '—')}</span><span class="meta">${esc(e.category || e.semantic_group || e.word_type || '')}</span></div>`).join('')}</div>`; }
     const xlocale = (a, b) => String(a).localeCompare(String(b));
-
-    function renderDictionary(list) {
-        const box = $('dictionary-output');
-        if (!box) return;
-        const dir = $('dictionary-direction')?.value || 'conlang-en';
-        const q = norm($('dictionary-search')?.value || '');
-        let rows = list.map(e => ({ l: dir === 'conlang-en' ? e.conlang : e.concept, r: dir === 'conlang-en' ? e.concept : e.conlang, m: e.category || e.semantic_group || e.word_type || '' })).filter(x => x.l && x.r);
-        if (q) rows = rows.filter(x => `${x.l} ${x.r} ${x.m}`.toLowerCase().includes(q));
-        rows.sort((a, b) => xlocale(a.l, b.l));
-        box.innerHTML = `<div class="card"><h3>${dir === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.map(x => `<div class="dict-row"><strong>${esc(x.l)}</strong><span>${esc(x.r)}</span><span class="meta">${esc(x.m)}</span></div>`).join('')}</div></div>`;
-    }
-
-    function renderResult(result) {
-        const box = $('generation-output');
-        if (!box) return;
-        const c = result.config;
-        const list = result.lexicon;
-        const name = window.ConlangEngine.languageName(c.seed, c);
-        const chips = [c.region[0], c.culture[0], c.biome[0], c.order].filter(Boolean);
-        box.className = 'result';
-        box.innerHTML = `<div class="hero"><div><div class="lang-name">Name of language: ${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`;
-        renderSamples(list, c);
-        renderLexicon(list);
-        renderDictionary(list);
-    }
-
-    function generate() {
-        try {
-            randomize();
-            const result = window.ConlangEngine.generate(readConfig());
-            renderResult(result);
-            if ($('message')) $('message').textContent = `Generated ${result.lexicon.length} entries.`;
-            window.dispatchEvent(new CustomEvent('conlang:generated', { detail: result }));
-        } catch (e) {
-            console.error(e);
-            if ($('message')) $('message').textContent = 'Generation error: ' + e.message;
-            if ($('generation-output')) {
-                $('generation-output').className = 'result';
-                $('generation-output').innerHTML = `<div class="error">${esc(e.message)}</div>`;
-            }
-        }
-    }
-
-    function regenerate() { if (window.ConlangEngine.getVocabulary().length) generate(); }
-
-    function randomize() {
-        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
-            const e = $(id);
-            if (e && e.options.length > 1) {
-                const options = [...e.options].slice(1).map(o => o.value);
-                e.value = options[Math.floor(Math.random() * options.length)];
-            }
-        });
-        ['vowels', 'consonants', 'word-order', 'morphology', 'adj-position', 'articles', 'plural', 'relations'].forEach(id => {
-            const e = $(id);
-            if (e && e.options.length) e.value = e.options[Math.floor(Math.random() * e.options.length)].value;
-        });
-        if ($('mean')) $('mean').value = (1 + Math.random() * 2.5).toFixed(1);
-        if ($('seed')) $('seed').value = 'auto';
-        $('consonants')?.dispatchEvent(new Event('change'));
-    }
-
-    function preset(type) {
-        const map = { historical: { temporal_setting: 'historical', tags: 'historical' }, fantasy: { tags: 'fantasy' }, modern: { temporal_setting: 'modern' }, scifi: { tags: 'sci-fi' } };
-        const p = map[type]; if (!p) return;
-        ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const e = $(id); if (e) e.value = p[id] || ''; });
-    }
-
-    function wire() {
-        installPhonotacticInfo();
-        $('generate')?.addEventListener('click', generate);
-        $('regenerate')?.addEventListener('click', regenerate);
-        $('randomize')?.addEventListener('click', randomize);
-        $('clear-filters')?.addEventListener('click', () => ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const e = $(id); if (e) e.value = ''; }));
-        [['preset-historical', 'historical'], ['preset-fantasy', 'fantasy'], ['preset-modern', 'modern'], ['preset-scifi', 'scifi']].forEach(([id, type]) => $(id)?.addEventListener('click', () => preset(type)));
-        $('dictionary-direction')?.addEventListener('change', () => renderDictionary(window.ConlangEngine.getGenerated()));
-        $('dictionary-search')?.addEventListener('input', () => renderDictionary(window.ConlangEngine.getGenerated()));
-    }
-
-    async function loadVocabulary() {
-        const status = $('db-status');
-        try {
-            const response = await fetch('vocabulary.json', { cache: 'no-store' });
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
-            const data = await response.json();
-            const vocabulary = window.ConlangEngine.loadVocabulary(data);
-            populateFilters(vocabulary);
-            if (status) status.textContent = `Vocabulary loaded: ${vocabulary.length} entries`;
-        } catch (e) {
-            console.error(e);
-            if (status) status.textContent = 'Vocabulary load failed';
-            if ($('message')) $('message').textContent = 'Vocabulary load failed: ' + e.message;
-        }
-    }
-
-    function loadSentenceEngine() {
-        if (window.ConlangSentenceEngine) return Promise.resolve();
-        return new Promise((resolve, reject) => {
-            const script = document.createElement('script');
-            script.src = 'sentence_engine.js';
-            script.onload = resolve;
-            script.onerror = () => reject(new Error('Unable to load sentence_engine.js.'));
-            document.head.appendChild(script);
-        });
-    }
-
+    function renderDictionary(list) { const box = $('dictionary-output'); if (!box) return; const dir = $('dictionary-direction')?.value || 'conlang-en'; const q = norm($('dictionary-search')?.value || ''); let rows = list.map(e => ({ l: dir === 'conlang-en' ? e.conlang : e.concept, r: dir === 'conlang-en' ? e.concept : e.conlang, m: e.category || e.semantic_group || e.word_type || '' })).filter(x => x.l && x.r); if (q) rows = rows.filter(x => `${x.l} ${x.r} ${x.m}`.toLowerCase().includes(q)); rows.sort((a, b) => xlocale(a.l, b.l)); box.innerHTML = `<div class="card"><h3>${dir === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.map(x => `<div class="dict-row"><strong>${esc(x.l)}</strong><span>${esc(x.r)}</span><span class="meta">${esc(x.m)}</span></div>`).join('')}</div></div>`; }
+    function renderResult(result) { const box = $('generation-output'); if (!box) return; const c = result.config; const list = result.lexicon; const name = window.ConlangEngine.languageName(c.seed, c); const chips = [c.region[0], c.culture[0], c.biome[0], c.order].filter(Boolean); box.className = 'result'; box.innerHTML = `<div class="hero"><div><div class="lang-name">Name of language: ${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`; renderSamples(list, c); renderLexicon(list); renderDictionary(list); }
+    function generate(randomizeParameters = true) { try { if (randomizeParameters) randomize(); const result = window.ConlangEngine.generate(readConfig()); renderResult(result); if ($('message')) $('message').textContent = `Generated ${result.lexicon.length} entries.`; window.dispatchEvent(new CustomEvent('conlang:generated', { detail: result })); } catch (e) { console.error(e); if ($('message')) $('message').textContent = 'Generation error: ' + e.message; if ($('generation-output')) { $('generation-output').className = 'result'; $('generation-output').innerHTML = `<div class="error">${esc(e.message)}</div>`; } } }
+    function regenerate() { if (window.ConlangEngine.getVocabulary().length) generate(false); }
+    function randomize() { ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const e = $(id); if (e && e.options.length > 1) { const options = [...e.options].slice(1).map(o => o.value); e.value = options[Math.floor(Math.random() * options.length)]; } }); ['vowels', 'consonants', 'word-order', 'morphology', 'adj-position', 'articles', 'plural', 'relations'].forEach(id => { const e = $(id); if (e && e.options.length) e.value = e.options[Math.floor(Math.random() * e.options.length)].value; }); if ($('mean')) $('mean').value = (1 + Math.random() * 2.5).toFixed(1); if ($('seed')) $('seed').value = 'auto'; $('consonants')?.dispatchEvent(new Event('change')); }
+    function preset(type) { const map = { historical: { temporal_setting: 'historical', tags: 'historical' }, fantasy: { tags: 'fantasy' }, modern: { temporal_setting: 'modern' }, scifi: { tags: 'sci-fi' } }; const p = map[type]; if (!p) return; ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const e = $(id); if (e) e.value = p[id] || ''; }); }
+    function wire() { installPhonotacticInfo(); $('generate')?.addEventListener('click', () => generate(true)); $('regenerate')?.addEventListener('click', () => regenerate()); $('randomize')?.addEventListener('click', randomize); $('clear-filters')?.addEventListener('click', () => ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const e = $(id); if (e) e.value = ''; })); [['preset-historical', 'historical'], ['preset-fantasy', 'fantasy'], ['preset-modern', 'modern'], ['preset-scifi', 'scifi']].forEach(([id, type]) => $(id)?.addEventListener('click', () => preset(type))); $('dictionary-direction')?.addEventListener('change', () => renderDictionary(window.ConlangEngine.getGenerated())); $('dictionary-search')?.addEventListener('input', () => renderDictionary(window.ConlangEngine.getGenerated())); }
+    async function loadVocabulary() { const status = $('db-status'); try { const response = await fetch('vocabulary.json', { cache: 'no-store' }); if (!response.ok) throw new Error(`HTTP ${response.status}`); const data = await response.json(); const vocabulary = window.ConlangEngine.loadVocabulary(data); populateFilters(vocabulary); if (status) status.textContent = `Vocabulary loaded: ${vocabulary.length} entries`; } catch (e) { console.error(e); if (status) status.textContent = 'Vocabulary load failed'; if ($('message')) $('message').textContent = 'Vocabulary load failed: ' + e.message; } }
+    function loadSentenceEngine() { if (window.ConlangSentenceEngine) return Promise.resolve(); return new Promise((resolve, reject) => { const script = document.createElement('script'); script.src = 'sentence_engine.js'; script.onload = resolve; script.onerror = () => reject(new Error('Unable to load sentence_engine.js.')); document.head.appendChild(script); }); }
     window.ConlangGeneratorUI = Object.freeze({ generate, regenerate, randomize, renderLexicon, renderDictionary });
-
-    async function start() {
-        try { await loadSentenceEngine(); wire(); await loadVocabulary(); }
-        catch (e) { console.error(e); if ($('message')) $('message').textContent = e.message; }
-    }
-
+    async function start() { try { await loadSentenceEngine(); wire(); await loadVocabulary(); } catch (e) { console.error(e); if ($('message')) $('message').textContent = e.message; } }
     start();
 })();
