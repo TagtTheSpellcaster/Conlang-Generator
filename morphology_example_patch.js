@@ -1,4 +1,4 @@
-/* ConLang Generator — fixed morphological example noun v0.11.17 */
+/* ConLang Generator — fixed morphological example noun v0.11.19 */
 (() => {
     'use strict';
 
@@ -52,11 +52,16 @@
         }
     }
 
-    const observer = new MutationObserver(() => {
-        if (document.querySelector('.morph-inventory')) patchMorphologyExample();
-    });
-
+    let observer;
     function start() {
+        observer = new MutationObserver(() => {
+            observer.disconnect();
+            try {
+                if (document.querySelector('.morph-inventory')) patchMorphologyExample();
+            } finally {
+                observer.observe(document.body, { childList: true, subtree: true });
+            }
+        });
         observer.observe(document.body, { childList: true, subtree: true });
         patchMorphologyExample();
     }
