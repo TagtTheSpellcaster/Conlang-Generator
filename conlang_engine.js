@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.10.7 */
+/* ConLang Generator — core engine v0.10.8 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.7';
+    const VERSION = '0.10.8';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -41,10 +41,22 @@
         return s;
     }
 
+    function articleAllowed(conceptName, mode) {
+        const c = norm(conceptName);
+        const m = norm(mode || 'none');
+        if (c !== 'the' && c !== 'a' && c !== 'an') return true;
+        if (m === 'none') return false;
+        if (c === 'the') return ['both', 'definite', 'partitive'].includes(m);
+        return ['both', 'indefinite', 'partitive'].includes(m);
+    }
+
     function selectVocabulary(c) {
-        const ranked = vocabulary.map(e => ({ ...e, kind: classify(e), score: score(e, c) }));
-        const required = ['i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there', 'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how', 'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in'];
         const articleMode = norm(c.articles || 'none');
+        const ranked = vocabulary
+            .map(e => ({ ...e, kind: classify(e), score: score(e, c) }))
+            .filter(e => articleAllowed(e.concept, articleMode));
+
+        const required = ['i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there', 'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how', 'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in'];
         if (articleMode !== 'none') required.push('the');
         if (articleMode === 'both' || articleMode === 'indefinite' || articleMode === 'partitive') required.push('a');
 
