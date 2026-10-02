@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.10.8 */
+/* ConLang Generator — core engine v0.10.9 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.8';
+    const VERSION = '0.10.9';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -20,17 +20,6 @@
         return 'noun';
     }
 
-    function meta(e) {
-        return {
-            tags: new Set(arr(e.tags).map(norm)),
-            features: new Set(arr(e.features).map(norm)),
-            groups: new Set([norm(e.semantic_group), norm(e.category)].filter(Boolean))
-        };
-    }
-
-    function has(set, values) { return values.some(v => set.has(norm(v))); }
-    function concept(e, values) { return values.some(v => norm(e.concept) === norm(v)); }
-
     function score(e, c) {
         let s = e.scope === 'universal' ? 1 : 0;
         for (const f of ['region', 'culture', 'biome', 'temporal_setting', 'tags']) {
@@ -44,10 +33,18 @@
     function articleAllowed(conceptName, mode) {
         const c = norm(conceptName);
         const m = norm(mode || 'none');
-        if (c !== 'the' && c !== 'a' && c !== 'an') return true;
+        if (!['the', 'a', 'an'].includes(c)) return true;
         if (m === 'none') return false;
         if (c === 'the') return ['both', 'definite', 'partitive'].includes(m);
         return ['both', 'indefinite', 'partitive'].includes(m);
+    }
+
+    function requiredArticles(mode) {
+        const m = norm(mode || 'none');
+        if (m === 'definite') return ['the'];
+        if (m === 'indefinite') return ['a', 'an'];
+        if (m === 'both' || m === 'partitive') return ['the', 'a', 'an'];
+        return [];
     }
 
     function selectVocabulary(c) {
@@ -56,9 +53,12 @@
             .map(e => ({ ...e, kind: classify(e), score: score(e, c) }))
             .filter(e => articleAllowed(e.concept, articleMode));
 
-        const required = ['i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there', 'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how', 'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in'];
-        if (articleMode !== 'none') required.push('the');
-        if (articleMode === 'both' || articleMode === 'indefinite' || articleMode === 'partitive') required.push('a');
+        const required = [
+            'i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there',
+            'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how',
+            'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in',
+            ...requiredArticles(articleMode)
+        ];
 
         const selected = [];
         const seen = new Set();
@@ -86,8 +86,7 @@
         'this', 'that', 'these', 'those', 'here', 'there',
         'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'you', 'him', 'her', 'us', 'them',
         'my', 'your', 'his', 'her', 'our', 'their', 'mine', 'yours', 'ours', 'theirs',
-        'who', 'what', 'which', 'thing',
-        'not', 'no', 'yes', 'already', 'maybe', 'but', 'also'
+        'who', 'what', 'which', 'thing', 'not', 'no', 'yes', 'already', 'maybe', 'but', 'also'
     ]);
 
     function isShortWord(e) {
@@ -102,15 +101,11 @@
         if (!vocabulary.length) throw new Error('Vocabulary is not loaded yet.');
 
         const config = {
-            region: Array.isArray(c?.region) ? c.region : [],
-            culture: Array.isArray(c?.culture) ? c.culture : [],
-            biome: Array.isArray(c?.biome) ? c.biome : [],
-            temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [],
-            tags: Array.isArray(c?.tags) ? c.tags : [],
-            vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european',
-            mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'),
-            order: c?.order || 'SVO', morphology: c?.morphology || 'isolating',
-            articles: c?.articles || 'none', plural: c?.plural || 'suffix',
+            region: Array.isArray(c?.region) ? c.region : [], culture: Array.isArray(c?.culture) ? c.culture : [],
+            biome: Array.isArray(c?.biome) ? c.biome : [], temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [],
+            tags: Array.isArray(c?.tags) ? c.tags : [], vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european',
+            mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'), order: c?.order || 'SVO',
+            morphology: c?.morphology || 'isolating', articles: c?.articles || 'none', plural: c?.plural || 'suffix',
             relations: c?.relations || 'prepositions', adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after'
         };
 
@@ -141,13 +136,11 @@
         const vowels = options.vowels || 'standard';
         const mean = Number(options.mean) || 2.2;
         const nameSeed = requestedSeed + '|language-name';
-
         if (window.ConlangPhonology?.createWordFactory) {
             const make = window.ConlangPhonology.createWordFactory({ consonants: modelKey, vowels, mean: Math.max(1, Math.min(4, mean * 0.8)), seed: nameSeed });
             return make();
         }
-
-        return 'language-' + String(Math.floor(rng(nameSeed)() * 900) + 100);
+        return 'language-' + String(Math.floor(Math.random() * 900) + 100);
     }
 
     window.ConlangEngine = Object.freeze({ version: VERSION, generate, loadVocabulary, getVocabulary: () => vocabulary.slice(), getGenerated: () => generated.slice(), languageName });
