@@ -12,7 +12,7 @@
     function loadMorphologyExamplePatch() {
         if (document.querySelector('script[data-morphology-example-patch]')) return;
         const script = document.createElement('script');
-        script.src = 'morphology_example_patch.js?v=0.11.25';
+        script.src = 'morphology_example_patch.js?v=0.11.26';
         script.dataset.morphologyExamplePatch = 'true';
         script.defer = true;
         document.head.appendChild(script);
