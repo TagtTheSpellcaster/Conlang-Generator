@@ -1,0 +1,39 @@
+name: Finish morphology UI v0.11.30
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-ui-031.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Add Gender and align version references
+        run: |
+          python -c 'from pathlib import Path; p=Path("index.html"); s=p.read_text(encoding="utf-8"); marker="                  <div class=\"field\"><label for=\"number\">Number</label><select id=\"number\">"; field="                  <div class=\"field\"><label for=\"gender\">Gender</label><select id=\"gender\">\n                      <option value=\"masculine-feminine\">Masculine + feminine</option>\n                      <option value=\"masculine-feminine-neuter\">Masculine + feminine + neuter</option>\n                    </select></div>\n"; assert s.count("id=\"gender\"")==0; assert marker in s; s=s.replace(marker,field+marker,1); s=s.replace("v0.11.29","v0.11.30"); p.write_text(s,encoding="utf-8")'
+          python -c 'from pathlib import Path; p=Path("generator_ui.js"); s=p.read_text(encoding="utf-8"); old="            plural: $(\'plural\')?.value || \'suffix\',\n            number: $(\'number\')?.value || \'singular-plural\',"; new="            plural: $(\'plural\')?.value || \'suffix\',\n            gender: $(\'gender\')?.value || \'masculine-feminine\',\n            number: $(\'number\')?.value || \'singular-plural\',"; assert old in s; s=s.replace(old,new,1); s=s.replace("\'articles\', \'plural\', \'number\', \'relations\'","\'articles\', \'plural\', \'gender\', \'number\', \'relations\'",1); p.write_text(s,encoding="utf-8")'
+          python -c 'from pathlib import Path; p=Path("version.js"); s=p.read_text(encoding="utf-8").replace("v=0.11.29","v=0.11.30"); p.write_text(s,encoding="utf-8")'
+
+      - name: Verify
+        run: |
+          node --check generator_ui.js
+          node --check sentence_audit_patch.js
+          node --check morphology_example_patch.js
+          node --check version.js
+          python -c 'from pathlib import Path; s=Path("index.html").read_text(encoding="utf-8"); assert s.count("id=\"gender\"")==1; assert s.count("id=\"number\"")==1; assert "v0.11.30" in s; assert "sample_patch.js?v=0.11.30" in s'
+
+      - name: Commit and remove temporary workflows
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html generator_ui.js version.js
+          git rm .github/workflows/fix-ui-031.yml .github/workflows/fix-morphology-030.yml
+          git commit -m 'Restore Gender selector and complete morphology repair'
+          git push
