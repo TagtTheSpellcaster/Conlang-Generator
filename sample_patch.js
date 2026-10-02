@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.11.5 */
+/* ConLang Generator UI patch — v0.11.6 */
 (() => {
     'use strict';
 
-    const VERSION = '0.11.5';
+    const VERSION = '0.11.6';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -65,8 +65,8 @@
     function installSampleSentencesTab() {
         if ($('sample-sentences')) return;
         const tabs = document.querySelector('.tabs');
-        const lexiconTab = document.querySelector('.tab[data-tab="lexicon"]');
-        if (!tabs || !lexiconTab) return;
+        const dictionaryTab = document.querySelector('.tab[data-tab="dictionary"]');
+        if (!tabs || !dictionaryTab) return;
 
         const tab = document.createElement('button');
         tab.type = 'button';
@@ -74,14 +74,14 @@
         tab.dataset.tab = 'sample-sentences';
         tab.setAttribute('aria-selected', 'false');
         tab.textContent = 'Sample Sentences';
-        tabs.insertBefore(tab, lexiconTab);
+        tabs.insertBefore(tab, dictionaryTab.nextSibling);
 
         const panel = document.createElement('section');
         panel.id = 'sample-sentences';
         panel.className = 'tab-panel';
         panel.innerHTML = '<main><div id="sample-sentences-output" class="empty">Generate a language to populate the sample sentences.</div></main>';
-        const lexiconPanel = $('lexicon');
-        if (lexiconPanel?.parentNode) lexiconPanel.parentNode.insertBefore(panel, lexiconPanel);
+        const dictionaryPanel = $('dictionary');
+        if (dictionaryPanel?.parentNode) dictionaryPanel.parentNode.insertBefore(panel, dictionaryPanel.nextSibling);
 
         tab.addEventListener('click', () => {
             document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
