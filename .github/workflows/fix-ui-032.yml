@@ -1,0 +1,69 @@
+name: Finish UI selector repair v0.11.30
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-ui-032.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Patch UI
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          if 'id="gender"' not in s:
+              marker = '                  <div class="field"><label for="number">Number</label><select id="number">'
+              field = '''                  <div class="field"><label for="gender">Gender</label><select id="gender">
+                      <option value="masculine-feminine">Masculine + feminine</option>
+                      <option value="masculine-feminine-neuter">Masculine + feminine + neuter</option>
+                    </select></div>
+'''
+              if marker not in s:
+                  raise SystemExit('Number selector not found')
+              s = s.replace(marker, field + marker, 1)
+          s = s.replace('v0.11.29', 'v0.11.30')
+          p.write_text(s, encoding='utf-8')
+
+          p = Path('generator_ui.js')
+          s = p.read_text(encoding='utf-8')
+          old = "            plural: $('plural')?.value || 'suffix',\n            number: $('number')?.value || 'singular-plural',"
+          new = "            plural: $('plural')?.value || 'suffix',\n            gender: $('gender')?.value || 'masculine-feminine',\n            number: $('number')?.value || 'singular-plural',"
+          if 'gender:' not in s:
+              if old not in s:
+                  raise SystemExit('generator config block not found')
+              s = s.replace(old, new, 1)
+          old_random = "'articles', 'plural', 'number', 'relations'"
+          if old_random in s:
+              s = s.replace(old_random, "'articles', 'plural', 'gender', 'number', 'relations'", 1)
+          p.write_text(s, encoding='utf-8')
+
+          p = Path('version.js')
+          s = p.read_text(encoding='utf-8').replace('v=0.11.29', 'v=0.11.30')
+          p.write_text(s, encoding='utf-8')
+          PY
+      - name: Verify
+        run: |
+          node --check generator_ui.js
+          node --check sentence_audit_patch.js
+          node --check morphology_example_patch.js
+          node --check version.js
+          grep -q 'id="gender"' index.html
+          grep -q 'v0.11.30' index.html
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html generator_ui.js version.js
+          git rm .github/workflows/fix-ui-032.yml .github/workflows/fix-ui-031.yml .github/workflows/fix-morphology-030.yml
+          git commit -m 'Restore Gender selector and bump UI version'
+          git push
