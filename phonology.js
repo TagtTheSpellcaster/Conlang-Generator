@@ -1,4 +1,4 @@
-/* ConLang Generator — shared phonology engine v0.9.6 */
+/* ConLang Generator — shared phonology engine v0.10.2 */
 (() => {
     'use strict';
 
@@ -17,7 +17,8 @@
             onset: ['p','t','k','b','d','g','f','v','s','z','ʃ','m','n','r','l','j','w'],
             coda: ['p','t','k','b','d','g','f','v','s','z','m','n','r','l'],
             clusters: ['pr','pl','tr','dr','kr','gr','br','bl','fr','fl','vr','vl','sp','st','sk','sm','sn','sl','sw','spr','str','skr','kl','gl','tw','dw','kw','gw'],
-            patterns: ['CV','CV','CVC','CV','CCV','CVC','V'], maxClusters: 3
+            patterns: ['CV','CV','CVC','CV','CCV','CVC','V'], maxClusters: 3,
+            maxVowelRatio: 0.60
         },
         english: {
             name: 'Dynamic Anglo-Saxon',
@@ -47,16 +48,12 @@
         ['semitic', '6 — Semitic Root-and-Pattern (Arabic-type)']
     ];
 
-    let phonologyBusy = false;
-    let phonologyCycleSeed = null;
     const $ = id => document.getElementById(id);
-    const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
     const pick = (a, r) => a[Math.floor(r() * a.length)];
 
     function hash(s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
     function rng(seed) { let x = hash(seed) || 1; return () => { x += 0x6D2B79F5; let t = x; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
     function modelForKey(key) { return MODEL[key] || MODEL.european; }
-    function modelFor() { return modelForKey($('consonants')?.value); }
     function vowelSet() { return VOWELS[$('vowels')?.value] || VOWELS.standard; }
 
     function chooseOnset(m, r) {
@@ -84,6 +81,11 @@
 
     function validWord(w, m, vowels) {
         if (!w || w.length < 2 || !vowels.some(v => w.includes(v))) return false;
+
+        const vowelCount = [...w].filter(ch => vowels.includes(ch)).length;
+        if (vowels.length && /[aeiouyøæ]{3}/i.test(w)) return false;
+        if (m.maxVowelRatio && vowelCount / w.length > m.maxVowelRatio) return false;
+
         const runs = consonantRuns(w, vowels);
         if (runs.some(run => run.length > m.maxClusters)) return false;
         if (/(.)\1/.test(w)) return false;
@@ -123,41 +125,11 @@
         };
     }
 
-    function resetCycle() {
-        phonologyCycleSeed = null;
-        document.querySelectorAll('#lexicon-output .lex-row .word[data-phonologized="1"]').forEach(cell => delete cell.dataset.phonologized);
-    }
+    function resetCycle() {}
 
-    function phonologySeed(requestedSeed, modelKey) {
-        if (requestedSeed && requestedSeed !== 'auto') return requestedSeed + '|phonology|' + modelKey;
-        if (!phonologyCycleSeed) phonologyCycleSeed = 'auto-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2) + '|phonology|' + modelKey;
-        return phonologyCycleSeed;
-    }
+    // Legacy DOM phonologization is intentionally disabled: generated lexical forms
+    // now come exclusively from ConlangEngine -> createWordFactory -> validWord.
+    function phonologize() {}
 
-    function phonologize() {
-        if (phonologyBusy) return;
-        const rows = [...document.querySelectorAll('#lexicon-output .lex-row')];
-        if (!rows.length || rows.every(row => row.children[0]?.dataset.phonologized === '1')) return;
-        phonologyBusy = true;
-        try {
-            const model = modelFor(), vowels = vowelSet(), seed = $('seed')?.value.trim() || 'auto';
-            const modelKey = Object.keys(MODEL).find(key => MODEL[key] === model) || 'european';
-            const mean = Number($('mean')?.value) || 2.2, r = rng(phonologySeed(seed, modelKey));
-            const map = new Map(), used = new Set();
-            rows.forEach(row => {
-                const meaning = row.children[1]?.textContent.trim(); if (!meaning) return;
-                let word = map.get(norm(meaning));
-                if (!word) {
-                    for (let guard = 0; guard < 100; guard++) { word = makeWord(model, vowels, mean, r); if (word && !used.has(word)) break; word = null; }
-                    if (!word) return;
-                    used.add(word); map.set(norm(meaning), word);
-                }
-                const cell = row.children[0]; if (cell) { cell.textContent = word; cell.dataset.phonologized = '1'; }
-            });
-            document.querySelectorAll('.sample-word').forEach(el => { const meaning = norm(el.getAttribute('data-meaning') || el.textContent); const word = map.get(meaning); if (word) el.textContent = word; });
-            document.querySelectorAll('#dictionary-output .dict-row').forEach(row => { const strong = row.querySelector('strong'), span = row.querySelector('span'); if (!strong || !span) return; const meaning = norm(span.textContent); if (map.has(meaning)) strong.textContent = map.get(meaning); });
-        } finally { phonologyBusy = false; }
-    }
-
-    window.ConlangPhonology = Object.freeze({ version: '0.9.6', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
+    window.ConlangPhonology = Object.freeze({ version: '0.10.2', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
 })();
