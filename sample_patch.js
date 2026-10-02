@@ -79,12 +79,12 @@
             pill = document.createElement('span');
             pill.id = 'app-version';
             pill.className = 'chip';
-            pill.textContent = `Conlang Generator v${VERSION}`;
-            const headerTools = document.querySelector('.header-tools');
-            if (headerTools) headerTools.appendChild(pill);
+            pill.textContent = `v${VERSION}`;
+            const titleRow = document.querySelector('.title-row');
+            if (titleRow) titleRow.appendChild(pill);
             else return;
         } else {
-            pill.textContent = `Conlang Generator v${VERSION}`;
+            pill.textContent = `v${VERSION}`;
         }
     }
 
