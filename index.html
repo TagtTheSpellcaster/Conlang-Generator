@@ -17,6 +17,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 .parameter-stack{display:grid;gap:14px}.compact-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}.full{grid-column:1/-1}
 .btn{border:1px solid var(--line);background:#18233a;color:var(--text);padding:9px 12px;border-radius:7px}.btn:hover{border-color:#3d5277}.btn.good{background:#146b55;border-color:#1c9675}.btn.ghost{background:transparent}.status{font-size:12px;color:var(--muted)}
 .generation-actions{display:flex;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:8px;margin:0;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px;min-width:0}.generation-actions .status{margin-bottom:4px;min-height:18px}.generation-actions .btn{width:100%}
+.case-options{display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}.case-options.visible{display:block}.morph-preview{margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:#090f1c;font-family:ui-monospace,monospace;font-size:15px}.morph-stem{color:#fff}.morph-ending{display:inline-block;color:#0b1020;background:#fff;border-radius:4px;padding:0 4px;margin-left:1px}.morph-note{margin-top:6px;color:var(--muted);font-size:11px}
 .result{margin-top:16px}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:20px;background:linear-gradient(135deg,#121d34,#0e1627);border:1px solid var(--line);border-radius:12px}.lang-name{font-size:32px;font-weight:700}.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:11px;padding:3px 7px;border-radius:99px;background:#18243a;color:#a9c4e8;border:1px solid #2a3b59}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:16px}.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:15px}.card h3{font-size:13px;color:var(--accent);margin-bottom:10px}.kv{display:grid;grid-template-columns:125px 1fr;gap:6px;font-size:13px}.kv b{color:#fff}.lexicon{max-height:620px;overflow:auto}.lex-row{display:grid;grid-template-columns:170px 1fr 150px;gap:10px;padding:7px 0;border-bottom:1px solid #1d2739}.lex-row .word{font-weight:700;color:#6ed2ff;font-family:ui-monospace,monospace}.lex-row .eng{color:#d9e2ef}.lex-row .meta{color:var(--muted);font-size:11px}.dictionary-controls{display:flex;gap:10px;align-items:end;margin-bottom:14px}.dictionary-controls .field{margin:0;flex:0 0 260px}.dictionary-controls .search{flex:1}.dictionary{max-height:680px;overflow:auto}.dict-row{display:grid;grid-template-columns:1fr 1fr 160px;gap:12px;padding:9px 4px;border-bottom:1px solid #1d2739}.dict-row strong{color:#77d6ff;font-family:ui-monospace,monospace}.dict-row .meta{color:var(--muted);font-size:11px}.empty{padding:30px;text-align:center;color:var(--muted)}.error{padding:12px;border:1px solid #743c3c;background:#281516;color:#e5a5a5;border-radius:8px;margin-top:12px}
 @media(max-width:950px){.parameter-grid{grid-template-columns:1fr 1fr}.generation-actions{grid-column:1/-1;flex-direction:row;align-items:center}.generation-actions .status{margin-right:auto;margin-bottom:0}.generation-actions .btn{width:auto}}
 @media(max-width:700px){.parameter-grid{grid-template-columns:1fr}.parameter-stack{grid-template-columns:1fr}.generation-actions{grid-column:auto;flex-direction:column;align-items:stretch}.generation-actions .status{margin-right:0;margin-bottom:4px}.generation-actions .btn{width:100%}.compact-grid{grid-template-columns:1fr}.full{grid-column:auto}.hero{flex-direction:column}.dictionary-controls{flex-direction:column;align-items:stretch}.dictionary-controls .field{flex:auto}.dict-row{grid-template-columns:1fr 1fr}.dict-row .meta{display:none}main{padding:16px}.header-tools{flex-wrap:wrap;justify-content:flex-end}.header-tools .status{display:none}}
@@ -24,7 +25,7 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 </head>
 <body>
 <header>
-  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.3</span></div><div class="sub">Vocabulary-driven language generation</div></div>
+  <div><div class="title-row"><h1>Conlang Generator</h1><span id="app-version" class="chip">v0.11.4</span></div><div class="sub">Vocabulary-driven language generation</div></div>
   <div class="header-tools">
     <button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button>
     <button type="button" class="btn" id="export-vocabulary">Export vocabulary</button>
@@ -70,7 +71,12 @@ header{padding:16px 24px;border-bottom:1px solid var(--line);background:#0e1526;
 <div class="field"><label for="adj-position">Adjective position</label><select id="adj-position"><option value="after">Noun + adjective</option><option value="before">Adjective + noun</option></select></div>
 <div class="field"><label for="articles">Articles</label><select id="articles"><option value="none">None</option><option value="both">Definite + indefinite</option><option value="definite">Definite only</option><option value="indefinite">Indefinite only</option><option value="partitive">Definite + indefinite + partitive</option></select></div>
 <div class="field"><label for="plural">Plural</label><select id="plural"><option value="suffix">Suffix</option><option value="prefix">Prefix</option><option value="none">No productive plural</option></select></div>
-<div class="field full"><label for="relations">Grammatical relations</label><select id="relations"><option value="prepositions">Prepositions / word order</option><option value="cases">Case endings</option></select></div>
+<div class="field full"><label for="relations">Grammatical relations</label><select id="relations"><option value="prepositions">Prepositional</option><option value="cases">Case-based</option><option value="mixed">Mixed</option></select></div>
+</div>
+<div id="case-options" class="case-options">
+<div class="field"><label for="case-system">Case system</label><select id="case-system"><option value="minimal">Minimal — nominative / accusative</option><option value="moderate" selected>Moderate — nominative / accusative / genitive / dative</option><option value="extensive">Extensive — nominative / accusative / genitive / dative / locative / ablative / instrumental</option></select></div>
+<div class="morph-preview" aria-label="Morphological form preview"><span class="morph-stem">ros</span><span class="morph-ending">a</span></div>
+<div class="morph-note">Stem + grammatical ending. Endings are attached to the stem, not to the complete inflected word.</div>
 </div>
 </section>
 </div>
@@ -95,6 +101,11 @@ document.querySelectorAll('.tab').forEach(tab=>tab.addEventListener('click',()=>
 (() => {
   const $=id=>document.getElementById(id);
   let imported=null;
+  const relationSelect=$('relations');
+  const caseOptions=$('case-options');
+  function syncCaseOptions(){caseOptions?.classList.toggle('visible', relationSelect?.value==='cases'||relationSelect?.value==='mixed');}
+  relationSelect?.addEventListener('change',syncCaseOptions);
+  syncCaseOptions();
   $('open-vocabulary')?.addEventListener('click',()=>{window.location.href='vocabulary.html';});
   function currentVisibleLexicon(){return [...document.querySelectorAll('#lexicon-output .lex-row')].map(row=>{const c=row.children;return {word:c[0]?.textContent.trim()||'',english:c[1]?.textContent.trim()||'',meta:c[2]?.textContent.trim()||''};}).filter(x=>x.word&&x.english);}
   $('export-vocabulary')?.addEventListener('click',()=>{const lexicon=imported||currentVisibleLexicon();if(!lexicon.length){if($('message'))$('message').textContent='Generate a language before exporting its vocabulary.';return;}const payload={format:'Conlang Generator vocabulary',version:1,exported_at:new Date().toISOString(),lexicon};const blob=new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='conlang-vocabulary.json';a.click();URL.revokeObjectURL(url);if($('message'))$('message').textContent=`Exported ${lexicon.length} entries.`;});
