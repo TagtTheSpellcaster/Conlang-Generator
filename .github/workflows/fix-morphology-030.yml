@@ -1,0 +1,204 @@
+name: Repair morphology UI v0.11.30
+
+on:
+  push:
+    paths:
+      - '.github/workflows/fix-morphology-030.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Repair gender, number markers, and nominal categories
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          # index.html: exactly one Gender selector, immediately before Number.
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+          gender_field = '''                  <div class="field"><label for="gender">Gender</label><select id="gender">
+                      <option value="masculine-feminine">Masculine + feminine</option>
+                      <option value="masculine-feminine-neuter">Masculine + feminine + neuter</option>
+                    </select></div>
+'''
+          if 'id="gender"' not in s:
+              marker = '''                  <div class="field"><label for="number">Number</label><select id="number">'''
+              if marker not in s:
+                  raise SystemExit('Number selector not found in index.html')
+              s = s.replace(marker, gender_field + marker, 1)
+          if s.count('id="gender"') != 1:
+              raise SystemExit('index.html must contain exactly one Gender selector')
+          if s.count('id="number"') != 1:
+              raise SystemExit('index.html must contain exactly one Number selector')
+          s = s.replace('v0.11.29', 'v0.11.30')
+          p.write_text(s, encoding='utf-8')
+
+          # generator_ui.js: include Gender in the generated configuration and Instant generate.
+          p = Path('generator_ui.js')
+          s = p.read_text(encoding='utf-8')
+          old = "            plural: $('plural')?.value || 'suffix',\n            number: $('number')?.value || 'singular-plural',"
+          new = "            plural: $('plural')?.value || 'suffix',\n            gender: $('gender')?.value || 'masculine-feminine',\n            number: $('number')?.value || 'singular-plural',"
+          if old not in s:
+              raise SystemExit('generator_ui.js config block not found')
+          s = s.replace(old, new, 1)
+          s = s.replace("'articles', 'plural', 'number', 'relations'", "'articles', 'plural', 'gender', 'number', 'relations'", 1)
+          p.write_text(s, encoding='utf-8')
+
+          # sentence_audit_patch.js: make the hardwired adjective mandatory and prefer adjective entries.
+          p = Path('sentence_audit_patch.js')
+          s = p.read_text(encoding='utf-8')
+          s = s.replace("'friend', 'sister', 'father'", "'friend', 'sister', 'father', 'good'", 1)
+          s = s.replace("const VERB_CONCEPTS = new Set([", "const ADJECTIVE_CONCEPTS = new Set(['good']);\n    const VERB_CONCEPTS = new Set([", 1)
+          old = "        if (VERB_CONCEPTS.has(norm(concept))) {\n            const verb = exact.find(e => kindOf(e) === 'verb');\n            if (verb) return verb;\n        }"
+          new = "        if (VERB_CONCEPTS.has(norm(concept))) {\n            const verb = exact.find(e => kindOf(e) === 'verb');\n            if (verb) return verb;\n        }\n        if (ADJECTIVE_CONCEPTS.has(norm(concept))) {\n            const adjective = exact.find(e => kindOf(e) === 'adjective');\n            if (adjective) return adjective;\n        }"
+          if old not in s:
+              raise SystemExit('sentence audit preferredEntry block not found')
+          s = s.replace(old, new, 1)
+          old = "            if (VERB_CONCEPTS.has(norm(concept))) existing = candidates.find(e => kindOf(e) === 'verb') || candidates[0];\n            else existing = candidates[0];"
+          new = "            if (VERB_CONCEPTS.has(norm(concept))) existing = candidates.find(e => kindOf(e) === 'verb') || candidates[0];\n            else if (ADJECTIVE_CONCEPTS.has(norm(concept))) existing = candidates.find(e => kindOf(e) === 'adjective') || candidates[0];\n            else existing = candidates[0];"
+          if old not in s:
+              raise SystemExit('sentence audit candidate selection block not found')
+          s = s.replace(old, new, 1)
+          old = "            const source = VERB_CONCEPTS.has(norm(concept))\n                ? (candidates.find(e => kindOf(e) === 'verb') || candidates[0])\n                : candidates[0];"
+          new = "            const source = VERB_CONCEPTS.has(norm(concept))\n                ? (candidates.find(e => kindOf(e) === 'verb') || candidates[0])\n                : (ADJECTIVE_CONCEPTS.has(norm(concept))\n                    ? (candidates.find(e => kindOf(e) === 'adjective') || candidates[0])\n                    : candidates[0]);"
+          if old not in s:
+              raise SystemExit('sentence audit source selection block not found')
+          s = s.replace(old, new, 1)
+          p.write_text(s, encoding='utf-8')
+
+          # Replace morphology patch with a non-generative formatter. It must never create a
+          # second plural/dual marker: those markers belong to the engine result rendered by
+          # generator_ui.js. The patch only fixes translations and ensures Nominal categories.
+          morphology = r'''/* ConLang Generator — morphology examples v0.11.30 */
+          (() => {
+              'use strict';
+
+              const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
+              const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+              const CASE_TRANSLATIONS = Object.freeze({
+                  nominative: 'forest',
+                  accusative: 'forest',
+                  genitive: 'of the forest',
+                  dative: 'to the forest',
+                  locative: 'in the forest',
+                  ablative: 'from the forest',
+                  instrumental: 'through the forest',
+                  absolutive: 'forest',
+                  ergative: 'by the forest'
+              });
+
+              function caseTranslation(caseName, numberLabel) {
+                  const base = CASE_TRANSLATIONS[norm(caseName)] || 'forest';
+                  if (numberLabel === 'plural') return base.replace(/\bforest\b/g, 'forests');
+                  if (numberLabel === 'dual') return base.replace(/\bforest\b/g, 'two forests');
+                  return base;
+              }
+
+              function updateTranslations() {
+                  document.querySelectorAll('.morph-number-block').forEach(block => {
+                      const title = norm(block.querySelector('.morph-number-title')?.textContent || 'singular');
+                      const number = title === 'plural' ? 'plural' : title === 'dual' ? 'dual' : 'singular';
+                      block.querySelectorAll('.morph-example-row').forEach(row => {
+                          const caseName = row.querySelector('.morph-case')?.textContent.trim() || '';
+                          const tr = row.querySelector('.morph-translation');
+                          if (tr) tr.textContent = caseTranslation(caseName, number);
+                      });
+                  });
+              }
+
+              function generatedEntries() {
+                  return window.ConlangEngine?.getGenerated?.() || [];
+              }
+
+              function findGood() {
+                  return generatedEntries().find(e => norm(e?.concept) === 'good' && norm(e?.word_type) === 'adjective')
+                      || generatedEntries().find(e => norm(e?.concept) === 'good' && norm(e?.category).includes('adjective'))
+                      || null;
+              }
+
+              function ensureNominalCategories() {
+                  const grid = document.querySelector('#generation-output .grid');
+                  if (!grid) return;
+                  let card = [...grid.querySelectorAll('.card')].find(c => norm(c.querySelector('h3')?.textContent) === 'nominal categories');
+                  const adjective = findGood();
+                  if (!adjective?.conlang) return;
+                  if (!card) {
+                      card = document.createElement('div');
+                      card.className = 'card nominal-categories';
+                      grid.appendChild(card);
+                  }
+                  const gender = document.getElementById('gender')?.value || 'masculine-feminine';
+                  const number = document.getElementById('number')?.value || 'singular-plural';
+                  const genders = gender === 'masculine-feminine-neuter'
+                      ? ['masculine', 'feminine', 'neuter']
+                      : ['masculine', 'feminine'];
+                  const numbers = number === 'singular-plural-dual'
+                      ? ['singular', 'plural', 'dual']
+                      : number === 'singular-plural'
+                          ? ['singular', 'plural']
+                          : ['singular'];
+                  const genderRows = genders.map(x => `<div class="kv"><b>${esc(x)}</b><span><span class="morph-stem">${esc(adjective.conlang)}</span> + gender ending</span></div>`).join('');
+                  const numberRows = numbers.map(x => `<div class="kv"><b>${esc(x)}</b><span><span class="morph-stem">${esc(adjective.conlang)}</span> + number ending</span></div>`).join('');
+                  card.innerHTML = `<h3>Nominal categories</h3><div class="sub morph-adjective-label">Example adjective: <strong>good</strong> — <span class="morph-stem">${esc(adjective.conlang)}</span></div><div class="sub" style="margin-top:10px">Gender</div>${genderRows}<div class="sub" style="margin-top:10px">Number</div>${numberRows}`;
+              }
+
+              function run() {
+                  updateTranslations();
+                  ensureNominalCategories();
+              }
+
+              function schedule() { queueMicrotask(run); }
+
+              function start() {
+                  document.getElementById('generate')?.addEventListener('click', schedule);
+                  document.getElementById('regenerate')?.addEventListener('click', schedule);
+                  document.getElementById('gender')?.addEventListener('change', schedule);
+                  document.getElementById('number')?.addEventListener('change', schedule);
+                  run();
+              }
+
+              if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+              else start();
+          })();
+          '''
+          p = Path('morphology_example_patch.js')
+          p.write_text(morphology.lstrip(), encoding='utf-8')
+
+          # Align auxiliary cache-busters.
+          p = Path('version.js')
+          s = p.read_text(encoding='utf-8').replace('v=0.11.29', 'v=0.11.30')
+          p.write_text(s, encoding='utf-8')
+          PY
+
+      - name: Verify
+        run: |
+          node --check generator_ui.js
+          node --check sentence_audit_patch.js
+          node --check morphology_example_patch.js
+          node --check version.js
+          python - <<'PY'
+          from pathlib import Path
+          s = Path('index.html').read_text(encoding='utf-8')
+          assert s.count('id="gender"') == 1
+          assert s.count('id="number"') == 1
+          assert 'v0.11.30' in s
+          assert 'sample_patch.js?v=0.11.30' in s
+          assert 'MutationObserver' not in Path('morphology_example_patch.js').read_text(encoding='utf-8')
+          PY
+
+      - name: Commit and remove workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html generator_ui.js sentence_audit_patch.js morphology_example_patch.js version.js
+          git rm .github/workflows/fix-morphology-030.yml
+          git commit -m 'Repair gender, number markers and nominal categories'
+          git push
