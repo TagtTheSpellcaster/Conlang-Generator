@@ -17,7 +17,7 @@
     function populateFilters(vocabulary) { ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => { const el = $(id); if (!el) return; const values = uniq(vocabulary.flatMap(e => arr(e[id]))).sort((a, b) => a.localeCompare(b)); el.innerHTML = '<option value="">Any</option>' + values.map(v => `<option value="${esc(v)}">${esc(v)}</option>`).join(''); }); }
     function selected(id) { const element = $(id); return element ? [...element.selectedOptions].map(o => o.value).filter(Boolean) : []; }
     function freshSeed() { if (globalThis.crypto?.getRandomValues) { const values = new Uint32Array(2); globalThis.crypto.getRandomValues(values); return `auto-${Date.now()}-${values[0].toString(36)}-${values[1].toString(36)}`; } return `auto-${Date.now()}-${Math.random().toString(36).slice(2)}`; }
-    function readConfig() { const requestedSeed = $('seed')?.value.trim() || ''; const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto' ? requestedSeed : freshSeed(); return { region: selected('region'), culture: selected('culture'), biome: selected('biome'), temporal_setting: selected('temporal_setting'), tags: selected('tags'), vowels: $('vowels')?.value || 'standard', consonants: $('consonants')?.value || 'european', mean: Number($('mean')?.value) || 2.2, seed, order: $('word-order')?.value || 'SVO', morphology: $('morphology')?.value || 'isolating' }; }
+    function readConfig() { const requestedSeed = $('seed')?.value.trim() || ''; const seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto' ? requestedSeed : freshSeed(); return { region: selected('region'), culture: selected('culture'), biome: selected('biome'), temporal_setting: selected('temporal_setting'), tags: selected('tags'), vowels: $('vowels')?.value || 'standard', consonants: $('consonants')?.value || 'european', mean: Number($('mean')?.value) || 2.2, seed, order: $('word-order')?.value || 'SVO', morphology: $('morphology')?.value || 'isolating', articles: $('articles')?.value || 'none', plural: $('plural')?.value || 'suffix', relations: $('relations')?.value || 'prepositions', adjPosition: $('adj-position')?.value || 'after' }; }
     function installMeanSlider() {
         const mean = $('mean'); if (!mean || mean.type === 'range') return;
         mean.type = 'range'; mean.min = '1'; mean.max = '5'; mean.step = '0.1';
@@ -25,48 +25,17 @@
         if (label && !label.querySelector('.mean-value')) {
             const value = document.createElement('span'); value.className = 'mean-value'; value.style.cssText = 'float:right;color:var(--text);font-variant-numeric:tabular-nums'; label.appendChild(value);
         }
-        const update = () => {
-            const value = Number(mean.value) || 2.2;
-            const display = label?.querySelector('.mean-value'); if (display) display.textContent = value.toFixed(1);
-            const info = document.querySelector('.phonotactic-info');
-            if (info) renderPhonotacticInfo(info);
-        };
-        mean.addEventListener('input', update);
-        update();
+        const update = () => { const value = Number(mean.value) || 2.2; const display = label?.querySelector('.mean-value'); if (display) display.textContent = value.toFixed(1); const info = document.querySelector('.phonotactic-info'); if (info) renderPhonotacticInfo(info); };
+        mean.addEventListener('input', update); update();
     }
-    function synthesisIndex(value) {
-        const mean = Number(value);
-        if (mean <= 1.5) return 'short';
-        if (mean < 2.2) return 'short-balanced';
-        if (mean <= 2.8) return 'balanced';
-        if (mean <= 3.5) return 'balanced-long';
-        return 'long';
-    }
-    function renderPhonotacticInfo(info) {
-        const select = $('consonants');
-        const data = PHONOTACTIC_INFO[select?.value] || PHONOTACTIC_INFO.european;
-        const mean = Number($('mean')?.value) || 2.2;
-        info.innerHTML = `<div style="color:var(--text);font-weight:700;margin-bottom:4px">${esc(data.title)}</div><div>${esc(data.description)}</div><div style="margin-top:5px"><strong style="color:var(--text)">Formal pattern:</strong> <code>${esc(data.pattern)}</code></div><div style="margin-top:5px"><strong style="color:var(--text)">Synthesis index:</strong> ${esc(synthesisIndex(mean))}</div>`;
-    }
+    function synthesisIndex(value) { const mean = Number(value); if (mean <= 1.5) return 'short'; if (mean < 2.2) return 'short-balanced'; if (mean <= 2.8) return 'balanced'; if (mean <= 3.5) return 'balanced-long'; return 'long'; }
+    function renderPhonotacticInfo(info) { const select = $('consonants'); const data = PHONOTACTIC_INFO[select?.value] || PHONOTACTIC_INFO.european; const mean = Number($('mean')?.value) || 2.2; info.innerHTML = `<div style="color:var(--text);font-weight:700;margin-bottom:4px">${esc(data.title)}</div><div>${esc(data.description)}</div><div style="margin-top:5px"><strong style="color:var(--text)">Formal pattern:</strong> <code>${esc(data.pattern)}</code></div><div style="margin-top:5px"><strong style="color:var(--text)">Synthesis index:</strong> ${esc(synthesisIndex(mean))}</div>`; }
     function installPhonotacticInfo() {
         const select = $('consonants'); if (!select) return; const field = select.closest('.field'); if (!field) return;
         const label = field.querySelector('label[for="consonants"]'); if (label) label.textContent = 'Phonotactic pattern';
-        const grid = field.closest('.compact-grid');
-        let info = grid?.querySelector('.phonotactic-info') || field.querySelector('.phonotactic-info');
-        if (!info) {
-            info = document.createElement('div'); info.className = 'phonotactic-info';
-            info.style.cssText = 'grid-column:1 / -1;margin-top:0;padding-top:8px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45';
-            if (grid) {
-                const fields = [...grid.querySelectorAll(':scope > .field')];
-                const meanField = fields.find(item => item.querySelector('#mean'));
-                const seedField = fields.find(item => item.querySelector('#seed'));
-                const afterField = seedField || meanField;
-                if (afterField) afterField.insertAdjacentElement('afterend', info); else grid.appendChild(info);
-            } else field.insertAdjacentElement('afterend', info);
-        }
-        select.addEventListener('change', () => renderPhonotacticInfo(info));
-        const mean = $('mean'); if (mean) mean.addEventListener('input', () => renderPhonotacticInfo(info));
-        renderPhonotacticInfo(info);
+        const grid = field.closest('.compact-grid'); let info = grid?.querySelector('.phonotactic-info') || field.querySelector('.phonotactic-info');
+        if (!info) { info = document.createElement('div'); info.className = 'phonotactic-info'; info.style.cssText = 'grid-column:1 / -1;margin-top:0;padding-top:8px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45'; if (grid) { const fields = [...grid.querySelectorAll(':scope > .field')]; const meanField = fields.find(item => item.querySelector('#mean')); const seedField = fields.find(item => item.querySelector('#seed')); const afterField = seedField || meanField; if (afterField) afterField.insertAdjacentElement('afterend', info); else grid.appendChild(info); } else field.insertAdjacentElement('afterend', info); }
+        select.addEventListener('change', () => renderPhonotacticInfo(info)); const mean = $('mean'); if (mean) mean.addEventListener('input', () => renderPhonotacticInfo(info)); renderPhonotacticInfo(info);
     }
     function renderSamples(list, config) { const box = $('generation-output'); if (!box || !window.ConlangSentenceEngine) return; const samples = window.ConlangSentenceEngine.generateSamples(list, config); const style = `<style id="sample-v718">.sample-frame{margin-top:16px;background:#11182a;border:1px solid #26324a;border-radius:10px;padding:14px}.sample-pill{background:#0d1424;border:1px solid #26324a;border-radius:999px;padding:9px 14px;margin:7px 0}.sample-pill .en{font-weight:400}.sample-pill .cl{font-weight:700;margin-top:4px}.sample-word{cursor:help;border-bottom:1px dotted #55c7ff;position:relative}.sample-word:hover::after{content:attr(data-meaning);position:absolute;left:0;bottom:calc(100% + 6px);background:#050914;color:#fff;border:1px solid #3d5277;border-radius:6px;padding:4px 7px;white-space:nowrap;font:12px/1.2 system-ui;z-index:50}</style>`; const html = samples.map(x => `<div class="sample-pill"><div class="en"><b>${x.number}.</b> ${esc(x.english)}</div><div class="cl"><b>${x.number}.</b> ${x.html}</div></div>`).join(''); box.insertAdjacentHTML('beforeend', style + `<div class="sample-frame"><h3>Sample sentences</h3>${html}</div>`); }
     function renderLexicon(list) { const box = $('lexicon-output'); if (!box) return; box.className = 'card'; box.innerHTML = `<h3>Generated lexicon</h3><div class="lexicon">${list.map(e => `<div class="lex-row"><span class="word">${esc(e.conlang || '—')}</span><span class="eng">${esc(e.concept || '—')}</span><span class="meta">${esc(e.category || e.semantic_group || e.word_type || '')}</span></div>`).join('')}</div>`; }
