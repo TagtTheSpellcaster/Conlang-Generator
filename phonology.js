@@ -1,4 +1,4 @@
-/* ConLang Generator — shared phonology engine v0.10.6 */
+/* ConLang Generator — shared phonology engine v0.10.7 */
 (() => {
     'use strict';
 
@@ -47,6 +47,18 @@
         ['slavic', '5 — Compact Slavic (Croatian/Polish-type)'],
         ['semitic', '6 — Semitic Root-and-Pattern (Arabic-type)']
     ];
+
+    // Asymmetric lexical-length profiles. They deliberately peak on short
+    // words and retain a progressively thinner right-hand tail. The Mean
+    // syllables control selects the appropriate macro-profile:
+    //   1.0–1.5  Short / isolating
+    //   1.6–3.0  Balanced
+    //   3.1–5.0  Long / polysynthetic-like
+    const LENGTH_PROFILES = {
+        short:    [0.60, 0.30, 0.08, 0.02, 0.00, 0.00, 0.00, 0.00],
+        balanced: [0.18, 0.40, 0.30, 0.08, 0.03, 0.01, 0.00, 0.00],
+        long:     [0.01, 0.04, 0.15, 0.30, 0.25, 0.15, 0.07, 0.03]
+    };
 
     const $ = id => document.getElementById(id);
     const pick = (a, r) => a[Math.floor(r() * a.length)];
@@ -98,12 +110,38 @@
         return true;
     }
 
-    function makeWord(m, vowels, mean, r, options = {}) {
-        const short = Boolean(options.short);
-        const targetSyllables = short ? (r() < 0.80 ? 1 : 2) : null;
+    function chooseLengthProfile(mean) {
+        const target = Number(mean) || 2.2;
+        if (target <= 1.5) return LENGTH_PROFILES.short;
+        if (target <= 3.0) return LENGTH_PROFILES.balanced;
+        return LENGTH_PROFILES.long;
+    }
 
+    function pickWeighted(weights, r) {
+        const total = weights.reduce((sum, weight) => sum + weight, 0);
+        let n = r() * total;
+        for (let i = 0; i < weights.length; i++) {
+            n -= weights[i];
+            if (n < 0) return i + 1;
+        }
+        return weights.length;
+    }
+
+    function makeWord(m, vowels, mean, r, options = {}) {
+        if (options.short) {
+            const targetSyllables = r() < 0.80 ? 1 : 2;
+            for (let tries = 0; tries < 500; tries++) {
+                let word = '';
+                for (let i = 0; i < targetSyllables; i++) word += makeSyllable(m, vowels, r);
+                word = word.toLowerCase();
+                if (validWord(word, m, vowels)) return word;
+            }
+            return null;
+        }
+
+        const profile = chooseLengthProfile(mean);
         for (let tries = 0; tries < 500; tries++) {
-            const syllables = targetSyllables ?? Math.max(1, Math.min(6, Math.round(mean + (r() - .5) * 1.4)));
+            const syllables = pickWeighted(profile, r);
             let word = '';
             for (let i = 0; i < syllables; i++) word += makeSyllable(m, vowels, r);
             word = word.toLowerCase();
@@ -129,10 +167,7 @@
     }
 
     function resetCycle() {}
-
-    // Legacy DOM phonologization is intentionally disabled: generated lexical forms
-    // now come exclusively from ConlangEngine -> createWordFactory -> validWord.
     function phonologize() {}
 
-    window.ConlangPhonology = Object.freeze({ version: '0.10.6', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
+    window.ConlangPhonology = Object.freeze({ version: '0.10.7', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
 })();
