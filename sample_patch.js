@@ -46,14 +46,6 @@
         });
     }
 
-    function installSynthesisIndex() {
-        const mean = $('mean'); const seed = $('seed');
-        if (!mean || !seed || $('synthesis-index')) return;
-        const info = document.createElement('div'); info.id = 'synthesis-index'; info.className = 'phonotactic-info';
-        const update = () => { const value = Number(mean.value) || 2.2; const label = value <= 1.5 ? 'short' : value >= 3.5 ? 'long' : value < 2.2 ? 'short-balanced' : value <= 2.8 ? 'balanced' : 'balanced-long'; info.innerHTML = `<strong>Synthesis index:</strong> ${label}`; };
-        seed.closest('.compact-grid')?.appendChild(info); mean.addEventListener('input', update); mean.addEventListener('change', update); update();
-    }
-
     function installVersionPill() {
         let pill = $('app-version');
         if (!pill) {
@@ -70,7 +62,7 @@
     }
 
     function init() {
-        styles(); installCopyButton(); installSynthesisIndex(); installVersionPill();
+        styles(); installCopyButton(); installVersionPill();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
