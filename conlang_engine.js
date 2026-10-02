@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.11.13 */
+/* ConLang Generator — core engine v0.11.14 */
 (() => {
     'use strict';
 
-    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.13';
+    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.14';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -111,26 +111,37 @@
         const caseSystem = ['minimal', 'moderate', 'extensive'].includes(c?.caseSystem) ? c.caseSystem : 'moderate';
         const ergative = relationModel === 'ergative';
         const cases = relationModel === 'prepositions' ? [] : (ergative ? CASE_DEFINITIONS[`ergative_${caseSystem}`].slice() : CASE_DEFINITIONS[caseSystem].slice());
-        return Object.freeze({
-            relationModel,
-            alignment: ergative ? 'ergative-absolutive' : 'nominative-accusative',
-            caseSystem: relationModel === 'prepositions' ? null : caseSystem,
-            cases,
-            stemRule: 'endings attach to the lexical stem, never to an already inflected form',
-            realization: relationModel === 'prepositions' ? 'particles' : (relationModel === 'cases' || ergative ? 'case-endings' : 'mixed')
-        });
+        return Object.freeze({ relationModel, alignment: ergative ? 'ergative-absolutive' : 'nominative-accusative', caseSystem: relationModel === 'prepositions' ? null : caseSystem, cases, stemRule: 'endings attach to the lexical stem, never to an already inflected form', realization: relationModel === 'prepositions' ? 'particles' : (relationModel === 'cases' || ergative ? 'case-endings' : 'mixed') });
+    }
+
+    function countSyllables(word, vowels) {
+        const v = new Set((vowels || ['a', 'e', 'i', 'o', 'u']).map(String));
+        let count = 0;
+        let previousWasVowel = false;
+        for (const char of String(word || '').toLowerCase()) {
+            const isVowel = v.has(char);
+            if (isVowel && !previousWasVowel) count++;
+            previousWasVowel = isVowel;
+        }
+        return count;
+    }
+
+    function generateOneSyllableEnding(factory, vowels, used) {
+        for (let guard = 0; guard < 200; guard++) {
+            const candidate = factory({ short: true });
+            if (!candidate) continue;
+            if (countSyllables(candidate, vowels) <= 1 && !used.has(candidate)) return candidate;
+        }
+        return '';
     }
 
     function generateCaseEndings(config, morphologyModel) {
         if (!morphologyModel.cases.length) return {};
         if (!window.ConlangPhonology?.createWordFactory) throw new Error('Shared phonology engine is not available.');
 
-        const factory = window.ConlangPhonology.createWordFactory({
-            consonants: config.consonants,
-            vowels: config.vowels,
-            mean: 1.2,
-            seed: `${config.seed}|morphology|case-endings`
-        });
+        const vowelSets = { standard: ['a', 'e', 'i', 'o', 'u'], minimal: ['a', 'i', 'u'], extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ'] };
+        const vowels = vowelSets[config.vowels] || vowelSets.standard;
+        const factory = window.ConlangPhonology.createWordFactory({ consonants: config.consonants, vowels: config.vowels, mean: 1, seed: `${config.seed}|morphology|case-endings` });
         const endings = {};
         const used = new Set();
 
@@ -139,9 +150,8 @@
                 endings[grammaticalCase] = '';
                 continue;
             }
-            let ending = '';
-            for (let guard = 0; guard < 100 && (!ending || used.has(ending)); guard++) ending = factory({ short: true });
-            if (!ending || used.has(ending)) throw new Error(`Unable to generate a unique ${grammaticalCase} case ending.`);
+            const ending = generateOneSyllableEnding(factory, vowels, used);
+            if (!ending) throw new Error(`Unable to generate a unique one-syllable ${grammaticalCase} case ending.`);
             used.add(ending);
             endings[grammaticalCase] = ending;
         }
@@ -150,56 +160,22 @@
 
     function generateMorphemeInventory(config, morphologyModel) {
         const caseEndings = generateCaseEndings(config, morphologyModel);
-        return Object.freeze({
-            relationModel: morphologyModel.relationModel,
-            alignment: morphologyModel.alignment,
-            caseSystem: morphologyModel.caseSystem,
-            cases: morphologyModel.cases.slice(),
-            caseEndings,
-            stemRule: morphologyModel.stemRule,
-            generatedAt: 'language-generation'
-        });
+        return Object.freeze({ relationModel: morphologyModel.relationModel, alignment: morphologyModel.alignment, caseSystem: morphologyModel.caseSystem, cases: morphologyModel.cases.slice(), caseEndings, stemRule: morphologyModel.stemRule, generatedAt: 'language-generation' });
     }
 
     function generate(c) {
         if (!vocabulary.length) throw new Error('Vocabulary is not loaded yet.');
-
-        const config = {
-            region: Array.isArray(c?.region) ? c.region : [], culture: Array.isArray(c?.culture) ? c.culture : [],
-            biome: Array.isArray(c?.biome) ? c.biome : [], temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [],
-            tags: Array.isArray(c?.tags) ? c.tags : [], vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european',
-            mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'), order: c?.order || 'SVO',
-            morphology: c?.morphology || 'isolating', articles: c?.articles || 'none', plural: c?.plural || 'suffix',
-            relations: c?.relations || 'prepositions', caseSystem: c?.caseSystem || 'moderate',
-            adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after'
-        };
-
+        const config = { region: Array.isArray(c?.region) ? c.region : [], culture: Array.isArray(c?.culture) ? c.culture : [], biome: Array.isArray(c?.biome) ? c.biome : [], temporal_setting: Array.isArray(c?.temporal_setting) ? c.temporal_setting : [], tags: Array.isArray(c?.tags) ? c.tags : [], vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european', mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'), order: c?.order || 'SVO', morphology: c?.morphology || 'isolating', articles: c?.articles || 'none', plural: c?.plural || 'suffix', relations: c?.relations || 'prepositions', caseSystem: c?.caseSystem || 'moderate', adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after' };
         const morphologyModel = buildMorphologyModel(config);
         const morphemes = generateMorphemeInventory(config, morphologyModel);
         const selected = selectVocabulary(config);
         const make = window.ConlangPhonology.createWordFactory(config);
         const seen = new Set();
-
-        generated = selected.map(e => {
-            const x = { ...e };
-            if (!x.conlang || seen.has(x.conlang)) x.conlang = make({ short: isShortWord(x) });
-            seen.add(x.conlang);
-            return x;
-        });
-
+        generated = selected.map(e => { const x = { ...e }; if (!x.conlang || seen.has(x.conlang)) x.conlang = make({ short: isShortWord(x) }); seen.add(x.conlang); return x; });
         return { config, morphology: morphologyModel, morphemes, lexicon: generated.slice() };
     }
 
-    function loadVocabulary(data) {
-        const list = Array.isArray(data) ? data : (Array.isArray(data?.vocabulary) ? data.vocabulary : []);
-        vocabulary = list.slice(); generated = []; return vocabulary.slice();
-    }
-
-    function languageName(seed, options = {}) {
-        const requestedSeed = String(seed ?? 'auto'); const modelKey = options.consonants || 'european'; const vowels = options.vowels || 'standard'; const mean = Number(options.mean) || 2.2;
-        if (window.ConlangPhonology?.createWordFactory) return window.ConlangPhonology.createWordFactory({ consonants: modelKey, vowels, mean: Math.max(1, Math.min(4, mean * 0.8)), seed: requestedSeed + '|language-name' })();
-        return 'language-' + String(Math.floor(Math.random() * 900) + 100);
-    }
-
+    function loadVocabulary(data) { const list = Array.isArray(data) ? data : (Array.isArray(data?.vocabulary) ? data.vocabulary : []); vocabulary = list.slice(); generated = []; return vocabulary.slice(); }
+    function languageName(seed, options = {}) { const requestedSeed = String(seed ?? 'auto'); const modelKey = options.consonants || 'european'; const vowels = options.vowels || 'standard'; const mean = Number(options.mean) || 2.2; if (window.ConlangPhonology?.createWordFactory) return window.ConlangPhonology.createWordFactory({ consonants: modelKey, vowels, mean: Math.max(1, Math.min(4, mean * 0.8)), seed: requestedSeed + '|language-name' })(); return 'language-' + String(Math.floor(Math.random() * 900) + 100); }
     window.ConlangEngine = Object.freeze({ version: VERSION, generate, loadVocabulary, getVocabulary: () => vocabulary.slice(), getGenerated: () => generated.slice(), languageName, buildMorphologyModel, generateMorphemeInventory });
 })();
