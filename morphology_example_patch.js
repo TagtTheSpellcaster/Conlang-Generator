@@ -1,10 +1,14 @@
-/* ConLang Generator — fixed morphological examples v0.11.25 */
+/* ConLang Generator — morphology examples v0.11.26 */
 (() => {
     'use strict';
 
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-    const vowelsFor = key => ({ standard: ['a', 'e', 'i', 'o', 'u'], minimal: ['a', 'i', 'u'], extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ'] }[key] || ['a', 'e', 'i', 'o', 'u']);
+    const VOWELS = {
+        standard: ['a', 'e', 'i', 'o', 'u'],
+        minimal: ['a', 'i', 'u'],
+        extended: ['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ']
+    };
 
     const CASE_TRANSLATIONS = Object.freeze({
         nominative: 'forest', accusative: 'forest', genitive: 'of the forest', dative: 'to the forest',
@@ -20,7 +24,7 @@
     }
 
     function countSyllables(word, vowels) {
-        const set = new Set((vowels || ['a', 'e', 'i', 'o', 'u']).map(String));
+        const set = new Set((vowels || VOWELS.standard).map(String));
         let count = 0, previous = false;
         for (const char of String(word || '').toLowerCase()) {
             const current = set.has(char);
@@ -30,164 +34,212 @@
         return count;
     }
 
-    function getGoodAdjective(engine) {
-        const existing = engine.getGenerated().find(e => norm(e.concept) === 'good' && (norm(e.word_type) === 'adjective' || norm(e.category).includes('adjective')));
-        return existing?.conlang ? { concept: 'good', conlang: String(existing.conlang) } : null;
+    function factory(config, purpose) {
+        return window.ConlangPhonology?.createWordFactory?.({
+            consonants: config.consonants,
+            vowels: config.vowels,
+            mean: 1,
+            seed: `${config.seed}|morphology|${purpose}`
+        }) || null;
     }
 
-    function createFactory(config, suffix) {
-        return window.ConlangPhonology?.createWordFactory?.({ consonants: config.consonants, vowels: config.vowels, mean: 1, seed: `${config.seed}|${suffix}` }) || null;
-    }
-
-    function generateUniqueEnding(factory, vowels, used) {
-        if (!factory) return '';
-        for (let guard = 0; guard < 200; guard++) {
-            const candidate = factory({ short: true });
-            if (candidate && countSyllables(candidate, vowels) <= 1 && !used.has(candidate)) { used.add(candidate); return candidate; }
+    function uniqueMarker(config, purpose, used) {
+        const f = factory(config, purpose);
+        if (!f) return '';
+        const vowels = VOWELS[config.vowels] || VOWELS.standard;
+        for (let i = 0; i < 300; i++) {
+            const candidate = f({ short: true });
+            if (candidate && countSyllables(candidate, vowels) <= 1 && !used.has(candidate)) {
+                used.add(candidate);
+                return candidate;
+            }
         }
         return '';
     }
 
-    function extractCaseEndings() {
+    function readConfig() {
+        return {
+            consonants: document.getElementById('consonants')?.value || 'european',
+            vowels: document.getElementById('vowels')?.value || 'standard',
+            seed: document.getElementById('seed')?.value || 'auto',
+            plural: document.getElementById('plural')?.value || 'suffix',
+            number: document.getElementById('morph-number')?.value || 'singular-plural'
+        };
+    }
+
+    function installNumberSelector() {
+        if (document.getElementById('morph-number')) return;
+        const plural = document.getElementById('plural');
+        if (!plural) return;
+        const field = plural.closest('.field');
+        if (!field) return;
+        const wrapper = document.createElement('div');
+        wrapper.className = 'field';
+        wrapper.innerHTML = '<label for="morph-number">Number</label><select id="morph-number"><option value="singular">Singular only</option><option value="singular-plural" selected>Singular + plural</option><option value="singular-plural-dual">Singular + plural + dual</option></select>';
+        field.insertAdjacentElement('afterend', wrapper);
+    }
+
+    function getMorphCard() {
+        return document.querySelector('.morph-inventory');
+    }
+
+    function getExampleNoun(card) {
+        const stem = card?.querySelector('.morph-noun-label .morph-stem');
+        return stem?.textContent.trim() || '';
+    }
+
+    function getCaseEnding(row) {
+        const ending = row.querySelector('.morph-ending');
+        return ending?.textContent.trim() || '';
+    }
+
+    function getCaseRows(card, number) {
+        const block = [...card.querySelectorAll('.morph-number-block')].find(b => norm(b.querySelector('.morph-number-title')?.textContent) === number);
+        return block ? [...block.querySelectorAll('.morph-example-row')] : [];
+    }
+
+    function formHTML(stem, numberMarker, caseEnding, prefix) {
+        const number = numberMarker ? `<span class="morph-number-ending">${esc(numberMarker)}</span>` : '';
+        const ending = caseEnding ? `<span class="morph-ending">${esc(caseEnding)}</span>` : '<span class="morph-empty">∅</span>';
+        if (prefix && numberMarker) return `<span class="morph-number-ending">${esc(numberMarker)}</span><span class="morph-stem">${esc(stem)}</span>${ending}`;
+        return `<span class="morph-stem">${esc(stem)}</span>${number}${ending}`;
+    }
+
+    function ensureBlock(card, title, beforeNode = null) {
+        let block = [...card.querySelectorAll('.morph-number-block')].find(b => norm(b.querySelector('.morph-number-title')?.textContent) === norm(title));
+        if (block) return block;
+        block = document.createElement('div');
+        block.className = 'morph-number-block';
+        block.style.marginTop = '12px';
+        block.innerHTML = `<div class="morph-number-title" style="font-weight:700;color:var(--text);margin-bottom:4px">${esc(title)}</div><div class="morph-example-table"></div>`;
+        if (beforeNode) card.insertBefore(block, beforeNode);
+        else card.appendChild(block);
+        return block;
+    }
+
+    function ensureHeader(block) {
+        const table = block.querySelector('.morph-example-table');
+        if (!table) return null;
+        let head = table.querySelector('.morph-example-head');
+        if (!head) {
+            head = document.createElement('div');
+            head.className = 'morph-example-head';
+            head.style.cssText = 'display:grid;grid-template-columns:minmax(100px,1fr) minmax(180px,1.4fr) minmax(130px,1fr);gap:14px;padding:5px 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em';
+            head.innerHTML = '<span>Case</span><span>Example</span><span>Translation</span>';
+            table.appendChild(head);
+        }
+        return table;
+    }
+
+    function buildNumberBlock(card, title, stem, marker, prefix, caseRows, sourceBlock) {
+        const block = ensureBlock(card, title);
+        const table = ensureHeader(block);
+        table.querySelectorAll('.morph-example-row').forEach(r => r.remove());
+        for (const source of caseRows) {
+            const caseName = source.querySelector('.morph-case')?.textContent.trim() || '';
+            const ending = getCaseEnding(source);
+            const row = document.createElement('div');
+            row.className = 'morph-example-row';
+            row.style.cssText = 'display:grid;grid-template-columns:minmax(100px,1fr) minmax(180px,1.4fr) minmax(130px,1fr);gap:14px;align-items:center;padding:6px 0;border-bottom:1px solid #1d2739';
+            row.innerHTML = `<span class="morph-case" style="color:var(--muted)">${esc(caseName)}</span><span class="morph-form" style="font-family:ui-monospace,monospace;font-size:14px">${formHTML(stem, marker, ending, prefix)}</span><span class="morph-translation" style="color:#d9e2ef">${esc(caseTranslation(caseName, title.toLowerCase()))}</span>`;
+            table.appendChild(row);
+        }
+        return block;
+    }
+
+    function patchGrammaticalMorphemes() {
+        const card = getMorphCard();
+        if (!card) return;
+        const stem = getExampleNoun(card);
+        if (!stem) return;
+
+        const config = readConfig();
+        const singularRows = getCaseRows(card, 'singular');
+        if (!singularRows.length) return;
+
         const used = new Set();
-        document.querySelectorAll('.morph-inventory .morph-ending').forEach(el => { const value = el.textContent.trim(); if (value) used.add(value); });
-        return used;
+        singularRows.forEach(row => { const ending = getCaseEnding(row); if (ending) used.add(ending); });
+
+        // Generate the productive number markers independently from the case endings.
+        // They are always one syllable and are attached to the lexical stem.
+        const pluralMarker = config.plural === 'none' || config.number === 'singular' ? '' : uniqueMarker(config, 'plural-marker', used);
+        const dualMarker = config.number === 'singular-plural-dual' ? uniqueMarker(config, 'dual-marker', used) : '';
+
+        const singularBlock = [...card.querySelectorAll('.morph-number-block')].find(b => norm(b.querySelector('.morph-number-title')?.textContent) === 'singular');
+        const pluralBlock = [...card.querySelectorAll('.morph-number-block')].find(b => norm(b.querySelector('.morph-number-title')?.textContent) === 'plural');
+        const dualBlock = [...card.querySelectorAll('.morph-number-block')].find(b => norm(b.querySelector('.morph-number-title')?.textContent) === 'dual');
+
+        if (singularBlock) {
+            singularBlock.querySelectorAll('.morph-example-row').forEach(row => {
+                const ending = getCaseEnding(row);
+                const form = row.querySelector('.morph-form');
+                if (form) form.innerHTML = formHTML(stem, '', ending, false);
+                const caseName = row.querySelector('.morph-case')?.textContent.trim() || '';
+                const tr = row.querySelector('.morph-translation');
+                if (tr) tr.textContent = caseTranslation(caseName, 'singular');
+            });
+        }
+
+        if (pluralMarker) {
+            const block = pluralBlock || ensureBlock(card, 'Plural');
+            const sourceRows = singularRows;
+            buildNumberBlock(card, 'Plural', stem, pluralMarker, config.plural === 'prefix', sourceRows, singularBlock);
+        } else if (pluralBlock) {
+            pluralBlock.remove();
+        }
+
+        if (dualMarker) {
+            buildNumberBlock(card, 'Dual', stem, dualMarker, config.plural === 'prefix', singularRows, singularBlock);
+        } else if (dualBlock) {
+            dualBlock.remove();
+        }
+
+        let note = card.querySelector('.morph-number-marker-note');
+        if (!note) {
+            note = document.createElement('div');
+            note.className = 'morph-note morph-number-marker-note';
+            card.appendChild(note);
+        }
+        const markers = [];
+        if (pluralMarker) markers.push(`Plural marker: <span class="morph-ending">${esc(pluralMarker)}</span>`);
+        if (dualMarker) markers.push(`Dual marker: <span class="morph-ending">${esc(dualMarker)}</span>`);
+        note.innerHTML = markers.length ? markers.join(' · ') : 'No productive number markers.';
     }
 
-    function extractGeneratedPluralMarker(stem, mode) {
-        if (mode === 'none') return '';
-        const blocks = [...document.querySelectorAll('.morph-inventory .morph-number-block')];
-        const pluralBlock = blocks.find(block => norm(block.querySelector('.morph-number-title')?.textContent) === 'plural');
-        const singularBlock = blocks.find(block => norm(block.querySelector('.morph-number-title')?.textContent) === 'singular');
-        const pluralForm = pluralBlock?.querySelector('.morph-example-row .morph-form');
-        const singularForm = singularBlock?.querySelector('.morph-example-row .morph-form');
-        if (!pluralForm || !singularForm) return '';
-        const plural = pluralForm.textContent.replace(/∅/g, '').trim();
-        const singular = singularForm.textContent.replace(/∅/g, '').trim();
-        if (mode === 'prefix' && plural.endsWith(stem)) return plural.slice(0, -stem.length);
-        if (mode !== 'prefix' && plural.startsWith(stem)) return plural.slice(stem.length);
-        if (singular && mode !== 'prefix' && plural.startsWith(singular)) return plural.slice(singular.length);
-        return '';
-    }
-
-    function generateNumberMarkers(config, stem) {
-        const result = { plural: extractGeneratedPluralMarker(stem, config.plural), dual: '' };
-        if (!config) return result;
-        const factory = createFactory(config, 'morphology|number|dual');
-        if (config.number !== 'singular-plural-dual' || !factory) return result;
-        const used = extractCaseEndings();
-        if (result.plural) used.add(result.plural);
-        result.dual = generateUniqueEnding(factory, vowelsFor(config.vowels), used);
-        return result;
-    }
-
-    function formHtml(stem, ending) {
-        return `<span class="stem">${esc(stem)}</span>${ending ? `<span class="ending">${esc(ending)}</span>` : '<span class="zero">∅</span>'}`;
-    }
-
-    function row(label, stem, ending, description = '') {
-        const el = document.createElement('div');
-        el.className = 'morph-category-row';
-        el.innerHTML = `<span class="label">${esc(label)}</span><span class="morph-form">${formHtml(stem, ending)}</span><span class="label">${esc(description)}</span>`;
-        return el;
-    }
-
-    function ensureSection(card, title) {
-        return [...card.querySelectorAll('.morph-category-section')].find(section => norm(section.querySelector('.morph-category-title')?.textContent) === norm(title));
+    function getGoodAdjective(engine) {
+        const existing = engine?.getGenerated?.().find(e => norm(e.concept) === 'good' && (norm(e.word_type) === 'adjective' || norm(e.category).includes('adjective')));
+        return existing?.conlang ? String(existing.conlang) : null;
     }
 
     function patchNominalCategories(engine) {
         const card = [...document.querySelectorAll('.card')].find(card => norm(card.querySelector('h3')?.textContent) === 'nominal categories');
         if (!card || !engine?.getGenerated) return;
-        const adjective = getGoodAdjective(engine);
-        if (!adjective) return;
-        const config = {
-            consonants: document.getElementById('consonants')?.value || 'european',
-            vowels: document.getElementById('vowels')?.value || 'standard',
-            seed: document.getElementById('seed')?.value || 'auto',
-            plural: document.getElementById('plural')?.value || 'suffix',
-            gender: document.getElementById('gender')?.value || 'none',
-            number: document.getElementById('number')?.value || 'singular-plural'
-        };
-        const adjectiveStem = adjective.conlang;
-        const label = [...card.querySelectorAll('.sub, .morph-noun-label, .morph-adjective-label')].find(el => /^(example noun|example adjective):/i.test(el.textContent.trim()));
+        const adjectiveStem = getGoodAdjective(engine);
+        if (!adjectiveStem) return;
+        const label = [...card.querySelectorAll('.sub, .morph-adjective-label')].find(el => /^(example noun|example adjective):/i.test(el.textContent.trim()));
         if (label) label.innerHTML = `Example adjective: <strong>good</strong> — <span class="morph-stem">${esc(adjectiveStem)}</span>`;
-
-        const genderValues = { none: [], 'masculine-feminine': ['masculine', 'feminine'], 'masculine-feminine-neuter': ['masculine', 'feminine', 'neuter'] }[config.gender] || [];
-        let genderSection = ensureSection(card, 'gender');
-        if (genderValues.length) {
-            if (!genderSection) {
-                genderSection = document.createElement('div');
-                genderSection.className = 'morph-category-section';
-                genderSection.innerHTML = '<div class="morph-category-title">Gender</div>';
-                const numberSection = ensureSection(card, 'number');
-                card.querySelector('h3')?.insertAdjacentElement('afterend', genderSection);
-                if (numberSection) card.insertBefore(genderSection, numberSection);
-            }
-            const used = new Set();
-            const factory = createFactory(config, 'morphology|nominal-categories');
-            const vowels = vowelsFor(config.vowels);
-            const existingRows = [...genderSection.querySelectorAll('.morph-category-row')];
-            genderSection.querySelectorAll('.morph-category-row').forEach(r => r.remove());
-            for (const gender of genderValues) {
-                const old = existingRows.find(r => norm(r.querySelector('.label')?.textContent) === gender);
-                const ending = old?.querySelector('.ending')?.textContent.trim() || generateUniqueEnding(factory, vowels, used);
-                genderSection.appendChild(row(gender, adjectiveStem, ending, 'stem + gender ending'));
-            }
-        } else if (genderSection) genderSection.remove();
-
-        let numberSection = ensureSection(card, 'number');
-        if (!numberSection) {
-            numberSection = document.createElement('div');
-            numberSection.className = 'morph-category-section';
-            numberSection.innerHTML = '<div class="morph-category-title">Number</div>';
-            card.appendChild(numberSection);
-        }
-        const markers = generateNumberMarkers(config, document.querySelector('.morph-inventory .morph-noun-label .morph-stem')?.textContent.trim() || '');
-        numberSection.querySelectorAll('.morph-category-row').forEach(r => r.remove());
-        numberSection.appendChild(row('singular', adjectiveStem, '', 'stem + number ending'));
-        if (config.plural !== 'none') numberSection.appendChild(row('plural', adjectiveStem, markers.plural, 'stem + number ending'));
-        if (config.number === 'singular-plural-dual') numberSection.appendChild(row('dual', adjectiveStem, markers.dual, 'stem + number ending'));
     }
 
-    function patchMorphologyExample() {
-        const card = document.querySelector('.morph-inventory');
-        const engine = window.ConlangEngine;
-        if (!card || !engine?.getGenerated) return;
-        const forest = engine.getGenerated().find(e => norm(e.concept) === 'forest');
-        if (!forest?.conlang) return;
-        const stem = String(forest.conlang);
-        const nounLabel = card.querySelector('.morph-noun-label');
-        if (nounLabel) nounLabel.innerHTML = `Example noun: <strong>forest</strong> — <span class="morph-stem">${esc(stem)}</span>`;
-        for (const block of card.querySelectorAll('.morph-number-block')) {
-            const label = block.querySelector('.morph-number-title')?.textContent.trim().toLowerCase() || '';
-            for (const form of block.querySelectorAll('.morph-form')) {
-                const ending = form.querySelector('.morph-ending');
-                form.innerHTML = `${esc(stem)}${ending ? ending.outerHTML : '<span class="morph-empty">∅</span>'}`;
-            }
-            for (const rowEl of block.querySelectorAll('.morph-example-row')) {
-                const caseName = rowEl.querySelector('.morph-case')?.textContent.trim() || '';
-                const translation = rowEl.querySelector('.morph-translation');
-                if (translation) translation.textContent = caseTranslation(caseName, label);
-            }
-        }
-        patchNominalCategories(engine);
-    }
-
-    let observer;
     function start() {
-        observer = new MutationObserver(() => {
-            observer.disconnect();
-            try {
-                if (document.querySelector('.morph-inventory')) patchMorphologyExample();
-                else patchNominalCategories(window.ConlangEngine);
-            } finally {
-                observer.observe(document.body, { childList: true, subtree: true });
-            }
-        });
+        installNumberSelector();
+        let scheduled = false;
+        const run = () => {
+            scheduled = false;
+            patchGrammaticalMorphemes();
+            patchNominalCategories(window.ConlangEngine);
+        };
+        const schedule = () => {
+            if (scheduled) return;
+            scheduled = true;
+            queueMicrotask(run);
+        };
+        const observer = new MutationObserver(schedule);
         observer.observe(document.body, { childList: true, subtree: true });
-        patchMorphologyExample();
-        patchNominalCategories(window.ConlangEngine);
+        document.getElementById('generate')?.addEventListener('click', schedule);
+        document.getElementById('regenerate')?.addEventListener('click', schedule);
+        document.getElementById('morph-number')?.addEventListener('change', schedule);
+        document.getElementById('plural')?.addEventListener('change', schedule);
+        run();
     }
 
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
