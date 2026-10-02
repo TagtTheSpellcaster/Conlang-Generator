@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.10.6 */
+/* ConLang Generator — core engine v0.10.7 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.6';
+    const VERSION = '0.10.7';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -31,19 +31,6 @@
     function has(set, values) { return values.some(v => set.has(norm(v))); }
     function concept(e, values) { return values.some(v => norm(e.concept) === norm(v)); }
 
-    function candidates(list, q = {}) {
-        const out = list.filter(e => !q.kinds || !q.kinds.length || q.kinds.includes(e.kind));
-        if (q.concepts?.length) return out.filter(e => concept(e, q.concepts));
-        return out.filter(e => {
-            const m = meta(e);
-            if (q.anyTags?.length && !has(m.tags, q.anyTags)) return false;
-            if (q.anyFeatures?.length && !has(m.features, q.anyFeatures)) return false;
-            if (q.anyGroups?.length && !has(m.groups, q.anyGroups)) return false;
-            if (q.excludeTags?.length && has(m.tags, q.excludeTags)) return false;
-            return true;
-        });
-    }
-
     function score(e, c) {
         let s = e.scope === 'universal' ? 1 : 0;
         for (const f of ['region', 'culture', 'biome', 'temporal_setting', 'tags']) {
@@ -56,10 +43,13 @@
 
     function selectVocabulary(c) {
         const ranked = vocabulary.map(e => ({ ...e, kind: classify(e), score: score(e, c) }));
-        const required = ['i', 'you', 'we', 'they', 'me', 'my', 'this', 'that', 'here', 'there', 'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how', 'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in', 'the'];
+        const required = ['i', 'you', 'we', 'they', 'me', 'my', 'your', 'this', 'that', 'here', 'there', 'today', 'tomorrow', 'yesterday', 'who', 'what', 'where', 'when', 'why', 'how', 'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in'];
+        const articleMode = norm(c.articles || 'none');
+        if (articleMode !== 'none') required.push('the');
+        if (articleMode === 'both' || articleMode === 'indefinite' || articleMode === 'partitive') required.push('a');
+
         const selected = [];
         const seen = new Set();
-
         ranked.filter(e => required.some(x => norm(e.concept) === x || norm(e.concept) === 'to ' + x)).forEach(e => {
             if (!seen.has(e.id)) { seen.add(e.id); selected.push(e); }
         });
@@ -80,9 +70,6 @@
         return selected.slice(0, 600);
     }
 
-    // Function words, pronouns and basic logical/modal particles are structurally
-    // frequent in speech, so they receive a strong one-syllable bias. The 80/20
-    // split is applied independently to each such lexical item.
     const SHORT_WORD_CONCEPTS = new Set([
         'this', 'that', 'these', 'those', 'here', 'there',
         'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'you', 'him', 'her', 'us', 'them',
@@ -110,7 +97,9 @@
             tags: Array.isArray(c?.tags) ? c.tags : [],
             vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european',
             mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'),
-            order: c?.order || 'SVO', morphology: c?.morphology || 'isolating'
+            order: c?.order || 'SVO', morphology: c?.morphology || 'isolating',
+            articles: c?.articles || 'none', plural: c?.plural || 'suffix',
+            relations: c?.relations || 'prepositions', adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after'
         };
 
         const selected = selectVocabulary(config);
