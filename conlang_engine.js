@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.11.4 */
+/* ConLang Generator — core engine v0.11.8 */
 (() => {
     'use strict';
 
-    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.4';
+    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.8';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -116,6 +116,47 @@
         });
     }
 
+    function generateCaseEndings(config, morphologyModel) {
+        if (!morphologyModel.cases.length) return {};
+        if (!window.ConlangPhonology?.createWordFactory) throw new Error('Shared phonology engine is not available.');
+
+        const factory = window.ConlangPhonology.createWordFactory({
+            consonants: config.consonants,
+            vowels: config.vowels,
+            mean: 1.2,
+            seed: `${config.seed}|morphology|case-endings`
+        });
+        const endings = {};
+        const used = new Set();
+
+        for (const grammaticalCase of morphologyModel.cases) {
+            if (grammaticalCase === 'nominative') {
+                endings[grammaticalCase] = '';
+                continue;
+            }
+            let ending = '';
+            for (let guard = 0; guard < 100 && (!ending || used.has(ending)); guard++) {
+                ending = factory({ short: true });
+            }
+            if (!ending || used.has(ending)) throw new Error(`Unable to generate a unique ${grammaticalCase} case ending.`);
+            used.add(ending);
+            endings[grammaticalCase] = ending;
+        }
+        return Object.freeze(endings);
+    }
+
+    function generateMorphemeInventory(config, morphologyModel) {
+        const caseEndings = generateCaseEndings(config, morphologyModel);
+        return Object.freeze({
+            relationModel: morphologyModel.relationModel,
+            caseSystem: morphologyModel.caseSystem,
+            cases: morphologyModel.cases.slice(),
+            caseEndings,
+            stemRule: morphologyModel.stemRule,
+            generatedAt: 'language-generation'
+        });
+    }
+
     function generate(c) {
         if (!vocabulary.length) throw new Error('Vocabulary is not loaded yet.');
 
@@ -130,6 +171,7 @@
         };
 
         const morphologyModel = buildMorphologyModel(config);
+        const morphemes = generateMorphemeInventory(config, morphologyModel);
         const selected = selectVocabulary(config);
         const make = window.ConlangPhonology.createWordFactory(config);
         const seen = new Set();
@@ -141,7 +183,7 @@
             return x;
         });
 
-        return { config, morphology: morphologyModel, lexicon: generated.slice() };
+        return { config, morphology: morphologyModel, morphemes, lexicon: generated.slice() };
     }
 
     function loadVocabulary(data) {
@@ -164,5 +206,5 @@
         return 'language-' + String(Math.floor(Math.random() * 900) + 100);
     }
 
-    window.ConlangEngine = Object.freeze({ version: VERSION, generate, loadVocabulary, getVocabulary: () => vocabulary.slice(), getGenerated: () => generated.slice(), languageName, buildMorphologyModel });
+    window.ConlangEngine = Object.freeze({ version: VERSION, generate, loadVocabulary, getVocabulary: () => vocabulary.slice(), getGenerated: () => generated.slice(), languageName, buildMorphologyModel, generateMorphemeInventory });
 })();
