@@ -1,4 +1,4 @@
-/* ConLang Generator — shared phonology engine v0.11.18 */
+/* ConLang Generator — shared phonology engine v0.11.19 */
 (() => {
     'use strict';
 
@@ -180,5 +180,5 @@
     function resetCycle() {}
     function phonologize() {}
 
-    window.ConlangPhonology = Object.freeze({ version: '0.11.18', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
+    window.ConlangPhonology = Object.freeze({ version: '0.11.19', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
 })();
