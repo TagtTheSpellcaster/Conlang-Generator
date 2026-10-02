@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.10.2 */
+/* ConLang Generator — core engine v0.10.6 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.2';
+    const VERSION = '0.10.6';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -80,6 +80,25 @@
         return selected.slice(0, 600);
     }
 
+    // Function words, pronouns and basic logical/modal particles are structurally
+    // frequent in speech, so they receive a strong one-syllable bias. The 80/20
+    // split is applied independently to each such lexical item.
+    const SHORT_WORD_CONCEPTS = new Set([
+        'this', 'that', 'these', 'those', 'here', 'there',
+        'i', 'you', 'he', 'she', 'it', 'we', 'they', 'me', 'you', 'him', 'her', 'us', 'them',
+        'my', 'your', 'his', 'her', 'our', 'their', 'mine', 'yours', 'ours', 'theirs',
+        'who', 'what', 'which', 'thing',
+        'not', 'no', 'yes', 'already', 'maybe', 'but', 'also'
+    ]);
+
+    function isShortWord(e) {
+        const t = norm(e.word_type);
+        const c = norm(e.category);
+        if (['preposition', 'conjunction', 'determiner', 'interrogative', 'pronoun', 'particle'].includes(t)) return true;
+        if (c.includes('preposition') || c.includes('conjunction') || c.includes('determiner') || c.includes('interrogative') || c.includes('pronoun')) return true;
+        return SHORT_WORD_CONCEPTS.has(norm(e.concept));
+    }
+
     function generate(c) {
         if (!vocabulary.length) throw new Error('Vocabulary is not loaded yet.');
 
@@ -100,7 +119,7 @@
 
         generated = selected.map(e => {
             const x = { ...e };
-            if (!x.conlang || seen.has(x.conlang)) x.conlang = make();
+            if (!x.conlang || seen.has(x.conlang)) x.conlang = make({ short: isShortWord(x) });
             seen.add(x.conlang);
             return x;
         });
