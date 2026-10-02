@@ -1,0 +1,69 @@
+name: Prepare v0.11.21
+
+on: push
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply targeted fixes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def patch(path, replacements):
+              p = Path(path)
+              s = p.read_text(encoding='utf-8')
+              for old, new in replacements:
+                  if old not in s:
+                      raise SystemExit(f'Expected text not found in {path}: {old[:100]!r}')
+                  s = s.replace(old, new, 1)
+              p.write_text(s, encoding='utf-8')
+
+          patch('index.html', [
+              ('<span id="app-version" class="chip">v0.11.20</span>', '<span id="app-version" class="chip">v0.11.21</span>'),
+              ('<script src="sample_patch.js"></script>', '<script src="sample_patch.js?v=0.11.21"></script>'),
+          ])
+
+          patch('sample_patch.js', [
+              ('/* ConLang Generator UI patch — v0.11.12 */', '/* ConLang Generator UI patch — v0.11.21 */'),
+              ("    const VERSION = '0.11.12';\n", ''),
+              ("    function installVersionPill() { const pill = $('app-version'); if (pill) pill.textContent = `v${VERSION}`; }\n", ''),
+              ('styles();installCopyButton();installVersionPill();installNominalCategoryControls();', 'styles();installCopyButton();installNominalCategoryControls();'),
+          ])
+
+          patch('conlang_engine.js', [
+              ("            'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in',\n", "            'many', 'all', 'nothing', 'not', 'can', 'have', 'be', 'to', 'from', 'with', 'in', 'forest',\n"),
+              ("        return selected.slice(0, 600);\n", "        const forestEntry = ranked.find(e => norm(e.concept) === 'forest');\n        if (!selected.some(e => norm(e.concept) === 'forest')) {\n            selected.unshift(forestEntry || { id: '__example_forest__', concept: 'forest', word_type: 'noun', scope: 'universal' });\n        }\n        return selected.slice(0, 600);\n"),
+          ])
+
+          patch('morphology_example_patch.js', [
+              ('/* ConLang Generator — fixed morphological example noun v0.11.20 */', '/* ConLang Generator — fixed morphological example noun v0.11.21 */'),
+              ("        nominative: 'stone',\n        accusative: 'stone',\n        genitive: 'of stone',\n        dative: 'to stone',\n        locative: 'at stone',\n        ablative: 'from stone',\n        instrumental: 'with stone',\n        absolutive: 'stone',\n        ergative: 'by stone'\n", "        nominative: 'forest',\n        accusative: 'forest',\n        genitive: 'of the forest',\n        dative: 'to the forest',\n        locative: 'in the forest',\n        ablative: 'from the forest',\n        instrumental: 'through the forest',\n        absolutive: 'forest',\n        ergative: 'by the forest'\n"),
+              ("        if (numberLabel === 'plural') return base.replace(/\\bstone\\b/g, 'stones');\n        if (numberLabel === 'dual') return base.replace(/\\bstone\\b/g, 'two stones');\n", "        if (numberLabel === 'plural') return base.replace(/\\bforest\\b/g, 'forests');\n        if (numberLabel === 'dual') return base.replace(/\\bforest\\b/g, 'two forests');\n"),
+              ("        const stone = engine.getGenerated().find(e => norm(e.concept) === 'stone');\n        if (!stone?.conlang) return;\n\n        const stem = String(stone.conlang);\n", "        const forest = engine.getGenerated().find(e => norm(e.concept) === 'forest');\n        if (!forest?.conlang) return;\n\n        const stem = String(forest.conlang);\n"),
+              ("        if (nounLabel) nounLabel.innerHTML = `Example noun: <strong>stone</strong> — <span class=\"morph-stem\">${esc(stem)}</span>`;\n", "        if (nounLabel) nounLabel.innerHTML = `Example noun: <strong>forest</strong> — <span class=\"morph-stem\">${esc(stem)}</span>`;\n"),
+          ])
+          PY
+
+      - name: Verify JavaScript
+        run: |
+          node --check conlang_engine.js
+          node --check sample_patch.js
+          node --check morphology_example_patch.js
+
+      - name: Commit fixes and remove maintenance workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html sample_patch.js conlang_engine.js morphology_example_patch.js
+          git rm .github/workflows/maintenance-0.11.21.yml
+          git commit -m 'Fix version pill and forest morphology example'
+          git push
