@@ -1,4 +1,4 @@
-/* ConLang Generator — sentence engine v0.11.2 */
+/* ConLang Generator — sentence engine v0.11.24 */
 (() => {
     'use strict';
 
@@ -53,6 +53,7 @@
         const hasIndefinite = ['both', 'indefinite', 'partitive'].includes(articles);
         const verbTag = x => find(list, { kinds: ['verb'], anyTags: [x] }, r);
         const byConcept = (...x) => find(list, { concepts: x }, r);
+        const verbConcept = (concept, tag) => byConcept(concept) || verbTag(tag);
         const pron = x => byConcept(x);
         const func = x => byConcept(x);
         const alt = (...concepts) => concepts.map(x => byConcept(x)).filter(Boolean);
@@ -94,10 +95,10 @@
             ['I have [water|food|bread].', SVO(F(I), F(HAVE), A(variants.resource))],
             ['You have [water|food|bread].', SVO(F(YOU), F(HAVE), A(variants.resource))],
             ['The [sun|moon|stone] is [hot|cold|bright].', SVO(NP(C('sun','moon','stone')), F(BE), C('hot','cold','bright'))],
-            ['I eat [food|bread].', SVO(F(I), V(verbTag('consumption')), C('food','bread'))],
-            ['[The wolf|the dog] drinks [water|milk].', SVO(NP(C('wolf','dog')), V(verbTag('consumption')), A(variants.liquid))],
-            ['I see you.', SVO(F(I), V(verbTag('perception')), F(YOU))],
-            ['You see me.', SVO(F(YOU), V(verbTag('perception')), F(ME))],
+            ['I eat [food|bread].', SVO(F(I), V(verbConcept('eat', 'consumption')), C('food','bread'))],
+            ['[The wolf|the dog] drinks [water|milk].', SVO(NP(C('wolf','dog')), V(verbConcept('drink', 'consumption')), A(variants.liquid))],
+            ['I see you.', SVO(F(I), V(verbConcept('see', 'perception')), F(YOU))],
+            ['You see me.', SVO(F(YOU), V(verbConcept('see', 'perception')), F(ME))],
             ['The hunter [kills|hunts] the wolf.', SVO(NP(F(byConcept('hunter'))), C('kill','hunt'), NP(F(byConcept('wolf'))))],
             ['I [love|trust|help] you.', SVO(F(I), C('love','trust','help'), F(YOU))],
             ['I fear [the sword|the enemy].', SVO(F(I), V(verbTag('emotion_negative')), NP(C('sword','enemy')))],
@@ -121,7 +122,7 @@
             ['I do not know.', `${F(I)} ${F(NOT)} ${V(verbTag('cognition'))}`],
             ['I know the way.', `${F(I)} ${V(verbTag('cognition'))} ${NP(F(byConcept('way') || byConcept('road')))}`],
             ['I can help you.', `${F(I)} ${F(CAN)} ${V(verbTag('help'))} ${F(YOU)}`],
-            ['Do not touch this.', `${F(NOT)} ${V(verbTag('prohibition'))} ${F(THIS)}`],
+            ['Do not touch this.', `${F(NOT)} ${V(verbConcept('touch', 'prohibition'))} ${F(THIS)}`],
             ['I am hungry.', `${F(I)} ${F(BE)} ${F(byConcept('hungry'))}`],
             ['My hand hurts.', `${F(MY)} ${F(byConcept('hand'))} ${V(verbTag('pain'))}`],
             ['I want to sleep.', `${F(I)} ${V(verbTag('volition'))} ${V(verbTag('rest'))}`],
@@ -131,16 +132,16 @@
             ['Today we work.', `${F(byConcept('today'))} ${F(WE)} ${V(verbTag('activity'))}`],
             ['Tomorrow we travel.', `${F(byConcept('tomorrow'))} ${F(WE)} ${V(verbTag('movement'))}`],
             ['Yesterday the hunter came.', `${F(byConcept('yesterday'))} ${NP(F(byConcept('hunter')))} ${V(verbTag('movement'))}`],
-            ['The [dog|wolf|horse] sees the [hunter|farmer].', SVO(NP(C('dog','wolf','horse')), V(verbTag('perception')), NP(C('hunter','farmer')))],
+            ['The [dog|wolf|horse] sees the [hunter|farmer].', SVO(NP(C('dog','wolf','horse')), V(verbConcept('see', 'perception')), NP(C('hunter','farmer')))],
             ['I [eat|drink] [food|water].', SVO(F(I), C('eat','drink'), C('food','water'))],
             ['The [sun|moon] is [bright|dark].', SVO(NP(C('sun','moon')), F(BE), C('bright','dark'))],
             ['[The hunter|the farmer] has [food|water].', SVO(NP(C('hunter','farmer')), F(HAVE), C('food','water'))],
-            ['I see [the house|the village].', SVO(F(I), V(verbTag('perception')), NP(C('house','village')))],
+            ['I see [the house|the village].', SVO(F(I), V(verbConcept('see', 'perception')), NP(C('house','village')))],
             ['We build [a house|a boat].', SVO(F(WE), V(verbTag('construction')), NP(C('house','boat'), 'indefinite'))],
             ['The [bird|fish] is [small|large].', SVO(NP(C('bird','fish')), F(BE), C('small','large'))]
         ];
         return rows.map(([english, html], i) => ({ number: i + 1, english, html }));
     }
 
-    window.ConlangSentenceEngine = Object.freeze({ version: window.CONLANG_GENERATOR_VERSION || '0.11.2', generateSamples });
+    window.ConlangSentenceEngine = Object.freeze({ version: window.CONLANG_GENERATOR_VERSION || '0.11.24', generateSamples });
 })();
