@@ -1,4 +1,4 @@
-/* ConLang Generator — generator UI controller v0.10.1 */
+/* ConLang Generator — generator UI controller v0.10.3 */
 (() => {
     'use strict';
 
@@ -7,6 +7,43 @@
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
     const uniq = a => [...new Set(a)];
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    const PHONOTACTIC_INFO = {
+        isolated: {
+            title: 'Minimalist Isolating Pattern (Hawaiian-type)',
+            description: 'The pattern categorically excludes consonant clusters and reduces the syllable to its minimum.',
+            pattern: '(C)V'
+        },
+        japanese: {
+            title: 'Controlled Open Syllable Pattern (Japanese-type)',
+            description: 'Allows minimal onsets and only the nasal in the coda, producing clean internal transitions.',
+            pattern: '(C)(G)V(N)'
+        },
+        european: {
+            title: 'Balanced European Pattern (Italian / Finnish-type)',
+            description: 'Balances open and closed syllables, distributing consonants and vowels for a smooth and stable phonotactic profile.',
+            pattern: '(S)(C)(L/G)V(L/N/S)',
+            constraint: 'String constraint: internal consonant sequences are limited to (L/N/S)+S+C or (L/N/S)+C+L, with a maximum of 3 consonants.'
+        },
+        english: {
+            title: 'Dynamic Anglo-Saxon Pattern (English-type)',
+            description: 'Allows extensive consonant clusters in both onsets and codas, with strong vowel compression.',
+            pattern: '(S)(C)(L/G)V(L/N)(C)(S)',
+            constraint: 'String constraint: internal consecutive consonants are capped at a strict maximum of 4.'
+        },
+        slavic: {
+            title: 'Compact Slavic Pattern (Croatian / Polish-type)',
+            description: 'Allows dense consonant structures and permits liquids to function as syllable nuclei.',
+            pattern: '(C)(C)(C)(V/L)(C)(C)(C)',
+            constraint: 'String constraint: two liquid-nucleus syllables may never be adjacent; internal consonant sequences are limited to 4.'
+        },
+        semitic: {
+            title: 'Semitic Root-and-Pattern Model (Arabic-type)',
+            description: 'Uses a rigid alternation that prevents both consonant and vowel accumulation.',
+            pattern: 'CV(C)',
+            constraint: 'String constraint: V+V is forbidden; word-initial structure must begin with a clean CV sequence.'
+        }
+    };
 
     function populateFilters(vocabulary) {
         ['region', 'culture', 'biome', 'temporal_setting', 'tags'].forEach(id => {
@@ -41,6 +78,32 @@
             mean: Number($('mean')?.value) || 2.2, seed,
             order: $('word-order')?.value || 'SVO', morphology: $('morphology')?.value || 'isolating'
         };
+    }
+
+    function installPhonotacticInfo() {
+        const select = $('consonants');
+        if (!select) return;
+        const field = select.closest('.field');
+        if (!field) return;
+
+        const label = field.querySelector('label[for="consonants"]');
+        if (label) label.textContent = 'Phonotactic pattern';
+
+        let info = field.querySelector('.phonotactic-info');
+        if (!info) {
+            info = document.createElement('div');
+            info.className = 'phonotactic-info';
+            info.style.cssText = 'margin-top:10px;padding-top:10px;border-top:1px solid var(--line);color:var(--muted);font-size:11px;line-height:1.45';
+            select.insertAdjacentElement('afterend', info);
+        }
+
+        const render = () => {
+            const data = PHONOTACTIC_INFO[select.value] || PHONOTACTIC_INFO.european;
+            info.innerHTML = `<div style="color:var(--text);font-weight:700;margin-bottom:4px">${esc(data.title)}</div><div>${esc(data.description)}</div><div style="margin-top:5px"><strong style="color:var(--text)">Formal pattern:</strong> <code>${esc(data.pattern)}</code></div>${data.constraint ? `<div style="margin-top:4px;font-style:italic">${esc(data.constraint)}</div>` : ''}`;
+        };
+
+        select.addEventListener('change', render);
+        render();
     }
 
     function renderSamples(list, config) {
@@ -78,7 +141,7 @@
         const c = result.config;
         const list = result.lexicon;
         const name = window.ConlangEngine.languageName(c.seed, c);
-        const chips = [c.region[0], c.culture[0], c.biome[0], c.temporal_setting[0], c.order].filter(Boolean);
+        const chips = [c.region[0], c.culture[0], c.biome[0], c.order].filter(Boolean);
         box.className = 'result';
         box.innerHTML = `<div class="hero"><div><div class="lang-name">Name of language: ${esc(name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div></div><div class="status">${list.length} lexical entries</div></div>`;
         renderSamples(list, c);
@@ -88,6 +151,7 @@
 
     function generate() {
         try {
+            randomize();
             const result = window.ConlangEngine.generate(readConfig());
             renderResult(result);
             if ($('message')) $('message').textContent = `Generated ${result.lexicon.length} entries.`;
@@ -118,6 +182,7 @@
         });
         if ($('mean')) $('mean').value = (1 + Math.random() * 2.5).toFixed(1);
         if ($('seed')) $('seed').value = 'auto';
+        $('consonants')?.dispatchEvent(new Event('change'));
     }
 
     function preset(type) {
@@ -127,6 +192,7 @@
     }
 
     function wire() {
+        installPhonotacticInfo();
         $('generate')?.addEventListener('click', generate);
         $('regenerate')?.addEventListener('click', regenerate);
         $('randomize')?.addEventListener('click', randomize);
