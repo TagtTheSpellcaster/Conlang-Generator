@@ -1,8 +1,8 @@
-/* ConLang Generator UI patch — v0.10.8 */
+/* ConLang Generator UI patch — v0.10.9 */
 (() => {
     'use strict';
 
-    const VERSION = '0.10.8';
+    const VERSION = '0.10.9';
     const $ = id => document.getElementById(id);
     const esc = v => String(v ?? '').replace(/[&<>\"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -18,7 +18,58 @@
             .compact-grid > .field { margin-top: 0; }
             .phonotactic-info { grid-column: 1 / -1; }
             .header-tools #copy-vocabulary { white-space: nowrap; }
-            #mean[type="range"] { width: 100%; height: 36px; padding: 7px 0; background: transparent; border: 0; accent-color: var(--accent); }
+
+            #mean[type="range"] {
+                width: 100%;
+                height: 24px;
+                padding: 0;
+                background: transparent;
+                border: 0;
+                outline: none;
+                appearance: none;
+                -webkit-appearance: none;
+                accent-color: transparent;
+            }
+
+            #mean[type="range"]::-webkit-slider-runnable-track {
+                height: 1px;
+                background: var(--muted);
+                border: 0;
+            }
+
+            #mean[type="range"]::-webkit-slider-thumb {
+                width: 10px;
+                height: 18px;
+                margin-top: -8px;
+                appearance: none;
+                -webkit-appearance: none;
+                border: 1px solid #6f88a8;
+                border-radius: 2px;
+                background: linear-gradient(#dce8f5, #79a9d7);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+                cursor: pointer;
+            }
+
+            #mean[type="range"]::-moz-range-track {
+                height: 1px;
+                background: var(--muted);
+                border: 0;
+            }
+
+            #mean[type="range"]::-moz-range-progress {
+                height: 1px;
+                background: var(--muted);
+            }
+
+            #mean[type="range"]::-moz-range-thumb {
+                width: 10px;
+                height: 18px;
+                border: 1px solid #6f88a8;
+                border-radius: 2px;
+                background: linear-gradient(#dce8f5, #79a9d7);
+                box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+                cursor: pointer;
+            }
         `; document.head.appendChild(s);
     }
 
