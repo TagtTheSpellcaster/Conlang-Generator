@@ -80,12 +80,12 @@
 
     function generateNumberMarkers(config) {
         const result = { plural: '', dual: '' };
-        if (!config || config.plural === 'none') return result;
+        if (!config) return result;
         const factory = createFactory(config, 'morphology|number');
         if (!factory) return result;
         const used = extractCaseEndings();
         const vowels = vowelsFor(config.vowels);
-        result.plural = generateUniqueEnding(factory, vowels, used);
+        if (config.plural !== 'none') result.plural = generateUniqueEnding(factory, vowels, used);
         if (config.number === 'singular-plural-dual') result.dual = generateUniqueEnding(factory, vowels, used);
         return result;
     }
