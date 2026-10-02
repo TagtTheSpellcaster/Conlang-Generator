@@ -1,4 +1,4 @@
-/* ConLang Generator — shared phonology engine v0.10.7 */
+/* ConLang Generator — shared phonology engine v0.11.18 */
 (() => {
     'use strict';
 
@@ -23,7 +23,7 @@
         english: {
             name: 'Dynamic Anglo-Saxon',
             c: ['p','t','k','b','d','g','f','θ','s','z','ʃ','m','n','ŋ','r','l','j','w','h'],
-            onset: ['p','t','k','b','d','g','f','θ','s','z','ʃ','m','n','r','l','j','w','h'],
+            onset: ['p','t','k','b','d','g','f','θ','s','z','ʃ','m','n','ŋ','r','l','j','w','h'],
             coda: ['p','t','k','b','d','g','f','θ','s','z','ʃ','m','n','ŋ','r','l'],
             clusters: ['pl','pr','bl','br','tr','dr','kr','gr','kl','gl','fr','fl','θr','sp','st','sk','sm','sn','sl','sw','tw','dw','kw','gw','spl','spr','str','skr','skw'],
             patterns: ['CV','CVC','CV','CCV','CVC','CCVC','CVCC'], maxClusters: 3
@@ -48,12 +48,6 @@
         ['semitic', '6 — Semitic Root-and-Pattern (Arabic-type)']
     ];
 
-    // Asymmetric lexical-length profiles. They deliberately peak on short
-    // words and retain a progressively thinner right-hand tail. The Mean
-    // syllables control selects the appropriate macro-profile:
-    //   1.0–1.5  Short / isolating
-    //   1.6–3.0  Balanced
-    //   3.1–5.0  Long / polysynthetic-like
     const LENGTH_PROFILES = {
         short:    [0.60, 0.30, 0.08, 0.02, 0.00, 0.00, 0.00, 0.00],
         balanced: [0.18, 0.40, 0.30, 0.08, 0.03, 0.01, 0.00, 0.00],
@@ -79,6 +73,10 @@
         const vowel = pick(vowels, r);
         const coda = pattern.endsWith('C') ? pick(m.coda, r) : '';
         return onset + vowel + coda;
+    }
+
+    function makeSafeSyllable(m, vowels, r) {
+        return pick(m.onset, r) + pick(vowels, r);
     }
 
     function consonantRuns(w, vowels) {
@@ -127,27 +125,30 @@
         return weights.length;
     }
 
-    function makeWord(m, vowels, mean, r, options = {}) {
-        if (options.short) {
-            const targetSyllables = r() < 0.80 ? 1 : 2;
-            for (let tries = 0; tries < 500; tries++) {
-                let word = '';
-                for (let i = 0; i < targetSyllables; i++) word += makeSyllable(m, vowels, r);
-                word = word.toLowerCase();
-                if (validWord(word, m, vowels)) return word;
-            }
-            return null;
-        }
-
-        const profile = chooseLengthProfile(mean);
-        for (let tries = 0; tries < 500; tries++) {
-            const syllables = pickWeighted(profile, r);
+    function emergencyWord(m, vowels, r, targetSyllables, used) {
+        const count = Math.max(1, Math.min(2, targetSyllables));
+        for (let attempt = 0; attempt < 64; attempt++) {
             let word = '';
-            for (let i = 0; i < syllables; i++) word += makeSyllable(m, vowels, r);
+            for (let i = 0; i < count; i++) word += makeSafeSyllable(m, vowels, r);
             word = word.toLowerCase();
-            if (validWord(word, m, vowels)) return word;
+            if (validWord(word, m, vowels) && !used.has(word)) return word;
         }
-        return null;
+        const fallback = `${pick(m.onset, r)}${pick(vowels, r)}`.toLowerCase();
+        return fallback;
+    }
+
+    function makeWord(m, vowels, mean, r, options = {}, used = new Set()) {
+        let targetSyllables;
+        if (options.short) targetSyllables = r() < 0.80 ? 1 : 2;
+        else targetSyllables = pickWeighted(chooseLengthProfile(mean), r);
+
+        for (let tries = 0; tries < 80; tries++) {
+            let word = '';
+            for (let i = 0; i < targetSyllables; i++) word += makeSyllable(m, vowels, r);
+            word = word.toLowerCase();
+            if (validWord(word, m, vowels) && !used.has(word)) return word;
+        }
+        return emergencyWord(m, vowels, r, targetSyllables, used);
     }
 
     function createWordFactory(c = {}) {
@@ -158,16 +159,26 @@
         const r = rng(`${String(c.seed || 'auto')}|phonology|${modelKey}|words`);
         const used = new Set();
         return (options = {}) => {
-            for (let guard = 0; guard < 100; guard++) {
-                const word = makeWord(model, vowels, mean, r, options);
-                if (word && !used.has(word)) { used.add(word); return word; }
+            for (let guard = 0; guard < 20; guard++) {
+                const word = makeWord(model, vowels, mean, r, options, used);
+                if (word && !used.has(word)) {
+                    used.add(word);
+                    return word;
+                }
             }
-            return 'lex' + Math.floor(r() * 1e6);
+            let emergency = makeSafeSyllable(model, vowels, r).toLowerCase();
+            let suffix = 0;
+            while (used.has(emergency) && suffix < 64) {
+                emergency = `${makeSafeSyllable(model, vowels, r)}${suffix + 1}`.toLowerCase();
+                suffix++;
+            }
+            used.add(emergency);
+            return emergency;
         };
     }
 
     function resetCycle() {}
     function phonologize() {}
 
-    window.ConlangPhonology = Object.freeze({ version: '0.10.7', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
+    window.ConlangPhonology = Object.freeze({ version: '0.11.18', models: MODEL, modelOptions: MODEL_OPTIONS, createWordFactory, resetCycle, phonologize });
 })();
