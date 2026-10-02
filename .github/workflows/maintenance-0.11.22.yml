@@ -1,0 +1,62 @@
+name: Prepare v0.11.22
+
+on: push
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Apply final targeted fixes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def patch(path, replacements):
+              p = Path(path)
+              s = p.read_text(encoding='utf-8')
+              for old, new in replacements:
+                  if old not in s:
+                      raise SystemExit(f'Expected text not found in {path}: {old[:120]!r}')
+                  s = s.replace(old, new, 1)
+              p.write_text(s, encoding='utf-8')
+
+          patch('index.html', [
+              ('<span id="app-version" class="chip">v0.11.21</span>', '<span id="app-version" class="chip">v0.11.22</span>'),
+              ('sample_patch.js?v=0.11.21', 'sample_patch.js?v=0.11.22'),
+          ])
+
+          patch('morphology_example_patch.js', [
+              ('/* ConLang Generator — fixed morphological example noun v0.11.21 */', '/* ConLang Generator — fixed morphological example noun v0.11.22 */'),
+              ("        const base = CASE_TRANSLATIONS[norm(caseName)] || 'stone';", "        const base = CASE_TRANSLATIONS[norm(caseName)] || 'forest';"),
+          ])
+
+          patch('sample_patch.js', [
+              ('/* ConLang Generator UI patch — v0.11.21 */', '/* ConLang Generator UI patch — v0.11.22 */'),
+          ])
+
+          patch('conlang_engine.js', [
+              ('/* ConLang Generator — core engine v0.11.19 */', '/* ConLang Generator — core engine v0.11.22 */'),
+          ])
+          PY
+
+      - name: Verify JavaScript
+        run: |
+          node --check conlang_engine.js
+          node --check sample_patch.js
+          node --check morphology_example_patch.js
+
+      - name: Commit fixes and remove maintenance workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html sample_patch.js conlang_engine.js morphology_example_patch.js
+          git rm .github/workflows/maintenance-0.11.22.yml
+          git commit -m 'Finalize v0.11.22 version and forest example'
+          git push
