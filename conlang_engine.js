@@ -1,8 +1,8 @@
-/* ConLang Generator — core engine v0.11.2 */
+/* ConLang Generator — core engine v0.11.4 */
 (() => {
     'use strict';
 
-    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.2';
+    const VERSION = window.CONLANG_GENERATOR_VERSION || '0.11.4';
     const arr = v => Array.isArray(v) ? v.filter(x => x !== null && x !== undefined && x !== '').map(String) : (v === null || v === undefined || v === '' ? [] : [String(v)]);
     const norm = v => String(v ?? '').toLowerCase().replace(/^to\s+/, '').trim();
 
@@ -97,6 +97,25 @@
         return SHORT_WORD_CONCEPTS.has(norm(e.concept));
     }
 
+    const CASE_DEFINITIONS = Object.freeze({
+        minimal: Object.freeze(['nominative', 'accusative']),
+        moderate: Object.freeze(['nominative', 'accusative', 'genitive', 'dative']),
+        extensive: Object.freeze(['nominative', 'accusative', 'genitive', 'dative', 'locative', 'ablative', 'instrumental'])
+    });
+
+    function buildMorphologyModel(c) {
+        const relationModel = ['prepositions', 'cases', 'mixed'].includes(c?.relations) ? c.relations : 'prepositions';
+        const caseSystem = ['minimal', 'moderate', 'extensive'].includes(c?.caseSystem) ? c.caseSystem : 'moderate';
+        const cases = relationModel === 'prepositions' ? [] : CASE_DEFINITIONS[caseSystem].slice();
+        return Object.freeze({
+            relationModel,
+            caseSystem: relationModel === 'prepositions' ? null : caseSystem,
+            cases,
+            stemRule: 'endings attach to the lexical stem, never to an already inflected form',
+            realization: relationModel === 'prepositions' ? 'particles' : (relationModel === 'cases' ? 'case-endings' : 'mixed')
+        });
+    }
+
     function generate(c) {
         if (!vocabulary.length) throw new Error('Vocabulary is not loaded yet.');
 
@@ -106,9 +125,11 @@
             tags: Array.isArray(c?.tags) ? c.tags : [], vowels: c?.vowels || 'standard', consonants: c?.consonants || 'european',
             mean: Number(c?.mean) || 2.2, seed: String(c?.seed ?? 'auto'), order: c?.order || 'SVO',
             morphology: c?.morphology || 'isolating', articles: c?.articles || 'none', plural: c?.plural || 'suffix',
-            relations: c?.relations || 'prepositions', adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after'
+            relations: c?.relations || 'prepositions', caseSystem: c?.caseSystem || 'moderate',
+            adjectivePosition: c?.adjectivePosition || c?.adjPosition || 'after'
         };
 
+        const morphologyModel = buildMorphologyModel(config);
         const selected = selectVocabulary(config);
         const make = window.ConlangPhonology.createWordFactory(config);
         const seen = new Set();
@@ -120,7 +141,7 @@
             return x;
         });
 
-        return { config, lexicon: generated.slice() };
+        return { config, morphology: morphologyModel, lexicon: generated.slice() };
     }
 
     function loadVocabulary(data) {
@@ -143,5 +164,5 @@
         return 'language-' + String(Math.floor(Math.random() * 900) + 100);
     }
 
-    window.ConlangEngine = Object.freeze({ version: VERSION, generate, loadVocabulary, getVocabulary: () => vocabulary.slice(), getGenerated: () => generated.slice(), languageName });
+    window.ConlangEngine = Object.freeze({ version: VERSION, generate, loadVocabulary, getVocabulary: () => vocabulary.slice(), getGenerated: () => generated.slice(), languageName, buildMorphologyModel });
 })();
