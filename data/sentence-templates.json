@@ -1,0 +1,1031 @@
+{
+ "version": 1,
+ "templates": [
+  {
+   "id": "t01",
+   "en": "I am your [friend|sister|father].",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "friend:noun",
+     "sister:noun",
+     "father:noun"
+    ],
+    "poss": "your:determiner"
+   }
+  },
+  {
+   "id": "t02",
+   "en": "You are my [friend|sister|father].",
+   "S": {
+    "head": "pronoun.second_person_singular"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "friend:noun",
+     "sister:noun",
+     "father:noun"
+    ],
+    "poss": "my:determiner"
+   }
+  },
+  {
+   "id": "t03",
+   "en": "This is [water|food|bread].",
+   "S": {
+    "head": "demonstrative.this"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "water:noun",
+     "food:noun",
+     "bread:noun"
+    ]
+   }
+  },
+  {
+   "id": "t04",
+   "en": "That is a [sword|house|tree].",
+   "S": {
+    "head": "demonstrative.that"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "sword:noun",
+     "house:noun",
+     "tree:noun"
+    ],
+    "det": "indefinite"
+   }
+  },
+  {
+   "id": "t05",
+   "en": "We are here.",
+   "S": {
+    "head": "pronoun.first_person_plural"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": "here:adverb"
+   }
+  },
+  {
+   "id": "t06",
+   "en": "They are there.",
+   "S": {
+    "head": "pronoun.third_person_plural"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": "there:adverb"
+   }
+  },
+  {
+   "id": "t07",
+   "en": "I have [water|food|bread].",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "have:verb"
+   },
+   "O": {
+    "head": [
+     "water:noun",
+     "food:noun",
+     "bread:noun"
+    ]
+   }
+  },
+  {
+   "id": "t08",
+   "en": "You have [water|food|bread].",
+   "S": {
+    "head": "pronoun.second_person_singular"
+   },
+   "V": {
+    "head": "have:verb"
+   },
+   "O": {
+    "head": [
+     "water:noun",
+     "food:noun",
+     "bread:noun"
+    ]
+   }
+  },
+  {
+   "id": "t09",
+   "en": "The sun is [hot|bright].",
+   "S": {
+    "head": "sun:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "hot:adjective",
+     "bright:adjective"
+    ]
+   }
+  },
+  {
+   "id": "t10",
+   "en": "The stone is [hot|cold].",
+   "S": {
+    "head": "stone:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "hot:adjective",
+     "cold:adjective"
+    ]
+   }
+  },
+  {
+   "id": "t11",
+   "en": "The moon is [bright|dark].",
+   "S": {
+    "head": "moon:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "bright:adjective",
+     "dark:adjective"
+    ]
+   }
+  },
+  {
+   "id": "t12",
+   "en": "I eat [food|bread].",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "eat:verb"
+   },
+   "O": {
+    "head": [
+     "food:noun",
+     "bread:noun"
+    ]
+   }
+  },
+  {
+   "id": "t13",
+   "en": "The [wolf|dog] drinks [water|milk].",
+   "S": {
+    "head": [
+     "wolf:noun",
+     "dog:noun"
+    ],
+    "det": "definite"
+   },
+   "V": {
+    "head": "drink:verb"
+   },
+   "O": {
+    "head": [
+     "water:noun",
+     "milk:noun"
+    ]
+   }
+  },
+  {
+   "id": "t14",
+   "en": "I see you.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": "pronoun.second_person_singular_object"
+   }
+  },
+  {
+   "id": "t15",
+   "en": "You see me.",
+   "S": {
+    "head": "pronoun.second_person_singular"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": "pronoun.first_person_singular_object"
+   }
+  },
+  {
+   "id": "t16",
+   "en": "The hunter [kills|hunts] the wolf.",
+   "S": {
+    "head": "hunter:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": [
+     "kill:verb",
+     "hunt:verb"
+    ]
+   },
+   "O": {
+    "head": "wolf:noun",
+    "det": "definite"
+   }
+  },
+  {
+   "id": "t17",
+   "en": "I [love|trust|help] you.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": [
+     "love:verb",
+     "trust:verb",
+     "help:verb"
+    ]
+   },
+   "O": {
+    "head": "pronoun.second_person_singular_object"
+   }
+  },
+  {
+   "id": "t18",
+   "en": "I fear the [sword|enemy].",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "fear:verb"
+   },
+   "O": {
+    "head": [
+     "sword:noun",
+     "enemy:noun"
+    ],
+    "det": "definite"
+   }
+  },
+  {
+   "id": "t19",
+   "en": "I go to the [village|city|forest].",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "go:verb"
+   },
+   "O": {
+    "adp": "to:adposition",
+    "case": "dative",
+    "np": {
+     "head": [
+      "village:noun",
+      "city:noun",
+      "forest:noun"
+     ],
+     "det": "definite"
+    }
+   }
+  },
+  {
+   "id": "t20",
+   "en": "You come from the [village|city].",
+   "S": {
+    "head": "pronoun.second_person_singular"
+   },
+   "V": {
+    "head": "come:verb"
+   },
+   "O": {
+    "adp": "from:adposition",
+    "case": "ablative",
+    "np": {
+     "head": [
+      "village:noun",
+      "city:noun"
+     ],
+     "det": "definite"
+    }
+   }
+  },
+  {
+   "id": "t21",
+   "en": "The sun rises.",
+   "S": {
+    "head": "sun:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "rise:verb"
+   }
+  },
+  {
+   "id": "t22",
+   "en": "The stone falls.",
+   "S": {
+    "head": "stone:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "fall:verb"
+   }
+  },
+  {
+   "id": "t23",
+   "en": "The [bird|fish] moves [up|down].",
+   "S": {
+    "head": [
+     "bird:noun",
+     "fish:noun"
+    ],
+    "det": "definite"
+   },
+   "V": {
+    "head": "move:verb"
+   },
+   "O": {
+    "head": [
+     "up:adverb",
+     "down:adverb"
+    ]
+   }
+  },
+  {
+   "id": "t24",
+   "en": "The wolf walks in the forest.",
+   "S": {
+    "head": "wolf:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "walk:verb"
+   },
+   "O": {
+    "adp": "in:adposition",
+    "case": "locative",
+    "np": {
+     "head": "forest:noun",
+     "det": "definite"
+    }
+   }
+  },
+  {
+   "id": "t25",
+   "en": "Stay here.",
+   "seq": [
+    "V",
+    "O"
+   ],
+   "V": {
+    "head": "stay:verb"
+   },
+   "O": {
+    "head": "here:adverb"
+   }
+  },
+  {
+   "id": "t26",
+   "en": "Come with me.",
+   "seq": [
+    "V",
+    "O"
+   ],
+   "V": {
+    "head": "come:verb"
+   },
+   "O": {
+    "adp": "with:adposition",
+    "case": "instrumental",
+    "np": {
+     "head": "pronoun.first_person_singular_object"
+    }
+   }
+  },
+  {
+   "id": "t27",
+   "en": "Who are you?",
+   "seq": [
+    "initial",
+    "V",
+    "S"
+   ],
+   "initial": [
+    {
+     "head": "interrogative.who"
+    }
+   ],
+   "V": {
+    "head": "be:verb"
+   },
+   "S": {
+    "head": "pronoun.second_person_singular"
+   }
+  },
+  {
+   "id": "t28",
+   "en": "What is this?",
+   "seq": [
+    "initial",
+    "V",
+    "S"
+   ],
+   "initial": [
+    {
+     "head": "interrogative.what"
+    }
+   ],
+   "V": {
+    "head": "be:verb"
+   },
+   "S": {
+    "head": "demonstrative.this"
+   }
+  },
+  {
+   "id": "t29",
+   "en": "Where are we?",
+   "seq": [
+    "initial",
+    "V",
+    "S"
+   ],
+   "initial": [
+    {
+     "head": "where:adverb"
+    }
+   ],
+   "V": {
+    "head": "be:verb"
+   },
+   "S": {
+    "head": "pronoun.first_person_plural"
+   }
+  },
+  {
+   "id": "t30",
+   "en": "When do you go?",
+   "seq": [
+    "initial",
+    "S",
+    "V"
+   ],
+   "initial": [
+    {
+     "head": "when:conjunction"
+    }
+   ],
+   "S": {
+    "head": "pronoun.second_person_singular"
+   },
+   "V": {
+    "head": "go:verb"
+   }
+  },
+  {
+   "id": "t31",
+   "en": "Why do you do this?",
+   "seq": [
+    "initial",
+    "S",
+    "V",
+    "O"
+   ],
+   "initial": [
+    {
+     "head": "why:adverb"
+    }
+   ],
+   "S": {
+    "head": "pronoun.second_person_singular"
+   },
+   "V": {
+    "head": "do:verb"
+   },
+   "O": {
+    "head": "demonstrative.this"
+   }
+  },
+  {
+   "id": "t32",
+   "en": "How does this work?",
+   "seq": [
+    "initial",
+    "S",
+    "V"
+   ],
+   "initial": [
+    {
+     "head": "how:adverb"
+    }
+   ],
+   "S": {
+    "head": "demonstrative.this"
+   },
+   "V": {
+    "head": "work:verb"
+   }
+  },
+  {
+   "id": "t33",
+   "en": "Where is the water?",
+   "seq": [
+    "initial",
+    "V",
+    "S"
+   ],
+   "initial": [
+    {
+     "head": "where:adverb"
+    }
+   ],
+   "V": {
+    "head": "be:verb"
+   },
+   "S": {
+    "head": "water:noun",
+    "det": "definite"
+   }
+  },
+  {
+   "id": "t34",
+   "en": "I do not want this.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "want:verb",
+    "neg": true
+   },
+   "O": {
+    "head": "demonstrative.this"
+   }
+  },
+  {
+   "id": "t35",
+   "en": "You cannot enter.",
+   "S": {
+    "head": "pronoun.second_person_singular"
+   },
+   "V": {
+    "head": "enter:verb",
+    "neg": true,
+    "aux": "can:particle"
+   }
+  },
+  {
+   "id": "t36",
+   "en": "I do not know.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "know:verb",
+    "neg": true
+   }
+  },
+  {
+   "id": "t37",
+   "en": "I know the way.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "know:verb"
+   },
+   "O": {
+    "head": "way:noun",
+    "det": "definite"
+   }
+  },
+  {
+   "id": "t38",
+   "en": "I can help you.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "help:verb",
+    "aux": "can:particle"
+   },
+   "O": {
+    "head": "pronoun.second_person_singular_object"
+   }
+  },
+  {
+   "id": "t39",
+   "en": "Do not touch this.",
+   "seq": [
+    "V",
+    "O"
+   ],
+   "V": {
+    "head": "touch:verb",
+    "neg": true
+   },
+   "O": {
+    "head": "demonstrative.this"
+   }
+  },
+  {
+   "id": "t40",
+   "en": "I am hungry.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": "hungry:adjective"
+   }
+  },
+  {
+   "id": "t41",
+   "en": "My hand hurts.",
+   "S": {
+    "head": "hand:noun",
+    "poss": "my:determiner"
+   },
+   "V": {
+    "head": "hurt:verb"
+   }
+  },
+  {
+   "id": "t42",
+   "en": "I want to sleep.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "want:verb"
+   },
+   "O": {
+    "head": "sleep:verb"
+   }
+  },
+  {
+   "id": "t43",
+   "en": "This is [much|little].",
+   "S": {
+    "head": "demonstrative.this"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "much:determiner",
+     "little:determiner"
+    ]
+   }
+  },
+  {
+   "id": "t44",
+   "en": "Everything is ready.",
+   "S": {
+    "head": "everything:pronoun"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": "ready:adjective"
+   }
+  },
+  {
+   "id": "t45",
+   "en": "Nothing exists.",
+   "S": {
+    "head": "nothing:pronoun"
+   },
+   "V": {
+    "head": "exist:verb"
+   }
+  },
+  {
+   "id": "t46",
+   "en": "Today we work.",
+   "seq": [
+    "initial",
+    "S",
+    "V"
+   ],
+   "initial": [
+    {
+     "head": "today:noun"
+    }
+   ],
+   "S": {
+    "head": "pronoun.first_person_plural"
+   },
+   "V": {
+    "head": "work:verb"
+   }
+  },
+  {
+   "id": "t47",
+   "en": "Tomorrow we travel.",
+   "seq": [
+    "initial",
+    "S",
+    "V"
+   ],
+   "initial": [
+    {
+     "head": "tomorrow:noun"
+    }
+   ],
+   "S": {
+    "head": "pronoun.first_person_plural"
+   },
+   "V": {
+    "head": "travel:verb"
+   }
+  },
+  {
+   "id": "t48",
+   "en": "Yesterday the hunter came.",
+   "seq": [
+    "initial",
+    "S",
+    "V"
+   ],
+   "initial": [
+    {
+     "head": "yesterday:noun"
+    }
+   ],
+   "S": {
+    "head": "hunter:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "come:verb"
+   }
+  },
+  {
+   "id": "t49",
+   "en": "The [dog|wolf|horse] sees the [hunter|farmer].",
+   "S": {
+    "head": [
+     "dog:noun",
+     "wolf:noun",
+     "horse:noun"
+    ],
+    "det": "definite"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": [
+     "hunter:noun",
+     "farmer:noun"
+    ],
+    "det": "definite"
+   }
+  },
+  {
+   "id": "t50",
+   "en": "I [eat|drink] [food|water].",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": [
+     "eat:verb",
+     "drink:verb"
+    ]
+   },
+   "O": {
+    "head": [
+     "food:noun",
+     "water:noun"
+    ]
+   }
+  },
+  {
+   "id": "t51",
+   "en": "The [hunter|farmer] has [food|water].",
+   "S": {
+    "head": [
+     "hunter:noun",
+     "farmer:noun"
+    ],
+    "det": "definite"
+   },
+   "V": {
+    "head": "have:verb"
+   },
+   "O": {
+    "head": [
+     "food:noun",
+     "water:noun"
+    ]
+   }
+  },
+  {
+   "id": "t52",
+   "en": "I see the [house|village].",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": [
+     "house:noun",
+     "village:noun"
+    ],
+    "det": "definite"
+   }
+  },
+  {
+   "id": "t53",
+   "en": "We build a [house|boat].",
+   "S": {
+    "head": "pronoun.first_person_plural"
+   },
+   "V": {
+    "head": "build:verb"
+   },
+   "O": {
+    "head": [
+     "house:noun",
+     "boat:noun"
+    ],
+    "det": "indefinite"
+   }
+  },
+  {
+   "id": "t54",
+   "en": "The bird is [small|large].",
+   "S": {
+    "head": "bird:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "small:adjective",
+     "large:adjective"
+    ]
+   }
+  },
+  {
+   "id": "t55",
+   "en": "The fish is [small|large].",
+   "S": {
+    "head": "fish:noun",
+    "det": "definite"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": [
+     "small:adjective",
+     "large:adjective"
+    ]
+   }
+  },
+  {
+   "id": "t56",
+   "en": "I see the [small|large] house.",
+   "S": {
+    "head": "pronoun.first_person_singular"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": "house:noun",
+    "det": "definite",
+    "adj": [
+     "small:adjective",
+     "large:adjective"
+    ]
+   }
+  },
+  {
+   "id": "t57",
+   "en": "The good wolf sees the [small|large] dog.",
+   "S": {
+    "head": "wolf:noun",
+    "det": "definite",
+    "adj": "good:adjective"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": "dog:noun",
+    "det": "definite",
+    "adj": [
+     "small:adjective",
+     "large:adjective"
+    ]
+   }
+  },
+  {
+   "id": "t58",
+   "en": "My sister is good.",
+   "S": {
+    "head": "sister:noun",
+    "poss": "my:determiner"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": "good:adjective"
+   }
+  },
+  {
+   "id": "t59",
+   "en": "My father is good.",
+   "S": {
+    "head": "father:noun",
+    "poss": "my:determiner"
+   },
+   "V": {
+    "head": "be:verb"
+   },
+   "O": {
+    "head": "good:adjective"
+   }
+  },
+  {
+   "id": "t60",
+   "en": "The wolves see the hunters.",
+   "requires": {
+    "number": "plural"
+   },
+   "S": {
+    "head": "wolf:noun",
+    "det": "definite",
+    "number": "plural"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": "hunter:noun",
+    "det": "definite",
+    "number": "plural"
+   }
+  },
+  {
+   "id": "t61",
+   "en": "We see two horses.",
+   "requires": {
+    "number": "dual"
+   },
+   "S": {
+    "head": "pronoun.first_person_plural"
+   },
+   "V": {
+    "head": "see:verb"
+   },
+   "O": {
+    "head": "horse:noun",
+    "number": "dual"
+   }
+  }
+ ]
+}

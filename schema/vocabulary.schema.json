@@ -1,0 +1,280 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "vocabulary.schema.json",
+  "title": "Conlang vocabulary",
+  "description": "Generated from src/lexicon/schema.js. Cross-entry rules (unique ids, relation targets, inverse closure) are enforced by tools/validate.mjs.",
+  "type": "object",
+  "required": [
+    "schema",
+    "vocabulary"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema": {
+      "const": 2
+    },
+    "vocabulary": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/entry"
+      }
+    }
+  },
+  "$defs": {
+    "entry": {
+      "type": "object",
+      "required": [
+        "id",
+        "lemma",
+        "pos",
+        "domain",
+        "group",
+        "tier",
+        "region",
+        "culture",
+        "biome",
+        "era",
+        "tags",
+        "features",
+        "relations"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9_]+(\\.[a-z0-9_]+)+$"
+        },
+        "lemma": {
+          "type": "string",
+          "minLength": 1,
+          "pattern": "^(?!to\\s)[^_()]+$"
+        },
+        "gloss": {
+          "type": "string",
+          "minLength": 1
+        },
+        "pos": {
+          "enum": [
+            "noun",
+            "verb",
+            "adjective",
+            "adverb",
+            "pronoun",
+            "determiner",
+            "numeral",
+            "quantifier",
+            "adposition",
+            "conjunction",
+            "particle",
+            "auxiliary"
+          ]
+        },
+        "domain": {
+          "enum": [
+            "abstract",
+            "action",
+            "animal",
+            "body",
+            "clothing",
+            "family",
+            "food",
+            "grammar",
+            "household",
+            "material",
+            "music",
+            "nature",
+            "need",
+            "number",
+            "object",
+            "quality",
+            "settlement",
+            "society",
+            "space",
+            "technology",
+            "time",
+            "transport",
+            "weapon"
+          ]
+        },
+        "group": {
+          "type": "string",
+          "minLength": 1
+        },
+        "tier": {
+          "enum": [
+            "core",
+            "common",
+            "domain"
+          ]
+        },
+        "region": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "culture": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "biome": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "era": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "prehistoric",
+              "ancient",
+              "medieval",
+              "renaissance",
+              "modern",
+              "futuristic"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        },
+        "features": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "animacy": {
+              "enum": [
+                "human",
+                "animate",
+                "inanimate"
+              ]
+            },
+            "countable": {
+              "type": "boolean"
+            },
+            "transitivity": {
+              "enum": [
+                "intransitive",
+                "transitive",
+                "ditransitive",
+                "copula"
+              ]
+            },
+            "person": {
+              "enum": [
+                1,
+                2,
+                3
+              ]
+            },
+            "number": {
+              "enum": [
+                "singular",
+                "plural"
+              ]
+            },
+            "role": {
+              "enum": [
+                "subject",
+                "object"
+              ]
+            }
+          }
+        },
+        "relations": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "opposite": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "gender_pair": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "related_to": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "same_as": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "part_of": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "has_part": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "derived_from": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "source_of": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            },
+            "is_a": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "string"
+              },
+              "uniqueItems": true
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+import { readFileSync } from 'node:fs';
+import { generateLanguage } from '../src/engine.js';
+import { tokenText } from '../src/syntax/realize.js';
+const v = JSON.parse(readFileSync(new URL('../data/vocabulary.json', import.meta.url))).vocabulary;
+const t = JSON.parse(readFileSync(new URL('../data/sentence-templates.json', import.meta.url))).templates;
+const spec = JSON.parse(process.argv[2] ?? '{}');
+const L = generateLanguage({ seed: 'demo', articles: 'both', ...spec }, v, t);
+console.log(L.name, L.lexicon.length, 'samples', L.samples.length, 'skipped', JSON.stringify(L.skippedSamples), 'notes', L.notes);
+console.log(JSON.stringify(L.morphology.affixes));
+for (const s of L.samples.slice(0, 14)) console.log(s.number, s.english, '=>', tokenText(s.tokens));

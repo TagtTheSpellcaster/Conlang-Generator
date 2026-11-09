@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conlang Vocabulary</title>
-    <link rel="stylesheet" href="vocabulary.css">
+    <link rel="stylesheet" href="css/vocabulary.css">
 </head>
 <body>
 <header>
     <div>
         <h1>Conlang Vocabulary</h1>
         <div id="databaseStatus" class="database-status">Loading...</div>
-        <div id="databaseFormatNote" class="database-format-note">
-            Database format: canonical <code>{"vocabulary":[...]}</code>
-        </div>
+        <div class="database-format-note">Schema v2 · validated with the same rules as <code>node tools/validate.mjs</code> · <a href="index.html" style="color:inherit">Generator</a></div>
     </div>
     <div class="statistics">
         <span>Total: <strong id="totalCount">0</strong></span>
@@ -29,17 +27,8 @@
         </div>
         <div id="attributeFilters" class="filters"></div>
         <div class="sorting">
-            <div>
-                <label for="sortAttribute">Sort by</label>
-                <select id="sortAttribute"></select>
-            </div>
-            <div>
-                <label for="sortDirection">Direction</label>
-                <select id="sortDirection">
-                    <option value="asc">A → Z</option>
-                    <option value="desc">Z → A</option>
-                </select>
-            </div>
+            <div><label for="sortAttribute">Sort by</label><select id="sortAttribute"></select></div>
+            <div><label for="sortDirection">Direction</label><select id="sortDirection"><option value="asc">A → Z</option><option value="desc">Z → A</option></select></div>
         </div>
     </section>
 
@@ -55,24 +44,10 @@
 
     <section class="table-container">
         <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>ID</th>
-                    <th>Concept</th>
-                    <th>Category</th>
-                    <th>Word Type</th>
-                    <th>Semantic Group</th>
-                    <th>Scope</th>
-                    <th>Region</th>
-                    <th>Culture</th>
-                    <th>Biome</th>
-                    <th>Temporal Setting</th>
-                    <th>Tags</th>
-                    <th>Features</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
+            <thead><tr>
+                <th>#</th><th>ID</th><th>Lemma</th><th>Gloss</th><th>POS</th><th>Domain</th><th>Group</th><th>Tier</th>
+                <th>Region</th><th>Culture</th><th>Biome</th><th>Era</th><th>Tags</th><th>Features</th><th>Relations</th><th>Actions</th>
+            </tr></thead>
             <tbody id="vocabularyBody"></tbody>
         </table>
     </section>
@@ -80,52 +55,41 @@
 
 <div id="appendModal" class="modal" hidden>
     <div class="modal-panel">
-        <div class="modal-header">
-            <h2>Append vocabulary</h2>
-            <button class="modal-close" data-close-modal="appendModal" aria-label="Close">×</button>
-        </div>
+        <div class="modal-header"><h2>Append vocabulary</h2><button class="modal-close" data-close-modal="appendModal" aria-label="Close">×</button></div>
         <p id="appendFilename"></p>
         <div id="appendSummary" class="append-summary"></div>
         <div id="appendErrors" class="validation-errors" hidden></div>
-        <div class="modal-actions">
-            <button id="cancelAppend">Cancel</button>
-            <button id="confirmAppend" disabled>Append entries</button>
-        </div>
+        <div class="modal-actions"><button id="cancelAppend">Cancel</button><button id="confirmAppend" disabled>Append entries</button></div>
     </div>
 </div>
 
 <div id="entryModal" class="modal" hidden>
     <div class="modal-panel modal-panel-large">
-        <div class="modal-header">
-            <h2 id="entryModalTitle">Add vocabulary entry</h2>
-            <button class="modal-close" data-close-modal="entryModal" aria-label="Close">×</button>
-        </div>
+        <div class="modal-header"><h2 id="entryModalTitle">Add vocabulary entry</h2><button class="modal-close" data-close-modal="entryModal" aria-label="Close">×</button></div>
         <form id="entryForm">
             <div class="form-grid">
-                <label>ID<input id="entryId" required></label>
-                <label>Concept<input id="entryConcept" required></label>
-                <label>Category<input id="entryCategory" required></label>
-                <label>Word type<input id="entryWordType" required></label>
-                <label>Semantic group<input id="entrySemanticGroup" required></label>
-                <label>Scope<input id="entryScope" required></label>
-                <label>Region<input id="entryRegion" placeholder="africa, mars, space"></label>
+                <label>ID<input id="entryId" required placeholder="domain.name"></label>
+                <label>Lemma<input id="entryLemma" required placeholder="no “to”, no underscores"></label>
+                <label>Gloss (optional)<input id="entryGloss" placeholder="disambiguates homonyms, e.g. of fish"></label>
+                <label>POS<select id="entryPos"></select></label>
+                <label>Domain<select id="entryDomain"></select></label>
+                <label>Group<input id="entryGroup" required></label>
+                <label>Tier<select id="entryTier"></select></label>
+                <label>Region<input id="entryRegion" placeholder="africa, europe"></label>
                 <label>Culture<input id="entryCulture" placeholder="tribal, nomadic, urban"></label>
-                <label>Biome<input id="entryBiome" placeholder="savanna, desert, tundra"></label>
-                <label>Temporal setting<input id="entryTemporalSetting" placeholder="prehistoric, medieval, futuristic"></label>
+                <label>Biome<input id="entryBiome" placeholder="savanna, desert, space"></label>
+                <label>Era<input id="entryEra" placeholder="ancient, medieval, futuristic"></label>
             </div>
-            <label>Tags<input id="entryTags" placeholder="animal, natural, fantasy"></label>
-            <label>Features<input id="entryFeatures" placeholder="living, animate"></label>
-            <label>Relations (JSON)<textarea id="entryRelations">{}</textarea></label>
+            <label>Tags<input id="entryTags" placeholder="animal, domestic, fantasy"></label>
+            <label>Features (JSON)<textarea id="entryFeatures">{}</textarea></label>
+            <label>Relations (JSON, values are arrays of ids; inverses are added automatically)<textarea id="entryRelations">{}</textarea></label>
             <div id="entryFormError" class="validation-errors" hidden></div>
-            <div class="modal-actions">
-                <button type="button" data-close-modal="entryModal">Cancel</button>
-                <button type="submit">Save entry</button>
-            </div>
+            <div class="modal-actions"><button type="button" data-close-modal="entryModal">Cancel</button><button type="submit">Save entry</button></div>
         </form>
     </div>
 </div>
 
 <input id="appendFileInput" type="file" accept=".json,application/json" hidden>
-<script src="vocabulary-manager.js"></script>
+<script type="module" src="src/ui/vocabulary-manager.js"></script>
 </body>
 </html>
