@@ -565,3 +565,14 @@ main {
 .morph-adj-head{padding:5px 0;border-bottom-color:var(--line);color:var(--muted);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
 .morph-adj-row > span:not(.morph-form){color:var(--muted)}
 .morph-ending{display:inline-block;color:#0b1020;background:#fff;border-radius:4px;padding:0 4px;margin-left:1px}
+
+/* consonant cluster controls */
+.cluster-controls { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+.cluster-group { border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px 8px; margin: 0; min-width: 0; }
+.cluster-group legend { font-size: 11px; color: var(--muted); padding: 0 4px; }
+.cluster-option { display: block; font-size: 12px; line-height: 1.7; color: var(--text); cursor: pointer; }
+.cluster-hint { grid-column: 1 / -1; font-size: 11px; }
+.phon-clusters { margin-top: 5px; font-size: 11px; color: var(--muted); }
+.phon-clusters code { margin-right: 3px; }
+.morph-verb-head, .morph-verb-row { display: grid; grid-template-columns: 70px repeat(3, 1fr); gap: 8px; padding: 3px 0; }
+.morph-verb-head { font-size: 11px; color: var(--muted); border-bottom: 1px solid var(--line); }

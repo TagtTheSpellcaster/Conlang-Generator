@@ -3,6 +3,7 @@ import { VERSION } from '../version.js';
 import { generateLanguage } from '../engine.js';
 import { assertVocabulary } from '../lexicon/schema.js';
 import { esc, uniq } from '../core/text.js';
+import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
@@ -16,13 +17,17 @@ let importedLexicon = null;  // rows imported for re-export only
 
 const selected = id => { const e = $(id); return e ? [...e.selectedOptions].map(o => o.value).filter(Boolean) : []; };
 
+// Nothing checked = model default; "none" = no clusters; otherwise the checked sets.
+const checkedClusters = position => [...document.querySelectorAll(`input[name="${position}-clusters"]:checked`)].map(i => i.value);
+
 function readInput() {
     const v = id => $(id)?.value;
     return {
         region: selected('region'), culture: selected('culture'), biome: selected('biome'), era: selected('era'), tags: selected('tags'),
         vowels: v('vowels'), consonants: v('consonants'), mean: v('mean'), seed: $('seed')?.value.trim(),
         order: v('word-order'), morphology: v('morphology'), articles: v('articles'), plural: v('plural'), number: v('number'),
-        gender: v('gender'), relations: v('relations'), caseSystem: v('case-system'), adjPosition: v('adj-position')
+        gender: v('gender'), relations: v('relations'), caseSystem: v('case-system'), adjPosition: v('adj-position'),
+        onsetClusters: checkedClusters('onset'), codaClusters: checkedClusters('coda'), maxCluster: v('max-cluster')
     };
 }
 
@@ -129,6 +134,26 @@ function installPhonotacticInfo() {
     refresh();
 }
 
+function installClusterControls() {
+    const seed = $('seed')?.closest('.field');
+    if (!seed) return;
+    const box = document.createElement('div');
+    box.className = 'cluster-controls';
+    const group = (position, title) => {
+        const items = [['none', 'None'], ...Object.keys(CLUSTER_SETS[position]).map(k => [k, CLUSTER_LABELS[k] ?? k])];
+        return `<fieldset class="cluster-group" data-position="${position}"><legend>${title}</legend>${items.map(([value, text]) => `<label class="cluster-option"><input type="checkbox" name="${position}-clusters" value="${esc(value)}"> ${esc(text)}</label>`).join('')}</fieldset>`;
+    };
+    box.innerHTML = `${group('onset', 'Onset clusters (word-initial)')}${group('coda', 'Coda clusters (word-final)')}<div class="field"><label for="max-cluster">Maximum cluster length</label><select id="max-cluster"><option value="3" selected>3 consonants</option><option value="2">2 consonants</option></select></div><div class="sub cluster-hint">Nothing checked = default of the consonant model. Sets that use consonants outside the model are skipped.</div>`;
+    seed.insertAdjacentElement('afterend', box);
+    box.addEventListener('change', ev => {
+        const input = ev.target;
+        if (input.type !== 'checkbox') return;
+        const same = [...box.querySelectorAll(`input[name="${input.name}"]`)];
+        if (input.checked && input.value === 'none') same.forEach(i => { if (i !== input) i.checked = false; });
+        else if (input.checked) same.find(i => i.value === 'none').checked = false;
+    });
+}
+
 const CASE_SYSTEM_OPTIONS = {
     accusative: [['minimal', 'Minimal — nominative / accusative'], ['moderate', 'Moderate — nominative / accusative / genitive / dative'], ['extensive', 'Extensive — nominative / accusative / genitive / dative / locative / ablative / instrumental']],
     ergative: [['minimal', 'Minimal — absolutive / ergative'], ['moderate', 'Moderate — absolutive / ergative / genitive / dative'], ['extensive', 'Extensive — absolutive / ergative / genitive / dative / locative / ablative / instrumental']]
@@ -205,7 +230,7 @@ async function loadJson(path) {
 
 async function start() {
     if ($('app-version')) $('app-version').textContent = `v${VERSION}`;
-    installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo();
+    installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls();
     $('generate')?.addEventListener('click', generate);
     $('regenerate')?.addEventListener('click', () => { randomize(); generate(); });
     $('randomize')?.addEventListener('click', randomize);

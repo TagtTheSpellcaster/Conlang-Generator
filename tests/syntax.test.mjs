@@ -63,7 +63,7 @@ test('a template with a missing concept is skipped and reported, never emitted w
 
 test('word order follows the language for the S, V, O slots', () => {
     const forms = order => {
-        const L = gen({ order }); const r = realize(T('x', { S: { head: I }, V: { head: 'see:verb' }, O: { head: YOU_O } }), lang(L));
+        const L = gen({ order, morphology: 'isolating' }); const r = realize(T('x', { S: { head: I }, V: { head: 'see:verb' }, O: { head: YOU_O } }), lang(L));
         const f = id => word(L, id).form;
         return { text: tokenText(r.tokens), s: f(I), v: f('verb.see'), o: f(YOU_O) };
     };
@@ -78,7 +78,7 @@ test('adposition position follows verb-object order (prepositions with VO, postp
     assert.equal(adpositionPosition('SOV'), 'after'); assert.equal(adpositionPosition('OSV'), 'after'); assert.equal(adpositionPosition('OVS'), 'after');
     const pp = { S: { head: I }, V: { head: 'go:verb' }, O: { adp: 'to:adposition', case: 'dative', np: { head: 'village:noun' } } };
     for (const [order, pos] of [['SVO', 'before'], ['SOV', 'after']]) {
-        const L = gen({ order, articles: 'none' }); const r = realize(T('x', pp), lang(L));
+        const L = gen({ order, articles: 'none', relations: 'prepositions' }); const r = realize(T('x', pp), lang(L));
         const to = word(L, 'function.to').form, village = word(L, 'settlement.village').form;
         const pair = tokenText(r.tokens).split(' ').filter(w => w === to || w.startsWith(village));
         assert.equal(pair[0] === to, pos === 'before', order);
@@ -130,7 +130,7 @@ test('object-form pronouns are not case-marked again', () => {
 test('adjective position and agreement with the noun', () => {
     const t = T('x', { S: { head: I }, V: { head: 'see:verb' }, O: { head: 'house:noun', adj: 'small:adjective' } });
     for (const adjPosition of ['before', 'after']) {
-        const L = gen({ adjPosition, articles: 'none', gender: 'masculine-feminine' });
+        const L = gen({ adjPosition, articles: 'none', gender: 'masculine-feminine', relations: 'prepositions' });
         const noun = word(L, 'object.house'), adj = word(L, 'adjective.small');
         const g = genderOf(noun, L.spec), ending = L.morphology.affixes.genderEndings[g];
         const out = tokenText(realize(t, lang(L)).tokens).split(' ');
@@ -165,15 +165,15 @@ test('inflect: noun paradigm cells are all different; prefix mode puts the numbe
 test('inflect leaves uninflected parts of speech and isolating languages alone', () => {
     const L = gen({ relations: 'cases' });
     const morph = { spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes };
-    const verb = word(L, 'verb.eat');
-    assert.equal(inflect(verb, { number: 'plural', case: 'accusative' }, morph).form, verb.form);
+    const adverb = word(L, 'space.here');
+    assert.equal(inflect(adverb, { number: 'plural', case: 'accusative' }, morph).form, adverb.form);
     const I2 = gen({ morphology: 'isolating' });
     const noun = word(I2, 'object.house');
     assert.equal(inflect(noun, { number: 'plural' }, { spec: I2.spec, model: I2.morphology.model, affixes: I2.morphology.affixes }).form, noun.form);
 });
 
-test('negation and auxiliary come before the verb; imperatives and questions use fixed orders', () => {
-    const L = gen({ order: 'SOV', articles: 'none' });
+test('isolating languages: negation and auxiliary are words before the verb; imperatives and questions use fixed orders', () => {
+    const L = gen({ order: 'SOV', articles: 'none', morphology: 'isolating' });
     const f = id => word(L, id).form;
     const neg = tokenText(realize(T('x', { S: { head: 'pronoun.second_person_singular' }, V: { head: 'enter:verb', neg: true, aux: 'can:particle' } }), lang(L)).tokens);
     assert.equal(neg, [f('pronoun.second_person_singular'), f('logic.not'), f('function.can'), f('verb.enter')].join(' '));

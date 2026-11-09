@@ -10,7 +10,8 @@ import { adpositionPosition, generateSamples } from './syntax/realize.js';
 export function languageName(spec) {
     const make = createWordFactory({
         consonants: spec.consonants, vowels: spec.vowels,
-        mean: Math.max(1, Math.min(4, spec.mean * 0.8)), seed: `${spec.seed}|language-name`
+        mean: Math.max(1, Math.min(4, spec.mean * 0.8)), seed: `${spec.seed}|language-name`,
+        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster
     });
     return make();
 }
@@ -30,7 +31,7 @@ export function generateLanguage(input, vocabulary, templates = []) {
         name: languageName(spec),
         spec, notes, phonology,
         morphology: { model, affixes },
-        syntax: { order: spec.order, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles },
+        syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles },
         lexicon, samples, skippedSamples: skipped
     });
 }

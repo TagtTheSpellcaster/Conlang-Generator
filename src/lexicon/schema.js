@@ -30,8 +30,8 @@ export const FEATURES = Object.freeze({
     animacy: { pos: ['noun'], values: ANIMACY },
     countable: { pos: ['noun'], type: 'boolean' },
     transitivity: { pos: ['verb'], values: TRANSITIVITY },
-    person: { pos: ['pronoun'], values: PERSONS },
-    number: { pos: ['pronoun'], values: NUMBERS },
+    person: { pos: ['pronoun', 'determiner'], values: PERSONS },
+    number: { pos: ['pronoun', 'determiner'], values: NUMBERS },
     role: { pos: ['pronoun'], values: ['subject', 'object'] }
 });
 

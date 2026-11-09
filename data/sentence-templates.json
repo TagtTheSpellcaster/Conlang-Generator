@@ -404,6 +404,7 @@
   {
    "id": "t25",
    "en": "Stay here.",
+   "mood": "imperative",
    "seq": [
     "V",
     "O"
@@ -418,6 +419,7 @@
   {
    "id": "t26",
    "en": "Come with me.",
+   "mood": "imperative",
    "seq": [
     "V",
     "O"
@@ -646,6 +648,7 @@
   {
    "id": "t39",
    "en": "Do not touch this.",
+   "mood": "imperative",
    "seq": [
     "V",
     "O"
@@ -757,6 +760,7 @@
   {
    "id": "t47",
    "en": "Tomorrow we travel.",
+   "tense": "future",
    "seq": [
     "initial",
     "S",
@@ -777,6 +781,7 @@
   {
    "id": "t48",
    "en": "Yesterday the hunter came.",
+   "tense": "past",
    "seq": [
     "initial",
     "S",

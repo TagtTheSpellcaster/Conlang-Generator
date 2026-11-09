@@ -3,6 +3,7 @@
 import { norm } from '../core/text.js';
 import { label } from '../lexicon/schema.js';
 import { inflect, genderOf } from '../morphology/inflect.js';
+import { cellOf } from '../morphology/affixes.js';
 
 const TIER_RANK = { core: 0, common: 1, domain: 2 };
 
@@ -35,7 +36,8 @@ function makeContext(lang) {
 
     const word = (entry, features = {}) => {
         const r = inflect(entry, features, morph);
-        return { kind: 'word', id: entry.id, gloss: label(entry), form: r.form, parts: r.parts };
+        const meanings = r.parts.filter(p => p.meaning).map(p => p.meaning);
+        return { kind: 'word', id: entry.id, gloss: meanings.length ? `${label(entry)} (${meanings.join(', ')})` : label(entry), form: r.form, parts: r.parts };
     };
     const need = (ref, optional = false) => {
         const e = index.resolve(ref);
@@ -64,11 +66,17 @@ function nounPhrase(np, role, ctx) {
         const art = ctx.index.resolve(np.det === 'definite' ? 'the:determiner' : 'a:determiner');
         if (art && spec.articles !== 'none') pre.push(word(art));
     }
-    if (np.poss) pre.push(word(need(np.poss)));
     const number = np.number ?? role.agree?.number ?? 'singular';
+    // Agglutinative languages mark the possessor with a suffix on the noun instead of a separate word.
+    let possessor = null;
+    if (np.poss) {
+        const possEntry = need(np.poss);
+        if (ctx.morph.affixes.possessive && possEntry.features.person && heads.every(h => h.pos === 'noun')) possessor = cellOf(possEntry.features.person, possEntry.features.number);
+        else pre.push(word(possEntry));
+    }
 
     const phrases = heads.map(h => {
-        const features = { case: role.case, number };
+        const features = { case: role.case, number, possessor };
         if (h.pos === 'adjective') features.gender = role.agree?.gender ?? spec.genders[0] ?? null;
         const headTok = word(h, features);
         if (!np.adj) return [headTok];
@@ -108,11 +116,18 @@ export function realize(template, lang) {
         const caseO = ergative ? 'absolutive' : (transitive ? 'accusative' : 'nominative');
         const adpPos = adpositionPosition(spec.order);
 
+        // Person and number of the subject drive verb agreement. A personal pronoun is dropped when the verb carries it.
+        const sHeads = template.S ? asList(template.S.head).map(ref => ctx.index.resolve(ref)).filter(Boolean) : [];
+        const sPronoun = sHeads.length === 1 && sHeads[0].pos === 'pronoun' && sHeads[0].features.person ? sHeads[0] : null;
+        const person = template.mood === 'imperative' ? 2 : (sPronoun?.features.person ?? 3);
+        const personNumber = sPronoun?.features.number ?? template.S?.number ?? 'singular';
+        const prodrop = !!(ctx.morph.affixes.verb && verbEntry && sPronoun);
+
         const parts = {};
         let subjectHead = null;
         if (template.S) {
             const r = nounPhrase(template.S, { case: caseS }, ctx);
-            parts.S = r.tokens; subjectHead = r.head;
+            parts.S = prodrop ? [] : r.tokens; subjectHead = r.head;
         }
         const agree = subjectHead ? { gender: subjectHead.pos === 'noun' ? genderOf(subjectHead, spec) : null, number: template.S.number ?? 'singular' } : undefined;
         if (template.O) {
@@ -121,12 +136,16 @@ export function realize(template, lang) {
         }
         if (template.V) {
             const v = template.V;
+            const verbAffixes = ctx.morph.affixes.verb;
             const toks = [];
-            if (v.neg) toks.push(ctx.word(ctx.need('not:particle')));
-            if (v.aux) toks.push(ctx.word(ctx.need(v.aux)));
-            toks.push(...ctx.alternatives(v.head).length > 1
-                ? [{ kind: 'alts', options: ctx.alternatives(v.head).map(e => [ctx.word(e)]) }]
-                : [ctx.word(verbEntry)]);
+            const vf = {
+                tense: template.tense ?? 'present', person, number: personNumber, imperative: template.mood === 'imperative',
+                negative: !!(v.neg && verbAffixes?.negation), potential: !!(v.aux === 'can:particle' && verbAffixes?.potential)
+            };
+            if (v.neg && !verbAffixes?.negation) toks.push(ctx.word(ctx.need('not:particle')));
+            if (v.aux && !vf.potential) toks.push(ctx.word(ctx.need(v.aux)));
+            const verbs = ctx.alternatives(v.head);
+            toks.push(...verbs.length > 1 ? [{ kind: 'alts', options: verbs.map(e => [ctx.word(e, vf)]) }] : [ctx.word(verbEntry, vf)]);
             parts.V = toks;
         }
         if (template.initial) parts.initial = template.initial.flatMap(np => nounPhrase(np, { case: model.baseCase }, ctx).tokens);

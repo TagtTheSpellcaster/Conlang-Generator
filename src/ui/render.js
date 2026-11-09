@@ -2,6 +2,7 @@
 import { esc } from '../core/text.js';
 import { label } from '../lexicon/schema.js';
 import { inflect, genderOf } from '../morphology/inflect.js';
+import { personCells } from '../morphology/affixes.js';
 
 export const PHONOTACTIC_INFO = {
     isolated: { title: 'Minimalist Isolating Pattern (Hawaiian-type)', description: 'The pattern categorically excludes consonant clusters and reduces the syllable to its minimum.', pattern: '(C)V' },
@@ -11,6 +12,17 @@ export const PHONOTACTIC_INFO = {
     slavic: { title: 'Compact Slavic Pattern (Croatian / Polish-type)', description: 'Allows dense consonant structures and permits liquids to function as syllable nuclei.', pattern: '(C)(C)(C)(V/L)(C)(C)(C)' },
     semitic: { title: 'Semitic Root-and-Pattern Model (Arabic-type)', description: 'Uses a rigid alternation that prevents both consonant and vowel accumulation.', pattern: 'CV(C)' }
 };
+
+export function clusterSummaryHtml(phonology) {
+    const list = a => a.length ? a.map(x => `<code>${esc(x)}</code>`).join(' ') : 'none';
+    return `<div class="phon-clusters"><div><strong>Onset clusters:</strong> ${list(phonology.clusters)}</div><div><strong>Coda clusters:</strong> ${list(phonology.codaClusters)}</div></div>`;
+}
+
+export function phonologyHtml(lang) {
+    const p = lang.phonology;
+    const list = a => a.map(x => `<code>${esc(x)}</code>`).join(' ');
+    return `<div class="card phonology-card"><h3>Phonology</h3><div class="sub">${esc(p.name)} · ${esc(p.lengthProfile)} words</div><div class="phon-clusters"><div><strong>Vowels:</strong> ${list(p.vowels)}</div><div><strong>Consonants:</strong> ${list(p.consonants)}</div></div>${clusterSummaryHtml(p)}<div class="phon-clusters"><div><strong>Syllable patterns:</strong> ${list(p.patterns)}</div></div></div>`;
+}
 
 export function synthesisIndex(mean) {
     if (mean <= 1.5) return 'short';
@@ -69,7 +81,7 @@ export function morphemeInventoryHtml(lang) {
     if (affixes.fused) notes.push('Fusional morphology: each gender, number and case combination has one portmanteau ending.');
     else if (markers.plural) notes.push(`Plural marker: <span class="morph-ending">${esc(markers.plural)}</span> (${esc(markers.mode)})${markers.dual ? `, dual marker: <span class="morph-ending">${esc(markers.dual)}</span>` : ''}`);
     else if (spec.morphology !== 'isolating') notes.push('No productive plural marker.');
-    notes.push('Case endings attach directly to the lexical stem, never to an already inflected form.');
+    notes.push(affixes.fused ? 'Case endings attach directly to the lexical stem.' : 'Suffix order on nouns: stem – number – possessor – case. Affixes attach to the stem in a fixed order; a linking vowel is inserted where the consonants would otherwise clash.');
     return `<div class="card morph-inventory"><h3>Grammatical morphemes</h3><div class="sub morph-noun-label">Example noun: <strong>${esc(label(noun))}</strong> — <span class="morph-stem">${esc(noun.form)}</span>${gender ? ` · gender: ${esc(gender)}` : ''}</div>${spec.morphology === 'isolating' ? '' : blocks}${notes.map(n => `<div class="morph-note">${n}</div>`).join('')}</div>`;
 }
 
@@ -90,15 +102,56 @@ export function nominalCategoriesHtml(lang) {
     return `<div class="card nominal-categories"><h3>Nominal categories</h3><div class="sub morph-adjective-label">Example adjective: <strong>${esc(adjective.lemma)}</strong> — <span class="morph-stem">${esc(adjective.form)}</span></div><div class="sub" style="margin-top:10px">Adjective declension (agrees in gender, number and case)</div><div class="morph-example-table"><div class="morph-adj-head"><span>Gender</span><span>Number · Case</span><span>Example</span></div>${rows.join('')}</div></div>`;
 }
 
+const CELL_LABEL = { singular: 'sg', plural: 'pl', dual: 'du' };
+const cellLabel = cell => { const [p, n] = cell.split('.'); return `${p}${CELL_LABEL[n]}`; };
+
+function exampleVerb(lexicon) {
+    const verbs = lexicon.filter(e => e.pos === 'verb');
+    for (const lemma of ['see', 'eat', 'go']) { const hit = verbs.find(e => e.lemma === lemma && !e.gloss); if (hit) return hit; }
+    return verbs[0] ?? null;
+}
+
+export function verbMorphologyHtml(lang) {
+    const { spec, morphology } = lang;
+    const { model, affixes } = morphology;
+    const v = affixes.verb;
+    const verb = exampleVerb(lang.lexicon);
+    if (!v || !verb) return '';
+    const morph = { spec, model, affixes };
+    const cells = personCells(spec);
+    const tenses = ['present', 'past', 'future'];
+    const rows = cells.map(cell => {
+        const [person, number] = cell.split('.');
+        const cols = tenses.map(tense => `<span class="morph-form">${formHtml(inflect(verb, { tense, person: Number(person), number }, morph).parts, true)}</span>`).join('');
+        return `<div class="morph-verb-row"><span class="morph-case">${esc(cellLabel(cell))}</span>${cols}</div>`;
+    }).join('');
+    const sfx = x => `<span class="morph-ending">${esc(x)}</span>`;
+    const notes = [];
+    if (v.mode === 'agglutinative') {
+        notes.push('Verb structure: stem – ability – negation – tense – subject agreement. Present tense and third person singular are unmarked.');
+        notes.push(`Ability: ${sfx(v.potential)} · negation: ${sfx(v.negation)} · imperative: ${sfx(v.imperative)}`);
+        const poss = affixes.possessive;
+        if (poss) {
+            const noun = exampleNoun(lang.lexicon);
+            const entries = Object.entries(poss).map(([cell, a]) => `${esc(cellLabel(cell))} ${sfx(a)}`).join(' · ');
+            notes.push(`Possessor suffixes (between number and case): ${entries}${noun ? ` — e.g. ${esc(noun.lemma)}: ${formHtml(inflect(noun, { possessor: '1.singular', case: model.baseCase }, morph).parts, false)}` : ''}`);
+        }
+    } else {
+        notes.push('Fusional verbs: one portmanteau ending per tense, person and number. Negation and ability stay separate words; the imperative is the bare stem.');
+    }
+    notes.push('Subject pronouns are dropped when the verb carries person and number.');
+    return `<div class="card verb-morphology"><h3>Verb morphology</h3><div class="sub">Example verb: <strong>${esc(label(verb))}</strong> — <span class="morph-stem">${esc(verb.form)}</span></div><div class="morph-example-table"><div class="morph-verb-head"><span>Subject</span>${tenses.map(t => `<span>${esc(t)}</span>`).join('')}</div>${rows}</div>${notes.map(n => `<div class="morph-note">${n}</div>`).join('')}</div>`;
+}
+
 const tokenHtml = t => t.kind === 'alts'
     ? `[${t.options.map(o => o.map(tokenHtml).join(' ')).join('|')}]`
-    : `<span class="sample-word" data-meaning="${esc(t.gloss)}">${t.parts.map(p => p.kind === 'stem' ? esc(p.text) : `<span class="morph-ending">${esc(p.text)}</span>`).join('')}</span>`;
+    : `<span class="sample-word" data-meaning="${esc(t.gloss)}">${t.parts.map(p => p.kind === 'stem' ? esc(p.text) : `<span class="morph-ending" title="${esc(p.meaning ?? p.kind)}">${esc(p.text)}</span>`).join('')}</span>`;
 
 export function samplesHtml(lang) {
     const pills = lang.samples.map(s => `<div class="sample-pill"><div class="en"><b>${s.number}.</b> ${esc(s.english)}</div><div class="cl"><b>${s.number}.</b> ${s.tokens.map(tokenHtml).join(' ')}</div></div>`).join('');
     const sk = lang.skippedSamples.length ? `<div class="morph-note">${lang.skippedSamples.length} sentence(s) skipped because the lexicon lacks: ${esc([...new Set(lang.skippedSamples.map(s => s.missing))].join(', '))}.</div>` : '';
     const s = lang.syntax;
-    return `<div class="sample-frame"><h3>Sample sentences</h3><div class="morph-note">Word order ${esc(s.order)} · ${s.adpositionPosition === 'before' ? 'prepositions' : 'postpositions'} · adjective ${esc(s.adjectivePosition)} the noun</div>${pills}${sk}</div>`;
+    return `<div class="sample-frame"><h3>Sample sentences</h3><div class="morph-note">Word order ${esc(s.order)} · ${s.adpositionPosition === 'before' ? 'prepositions' : 'postpositions'} · adjective ${esc(s.adjectivePosition)} the noun${s.prodrop ? ' · subject pronouns dropped (verb agreement)' : ''}</div>${pills}${sk}</div>`;
 }
 
 export const lexiconRows = lexicon => lexicon.map(e => ({ word: e.form, english: label(e), meta: `${e.domain} · ${e.pos}` }));
@@ -119,5 +172,5 @@ export function resultHtml(lang) {
     const s = lang.spec;
     const chips = [s.region[0], s.culture[0], s.biome[0], s.order].filter(Boolean);
     const notes = lang.notes.length ? `<div class="card"><h3>Adjusted options</h3>${lang.notes.map(n => `<div class="morph-note">${esc(n)}</div>`).join('')}</div>` : '';
-    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="grid">${morphemeInventoryHtml(lang)}${nominalCategoriesHtml(lang)}${notes}</div>`;
+    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div><div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="grid">${phonologyHtml(lang)}${morphemeInventoryHtml(lang)}${nominalCategoriesHtml(lang)}${verbMorphologyHtml(lang)}${notes}</div>`;
 }

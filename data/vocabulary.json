@@ -44153,7 +44153,10 @@
     "first_person",
     "possessive"
    ],
-   "features": {},
+   "features": {
+    "person": 1,
+    "number": "singular"
+   },
    "relations": {}
   },
   {
@@ -44171,7 +44174,10 @@
     "second_person",
     "possessive"
    ],
-   "features": {},
+   "features": {
+    "person": 2,
+    "number": "singular"
+   },
    "relations": {}
   },
   {
@@ -44190,7 +44196,10 @@
     "male",
     "possessive"
    ],
-   "features": {},
+   "features": {
+    "person": 3,
+    "number": "singular"
+   },
    "relations": {}
   },
   {
@@ -44209,7 +44218,10 @@
     "female",
     "possessive"
    ],
-   "features": {},
+   "features": {
+    "person": 3,
+    "number": "singular"
+   },
    "relations": {}
   },
   {
@@ -44228,7 +44240,10 @@
     "neutral",
     "possessive"
    ],
-   "features": {},
+   "features": {
+    "person": 3,
+    "number": "singular"
+   },
    "relations": {}
   },
   {
@@ -44247,7 +44262,10 @@
     "plural",
     "possessive"
    ],
-   "features": {},
+   "features": {
+    "person": 1,
+    "number": "plural"
+   },
    "relations": {}
   },
   {
@@ -44266,7 +44284,10 @@
     "plural",
     "possessive"
    ],
-   "features": {},
+   "features": {
+    "person": 3,
+    "number": "plural"
+   },
    "relations": {}
   },
   {

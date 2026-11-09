@@ -31,10 +31,19 @@ export function buildMorphologyModel(spec) {
 
 const NO_GENDER = '-';
 
+export const PERSONS = Object.freeze([1, 2, 3]);
+export const TENSES = Object.freeze(['present', 'past', 'future']);
+// Person/number cells used by verb agreement and possessive suffixes, e.g. "1.singular".
+export const personCells = spec => {
+    const numbers = ['singular', 'plural', ...(spec.numbers.includes('dual') ? ['dual'] : [])];
+    return PERSONS.flatMap(p => numbers.map(n => `${p}.${n}`));
+};
+export const cellOf = (person, number) => `${person ?? 3}.${number ?? 'singular'}`;
+
 export function generateAffixes(spec, model, reserved = new Set()) {
     const make = createAffixFactory(spec, reserved);
     const cases = model.cases;
-    const result = { caseEndings: {}, numberMarkers: { plural: '', dual: '', mode: spec.plural }, genderEndings: {}, fused: null };
+    const result = { caseEndings: {}, numberMarkers: { plural: '', dual: '', mode: spec.plural }, genderEndings: {}, fused: null, possessive: null, verb: null };
     if (spec.morphology === 'isolating') return Object.freeze(result);
 
     if (model.fusional) {
@@ -52,6 +61,7 @@ export function generateAffixes(spec, model, reserved = new Set()) {
             }
         }
         result.fused = fused;
+        result.verb = fusionalVerb(spec, make);
         return Object.freeze(result);
     }
 
@@ -59,7 +69,29 @@ export function generateAffixes(spec, model, reserved = new Set()) {
     if (spec.numbers.includes('plural')) result.numberMarkers.plural = make();
     if (spec.numbers.includes('dual')) result.numberMarkers.dual = make();
     for (const g of spec.genders) result.genderEndings[g] = make();
+    // Possessor suffixes on the noun (agglutinative only): one per person and number.
+    result.possessive = {};
+    for (const cell of personCells(spec)) result.possessive[cell] = make();
+    result.verb = agglutinativeVerb(spec, make);
     return Object.freeze(result);
+}
+
+// Verb suffix chain: stem - POTENTIAL - NEGATION - TENSE - SUBJECT AGREEMENT (imperative replaces tense and agreement).
+// Present tense and third person singular are unmarked.
+function agglutinativeVerb(spec, make) {
+    const verb = { mode: 'agglutinative', order: ['potential', 'negation', 'tense', 'agreement'], tense: { present: '', past: make(), future: make() }, negation: make(), potential: make(), imperative: make(), agreement: {} };
+    for (const cell of personCells(spec)) verb.agreement[cell] = cell === '3.singular' ? '' : make();
+    return verb;
+}
+
+// One portmanteau ending per tense x person x number. Negation and ability stay separate words, the imperative is the bare stem.
+function fusionalVerb(spec, make) {
+    const fused = {};
+    for (const tense of TENSES) {
+        fused[tense] = {};
+        for (const cell of personCells(spec)) fused[tense][cell] = tense === 'present' && cell === '3.singular' ? '' : make();
+    }
+    return { mode: 'fusional', fused, negation: '', potential: '', imperative: '' };
 }
 
 export const FUSED_NO_GENDER = NO_GENDER;

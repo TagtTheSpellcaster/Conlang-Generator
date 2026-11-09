@@ -44,3 +44,39 @@ export const MODEL_OPTIONS = [
     ['slavic', '5 — Compact Slavic (Croatian/Polish-type)'],
     ['semitic', '6 — Semitic Root-and-Pattern (Arabic-type)']
 ];
+
+// Selectable consonant-cluster sets. Single-character symbols only (a cluster is split per character).
+// A cluster is available only if every consonant in it belongs to the chosen consonant model.
+export const CLUSTER_SETS = Object.freeze({
+    onset: Object.freeze({
+        liquids: ['pr', 'br', 'tr', 'dr', 'kr', 'gr', 'fr', 'pl', 'bl', 'kl', 'gl', 'fl'],
+        sibilant_stop: ['sp', 'st', 'sk', 'spr', 'str', 'skr', 'spl'],
+        nasal_stop: ['mb', 'nd', 'ng', 'mp', 'nt', 'nk', 'ŋg', 'ŋk'],
+        harsh: ['zg', 'zd', 'zr', 'ʃk', 'ʃt', 'ʃp', 'kt', 'gd', 'tk', 'gz', 'kr', 'gr'],
+        slavic: ['vz', 'zv', 'sv', 'zl', 'vl', 'vr', 'mn', 'rz', 'zdr', 'vzd'],
+        greek: ['ps', 'pt', 'ks', 'kt', 'pn', 'mn', 'gn', 'bd']
+    }),
+    coda: Object.freeze({
+        liquid_stop: ['rp', 'rt', 'rk', 'rb', 'rd', 'rg', 'lp', 'lt', 'lk', 'ld', 'lb', 'lg', 'rm', 'rn', 'lm', 'ln'],
+        nasal_stop: ['mp', 'nt', 'nk', 'nd', 'mb', 'ng', 'ŋk', 'ŋg'],
+        sibilant_stop: ['sp', 'st', 'sk', 'ps', 'ts', 'ks'],
+        fricative_stop: ['ft', 'fs', 'pt', 'kt', 'ʃt', 'zd'],
+        harsh: ['rkt', 'rst', 'lkt', 'kst', 'rʃ', 'kʃ', 'ʃt', 'ks']
+    })
+});
+
+export const CLUSTER_LABELS = Object.freeze({
+    liquids: 'liquids (pr, tl…)', sibilant_stop: 'sibilant + stop (st, sk…)', nasal_stop: 'nasal + stop (mb, nd…)',
+    harsh: 'harsh (zg, kt…)', slavic: 'Slavic (vz, zdr…)', greek: 'Greek (ps, pt…)',
+    liquid_stop: 'liquid + stop (rk, lt…)', fricative_stop: 'fricative + stop (ft, ʃt…)'
+});
+
+export const MAX_CLUSTER_OPTIONS = Object.freeze([2, 3]);
+
+// Effective cluster list for one position: union of the chosen sets, restricted to the
+// consonant inventory of the model and to the maximum cluster length.
+export function resolveClusters(modelKey, position, keys, maxCluster = 3) {
+    const inventory = new Set((MODEL[modelKey] ?? MODEL.european).c);
+    const all = [...new Set(keys.flatMap(k => CLUSTER_SETS[position][k] ?? []))];
+    return all.filter(cl => cl.length <= maxCluster && [...cl].every(ch => inventory.has(ch)));
+}

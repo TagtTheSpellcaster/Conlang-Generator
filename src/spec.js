@@ -1,6 +1,6 @@
 // Input normalisation: turns whatever the UI (or a test) provides into one complete, valid spec,
 // and reports every place where a requested option was overridden.
-import { MODEL } from './phonology/models.js';
+import { MODEL, CLUSTER_SETS, MAX_CLUSTER_OPTIONS, resolveClusters } from './phonology/models.js';
 import { freshSeed } from './core/rng.js';
 
 export const OPTIONS = Object.freeze({
@@ -19,7 +19,7 @@ export const OPTIONS = Object.freeze({
 
 export const DEFAULTS = Object.freeze({
     vowels: 'standard', consonants: 'european', mean: 2.2, order: 'SVO', morphology: 'agglutinative', articles: 'none',
-    plural: 'suffix', number: 'singular-plural', gender: 'masculine-feminine', relations: 'prepositions',
+    plural: 'suffix', number: 'singular-plural', gender: 'masculine-feminine', relations: 'cases',
     caseSystem: 'moderate', adjPosition: 'after'
 });
 
@@ -37,6 +37,28 @@ export function resolveSpec(input = {}) {
     const mean = Number(input.mean);
     spec.mean = Number.isFinite(mean) && mean > 0 ? Math.min(5, Math.max(1, mean)) : DEFAULTS.mean;
     for (const f of ['region', 'culture', 'biome', 'era', 'tags']) spec[f] = list(input[f]);
+
+    // Consonant clusters: null = whatever the consonant model does by default, [] = none, otherwise the chosen sets.
+    const maxCluster = Number(input.maxCluster);
+    spec.maxCluster = MAX_CLUSTER_OPTIONS.includes(maxCluster) ? maxCluster : 3;
+    const clusterChoice = (position, raw) => {
+        const requested = list(raw);
+        if (!requested.length || requested.includes('default')) return null;
+        if (requested.includes('none')) return [];
+        const valid = requested.filter(k => CLUSTER_SETS[position][k]);
+        for (const k of requested) if (!CLUSTER_SETS[position][k]) notes.push(`${position} clusters: "${k}" is not a valid set, ignored.`);
+        return valid.length ? [...new Set(valid)] : null;
+    };
+    spec.onsetClusters = clusterChoice('onset', input.onsetClusters);
+    spec.codaClusters = clusterChoice('coda', input.codaClusters);
+    for (const [position, keys] of [['onset', spec.onsetClusters], ['coda', spec.codaClusters]]) {
+        if (!keys?.length) continue;
+        const usable = new Set(resolveClusters(spec.consonants, position, keys, spec.maxCluster));
+        for (const k of keys) {
+            const any = CLUSTER_SETS[position][k].some(cl => usable.has(cl));
+            if (!any) notes.push(`${position} clusters "${k}": no cluster of this set fits the "${spec.consonants}" consonant model and the maximum length ${spec.maxCluster}; ignored.`);
+        }
+    }
 
     const requestedSeed = String(input.seed ?? '').trim();
     spec.seedRequested = requestedSeed || 'auto';
