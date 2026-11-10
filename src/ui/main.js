@@ -4,6 +4,7 @@ import { generateLanguage } from '../engine.js';
 import { assertVocabulary } from '../lexicon/schema.js';
 import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
+import { GENRES, GENRE_IDS } from '../genres.js';
 import { resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
@@ -27,6 +28,7 @@ function readInput() {
         vowels: v('vowels'), consonants: v('consonants'), mean: v('mean'), seed: $('seed')?.value.trim(),
         order: v('word-order'), morphology: v('morphology'), articles: v('articles'), plural: v('plural'), number: v('number'),
         gender: v('gender'), relations: v('relations'), caseSystem: v('case-system'), adjPosition: v('adj-position'),
+        genre: v('genre'),
         onsetClusters: checkedClusters('onset'), codaClusters: checkedClusters('coda'), maxCluster: v('max-cluster')
     };
 }
@@ -74,16 +76,21 @@ function generate() {
 }
 
 function randomize() {
+    if ($('genre')) {
+        const pool = ['none', ...GENRE_IDS];
+        $('genre').value = pool[Math.floor(Math.random() * pool.length)];
+        applyGenre($('genre').value);
+    }
     for (const id of FILTERS) {
         const e = $(id);
         if (e && e.options.length > 1) e.value = [...e.options].slice(1)[Math.floor(Math.random() * (e.options.length - 1))].value;
     }
-    for (const id of ['vowels', 'consonants', 'word-order', 'morphology', 'adj-position', 'articles', 'plural', 'number', 'gender', 'relations']) {
+    for (const id of $('genre')?.value && $('genre').value !== 'none' ? [] : ['vowels', 'consonants', 'word-order', 'morphology', 'adj-position', 'articles', 'plural', 'number', 'gender', 'relations']) {
         const e = $(id);
         if (e?.options.length) e.value = e.options[Math.floor(Math.random() * e.options.length)].value;
     }
     $('relations')?.dispatchEvent(new Event('change'));
-    if ($('mean')) { $('mean').value = (1 + Math.random() * 2.5).toFixed(1); $('mean').dispatchEvent(new Event('input')); }
+    if ($('mean') && !($('genre')?.value && $('genre').value !== 'none')) { $('mean').value = (1 + Math.random() * 2.5).toFixed(1); $('mean').dispatchEvent(new Event('input')); }
     if ($('seed')) $('seed').value = 'auto';
     $('consonants')?.dispatchEvent(new Event('change'));
 }
@@ -152,6 +159,37 @@ function installClusterControls() {
         if (input.checked && input.value === 'none') same.forEach(i => { if (i !== input) i.checked = false; });
         else if (input.checked) same.find(i => i.value === 'none').checked = false;
     });
+}
+
+// Form control ids for each genre option.
+const GRAMMAR_CONTROLS = { morphology: 'morphology', articles: 'articles', order: 'word-order', plural: 'plural', number: 'number', gender: 'gender', relations: 'relations', caseSystem: 'case-system', adjPosition: 'adj-position' };
+const SOUND_CONTROLS = { consonants: 'consonants', vowels: 'vowels', mean: 'mean', maxCluster: 'max-cluster' };
+
+// Fills the grammar and sound controls with the genre's defaults; the user can change any of them afterwards.
+function applyGenre(id) {
+    const g = GENRES[id];
+    const info = $('genre-info');
+    if (info) info.textContent = g ? g.summary : 'No genre: every option is chosen by hand and the vocabulary is not weighted.';
+    if (!g) return;
+    const set = (control, value, eventName = 'change') => { const e = $(control); if (e && value !== undefined) { e.value = String(value); e.dispatchEvent(new Event(eventName)); } };
+    const order = ['morphology', 'articles', 'order', 'plural', 'number', 'gender', 'relations', 'caseSystem', 'adjPosition'];
+    for (const key of order) set(GRAMMAR_CONTROLS[key], g.grammar[key]);
+    for (const [key, control] of Object.entries(SOUND_CONTROLS)) set(control, g.sound[key], key === 'mean' ? 'input' : 'change');
+    for (const [position, list] of [['onset', g.sound.onsetClusters], ['coda', g.sound.codaClusters]]) {
+        for (const box of document.querySelectorAll(`input[name="${position}-clusters"]`)) box.checked = !!list?.includes(box.value);
+    }
+    $('consonants')?.dispatchEvent(new Event('change'));
+}
+
+function installGenreControls() {
+    const controls = document.querySelector('.controls');
+    if (!controls) return;
+    const section = document.createElement('section');
+    section.className = 'section genre-section';
+    section.innerHTML = `<h2>Language genre</h2><div class="genre-row"><div class="field"><label for="genre">Genre</label><select id="genre"><option value="none">None (free choice)</option>${GENRE_IDS.map(id => `<option value="${esc(id)}">${esc(GENRES[id].label)}</option>`).join('')}</select></div><div class="sub genre-info" id="genre-info"></div></div>`;
+    controls.insertAdjacentElement('afterbegin', section);
+    $('genre').addEventListener('change', () => applyGenre($('genre').value));
+    applyGenre('none');
 }
 
 const CASE_SYSTEM_OPTIONS = {
@@ -230,7 +268,7 @@ async function loadJson(path) {
 
 async function start() {
     if ($('app-version')) $('app-version').textContent = `v${VERSION}`;
-    installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls();
+    installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls(); installGenreControls();
     $('generate')?.addEventListener('click', generate);
     $('regenerate')?.addEventListener('click', () => { randomize(); generate(); });
     $('randomize')?.addEventListener('click', randomize);

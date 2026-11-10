@@ -2,6 +2,7 @@
 // and reports every place where a requested option was overridden.
 import { MODEL, CLUSTER_SETS, MAX_CLUSTER_OPTIONS, resolveClusters } from './phonology/models.js';
 import { freshSeed } from './core/rng.js';
+import { GENRES, genreDefaults } from './genres.js';
 
 export const OPTIONS = Object.freeze({
     vowels: ['standard', 'minimal', 'extended'],
@@ -25,9 +26,19 @@ export const DEFAULTS = Object.freeze({
 
 const list = v => Array.isArray(v) ? v.map(String).filter(Boolean) : (v === undefined || v === null || v === '' ? [] : [String(v)]);
 
-export function resolveSpec(input = {}) {
+// Unset options (undefined, '', null, empty list) fall back to the genre's defaults.
+const isUnset = v => v === undefined || v === null || v === '' || (Array.isArray(v) && v.length === 0);
+
+export function resolveSpec(rawInput = {}) {
     const notes = [];
     const spec = {};
+    const genreId = rawInput.genre && rawInput.genre !== 'none' && GENRES[rawInput.genre] ? rawInput.genre : null;
+    if (rawInput.genre && rawInput.genre !== 'none' && !genreId) notes.push(`genre: "${rawInput.genre}" is not known, ignored.`);
+    const input = { ...genreDefaults(genreId) };
+    for (const [k, v] of Object.entries(rawInput)) if (!isUnset(v) || !(k in input)) input[k] = v;
+    spec.genre = genreId;
+    spec.soundBias = genreId ? GENRES[genreId].sound.bias : null;
+    spec.semantics = genreId ? GENRES[genreId].semantics : null;
     for (const [key, allowed] of Object.entries(OPTIONS)) {
         const requested = key === 'order' ? String(input[key] ?? '').toUpperCase() : input[key];
         if (requested === undefined || requested === '') spec[key] = DEFAULTS[key];

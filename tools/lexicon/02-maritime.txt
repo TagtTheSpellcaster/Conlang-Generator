@@ -1,0 +1,40 @@
+# Seafaring: vessels, rigging, navigation, sea states, coast, harbour, crew, marine life.
+@domain maritime
+@era ancient,medieval,renaissance,modern
+@culture maritime
+@biome ocean
+@tags sea
+
+## vessels | tags=ship,vessel
+galley, longship, caravel, galleon, carrack, cog, cutter, sloop, schooner, brig, brigantine, barque, clipper, frigate, man-of-war, ship of the line, dhow, junk, trireme, bireme, quinquereme, outrigger, canoe, dugout canoe, coracle, raft, skiff, dinghy, rowboat, longboat, lifeboat, ferry, barge, whaler, trawler, fishing smack, merchantman, packet ship, hulk, fireship, ironclad, steamship, submarine, flagship, tender, tugboat, lighter
+
+## hull_and_rigging | tags=ship_part
+hull, keel, prow, bow, stern, poop deck, quarterdeck, forecastle, deck, gunwale, bulwark, bilge, hold, cargo hold, galley kitchen, cabin, porthole, hatch, companionway, mast, mainmast, foremast, mizzenmast, topmast, yard, yardarm, boom, bowsprit, sail, mainsail, topsail, jib, spinnaker, lateen sail, square sail, rigging, shroud, stay, halyard, sheet, ratline, crow's nest, rudder, tiller, helm, wheel, anchor, anchor chain, windlass, capstan, oar, oarlock, thole pin, figurehead, ballast, caulking, planking, strake, rib, thwart, bailer
+
+## navigation | tags=navigation
+compass, astrolabe, sextant, quadrant, chart, sea chart, portolan, logbook, log line, lead line, sounding, dead reckoning, celestial navigation, latitude, longitude, bearing, heading, course, wake, landmark, lighthouse, beacon fire, buoy, channel marker, pilot, rhumb line, pole star, southern cross, compass rose, knot, fathom, league, sea mile, ship's bell, watch, dogwatch, signal flag, foghorn
+
+## sea_states_and_weather | tags=sea_state
+swell, wave, breaker, whitecap, surf, rogue wave, tide, high tide, low tide, spring tide, neap tide, ebb, flood, slack water, current, undertow, riptide, whirlpool, maelstrom, squall, gale, tempest, hurricane, typhoon, waterspout, calm, doldrums, trade wind, monsoon, headwind, tailwind, crosswind, fog bank, sea mist, spray, brine, foam, sea breeze, offshore wind, onshore wind, lee, windward, leeward, horizon
+
+## coast_and_harbour | tags=coast,harbour
+coast, shoreline, beach, cove, bay, gulf, strait, channel, sound, estuary, delta, lagoon, archipelago, atoll, island, islet, reef, coral reef, shoal, sandbar, sandbank, skerry, fjord, cape, headland, promontory, cliff, sea cave, tide pool, harbor, port, haven, anchorage, roadstead, quay, pier, jetty, wharf, dock, dry dock, slipway, shipyard, boatyard, breakwater, seawall, mole, customs house, chandlery, fish market, net loft, boathouse, salt pan, saltworks
+
+## crew_and_trades | tags=crew,trade | animacy=human
+sailor, seaman, mariner, deckhand, captain, skipper, first mate, helmsman, navigator, boatswain, quartermaster, purser, ship's cook, cabin boy, lookout, oarsman, rower, galley slave, shipwright, rigger, caulker, sailmaker, ropemaker, pilot, harbormaster, fisherman, whaler, harpooner, netmaker, diver, pearl diver, sponge diver, pirate, privateer, buccaneer, corsair, smuggler, wrecker, castaway, stowaway, marooned sailor, drowned man, merchant captain, admiral, commodore, shipowner
+
+## sea_cargo_and_wreck | tags=cargo
+cargo, freight, hold stores, ship's biscuit, salt fish, grog, rum, barrel, cask, crate, bale, spice cargo, treasure chest, prize, booty, bounty, ransom, flotsam, jetsam, wreckage, driftwood, shipwreck, wreck, derelict, ghost ship, figurehead carving, message in a bottle, sea chest, hammock, rope, hawser, cable, net, trawl net, drift net, fishing line, hook, lure, harpoon, trident spear, oil lamp, ship's lantern, tar, pitch, oakum
+
+## marine_life | tags=marine_life | animacy=animate | era= | culture=
+kelp, seaweed, eelgrass, coral, anemone, sponge, jellyfish, starfish, sea urchin, sea cucumber, sea snail, limpet, barnacle, mussel, clam, oyster, scallop, cockle, whelk, conch, nautilus, cuttlefish, squid, giant squid, kraken, crab, hermit crab, lobster, crayfish, shrimp, prawn, krill, seahorse, eel, moray, ray, manta, skate, tuna, herring, sardine, anchovy, mackerel, cod, haddock, swordfish, marlin, barracuda, pike, salmon, trout, sturgeon, flying fish, pufferfish, anglerfish, dolphin, porpoise, orca, narwhal, manatee, seal, sea lion, walrus, sea otter, sea turtle, penguin, albatross, seagull, tern, cormorant, pelican, plankton, pearl, mother-of-pearl, shell, ambergris, coral branch, sea foam
+
+## sea_depths | tags=depth,ocean
+abyss, deep, depths, trench, ocean floor, seabed, seamount, thermal vent, shallows, surface, twilight zone, pressure, darkness of the deep, sunken city, sunken ship, drowned land, air pocket, bubble, sea current, thermocline
+
+## sea_actions | tags=action
+v:sail, v:navigate, v:steer, v:tack, v:jibe, v:reef, v:moor, v:dock, v:berth, v:anchor, v:weigh anchor, v:hoist, v:lower, v:furl, v:unfurl, v:row, v:paddle, v:haul, v:bail, v:careen, v:launch, v:ground, v:salvage, v:board, v:scuttle, v:sink, v:trawl, v:cast, v:harpoon, v:dive, v:float, v:sound, v:chart, v:blockade, v:ride out
+vi:drift, vi:capsize, vi:founder, vi:drown, vi:swim, vi:wade, vi:surface, vi:ebb, vi:surge, vi:heave, vi:list, vi:pitch, vi:roll, vi:flow
+
+## sea_qualities | tags=quality
+a:salty, a:briny, a:tidal, a:nautical, a:maritime, a:seaworthy, a:becalmed, a:storm-tossed, a:fathomless, a:abyssal, a:oceanic, a:buoyant, a:waterlogged, a:windswept, a:choppy, a:landlocked, a:pelagic, a:coastal, a:shallow, a:deep

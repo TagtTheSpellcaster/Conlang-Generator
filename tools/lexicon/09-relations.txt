@@ -1,0 +1,56 @@
+@domain war
+@rel opposite | war of position | war of movement
+@rel opposite | offensive | defensive
+@rel opposite | victory | defeat
+@rel opposite | advance | retreat
+@rel opposite | armistice | declaration of war
+@rel is_a | trebuchet | siege engine
+@rel is_a | catapult | siege engine
+@rel is_a | ballista | siege engine
+@rel is_a | mangonel | siege engine
+@rel is_a | battering ram | siege engine
+@rel is_a | siege tower | siege engine
+@rel part_of | vanguard | army
+@rel part_of | rear guard | army
+@rel part_of | cohort | legion
+@rel part_of | century | cohort
+@rel part_of | squad | platoon
+@rel part_of | platoon | company
+@rel part_of | company | battalion
+@rel part_of | battalion | regiment
+@rel part_of | battlement | curtain wall
+@rel part_of | portcullis | gatehouse
+@rel part_of | drawbridge | gatehouse
+@rel part_of | gatehouse | barbican
+@rel is_a | galleon | ship
+@rel is_a | caravel | ship
+@rel is_a | trireme | ship
+@rel is_a | frigate | ship
+@rel is_a | dhow | ship
+@rel part_of | mast | ship
+@rel part_of | keel | hull
+@rel part_of | hull | ship
+@rel part_of | sail | mast
+@rel part_of | rudder | ship
+@rel part_of | anchor | ship
+@rel opposite | high tide | low tide
+@rel opposite | ebb | flood
+@rel opposite | windward | leeward
+@rel opposite | bow | stern
+@rel part_of | tang | blade
+@rel part_of | pommel | sword
+@rel is_a | anvil | tool
+@rel is_a | tongs | tool
+@rel part_of | warp | loom
+@rel opposite | warp | weft
+@rel opposite | master craftsman | apprentice
+@rel is_a | stoneware | clay
+@rel is_a | porcelain | clay
+@rel is_a | dragon scale | dragon
+@rel part_of | dragon wing | dragon
+@rel opposite | heaven | hell
+@rel opposite | god | devil
+@rel opposite | blessing | curse
+@rel opposite | bride | widow
+@rel opposite | king | queen
+@rel opposite | queen | drone

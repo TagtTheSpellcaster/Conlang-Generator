@@ -1,0 +1,85 @@
+# Vocabulary for creature-folk languages: fey, giants, dragons, dwarves, hive and nomads.
+@domain nature
+@era prehistoric,ancient,medieval
+@culture animist
+@tags fey,fantasy
+
+## fey_world | tags=fey,glade
+glamour, enchanted glade, fairy ring, mushroom ring, toadstool, hollow hill, moonlit glade, twilight hour, gloaming, dawn chorus, dew, dewdrop, gossamer, cobweb, spider silk, thistledown, petal, blossom, bud, nectar, honeydew, pollen, thorn, bramble, briar, hawthorn, rowan, elder tree, willow, birch, aspen, ivy, moss, fern, lichen, wildflower, bluebell, foxglove, primrose, clover, heather, meadowsweet, mistletoe, mist, moonbeam, starlight, will-o'-the-wisp, glimmer, firefly, glow-worm, moth, dragonfly, butterfly, nightingale, lark, wren, owl, hare, fox cub, hedgehog, dormouse, stag, doe
+
+## fey_folk_and_ways | tags=fey,folk | animacy=animate
+fairy, sprite, pixie, sylph, dryad, nymph, naiad, hob, brownie, leprechaun, gnome, elf, elven lord, elven lady, fey queen, fey king, changeling, piper, trickster, wisp, hag of the wood, green man, forest spirit, river spirit, wind spirit, flower spirit, mushroom spirit, will-spirit, night wanderer
+
+## fey_acts_and_charm | tags=fey,action
+revel, round dance, midsummer dance, moonlit feast, riddle game, jest, prank, trick, wager, bargain with the fey, gift-giving, hospitality, debt of kindness, true name, borrowed name, wish, lure, enticement, spell of forgetting, enchanted sleep, dream-weaving, song of the wood
+v:flit, v:dance, v:twirl, v:bloom, v:blossom, v:glimmer, v:shimmer, v:sparkle, v:twinkle, v:whisper, v:murmur, v:bewitch, v:beguile, v:lure, v:entice, v:delight, v:tease, v:mock, v:jest, v:wager, v:weave dreams, v:steal away, v:vanish
+a:fleeting, a:fickle, a:luminous, a:elusive, a:whimsical, a:mischievous, a:radiant, a:dewy, a:mossy, a:gossamer, a:fragrant, a:fey, a:ageless, a:capricious, a:enchanting, a:wild, a:dreamy, a:graceful, a:lithe, a:slender
+
+@domain nature
+@era prehistoric,ancient,medieval
+@culture tribal
+@tags giant,mountain
+
+## giant_places_and_stone | tags=mountain,stone
+mountain peak, summit, crag, tor, massif, escarpment, scree, talus, boulder, megalith, monolith, standing stone, cairn, dolmen, stone circle, cyclopean wall, glacier, icefall, moraine, snowfield, snowdrift, avalanche, landslide, rockslide, rockfall, cavern, grotto, deep cave, mountain pass, gorge, ravine, canyon, cliff face, plateau, highland, upland, bluff, mountain spring, mountain lake, mountain hall, stone hall, giant's seat, giant's causeway, hill fort, ridge, spur, saddle, col, rock face, bedrock, granite vein, flint, obsidian, basalt, frost, permafrost, thunderhead, mountain storm
+
+## giant_folk_and_deeds | tags=giant,folk | animacy=human
+giant, titan, jotun, ogre, troll, cyclops, hill giant, frost giant, stone giant, fire giant, cloud giant, storm giant, giant elder, giant chieftain, giant child, mountain king, rock-eater, boulder-thrower, herdsman of giants, giant's wife, giant's club, giant's boot, giant's cave
+v:stomp, v:crush, v:hurl, v:uproot, v:topple, v:rumble, v:tremble, v:shake, v:heave, v:lumber, v:smash, v:pound, v:grind, v:bellow, v:roar, v:thunder, v:squat, v:sprawl, v:loom, v:tower over
+vi:endure long, vi:slumber, vi:awaken
+a:colossal, a:vast, a:towering, a:immense, a:ponderous, a:massive, a:enormous, a:gigantic, a:hulking, a:heavy, a:slow, a:ancient, a:primeval, a:rugged, a:craggy, a:granite-hard, a:unmoving, a:enduring, a:thunderous, a:mighty
+
+@domain abstract
+@era prehistoric,ancient
+@culture tribal
+@tags giant,time
+
+## deep_time | tags=time,age
+age, aeon, eon, epoch, millennium, generation of stone, long winter, great thaw, first dawn, last dusk, memory of the mountain, old ways, elder days, ancestral hall, line of ancestors, oath-stone, long memory, slow thought, heavy silence, great silence, stillness, heaviness, hugeness
+
+@domain animal
+@era ancient,medieval,renaissance
+@culture warrior,aristocratic
+@tags dragon,fantasy
+
+## dragon_kind | tags=dragon | animacy=animate
+wyrm, wyvern, drake, firedrake, dragon king, ancient wyrm, hatchling, brood of dragons, egg clutch, dragon egg, dragon rider, dragonslayer, dragon-kin, dragon scale, dragon fang, dragon claw, dragon wing, dragon tail, dragon horn, dragon breath, fire breath, frost breath, venom spit, flame, inferno, ember, cinder, ash cloud, smoke plume, lair, den of the wyrm, volcano, magma, obsidian, burnt hills, scorched earth tract, bone pile, charred bones
+
+## hoard_and_pride | tags=hoard,treasure | domain=abstract
+hoard, treasure, treasure heap, gold heap, golden hoard, dragon gold, jewel, gem hoard, trinket, tribute, tribute gold, covetousness, avarice, greed for gold, pride, vanity, arrogance, sovereignty, dominion, supremacy, tyranny, terror, awe, dread, majesty, grandeur, ancient memory, long grudge, vengeance, riddle of the wyrm, bargain with a dragon, oath of fire, breath of ruin
+
+## dragon_acts | tags=action
+v:hoard, v:covet, v:guard, v:soar, v:circle, v:coil, v:scorch, v:incinerate, v:devour, v:swallow, v:roar, v:blaze, v:smolder, v:glare, v:dominate, v:demand, v:claim, v:brood, v:hatch, v:crush underfoot
+a:fiery, a:scaled, a:winged, a:covetous, a:vainglorious, a:imperious, a:smoldering, a:ancient wyrm-old, a:glittering, a:molten, a:ashen, a:ruinous, a:sovereign, a:terrible, a:proud, a:serpentine, a:horned, a:armored, a:greedy, a:vengeful
+
+@domain nature
+@era prehistoric,ancient,medieval
+@culture tribal,communal
+@tags hive,insect
+
+## hive_life | tags=hive,colony | animacy=animate
+hive, colony, swarm, brood, brood chamber, nest, comb, honeycomb, cell, royal cell, larva, grub, pupa, chrysalis, cocoon of the brood, nymph, queen, queen mother, drone, worker, soldier caste, nurse, forager, scout insect, guard insect, caste, swarm-mind, hive-mind, spawning pit, egg, egg chamber, brood nursery, mound, anthill, termite mound, tunnel, chamber, gallery, nuptial flight, swarming, fungus garden, honey store, bee bread, royal jelly, propolis, wax, nectar flow
+
+## insect_body | tags=insect,body
+antenna, mandible, pincer, stinger, sting, fang, proboscis, chitin, carapace, exoskeleton, shell plate, thorax, abdomen, segment, compound eye, facet, wing case, wing, leg, spiracle, gland, venom sac, pheromone, scent trail, trail marker, chemical signal, vibration, buzz, hum, chirp, click, molt, shed skin, metamorphosis
+
+## hive_acts | tags=action
+v:swarm, v:forage, v:gather, v:tend, v:feed, v:build, v:excavate, v:tunnel, v:seal, v:guard, v:defend, v:sting, v:bite, v:devour, v:consume, v:digest, v:spin, v:secrete, v:molt, v:hatch, v:spawn, v:mark, v:follow the trail, v:signal, v:swarm over, v:infest, v:colonize
+vi:buzz, vi:hum, vi:crawl, vi:skitter, vi:cluster, vi:pupate, vi:emerge
+a:chitinous, a:segmented, a:swarming, a:communal, a:tireless, a:obedient, a:collective, a:faceless, a:multitudinous, a:industrious, a:sterile, a:fertile, a:venomous, a:armored, a:many-legged, a:insectoid, a:blind
+
+@domain society
+@era prehistoric,ancient,medieval
+@culture nomadic,pastoral,tribal
+@biome grassland,desert,savanna,tundra
+@tags nomad
+
+## nomad_life | tags=nomad,camp
+steppe, grassland sea, plain, open plain, dust road, caravan route, trail, track, waymarker, oasis, well, watering place, wadi, dry riverbed, salt flat, dune, camp, summer pasture, winter pasture, herd, flock, drove, herder, shepherd, drover, horse herd, camel train, mare's milk, kumis, curd, dried meat, jerky, flatbread, felt, felt tent, tent peg, tent pole, tent flap, hearth stone, smoke hole, dung fire, saddle bag, packsaddle, yak, camel, goat, sheep, mare, stallion, foal, lasso, bolas, horse-hair rope, stirrup, composite bow, felt boot, sheepskin coat, tent cover, camp circle, wagon, ox cart, wind, dust storm, blizzard, horizon, sky, migration, season round
+
+## nomad_society | tags=nomad,clan | animacy=human
+nomad, clan, tribe, band, clan elder, khan, khagan, chieftain, tribal council, horseman, horse-archer, herder chief, tribal bard, camp mother, tent-wife, scout rider, outrider, raider band, trader of the steppe, guide, guest, host, kinsman, blood brother, oathsworn rider, tribute collector
+
+## nomad_acts | tags=action
+v:migrate, v:roam, v:wander, v:graze, v:herd, v:drive, v:pitch, v:strike camp, v:break camp, v:load, v:ride, v:gallop, v:raid, v:trade, v:barter, v:track, v:forage, v:water, v:milk, v:shear, v:slaughter, v:smoke meat, v:felt, v:pack
+a:nomadic, a:wandering, a:swift, a:wind-swept, a:dusty, a:parched, a:vast, a:open, a:free, a:restless, a:hardy, a:lean, a:sun-baked, a:frost-bitten, a:far-ranging, a:mounted, a:pastoral

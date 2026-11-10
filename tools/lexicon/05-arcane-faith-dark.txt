@@ -1,0 +1,82 @@
+# Magic, devotion, hell, the dead.
+@domain magic
+@era ancient,medieval,renaissance
+@culture scholarly,shamanic
+@tags magic,fantasy
+
+## spellcraft | tags=spell
+spell, incantation, charm, enchantment, hex, curse, jinx, blessing spell, ritual, rite, ceremony of power, formula, word of power, true name, name of binding, rune, sigil, glyph, seal, circle, magic circle, ward, binding, bond of power, geas, pact, invocation, evocation, conjuration, summoning, banishment, exorcism, abjuration, divination, augury, scrying, vision, omen, prophecy, illusion, glamour, transmutation, transformation, alchemy, elixir, philter, potion, draught, tincture, antidote, poison, salve, reagent, catalyst, philosopher's stone, quintessence, cantrip, counterspell, dispelling, warding circle, protective charm, talisman, amulet, fetish, totem, runestone, enchanted object
+
+## magical_forces | tags=force
+magic, sorcery, witchcraft, wizardry, thaumaturgy, necromancy, theurgy, wild magic, high magic, low magic, hedge magic, blood magic, earth magic, fire magic, storm magic, mana, aether, ether, ley line, wellspring of power, node of power, leyline crossing, arcane current, aura, spark of power, spirit, elemental, familiar, astral plane, ethereal plane, shadow realm, other realm, veil between worlds, portal, gateway, rift, nexus
+
+## implements | tags=implement
+grimoire, tome, spellbook, scroll, codex of secrets, wand, staff, rod, orb, crystal ball, scrying mirror, focus, athame, censer, cauldron, mortar and pestle, alembic, retort, athanor, crucible of art, philter flask, vial, phial, reagent pouch, component pouch, chalk of binding, silver bowl, candle of binding, bell of warding, black mirror, rune tablet, divining rod, pendulum, tarot, bone dice, casting stones, star chart
+
+## practitioners | tags=practitioner | animacy=human
+mage, wizard, sorcerer, sorceress, warlock, witch, enchanter, enchantress, conjurer, summoner, diviner, seer, oracle, soothsayer, augur, astrologer, alchemist, necromancer, shaman, hedge witch, wise woman, cunning man, druid, medium, spellbinder, runecaster, archmage, magister, apprentice mage, magical scholar, hierophant, thaumaturge, warder, sage
+
+## magical_phenomena | tags=phenomenon
+arcane fire, witchlight, will-o'-the-wisp, spectral light, magical storm, ward-flare, glamoured mist, shimmer, shadow veil, dream, nightmare, trance, vision quest, curse mark, blight, enchanted sleep, charmed ring, cursed object, haunting, possession, apparition, manifestation, miracle, wonder, portent, sign, thunderclap of power, rift storm, mana surge, backlash, arcane residue
+
+## magic_actions | tags=action
+v:cast, v:conjure, v:summon, v:banish, v:ward, v:bind, v:enchant, v:disenchant, v:dispel, v:scry, v:divine, v:transmute, v:channel, v:invoke, v:evoke, v:attune, v:imbue, v:consecrate, v:curse, v:hex, v:bewitch, v:charm, v:glamour, v:conjure up, v:transform, v:shapeshift, v:levitate, v:ensorcel, v:exorcise, v:petrify, v:animate, v:resurrect, v:prophesy, v:foretell, v:brew, v:distill, v:infuse, v:inscribe, v:seal, v:unseal, v:unbind
+vi:shimmer, vi:glow, vi:flicker, vi:fade, vi:vanish, vi:manifest
+
+## magic_qualities | tags=quality
+a:arcane, a:mystic, a:occult, a:eldritch, a:enchanted, a:cursed, a:charmed, a:warded, a:hexed, a:spectral, a:ethereal, a:uncanny, a:magical, a:runic, a:alchemical, a:sorcerous, a:glamoured, a:blessed, a:unholy, a:forbidden, a:secret, a:ancient, a:potent, a:volatile, a:unstable, a:latent
+
+@domain faith
+@era prehistoric,ancient,medieval,renaissance
+@culture religious,theocratic,monastic
+@tags faith,sacred
+
+## places_and_things | tags=sacred_place
+altar, shrine, temple, sanctuary, sanctum, chapel, cathedral, monastery, abbey, convent, hermitage, cloister, crypt chapel, holy grove, sacred spring, sacred mountain, standing stone circle, high place, reliquary, relic, icon, idol, effigy, votive offering, votive candle, incense, censer, thurible, chalice, paten, holy water, font, lamp of vigil, prayer wheel, prayer rug, prayer beads, rosary, bell tower, temple bell, gong, sacrificial altar, sacred fire, holy book, scripture, psalter, breviary, sutra, hymnal, litany book, banner of faith, vestment, cassock, robe of office, mitre, stole, tonsure
+
+## rites | tags=rite
+prayer, chant, hymn, psalm, litany, mantra, benediction, blessing, curse of god, invocation of the gods, communion, sacrament, oblation, libation, offering, sacrifice, tithe, alms, vigil, fast, feast day, holy day, sabbath, pilgrimage, procession, requiem, funeral rite, baptism, initiation, ordination, confession, penance, absolution, atonement, exorcism rite, consecration, anointing, oath on the altar, covenant, creed, doctrine, dogma, heresy, schism, orthodoxy, miracle of faith, vision of the divine, revelation, omen of the gods
+
+## clergy_and_devout | tags=clergy | animacy=human
+priest, priestess, high priest, prelate, bishop, abbot, abbess, monk, nun, friar, hermit, anchorite, acolyte, novice, deacon, verger, sexton, chaplain, cantor, chorister, preacher, prophet, prophetess, apostle, disciple, saint, martyr, pilgrim, penitent, zealot, believer, heretic, apostate, infidel, missionary, inquisitor, templar, paladin of faith, oracle of the temple, vestal, shaman of the tribe
+
+## divine_things | tags=divine
+god, goddess, deity, divinity, godhead, creator, trickster god, mother goddess, sky father, earth mother, storm god, sun god, moon goddess, war god, death god, god of the harvest, patron deity, household god, spirit of the place, ancestor spirit, angel, archangel, seraph, cherub, saint's relic, heaven, paradise, afterlife, hereafter, purgatory, limbo, damnation, salvation, redemption, grace, mercy, wrath of god, providence, destiny, fate, doom, judgment, last judgment, resurrection, reincarnation, nirvana, karma, soul's journey, holy spirit, divine light, divine wrath
+
+## faith_actions | tags=action
+v:pray, v:worship, v:adore, v:praise, v:bless, v:consecrate, v:sanctify, v:anoint, v:baptize, v:ordain, v:absolve, v:confess, v:atone, v:repent, v:sacrifice, v:offer, v:pour out, v:chant, v:intone, v:genuflect, v:kneel, v:bow, v:fast, v:purify, v:profane, v:desecrate, v:excommunicate, v:convert, v:preach, v:proclaim, v:prophesy, v:invoke god, v:venerate, v:revere, v:glorify, v:abjure, v:renounce
+vi:believe, vi:doubt, vi:vigil, vi:fall to knees, vi:ascend, vi:descend
+
+## faith_qualities | tags=quality
+a:holy, a:sacred, a:divine, a:blessed, a:hallowed, a:consecrated, a:sanctified, a:profane, a:sacrilegious, a:heretical, a:pious, a:devout, a:righteous, a:sinful, a:penitent, a:merciful, a:wrathful, a:celestial, a:heavenly, a:immortal, a:eternal, a:transcendent, a:ineffable, a:reverent, a:faithful, a:faithless
+
+@domain magic
+@era ancient,medieval,renaissance
+@culture occult
+@tags infernal,fiend
+
+## hell_and_devils | tags=infernal | animacy=animate
+devil, demon, fiend, imp, succubus, incubus, tempter, tormentor, infernal duke, infernal prince, archdevil, hellhound, hellspawn, pit fiend, balor, lesser demon, greater demon, legion of devils, damned soul, lost soul, fallen angel, accuser, adversary, corruptor, torturer, jailer of hell, hellkeeper, collector of souls, devil's advocate
+
+## hell_places_and_things | tags=infernal,place
+hell, inferno, the pit, the abyss, nine hells, burning plain, river of fire, lake of brimstone, iron city, infernal court, throne of bone, torment chamber, gate of hell, hellfire, brimstone, sulfur, ash and cinder, chains of iron, branding iron, infernal contract, soul contract, deed of surrender, signature in blood, clause, fine print, loophole, debt of the soul, collection, tithe of souls, infernal law, hierarchy of hell, legion, rank of damnation, covenant of fire
+
+## hell_acts_and_vices | tags=infernal,vice | domain=abstract
+temptation, corruption, sin, vice, wrath, pride, envy, greed, lust, sloth, gluttony, malice, cruelty, spite, treachery, deceit, perversion, depravity, torment, agony, anguish, damnation, perdition, damned eternity, bargain, tribute, domination, subjugation, enslavement, bondage, usury, sin offering
+v:tempt, v:corrupt, v:torment, v:torture, v:damn, v:enslave, v:subjugate, v:dominate, v:deceive, v:betray, v:ensnare, v:seduce, v:lure, v:bargain, v:barter, v:collect, v:repossess, v:brand, v:scourge, v:burn, v:scorch, v:condemn, v:sentence, v:punish
+a:infernal, a:wicked, a:vile, a:malevolent, a:diabolical, a:sinister, a:fiendish, a:hellish, a:damned, a:accursed, a:unholy, a:corrupt, a:merciless, a:cruel, a:treacherous, a:binding, a:contractual
+
+@domain magic
+@era prehistoric,ancient,medieval,renaissance
+@culture occult
+@tags undead,death
+
+## the_dead | tags=undead | animacy=animate
+ghost, spirit of the dead, wraith, specter, phantom, banshee, revenant, shade, poltergeist, ghoul, ghast, zombie, mummy, skeleton warrior, bone soldier, lich, vampire, wight, draugr, barrow wight, death knight, necromancer's servant, corpse-eater, crypt creature, grave robber, gravedigger, undertaker, mourner for hire, funeral priest, embalmer, sexton of the dead
+
+## graves_and_death | tags=death,grave
+grave, graveyard, cemetery, necropolis, catacomb, tomb, mausoleum, crypt, sarcophagus, coffin, casket, bier, pyre, funeral pyre, urn of ashes, ossuary, charnel house, barrow, burial mound, cairn of the dead, tombstone, gravestone, headstone, epitaph, memorial, shroud, winding sheet, burial cloth, grave goods, death mask, skull, skeleton, bones, ribcage, marrow, ashes, dust, decay, rot, mold, worm, carrion, corpse, cadaver, remains, relics of the dead, last breath, death rattle, deathbed, wake, vigil for the dead, requiem mass, dirge, elegy for the dead, mourning, mourning cloth, black veil, funeral procession, passing bell
+
+## death_actions_and_states | tags=action
+v:die, v:perish, v:rot, v:decay, v:wither, v:crumble, v:bury, v:inter, v:exhume, v:embalm, v:entomb, v:cremate, v:haunt, v:possess, v:rise, v:raise the dead, v:reanimate, v:drain, v:feed on, v:curse the living, v:wail, v:moan, v:linger, v:wander, v:mourn the dead, v:lay to rest
+a:dead, a:undead, a:lifeless, a:ghostly, a:ghastly, a:spectral, a:cadaverous, a:skeletal, a:decaying, a:rotting, a:putrid, a:hollow, a:pale, a:cold, a:grave, a:funereal, a:mournful, a:restless, a:unquiet, a:buried, a:bloodless, a:ashen, a:withered

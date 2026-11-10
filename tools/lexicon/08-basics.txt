@@ -1,0 +1,37 @@
+# Everyday words that the original dictionary lacked.
+@tier common
+@era
+
+@domain society
+@tags
+## rulers_and_ranks | animacy=human
+king, queen, prince, princess, lord, lady, knight, master, servant, guard, traitor, hero, villain, steward, squire, page, noble, commoner, outcast, exile, elder, chieftain, hermit, bard, jester, executioner, messenger, guide, healer, midwife, orphan, widow, stranger, guest, neighbor
+
+@domain weapon
+## basic_arms
+spear, arrow, mace, club, helmet, armor, breastplate, gauntlet, greaves, chainmail, quiver, bowstring, arrowhead, spear shaft, pike, lance, halberd, throwing spear, buckler, war hammer, standard weapon
+
+@domain settlement
+## structures
+castle, wall, tower, hall, bridge, throne, gate, door, window, roof, floor, stair, cellar, attic, chimney, hearth room, courtyard, garden, fence, well house, mill, barn, stable, smithy house, inn, tavern, market square, watchtower, lighthouse tower, harbor wall, city wall, town square, crossroad, milestone, gatehouse door
+
+@domain nature
+## elements_and_land
+mountain, ice, grass, root, smoke, light, shadow, darkness, thunder clap, lightning bolt, snowfall, hailstone, dewfall, rainbow, whirlwind, wildfire, ember glow, ash fall, quicksand, bog, swamp, marsh, moor, dune sea, cliff edge, hollow, thicket, grove, clearing, orchard, vineyard, meadow, field edge, hilltop, valley floor, riverbank, streambed, waterfall, spring water, pond, puddle
+
+@domain food
+## food_and_drink
+meat, wine, honey, fruit, ale, mead, beer, cheese, butter, egg, porridge, soup, stew, roast, broth, sausage, smoked fish, dried fruit, nut, berry, apple, grape, olive, onion, garlic, herb, spice, pepper, salt pork, flour, dough, cake, sweet, feast, banquet, hunger pang
+
+@domain abstract
+## ideas
+voice, dance, story, gift, oath, law, justice, honor, shame, glory, fear, love, joy, anger, grief, courage, cowardice, wisdom, folly, hope, despair, trust, doubt, loyalty, betrayal, mercy, vengeance, freedom, slavery, peace, war cry call, fate, luck, chance, danger, safety, secret, truth, lie, promise, memory, dream, rumor, custom, tradition, duty, debt of honor, blood feud, vow
+
+@domain action
+## common_verbs
+v:seek, v:free, v:protect, v:rule, v:obey, v:command, v:hate, v:forgive, v:heal, v:swear, v:promise, v:lie, v:serve, v:judge, v:punish, v:reward, v:welcome, v:refuse, v:accept, v:warn, v:summon people, v:gather people, v:lead, v:follow, v:guard
+vi:hesitate, vi:tremble, vi:wake, vi:rest
+
+@domain quality
+## common_adjectives
+a:wise, a:foolish, a:humble, a:cowardly, a:alone, a:whole, a:golden, a:noble, a:loyal, a:treacherous, a:honorable, a:shameful, a:fearless, a:wary, a:grim, a:solemn, a:eager, a:weary, a:stubborn, a:patient, a:rash, a:cautious, a:generous, a:greedy, a:kind, a:harsh, a:gentle, a:savage, a:civilized, a:strange, a:familiar, a:sacred ground, a:forbidden ground

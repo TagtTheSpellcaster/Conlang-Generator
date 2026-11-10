@@ -6,12 +6,13 @@ import { selectEntries, assignForms } from './lexicon/select.js';
 import { describePhonology, createWordFactory } from './phonology/words.js';
 import { buildMorphologyModel, generateAffixes } from './morphology/affixes.js';
 import { adpositionPosition, generateSamples } from './syntax/realize.js';
+import { GENRES } from './genres.js';
 
 export function languageName(spec) {
     const make = createWordFactory({
         consonants: spec.consonants, vowels: spec.vowels,
         mean: Math.max(1, Math.min(4, spec.mean * 0.8)), seed: `${spec.seed}|language-name`,
-        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster
+        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster, soundBias: spec.soundBias
     });
     return make();
 }
@@ -29,6 +30,7 @@ export function generateLanguage(input, vocabulary, templates = []) {
     return Object.freeze({
         version: VERSION,
         name: languageName(spec),
+        genre: spec.genre ? { id: spec.genre, label: GENRES[spec.genre].label, summary: GENRES[spec.genre].summary } : null,
         spec, notes, phonology,
         morphology: { model, affixes },
         syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles },

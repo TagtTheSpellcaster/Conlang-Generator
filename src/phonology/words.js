@@ -1,5 +1,5 @@
 // Pure word and affix factories. No DOM, no globals: everything depends on (config, seed).
-import { MODEL, VOWELS, resolveClusters } from './models.js';
+import { MODEL, VOWELS, resolveClusters, CONSONANT_CLASSES, VOWEL_CLASSES } from './models.js';
 import { rng, pick } from '../core/rng.js';
 
 const LENGTH_PROFILES = {
@@ -7,6 +7,20 @@ const LENGTH_PROFILES = {
     balanced: [0.18, 0.40, 0.30, 0.08, 0.03, 0.01, 0.00, 0.00],
     long:     [0.01, 0.04, 0.15, 0.30, 0.25, 0.15, 0.07, 0.03]
 };
+
+// Weighted pick for sound profiles: weight(symbol) = product of the weights of its phonetic classes
+// (and of the symbol itself). Returns null when there is no bias, so unbiased languages keep their exact output.
+function biasedPicker(symbols, classesOf, table) {
+    if (!table || !Object.keys(table).length) return null;
+    const weights = symbols.map(sym => [...(classesOf[sym] ?? []), sym].reduce((w, key) => w * (table[key] ?? 1), 1));
+    const total = weights.reduce((a, b) => a + b, 0);
+    if (!(total > 0)) return null;
+    return r => {
+        let x = r() * total;
+        for (let i = 0; i < symbols.length; i++) { x -= weights[i]; if (x < 0) return symbols[i]; }
+        return symbols[symbols.length - 1];
+    };
+}
 
 export const vowelsFor = key => VOWELS[key] || VOWELS.standard;
 export const modelFor = key => MODEL[key] ? key : 'european';
@@ -21,8 +35,13 @@ export function resolvePhonotactics(c = {}) {
     const onsetChosen = Array.isArray(c.onsetClusters), codaChosen = Array.isArray(c.codaClusters);
     const onset = onsetChosen ? resolveClusters(modelKey, 'onset', c.onsetClusters, maxCluster) : (model.clusters ?? []).filter(cl => cl.length <= maxCluster);
     const coda = codaChosen ? resolveClusters(modelKey, 'coda', c.codaClusters, maxCluster) : [];
+    const bias = c.soundBias ?? null;
     return {
         modelKey, model, vowels, maxCluster, onsetChosen, codaChosen, onset, coda,
+        pickOnset: biasedPicker(model.onset, CONSONANT_CLASSES, bias?.c),
+        pickCoda: biasedPicker(model.coda, CONSONANT_CLASSES, bias?.c),
+        pickVowel: biasedPicker(vowels, VOWEL_CLASSES, bias?.v),
+        closed: Number.isFinite(bias?.closed) ? bias.closed : 1,
         onsetSet: new Set(onset), codaSet: new Set(coda),
         // models without clusters keep their strict "no consonant run" rule unless the user picked clusters
         strictSingle: !onsetChosen && !codaChosen && ['isolated', 'japanese', 'semitic'].includes(modelKey)
@@ -31,7 +50,7 @@ export function resolvePhonotactics(c = {}) {
 
 function chooseOnset(ph, r) {
     if (ph.onset.length && r() < (ph.onsetChosen ? 0.30 : (ph.modelKey === 'english' ? 0.24 : 0.16))) return pick(ph.onset, r);
-    return pick(ph.model.onset, r);
+    return ph.pickOnset ? ph.pickOnset(r) : pick(ph.model.onset, r);
 }
 
 function patternsFor(ph) {
@@ -41,12 +60,21 @@ function patternsFor(ph) {
     return base;
 }
 
-function makeSyllable(ph, vowels, r, patterns) {
-    const pattern = pick(patterns, r);
+// bias.closed multiplies the weight of closed syllable patterns (0 = open syllables only).
+function patternPicker(ph, patterns) {
+    if (ph.closed === 1) return r => pick(patterns, r);
+    const weights = patterns.map(p => (p.endsWith('C') ? ph.closed : 1));
+    const total = weights.reduce((a, b) => a + b, 0);
+    if (!(total > 0)) return r => pick(patterns.filter(p => !p.endsWith('C')).length ? patterns.filter(p => !p.endsWith('C')) : ['CV'], r);
+    return r => { let x = r() * total; for (let i = 0; i < patterns.length; i++) { x -= weights[i]; if (x < 0) return patterns[i]; } return patterns[patterns.length - 1]; };
+}
+
+function makeSyllable(ph, vowels, r, patterns, choosePattern = r => pick(patterns, r)) {
+    const pattern = choosePattern(r);
     const onset = pattern.startsWith('C') ? chooseOnset(ph, r) : '';
-    const vowel = pick(vowels, r);
+    const vowel = ph.pickVowel ? ph.pickVowel(r) : pick(vowels, r);
     let coda = '';
-    if (pattern.endsWith('C')) coda = ph.coda.length && r() < 0.45 ? pick(ph.coda, r) : pick(ph.model.coda, r);
+    if (pattern.endsWith('C')) coda = ph.coda.length && r() < 0.45 ? pick(ph.coda, r) : (ph.pickCoda ? ph.pickCoda(r) : pick(ph.model.coda, r));
     return onset + vowel + coda;
 }
 
@@ -116,6 +144,7 @@ export function createWordFactory(c = {}) {
     const ph = resolvePhonotactics(c);
     const { modelKey, model, vowels } = ph;
     const patterns = patternsFor(ph);
+    const choosePattern = patternPicker(ph, patterns);
     const profile = LENGTH_PROFILES[lengthProfile(c.mean)];
     const r = rng(`${String(c.seed ?? 'auto')}|phonology|${modelKey}|words`);
     const used = new Set();
@@ -124,7 +153,7 @@ export function createWordFactory(c = {}) {
         const target = options.short ? (r() < 0.80 ? 1 : 2) : pickWeighted(profile, r);
         for (let tries = 0; tries < 80; tries++) {
             let word = '';
-            for (let i = 0; i < target; i++) word += makeSyllable(ph, vowels, r, patterns);
+            for (let i = 0; i < target; i++) word += makeSyllable(ph, vowels, r, patterns, choosePattern);
             word = word.toLowerCase();
             if (validWord(word, modelKey, vowels, ph) && !used.has(word)) return word;
         }
@@ -159,13 +188,18 @@ export function createAffixFactory(c = {}, reserved = new Set()) {
     const vowels = vowelsFor(c.vowels);
     const r = rng(`${String(c.seed ?? 'auto')}|phonology|${modelKey}|affixes`);
     const used = new Set(reserved);
-    const TEMPLATES = ['CV', 'CV', 'CV', 'V', 'VC'];
+    // Affixes follow the genre's sound profile too: its consonant and vowel weights, and its taste for closed syllables.
+    const bias = c.soundBias ?? null;
+    const pickOnset = biasedPicker(model.onset, CONSONANT_CLASSES, bias?.c);
+    const pickCoda = biasedPicker(model.coda ?? model.onset, CONSONANT_CLASSES, bias?.c);
+    const pickVowel = biasedPicker(vowels, VOWEL_CLASSES, bias?.v);
+    const TEMPLATES = Number.isFinite(bias?.closed) && bias.closed < 0.5 ? ['CV', 'CV', 'CV', 'V'] : ['CV', 'CV', 'CV', 'V', 'VC'];
 
     const one = () => {
         const t = pick(TEMPLATES, r);
-        const onset = t.startsWith('C') ? pick(model.onset, r) : '';
-        const coda = t.endsWith('C') ? pick(model.coda ?? model.onset, r) : '';
-        return (onset + pick(vowels, r) + coda).toLowerCase();
+        const onset = t.startsWith('C') ? (pickOnset ? pickOnset(r) : pick(model.onset, r)) : '';
+        const coda = t.endsWith('C') ? (pickCoda ? pickCoda(r) : pick(model.coda ?? model.onset, r)) : '';
+        return (onset + (pickVowel ? pickVowel(r) : pick(vowels, r)) + coda).toLowerCase();
     };
     return () => {
         for (let i = 0; i < 300; i++) {

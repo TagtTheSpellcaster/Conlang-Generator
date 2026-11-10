@@ -76,10 +76,14 @@
             "animal",
             "body",
             "clothing",
+            "craft",
+            "faith",
             "family",
             "food",
             "grammar",
             "household",
+            "magic",
+            "maritime",
             "material",
             "music",
             "nature",
@@ -93,6 +97,7 @@
             "technology",
             "time",
             "transport",
+            "war",
             "weapon"
           ]
         },

@@ -80,3 +80,20 @@ export function resolveClusters(modelKey, position, keys, maxCluster = 3) {
     const all = [...new Set(keys.flatMap(k => CLUSTER_SETS[position][k] ?? []))];
     return all.filter(cl => cl.length <= maxCluster && [...cl].every(ch => inventory.has(ch)));
 }
+
+// Phonetic classes, used by genre sound profiles to weight symbols (weight of a symbol = product of the weights of its classes).
+export const CONSONANT_CLASSES = Object.freeze({
+    p: ['stop', 'voiceless', 'labial'], t: ['stop', 'voiceless', 'dental'], k: ['stop', 'voiceless', 'velar', 'guttural', 'harsh'],
+    b: ['stop', 'voiced', 'labial'], d: ['stop', 'voiced', 'dental'], g: ['stop', 'voiced', 'velar', 'guttural', 'harsh'],
+    f: ['fricative', 'voiceless', 'labial'], v: ['fricative', 'voiced', 'labial', 'soft'], 'θ': ['fricative', 'voiceless', 'dental'],
+    s: ['fricative', 'voiceless', 'sibilant', 'dental'], z: ['fricative', 'voiced', 'sibilant', 'dental', 'harsh'], 'ʃ': ['fricative', 'voiceless', 'sibilant', 'harsh'],
+    'ħ': ['fricative', 'voiceless', 'guttural', 'harsh'], 'ʕ': ['fricative', 'voiced', 'guttural', 'harsh'], h: ['fricative', 'voiceless', 'guttural'],
+    m: ['nasal', 'sonorant', 'voiced', 'labial', 'soft'], n: ['nasal', 'sonorant', 'voiced', 'dental', 'soft'], 'ŋ': ['nasal', 'sonorant', 'voiced', 'velar'],
+    r: ['liquid', 'sonorant', 'voiced', 'dental', 'harsh'], l: ['liquid', 'sonorant', 'voiced', 'dental', 'soft'],
+    j: ['glide', 'sonorant', 'voiced', 'soft'], w: ['glide', 'sonorant', 'voiced', 'labial', 'soft']
+});
+export const VOWEL_CLASSES = Object.freeze({
+    a: ['open'], e: ['mid', 'front'], i: ['close', 'front'], o: ['mid', 'back', 'rounded'], u: ['close', 'back', 'rounded'],
+    y: ['close', 'front', 'rounded'], 'ø': ['mid', 'front', 'rounded'], 'æ': ['open', 'front']
+});
+export const SOUND_CLASSES = Object.freeze([...new Set([...Object.values(CONSONANT_CLASSES), ...Object.values(VOWEL_CLASSES)].flat())]);

@@ -1,0 +1,63 @@
+# Craft vocabulary. Guild terms plus the trades: smith, carpenter, mason, potter, weaver, dyer, tanner,
+# glassmaker, goldsmith, cooper, ropemaker, thatcher, basketmaker, bowyer, fletcher, saddler.
+@domain craft
+@era ancient,medieval,renaissance
+@culture artisan
+@tags craft
+
+## guild_and_workshop | tags=guild,workshop
+guild, craft guild, workshop, atelier, shop, stall, bench, apprentice, journeyman, master craftsman, grandmaster, masterpiece, apprenticeship, indenture, guildhall, guild charter, guild mark, maker's mark, hallmark, trade secret, trade, craft, craftsmanship, workmanship, commission, order book, patron, bespoke piece, prototype, model, template, pattern, jig, mold, form, standard, tolerance, flaw, defect, seconds, finish, polish, patina, signature piece, repair, restoration, journeyman's tour
+
+## craftsmen | tags=craftsman | animacy=human
+craftsman, artisan, smith, blacksmith, farrier, whitesmith, swordsmith, armorer, bladesmith, goldsmith, silversmith, coppersmith, tinsmith, locksmith, gunsmith, carpenter, joiner, cabinetmaker, wheelwright, cartwright, shipwright, cooper, turner, carver, bowyer, fletcher, mason, stonecutter, bricklayer, plasterer, thatcher, tiler, glazier, potter, tilemaker, glassblower, weaver, spinner, dyer, fuller, felter, tailor, seamstress, embroiderer, tanner, cobbler, saddler, harness maker, bookbinder, scribe, illuminator, printer, jeweler, gemcutter, lapidary, engraver, clockmaker, instrument maker, luthier, ropemaker, basketmaker, chandler, candlemaker, tallow chandler, soapmaker, brewer, baker, miller, cutler, pewterer, wiredrawer, charcoal burner, lime burner, brickmaker, quarryman, miner, sawyer, lumberjack
+
+## smithing | tags=smithing,metal | era=ancient,medieval,renaissance
+forge, smithy, hearth, bellows, tuyere, anvil, horn of the anvil, hardy hole, pritchel hole, swage block, swage, fuller, set hammer, flatter, cross-peen hammer, sledgehammer, tongs, pincers, punch, drift, chisel, hot chisel, file, rasp, vise, quench tank, slack tub, charcoal, coke, bloom, bloomery, ingot, billet, bar, rod, sheet, plate, wire, rivet, nail, scale, slag, clinker, flux, borax, fire scale, heat, red heat, white heat, welding heat, cold iron, wrought iron, cast iron, pig iron, steel, crucible steel, damascus steel, pattern welding, blade, tang, ricasso, edge, bevel, spine, fuller groove, crossguard, pommel, grip, scabbard, horseshoe, hinge, hasp, latch, chain link, sword blank, blade blank, grindstone, whetstone, hone, temper line, hamon
+
+## smithing_actions
+v:forge, v:hammer, v:strike, v:draw out, v:upset, v:bend, v:fold, v:weld, v:forge-weld, v:quench, v:temper, v:anneal, v:harden, v:case-harden, v:normalize, v:scarf, v:punch, v:drift, v:swage, v:cut, v:grind, v:hone, v:sharpen, v:polish, v:file, v:rivet, v:solder, v:braze, v:cast, v:pour, v:smelt, v:refine, v:alloy, v:heat, v:stoke, v:blow, v:shape, v:tin, v:plate, v:gild, v:engrave, v:etch, v:inlay
+
+## carpentry_and_joinery | tags=wood,carpentry
+timber, lumber, plank, board, beam, joist, rafter, purlin, post, lintel beam, stave, batten, lath, shingle, veneer, plywood, log, trunk, bark, heartwood, sapwood, grain, burl, knot, kerf, shaving, sawdust, offcut, seasoning, green wood, hardwood, softwood, oak, ash, elm, yew, beech, walnut, cedar, pine, mortise, tenon, dovetail, dado, rabbet, tongue and groove, scarf joint, lap joint, butt joint, miter, bridle joint, finger joint, peg, trenail, dowel, glue, wedge, hinge pin, saw, handsaw, ripsaw, crosscut saw, frame saw, bow saw, pit saw, adze, axe, broadaxe, hatchet, drawknife, spokeshave, plane, jack plane, smoothing plane, block plane, router plane, chisel, gouge, mallet, auger, brace and bit, bradawl, gimlet, marking gauge, try square, bevel gauge, plumb bob, chalk line, workbench, sawhorse, clamp, lathe, treadle lathe, pole lathe, mandrel, steam box, bending form, jointer
+
+## carpentry_actions
+v:saw, v:plane, v:chisel, v:carve, v:whittle, v:mortise, v:dovetail, v:join, v:glue, v:clamp, v:peg, v:nail, v:turn, v:bore, v:drill, v:rip, v:crosscut, v:square, v:true, v:sand, v:scrape, v:steam-bend, v:laminate, v:season, v:fell, v:hew, v:split, v:cleave, v:frame, v:raise, v:inlay, v:veneer, v:varnish, v:stain, v:oil, v:wax
+
+## masonry_and_building | tags=stone,masonry
+stone, ashlar, rubble, fieldstone, flagstone, cobble, quoin, keystone, voussoir, springer, lintel, corbel, buttress, flying buttress, pier, pilaster, column shaft, capital, plinth, base, vault, barrel vault, groin vault, rib vault, dome, arch, pointed arch, round arch, spandrel, tympanum, coping, string course, course, bond, header, stretcher, mortar, lime mortar, lime putty, plaster, stucco, daub, wattle, cob, adobe, brick, fired brick, roof tile, slate, thatch, trowel, hod, plumb line, level, spirit level, scaffold, hoist, crane wheel, treadwheel, stone chisel, point chisel, claw chisel, mason's mallet, stone saw, quarry, quarry face, freestone, limestone, sandstone, granite, marble, slate quarry, foundation, footing, cornerstone, lime kiln
+
+## masonry_actions
+v:quarry, v:dress, v:cut stone, v:lay, v:point, v:plaster, v:render, v:daub, v:thatch, v:tile, v:roof, v:vault, v:buttress, v:underpin, v:shore up, v:scaffold, v:hoist, v:square-up, v:chisel stone
+
+## pottery_and_glass | tags=clay,pottery
+clay, kaolin, slip, engobe, glaze, ash glaze, salt glaze, kiln, updraft kiln, climbing kiln, firing, bisque, bisque firing, grog, temper, burnish, sgraffito, terracotta, earthenware, stoneware, porcelain, majolica, shard, sherd, potsherd, potter's wheel, throwing, coil, coil pot, pinch pot, slab, rib tool, wire cutter, wedging table, sagger, kiln shelf, kiln furniture, amphora, jug, ewer, urn, crock, bowl, cup, plate, jar, pitcher, vase, brick clay, tile clay, glassworks, furnace, glory hole, annealing oven, lehr, blowpipe, pontil, punty, marver, jack, paddle, gather, parison, cullet, batch, soda-lime glass, lead crystal, stained glass, cames, cutting diamond, glass bead, lampwork, mirror silvering
+
+## pottery_actions
+v:throw, v:coil, v:pinch, v:wedge, v:slip, v:glaze, v:fire, v:burnish, v:turn on the wheel, v:trim, v:decorate, v:bisque-fire, v:blow glass, v:gather, v:marver, v:anneal glass, v:fuse, v:cut glass, v:cool, v:crackle
+
+## weaving_and_dyeing | tags=textile,weaving
+loom, warp-weighted loom, backstrap loom, treadle loom, warp, weft, shed, shuttle, heddle, reed, beater, beam, warp beam, cloth beam, spindle, whorl, distaff, spinning wheel, niddy-noddy, card, comb, wool comb, hackle, flax, hemp, nettle fiber, cotton, wool, fleece, silk, silk thread, cocoon, silkworm, mulberry leaf, linen, yarn, thread, skein, hank, bobbin, spool, selvedge, hem, seam, twill, tabby, plain weave, satin weave, brocade, damask, tapestry, felt, fulling mill, tenterhook, tenter frame, fabric, cloth, bolt of cloth, ell, remnant, warp thread, weft thread, pattern card, mordant, alum, madder, woad, indigo, weld, cochineal, saffron dye, walnut husk, oak gall, vat, dye vat, dyebath, color-fast dye, tie-dye, resist dyeing, batik
+
+## weaving_actions
+v:weave, v:spin, v:card, v:comb, v:ret, v:scutch, v:full, v:felt, v:dye, v:mordant, v:bleach, v:warp, v:thread, v:beat, v:throw the shuttle, v:reel, v:wind, v:twist, v:ply, v:knit, v:crochet, v:sew, v:stitch, v:hem, v:embroider, v:darn, v:patch, v:braid, v:plait, v:knot, v:tie, v:unravel, v:fray
+
+## leatherwork | tags=leather
+hide, skin, pelt, rawhide, leather, tanned hide, vegetable tanning, tanning pit, tannin, oak bark, lime pit, fleshing beam, scudding, currier, tawing, parchment, vellum, awl, stitching awl, harness needle, waxed thread, stitching pony, skiving knife, round knife, edge beveler, burnisher, punch, rivet, buckle, strap, welt, sole, upper, last, heel, boot, shoe, sandal, saddle, saddle tree, girth, bridle, bit, rein, stirrup leather, harness, scabbard leather, quiver, belt, pouch, glove, tooling, embossing, stamping, dyeing leather, hide glue
+
+## leatherwork_actions
+v:tan, v:cure, v:flay, v:skin, v:scrape, v:flesh, v:cut leather, v:skive, v:stitch leather, v:saddle, v:bridle, v:harness, v:burnish leather, v:tool, v:emboss, v:stamp, v:rivet leather, v:sole, v:resole
+
+## goldsmithing_and_gems | tags=jewelry,metalwork
+gold, silver, copper, bronze, brass, tin, lead, pewter, electrum, platinum, gold leaf, gold dust, nugget, bullion, ingot of gold, alloy, karat, touchstone, assay, assay mark, hallmark stamp, crucible, mold, draw plate, wire, filigree, granulation, repoussé, chasing, niello, enamel, cloisonné, champlevé, inlay work, setting, bezel, prong, claw setting, burin, graver, hammered work, openwork, gemstone, gem, jewel, diamond, ruby, sapphire, emerald, amethyst, garnet, topaz, opal, jade, amber, jet, lapis lazuli, turquoise, onyx, agate, pearl necklace, cabochon, facet, brilliant cut, rose cut, table cut, gemcutter's wheel, lapidary wheel, ring, bracelet, torc, brooch, fibula, pendant, circlet, crown, diadem, earring, signet ring, seal matrix
+
+## cooper_rope_basket | tags=cooperage,rope,basketry
+barrel, cask, keg, tun, hogshead, bucket, tub, vat, stave, hoop, iron hoop, croze, bung, bunghole, truss hoop, cooper's adze, cooper's plane, rope, cord, twine, string, hemp rope, strand, lay, hawser lay, splice, eye splice, ropewalk, fiber, tow, oakum fiber, knot, sheepshank, bowline, hitch, whip, basket, wicker, osier, withy, rush, reed, straw, raffia, coil basket, hamper, creel, fish trap, weir basket, thatch bundle, thatching spar, hurdle, wattle fence
+
+## tools_general | tags=tool
+hammer, mallet, pick, wedge tool, crowbar, lever, pulley, block and tackle, winch, jack, vise, clamp, tongs set, pliers, shears, snips, knife, whittling knife, razor, awl set, needle, thimble, bodkin, scissors, ruler, rule, folding rule, caliper, compass tool, dividers, square, straightedge, plumb, level tool, plane iron, burr, rasp file, whetstone block, strop, grindstone wheel, workbench vise, toolbox, tool belt, tool rack, apron, glove, goggles, bellows pump, oil can, brush, sponge, ladle, funnel, sieve, scoop
+
+## materials_and_finishes | tags=material,finish
+resin, pitch, tar, beeswax, tallow, lard, linseed oil, lampblack, soot, ochre, red ochre, umber, verdigris, vermilion, lead white, gesso, size, varnish, lacquer, shellac, japan, whiting, chalk powder, pumice, emery, sand, silica, potash, soda ash, lye, quicklime, slaked lime, gypsum, alabaster, gum arabic, glue, hide glue, fish glue, paste, wax resist, gilding size, patina, tarnish, verdigris crust, rust, burnish mark, tool mark, grain pattern
+
+## craft_qualities | tags=quality
+a:handmade, a:hand-forged, a:well-wrought, a:finely-wrought, a:masterful, a:sturdy, a:flawless, a:flawed, a:true, a:warped, a:brittle, a:tempered, a:supple, a:seasoned, a:green, a:raw, a:polished, a:rough, a:keen, a:blunt, a:dovetailed, a:inlaid, a:gilded, a:plain, a:ornate, a:fine, a:coarse, a:woven, a:fired, a:glazed, a:cast, a:molten, a:ductile, a:malleable, a:hardwearing, a:crude

@@ -1,0 +1,49 @@
+# Machine speech, thieves' cant and trade talk.
+@domain technology
+@era futuristic,modern
+@culture technocratic,posthuman
+@tags machine,digital
+
+## computation | tags=computing
+processor, core, thread, register, cache, memory, buffer, stack, heap, queue, bus, clock, clock cycle, interrupt, firmware, kernel, driver, protocol, packet, frame, header, payload, checksum, parity bit, handshake, port, socket, node, link, network, mesh, bandwidth, latency, throughput, bit, byte, word, binary, hexadecimal, bitmask, flag, signal, pulse, state, state machine, algorithm, routine, subroutine, function call, parameter, argument, variable, constant, loop, branch, condition, query, response, request, reply, status, error code, fault, exception, diagnostic, log, trace, key, token, hash, cipher, certificate, checksum value, nonce, uplink, downlink, telemetry, beacon signal, transponder, array, matrix, tensor, index, pointer, address, object, instance
+
+## machine_bodies | tags=machine,hardware
+unit, module, chassis, frame plate, actuator, servo, motor, piston, gear, cog, bearing, axle, sensor, optical sensor, lidar, radar, sonar, microphone, speaker, relay, switch, valve, capacitor, resistor, diode, transistor, circuit, circuit board, wiring, cable run, conduit, power cell, battery, reactor core, coolant, heat sink, shell casing, plating, hull plate, drone, automaton, android, robot, construct, cyborg, synthetic, manufactured mind, artificial mind, subroutine mind, hive network, central core, fabricator, assembler, foundry unit, repair bay, charging dock, maintenance shaft
+
+## machine_acts | tags=action
+v:initialize, v:boot, v:calibrate, v:synchronize, v:execute, v:compile, v:allocate, v:deallocate, v:encode, v:decode, v:encrypt, v:decrypt, v:authenticate, v:transmit, v:receive, v:relay, v:route, v:parse, v:scan, v:probe, v:query, v:acknowledge, v:terminate, v:reset, v:update, v:patch, v:overwrite, v:erase, v:copy, v:store, v:retrieve, v:compute, v:process, v:optimize, v:repair, v:diagnose, v:assemble, v:fabricate, v:power down, v:power up, v:shut down, v:lock, v:unlock, v:align, v:target
+vi:idle, vi:halt, vi:crash, vi:overheat, vi:buffer, vi:hum
+
+## machine_states | tags=state
+a:active, a:inactive, a:idle, a:online, a:offline, a:operational, a:defective, a:corrupted, a:encrypted, a:redundant, a:optimal, a:nominal, a:critical, a:binary, a:digital, a:analog, a:automatic, a:manual, a:synthetic, a:mechanical, a:efficient, a:precise, a:exact, a:logical, a:sequential, a:parallel, a:invalid, a:valid, a:null, a:affirmative, a:negative, a:unknown, a:pending
+
+@domain society
+@era medieval,renaissance,modern
+@culture urban,mercantile
+@tags thieves
+
+## thieves_and_crime | tags=thief,crime | animacy=human
+thief, pickpocket, cutpurse, burglar, housebreaker, cat burglar, footpad, highwayman, bandit, robber, swindler, con artist, forger, counterfeiter, fence, smuggler, gang, crew, mob, thieves' guild, guildmaster of thieves, lookout, getaway driver, stoolpigeon, informer, snitch, spy ring, bounty hunter, thief-taker, constable, watchman, magistrate, jailer, warden, prisoner, convict, outlaw, vagabond, beggar, urchin, mark, victim, gull, patsy, accomplice, crooked guard, corrupt official
+
+## thieves_tools_and_places | tags=thief,tool
+lockpick, skeleton key, jimmy, crowbar, grappling hook, rope ladder, dark lantern, muffled boots, black cloak, false bottom, hidden pocket, loaded dice, marked cards, forged seal, counterfeit coin, stolen goods, swag, loot bag, safehouse, hideout, den, thieves' den, back room, back alley, rooftop, sewer, cellar door, side door, tunnel, secret passage, drop, dead drop, cache, stash, lair, tavern, gambling den, fence's shop, pawnshop, gibbet, gallows, noose, stocks, pillory, dungeon, cell, chain gang, hulks, wanted poster, reward, bribe, hush money, cut, share, take, score, heist, job, caper, grift, scam, shakedown, protection money, signal chalk mark, whistle code, thieves' sign, password
+
+## thieves_actions | tags=action
+v:steal, v:lift, v:pinch, v:nick, v:filch, v:snatch, v:burgle, v:rob, v:mug, v:swindle, v:con, v:cheat, v:forge, v:counterfeit, v:fence, v:smuggle, v:pick a lock, v:case, v:shadow, v:tail, v:stake out, v:cover, v:sneak, v:slip, v:climb, v:evade, v:bribe, v:blackmail, v:inform, v:betray, v:snitch, v:grass, v:lie low, v:flee, v:vanish, v:fence the goods, v:split, v:double-cross, v:hang, v:flog, v:arrest, v:imprison
+vi:skulk, vi:lurk, vi:hide, vi:run, vi:hang
+a:sly, a:cunning, a:shifty, a:furtive, a:stealthy, a:light-fingered, a:crooked, a:dishonest, a:wanted, a:hunted, a:nimble, a:quick, a:silent, a:sneaky, a:dodgy, a:slippery, a:hot, a:clean, a:marked
+
+@domain society
+@era ancient,medieval,renaissance
+@culture mercantile
+@tags trade
+
+## trade_and_market | tags=trade,market | animacy=inanimate
+market, marketplace, bazaar, souk, fair, stall, booth, counter, scale, balance, weight, measure, bushel, pound, ounce, ell, yard of cloth, price, cost, value, worth, profit, loss, margin, discount, bargain price, tariff, toll, duty, tax on goods, customs, license, monopoly, cartel, contract of sale, ledger, account book, receipt, tally stick, promissory note, bill of exchange, letter of credit, loan, interest, debt, credit, deposit, pledge, security, bankruptcy, coin, ingot of silver, purse, strongbox, vault, counting house, exchange, caravanserai, warehouse, depot, storehouse, bonded store, cargo manifest, bill of lading, trade route, silk road, spice route, salt road, trading post, factory, merchant house, trade league
+
+## traders | tags=merchant | animacy=human
+merchant, trader, dealer, broker, factor, peddler, hawker, huckster, pawnbroker, moneylender, banker, money changer, usurer, auctioneer, appraiser, assayer, weigher, customs officer, tax collector, shipper, carter, caravan master, drover of goods, wholesaler, retailer, shopkeeper, grocer, draper, mercer, vintner, spice merchant, wool merchant, slave trader, middleman, agent, guarantor, partner, rival merchant
+
+## trade_acts | tags=action
+v:trade, v:buy, v:sell, v:barter, v:haggle, v:bargain, v:bid, v:offer, v:counter-offer, v:appraise, v:weigh, v:measure, v:count, v:tally, v:invoice, v:lend, v:borrow, v:owe, v:repay, v:default, v:invest, v:speculate, v:ship, v:haul goods, v:import, v:export, v:smuggle goods, v:tax, v:levy, v:fine, v:pay, v:charge, v:refund, v:swap, v:exchange, v:hoard goods, v:corner the market
+a:cheap, a:expensive, a:costly, a:valuable, a:worthless, a:profitable, a:solvent, a:bankrupt, a:indebted, a:fair-priced, a:overpriced, a:wholesale, a:retail, a:negotiable, a:binding, a:tax-free

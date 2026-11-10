@@ -1,0 +1,35 @@
+# Vocabulary of a women's secret language, in the manner of Nüshu: sisterhoods, letters and songs between
+# women, weddings and farewells, textile work and embroidery, the inner courtyard, confinement and birth.
+@domain family
+@era ancient,medieval,renaissance
+@culture sisterhood,rural
+@tags women
+
+## sisterhood | tags=sisterhood,kinship | animacy=human
+sworn sister, sworn sisterhood, bosom friend, confidante, soul sister, kinswoman, foster sister, elder sister, younger sister, sister-in-law, aunt, great-aunt, grandmother, great-grandmother, mother-in-law, daughter-in-law, stepmother, co-wife, bride, bridesmaid, maiden, young wife, new wife, widow, matron, matriarch, godmother, midwife, wet nurse, nursemaid, matchmaker, go-between, village wife, neighbor woman, stranger bride
+
+## ties_and_vows | tags=bond,vow | domain=abstract
+sisters' pact, sisters' oath, bond of sisterhood, shared fate, shared secret, shared grief, kept promise, faithful friendship, lifelong companionship, mutual care, mutual aid, mutual trust, solidarity, loyalty, confidence, discretion, secrecy, silence, concealment, seclusion, privacy, understanding, tenderness, devotion, sisterly love, motherly love, yearning, longing, homesickness, heartache, sorrow, bitterness, hardship, endurance, patience, resignation, resilience, quiet strength, hope, consolation, comfort, wistfulness
+
+## messages_and_writing | tags=letter,writing | domain=society
+women's script, secret script, fan script, hidden writing, cipher, code, third-day letter, third-day book, letter of farewell, letter of friendship, letter of comfort, letter of grief, message, note, book of words, cloth book, embroidered letter, inscribed fan, painted fan, handkerchief letter, verse, couplet, stanza, refrain, rhyme, line of verse, seven-syllable line, song, ballad, folk song, lullaby, cradle song, wedding song, bridal lament, weeping song, farewell song, mourning song, harvest song, spinning song, work song, lament, elegy, riddle, proverb, saying, tale, folktale, legend, women's tale, storyteller, singer, mourner, letter-bearer, copyist
+
+## wedding_and_leaving | tags=wedding,rite | domain=society
+betrothal, engagement, bride price, dowry, trousseau, bridal chest, bridal veil, bridal procession, bridal sedan, wedding feast, wedding night, wedding bed, wedding day, farewell to the maiden house, parting from the mother, weeping ceremony, sitting-and-singing, hair-pinning, hair-combing, face-threading, red thread, red cloth, red lantern, marriage contract, matchmaking, husband's house, mother's house, return visit, third-day visit, homecoming, widowhood, remarriage, divorce
+
+## inner_quarters | tags=house,quarters | domain=household
+inner chamber, women's chamber, women's quarters, upstairs room, loft room, lattice window, latticework, screen, bamboo screen, courtyard, inner courtyard, well, well-side, hearth fire, kitchen, stove, water jar, washing stone, washing place, riverbank, laundry, linen chest, bridal chest, sewing basket, needle case, work basket, cradle, sleeping mat, quilt, pillow, mirror, comb, hairpin, hair ornament, hand warmer, lamp, oil lamp, candle, incense stick, tea, rice porridge, steamed bread, dumpling, sweet cake, festival food
+
+## needlework | tags=needlework,embroidery | domain=craft
+needlework, embroidery, cross-stitch, satin stitch, chain stitch, couching, appliqué, patchwork, quilting, lace, lacework, braiding, cord, tassel, ribbon, knot work, paper cutting, window flower, pattern book, embroidery frame, embroidery silk, silk floss, gold thread, thimble, needle case, pincushion, scissors, spool of thread, bolt of silk, silk reeling, silk cocoon, cocoon boiling, mulberry grove, silkworm tray, silk weaving, cotton weaving, indigo cloth, blue cloth, white cloth, bridal cloth, patterned cloth, sash, belt, apron, headscarf, headband, collar, sleeve, hem, slipper, embroidered shoe, shoe sole, shoe pattern
+v:embroider, v:quilt, v:appliqué, v:cut paper, v:comb hair, v:pin up, v:reel silk, v:boil cocoons, v:feed silkworms
+
+## women_and_body_life | tags=life,care | domain=body
+pregnancy, childbirth, confinement, labor, birthing stool, birth cord, afterbirth, newborn, swaddling cloth, nursing, weaning, milk, breast milk, cradle blanket, naming day, first month feast, child's lock, girl-child, boy-child, daughter, granddaughter, nursing mother, mother's milk, herbal tea, herbal poultice, healing herb, midwife's herbs, women's remedy, bone-setting, bath water, fumigation, cleansing, lying-in, postpartum rest
+
+## women_actions | tags=action
+v:confide, v:console, v:comfort, v:lament, v:weep, v:sing, v:hum, v:whisper, v:mourn, v:bless, v:pledge, v:swear sisterhood, v:keep a secret, v:conceal, v:veil, v:wait, v:endure, v:longing for, v:remember, v:greet, v:send a letter, v:read aloud, v:copy, v:teach, v:nurse, v:rock, v:swaddle, v:knead, v:sweep, v:fetch water, v:wash, v:wring, v:spread out, v:fold, v:braid hair, v:marry, v:wed, v:give away, v:part
+vi:grieve, vi:sigh, vi:yearn, vi:linger, vi:blush, vi:smile through tears
+
+## women_qualities | tags=quality
+a:gentle, a:tender, a:modest, a:patient, a:faithful, a:secret, a:hidden, a:veiled, a:homesick, a:tearful, a:bitter-sweet, a:sisterly, a:motherly, a:enduring, a:quiet, a:soft-spoken, a:nimble-fingered, a:deft, a:delicate, a:fragile, a:cherished, a:distant, a:lonely, a:married, a:betrothed, a:widowed

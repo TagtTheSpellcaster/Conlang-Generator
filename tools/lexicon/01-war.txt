@@ -1,0 +1,42 @@
+# Specialised war vocabulary. Concepts, doctrine, formations, siegecraft, logistics, signals.
+@domain war
+@era ancient,medieval,renaissance,modern
+@culture warrior,militaristic
+@tags war
+
+## strategy | tags=strategy,doctrine
+war of position, war of movement, war of attrition, war of conquest, war of annihilation, war of succession, total war, limited war, guerrilla war, proxy war, civil war, border war, holy war, defensive war, preemptive strike, campaign, theater of war, strategic depth, defense in depth, scorched earth, blitzkrieg, lightning war, war of nerves, cold war, hybrid war, naval blockade, siege warfare, mobile defense, elastic defense, forward defense, interior lines, exterior lines, center of gravity, culminating point, initiative, tempo, momentum, surprise, deception, economy of force, concentration of force, unity of command, objective, line of communication, line of retreat, lines of supply
+
+## operations | tags=operation,maneuver
+offensive, counteroffensive, counterattack, defensive, sortie, raid, foray, incursion, invasion, occupation, reconnaissance in force, flanking maneuver, envelopment, double envelopment, pincer movement, encirclement, pocket, breakthrough, exploitation, pursuit, forced march, night march, fighting retreat, withdrawal, rout, feint, diversion, decoy, ambush, skirmish, pitched battle, set-piece battle, meeting engagement, delaying action, holding action, rearguard action, last stand, assault, storming, escalade, bombardment, barrage, blockade, stalemate, deadlock, advance, retreat
+
+## outcomes | tags=outcome
+decisive victory, pyrrhic victory, defeat, surrender, unconditional surrender, capitulation, armistice, ceasefire, truce, peace treaty, tribute of war, reparations, annexation, partition, devastation, massacre, carnage, slaughter, atrocity, war crime, amnesty, victory, conquest
+
+## terrain_and_position | tags=terrain,position
+front line, battle line, line of battle, front, rear, rear guard, vanguard, advance guard, flank, wing, center, reserve, salient, bridgehead, beachhead, high ground, chokepoint, narrow pass, ford, ridge line, no man's land, killing ground, field of fire, dead ground, cover, concealment, vantage point, lookout post, forward base, outpost, picket line, staging area, assembly point, rallying point
+
+## organization | tags=unit,organization | animacy=human
+army, host, legion, cohort, century, phalanx, regiment, battalion, brigade, division, company, squadron, troop, platoon, squad, detachment, garrison, militia, levy, warband, war party, mercenary company, free company, auxiliaries, expeditionary force, honor guard, shock troops, light infantry, heavy infantry, cavalry, light cavalry, heavy cavalry, mounted archers, artillery corps, engineer corps, general staff, war council, chain of command
+
+## ranks_and_roles | tags=rank,role | animacy=human
+soldier, warrior, fighter, combatant, infantryman, footman, cavalryman, horseman, rider, hoplite, legionary, pikeman, spearman, swordsman, archer, crossbowman, slinger, skirmisher, shield-bearer, standard-bearer, drummer, trumpeter, herald, berserker, champion, veteran, recruit, conscript, volunteer, deserter, camp follower, quartermaster, sapper, pioneer, engineer, signalman, scout, sentinel, sentry, lookout, spy, infiltrator, saboteur, marksman, sniper, gunner, bombardier, sergeant, corporal, lieutenant, centurion, commander, marshal, war chief, warlord, warmaster, strategist, tactician, conqueror, invader, defender, besieger, captive, prisoner of war, hostage, casualty, fallen, wounded, survivor, enemy, foe, ally, adversary, rebel, insurgent, partisan, guerrilla, raider, marauder, pillager, brigand
+
+## formations_and_tactics | tags=formation,tactic
+shield wall, testudo, wedge, square, column, line, skirmish line, order of battle, battle array, hollow square, echelon, oblique order, cavalry charge, volley, salvo, enfilade, crossfire, suppressive fire, covering fire, fire support, bayonet charge, spear wall, pike block, caracole, phalanx formation, battle cry, war cry, tactic, maneuver, countermarch, wheeling movement
+
+## siegecraft | tags=siege,fortification | era=ancient,medieval,renaissance
+siege, siege engine, siege tower, siege ladder, siege camp, siege works, trebuchet, catapult, mangonel, onager, ballista, battering ram, ram, mantlet, sap, mine, countermine, breach, assault ramp, circumvallation, starvation siege, sally port, relief force, rampart, palisade, stockade, moat, ditch, drawbridge, portcullis, bastion, curtain wall, battlement, parapet, crenel, merlon, arrow slit, murder hole, machicolation, hoarding, keep, donjon, barbican, gatehouse, citadel, redoubt, fort, stronghold, bulwark, trench, dugout, bunker, minefield, barbed wire, abatis, caltrop, chevaux-de-frise, pillbox, fortification, earthwork, glacis, ravelin
+
+## logistics_and_camp | tags=logistics,camp
+supply line, supply train, convoy, provisions, ration, field kitchen, war chest, pay, plunder, spoils, loot, booty, ransom, field hospital, camp, bivouac, encampment, barracks, armory, magazine, picket, watchword, countersign, sentry duty, night watch, muster, roll call, drill, parade, march, formation, discipline, morale, esprit de corps, rank and file, baggage train, forage, requisition, arsenal, depot, garrison duty, furlough, billet
+
+## command_and_signals | tags=command,signal
+war horn, war drum, battle horn, trumpet call, bugle call, banner, standard, pennant, ensign, colors, battle standard, signal fire, beacon, smoke signal, heliograph, semaphore, flag signal, order, command, dispatch, messenger rider, courier, intelligence, reconnaissance, report, briefing, plan of battle, ultimatum, declaration of war, call to arms, general mobilization, alarm, alert, parley, flag of truce, safe conduct
+
+## war_actions | tags=action
+v:muster, v:mobilize, v:march, v:advance, v:charge, v:storm, v:besiege, v:assault, v:ambush, v:flank, v:outflank, v:encircle, v:retreat, v:withdraw, v:rout, v:rally, v:regroup, v:fortify, v:garrison, v:entrench, v:plunder, v:pillage, v:sack, v:raze, v:conquer, v:subdue, v:occupy, v:invade, v:repel, v:resist, v:surrender, v:capitulate, v:parry, v:slay, v:vanquish, v:enlist, v:conscript, v:desert, v:hold, v:breach, v:reconnoiter, v:skirmish, v:bombard, v:blockade, v:disarm, v:wound, v:maim, v:capture, v:ransom, v:pursue, v:overrun, v:reinforce, v:relieve, v:patrol, v:signal, v:deploy, v:drill, v:train
+vi:fall, vi:endure
+
+## war_qualities | tags=quality
+a:fierce, a:valiant, a:ruthless, a:disciplined, a:hostile, a:victorious, a:defeated, a:wounded, a:armed, a:unarmed, a:fortified, a:besieged, a:invincible, a:relentless, a:merciless, a:war-torn, a:embattled, a:undefended, a:outnumbered, a:routed, a:fallen

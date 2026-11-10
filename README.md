@@ -16,3 +16,9 @@
 - Il pronome soggetto personale cade quando il verbo porta persona e numero (pro-drop). Nelle lingue isolanti resta.
 - Giunzione: se l'unione radice+affisso crea un nesso consonantico non ammesso, si inserisce l'ultima vocale della radice come vocale di legame.
 - Nessi consonantici: insiemi selezionabili separatamente per attacco e coda, più lunghezza massima (2 o 3). Nulla selezionato = comportamento predefinito del modello consonantico.
+
+## Generi linguistici
+
+`src/genres.js` definisce 18 generi (war, orcish, giant, marine, fey, draconic, dwarven, infernal, arcane, machine, hive, women, artisan, thieves, nomad, sacred, undead, merchant). Ogni genere imposta: default grammaticali (solo per opzioni non impostate), profilo sonoro (pesi per classi di suoni, `closed` per sillabe chiuse) e pesi semantici (domini, gruppi, tag, culture, biomi, esclusioni). Con un genere il lessico arriva fino a 900 voci.
+
+Il dizionario (6642 voci) si rigenera dalle sorgenti con `node tools/lexicon/build.mjs` (sorgenti in `tools/lexicon/sources/`), poi `node tools/validate.mjs`.
