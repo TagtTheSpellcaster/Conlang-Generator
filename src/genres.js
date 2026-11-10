@@ -8,7 +8,19 @@
 // resolveSpec() uses grammar and sound as defaults for every option the caller leaves unset; select.js uses semantics.
 // Weights are tuned so a genre fills roughly a third to a half of the lexicon with its own vocabulary.
 
-const G = (id, label, summary, grammar, sound, semantics) => Object.freeze({ id, label, summary, grammar, sound, semantics });
+// Culture / biome / era the interface selects when the genre is chosen. Only the dimensions where the genre has a clear
+// identity are listed (a war tongue has a culture but no biome or era); the others stay on "Any". The selection is a soft
+// preference that adds weight to matching entries; the user can change it.
+const PROFILES = {
+    war: { culture: 'militaristic' }, orcish: { culture: 'tribal' }, giant: { biome: 'alpine', era: 'prehistoric' },
+    marine: { culture: 'maritime', biome: 'ocean' }, fey: { culture: 'animist', biome: 'forest' }, draconic: {},
+    dwarven: { culture: 'artisan' }, infernal: { culture: 'occult' }, arcane: { culture: 'scholarly' },
+    machine: { culture: 'technocratic', era: 'futuristic' }, hive: { culture: 'communal' }, women: { culture: 'sisterhood' },
+    artisan: { culture: 'artisan' }, thieves: { culture: 'urban' }, nomad: { culture: 'nomadic', biome: 'grassland' },
+    sacred: { culture: 'religious' }, undead: { culture: 'occult' }, merchant: { culture: 'mercantile' }
+};
+
+const G = (id, label, summary, grammar, sound, semantics) => Object.freeze({ id, label, summary, grammar, sound, semantics, profile: Object.freeze({ ...PROFILES[id] }) });
 
 export const GENRES = Object.freeze(Object.fromEntries([
     G('war', 'War tongue',

@@ -120,11 +120,27 @@ main {
   width: 100%
 }
 
+/* three equal columns of equal height: genre + semantic profile + actions | phonology | morphosyntax */
 .parameter-grid {
   display: grid;
-  grid-template-columns: minmax(250px, 1fr) minmax(320px, 1.15fr) minmax(190px, .65fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
-  align-items: start
+  align-items: stretch
+}
+
+.parameter-col {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0
+}
+
+.parameter-col > .section:last-child {
+  flex: 1
+}
+
+.parameter-col-main > .genre-section {
+  margin-bottom: 0
 }
 
 .section {
@@ -440,49 +456,27 @@ main {
   margin-top: 12px
 }
 
-@media(max-width:950px) {
+@media(max-width:1050px) {
   .parameter-grid {
     grid-template-columns: 1fr 1fr
   }
 
-  .generation-actions {
+  .parameter-col-main {
     grid-column: 1/-1;
-    flex-direction: row;
-    align-items: center
-  }
-
-  .generation-actions .status {
-    margin-right: auto;
-    margin-bottom: 0
-  }
-
-  .generation-actions .btn {
-    width: auto
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch
   }
 }
 
 @media(max-width:700px) {
-  .parameter-grid {
+  .parameter-grid,
+  .parameter-col-main {
     grid-template-columns: 1fr
   }
 
-  .parameter-stack {
-    grid-template-columns: 1fr
-  }
-
-  .generation-actions {
-    grid-column: auto;
-    flex-direction: column;
-    align-items: stretch
-  }
-
-  .generation-actions .status {
-    margin-right: 0;
-    margin-bottom: 4px
-  }
-
-  .generation-actions .btn {
-    width: 100%
+  .parameter-col-main {
+    display: flex
   }
 
   .compact-grid {
@@ -579,7 +573,7 @@ main {
 
 /* language genre */
 .genre-section { margin-bottom: 14px; }
-.genre-row { display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: 12px; align-items: end; }
+.genre-row { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .genre-info { font-size: 12px; line-height: 1.5; color: var(--muted); }
 .genre-line { margin-top: 4px; }
 @media (max-width: 640px) { .genre-row { grid-template-columns: 1fr; } }
@@ -589,3 +583,19 @@ main {
 .sample-col h3{margin:0 0 2px}
 .sample-topic{margin:16px 0 2px;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;color:#8fa6c9;font-weight:600}
 @media (max-width:900px){.sample-columns{grid-template-columns:1fr}}
+
+/* generation results: two balanced columns, tables that never overflow their card */
+.result-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 16px; align-items: start; }
+.result-col { display: grid; gap: 14px; align-content: start; min-width: 0; }
+.result-cols .card { min-width: 0; overflow: hidden; }
+.result-cols .morph-form { overflow-wrap: anywhere; }
+.morph-verb-head, .morph-verb-row { grid-template-columns: 52px repeat(3, minmax(0, 1fr)); }
+.morph-verb-row .morph-form { font-size: 13px; }
+.morph-adj-row, .morph-adj-head { grid-template-columns: minmax(40px, .4fr) minmax(90px, .9fr) minmax(0, 2fr); }
+@media (max-width: 900px) { .result-cols { grid-template-columns: 1fr; } }
+.semantic-hint { margin-top: 10px; }
+.result-cols .card, .hero { max-width: 100%; }
+.morph-example-row, .morph-example-head { grid-template-columns: minmax(70px, 1fr) minmax(0, 1.6fr) minmax(0, 1fr); gap: 10px; }
+.morph-adj-row, .morph-adj-head { gap: 10px; }
+@media (max-width: 520px) { .morph-verb-row .morph-form { font-size: 11px; } .morph-translation { font-size: 12px; } }
+.tabs { overflow-x: auto; scrollbar-width: none; } .tab { white-space: nowrap; flex: 0 0 auto; }

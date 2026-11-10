@@ -9,7 +9,7 @@ const GROUP_OF = {
     numeral: 'number', quantifier: 'number', noun: 'noun'
 };
 const GROUP_ORDER = ['verb', 'adjective', 'pronoun', 'function', 'number', 'noun'];
-const FILTERS = ['region', 'culture', 'biome', 'era', 'tags'];
+const FILTERS = ['culture', 'biome', 'era', 'tags'];
 export const MAX_LEXICON = 600;
 // A language with a genre has room for its specialised vocabulary on top of the general one.
 export const MAX_LEXICON_GENRE = 900;

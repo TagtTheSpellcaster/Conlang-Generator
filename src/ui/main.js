@@ -8,7 +8,7 @@ import { GENRES, GENRE_IDS } from '../genres.js';
 import { resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
-const FILTERS = ['region', 'culture', 'biome', 'era', 'tags'];
+const FILTERS = ['culture', 'biome', 'era'];
 const say = text => { if ($('message')) $('message').textContent = text; };
 
 let vocabulary = [];
@@ -24,7 +24,7 @@ const checkedClusters = position => [...document.querySelectorAll(`input[name="$
 function readInput() {
     const v = id => $(id)?.value;
     return {
-        region: selected('region'), culture: selected('culture'), biome: selected('biome'), era: selected('era'), tags: selected('tags'),
+        culture: selected('culture'), biome: selected('biome'), era: selected('era'),
         vowels: v('vowels'), consonants: v('consonants'), mean: v('mean'), seed: $('seed')?.value.trim(),
         order: v('word-order'), morphology: v('morphology'), articles: v('articles'), plural: v('plural'), number: v('number'),
         gender: v('gender'), relations: v('relations'), caseSystem: v('case-system'), adjPosition: v('adj-position'),
@@ -81,7 +81,7 @@ function randomize() {
         $('genre').value = pool[Math.floor(Math.random() * pool.length)];
         applyGenre($('genre').value);
     }
-    for (const id of FILTERS) {
+    if (!$('genre') || $('genre').value === 'none') for (const id of FILTERS) {
         const e = $(id);
         if (e && e.options.length > 1) e.value = [...e.options].slice(1)[Math.floor(Math.random() * (e.options.length - 1))].value;
     }
@@ -95,8 +95,9 @@ function randomize() {
     $('consonants')?.dispatchEvent(new Event('change'));
 }
 
+// quick profiles for the culture / biome / era selectors
 const PRESETS = {
-    historical: { era: 'medieval' }, fantasy: { tags: 'fantasy' }, modern: { era: 'modern' }, scifi: { tags: 'sci-fi' }
+    historical: { era: 'medieval' }, fantasy: { culture: 'shamanic', era: 'medieval' }, modern: { era: 'modern' }, scifi: { culture: 'technocratic', era: 'futuristic' }
 };
 
 function preset(type) {
@@ -166,10 +167,19 @@ const GRAMMAR_CONTROLS = { morphology: 'morphology', articles: 'articles', order
 const SOUND_CONTROLS = { consonants: 'consonants', vowels: 'vowels', mean: 'mean', maxCluster: 'max-cluster' };
 
 // Fills the grammar and sound controls with the genre's defaults; the user can change any of them afterwards.
+const autoProfile = {};   // last value the genre put into each selector
 function applyGenre(id) {
     const g = GENRES[id];
     const info = $('genre-info');
     if (info) info.textContent = g ? g.summary : 'No genre: every option is chosen by hand and the vocabulary is not weighted.';
+    // culture / biome / era chosen by the genre; selectors the user changed by hand are kept unless the genre names one
+    for (const key of FILTERS) {
+        const el = $(key);
+        if (!el) continue;
+        const wanted = g?.profile[key] ?? '';
+        if (wanted || el.value === autoProfile[key]) el.value = wanted;
+        autoProfile[key] = wanted;
+    }
     if (!g) return;
     const set = (control, value, eventName = 'change') => { const e = $(control); if (e && value !== undefined) { e.value = String(value); e.dispatchEvent(new Event(eventName)); } };
     const order = ['morphology', 'articles', 'order', 'plural', 'number', 'gender', 'relations', 'caseSystem', 'adjPosition'];
@@ -187,7 +197,7 @@ function installGenreControls() {
     const section = document.createElement('section');
     section.className = 'section genre-section';
     section.innerHTML = `<h2>Language genre</h2><div class="genre-row"><div class="field"><label for="genre">Genre</label><select id="genre"><option value="none">None (free choice)</option>${GENRE_IDS.map(id => `<option value="${esc(id)}">${esc(GENRES[id].label)}</option>`).join('')}</select></div><div class="sub genre-info" id="genre-info"></div></div>`;
-    controls.insertAdjacentElement('afterbegin', section);
+    (document.querySelector('.parameter-col-main') ?? controls).insertAdjacentElement('afterbegin', section);
     $('genre').addEventListener('change', () => applyGenre($('genre').value));
     applyGenre('none');
 }

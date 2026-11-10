@@ -4,6 +4,14 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.8.0
+- Choosing a genre also selects culture, biome and era in the Semantic profile, but only where the genre has a clear identity (marine: maritime + ocean; giant: alpine + prehistoric; machine: technocratic + futuristic; draconic: none). Selectors changed by hand are kept unless the genre names that dimension. Randomisation leaves the profile to the genre.
+
+## 1.7.0
+- Generation tab reorganised: three columns of equal height (genre + semantic profile + actions | phonology | morphosyntax); results in two balanced columns; tables no longer overflow their panels; the tab bar scrolls on narrow screens.
+- Region selector removed (real-world regions made little sense for invented languages, only 51 entries used them, and "arctic" duplicated the biomes). The field stays in the dictionary data and in the vocabulary manager.
+- Tags selector removed from the generator window (the engine still uses tags, for the genres). The Fantasy and Science fiction presets now fill culture and era instead of a tag.
+
 ## 1.6.0
 - Universal sentences consolidated into 47 frames with alternatives (`My [hand|foot|head] hurts`, `I [hear|see|smell] you`, `Where is the [water|food|road]?`…): more example words and combinations per sentence without a longer list.
 - New universal frames: question words (`[Where|When|Why] do you go?`), `[Look|Listen|Wait]!`, `Give me [water|food].`

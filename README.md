@@ -27,10 +27,11 @@ A browser tool that generates artificial languages — phonology, morphology, sy
 ## Language genres
 `src/genres.js` defines 18 genres: war, orcish, giant, marine, fey, draconic, dwarven, infernal, arcane, machine, hive, women (secret women's tongue in the manner of Nüshu), artisan (craftsmen's cant), thieves, nomad, sacred, undead and merchant (trade pidgin).
 
-A genre has three parts:
+A genre has four parts:
 1. **Structure**: default values for the grammatical options (morphology, articles, word order, relations, plural, gender, adjective position). Only options you leave unset are filled; anything you choose yourself wins.
 2. **Sound**: default phonology options plus a bias — multipliers for classes of sounds (stops, nasals, liquids, back vowels…) or single symbols (0 removes a symbol), and a multiplier for closed syllables. The bias applies to roots and affixes.
-3. **Semantics**: weights for dictionary domains, groups, tags, cultures, biomes and eras, and exclusions (a fey tongue has no war vocabulary). With a genre the lexicon grows from 600 to up to 900 entries.
+3. **Profile**: the culture, biome and era the interface selects with the genre (only where the genre has a clear identity). They are soft preferences you can change.
+4. **Semantics**: weights for dictionary domains, groups, tags, cultures, biomes and eras, and exclusions (a fey tongue has no war vocabulary). With a genre the lexicon grows from 600 to up to 900 entries.
 
 The dictionary (6,690 entries) is rebuilt from the sources in `tools/lexicon/*.txt` with `node tools/lexicon/build.mjs` (idempotent; it validates the result), then `node tools/validate.mjs`.
 

@@ -47,7 +47,7 @@ export function resolveSpec(rawInput = {}) {
     }
     const mean = Number(input.mean);
     spec.mean = Number.isFinite(mean) && mean > 0 ? Math.min(5, Math.max(1, mean)) : DEFAULTS.mean;
-    for (const f of ['region', 'culture', 'biome', 'era', 'tags']) spec[f] = list(input[f]);
+    for (const f of ['culture', 'biome', 'era', 'tags']) spec[f] = list(input[f]);
 
     // Consonant clusters: null = whatever the consonant model does by default, [] = none, otherwise the chosen sets.
     const maxCluster = Number(input.maxCluster);

@@ -23,18 +23,20 @@
       <main>
         <div class="controls">
           <div class="parameter-grid">
+            <div class="parameter-col parameter-col-main">
             <section class="section">
               <h2>Semantic profile</h2>
               <div class="semantic-fields">
-                <div class="field"><label for="region">Region</label><select id="region"></select></div>
                 <div class="field"><label for="culture">Culture</label><select id="culture"></select></div>
                 <div class="field"><label for="biome">Biome</label><select id="biome"></select></div>
                 <div class="field"><label for="era">Era</label><select id="era"></select></div>
-                <div class="field"><label for="tags">Tags</label><select id="tags"></select></div>
               </div>
+              <div class="morph-note semantic-hint">A genre fills these in when it calls for them. They only add weight to matching words and never exclude any.</div>
               <div class="preset-row"><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Science fiction</button></div>
             </section>
-            <div class="parameter-stack">
+            <div class="generation-actions"><span id="message" class="status"></span><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Instant generate</button></div>
+            </div>
+            <div class="parameter-col">
               <section class="section">
                 <h2>Phonology</h2>
                 <div class="compact-grid">
@@ -55,6 +57,8 @@
                   <div class="field"><label for="seed">Seed</label><input id="seed" type="text" value="auto"></div>
                 </div>
               </section>
+            </div>
+            <div class="parameter-col">
               <section class="section">
                 <h2>Morphosyntax</h2>
                 <div class="field"><label for="word-order">Word order</label><select id="word-order">
@@ -114,7 +118,6 @@
                 </div>
               </section>
             </div>
-            <div class="generation-actions"><span id="message" class="status"></span><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Instant generate</button></div>
           </div>
           <div id="generation-output" class="result empty">Set the parameters and generate a language.</div>
         </div>

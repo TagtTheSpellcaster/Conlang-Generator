@@ -173,3 +173,16 @@ test('option sweep over genres x morphology x order keeps every sample sentence'
         assert.deepEqual(L.skippedSamples, [], `${id}/${morphology}/${order}`);
     }
 });
+
+test('genre profile: the culture / biome / era a genre selects exist in the dictionary and agree with the genre weights', () => {
+    const dims = { culture: 'cultures', biome: 'biomes', era: 'eras' };
+    for (const g of Object.values(GENRES)) {
+        assert.ok(g.profile && Object.keys(g.profile).every(k => k in dims), `${g.id}: profile keys`);
+        for (const [k, v] of Object.entries(g.profile)) {
+            assert.ok(vocabulary.filter(e => e[k].includes(v)).length >= 20, `${g.id}: ${k} "${v}" has too few entries`);
+            assert.ok((g.semantics[dims[k]]?.[v] ?? 0) > 0, `${g.id}: ${k} "${v}" is not weighted by the genre`);
+        }
+    }
+    // only where the genre has an identity: no genre selects all three dimensions
+    assert.ok(Object.values(GENRES).every(g => Object.keys(g.profile).length < 3));
+});
