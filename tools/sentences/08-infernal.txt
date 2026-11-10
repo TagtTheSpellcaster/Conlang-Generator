@@ -1,0 +1,29 @@
+@genre infernal
+
+## Pacts and bargains
+I offer you a bargain. | S=I | V=offer:v | O=a bargain:n | A=to>YOU_O
+Sign the contract! | mood=imperative | seq=V,O | V=sign:v | O=the infernal_contract:n
+The contract has a loophole. | S=the infernal_contract:n | V=have:v | O=a loophole:n
+Your soul is mine. | S=your soul:n | V=be:v | O=mine:pr
+I want your soul. | S=I | V=want:v | O=your soul:n
+Nothing is free. | S=nothing:pr | V=be:v | O=free:a
+
+## Hell
+This is hell. | S=THIS | V=be:v | O=hell:n
+Brimstone burns. | S=brimstone:n | V=burn:v
+The fire does not die. | S=the fire:n | V=die:v/neg
+The devil is cruel. | S=the devil:n | V=be:v | O=cruel:a
+The damned cry. | S=the damned:a | V=cry:v
+
+## Temptation
+I know your desire. | S=I | V=know:v | O=your desire:n
+You fear me. | S=YOU | V=fear:v | O=ME
+Do not trust the devil. | mood=imperative | seq=V,O | V=trust:v/neg | O=the devil:n
+I do not lie. | S=I | V=lie:v/neg
+
+## Law and loopholes
+The contract is [binding|false]. | S=the infernal_contract:n | V=be:v | O=binding:a|false:a
+I read the fine print. | S=I | V=read:v | O=the fine_print:n
+The price is your soul. | S=the price:n | V=be:v | O=your soul:n
+The devil lies. | S=the devil:n | V=lie:v
+I collect the debt. | S=I | V=collect:v | O=the debt:n

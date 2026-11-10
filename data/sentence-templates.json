@@ -1,1036 +1,503 @@
 {
- "version": 1,
- "templates": [
-  {
-   "id": "t01",
-   "en": "I am your [friend|sister|father].",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "friend:noun",
-     "sister:noun",
-     "father:noun"
-    ],
-    "poss": "your:determiner"
-   }
-  },
-  {
-   "id": "t02",
-   "en": "You are my [friend|sister|father].",
-   "S": {
-    "head": "pronoun.second_person_singular"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "friend:noun",
-     "sister:noun",
-     "father:noun"
-    ],
-    "poss": "my:determiner"
-   }
-  },
-  {
-   "id": "t03",
-   "en": "This is [water|food|bread].",
-   "S": {
-    "head": "demonstrative.this"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "water:noun",
-     "food:noun",
-     "bread:noun"
-    ]
-   }
-  },
-  {
-   "id": "t04",
-   "en": "That is a [sword|house|tree].",
-   "S": {
-    "head": "demonstrative.that"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "sword:noun",
-     "house:noun",
-     "tree:noun"
-    ],
-    "det": "indefinite"
-   }
-  },
-  {
-   "id": "t05",
-   "en": "We are here.",
-   "S": {
-    "head": "pronoun.first_person_plural"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": "here:adverb"
-   }
-  },
-  {
-   "id": "t06",
-   "en": "They are there.",
-   "S": {
-    "head": "pronoun.third_person_plural"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": "there:adverb"
-   }
-  },
-  {
-   "id": "t07",
-   "en": "I have [water|food|bread].",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "have:verb"
-   },
-   "O": {
-    "head": [
-     "water:noun",
-     "food:noun",
-     "bread:noun"
-    ]
-   }
-  },
-  {
-   "id": "t08",
-   "en": "You have [water|food|bread].",
-   "S": {
-    "head": "pronoun.second_person_singular"
-   },
-   "V": {
-    "head": "have:verb"
-   },
-   "O": {
-    "head": [
-     "water:noun",
-     "food:noun",
-     "bread:noun"
-    ]
-   }
-  },
-  {
-   "id": "t09",
-   "en": "The sun is [hot|bright].",
-   "S": {
-    "head": "sun:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "hot:adjective",
-     "bright:adjective"
-    ]
-   }
-  },
-  {
-   "id": "t10",
-   "en": "The stone is [hot|cold].",
-   "S": {
-    "head": "stone:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "hot:adjective",
-     "cold:adjective"
-    ]
-   }
-  },
-  {
-   "id": "t11",
-   "en": "The moon is [bright|dark].",
-   "S": {
-    "head": "moon:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "bright:adjective",
-     "dark:adjective"
-    ]
-   }
-  },
-  {
-   "id": "t12",
-   "en": "I eat [food|bread].",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "eat:verb"
-   },
-   "O": {
-    "head": [
-     "food:noun",
-     "bread:noun"
-    ]
-   }
-  },
-  {
-   "id": "t13",
-   "en": "The [wolf|dog] drinks [water|milk].",
-   "S": {
-    "head": [
-     "wolf:noun",
-     "dog:noun"
-    ],
-    "det": "definite"
-   },
-   "V": {
-    "head": "drink:verb"
-   },
-   "O": {
-    "head": [
-     "water:noun",
-     "milk:noun"
-    ]
-   }
-  },
-  {
-   "id": "t14",
-   "en": "I see you.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": "pronoun.second_person_singular_object"
-   }
-  },
-  {
-   "id": "t15",
-   "en": "You see me.",
-   "S": {
-    "head": "pronoun.second_person_singular"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": "pronoun.first_person_singular_object"
-   }
-  },
-  {
-   "id": "t16",
-   "en": "The hunter [kills|hunts] the wolf.",
-   "S": {
-    "head": "hunter:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": [
-     "kill:verb",
-     "hunt:verb"
-    ]
-   },
-   "O": {
-    "head": "wolf:noun",
-    "det": "definite"
-   }
-  },
-  {
-   "id": "t17",
-   "en": "I [love|trust|help] you.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": [
-     "love:verb",
-     "trust:verb",
-     "help:verb"
-    ]
-   },
-   "O": {
-    "head": "pronoun.second_person_singular_object"
-   }
-  },
-  {
-   "id": "t18",
-   "en": "I fear the [sword|enemy].",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "fear:verb"
-   },
-   "O": {
-    "head": [
-     "sword:noun",
-     "enemy:noun"
-    ],
-    "det": "definite"
-   }
-  },
-  {
-   "id": "t19",
-   "en": "I go to the [village|city|forest].",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "go:verb"
-   },
-   "O": {
-    "adp": "to:adposition",
-    "case": "dative",
-    "np": {
-     "head": [
-      "village:noun",
-      "city:noun",
-      "forest:noun"
-     ],
-     "det": "definite"
-    }
-   }
-  },
-  {
-   "id": "t20",
-   "en": "You come from the [village|city].",
-   "S": {
-    "head": "pronoun.second_person_singular"
-   },
-   "V": {
-    "head": "come:verb"
-   },
-   "O": {
-    "adp": "from:adposition",
-    "case": "ablative",
-    "np": {
-     "head": [
-      "village:noun",
-      "city:noun"
-     ],
-     "det": "definite"
-    }
-   }
-  },
-  {
-   "id": "t21",
-   "en": "The sun rises.",
-   "S": {
-    "head": "sun:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "rise:verb"
-   }
-  },
-  {
-   "id": "t22",
-   "en": "The stone falls.",
-   "S": {
-    "head": "stone:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "fall:verb"
-   }
-  },
-  {
-   "id": "t23",
-   "en": "The [bird|fish] moves [up|down].",
-   "S": {
-    "head": [
-     "bird:noun",
-     "fish:noun"
-    ],
-    "det": "definite"
-   },
-   "V": {
-    "head": "move:verb"
-   },
-   "O": {
-    "head": [
-     "up:adverb",
-     "down:adverb"
-    ]
-   }
-  },
-  {
-   "id": "t24",
-   "en": "The wolf walks in the forest.",
-   "S": {
-    "head": "wolf:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "walk:verb"
-   },
-   "O": {
-    "adp": "in:adposition",
-    "case": "locative",
-    "np": {
-     "head": "forest:noun",
-     "det": "definite"
-    }
-   }
-  },
-  {
-   "id": "t25",
-   "en": "Stay here.",
-   "mood": "imperative",
-   "seq": [
-    "V",
-    "O"
+  "version": 2,
+  "universal": [
+    {"id":"u01","topic":"Greetings and courtesy","en":"Hello.","initial":[{"head":"hello:particle"}]},
+    {"id":"u02","topic":"Greetings and courtesy","en":"Goodbye.","initial":[{"head":"goodbye:particle"}]},
+    {"id":"u03","topic":"Greetings and courtesy","en":"Thank you.","initial":[{"head":"thanks:particle"}]},
+    {"id":"u04","topic":"Greetings and courtesy","en":"I am sorry.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"sorry:adjective"}},
+    {"id":"u05","topic":"Greetings and courtesy","en":"[Yes|No].","initial":[{"head":["yes:particle","no:particle"]}]},
+    {"id":"u06","topic":"Wishes and blessings","en":"Good luck.","initial":[{"head":"luck:noun","adj":"good:adjective"}]},
+    {"id":"u07","topic":"Wishes and blessings","en":"Good health.","initial":[{"head":"health:noun","adj":"good:adjective"}]},
+    {"id":"u08","topic":"Wishes and blessings","en":"Peace to you.","initial":[{"head":"peace:noun"}],"A":{"adp":"to:adposition","case":"dative","np":{"head":"pronoun.second_person_singular_object"}}},
+    {"id":"u09","topic":"Needs and the body","en":"I am hungry.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"hungry:adjective"}},
+    {"id":"u10","topic":"Needs and the body","en":"I am thirsty.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"thirsty:adjective"}},
+    {"id":"u11","topic":"Needs and the body","en":"I am [cold|hot].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":["cold:adjective","hot:adjective"]}},
+    {"id":"u12","topic":"Needs and the body","en":"I am sick.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"sick:adjective"}},
+    {"id":"u13","topic":"Needs and the body","en":"My hand hurts.","S":{"head":"hand:noun","poss":"my:determiner"},"V":{"head":"hurt:verb"}},
+    {"id":"u14","topic":"Needs and the body","en":"I want [water|food].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"want:verb"},"O":{"head":["water:noun","food:noun"]}},
+    {"id":"u15","topic":"Needs and the body","en":"I want to sleep.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"want:verb"},"O":{"head":"sleep:verb"}},
+    {"id":"u16","topic":"Danger and emergency","en":"Danger!","initial":[{"head":"danger:noun"}]},
+    {"id":"u17","topic":"Danger and emergency","en":"Run!","mood":"imperative","seq":["V"],"V":{"head":"run:verb"}},
+    {"id":"u18","topic":"Danger and emergency","en":"Help me!","mood":"imperative","seq":["V","O"],"V":{"head":"help:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"u19","topic":"Danger and emergency","en":"Do not touch this.","mood":"imperative","seq":["V","O"],"V":{"head":"touch:verb","neg":true},"O":{"head":"demonstrative.this"}},
+    {"id":"u20","topic":"Affection and kinship","en":"I love you.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"love:verb"},"O":{"head":"pronoun.second_person_singular_object"}},
+    {"id":"u21","topic":"Affection and kinship","en":"You are my [friend|mother|child].","S":{"head":"pronoun.second_person_singular"},"V":{"head":"be:verb"},"O":{"head":["friend:noun","mother:noun","child:noun"],"poss":"my:determiner"}},
+    {"id":"u22","topic":"Affection and kinship","en":"You are not my enemy.","S":{"head":"pronoun.second_person_singular"},"V":{"head":"be:verb","neg":true},"O":{"head":"enemy:noun","poss":"my:determiner"}},
+    {"id":"u23","topic":"Affection and kinship","en":"My [mother|child] loves me.","S":{"head":["mother:noun","child:noun"],"poss":"my:determiner"},"V":{"head":"love:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"u24","topic":"Identity","en":"Who are you?","seq":["initial","V","S"],"initial":[{"head":"interrogative.who"}],"S":{"head":"pronoun.second_person_singular"},"V":{"head":"be:verb"}},
+    {"id":"u25","topic":"Identity","en":"What is your name?","seq":["initial","V","S"],"initial":[{"head":"interrogative.what"}],"S":{"head":"name:noun","poss":"your:determiner"},"V":{"head":"be:verb"}},
+    {"id":"u26","topic":"Identity","en":"I come from [here|there].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"come:verb"},"A":{"adp":"from:adposition","case":"ablative","np":{"head":["here:adverb","there:adverb"]}}},
+    {"id":"u27","topic":"Place and resources","en":"Where is the water?","seq":["initial","V","S"],"initial":[{"head":"interrogative.where"}],"S":{"head":"water:noun","det":"definite"},"V":{"head":"be:verb"}},
+    {"id":"u28","topic":"Place and resources","en":"Where is the food?","seq":["initial","V","S"],"initial":[{"head":"interrogative.where"}],"S":{"head":"food:noun","det":"definite"},"V":{"head":"be:verb"}},
+    {"id":"u29","topic":"Place and resources","en":"What is this?","seq":["initial","V","S"],"initial":[{"head":"interrogative.what"}],"S":{"head":"demonstrative.this"},"V":{"head":"be:verb"}},
+    {"id":"u30","topic":"Place and resources","en":"The [water|food] is [here|there].","S":{"head":["water:noun","food:noun"],"det":"definite"},"V":{"head":"be:verb"},"O":{"head":["here:adverb","there:adverb"]}},
+    {"id":"u31","topic":"Place and resources","en":"Come here.","mood":"imperative","seq":["V","O"],"V":{"head":"come:verb"},"O":{"head":"here:adverb"}},
+    {"id":"u32","topic":"Knowledge and perception","en":"I do not know.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"know:verb","neg":true}},
+    {"id":"u33","topic":"Knowledge and perception","en":"I do not understand.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"understand:verb","neg":true}},
+    {"id":"u34","topic":"Knowledge and perception","en":"I hear you.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"hear:verb"},"O":{"head":"pronoun.second_person_singular_object"}},
+    {"id":"u35","topic":"Quality and quantity","en":"This is [good|bad].","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":["good:adjective","bad:adjective"]}},
+    {"id":"u36","topic":"Quality and quantity","en":"This is [large|small].","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":["large:adjective","small:adjective"]}},
+    {"id":"u37","topic":"Quality and quantity","en":"This is [much|little].","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":["much:determiner","little:determiner"]}},
+    {"id":"u38","topic":"Quality and quantity","en":"Everything is good.","S":{"head":"everything:pronoun"},"V":{"head":"be:verb"},"O":{"head":"good:adjective"}},
+    {"id":"u39","topic":"Time and events","en":"Today we work.","seq":["initial","S","V"],"initial":[{"head":"today:noun"}],"S":{"head":"pronoun.first_person_plural"},"V":{"head":"work:verb"}},
+    {"id":"u40","topic":"Time and events","en":"Tomorrow we travel.","tense":"future","seq":["initial","S","V"],"initial":[{"head":"tomorrow:noun"}],"S":{"head":"pronoun.first_person_plural"},"V":{"head":"travel:verb"}},
+    {"id":"u41","topic":"Time and events","en":"Yesterday I came.","tense":"past","seq":["initial","S","V"],"initial":[{"head":"yesterday:noun"}],"S":{"head":"pronoun.first_person_singular"},"V":{"head":"come:verb"}},
+    {"id":"u42","topic":"Time and events","en":"The sun rises.","S":{"head":"sun:noun","det":"definite"},"V":{"head":"rise:verb"}},
+    {"id":"u43","topic":"Time and events","en":"I live.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"live:verb"}},
+    {"id":"u44","topic":"Basic sentence patterns","en":"I eat [food|bread].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"eat:verb"},"O":{"head":["food:noun","bread:noun"]}},
+    {"id":"u45","topic":"Basic sentence patterns","en":"I give you [water|food].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"give:verb"},"O":{"head":["water:noun","food:noun"]},"A":{"adp":"to:adposition","case":"dative","np":{"head":"pronoun.second_person_singular_object"}}},
+    {"id":"u46","topic":"Basic sentence patterns","en":"The good dog sees the small bird.","S":{"head":"dog:noun","det":"definite","adj":"good:adjective"},"V":{"head":"see:verb"},"O":{"head":"bird:noun","det":"definite","adj":"small:adjective"}},
+    {"id":"u47","topic":"Basic sentence patterns","en":"The dogs see the children.","requires":{"number":"plural"},"S":{"head":"dog:noun","det":"definite","number":"plural"},"V":{"head":"see:verb"},"O":{"head":"child:noun","det":"definite","number":"plural"}},
+    {"id":"u48","topic":"Basic sentence patterns","en":"We see two dogs.","requires":{"number":"dual"},"S":{"head":"pronoun.first_person_plural"},"V":{"head":"see:verb"},"O":{"head":"dog:noun","number":"dual"}},
+    {"id":"u49","topic":"Basic sentence patterns","en":"You cannot enter.","S":{"head":"pronoun.second_person_singular"},"V":{"head":"enter:verb","neg":true,"aux":"can:particle"}},
+    {"id":"u50","topic":"Basic sentence patterns","en":"I can help you.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"help:verb","aux":"can:particle"},"O":{"head":"pronoun.second_person_singular_object"}}
+  ],
+  "genres": {
+   "war": [
+    {"id":"war01","topic":"Commands","en":"Charge!","mood":"imperative","seq":["V"],"V":{"head":"charge:verb"}},
+    {"id":"war02","topic":"Commands","en":"Advance!","mood":"imperative","seq":["V"],"V":{"head":"advance:verb"}},
+    {"id":"war03","topic":"Commands","en":"Retreat!","mood":"imperative","seq":["V"],"V":{"head":"retreat:verb"}},
+    {"id":"war04","topic":"Commands","en":"Do not retreat!","mood":"imperative","seq":["V"],"V":{"head":"retreat:verb","neg":true}},
+    {"id":"war05","topic":"Commands","en":"Hold the line!","mood":"imperative","seq":["V","O"],"V":{"head":"hold:verb"},"O":{"head":"line:noun","det":"definite"}},
+    {"id":"war06","topic":"Commands","en":"Follow the banner!","mood":"imperative","seq":["V","O"],"V":{"head":"follow:verb"},"O":{"head":"banner:noun","det":"definite"}},
+    {"id":"war07","topic":"Commands","en":"Surrender!","mood":"imperative","seq":["V"],"V":{"head":"surrender:verb"}},
+    {"id":"war08","topic":"Reports from the front","en":"The enemy advances.","S":{"head":"enemy:noun","det":"definite"},"V":{"head":"advance:verb"}},
+    {"id":"war09","topic":"Reports from the front","en":"The enemy retreats.","S":{"head":"enemy:noun","det":"definite"},"V":{"head":"retreat:verb"}},
+    {"id":"war10","topic":"Reports from the front","en":"The enemy is strong.","S":{"head":"enemy:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"war11","topic":"Reports from the front","en":"We are outnumbered.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"be:verb"},"O":{"head":"outnumbered:adjective"}},
+    {"id":"war12","topic":"Reports from the front","en":"The [scout|sentry] sees the enemy.","S":{"head":["scout:noun","sentry:noun"],"det":"definite"},"V":{"head":"see:verb"},"O":{"head":"enemy:noun","det":"definite"}},
+    {"id":"war13","topic":"Reports from the front","en":"The messenger comes from the front line.","S":{"head":"messenger:noun","det":"definite"},"V":{"head":"come:verb"},"A":{"adp":"from:adposition","case":"ablative","np":{"head":"front line:noun","det":"definite"}}},
+    {"id":"war14","topic":"Strategy and tactics","en":"This is a war of position.","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":"war of position:noun","det":"indefinite"}},
+    {"id":"war15","topic":"Strategy and tactics","en":"This is a war of movement.","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":"war of movement:noun","det":"indefinite"}},
+    {"id":"war16","topic":"Strategy and tactics","en":"We flank the enemy.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"flank:verb"},"O":{"head":"enemy:noun","det":"definite"}},
+    {"id":"war17","topic":"Strategy and tactics","en":"We encircle the enemy.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"encircle:verb"},"O":{"head":"enemy:noun","det":"definite"}},
+    {"id":"war18","topic":"Strategy and tactics","en":"We hold the high ground.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"hold:verb"},"O":{"head":"high ground:noun","det":"definite"}},
+    {"id":"war19","topic":"Strategy and tactics","en":"The cavalry charges.","S":{"head":"cavalry:noun","det":"definite"},"V":{"head":"charge:verb"}},
+    {"id":"war20","topic":"Strategy and tactics","en":"The archer holds the ridge line.","S":{"head":"archer:noun","det":"definite"},"V":{"head":"hold:verb"},"O":{"head":"ridge line:noun","det":"definite"}},
+    {"id":"war21","topic":"Strategy and tactics","en":"We besiege the city.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"besiege:verb"},"O":{"head":"city:noun","det":"definite"}},
+    {"id":"war22","topic":"Strategy and tactics","en":"The keep falls.","S":{"head":"keep:noun","det":"definite"},"V":{"head":"fall:verb"}},
+    {"id":"war23","topic":"Camp and supply","en":"We have provisions.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"have:verb"},"O":{"head":"provisions:noun"}},
+    {"id":"war24","topic":"Camp and supply","en":"The soldier is wounded.","S":{"head":"soldier:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"wounded:adjective"}},
+    {"id":"war25","topic":"Camp and supply","en":"The army marches.","S":{"head":"army:noun","det":"definite"},"V":{"head":"march:verb"}},
+    {"id":"war26","topic":"Outcomes","en":"We are victorious.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"be:verb"},"O":{"head":"victorious:adjective"}},
+    {"id":"war27","topic":"Outcomes","en":"We are defeated.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"be:verb"},"O":{"head":"defeated:adjective"}},
+    {"id":"war28","topic":"Outcomes","en":"We want peace.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"want:verb"},"O":{"head":"peace:noun"}},
+    {"id":"war29","topic":"Doctrine","en":"This is a war of attrition.","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":"war of attrition:noun","det":"indefinite"}},
+    {"id":"war30","topic":"Doctrine","en":"The guerrilla ambushes the convoy.","S":{"head":"guerrilla:noun","det":"definite"},"V":{"head":"ambush:verb"},"O":{"head":"convoy:noun","det":"definite"}},
+    {"id":"war31","topic":"Doctrine","en":"We strike the rear.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"strike:verb"},"O":{"head":"rear:noun","det":"definite"}},
+    {"id":"war32","topic":"Doctrine","en":"The pincer movement is complete.","S":{"head":"pincer movement:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"complete:adjective"}},
+    {"id":"war33","topic":"Doctrine","en":"The line of retreat is open.","S":{"head":"line of retreat:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"open:adjective"}},
+    {"id":"war34","topic":"Doctrine","en":"The ceasefire holds.","S":{"head":"ceasefire:noun","det":"definite"},"V":{"head":"hold:verb"}},
+    {"id":"war35","topic":"Orders and discipline","en":"Muster the army!","mood":"imperative","seq":["V","O"],"V":{"head":"muster:verb"},"O":{"head":"army:noun","det":"definite"}},
+    {"id":"war36","topic":"Orders and discipline","en":"Fortify the ridge line!","mood":"imperative","seq":["V","O"],"V":{"head":"fortify:verb"},"O":{"head":"ridge line:noun","det":"definite"}},
+    {"id":"war37","topic":"Orders and discipline","en":"Guard the pass!","mood":"imperative","seq":["V","O"],"V":{"head":"guard:verb"},"O":{"head":"narrow pass:noun","det":"definite"}},
+    {"id":"war38","topic":"Orders and discipline","en":"The general commands the army.","S":{"head":"general:noun","det":"definite"},"V":{"head":"command:verb"},"O":{"head":"army:noun","det":"definite"}},
+    {"id":"war39","topic":"Orders and discipline","en":"The deserter flees.","S":{"head":"deserter:noun","det":"definite"},"V":{"head":"flee:verb"}}
    ],
-   "V": {
-    "head": "stay:verb"
-   },
-   "O": {
-    "head": "here:adverb"
-   }
-  },
-  {
-   "id": "t26",
-   "en": "Come with me.",
-   "mood": "imperative",
-   "seq": [
-    "V",
-    "O"
+   "orcish": [
+    {"id":"orcish01","topic":"Boasts and threats","en":"I am strong.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"orcish02","topic":"Boasts and threats","en":"You are weak.","S":{"head":"pronoun.second_person_singular"},"V":{"head":"be:verb"},"O":{"head":"weak:adjective"}},
+    {"id":"orcish03","topic":"Boasts and threats","en":"I will kill you.","tense":"future","S":{"head":"pronoun.first_person_singular"},"V":{"head":"kill:verb"},"O":{"head":"pronoun.second_person_singular_object"}},
+    {"id":"orcish04","topic":"Boasts and threats","en":"We are the [warband|clan].","S":{"head":"pronoun.first_person_plural"},"V":{"head":"be:verb"},"O":{"head":["warband:noun","clan:noun"],"det":"definite"}},
+    {"id":"orcish05","topic":"Boasts and threats","en":"The enemy is weak.","S":{"head":"enemy:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"weak:adjective"}},
+    {"id":"orcish06","topic":"Chief and clan","en":"The chief is strong.","S":{"head":"chief:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"orcish07","topic":"Chief and clan","en":"The warband follows the chief.","S":{"head":"warband:noun","det":"definite"},"V":{"head":"follow:verb"},"O":{"head":"chief:noun","det":"definite"}},
+    {"id":"orcish08","topic":"Chief and clan","en":"Follow the chief!","mood":"imperative","seq":["V","O"],"V":{"head":"follow:verb"},"O":{"head":"chief:noun","det":"definite"}},
+    {"id":"orcish09","topic":"Chief and clan","en":"My clan is large.","S":{"head":"clan:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"large:adjective"}},
+    {"id":"orcish10","topic":"Chief and clan","en":"I fear the chief.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"fear:verb"},"O":{"head":"chief:noun","det":"definite"}},
+    {"id":"orcish11","topic":"Raids and spoils","en":"We plunder the village.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"plunder:verb"},"O":{"head":"village:noun","det":"definite"}},
+    {"id":"orcish12","topic":"Raids and spoils","en":"We take the [loot|spoils].","S":{"head":"pronoun.first_person_plural"},"V":{"head":"take:verb"},"O":{"head":["loot:noun","spoils:noun"],"det":"definite"}},
+    {"id":"orcish13","topic":"Raids and spoils","en":"The raiders come from the mountain.","S":{"head":"raider:noun","det":"definite"},"V":{"head":"come:verb"},"A":{"adp":"from:adposition","case":"ablative","np":{"head":"mountain:noun","det":"definite"}}},
+    {"id":"orcish14","topic":"Raids and spoils","en":"We eat the meat.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"eat:verb"},"O":{"head":"meat:noun","det":"definite"}},
+    {"id":"orcish15","topic":"Raids and spoils","en":"Bring meat!","mood":"imperative","seq":["V","O"],"V":{"head":"bring:verb"},"O":{"head":"meat:noun"}},
+    {"id":"orcish16","topic":"Weapons and the body","en":"I have an [axe|club].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"have:verb"},"O":{"head":["axe:noun","club:noun"],"det":"indefinite"}},
+    {"id":"orcish17","topic":"Weapons and the body","en":"My axe is [large|sharp].","S":{"head":"axe:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":["large:adjective","sharp:adjective"]}},
+    {"id":"orcish18","topic":"Weapons and the body","en":"My hand is strong.","S":{"head":"hand:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"orcish19","topic":"Weapons and the body","en":"The bone is [white|old].","S":{"head":"bone:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["white:adjective","old:adjective"]}},
+    {"id":"orcish20","topic":"Feast and fire","en":"The meat is good.","S":{"head":"meat:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"good:adjective"}},
+    {"id":"orcish21","topic":"Feast and fire","en":"The fire is [large|hot].","S":{"head":"fire:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["large:adjective","hot:adjective"]}},
+    {"id":"orcish22","topic":"Feast and fire","en":"I drink the blood.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"drink:verb"},"O":{"head":"blood:noun","det":"definite"}},
+    {"id":"orcish23","topic":"Feast and fire","en":"The skull is on the [spear|wall].","S":{"head":"skull:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"adp":"on:adposition","case":"locative","np":{"head":["spear:noun","wall:noun"],"det":"definite"}}},
+    {"id":"orcish24","topic":"War cry","en":"Kill!","mood":"imperative","seq":["V"],"V":{"head":"kill:verb"}},
+    {"id":"orcish25","topic":"War cry","en":"Crush the enemy!","mood":"imperative","seq":["V","O"],"V":{"head":"crush:verb"},"O":{"head":"enemy:noun","det":"definite"}},
+    {"id":"orcish26","topic":"War cry","en":"Blood and fire!","initial":[{"head":"blood:noun"},{"head":"fire:noun"}]},
+    {"id":"orcish27","topic":"War cry","en":"The warband comes.","S":{"head":"warband:noun","det":"definite"},"V":{"head":"come:verb"}}
    ],
-   "V": {
-    "head": "come:verb"
-   },
-   "O": {
-    "adp": "with:adposition",
-    "case": "instrumental",
-    "np": {
-     "head": "pronoun.first_person_singular_object"
-    }
-   }
-  },
-  {
-   "id": "t27",
-   "en": "Who are you?",
-   "seq": [
-    "initial",
-    "V",
-    "S"
+   "giant": [
+    {"id":"giant01","topic":"Size and weight","en":"I am large.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"large:adjective"}},
+    {"id":"giant02","topic":"Size and weight","en":"The mountain is old.","S":{"head":"mountain:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"old:adjective"}},
+    {"id":"giant03","topic":"Size and weight","en":"The [stone|boulder] is heavy.","S":{"head":["stone:noun","boulder:noun"],"det":"definite"},"V":{"head":"be:verb"},"O":{"head":"heavy:adjective"}},
+    {"id":"giant04","topic":"Size and weight","en":"I carry the boulder.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"carry:verb"},"O":{"head":"boulder:noun","det":"definite"}},
+    {"id":"giant05","topic":"Size and weight","en":"I stomp.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"stomp:verb"}},
+    {"id":"giant06","topic":"Time and memory","en":"The aeon is long.","S":{"head":"aeon:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"long:adjective"}},
+    {"id":"giant07","topic":"Time and memory","en":"I remember the [aeon|mountain].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"remember:verb"},"O":{"head":["aeon:noun","mountain:noun"],"det":"definite"}},
+    {"id":"giant08","topic":"Time and memory","en":"The avalanche comes.","S":{"head":"avalanche:noun","det":"definite"},"V":{"head":"come:verb"}},
+    {"id":"giant09","topic":"Time and memory","en":"The ice melts.","S":{"head":"ice:noun","det":"definite"},"V":{"head":"melt:verb"}},
+    {"id":"giant10","topic":"Time and memory","en":"I am old.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"old:adjective"}},
+    {"id":"giant11","topic":"Earth and sky","en":"I sleep in the mountain.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"sleep:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"mountain:noun","det":"definite"}}},
+    {"id":"giant12","topic":"Earth and sky","en":"I walk on the [stone|ice].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"walk:verb"},"A":{"adp":"on:adposition","case":"locative","np":{"head":["stone:noun","ice:noun"],"det":"definite"}}},
+    {"id":"giant13","topic":"Earth and sky","en":"The earth shakes.","S":{"head":"earth:noun","det":"definite"},"V":{"head":"shake:verb"}},
+    {"id":"giant14","topic":"Earth and sky","en":"The river is below.","S":{"head":"river:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"below:adposition"}},
+    {"id":"giant15","topic":"Earth and sky","en":"The sky is [dark|cold].","S":{"head":"sky:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["dark:adjective","cold:adjective"]}},
+    {"id":"giant16","topic":"The small folk","en":"The small people fear me.","S":{"head":"people:noun","det":"definite","adj":"small:adjective"},"V":{"head":"fear:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"giant17","topic":"The small folk","en":"I do not fear the small people.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"fear:verb","neg":true},"O":{"head":"people:noun","det":"definite","adj":"small:adjective"}},
+    {"id":"giant18","topic":"The small folk","en":"Do not wake me.","mood":"imperative","seq":["V","O"],"V":{"head":"wake:verb","neg":true},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"giant19","topic":"The small folk","en":"The small people run.","S":{"head":"people:noun","det":"definite","adj":"small:adjective"},"V":{"head":"run:verb"}},
+    {"id":"giant20","topic":"Deep time","en":"The mountain was young.","tense":"past","S":{"head":"mountain:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"young:adjective"}},
+    {"id":"giant21","topic":"Deep time","en":"The glacier moves.","S":{"head":"glacier:noun","det":"definite"},"V":{"head":"move:verb"}},
+    {"id":"giant22","topic":"Deep time","en":"The winter is long.","S":{"head":"winter:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"long:adjective"}}
    ],
-   "initial": [
-    {
-     "head": "interrogative.who"
-    }
+   "marine": [
+    {"id":"marine01","topic":"Water and weather","en":"The tide [rises|falls].","S":{"head":"tide:noun","det":"definite"},"V":{"head":["rise:verb","fall:verb"]}},
+    {"id":"marine02","topic":"Water and weather","en":"The wave is large.","S":{"head":"wave:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"large:adjective"}},
+    {"id":"marine03","topic":"Water and weather","en":"The current is strong.","S":{"head":"current:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"marine04","topic":"Water and weather","en":"The water is deep.","S":{"head":"water:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"deep:adjective"}},
+    {"id":"marine05","topic":"Water and weather","en":"The storm comes.","S":{"head":"storm:noun","det":"definite"},"V":{"head":"come:verb"}},
+    {"id":"marine06","topic":"Water and weather","en":"The wind is [cold|strong].","S":{"head":"wind:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["cold:adjective","strong:adjective"]}},
+    {"id":"marine07","topic":"Ship and sailing","en":"The ship sails to the [harbor|island].","S":{"head":"ship:noun","det":"definite"},"V":{"head":"sail:verb"},"A":{"adp":"to:adposition","case":"dative","np":{"head":["harbor:noun","island:noun"],"det":"definite"}}},
+    {"id":"marine08","topic":"Ship and sailing","en":"Raise the sail!","mood":"imperative","seq":["V","O"],"V":{"head":"raise:verb"},"O":{"head":"sail:noun","det":"definite"}},
+    {"id":"marine09","topic":"Ship and sailing","en":"Drop the anchor!","mood":"imperative","seq":["V","O"],"V":{"head":"drop:verb"},"O":{"head":"anchor:noun","det":"definite"}},
+    {"id":"marine10","topic":"Ship and sailing","en":"The keel is strong.","S":{"head":"keel:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"marine11","topic":"Ship and sailing","en":"We are on the sea.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"be:verb"},"O":{"adp":"on:adposition","case":"locative","np":{"head":"sea:noun","det":"definite"}}},
+    {"id":"marine12","topic":"Ship and sailing","en":"Land!","initial":[{"head":"land:noun"}]},
+    {"id":"marine13","topic":"Ship and sailing","en":"Where is the shore?","seq":["initial","V","S"],"initial":[{"head":"interrogative.where"}],"S":{"head":"shore:noun","det":"definite"},"V":{"head":"be:verb"}},
+    {"id":"marine14","topic":"Creatures of the deep","en":"We hunt the whale.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"hunt:verb"},"O":{"head":"whale:noun","det":"definite"}},
+    {"id":"marine15","topic":"Creatures of the deep","en":"The harpoon is in the whale.","S":{"head":"harpoon:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"adp":"in:adposition","case":"locative","np":{"head":"whale:noun","det":"definite"}}},
+    {"id":"marine16","topic":"Creatures of the deep","en":"The fish swims in the kelp.","S":{"head":"fish:noun","det":"definite"},"V":{"head":"swim:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"kelp:noun","det":"definite"}}},
+    {"id":"marine17","topic":"Creatures of the deep","en":"The shoal is large.","S":{"head":"shoal:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"large:adjective"}},
+    {"id":"marine18","topic":"Danger at sea","en":"The maelstrom takes the ship.","S":{"head":"maelstrom:noun","det":"definite"},"V":{"head":"take:verb"},"O":{"head":"ship:noun","det":"definite"}},
+    {"id":"marine19","topic":"Danger at sea","en":"I fear the maelstrom.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"fear:verb"},"O":{"head":"maelstrom:noun","det":"definite"}},
+    {"id":"marine20","topic":"Danger at sea","en":"The sailor drowns.","S":{"head":"sailor:noun","det":"definite"},"V":{"head":"drown:verb"}},
+    {"id":"marine21","topic":"Danger at sea","en":"Swim!","mood":"imperative","seq":["V"],"V":{"head":"swim:verb"}},
+    {"id":"marine22","topic":"Depths and creatures","en":"The reef is sharp.","S":{"head":"reef:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"sharp:adjective"}},
+    {"id":"marine23","topic":"Depths and creatures","en":"The pearl is in the shell.","S":{"head":"pearl:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"adp":"in:adposition","case":"locative","np":{"head":"shell:noun","det":"definite"}}},
+    {"id":"marine24","topic":"Depths and creatures","en":"The octopus hides in the kelp.","S":{"head":"octopus:noun","det":"definite"},"V":{"head":"hide:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"kelp:noun","det":"definite"}}},
+    {"id":"marine25","topic":"Depths and creatures","en":"The moon pulls the tide.","S":{"head":"moon:noun","det":"definite"},"V":{"head":"pull:verb"},"O":{"head":"tide:noun","det":"definite"}}
    ],
-   "V": {
-    "head": "be:verb"
-   },
-   "S": {
-    "head": "pronoun.second_person_singular"
-   }
-  },
-  {
-   "id": "t28",
-   "en": "What is this?",
-   "seq": [
-    "initial",
-    "V",
-    "S"
+   "fey": [
+    {"id":"fey01","topic":"Glamour and trickery","en":"The glamour is bright.","S":{"head":"glamour:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"bright:adjective"}},
+    {"id":"fey02","topic":"Glamour and trickery","en":"I see a fairy ring.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"see:verb"},"O":{"head":"fairy ring:noun","det":"indefinite"}},
+    {"id":"fey03","topic":"Glamour and trickery","en":"Do not enter the fairy ring!","mood":"imperative","seq":["V","O"],"V":{"head":"enter:verb","neg":true},"O":{"head":"fairy ring:noun","det":"definite"}},
+    {"id":"fey04","topic":"Glamour and trickery","en":"I do not lie.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"lie:verb","neg":true}},
+    {"id":"fey05","topic":"Glamour and trickery","en":"I give you a gift.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"give:verb"},"O":{"head":"gift:noun","det":"indefinite"},"A":{"adp":"to:adposition","case":"dative","np":{"head":"pronoun.second_person_singular_object"}}},
+    {"id":"fey06","topic":"Glamour and trickery","en":"Do not eat the food.","mood":"imperative","seq":["V","O"],"V":{"head":"eat:verb","neg":true},"O":{"head":"food:noun","det":"definite"}},
+    {"id":"fey07","topic":"Night and nature","en":"The moon is bright.","S":{"head":"moon:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"bright:adjective"}},
+    {"id":"fey08","topic":"Night and nature","en":"The dew is on the [flower|leaf].","S":{"head":"dew:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"adp":"on:adposition","case":"locative","np":{"head":["flower:noun","leaf:noun"],"det":"definite"}}},
+    {"id":"fey09","topic":"Night and nature","en":"The mist comes.","S":{"head":"mist:noun","det":"definite"},"V":{"head":"come:verb"}},
+    {"id":"fey10","topic":"Night and nature","en":"The star sings.","S":{"head":"star:noun","det":"definite"},"V":{"head":"sing:verb"}},
+    {"id":"fey11","topic":"Night and nature","en":"The flower dies.","S":{"head":"flower:noun","det":"definite"},"V":{"head":"die:verb"}},
+    {"id":"fey12","topic":"Night and nature","en":"The gossamer is [fine|bright].","S":{"head":"gossamer:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["fine:adjective","bright:adjective"]}},
+    {"id":"fey13","topic":"Dance and song","en":"We dance under the moon.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"dance:verb"},"A":{"adp":"under:adposition","case":"locative","np":{"head":"moon:noun","det":"definite"}}},
+    {"id":"fey14","topic":"Dance and song","en":"We sing in the glade.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"sing:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"glade:noun","det":"definite"}}},
+    {"id":"fey15","topic":"Dance and song","en":"Dance with me.","mood":"imperative","seq":["V","A"],"V":{"head":"dance:verb"},"A":{"adp":"with:adposition","case":"instrumental","np":{"head":"pronoun.first_person_singular_object"}}},
+    {"id":"fey16","topic":"Dance and song","en":"The music is [sweet|old].","S":{"head":"music:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["sweet:adjective","old:adjective"]}},
+    {"id":"fey17","topic":"Age and time","en":"You are young.","S":{"head":"pronoun.second_person_singular"},"V":{"head":"be:verb"},"O":{"head":"young:adjective"}},
+    {"id":"fey18","topic":"Age and time","en":"I am old.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"old:adjective"}},
+    {"id":"fey19","topic":"Oaths and bargains","en":"I keep my promise.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"keep:verb"},"O":{"head":"promise:noun","poss":"my:determiner"}},
+    {"id":"fey20","topic":"Oaths and bargains","en":"Do not say your name.","mood":"imperative","seq":["V","O"],"V":{"head":"say:verb","neg":true},"O":{"head":"name:noun","poss":"your:determiner"}},
+    {"id":"fey21","topic":"Oaths and bargains","en":"The fey take the dew.","S":{"head":"fey:noun","det":"definite"},"V":{"head":"take:verb"},"O":{"head":"dew:noun","det":"definite"}},
+    {"id":"fey22","topic":"Oaths and bargains","en":"The forest is alive.","S":{"head":"forest:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"alive:adjective"}}
    ],
-   "initial": [
-    {
-     "head": "interrogative.what"
-    }
+   "draconic": [
+    {"id":"draconic01","topic":"Hoard and greed","en":"The gold is mine.","S":{"head":"gold:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"mine:pronoun"}},
+    {"id":"draconic02","topic":"Hoard and greed","en":"I covet the [gold|jewel].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"covet:verb"},"O":{"head":["gold:noun","jewel:noun"],"det":"definite"}},
+    {"id":"draconic03","topic":"Hoard and greed","en":"The hoard is [large|ancient].","S":{"head":"hoard:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["large:adjective","ancient:adjective"]}},
+    {"id":"draconic04","topic":"Hoard and greed","en":"Do not touch my hoard!","mood":"imperative","seq":["V","O"],"V":{"head":"touch:verb","neg":true},"O":{"head":"hoard:noun","poss":"my:determiner"}},
+    {"id":"draconic05","topic":"Hoard and greed","en":"Who takes my gold?","S":{"head":"interrogative.who"},"V":{"head":"take:verb"},"O":{"head":"gold:noun","poss":"my:determiner"}},
+    {"id":"draconic06","topic":"Hoard and greed","en":"I sleep on the hoard.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"sleep:verb"},"A":{"adp":"on:adposition","case":"locative","np":{"head":"hoard:noun","det":"definite"}}},
+    {"id":"draconic07","topic":"Fire and might","en":"I am the [wyrm|dragon].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":["wyrm:noun","dragon:noun"],"det":"definite"}},
+    {"id":"draconic08","topic":"Fire and might","en":"My fire burns.","S":{"head":"fire:noun","poss":"my:determiner"},"V":{"head":"burn:verb"}},
+    {"id":"draconic09","topic":"Fire and might","en":"My scale is strong.","S":{"head":"scale:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"draconic10","topic":"Fire and might","en":"I fly over the mountain.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"fly:verb"},"A":{"adp":"over:adposition","case":"locative","np":{"head":"mountain:noun","det":"definite"}}},
+    {"id":"draconic11","topic":"Fire and might","en":"You are [small|weak].","S":{"head":"pronoun.second_person_singular"},"V":{"head":"be:verb"},"O":{"head":["small:adjective","weak:adjective"]}},
+    {"id":"draconic12","topic":"Fire and might","en":"The knight fears me.","S":{"head":"knight:noun","det":"definite"},"V":{"head":"fear:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"draconic13","topic":"Dominion and age","en":"This is my dominion.","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":"dominion:noun","poss":"my:determiner"}},
+    {"id":"draconic14","topic":"Dominion and age","en":"I rule the [mountain|sky].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"rule:verb"},"O":{"head":["mountain:noun","sky:noun"],"det":"definite"}},
+    {"id":"draconic15","topic":"Dominion and age","en":"I am ancient.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"ancient:adjective"}},
+    {"id":"draconic16","topic":"Dominion and age","en":"I remember everything.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"remember:verb"},"O":{"head":"everything:pronoun"}},
+    {"id":"draconic17","topic":"Wrath and sleep","en":"My wrath is fire.","S":{"head":"wrath:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"fire:noun"}},
+    {"id":"draconic18","topic":"Wrath and sleep","en":"The village burns.","S":{"head":"village:noun","det":"definite"},"V":{"head":"burn:verb"}},
+    {"id":"draconic19","topic":"Wrath and sleep","en":"I wake.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"wake:verb"}},
+    {"id":"draconic20","topic":"Wrath and sleep","en":"The jewel is in the cave.","S":{"head":"jewel:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"adp":"in:adposition","case":"locative","np":{"head":"cave:noun","det":"definite"}}}
    ],
-   "V": {
-    "head": "be:verb"
-   },
-   "S": {
-    "head": "demonstrative.this"
-   }
-  },
-  {
-   "id": "t29",
-   "en": "Where are we?",
-   "seq": [
-    "initial",
-    "V",
-    "S"
+   "dwarven": [
+    {"id":"dwarven01","topic":"Forge and mine","en":"The forge is hot.","S":{"head":"forge:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"hot:adjective"}},
+    {"id":"dwarven02","topic":"Forge and mine","en":"I strike the [iron|anvil].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"strike:verb"},"O":{"head":["iron:noun","anvil:noun"],"det":"definite"}},
+    {"id":"dwarven03","topic":"Forge and mine","en":"The hammer is [heavy|old].","S":{"head":"hammer:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["heavy:adjective","old:adjective"]}},
+    {"id":"dwarven04","topic":"Forge and mine","en":"We dig in the mountain.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"dig:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"mountain:noun","det":"definite"}}},
+    {"id":"dwarven05","topic":"Forge and mine","en":"The ore is in the mountain.","S":{"head":"ore:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"adp":"in:adposition","case":"locative","np":{"head":"mountain:noun","det":"definite"}}},
+    {"id":"dwarven06","topic":"Forge and mine","en":"The [iron|gold] is good.","S":{"head":["iron:noun","gold:noun"],"det":"definite"},"V":{"head":"be:verb"},"O":{"head":"good:adjective"}},
+    {"id":"dwarven07","topic":"Stonework","en":"The mortise is [deep|small].","S":{"head":"mortise:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["deep:adjective","small:adjective"]}},
+    {"id":"dwarven08","topic":"Stonework","en":"I cut the ashlar.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"cut:verb"},"O":{"head":"ashlar:noun","det":"definite"}},
+    {"id":"dwarven09","topic":"Stonework","en":"The wall is strong.","S":{"head":"wall:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"dwarven10","topic":"Stonework","en":"The master teaches the apprentice.","S":{"head":"master:noun","det":"definite"},"V":{"head":"teach:verb"},"O":{"head":"apprentice:noun","det":"definite"}},
+    {"id":"dwarven11","topic":"Clan and halls","en":"My clan is old.","S":{"head":"clan:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"old:adjective"}},
+    {"id":"dwarven12","topic":"Clan and halls","en":"The hall is [deep|large].","S":{"head":"hall:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["deep:adjective","large:adjective"]}},
+    {"id":"dwarven13","topic":"Clan and halls","en":"My father has a beard.","S":{"head":"father:noun","poss":"my:determiner"},"V":{"head":"have:verb"},"O":{"head":"beard:noun","det":"indefinite"}},
+    {"id":"dwarven14","topic":"Clan and halls","en":"We keep our oath.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"keep:verb"},"O":{"head":"oath:noun","poss":"our:determiner"}},
+    {"id":"dwarven15","topic":"Clan and halls","en":"I do not forget.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"forget:verb","neg":true}},
+    {"id":"dwarven16","topic":"Grudges and honour","en":"I remember the wrong.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"remember:verb"},"O":{"head":"wrong:noun","det":"definite"}},
+    {"id":"dwarven17","topic":"Grudges and honour","en":"The grudge is old.","S":{"head":"grudge:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"old:adjective"}},
+    {"id":"dwarven18","topic":"Grudges and honour","en":"The clan honors the ancestor.","S":{"head":"clan:noun","det":"definite"},"V":{"head":"honor:verb"},"O":{"head":"ancestor:noun","det":"definite"}},
+    {"id":"dwarven19","topic":"Grudges and honour","en":"Where is the mine?","seq":["initial","V","S"],"initial":[{"head":"interrogative.where"}],"S":{"head":"mine:noun","det":"definite"},"V":{"head":"be:verb"}},
+    {"id":"dwarven20","topic":"Grudges and honour","en":"The vein is [rich|deep].","S":{"head":"vein:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["rich:adjective","deep:adjective"]}}
    ],
-   "initial": [
-    {
-     "head": "where:adverb"
-    }
+   "infernal": [
+    {"id":"infernal01","topic":"Pacts and bargains","en":"I offer you a bargain.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"offer:verb"},"O":{"head":"bargain:noun","det":"indefinite"},"A":{"adp":"to:adposition","case":"dative","np":{"head":"pronoun.second_person_singular_object"}}},
+    {"id":"infernal02","topic":"Pacts and bargains","en":"Sign the contract!","mood":"imperative","seq":["V","O"],"V":{"head":"sign:verb"},"O":{"head":"infernal contract:noun","det":"definite"}},
+    {"id":"infernal03","topic":"Pacts and bargains","en":"The contract has a loophole.","S":{"head":"infernal contract:noun","det":"definite"},"V":{"head":"have:verb"},"O":{"head":"loophole:noun","det":"indefinite"}},
+    {"id":"infernal04","topic":"Pacts and bargains","en":"Your soul is mine.","S":{"head":"soul:noun","poss":"your:determiner"},"V":{"head":"be:verb"},"O":{"head":"mine:pronoun"}},
+    {"id":"infernal05","topic":"Pacts and bargains","en":"I want your soul.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"want:verb"},"O":{"head":"soul:noun","poss":"your:determiner"}},
+    {"id":"infernal06","topic":"Pacts and bargains","en":"Nothing is free.","S":{"head":"nothing:pronoun"},"V":{"head":"be:verb"},"O":{"head":"free:adjective"}},
+    {"id":"infernal07","topic":"Hell","en":"This is hell.","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":"hell:noun"}},
+    {"id":"infernal08","topic":"Hell","en":"Brimstone burns.","S":{"head":"brimstone:noun"},"V":{"head":"burn:verb"}},
+    {"id":"infernal09","topic":"Hell","en":"The fire does not die.","S":{"head":"fire:noun","det":"definite"},"V":{"head":"die:verb","neg":true}},
+    {"id":"infernal10","topic":"Hell","en":"The devil is cruel.","S":{"head":"devil:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"cruel:adjective"}},
+    {"id":"infernal11","topic":"Hell","en":"The damned cry.","S":{"head":"damned:adjective","det":"definite"},"V":{"head":"cry:verb"}},
+    {"id":"infernal12","topic":"Temptation","en":"I know your desire.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"know:verb"},"O":{"head":"desire:noun","poss":"your:determiner"}},
+    {"id":"infernal13","topic":"Temptation","en":"You fear me.","S":{"head":"pronoun.second_person_singular"},"V":{"head":"fear:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"infernal14","topic":"Temptation","en":"Do not trust the devil.","mood":"imperative","seq":["V","O"],"V":{"head":"trust:verb","neg":true},"O":{"head":"devil:noun","det":"definite"}},
+    {"id":"infernal15","topic":"Temptation","en":"I do not lie.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"lie:verb","neg":true}},
+    {"id":"infernal16","topic":"Law and loopholes","en":"The contract is [binding|false].","S":{"head":"infernal contract:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["binding:adjective","false:adjective"]}},
+    {"id":"infernal17","topic":"Law and loopholes","en":"I read the fine print.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"read:verb"},"O":{"head":"fine print:noun","det":"definite"}},
+    {"id":"infernal18","topic":"Law and loopholes","en":"The price is your soul.","S":{"head":"price:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"soul:noun","poss":"your:determiner"}},
+    {"id":"infernal19","topic":"Law and loopholes","en":"The devil lies.","S":{"head":"devil:noun","det":"definite"},"V":{"head":"lie:verb"}},
+    {"id":"infernal20","topic":"Law and loopholes","en":"I collect the debt.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"collect:verb"},"O":{"head":"debt:noun","det":"definite"}}
    ],
-   "V": {
-    "head": "be:verb"
-   },
-   "S": {
-    "head": "pronoun.first_person_plural"
-   }
-  },
-  {
-   "id": "t30",
-   "en": "When do you go?",
-   "seq": [
-    "initial",
-    "S",
-    "V"
+   "arcane": [
+    {"id":"arcane01","topic":"Casting","en":"I cast a spell.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"cast:verb"},"O":{"head":"spell:noun","det":"indefinite"}},
+    {"id":"arcane02","topic":"Casting","en":"The spell is [strong|weak].","S":{"head":"spell:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["strong:adjective","weak:adjective"]}},
+    {"id":"arcane03","topic":"Casting","en":"Say the incantation!","mood":"imperative","seq":["V","O"],"V":{"head":"say:verb"},"O":{"head":"incantation:noun","det":"definite"}},
+    {"id":"arcane04","topic":"Casting","en":"I scry the future.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"scry:verb"},"O":{"head":"future:noun","det":"definite"}},
+    {"id":"arcane05","topic":"Casting","en":"The rune burns.","S":{"head":"rune:noun","det":"definite"},"V":{"head":"burn:verb"}},
+    {"id":"arcane06","topic":"Books and study","en":"The grimoire is old.","S":{"head":"grimoire:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"old:adjective"}},
+    {"id":"arcane07","topic":"Books and study","en":"The wizard reads the grimoire.","S":{"head":"wizard:noun","det":"definite"},"V":{"head":"read:verb"},"O":{"head":"grimoire:noun","det":"definite"}},
+    {"id":"arcane08","topic":"Books and study","en":"I study magic.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"study:verb"},"O":{"head":"magic:noun"}},
+    {"id":"arcane09","topic":"Books and study","en":"The mage teaches the apprentice.","S":{"head":"mage:noun","det":"definite"},"V":{"head":"teach:verb"},"O":{"head":"apprentice:noun","det":"definite"}},
+    {"id":"arcane10","topic":"Books and study","en":"The staff is in my hand.","S":{"head":"staff:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"adp":"in:adposition","case":"locative","np":{"head":"hand:noun","poss":"my:determiner"}}},
+    {"id":"arcane11","topic":"Power and danger","en":"Magic is dangerous.","S":{"head":"magic:noun"},"V":{"head":"be:verb"},"O":{"head":"dangerous:adjective"}},
+    {"id":"arcane12","topic":"Power and danger","en":"Do not break the circle.","mood":"imperative","seq":["V","O"],"V":{"head":"break:verb","neg":true},"O":{"head":"circle:noun","det":"definite"}},
+    {"id":"arcane13","topic":"Power and danger","en":"I know your name.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"know:verb"},"O":{"head":"name:noun","poss":"your:determiner"}},
+    {"id":"arcane14","topic":"Power and danger","en":"The light is [bright|dark].","S":{"head":"light:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["bright:adjective","dark:adjective"]}},
+    {"id":"arcane15","topic":"Theory and practice","en":"The circle is [open|closed].","S":{"head":"circle:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["open:adjective","closed:adjective"]}},
+    {"id":"arcane16","topic":"Theory and practice","en":"I read the rune.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"read:verb"},"O":{"head":"rune:noun","det":"definite"}},
+    {"id":"arcane17","topic":"Theory and practice","en":"Magic needs [water|fire].","S":{"head":"magic:noun"},"V":{"head":"need:verb"},"O":{"head":["water:noun","fire:noun"]}},
+    {"id":"arcane18","topic":"Theory and practice","en":"The portal opens.","S":{"head":"portal:noun","det":"definite"},"V":{"head":"open:verb"}},
+    {"id":"arcane19","topic":"Theory and practice","en":"I am a wizard.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"wizard:noun","det":"indefinite"}},
+    {"id":"arcane20","topic":"Elements and wards","en":"The ward is [strong|broken].","S":{"head":"ward:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["strong:adjective","broken:adjective"]}},
+    {"id":"arcane21","topic":"Elements and wards","en":"I summon the [fire|wind].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"summon:verb"},"O":{"head":["fire:noun","wind:noun"],"det":"definite"}},
+    {"id":"arcane22","topic":"Elements and wards","en":"The wand is [old|bright].","S":{"head":"wand:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["old:adjective","bright:adjective"]}},
+    {"id":"arcane23","topic":"Elements and wards","en":"The mana is low.","S":{"head":"mana:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"low:adjective"}}
    ],
-   "initial": [
-    {
-     "head": "when:conjunction"
-    }
+   "machine": [
+    {"id":"machine01","topic":"System status","en":"The system is ready.","S":{"head":"system:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"ready:adjective"}},
+    {"id":"machine02","topic":"System status","en":"Initialize the system!","mood":"imperative","seq":["V","O"],"V":{"head":"initialize:verb"},"O":{"head":"system:noun","det":"definite"}},
+    {"id":"machine03","topic":"System status","en":"The signal is [weak|strong].","S":{"head":"signal:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["weak:adjective","strong:adjective"]}},
+    {"id":"machine04","topic":"System status","en":"Error!","initial":[{"head":"error:noun"}]},
+    {"id":"machine05","topic":"System status","en":"The data is lost.","S":{"head":"data:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"lost:adjective"}},
+    {"id":"machine06","topic":"System status","en":"The battery is empty.","S":{"head":"battery:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"empty:adjective"}},
+    {"id":"machine07","topic":"Commands","en":"Stop the engine!","mood":"imperative","seq":["V","O"],"V":{"head":"stop:verb"},"O":{"head":"engine:noun","det":"definite"}},
+    {"id":"machine08","topic":"Commands","en":"Send the data!","mood":"imperative","seq":["V","O"],"V":{"head":"send:verb"},"O":{"head":"data:noun","det":"definite"}},
+    {"id":"machine09","topic":"Commands","en":"Connect to the network!","mood":"imperative","seq":["V","A"],"V":{"head":"connect:verb"},"A":{"adp":"to:adposition","case":"dative","np":{"head":"network:noun","det":"definite"}}},
+    {"id":"machine10","topic":"Commands","en":"Open the door!","mood":"imperative","seq":["V","O"],"V":{"head":"open:verb"},"O":{"head":"door:noun","det":"definite"}},
+    {"id":"machine11","topic":"Identity and protocol","en":"I am a machine.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"machine:noun","det":"indefinite"}},
+    {"id":"machine12","topic":"Identity and protocol","en":"I receive your signal.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"receive:verb"},"O":{"head":"signal:noun","poss":"your:determiner"}},
+    {"id":"machine13","topic":"Identity and protocol","en":"The handshake is complete.","S":{"head":"handshake:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"complete:adjective"}},
+    {"id":"machine14","topic":"Identity and protocol","en":"The checksum is [correct|wrong].","S":{"head":"checksum:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["correct:adjective","wrong:adjective"]}},
+    {"id":"machine15","topic":"Identity and protocol","en":"We repair the engine.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"repair:verb"},"O":{"head":"engine:noun","det":"definite"}},
+    {"id":"machine16","topic":"Identity and protocol","en":"The subroutine runs.","S":{"head":"subroutine:noun","det":"definite"},"V":{"head":"run:verb"}},
+    {"id":"machine17","topic":"Maintenance and logic","en":"The engine is broken.","S":{"head":"engine:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"broken:adjective"}},
+    {"id":"machine18","topic":"Maintenance and logic","en":"Repair is complete.","S":{"head":"repair:noun"},"V":{"head":"be:verb"},"O":{"head":"complete:adjective"}},
+    {"id":"machine19","topic":"Maintenance and logic","en":"The program has an error.","S":{"head":"program:noun","det":"definite"},"V":{"head":"have:verb"},"O":{"head":"error:noun","det":"indefinite"}},
+    {"id":"machine20","topic":"Maintenance and logic","en":"Power is low.","S":{"head":"power:noun"},"V":{"head":"be:verb"},"O":{"head":"low:adjective"}},
+    {"id":"machine21","topic":"Maintenance and logic","en":"The network is [open|closed].","S":{"head":"network:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["open:adjective","closed:adjective"]}}
    ],
-   "S": {
-    "head": "pronoun.second_person_singular"
-   },
-   "V": {
-    "head": "go:verb"
-   }
-  },
-  {
-   "id": "t31",
-   "en": "Why do you do this?",
-   "seq": [
-    "initial",
-    "S",
-    "V",
-    "O"
+   "hive": [
+    {"id":"hive01","topic":"The hive and the queen","en":"We are the hive.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"be:verb"},"O":{"head":"hive:noun","det":"definite"}},
+    {"id":"hive02","topic":"The hive and the queen","en":"The queen is large.","S":{"head":"queen:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"large:adjective"}},
+    {"id":"hive03","topic":"The hive and the queen","en":"We serve the queen.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"serve:verb"},"O":{"head":"queen:noun","det":"definite"}},
+    {"id":"hive04","topic":"The hive and the queen","en":"The queen has the brood.","S":{"head":"queen:noun","det":"definite"},"V":{"head":"have:verb"},"O":{"head":"brood:noun","det":"definite"}},
+    {"id":"hive05","topic":"The hive and the queen","en":"We build the hive.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"build:verb"},"O":{"head":"hive:noun","det":"definite"}},
+    {"id":"hive06","topic":"Work and swarm","en":"The worker carries the nectar.","S":{"head":"worker:noun","det":"definite"},"V":{"head":"carry:verb"},"O":{"head":"nectar:noun","det":"definite"}},
+    {"id":"hive07","topic":"Work and swarm","en":"The drone does not work.","S":{"head":"drone:noun","det":"definite"},"V":{"head":"work:verb","neg":true}},
+    {"id":"hive08","topic":"Work and swarm","en":"The swarm comes.","S":{"head":"swarm:noun","det":"definite"},"V":{"head":"come:verb"}},
+    {"id":"hive09","topic":"Work and swarm","en":"The swarm flies.","S":{"head":"swarm:noun","det":"definite"},"V":{"head":"fly:verb"}},
+    {"id":"hive10","topic":"Work and swarm","en":"We are many.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"be:verb"},"O":{"head":"many:determiner"}},
+    {"id":"hive11","topic":"Scent and defence","en":"The pheromone is [strong|sweet].","S":{"head":"pheromone:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["strong:adjective","sweet:adjective"]}},
+    {"id":"hive12","topic":"Scent and defence","en":"I smell the pheromone.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"smell:verb"},"O":{"head":"pheromone:noun","det":"definite"}},
+    {"id":"hive13","topic":"Scent and defence","en":"Defend the hive!","mood":"imperative","seq":["V","O"],"V":{"head":"defend:verb"},"O":{"head":"hive:noun","det":"definite"}},
+    {"id":"hive14","topic":"Scent and defence","en":"The enemy enters the hive.","S":{"head":"enemy:noun","det":"definite"},"V":{"head":"enter:verb"},"O":{"head":"hive:noun","det":"definite"}},
+    {"id":"hive15","topic":"Scent and defence","en":"The mandible is sharp.","S":{"head":"mandible:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"sharp:adjective"}},
+    {"id":"hive16","topic":"Scent and defence","en":"I am not alone.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb","neg":true},"O":{"head":"alone:adjective"}},
+    {"id":"hive17","topic":"Brood and food","en":"The brood is small.","S":{"head":"brood:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"small:adjective"}},
+    {"id":"hive18","topic":"Brood and food","en":"The larva eats.","S":{"head":"larva:noun","det":"definite"},"V":{"head":"eat:verb"}},
+    {"id":"hive19","topic":"Brood and food","en":"We feed the brood.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"feed:verb"},"O":{"head":"brood:noun","det":"definite"}},
+    {"id":"hive20","topic":"Brood and food","en":"The nectar is [sweet|good].","S":{"head":"nectar:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["sweet:adjective","good:adjective"]}},
+    {"id":"hive21","topic":"Brood and food","en":"I do not think alone.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"think:verb","neg":true},"A":{"head":"alone:adjective"}}
    ],
-   "initial": [
-    {
-     "head": "why:adverb"
-    }
+   "women": [
+    {"id":"women01","topic":"Sworn sisters","en":"You are my sworn sister.","S":{"head":"pronoun.second_person_singular"},"V":{"head":"be:verb"},"O":{"head":"sworn sister:noun","poss":"my:determiner"}},
+    {"id":"women02","topic":"Sworn sisters","en":"I write you a letter.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"write:verb"},"O":{"head":"letter:noun","det":"indefinite"},"A":{"adp":"to:adposition","case":"dative","np":{"head":"pronoun.second_person_singular_object"}}},
+    {"id":"women03","topic":"Sworn sisters","en":"Keep this secret.","mood":"imperative","seq":["V","O"],"V":{"head":"keep:verb"},"O":{"head":"secret:noun","det":"definite"}},
+    {"id":"women04","topic":"Sworn sisters","en":"The letter is sweet.","S":{"head":"letter:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"sweet:adjective"}},
+    {"id":"women05","topic":"Sworn sisters","en":"I miss my sister.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"miss:verb"},"O":{"head":"sister:noun","poss":"my:determiner"}},
+    {"id":"women06","topic":"Needlework","en":"I embroider the [flower|bird].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"embroider:verb"},"O":{"head":["flower:noun","bird:noun"],"det":"definite"}},
+    {"id":"women07","topic":"Needlework","en":"The thread is [red|fine].","S":{"head":"thread:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["red:adjective","fine:adjective"]}},
+    {"id":"women08","topic":"Needlework","en":"The needle is small.","S":{"head":"needle:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"small:adjective"}},
+    {"id":"women09","topic":"Needlework","en":"I weave the cloth.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"weave:verb"},"O":{"head":"cloth:noun","det":"definite"}},
+    {"id":"women10","topic":"Marriage and birth","en":"The bride sings a lament.","S":{"head":"bride:noun","det":"definite"},"V":{"head":"sing:verb"},"O":{"head":"lament:noun","det":"indefinite"}},
+    {"id":"women11","topic":"Marriage and birth","en":"The bride is young.","S":{"head":"bride:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"young:adjective"}},
+    {"id":"women12","topic":"Marriage and birth","en":"The midwife helps the mother.","S":{"head":"midwife:noun","det":"definite"},"V":{"head":"help:verb"},"O":{"head":"mother:noun","det":"definite"}},
+    {"id":"women13","topic":"Marriage and birth","en":"The mother has a child.","S":{"head":"mother:noun","det":"definite"},"V":{"head":"have:verb"},"O":{"head":"child:noun","det":"indefinite"}},
+    {"id":"women14","topic":"The inner quarters","en":"I live in the inner quarters.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"live:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"inner quarters:noun","det":"definite"}}},
+    {"id":"women15","topic":"The inner quarters","en":"The house is quiet.","S":{"head":"house:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"quiet:adjective"}},
+    {"id":"women16","topic":"Songs and feelings","en":"I sing a lullaby.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"sing:verb"},"O":{"head":"lullaby:noun","det":"indefinite"}},
+    {"id":"women17","topic":"Songs and feelings","en":"My heart is heavy.","S":{"head":"heart:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"heavy:adjective"}},
+    {"id":"women18","topic":"Songs and feelings","en":"The song is [sad|sweet].","S":{"head":"song:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["sad:adjective","sweet:adjective"]}},
+    {"id":"women19","topic":"Songs and feelings","en":"We cry together.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"cry:verb"},"A":{"head":"together:adverb"}},
+    {"id":"women20","topic":"Songs and feelings","en":"Do not tell the [husband|father].","mood":"imperative","seq":["V","O"],"V":{"head":"tell:verb","neg":true},"O":{"head":["husband:noun","father:noun"],"det":"definite"}}
    ],
-   "S": {
-    "head": "pronoun.second_person_singular"
-   },
-   "V": {
-    "head": "do:verb"
-   },
-   "O": {
-    "head": "demonstrative.this"
-   }
-  },
-  {
-   "id": "t32",
-   "en": "How does this work?",
-   "seq": [
-    "initial",
-    "S",
-    "V"
+   "artisan": [
+    {"id":"artisan01","topic":"Workshop and guild","en":"The workshop is [warm|large].","S":{"head":"workshop:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["warm:adjective","large:adjective"]}},
+    {"id":"artisan02","topic":"Workshop and guild","en":"I work in the workshop.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"work:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"workshop:noun","det":"definite"}}},
+    {"id":"artisan03","topic":"Workshop and guild","en":"The master teaches the apprentice.","S":{"head":"master:noun","det":"definite"},"V":{"head":"teach:verb"},"O":{"head":"apprentice:noun","det":"definite"}},
+    {"id":"artisan04","topic":"Workshop and guild","en":"The journeyman leaves the workshop.","S":{"head":"journeyman:noun","det":"definite"},"V":{"head":"leave:verb"},"O":{"head":"workshop:noun","det":"definite"}},
+    {"id":"artisan05","topic":"Workshop and guild","en":"The guild is old.","S":{"head":"guild:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"old:adjective"}},
+    {"id":"artisan06","topic":"Tools and materials","en":"The chisel is [sharp|small].","S":{"head":"chisel:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["sharp:adjective","small:adjective"]}},
+    {"id":"artisan07","topic":"Tools and materials","en":"Quench the iron!","mood":"imperative","seq":["V","O"],"V":{"head":"quench:verb"},"O":{"head":"iron:noun","det":"definite"}},
+    {"id":"artisan08","topic":"Tools and materials","en":"The dovetail is strong.","S":{"head":"dovetail:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"strong:adjective"}},
+    {"id":"artisan09","topic":"Tools and materials","en":"I weave the weft.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"weave:verb"},"O":{"head":"weft:noun","det":"definite"}},
+    {"id":"artisan10","topic":"Tools and materials","en":"The kiln is hot.","S":{"head":"kiln:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"hot:adjective"}},
+    {"id":"artisan11","topic":"Tools and materials","en":"The wood is dry.","S":{"head":"wood:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"dry:adjective"}},
+    {"id":"artisan12","topic":"Making and quality","en":"I cut the [wood|leather|cloth].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"cut:verb"},"O":{"head":["wood:noun","leather:noun","cloth:noun"],"det":"definite"}},
+    {"id":"artisan13","topic":"Making and quality","en":"Measure the wood!","mood":"imperative","seq":["V","O"],"V":{"head":"measure:verb"},"O":{"head":"wood:noun","det":"definite"}},
+    {"id":"artisan14","topic":"Making and quality","en":"The work is good.","S":{"head":"work:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"good:adjective"}},
+    {"id":"artisan15","topic":"Making and quality","en":"The master looks at my work.","S":{"head":"master:noun","det":"definite"},"V":{"head":"look:verb"},"A":{"adp":"at:adposition","case":"locative","np":{"head":"work:noun","poss":"my:determiner"}}},
+    {"id":"artisan16","topic":"Trade and craft secrets","en":"The joint is [tight|loose].","S":{"head":"joint:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["tight:adjective","loose:adjective"]}},
+    {"id":"artisan17","topic":"Trade and craft secrets","en":"The glue is dry.","S":{"head":"glue:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"dry:adjective"}},
+    {"id":"artisan18","topic":"Trade and craft secrets","en":"I polish the work.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"polish:verb"},"O":{"head":"work:noun","det":"definite"}},
+    {"id":"artisan19","topic":"Trade and craft secrets","en":"The master has a secret.","S":{"head":"master:noun","det":"definite"},"V":{"head":"have:verb"},"O":{"head":"secret:noun","det":"indefinite"}},
+    {"id":"artisan20","topic":"Trade and craft secrets","en":"The loom is [old|large].","S":{"head":"loom:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["old:adjective","large:adjective"]}}
    ],
-   "initial": [
-    {
-     "head": "how:adverb"
-    }
+   "thieves": [
+    {"id":"thieves01","topic":"The trade","en":"I am a [thief|pickpocket].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":["thief:noun","pickpocket:noun"],"det":"indefinite"}},
+    {"id":"thieves02","topic":"The trade","en":"Tomorrow we steal the gold.","tense":"future","seq":["initial","S","V","O"],"initial":[{"head":"tomorrow:noun"}],"S":{"head":"pronoun.first_person_plural"},"V":{"head":"steal:verb"},"O":{"head":"gold:noun","det":"definite"}},
+    {"id":"thieves03","topic":"The trade","en":"We rob the merchant.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"rob:verb"},"O":{"head":"merchant:noun","det":"definite"}},
+    {"id":"thieves04","topic":"The trade","en":"The heist is [tonight|tomorrow].","S":{"head":"heist:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["tonight:adverb","tomorrow:noun"]}},
+    {"id":"thieves05","topic":"The trade","en":"The lockpick opens the lock.","S":{"head":"lockpick:noun","det":"definite"},"V":{"head":"open:verb"},"O":{"head":"lock:noun","det":"definite"}},
+    {"id":"thieves06","topic":"Guards and danger","en":"The guard sleeps.","S":{"head":"guard:noun","det":"definite"},"V":{"head":"sleep:verb"}},
+    {"id":"thieves07","topic":"Guards and danger","en":"The guard sees me.","S":{"head":"guard:noun","det":"definite"},"V":{"head":"see:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"thieves08","topic":"Guards and danger","en":"Hide!","mood":"imperative","seq":["V"],"V":{"head":"hide:verb"}},
+    {"id":"thieves09","topic":"Guards and danger","en":"Do not run!","mood":"imperative","seq":["V"],"V":{"head":"run:verb","neg":true}},
+    {"id":"thieves10","topic":"Guards and danger","en":"The night is dark.","S":{"head":"night:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"dark:adjective"}},
+    {"id":"thieves11","topic":"Guards and danger","en":"Quiet!","initial":[{"head":"quiet:adjective"}]},
+    {"id":"thieves12","topic":"Loot and fence","en":"The fence buys the loot.","S":{"head":"fence:noun","det":"definite"},"V":{"head":"buy:verb"},"O":{"head":"loot:noun","det":"definite"}},
+    {"id":"thieves13","topic":"Loot and fence","en":"I have the purse.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"have:verb"},"O":{"head":"purse:noun","det":"definite"}},
+    {"id":"thieves14","topic":"Loot and fence","en":"Where is the coin?","seq":["initial","V","S"],"initial":[{"head":"interrogative.where"}],"S":{"head":"coin:noun","det":"definite"},"V":{"head":"be:verb"}},
+    {"id":"thieves15","topic":"Loot and fence","en":"I do not know you.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"know:verb","neg":true},"O":{"head":"pronoun.second_person_singular_object"}},
+    {"id":"thieves16","topic":"Signals and slang","en":"Watch the door!","mood":"imperative","seq":["V","O"],"V":{"head":"watch:verb"},"O":{"head":"door:noun","det":"definite"}},
+    {"id":"thieves17","topic":"Signals and slang","en":"The informer talks.","S":{"head":"informer:noun","det":"definite"},"V":{"head":"talk:verb"}},
+    {"id":"thieves18","topic":"Signals and slang","en":"I climb the wall.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"climb:verb"},"O":{"head":"wall:noun","det":"definite"}},
+    {"id":"thieves19","topic":"Signals and slang","en":"The alley is dark.","S":{"head":"alley:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"dark:adjective"}},
+    {"id":"thieves20","topic":"Signals and slang","en":"We share the loot.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"share:verb"},"O":{"head":"loot:noun","det":"definite"}}
    ],
-   "S": {
-    "head": "demonstrative.this"
-   },
-   "V": {
-    "head": "work:verb"
-   }
-  },
-  {
-   "id": "t33",
-   "en": "Where is the water?",
-   "seq": [
-    "initial",
-    "V",
-    "S"
+   "nomad": [
+    {"id":"nomad01","topic":"Herd and camp","en":"We migrate with the herd.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"migrate:verb"},"A":{"adp":"with:adposition","case":"instrumental","np":{"head":"herd:noun","det":"definite"}}},
+    {"id":"nomad02","topic":"Herd and camp","en":"The horse is [fast|strong].","S":{"head":"horse:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["fast:adjective","strong:adjective"]}},
+    {"id":"nomad03","topic":"Herd and camp","en":"The yurt is [warm|small].","S":{"head":"yurt:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["warm:adjective","small:adjective"]}},
+    {"id":"nomad04","topic":"Herd and camp","en":"We drink mare's milk.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"drink:verb"},"O":{"head":"mare's milk:noun"}},
+    {"id":"nomad05","topic":"Herd and camp","en":"The herd eats the grass.","S":{"head":"herd:noun","det":"definite"},"V":{"head":"eat:verb"},"O":{"head":"grass:noun","det":"definite"}},
+    {"id":"nomad06","topic":"Herd and camp","en":"We leave the camp.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"leave:verb"},"O":{"head":"camp:noun","det":"definite"}},
+    {"id":"nomad07","topic":"Steppe and sky","en":"The steppe is [large|dry].","S":{"head":"steppe:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["large:adjective","dry:adjective"]}},
+    {"id":"nomad08","topic":"Steppe and sky","en":"The wind is [cold|strong].","S":{"head":"wind:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["cold:adjective","strong:adjective"]}},
+    {"id":"nomad09","topic":"Steppe and sky","en":"The sky is open.","S":{"head":"sky:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"open:adjective"}},
+    {"id":"nomad10","topic":"Steppe and sky","en":"The river is there.","S":{"head":"river:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"there:adverb"}},
+    {"id":"nomad11","topic":"Kin and hospitality","en":"My tribe is large.","S":{"head":"tribe:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"large:adjective"}},
+    {"id":"nomad12","topic":"Kin and hospitality","en":"The elder knows the way.","S":{"head":"elder:noun","det":"definite"},"V":{"head":"know:verb"},"O":{"head":"way:noun","det":"definite"}},
+    {"id":"nomad13","topic":"Kin and hospitality","en":"Where is the herd?","seq":["initial","V","S"],"initial":[{"head":"interrogative.where"}],"S":{"head":"herd:noun","det":"definite"},"V":{"head":"be:verb"}},
+    {"id":"nomad14","topic":"Kin and hospitality","en":"We share the [food|milk] with the guest.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"share:verb"},"O":{"head":["food:noun","milk:noun"],"det":"definite"},"A":{"adp":"with:adposition","case":"instrumental","np":{"head":"guest:noun","det":"definite"}}},
+    {"id":"nomad15","topic":"Seasons and journey","en":"We follow the herd.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"follow:verb"},"O":{"head":"herd:noun","det":"definite"}},
+    {"id":"nomad16","topic":"Seasons and journey","en":"The winter is [long|cold].","S":{"head":"winter:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["long:adjective","cold:adjective"]}},
+    {"id":"nomad17","topic":"Seasons and journey","en":"The well is dry.","S":{"head":"well:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"dry:adjective"}},
+    {"id":"nomad18","topic":"Seasons and journey","en":"The tent is [small|warm].","S":{"head":"tent:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["small:adjective","warm:adjective"]}},
+    {"id":"nomad19","topic":"Seasons and journey","en":"I ride the horse.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"ride:verb"},"O":{"head":"horse:noun","det":"definite"}},
+    {"id":"nomad20","topic":"Law of the steppe","en":"The guest is holy.","S":{"head":"guest:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"holy:adjective"}},
+    {"id":"nomad21","topic":"Law of the steppe","en":"The khan rides at dawn.","S":{"head":"khan:noun","det":"definite"},"V":{"head":"ride:verb"},"A":{"adp":"at:adposition","case":"locative","np":{"head":"dawn:noun","det":"definite"}}},
+    {"id":"nomad22","topic":"Law of the steppe","en":"The pasture is [green|dry].","S":{"head":"pasture:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["green:adjective","dry:adjective"]}},
+    {"id":"nomad23","topic":"Law of the steppe","en":"We trade horses.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"trade:verb"},"O":{"head":"horse:noun"}}
    ],
-   "initial": [
-    {
-     "head": "where:adverb"
-    }
+   "sacred": [
+    {"id":"sacred01","topic":"Worship","en":"I pray to the god.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"pray:verb"},"A":{"adp":"to:adposition","case":"dative","np":{"head":"god:noun","det":"definite"}}},
+    {"id":"sacred02","topic":"Worship","en":"The priest speaks the litany.","S":{"head":"priest:noun","det":"definite"},"V":{"head":"speak:verb"},"O":{"head":"litany:noun","det":"definite"}},
+    {"id":"sacred03","topic":"Worship","en":"The altar is holy.","S":{"head":"altar:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"holy:adjective"}},
+    {"id":"sacred04","topic":"Worship","en":"I bless you.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"bless:verb"},"O":{"head":"pronoun.second_person_singular_object"}},
+    {"id":"sacred05","topic":"Worship","en":"The god is [good|great].","S":{"head":"god:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["good:adjective","great:adjective"]}},
+    {"id":"sacred06","topic":"Pilgrimage","en":"We walk to the temple.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"walk:verb"},"A":{"adp":"to:adposition","case":"dative","np":{"head":"temple:noun","det":"definite"}}},
+    {"id":"sacred07","topic":"Pilgrimage","en":"The pilgrimage is long.","S":{"head":"pilgrimage:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"long:adjective"}},
+    {"id":"sacred08","topic":"Pilgrimage","en":"The pilgrim is tired.","S":{"head":"pilgrim:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"tired:adjective"}},
+    {"id":"sacred09","topic":"Sin and mercy","en":"The priest absolves my sin.","S":{"head":"priest:noun","det":"definite"},"V":{"head":"absolve:verb"},"O":{"head":"sin:noun","poss":"my:determiner"}},
+    {"id":"sacred10","topic":"Sin and mercy","en":"Forgive me.","mood":"imperative","seq":["V","O"],"V":{"head":"forgive:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"sacred11","topic":"Sin and mercy","en":"I confess my sin.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"confess:verb"},"O":{"head":"sin:noun","poss":"my:determiner"}},
+    {"id":"sacred12","topic":"The dead and the light","en":"We honor the dead.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"honor:verb"},"O":{"head":"dead:adjective","det":"definite"}},
+    {"id":"sacred13","topic":"The dead and the light","en":"The soul lives.","S":{"head":"soul:noun","det":"definite"},"V":{"head":"live:verb"}},
+    {"id":"sacred14","topic":"The dead and the light","en":"The light is holy.","S":{"head":"light:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"holy:adjective"}},
+    {"id":"sacred15","topic":"Rites and feasts","en":"The priest lights the [fire|candle].","S":{"head":"priest:noun","det":"definite"},"V":{"head":"light:verb"},"O":{"head":["fire:noun","candle:noun"],"det":"definite"}},
+    {"id":"sacred16","topic":"Rites and feasts","en":"We sing the hymn.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"sing:verb"},"O":{"head":"hymn:noun","det":"definite"}},
+    {"id":"sacred17","topic":"Rites and feasts","en":"The sacrifice is holy.","S":{"head":"sacrifice:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"holy:adjective"}},
+    {"id":"sacred18","topic":"Rites and feasts","en":"The [temple|altar] is silent.","S":{"head":["temple:noun","altar:noun"],"det":"definite"},"V":{"head":"be:verb"},"O":{"head":"silent:adjective"}},
+    {"id":"sacred19","topic":"Rites and feasts","en":"I kneel.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"kneel:verb"}},
+    {"id":"sacred20","topic":"Doctrine","en":"The word is true.","S":{"head":"word:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"true:adjective"}},
+    {"id":"sacred21","topic":"Doctrine","en":"Faith is [strong|old].","S":{"head":"faith:noun"},"V":{"head":"be:verb"},"O":{"head":["strong:adjective","old:adjective"]}},
+    {"id":"sacred22","topic":"Doctrine","en":"The saint is holy.","S":{"head":"saint:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"holy:adjective"}},
+    {"id":"sacred23","topic":"Doctrine","en":"We fast.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"fast:verb"}}
    ],
-   "V": {
-    "head": "be:verb"
-   },
-   "S": {
-    "head": "water:noun",
-    "det": "definite"
-   }
-  },
-  {
-   "id": "t34",
-   "en": "I do not want this.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "want:verb",
-    "neg": true
-   },
-   "O": {
-    "head": "demonstrative.this"
-   }
-  },
-  {
-   "id": "t35",
-   "en": "You cannot enter.",
-   "S": {
-    "head": "pronoun.second_person_singular"
-   },
-   "V": {
-    "head": "enter:verb",
-    "neg": true,
-    "aux": "can:particle"
-   }
-  },
-  {
-   "id": "t36",
-   "en": "I do not know.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "know:verb",
-    "neg": true
-   }
-  },
-  {
-   "id": "t37",
-   "en": "I know the way.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "know:verb"
-   },
-   "O": {
-    "head": "way:noun",
-    "det": "definite"
-   }
-  },
-  {
-   "id": "t38",
-   "en": "I can help you.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "help:verb",
-    "aux": "can:particle"
-   },
-   "O": {
-    "head": "pronoun.second_person_singular_object"
-   }
-  },
-  {
-   "id": "t39",
-   "en": "Do not touch this.",
-   "mood": "imperative",
-   "seq": [
-    "V",
-    "O"
+   "undead": [
+    {"id":"undead01","topic":"The state of death","en":"I am dead.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb"},"O":{"head":"dead:adjective"}},
+    {"id":"undead02","topic":"The state of death","en":"I do not sleep.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"sleep:verb","neg":true}},
+    {"id":"undead03","topic":"The state of death","en":"My heart is cold.","S":{"head":"heart:noun","poss":"my:determiner"},"V":{"head":"be:verb"},"O":{"head":"cold:adjective"}},
+    {"id":"undead04","topic":"The state of death","en":"I hunger.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"hunger:verb"}},
+    {"id":"undead05","topic":"Places of the dead","en":"The crypt is [dark|cold].","S":{"head":"crypt:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["dark:adjective","cold:adjective"]}},
+    {"id":"undead06","topic":"Places of the dead","en":"The grave is open.","S":{"head":"grave:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"open:adjective"}},
+    {"id":"undead07","topic":"Places of the dead","en":"The sarcophagus is closed.","S":{"head":"sarcophagus:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"closed:adjective"}},
+    {"id":"undead08","topic":"Places of the dead","en":"I exhume the bones.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"exhume:verb"},"O":{"head":"bone:noun","det":"definite"}},
+    {"id":"undead09","topic":"Places of the dead","en":"The wraith comes from the grave.","S":{"head":"wraith:noun","det":"definite"},"V":{"head":"come:verb"},"A":{"adp":"from:adposition","case":"ablative","np":{"head":"grave:noun","det":"definite"}}},
+    {"id":"undead10","topic":"Memory and the living","en":"I remember my name.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"remember:verb"},"O":{"head":"name:noun","poss":"my:determiner"}},
+    {"id":"undead11","topic":"Memory and the living","en":"The bone is [old|white].","S":{"head":"bone:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["old:adjective","white:adjective"]}},
+    {"id":"undead12","topic":"Memory and the living","en":"The child fears me.","S":{"head":"child:noun","det":"definite"},"V":{"head":"fear:verb"},"O":{"head":"pronoun.first_person_singular_object"}},
+    {"id":"undead13","topic":"Memory and the living","en":"Death is cold.","S":{"head":"death:noun"},"V":{"head":"be:verb"},"O":{"head":"cold:adjective"}},
+    {"id":"undead14","topic":"Curse and hunger","en":"The curse is [old|strong].","S":{"head":"curse:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["old:adjective","strong:adjective"]}},
+    {"id":"undead15","topic":"Curse and hunger","en":"I rise from the grave.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"rise:verb"},"A":{"adp":"from:adposition","case":"ablative","np":{"head":"grave:noun","det":"definite"}}},
+    {"id":"undead16","topic":"Curse and hunger","en":"The skeleton walks.","S":{"head":"skeleton:noun","det":"definite"},"V":{"head":"walk:verb"}},
+    {"id":"undead17","topic":"Curse and hunger","en":"The living are warm.","S":{"head":"living:adjective","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"warm:adjective"}},
+    {"id":"undead18","topic":"Curse and hunger","en":"Darkness is my home.","S":{"head":"darkness:noun"},"V":{"head":"be:verb"},"O":{"head":"home:noun","poss":"my:determiner"}},
+    {"id":"undead19","topic":"Curse and hunger","en":"I bury the dead.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"bury:verb"},"O":{"head":"dead:adjective","det":"definite"}},
+    {"id":"undead20","topic":"Unlife","en":"The undead do not die.","S":{"head":"undead:noun","det":"definite"},"V":{"head":"die:verb","neg":true}},
+    {"id":"undead21","topic":"Unlife","en":"I am not alive.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"be:verb","neg":true},"O":{"head":"alive:adjective"}},
+    {"id":"undead22","topic":"Unlife","en":"The ghost [walks|waits] in the dark.","S":{"head":"ghost:noun","det":"definite"},"V":{"head":["walk:verb","wait:verb"]},"A":{"adp":"in:adposition","case":"locative","np":{"head":"darkness:noun","det":"definite"}}},
+    {"id":"undead23","topic":"Unlife","en":"The coffin is closed.","S":{"head":"coffin:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"closed:adjective"}}
    ],
-   "V": {
-    "head": "touch:verb",
-    "neg": true
-   },
-   "O": {
-    "head": "demonstrative.this"
-   }
-  },
-  {
-   "id": "t40",
-   "en": "I am hungry.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": "hungry:adjective"
-   }
-  },
-  {
-   "id": "t41",
-   "en": "My hand hurts.",
-   "S": {
-    "head": "hand:noun",
-    "poss": "my:determiner"
-   },
-   "V": {
-    "head": "hurt:verb"
-   }
-  },
-  {
-   "id": "t42",
-   "en": "I want to sleep.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "want:verb"
-   },
-   "O": {
-    "head": "sleep:verb"
-   }
-  },
-  {
-   "id": "t43",
-   "en": "This is [much|little].",
-   "S": {
-    "head": "demonstrative.this"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "much:determiner",
-     "little:determiner"
-    ]
-   }
-  },
-  {
-   "id": "t44",
-   "en": "Everything is ready.",
-   "S": {
-    "head": "everything:pronoun"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": "ready:adjective"
-   }
-  },
-  {
-   "id": "t45",
-   "en": "Nothing exists.",
-   "S": {
-    "head": "nothing:pronoun"
-   },
-   "V": {
-    "head": "exist:verb"
-   }
-  },
-  {
-   "id": "t46",
-   "en": "Today we work.",
-   "seq": [
-    "initial",
-    "S",
-    "V"
-   ],
-   "initial": [
-    {
-     "head": "today:noun"
-    }
-   ],
-   "S": {
-    "head": "pronoun.first_person_plural"
-   },
-   "V": {
-    "head": "work:verb"
-   }
-  },
-  {
-   "id": "t47",
-   "en": "Tomorrow we travel.",
-   "tense": "future",
-   "seq": [
-    "initial",
-    "S",
-    "V"
-   ],
-   "initial": [
-    {
-     "head": "tomorrow:noun"
-    }
-   ],
-   "S": {
-    "head": "pronoun.first_person_plural"
-   },
-   "V": {
-    "head": "travel:verb"
-   }
-  },
-  {
-   "id": "t48",
-   "en": "Yesterday the hunter came.",
-   "tense": "past",
-   "seq": [
-    "initial",
-    "S",
-    "V"
-   ],
-   "initial": [
-    {
-     "head": "yesterday:noun"
-    }
-   ],
-   "S": {
-    "head": "hunter:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "come:verb"
-   }
-  },
-  {
-   "id": "t49",
-   "en": "The [dog|wolf|horse] sees the [hunter|farmer].",
-   "S": {
-    "head": [
-     "dog:noun",
-     "wolf:noun",
-     "horse:noun"
-    ],
-    "det": "definite"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": [
-     "hunter:noun",
-     "farmer:noun"
-    ],
-    "det": "definite"
-   }
-  },
-  {
-   "id": "t50",
-   "en": "I [eat|drink] [food|water].",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": [
-     "eat:verb",
-     "drink:verb"
-    ]
-   },
-   "O": {
-    "head": [
-     "food:noun",
-     "water:noun"
-    ]
-   }
-  },
-  {
-   "id": "t51",
-   "en": "The [hunter|farmer] has [food|water].",
-   "S": {
-    "head": [
-     "hunter:noun",
-     "farmer:noun"
-    ],
-    "det": "definite"
-   },
-   "V": {
-    "head": "have:verb"
-   },
-   "O": {
-    "head": [
-     "food:noun",
-     "water:noun"
-    ]
-   }
-  },
-  {
-   "id": "t52",
-   "en": "I see the [house|village].",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": [
-     "house:noun",
-     "village:noun"
-    ],
-    "det": "definite"
-   }
-  },
-  {
-   "id": "t53",
-   "en": "We build a [house|boat].",
-   "S": {
-    "head": "pronoun.first_person_plural"
-   },
-   "V": {
-    "head": "build:verb"
-   },
-   "O": {
-    "head": [
-     "house:noun",
-     "boat:noun"
-    ],
-    "det": "indefinite"
-   }
-  },
-  {
-   "id": "t54",
-   "en": "The bird is [small|large].",
-   "S": {
-    "head": "bird:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "small:adjective",
-     "large:adjective"
-    ]
-   }
-  },
-  {
-   "id": "t55",
-   "en": "The fish is [small|large].",
-   "S": {
-    "head": "fish:noun",
-    "det": "definite"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": [
-     "small:adjective",
-     "large:adjective"
-    ]
-   }
-  },
-  {
-   "id": "t56",
-   "en": "I see the [small|large] house.",
-   "S": {
-    "head": "pronoun.first_person_singular"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": "house:noun",
-    "det": "definite",
-    "adj": [
-     "small:adjective",
-     "large:adjective"
-    ]
-   }
-  },
-  {
-   "id": "t57",
-   "en": "The good wolf sees the [small|large] dog.",
-   "S": {
-    "head": "wolf:noun",
-    "det": "definite",
-    "adj": "good:adjective"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": "dog:noun",
-    "det": "definite",
-    "adj": [
-     "small:adjective",
-     "large:adjective"
-    ]
-   }
-  },
-  {
-   "id": "t58",
-   "en": "My sister is good.",
-   "S": {
-    "head": "sister:noun",
-    "poss": "my:determiner"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": "good:adjective"
-   }
-  },
-  {
-   "id": "t59",
-   "en": "My father is good.",
-   "S": {
-    "head": "father:noun",
-    "poss": "my:determiner"
-   },
-   "V": {
-    "head": "be:verb"
-   },
-   "O": {
-    "head": "good:adjective"
-   }
-  },
-  {
-   "id": "t60",
-   "en": "The wolves see the hunters.",
-   "requires": {
-    "number": "plural"
-   },
-   "S": {
-    "head": "wolf:noun",
-    "det": "definite",
-    "number": "plural"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": "hunter:noun",
-    "det": "definite",
-    "number": "plural"
-   }
-  },
-  {
-   "id": "t61",
-   "en": "We see two horses.",
-   "requires": {
-    "number": "dual"
-   },
-   "S": {
-    "head": "pronoun.first_person_plural"
-   },
-   "V": {
-    "head": "see:verb"
-   },
-   "O": {
-    "head": "horse:noun",
-    "number": "dual"
-   }
+   "merchant": [
+    {"id":"merchant01","topic":"Price and payment","en":"What is the price?","seq":["initial","V","S"],"initial":[{"head":"interrogative.what"}],"S":{"head":"price:noun","det":"definite"},"V":{"head":"be:verb"}},
+    {"id":"merchant02","topic":"Price and payment","en":"The price is [high|low].","S":{"head":"price:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["high:adjective","low:adjective"]}},
+    {"id":"merchant03","topic":"Price and payment","en":"This is [cheap|expensive].","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":["cheap:adjective","expensive:adjective"]}},
+    {"id":"merchant04","topic":"Price and payment","en":"I buy the [goods|cloth].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"buy:verb"},"O":{"head":["goods:noun","cloth:noun"],"det":"definite"}},
+    {"id":"merchant05","topic":"Price and payment","en":"You sell the [salt|wine].","S":{"head":"pronoun.second_person_singular"},"V":{"head":"sell:verb"},"O":{"head":["salt:noun","wine:noun"],"det":"definite"}},
+    {"id":"merchant06","topic":"Price and payment","en":"I pay in coin.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"pay:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"coin:noun"}}},
+    {"id":"merchant07","topic":"Bargaining","en":"We make a deal.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"make:verb"},"O":{"head":"deal:noun","det":"indefinite"}},
+    {"id":"merchant08","topic":"Bargaining","en":"The tariff is high.","S":{"head":"tariff:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"high:adjective"}},
+    {"id":"merchant09","topic":"Bargaining","en":"I haggle.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"haggle:verb"}},
+    {"id":"merchant10","topic":"Bargaining","en":"I have a debt.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"have:verb"},"O":{"head":"debt:noun","det":"indefinite"}},
+    {"id":"merchant11","topic":"Bargaining","en":"Good deal.","initial":[{"head":"deal:noun","adj":"good:adjective"}]},
+    {"id":"merchant12","topic":"The caravan","en":"The caravan goes to the city.","S":{"head":"caravan:noun","det":"definite"},"V":{"head":"go:verb"},"A":{"adp":"to:adposition","case":"dative","np":{"head":"city:noun","det":"definite"}}},
+    {"id":"merchant13","topic":"The caravan","en":"The road is [long|dangerous].","S":{"head":"road:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["long:adjective","dangerous:adjective"]}},
+    {"id":"merchant14","topic":"The caravan","en":"We sleep in the caravanserai.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"sleep:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":"caravanserai:noun","det":"definite"}}},
+    {"id":"merchant15","topic":"The caravan","en":"The ledger is open.","S":{"head":"ledger:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":"open:adjective"}},
+    {"id":"merchant16","topic":"Weights and measures","en":"The weight is [large|small].","S":{"head":"weight:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["large:adjective","small:adjective"]}},
+    {"id":"merchant17","topic":"Weights and measures","en":"Measure the [salt|cloth].","mood":"imperative","seq":["V","O"],"V":{"head":"measure:verb"},"O":{"head":["salt:noun","cloth:noun"],"det":"definite"}},
+    {"id":"merchant18","topic":"Weights and measures","en":"I count the coin.","S":{"head":"pronoun.first_person_singular"},"V":{"head":"count:verb"},"O":{"head":"coin:noun","det":"definite"}},
+    {"id":"merchant19","topic":"Weights and measures","en":"The scale is [true|false].","S":{"head":"scale:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["true:adjective","false:adjective"]}},
+    {"id":"merchant20","topic":"Weights and measures","en":"The market is [open|closed].","S":{"head":"market:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["open:adjective","closed:adjective"]}},
+    {"id":"merchant21","topic":"Weights and measures","en":"We trade in [salt|silk].","S":{"head":"pronoun.first_person_plural"},"V":{"head":"trade:verb"},"A":{"adp":"in:adposition","case":"locative","np":{"head":["salt:noun","silk:noun"]}}}
+   ]
   }
- ]
 }

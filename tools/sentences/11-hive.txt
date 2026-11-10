@@ -1,0 +1,30 @@
+@genre hive
+
+## The hive and the queen
+We are the hive. | S=WE | V=be:v | O=the hive:n
+The queen is large. | S=the queen:n | V=be:v | O=large:a
+We serve the queen. | S=WE | V=serve:v | O=the queen:n
+The queen has the brood. | S=the queen:n | V=have:v | O=the brood:n
+We build the hive. | S=WE | V=build:v | O=the hive:n
+
+## Work and swarm
+The worker carries the nectar. | S=the worker:n | V=carry:v | O=the nectar:n
+The drone does not work. | S=the drone:n | V=work:v/neg
+The swarm comes. | S=the swarm:n | V=come:v
+The swarm flies. | S=the swarm:n | V=fly:v
+We are many. | S=WE | V=be:v | O=many:d
+
+## Scent and defence
+The pheromone is [strong|sweet]. | S=the pheromone:n | V=be:v | O=strong:a|sweet:a
+I smell the pheromone. | S=I | V=smell:v | O=the pheromone:n
+Defend the hive! | mood=imperative | seq=V,O | V=defend:v | O=the hive:n
+The enemy enters the hive. | S=the enemy:n | V=enter:v | O=the hive:n
+The mandible is sharp. | S=the mandible:n | V=be:v | O=sharp:a
+I am not alone. | S=I | V=be:v/neg | O=alone:a
+
+## Brood and food
+The brood is small. | S=the brood:n | V=be:v | O=small:a
+The larva eats. | S=the larva:n | V=eat:v
+We feed the brood. | S=WE | V=feed:v | O=the brood:n
+The nectar is [sweet|good]. | S=the nectar:n | V=be:v | O=sweet:a|good:a
+I do not think alone. | S=I | V=think:v/neg | A=alone:a

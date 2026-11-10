@@ -1,0 +1,29 @@
+@genre dwarven
+
+## Forge and mine
+The forge is hot. | S=the forge:n | V=be:v | O=hot:a
+I strike the [iron|anvil]. | S=I | V=strike:v | O=the iron:n|anvil:n
+The hammer is [heavy|old]. | S=the hammer:n | V=be:v | O=heavy:a|old:a
+We dig in the mountain. | S=WE | V=dig:v | A=in>the mountain:n
+The ore is in the mountain. | S=the ore:n | V=be:v | O=in>the mountain:n
+The [iron|gold] is good. | S=the iron:n|gold:n | V=be:v | O=good:a
+
+## Stonework
+The mortise is [deep|small]. | S=the mortise:n | V=be:v | O=deep:a|small:a
+I cut the ashlar. | S=I | V=cut:v | O=the ashlar:n
+The wall is strong. | S=the wall:n | V=be:v | O=strong:a
+The master teaches the apprentice. | S=the master:n | V=teach:v | O=the apprentice:n
+
+## Clan and halls
+My clan is old. | S=my clan:n | V=be:v | O=old:a
+The hall is [deep|large]. | S=the hall:n | V=be:v | O=deep:a|large:a
+My father has a beard. | S=my father:n | V=have:v | O=a beard:n
+We keep our oath. | S=WE | V=keep:v | O=our oath:n
+I do not forget. | S=I | V=forget:v/neg
+
+## Grudges and honour
+I remember the wrong. | S=I | V=remember:v | O=the wrong:n
+The grudge is old. | S=the grudge:n | V=be:v | O=old:a
+The clan honors the ancestor. | S=the clan:n | V=honor:v | O=the ancestor:n
+Where is the mine? | seq=init,V,S | init=WHERE | V=be:v | S=the mine:n
+The vein is [rich|deep]. | S=the vein:n | V=be:v | O=rich:a|deep:a

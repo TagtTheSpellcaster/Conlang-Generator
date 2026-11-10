@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
 import { inflect, attach } from '../src/morphology/inflect.js';
 import { personCells } from '../src/morphology/affixes.js';
-import { tokenText } from '../src/syntax/realize.js';
+import { tokenText, realize } from '../src/syntax/realize.js';
 import { vocabulary, templates } from './helpers.mjs';
 
 const gen = (input = {}) => generateLanguage({ seed: 'agg', articles: 'none', relations: 'cases', ...input }, vocabulary, templates);
@@ -12,6 +12,8 @@ const word = (L, id) => L.lexicon.find(e => e.id === id);
 const sample = (L, en) => L.samples.find(s => s.english === en);
 const verbToken = s => s.tokens.find(t => t.id?.startsWith('verb.'));
 const kinds = t => t.parts.map(p => p.kind);
+const langOf = L => ({ spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes, lexicon: L.lexicon });
+const mySisterIsGood = { id: 'x', en: 'My sister is good.', S: { head: 'sister:noun', poss: 'my:determiner' }, V: { head: 'be:verb' }, O: { head: 'good:adjective' } };
 
 test('agglutinative verbs are inflected: person, number and tense each have their own suffix', () => {
     const L = gen({ morphology: 'agglutinative' }), m = morphOf(L), see = word(L, 'verb.see');
@@ -42,29 +44,29 @@ test('agglutinative negation, ability and mood are suffixes, not separate words'
     const neg = sample(L, 'You cannot enter.'), tokens = neg.tokens.map(t => t.id);
     assert.deepEqual(tokens.filter(Boolean), ['verb.enter']);
     assert.deepEqual(kinds(verbToken(neg)).slice(0, 3), ['stem', 'potential', 'negation']);
-    assert.ok(kinds(verbToken(sample(L, 'Stay here.'))).includes('mood'));
-    assert.ok(kinds(verbToken(sample(L, 'Yesterday the hunter came.'))).includes('tense'));
+    assert.ok(kinds(verbToken(sample(L, 'Come here.'))).includes('mood'));
+    assert.ok(kinds(verbToken(sample(L, 'Yesterday I came.'))).includes('tense'));
     assert.ok(verbToken(sample(L, 'Tomorrow we travel.')).parts.some(p => p.kind === 'tense' && p.meaning === 'future'));
 });
 
 test('pro-drop: a personal pronoun subject is carried by the verb ending, a noun subject stays', () => {
     const L = gen({ morphology: 'agglutinative' }), I = word(L, 'pronoun.first_person_singular').form;
-    const s = sample(L, 'I see you.');
+    const s = sample(L, 'I hear you.');
     assert.ok(!s.tokens.some(t => t.id === 'pronoun.first_person_singular'));
     assert.ok(verbToken(s).parts.some(p => p.kind === 'agreement' && p.meaning === '1.singular'));
     assert.ok(!tokenText(s.tokens).split(' ').includes(I));
-    const noun = sample(L, 'The [wolf|dog] drinks [water|milk].');
-    assert.ok(noun.tokens.some(t => t.kind === 'alts' || t.id?.startsWith('animal.')));
+    const noun = sample(L, 'The good dog sees the small bird.');
+    assert.ok(noun.tokens.some(t => t.kind === 'alts' || t.id?.startsWith('nature.dog')));
     assert.equal(L.syntax.prodrop, true);
     // isolating languages keep the pronoun
     const I2 = gen({ morphology: 'isolating' });
-    assert.ok(sample(I2, 'I see you.').tokens.some(t => t.id === 'pronoun.first_person_singular'));
+    assert.ok(sample(I2, 'I hear you.').tokens.some(t => t.id === 'pronoun.first_person_singular'));
     assert.equal(I2.syntax.prodrop, false);
 });
 
 test('possessors are suffixes on the noun in agglutinative languages, separate words in fusional ones', () => {
     const A = gen({ morphology: 'agglutinative' }), F = gen({ morphology: 'fusional' });
-    const a = sample(A, 'My sister is good.'), f = sample(F, 'My sister is good.');
+    const a = realize(mySisterIsGood, langOf(A)), f = realize(mySisterIsGood, langOf(F));
     const sister = a.tokens.find(t => t.id === 'family.sister');
     assert.ok(sister.parts.some(p => p.kind === 'possessor' && p.meaning === 'poss.1.singular'));
     assert.ok(!a.tokens.some(t => t.id === 'function.my'));
@@ -82,7 +84,7 @@ test('fusional verbs: one portmanteau ending per tense x person x number; negati
     assert.equal(cells.filter(c => c === '').length, 1);
     const neg = sample(L, 'You cannot enter.');
     assert.ok(neg.tokens.some(t => t.id === 'logic.not'));
-    assert.ok(verbToken(sample(L, 'I see you.')).parts.some(p => p.kind === 'fused'));
+    assert.ok(verbToken(sample(L, 'I hear you.')).parts.some(p => p.kind === 'fused'));
 });
 
 test('dual adds dual agreement cells', () => {

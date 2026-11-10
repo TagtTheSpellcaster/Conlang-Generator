@@ -1,0 +1,29 @@
+@genre artisan
+
+## Workshop and guild
+The workshop is [warm|large]. | S=the workshop:n | V=be:v | O=warm:a|large:a
+I work in the workshop. | S=I | V=work:v | A=in>the workshop:n
+The master teaches the apprentice. | S=the master:n | V=teach:v | O=the apprentice:n
+The journeyman leaves the workshop. | S=the journeyman:n | V=leave:v | O=the workshop:n
+The guild is old. | S=the guild:n | V=be:v | O=old:a
+
+## Tools and materials
+The chisel is [sharp|small]. | S=the chisel:n | V=be:v | O=sharp:a|small:a
+Quench the iron! | mood=imperative | seq=V,O | V=quench:v | O=the iron:n
+The dovetail is strong. | S=the dovetail:n | V=be:v | O=strong:a
+I weave the weft. | S=I | V=weave:v | O=the weft:n
+The kiln is hot. | S=the kiln:n | V=be:v | O=hot:a
+The wood is dry. | S=the wood:n | V=be:v | O=dry:a
+
+## Making and quality
+I cut the [wood|leather|cloth]. | S=I | V=cut:v | O=the wood:n|leather:n|cloth:n
+Measure the wood! | mood=imperative | seq=V,O | V=measure:v | O=the wood:n
+The work is good. | S=the work:n | V=be:v | O=good:a
+The master looks at my work. | S=the master:n | V=look:v | A=at>my work:n
+
+## Trade and craft secrets
+The joint is [tight|loose]. | S=the joint:n | V=be:v | O=tight:a|loose:a
+The glue is dry. | S=the glue:n | V=be:v | O=dry:a
+I polish the work. | S=I | V=polish:v | O=the work:n
+The master has a secret. | S=the master:n | V=have:v | O=a secret:n
+The loom is [old|large]. | S=the loom:n | V=be:v | O=old:a|large:a

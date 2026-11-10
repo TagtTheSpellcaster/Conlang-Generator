@@ -2,7 +2,9 @@ import { readFileSync } from 'node:fs';
 const load = p => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
 export const vocabularyFile = load('../data/vocabulary.json');
 export const vocabulary = vocabularyFile.vocabulary;
-export const templates = load('../data/sentence-templates.json').templates;
+export const templates = load('../data/sentence-templates.json');
+export const universal = templates.universal;
+export const everyTemplate = [...templates.universal, ...Object.values(templates.genres).flat()];
 export const refsOf = t => {
     const refs = [];
     const walk = (x, key) => {
@@ -10,6 +12,6 @@ export const refsOf = t => {
         else if (x && typeof x === 'object' && !Array.isArray(x)) Object.entries(x).forEach(([k, v]) => walk(v, k));
         else if (Array.isArray(x)) x.forEach(v => walk(v, key));
     };
-    for (const k of ['S', 'V', 'O', 'initial']) if (t[k]) walk(t[k], k);
+    for (const k of ['S', 'V', 'O', 'A', 'B', 'initial']) if (t[k]) walk(t[k], k);
     return refs.filter(r => typeof r === 'string');
 };

@@ -1,0 +1,31 @@
+@genre women
+
+## Sworn sisters
+You are my sworn sister. | S=YOU | V=be:v | O=my sworn_sister:n
+I write you a letter. | S=I | V=write:v | O=a letter:n | A=to>YOU_O
+Keep this secret. | mood=imperative | seq=V,O | V=keep:v | O=the secret:n
+The letter is sweet. | S=the letter:n | V=be:v | O=sweet:a
+I miss my sister. | S=I | V=miss:v | O=my sister:n
+
+## Needlework
+I embroider the [flower|bird]. | S=I | V=embroider:v | O=the flower:n|bird:n
+The thread is [red|fine]. | S=the thread:n | V=be:v | O=red:a|fine:a
+The needle is small. | S=the needle:n | V=be:v | O=small:a
+I weave the cloth. | S=I | V=weave:v | O=the cloth:n
+
+## Marriage and birth
+The bride sings a lament. | S=the bride:n | V=sing:v | O=a lament:n
+The bride is young. | S=the bride:n | V=be:v | O=young:a
+The midwife helps the mother. | S=the midwife:n | V=help:v | O=the mother:n
+The mother has a child. | S=the mother:n | V=have:v | O=a child:n
+
+## The inner quarters
+I live in the inner quarters. | S=I | V=live:v | A=in>the inner_quarters:n
+The house is quiet. | S=the house:n | V=be:v | O=quiet:a
+
+## Songs and feelings
+I sing a lullaby. | S=I | V=sing:v | O=a lullaby:n
+My heart is heavy. | S=my heart:n | V=be:v | O=heavy:a
+The song is [sad|sweet]. | S=the song:n | V=be:v | O=sad:a|sweet:a
+We cry together. | S=WE | V=cry:v | A=together:adv
+Do not tell the [husband|father]. | mood=imperative | seq=V,O | V=tell:v/neg | O=the husband:n|father:n

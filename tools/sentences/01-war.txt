@@ -1,0 +1,54 @@
+@genre war
+
+## Commands
+Charge! | mood=imperative | seq=V | V=charge:v
+Advance! | mood=imperative | seq=V | V=advance:v
+Retreat! | mood=imperative | seq=V | V=retreat:v
+Do not retreat! | mood=imperative | seq=V | V=retreat:v/neg
+Hold the line! | mood=imperative | seq=V,O | V=hold:v | O=the line:n
+Follow the banner! | mood=imperative | seq=V,O | V=follow:v | O=the banner:n
+Surrender! | mood=imperative | seq=V | V=surrender:v
+
+## Reports from the front
+The enemy advances. | S=the enemy:n | V=advance:v
+The enemy retreats. | S=the enemy:n | V=retreat:v
+The enemy is strong. | S=the enemy:n | V=be:v | O=strong:a
+We are outnumbered. | S=WE | V=be:v | O=outnumbered:a
+The [scout|sentry] sees the enemy. | S=the scout:n|sentry:n | V=see:v | O=the enemy:n
+The messenger comes from the front line. | S=the messenger:n | V=come:v | A=from>the front_line:n
+
+## Strategy and tactics
+This is a war of position. | S=THIS | V=be:v | O=a war_of_position:n
+This is a war of movement. | S=THIS | V=be:v | O=a war_of_movement:n
+We flank the enemy. | S=WE | V=flank:v | O=the enemy:n
+We encircle the enemy. | S=WE | V=encircle:v | O=the enemy:n
+We hold the high ground. | S=WE | V=hold:v | O=the high_ground:n
+The cavalry charges. | S=the cavalry:n | V=charge:v
+The archer holds the ridge line. | S=the archer:n | V=hold:v | O=the ridge_line:n
+We besiege the city. | S=WE | V=besiege:v | O=the city:n
+The keep falls. | S=the keep:n | V=fall:v
+
+## Camp and supply
+We have provisions. | S=WE | V=have:v | O=provisions:n
+The soldier is wounded. | S=the soldier:n | V=be:v | O=wounded:a
+The army marches. | S=the army:n | V=march:v
+
+## Outcomes
+We are victorious. | S=WE | V=be:v | O=victorious:a
+We are defeated. | S=WE | V=be:v | O=defeated:a
+We want peace. | S=WE | V=want:v | O=peace:n
+
+## Doctrine
+This is a war of attrition. | S=THIS | V=be:v | O=a war_of_attrition:n
+The guerrilla ambushes the convoy. | S=the guerrilla:n | V=ambush:v | O=the convoy:n
+We strike the rear. | S=WE | V=strike:v | O=the rear:n
+The pincer movement is complete. | S=the pincer_movement:n | V=be:v | O=complete:a
+The line of retreat is open. | S=the line_of_retreat:n | V=be:v | O=open:a
+The ceasefire holds. | S=the ceasefire:n | V=hold:v
+
+## Orders and discipline
+Muster the army! | mood=imperative | seq=V,O | V=muster:v | O=the army:n
+Fortify the ridge line! | mood=imperative | seq=V,O | V=fortify:v | O=the ridge_line:n
+Guard the pass! | mood=imperative | seq=V,O | V=guard:v | O=the narrow_pass:n
+The general commands the army. | S=the general:n | V=command:v | O=the army:n
+The deserter flees. | S=the deserter:n | V=flee:v

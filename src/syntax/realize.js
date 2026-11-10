@@ -149,8 +149,13 @@ export function realize(template, lang) {
             parts.V = toks;
         }
         if (template.initial) parts.initial = template.initial.flatMap(np => nounPhrase(np, { case: model.baseCase }, ctx).tokens);
+        // adjuncts (A, B): a prepositional phrase (adp + np) or a bare noun phrase, e.g. "to me", "now"
+        for (const key of ['A', 'B']) {
+            const adj = template[key];
+            if (adj) parts[key] = (adj.adp ? prepositionalPhrase(adj, ctx, adpPos) : nounPhrase(adj, { case: model.baseCase }, ctx)).tokens;
+        }
 
-        const sequence = template.seq ?? [...(parts.initial ? ['initial'] : []), ...spec.order.split('')];
+        const sequence = template.seq ?? [...(parts.initial ? ['initial'] : []), ...spec.order.split(''), 'A', 'B'];
         const tokens = sequence.flatMap(k => parts[k] ?? []);
         return { id: template.id, english: template.en, tokens, partial: ctx.partial.length ? [...ctx.partial] : undefined };
     } catch (e) {
@@ -159,13 +164,46 @@ export function realize(template, lang) {
     }
 }
 
-export function generateSamples(templates, lang) {
+// Sentence sets. The template file holds { universal: [...], genres: { id: [...] } }; a plain array is a universal list.
+export function templateSets(templates, genre) {
+    if (Array.isArray(templates)) return { universal: templates, specialised: [] };
+    return { universal: templates?.universal ?? [], specialised: genre ? (templates?.genres?.[genre] ?? []) : [] };
+}
+
+// Every lexical reference of a template (lemma:pos or id), including the function words the realiser adds on its own.
+export function templateRefs(t) {
+    const refs = new Set(['the:determiner', 'a:determiner', 'not:particle', 'can:particle']);
+    const walk = x => {
+        if (!x || typeof x !== 'object') return;
+        for (const [k, v] of Object.entries(x)) {
+            if (['head', 'adj', 'poss', 'adp', 'aux'].includes(k)) asList(v).forEach(r => refs.add(r));
+            else if (k === 'initial') v.forEach(walk);
+            else if (['S', 'V', 'O', 'A', 'B', 'np'].includes(k)) walk(v);
+        }
+    };
+    walk(t);
+    return refs;
+}
+
+// The dictionary senses the sample sentences need, so a language always contains them (whatever the genre excludes).
+export function requiredEntries(templateList, vocabulary) {
+    const index = buildIndex(vocabulary);
+    const found = new Map();
+    for (const t of templateList) for (const ref of templateRefs(t)) { const e = index.resolve(ref); if (e) found.set(e.id, e); }
+    return [...found.values()];
+}
+
+export function generateSamples(templates, lang, genre = lang.spec.genre) {
+    const sets = templateSets(templates, genre);
     const samples = [];
     const skipped = [];
-    for (const t of templates) {
-        const r = realize(t, lang);
-        if (r.skipped) { if (r.skipped === 'missing') skipped.push({ id: r.id, english: r.english, missing: r.missing }); continue; }
-        samples.push({ number: samples.length + 1, ...r });
+    for (const [scope, list] of [['universal', sets.universal], ['genre', sets.specialised]]) {
+        let n = 0;
+        for (const t of list) {
+            const r = realize(t, lang);
+            if (r.skipped) { if (r.skipped === 'missing') skipped.push({ id: r.id, scope, topic: t.topic, english: r.english, missing: r.missing }); continue; }
+            samples.push({ number: ++n, scope, topic: t.topic ?? null, ...r });
+        }
     }
     return { samples, skipped };
 }

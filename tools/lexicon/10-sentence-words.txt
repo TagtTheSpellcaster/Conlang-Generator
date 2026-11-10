@@ -1,0 +1,93 @@
+# Words needed by the sample sentences (data/sentence-templates.json is built from tools/sentences/*.txt).
+@tier common
+@domain grammar
+## courtesy
+p:hello, p:goodbye, p:thanks, p:welcome, p:please
+
+@domain quality
+## condition
+a:sorry, a:sick
+
+@domain abstract
+## wellbeing
+health
+
+@domain society
+@tags
+## people_terms
+people
+
+@domain body
+## body_parts
+beard
+
+@domain society
+@animacy human
+## roles
+chief
+@animacy inanimate
+
+@domain quality
+## condition
+a:closed, a:complete, a:correct, a:dangerous, a:damned, a:great, a:lost
+
+@domain action
+## everyday_verbs
+v:connect, v:drop, v:honor, vi:hunger, v:miss, v:share, v:sign, v:study
+
+@domain technology
+## systems
+data, engine, error, machine, system
+
+@domain object
+## things
+lock, goods
+
+@domain nature
+## places
+glade
+
+@domain household
+## rooms
+inner quarters
+
+@domain time
+## day_parts
+adv:tonight
+
+@domain family
+## kin_terms
+ancestor
+
+@domain society
+@animacy animate
+## peoples
+fey
+@animacy inanimate
+## grievance
+grudge, wrong
+
+@domain craft
+## joinery_terms
+joint
+
+@domain material
+## ore_terms
+vein
+
+@domain quality
+## condition
+a:loose, a:tight
+
+@domain action
+## everyday_verbs
+v:light, v:need, vi:talk
+
+@domain nature
+## land_use
+pasture
+
+@domain society
+@animacy animate
+## creatures_of_death
+undead

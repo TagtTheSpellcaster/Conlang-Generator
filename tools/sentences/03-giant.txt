@@ -1,0 +1,33 @@
+@genre giant
+
+## Size and weight
+I am large. | S=I | V=be:v | O=large:a
+The mountain is old. | S=the mountain:n | V=be:v | O=old:a
+The [stone|boulder] is heavy. | S=the stone:n|boulder:n | V=be:v | O=heavy:a
+I carry the boulder. | S=I | V=carry:v | O=the boulder:n
+I stomp. | S=I | V=stomp:v
+
+## Time and memory
+The aeon is long. | S=the aeon:n | V=be:v | O=long:a
+I remember the [aeon|mountain]. | S=I | V=remember:v | O=the aeon:n|mountain:n
+The avalanche comes. | S=the avalanche:n | V=come:v
+The ice melts. | S=the ice:n | V=melt:v
+I am old. | S=I | V=be:v | O=old:a
+
+## Earth and sky
+I sleep in the mountain. | S=I | V=sleep:v | A=in>the mountain:n
+I walk on the [stone|ice]. | S=I | V=walk:v | A=on>the stone:n|ice:n
+The earth shakes. | S=the earth:n | V=shake:v
+The river is below. | S=the river:n | V=be:v | O=below:ad
+The sky is [dark|cold]. | S=the sky:n | V=be:v | O=dark:a|cold:a
+
+## The small folk
+The small people fear me. | S=the +small people:n | V=fear:v | O=ME
+I do not fear the small people. | S=I | V=fear:v/neg | O=the +small people:n
+Do not wake me. | mood=imperative | seq=V,O | V=wake:v/neg | O=ME
+The small people run. | S=the +small people:n | V=run:v
+
+## Deep time
+The mountain was young. | tense=past | S=the mountain:n | V=be:v | O=young:a
+The glacier moves. | S=the glacier:n | V=move:v
+The winter is long. | S=the winter:n | V=be:v | O=long:a

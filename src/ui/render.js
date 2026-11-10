@@ -147,11 +147,33 @@ const tokenHtml = t => t.kind === 'alts'
     ? `[${t.options.map(o => o.map(tokenHtml).join(' ')).join('|')}]`
     : `<span class="sample-word" data-meaning="${esc(t.gloss)}">${t.parts.map(p => p.kind === 'stem' ? esc(p.text) : `<span class="morph-ending" title="${esc(p.meaning ?? p.kind)}">${esc(p.text)}</span>`).join('')}</span>`;
 
+const pillHtml = s => `<div class="sample-pill"><div class="en"><b>${s.number}.</b> ${esc(s.english)}</div><div class="cl"><b>${s.number}.</b> ${s.tokens.map(tokenHtml).join(' ')}</div></div>`;
+
+// sentences of one scope grouped by topic, in source order
+function sampleColumnHtml(title, subtitle, samples, skipped, emptyMessage) {
+    const topics = [];
+    for (const s of samples) {
+        let group = topics.find(t => t.name === s.topic);
+        if (!group) topics.push(group = { name: s.topic, items: [] });
+        group.items.push(s);
+    }
+    const body = topics.length
+        ? topics.map(t => `<h4 class="sample-topic">${esc(t.name ?? 'Other')}</h4>${t.items.map(pillHtml).join('')}`).join('')
+        : `<div class="morph-note">${esc(emptyMessage)}</div>`;
+    const sk = skipped.length ? `<div class="morph-note">${skipped.length} sentence(s) skipped because the lexicon lacks: ${esc([...new Set(skipped.map(x => x.missing))].join(', '))}.</div>` : '';
+    return `<section class="sample-col"><h3>${esc(title)}</h3><div class="sub">${esc(subtitle)}</div>${body}${sk}</section>`;
+}
+
 export function samplesHtml(lang) {
-    const pills = lang.samples.map(s => `<div class="sample-pill"><div class="en"><b>${s.number}.</b> ${esc(s.english)}</div><div class="cl"><b>${s.number}.</b> ${s.tokens.map(tokenHtml).join(' ')}</div></div>`).join('');
-    const sk = lang.skippedSamples.length ? `<div class="morph-note">${lang.skippedSamples.length} sentence(s) skipped because the lexicon lacks: ${esc([...new Set(lang.skippedSamples.map(s => s.missing))].join(', '))}.</div>` : '';
     const s = lang.syntax;
-    return `<div class="sample-frame"><h3>Sample sentences</h3><div class="morph-note">Word order ${esc(s.order)} · ${s.adpositionPosition === 'before' ? 'prepositions' : 'postpositions'} · adjective ${esc(s.adjectivePosition)} the noun${s.prodrop ? ' · subject pronouns dropped (verb agreement)' : ''}</div>${pills}${sk}</div>`;
+    const uni = lang.samples.filter(x => x.scope === 'universal'), gen = lang.samples.filter(x => x.scope === 'genre');
+    const skip = scope => lang.skippedSamples.filter(x => x.scope === scope);
+    const note = `Word order ${esc(s.order)} · ${s.adpositionPosition === 'before' ? 'prepositions' : 'postpositions'} · adjective ${esc(s.adjectivePosition)} the noun${s.prodrop ? ' · subject pronouns dropped (verb agreement)' : ''}`;
+    const left = sampleColumnHtml('Universal Sentences', `${uni.length} sentences every language needs, by topic`, uni, skip('universal'), 'No universal sentence could be built.');
+    const right = lang.genre
+        ? sampleColumnHtml(`Specialised Sentences · ${lang.genre.label}`, `${gen.length} sentences typical of this genre, by topic`, gen, skip('genre'), 'No specialised sentence could be built.')
+        : sampleColumnHtml('Specialised Sentences', 'Not available without a genre', [], [], 'Choose a language genre (war, marine, artisans, women\'s tongue…) to get sentences typical of it.');
+    return `<div class="sample-frame"><div class="morph-note">${note}</div><div class="sample-columns">${left}${right}</div></div>`;
 }
 
 export const lexiconRows = lexicon => lexicon.map(e => ({ word: e.form, english: label(e), meta: `${e.domain} · ${e.pos}` }));

@@ -1,0 +1,33 @@
+@genre fey
+
+## Glamour and trickery
+The glamour is bright. | S=the glamour:n | V=be:v | O=bright:a
+I see a fairy ring. | S=I | V=see:v | O=a fairy_ring:n
+Do not enter the fairy ring! | mood=imperative | seq=V,O | V=enter:v/neg | O=the fairy_ring:n
+I do not lie. | S=I | V=lie:v/neg
+I give you a gift. | S=I | V=give:v | O=a gift:n | A=to>YOU_O
+Do not eat the food. | mood=imperative | seq=V,O | V=eat:v/neg | O=the food:n
+
+## Night and nature
+The moon is bright. | S=the moon:n | V=be:v | O=bright:a
+The dew is on the [flower|leaf]. | S=the dew:n | V=be:v | O=on>the flower:n|leaf:n
+The mist comes. | S=the mist:n | V=come:v
+The star sings. | S=the star:n | V=sing:v
+The flower dies. | S=the flower:n | V=die:v
+The gossamer is [fine|bright]. | S=the gossamer:n | V=be:v | O=fine:a|bright:a
+
+## Dance and song
+We dance under the moon. | S=WE | V=dance:v | A=under>the moon:n
+We sing in the glade. | S=WE | V=sing:v | A=in>the glade:n
+Dance with me. | mood=imperative | seq=V,A | V=dance:v | A=with>ME
+The music is [sweet|old]. | S=the music:n | V=be:v | O=sweet:a|old:a
+
+## Age and time
+You are young. | S=YOU | V=be:v | O=young:a
+I am old. | S=I | V=be:v | O=old:a
+
+## Oaths and bargains
+I keep my promise. | S=I | V=keep:v | O=my promise:n
+Do not say your name. | mood=imperative | seq=V,O | V=say:v/neg | O=your name:n
+The fey take the dew. | S=the fey:n | V=take:v | O=the dew:n
+The forest is alive. | S=the forest:n | V=be:v | O=alive:a

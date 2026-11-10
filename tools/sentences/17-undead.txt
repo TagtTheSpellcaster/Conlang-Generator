@@ -1,0 +1,34 @@
+@genre undead
+
+## The state of death
+I am dead. | S=I | V=be:v | O=dead:a
+I do not sleep. | S=I | V=sleep:v/neg
+My heart is cold. | S=my heart:n | V=be:v | O=cold:a
+I hunger. | S=I | V=hunger:v
+
+## Places of the dead
+The crypt is [dark|cold]. | S=the crypt:n | V=be:v | O=dark:a|cold:a
+The grave is open. | S=the grave:n | V=be:v | O=open:a
+The sarcophagus is closed. | S=the sarcophagus:n | V=be:v | O=closed:a
+I exhume the bones. | S=I | V=exhume:v | O=the bone:n
+The wraith comes from the grave. | S=the wraith:n | V=come:v | A=from>the grave:n
+
+## Memory and the living
+I remember my name. | S=I | V=remember:v | O=my name:n
+The bone is [old|white]. | S=the bone:n | V=be:v | O=old:a|white:a
+The child fears me. | S=the child:n | V=fear:v | O=ME
+Death is cold. | S=death:n | V=be:v | O=cold:a
+
+## Curse and hunger
+The curse is [old|strong]. | S=the curse:n | V=be:v | O=old:a|strong:a
+I rise from the grave. | S=I | V=rise:v | A=from>the grave:n
+The skeleton walks. | S=the skeleton:n | V=walk:v
+The living are warm. | S=the living:a | V=be:v | O=warm:a
+Darkness is my home. | S=darkness:n | V=be:v | O=my home:n
+I bury the dead. | S=I | V=bury:v | O=the dead:a
+
+## Unlife
+The undead do not die. | S=the undead:n | V=die:v/neg
+I am not alive. | S=I | V=be:v/neg | O=alive:a
+The ghost [walks|waits] in the dark. | S=the ghost:n | V=walk:v|wait:v | A=in>the darkness:n
+The coffin is closed. | S=the coffin:n | V=be:v | O=closed:a

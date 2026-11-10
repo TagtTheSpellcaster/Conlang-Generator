@@ -1,0 +1,30 @@
+@genre machine
+
+## System status
+The system is ready. | S=the system:n | V=be:v | O=ready:a
+Initialize the system! | mood=imperative | seq=V,O | V=initialize:v | O=the system:n
+The signal is [weak|strong]. | S=the signal:n | V=be:v | O=weak:a|strong:a
+Error! | init=error:n
+The data is lost. | S=the data:n | V=be:v | O=lost:a
+The battery is empty. | S=the battery:n | V=be:v | O=empty:a
+
+## Commands
+Stop the engine! | mood=imperative | seq=V,O | V=stop:v | O=the engine:n
+Send the data! | mood=imperative | seq=V,O | V=send:v | O=the data:n
+Connect to the network! | mood=imperative | seq=V,A | V=connect:v | A=to>the network:n
+Open the door! | mood=imperative | seq=V,O | V=open:v | O=the door:n
+
+## Identity and protocol
+I am a machine. | S=I | V=be:v | O=a machine:n
+I receive your signal. | S=I | V=receive:v | O=your signal:n
+The handshake is complete. | S=the handshake:n | V=be:v | O=complete:a
+The checksum is [correct|wrong]. | S=the checksum:n | V=be:v | O=correct:a|wrong:a
+We repair the engine. | S=WE | V=repair:v | O=the engine:n
+The subroutine runs. | S=the subroutine:n | V=run:v
+
+## Maintenance and logic
+The engine is broken. | S=the engine:n | V=be:v | O=broken:a
+Repair is complete. | S=repair:n | V=be:v | O=complete:a
+The program has an error. | S=the program:n | V=have:v | O=a error:n
+Power is low. | S=power:n | V=be:v | O=low:a
+The network is [open|closed]. | S=the network:n | V=be:v | O=open:a|closed:a

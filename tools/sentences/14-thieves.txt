@@ -1,0 +1,29 @@
+@genre thieves
+
+## The trade
+I am a [thief|pickpocket]. | S=I | V=be:v | O=a thief:n|pickpocket:n
+Tomorrow we steal the gold. | tense=future | seq=init,S,V,O | init=tomorrow:n | S=WE | V=steal:v | O=the gold:n
+We rob the merchant. | S=WE | V=rob:v | O=the merchant:n
+The heist is [tonight|tomorrow]. | S=the heist:n | V=be:v | O=tonight:adv|tomorrow:n
+The lockpick opens the lock. | S=the lockpick:n | V=open:v | O=the lock:n
+
+## Guards and danger
+The guard sleeps. | S=the guard:n | V=sleep:v
+The guard sees me. | S=the guard:n | V=see:v | O=ME
+Hide! | mood=imperative | seq=V | V=hide:v
+Do not run! | mood=imperative | seq=V | V=run:v/neg
+The night is dark. | S=the night:n | V=be:v | O=dark:a
+Quiet! | init=quiet:a
+
+## Loot and fence
+The fence buys the loot. | S=the fence:n | V=buy:v | O=the loot:n
+I have the purse. | S=I | V=have:v | O=the purse:n
+Where is the coin? | seq=init,V,S | init=WHERE | V=be:v | S=the coin:n
+I do not know you. | S=I | V=know:v/neg | O=YOU_O
+
+## Signals and slang
+Watch the door! | mood=imperative | seq=V,O | V=watch:v | O=the door:n
+The informer talks. | S=the informer:n | V=talk:v
+I climb the wall. | S=I | V=climb:v | O=the wall:n
+The alley is dark. | S=the alley:n | V=be:v | O=dark:a
+We share the loot. | S=WE | V=share:v | O=the loot:n

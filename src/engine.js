@@ -5,7 +5,7 @@ import { resolveSpec } from './spec.js';
 import { selectEntries, assignForms } from './lexicon/select.js';
 import { describePhonology, createWordFactory } from './phonology/words.js';
 import { buildMorphologyModel, generateAffixes } from './morphology/affixes.js';
-import { adpositionPosition, generateSamples } from './syntax/realize.js';
+import { adpositionPosition, generateSamples, requiredEntries, templateSets } from './syntax/realize.js';
 import { GENRES } from './genres.js';
 
 export function languageName(spec) {
@@ -17,12 +17,15 @@ export function languageName(spec) {
     return make();
 }
 
+// templates: { universal: [...], genres: { id: [...] } } (data/sentence-templates.json) or a plain array of universal templates.
 export function generateLanguage(input, vocabulary, templates = []) {
     if (!Array.isArray(vocabulary) || !vocabulary.length) throw new Error('Vocabulary is empty or not loaded.');
     const { spec, notes } = resolveSpec(input);
     const phonology = describePhonology(spec);
     const model = buildMorphologyModel(spec);
-    const lexicon = assignForms(selectEntries(vocabulary, spec), spec);
+    const sets = templateSets(templates, spec.genre);
+    const required = requiredEntries([...sets.universal, ...sets.specialised], vocabulary);
+    const lexicon = assignForms(selectEntries(vocabulary, spec, undefined, required), spec);
     // Affixes must not collide with any root form.
     const affixes = generateAffixes(spec, model, new Set(lexicon.map(e => e.form)));
     const lang = { spec, model, affixes, lexicon };

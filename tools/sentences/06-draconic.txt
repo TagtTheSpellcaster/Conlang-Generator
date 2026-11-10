@@ -1,0 +1,29 @@
+@genre draconic
+
+## Hoard and greed
+The gold is mine. | S=the gold:n | V=be:v | O=mine:pr
+I covet the [gold|jewel]. | S=I | V=covet:v | O=the gold:n|jewel:n
+The hoard is [large|ancient]. | S=the hoard:n | V=be:v | O=large:a|ancient:a
+Do not touch my hoard! | mood=imperative | seq=V,O | V=touch:v/neg | O=my hoard:n
+Who takes my gold? | S=WHO | V=take:v | O=my gold:n
+I sleep on the hoard. | S=I | V=sleep:v | A=on>the hoard:n
+
+## Fire and might
+I am the [wyrm|dragon]. | S=I | V=be:v | O=the wyrm:n|dragon:n
+My fire burns. | S=my fire:n | V=burn:v
+My scale is strong. | S=my scale:n | V=be:v | O=strong:a
+I fly over the mountain. | S=I | V=fly:v | A=over>the mountain:n
+You are [small|weak]. | S=YOU | V=be:v | O=small:a|weak:a
+The knight fears me. | S=the knight:n | V=fear:v | O=ME
+
+## Dominion and age
+This is my dominion. | S=THIS | V=be:v | O=my dominion:n
+I rule the [mountain|sky]. | S=I | V=rule:v | O=the mountain:n|sky:n
+I am ancient. | S=I | V=be:v | O=ancient:a
+I remember everything. | S=I | V=remember:v | O=everything:pr
+
+## Wrath and sleep
+My wrath is fire. | S=my wrath:n | V=be:v | O=fire:n
+The village burns. | S=the village:n | V=burn:v
+I wake. | S=I | V=wake:v
+The jewel is in the cave. | S=the jewel:n | V=be:v | O=in>the cave:n

@@ -1,0 +1,36 @@
+@genre marine
+
+## Water and weather
+The tide [rises|falls]. | S=the tide:n | V=rise:v|fall:v
+The wave is large. | S=the wave:n | V=be:v | O=large:a
+The current is strong. | S=the current:n | V=be:v | O=strong:a
+The water is deep. | S=the water:n | V=be:v | O=deep:a
+The storm comes. | S=the storm:n | V=come:v
+The wind is [cold|strong]. | S=the wind:n | V=be:v | O=cold:a|strong:a
+
+## Ship and sailing
+The ship sails to the [harbor|island]. | S=the ship:n | V=sail:v | A=to>the harbor:n|island:n
+Raise the sail! | mood=imperative | seq=V,O | V=raise:v | O=the sail:n
+Drop the anchor! | mood=imperative | seq=V,O | V=drop:v | O=the anchor:n
+The keel is strong. | S=the keel:n | V=be:v | O=strong:a
+We are on the sea. | S=WE | V=be:v | O=on>the sea:n
+Land! | init=land:n
+Where is the shore? | seq=init,V,S | init=WHERE | V=be:v | S=the shore:n
+
+## Creatures of the deep
+We hunt the whale. | S=WE | V=hunt:v | O=the whale:n
+The harpoon is in the whale. | S=the harpoon:n | V=be:v | O=in>the whale:n
+The fish swims in the kelp. | S=the fish:n | V=swim:v | A=in>the kelp:n
+The shoal is large. | S=the shoal:n | V=be:v | O=large:a
+
+## Danger at sea
+The maelstrom takes the ship. | S=the maelstrom:n | V=take:v | O=the ship:n
+I fear the maelstrom. | S=I | V=fear:v | O=the maelstrom:n
+The sailor drowns. | S=the sailor:n | V=drown:v
+Swim! | mood=imperative | seq=V | V=swim:v
+
+## Depths and creatures
+The reef is sharp. | S=the reef:n | V=be:v | O=sharp:a
+The pearl is in the shell. | S=the pearl:n | V=be:v | O=in>the shell:n
+The octopus hides in the kelp. | S=the octopus:n | V=hide:v | A=in>the kelp:n
+The moon pulls the tide. | S=the moon:n | V=pull:v | O=the tide:n

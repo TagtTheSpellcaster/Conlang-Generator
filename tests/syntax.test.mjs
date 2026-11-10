@@ -4,6 +4,7 @@ import { generateLanguage } from '../src/engine.js';
 import { realize, tokenText, buildIndex, adpositionPosition } from '../src/syntax/realize.js';
 import { inflect, genderOf } from '../src/morphology/inflect.js';
 import { vocabulary, templates, refsOf } from './helpers.mjs';
+import { GENRE_IDS } from '../src/genres.js';
 
 const byId = new Map(vocabulary.map(e => [e.id, e]));
 const gen = (input = {}) => generateLanguage({ seed: 'syn', articles: 'both', ...input }, vocabulary, templates);
@@ -13,42 +14,60 @@ const word = (L, id) => L.lexicon.find(e => e.id === id);
 const I = 'pronoun.first_person_singular', YOU_O = 'pronoun.second_person_singular_object';
 const see = { S: { head: I }, V: { head: 'see:verb' }, O: { head: 'wolf:noun', det: 'definite' } };
 
-test('template coverage: every referenced sense exists, is unambiguous and belongs to the core tier', () => {
+const sets = { universal: templates.universal, ...Object.fromEntries(Object.entries(templates.genres).map(([id, l]) => [`genre ${id}`, l])) };
+
+test('template coverage: every referenced sense exists and is unambiguous', () => {
     const index = buildIndex(vocabulary);
     const problems = [];
-    for (const t of templates) {
-        assert.ok(t.en && t.id, 'template needs id and english');
+    for (const [name, list] of Object.entries(sets)) for (const t of list) {
+        assert.ok(t.en && t.id && t.topic, `${name}: template needs id, topic and english`);
         const refs = refsOf(t);
         assert.ok(refs.length, `${t.id} has no word references`);
         for (const ref of refs) {
             const e = index.resolve(ref);
             if (!e) { problems.push(`${t.id}: ${ref} not found`); continue; }
-            if (e.tier !== 'core') problems.push(`${t.id}: ${ref} (${e.id}) is ${e.tier}, not core`);
             if (!ref.includes('.')) {
                 const [lemma, pos] = ref.split(':');
-                const same = vocabulary.filter(x => x.lemma.toLowerCase() === lemma && x.pos === pos && !x.gloss && x.tier === 'core');
+                const same = vocabulary.filter(x => x.lemma.toLowerCase() === lemma && x.pos === pos && !x.gloss && x.tier === e.tier);
                 if (same.length > 1) problems.push(`${t.id}: ${ref} is ambiguous (${same.map(x => x.id).join(', ')}) — use the sense id`);
             }
         }
-        for (const d of ['definite', 'indefinite']) JSON.stringify(t).includes(`"det":"${d}"`) && assert.ok(index.resolve(d === 'definite' ? 'the:determiner' : 'a:determiner'));
     }
     assert.deepEqual(problems, []);
 });
 
-test('template ids are unique and english sentences do not repeat', () => {
-    assert.equal(new Set(templates.map(t => t.id)).size, templates.length);
-    assert.equal(new Set(templates.map(t => t.en)).size, templates.length);
+test('sentence sets: about 50 universal sentences, 20-50 per genre, unique ids and english, several topics', () => {
+    assert.ok(templates.universal.length >= 48 && templates.universal.length <= 52, `${templates.universal.length} universal sentences`);
+    assert.deepEqual(Object.keys(templates.genres).sort(), [...GENRE_IDS].sort());
+    for (const [name, list] of Object.entries(sets)) {
+        assert.equal(new Set(list.map(t => t.id)).size, list.length, `${name}: ids`);
+        assert.equal(new Set(list.map(t => t.en)).size, list.length, `${name}: english`);
+        if (name !== 'universal') assert.ok(list.length >= 20 && list.length <= 50, `${name}: ${list.length} sentences`);
+        assert.ok(new Set(list.map(t => t.topic)).size >= 3, `${name}: topics`);
+    }
 });
 
-test('default language realises every template that applies (none skipped)', () => {
+test('universal sentences cover the needs of the comparative literature (hunger, thirst, pain, danger, thanks, love, identity, place, what is this)', () => {
+    const en = new Set(templates.universal.map(t => t.en));
+    for (const s of ['I am hungry.', 'I am thirsty.', 'My hand hurts.', 'Danger!', 'Run!', 'Help me!', 'Thank you.', 'I love you.', 'Who are you?', 'Where is the water?', 'Where is the food?', 'What is this?'])
+        assert.ok(en.has(s), s);
+});
+
+test('default language realises every sentence that applies (none skipped); the genre adds its own set', () => {
     const L = gen({ number: 'singular-plural-dual', gender: 'masculine-feminine' });
     assert.deepEqual(L.skippedSamples, []);
-    assert.equal(L.samples.length, templates.length);
+    assert.equal(L.samples.filter(s => s.scope === 'universal').length, templates.universal.length);
+    assert.equal(L.samples.filter(s => s.scope === 'genre').length, 0, 'no genre, no specialised sentences');
+    const G = gen({ genre: 'marine', number: 'singular-plural-dual', gender: 'masculine-feminine' });
+    assert.deepEqual(G.skippedSamples, []);
+    assert.equal(G.samples.filter(s => s.scope === 'genre').length, templates.genres.marine.length);
+    assert.ok(G.samples.filter(s => s.scope === 'genre').every((s, i) => s.number === i + 1 && s.topic));
 });
 
 test('number-dependent templates are only used when the language has that number', () => {
-    assert.equal(gen({ number: 'singular' }).samples.length, templates.length - 2);
-    assert.equal(gen({ number: 'singular-plural' }).samples.length, templates.length - 1);
+    const n = L => L.samples.filter(s => s.scope === 'universal').length;
+    assert.equal(n(gen({ number: 'singular' })), templates.universal.length - 2);
+    assert.equal(n(gen({ number: 'singular-plural' })), templates.universal.length - 1);
 });
 
 test('a template with a missing concept is skipped and reported, never emitted with holes', () => {
@@ -177,8 +196,8 @@ test('isolating languages: negation and auxiliary are words before the verb; imp
     const f = id => word(L, id).form;
     const neg = tokenText(realize(T('x', { S: { head: 'pronoun.second_person_singular' }, V: { head: 'enter:verb', neg: true, aux: 'can:particle' } }), lang(L)).tokens);
     assert.equal(neg, [f('pronoun.second_person_singular'), f('logic.not'), f('function.can'), f('verb.enter')].join(' '));
-    const q = templates.find(t => t.en === 'Who are you?');
+    const q = templates.universal.find(t => t.en === 'Who are you?');
     assert.equal(tokenText(realize(q, lang(L)).tokens), [f('interrogative.who'), f('verb.be'), f('pronoun.second_person_singular')].join(' '));
-    const imp = templates.find(t => t.en === 'Stay here.');
-    assert.equal(tokenText(realize(imp, lang(L)).tokens), [f('verb.stay'), f('space.here')].join(' '));
+    const imp = templates.universal.find(t => t.en === 'Come here.');
+    assert.equal(tokenText(realize(imp, lang(L)).tokens), [f('verb.come'), f('space.here')].join(' '));
 });

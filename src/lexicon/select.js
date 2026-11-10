@@ -49,7 +49,8 @@ function articleAllowed(entry, mode) {
     return ['both', 'indefinite', 'partitive'].includes(mode);
 }
 
-export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON_GENRE : MAX_LEXICON) {
+// `required`: entries the sample sentences need; they are always included, even if the genre would exclude them.
+export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON_GENRE : MAX_LEXICON, required = []) {
     const ranked = vocabulary
         // equal scores are ordered by a fixed hash of the id (not the seed): the selected senses stay the same for every seed,
         // but they are spread over the whole dictionary instead of always being its first entries
@@ -60,7 +61,9 @@ export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON
     const seen = new Set();
     const add = x => { if (x && !seen.has(x.e.id) && chosen.length < limit) { seen.add(x.e.id); chosen.push(x.e); } };
 
-    ranked.filter(x => x.e.tier === 'core').forEach(add);
+    const needed = new Set(required.map(e => e.id));
+    ranked.filter(x => x.e.tier === 'core' || needed.has(x.e.id)).forEach(add);
+    required.filter(e => !seen.has(e.id) && articleAllowed(e, spec.articles)).forEach(e => add({ e }));
     // With a genre the specialised nouns, verbs and adjectives come first; numerals and function words are capped lower.
     const plan = spec.genre
         ? [['noun', 420], ['verb', 120], ['adjective', 100], ['pronoun', 40], ['function', 60], ['number', 40]]

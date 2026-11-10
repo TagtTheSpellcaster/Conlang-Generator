@@ -1,0 +1,34 @@
+@genre arcane
+
+## Casting
+I cast a spell. | S=I | V=cast:v | O=a spell:n
+The spell is [strong|weak]. | S=the spell:n | V=be:v | O=strong:a|weak:a
+Say the incantation! | mood=imperative | seq=V,O | V=say:v | O=the incantation:n
+I scry the future. | S=I | V=scry:v | O=the future:n
+The rune burns. | S=the rune:n | V=burn:v
+
+## Books and study
+The grimoire is old. | S=the grimoire:n | V=be:v | O=old:a
+The wizard reads the grimoire. | S=the wizard:n | V=read:v | O=the grimoire:n
+I study magic. | S=I | V=study:v | O=magic:n
+The mage teaches the apprentice. | S=the mage:n | V=teach:v | O=the apprentice:n
+The staff is in my hand. | S=the staff:n | V=be:v | O=in>my hand:n
+
+## Power and danger
+Magic is dangerous. | S=magic:n | V=be:v | O=dangerous:a
+Do not break the circle. | mood=imperative | seq=V,O | V=break:v/neg | O=the circle:n
+I know your name. | S=I | V=know:v | O=your name:n
+The light is [bright|dark]. | S=the light:n | V=be:v | O=bright:a|dark:a
+
+## Theory and practice
+The circle is [open|closed]. | S=the circle:n | V=be:v | O=open:a|closed:a
+I read the rune. | S=I | V=read:v | O=the rune:n
+Magic needs [water|fire]. | S=magic:n | V=need:v | O=water:n|fire:n
+The portal opens. | S=the portal:n | V=open:v
+I am a wizard. | S=I | V=be:v | O=a wizard:n
+
+## Elements and wards
+The ward is [strong|broken]. | S=the ward:n | V=be:v | O=strong:a|broken:a
+I summon the [fire|wind]. | S=I | V=summon:v | O=the fire:n|wind:n
+The wand is [old|bright]. | S=the wand:n | V=be:v | O=old:a|bright:a
+The mana is low. | S=the mana:n | V=be:v | O=low:a

@@ -1,0 +1,40 @@
+@genre orcish
+
+## Boasts and threats
+I am strong. | S=I | V=be:v | O=strong:a
+You are weak. | S=YOU | V=be:v | O=weak:a
+I will kill you. | tense=future | S=I | V=kill:v | O=YOU_O
+We are the [warband|clan]. | S=WE | V=be:v | O=the warband:n|clan:n
+The enemy is weak. | S=the enemy:n | V=be:v | O=weak:a
+
+## Chief and clan
+The chief is strong. | S=the chief:n | V=be:v | O=strong:a
+The warband follows the chief. | S=the warband:n | V=follow:v | O=the chief:n
+Follow the chief! | mood=imperative | seq=V,O | V=follow:v | O=the chief:n
+My clan is large. | S=my clan:n | V=be:v | O=large:a
+I fear the chief. | S=I | V=fear:v | O=the chief:n
+
+## Raids and spoils
+We plunder the village. | S=WE | V=plunder:v | O=the village:n
+We take the [loot|spoils]. | S=WE | V=take:v | O=the loot:n|spoils:n
+The raiders come from the mountain. | S=the raider:n | V=come:v | A=from>the mountain:n
+We eat the meat. | S=WE | V=eat:v | O=the meat:n
+Bring meat! | mood=imperative | seq=V,O | V=bring:v | O=meat:n
+
+## Weapons and the body
+I have an [axe|club]. | S=I | V=have:v | O=a axe:n|club:n
+My axe is [large|sharp]. | S=my axe:n | V=be:v | O=large:a|sharp:a
+My hand is strong. | S=my hand:n | V=be:v | O=strong:a
+The bone is [white|old]. | S=the bone:n | V=be:v | O=white:a|old:a
+
+## Feast and fire
+The meat is good. | S=the meat:n | V=be:v | O=good:a
+The fire is [large|hot]. | S=the fire:n | V=be:v | O=large:a|hot:a
+I drink the blood. | S=I | V=drink:v | O=the blood:n
+The skull is on the [spear|wall]. | S=the skull:n | V=be:v | O=on>the spear:n|wall:n
+
+## War cry
+Kill! | mood=imperative | seq=V | V=kill:v
+Crush the enemy! | mood=imperative | seq=V,O | V=crush:v | O=the enemy:n
+Blood and fire! | init=blood:n ; fire:n
+The warband comes. | S=the warband:n | V=come:v

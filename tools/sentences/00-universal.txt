@@ -1,0 +1,76 @@
+# Universal sentences: communicative needs that every human language has to cover.
+# Sources: Wierzbicka's semantic primes (I, you, want, know, see, hear, good, bad, big, small, do, happen, live, die, here, now...)
+# and the survival / social / orientation needs described in the comparative literature.
+@universal
+
+## Greetings and courtesy
+Hello. | init=hello:p
+Goodbye. | init=goodbye:p
+Thank you. | init=thanks:p
+I am sorry. | S=I | V=be:v | O=sorry:a
+[Yes|No]. | init=yes:p|no:p
+
+## Wishes and blessings
+Good luck. | init=+good luck:n
+Good health. | init=+good health:n
+Peace to you. | init=peace:n | A=to>YOU_O
+
+## Needs and the body
+I am hungry. | S=I | V=be:v | O=hungry:a
+I am thirsty. | S=I | V=be:v | O=thirsty:a
+I am [cold|hot]. | S=I | V=be:v | O=cold:a|hot:a
+I am sick. | S=I | V=be:v | O=sick:a
+My hand hurts. | S=my hand:n | V=hurt:v
+I want [water|food]. | S=I | V=want:v | O=water:n|food:n
+I want to sleep. | S=I | V=want:v | O=sleep:v
+
+## Danger and emergency
+Danger! | init=danger:n
+Run! | mood=imperative | seq=V | V=run:v
+Help me! | mood=imperative | seq=V,O | V=help:v | O=ME
+Do not touch this. | mood=imperative | seq=V,O | V=touch:v/neg | O=THIS
+
+## Affection and kinship
+I love you. | S=I | V=love:v | O=YOU_O
+You are my [friend|mother|child]. | S=YOU | V=be:v | O=my friend:n|mother:n|child:n
+You are not my enemy. | S=YOU | V=be:v/neg | O=my enemy:n
+My [mother|child] loves me. | S=my mother:n|child:n | V=love:v | O=ME
+
+## Identity
+Who are you? | seq=init,V,S | init=WHO | V=be:v | S=YOU
+What is your name? | seq=init,V,S | init=WHAT | V=be:v | S=your name:n
+I come from [here|there]. | S=I | V=come:v | A=from>here:adv|there:adv
+
+## Place and resources
+Where is the water? | seq=init,V,S | init=WHERE | V=be:v | S=the water:n
+Where is the food? | seq=init,V,S | init=WHERE | V=be:v | S=the food:n
+What is this? | seq=init,V,S | init=WHAT | V=be:v | S=THIS
+The [water|food] is [here|there]. | S=the water:n|food:n | V=be:v | O=here:adv|there:adv
+Come here. | mood=imperative | seq=V,O | V=come:v | O=here:adv
+
+## Knowledge and perception
+I do not know. | S=I | V=know:v/neg
+I do not understand. | S=I | V=understand:v/neg
+I hear you. | S=I | V=hear:v | O=YOU_O
+
+## Quality and quantity
+This is [good|bad]. | S=THIS | V=be:v | O=good:a|bad:a
+This is [large|small]. | S=THIS | V=be:v | O=large:a|small:a
+This is [much|little]. | S=THIS | V=be:v | O=much:d|little:d
+Everything is good. | S=everything:pr | V=be:v | O=good:a
+
+## Time and events
+Today we work. | seq=init,S,V | init=today:n | S=WE | V=work:v
+Tomorrow we travel. | tense=future | seq=init,S,V | init=tomorrow:n | S=WE | V=travel:v
+Yesterday I came. | tense=past | seq=init,S,V | init=yesterday:n | S=I | V=come:v
+The sun rises. | S=the sun:n | V=rise:v
+I live. | S=I | V=live:v
+
+## Basic sentence patterns
+I eat [food|bread]. | S=I | V=eat:v | O=food:n|bread:n
+I give you [water|food]. | S=I | V=give:v | O=water:n|food:n | A=to>YOU_O
+The good dog sees the small bird. | S=the +good dog:n | V=see:v | O=the +small bird:n
+The dogs see the children. | req=plural | S=the pl dog:n | V=see:v | O=the pl child:n
+We see two dogs. | req=dual | S=WE | V=see:v | O=du dog:n
+You cannot enter. | S=YOU | V=enter:v/neg,can
+I can help you. | S=I | V=help:v/can | O=YOU_O

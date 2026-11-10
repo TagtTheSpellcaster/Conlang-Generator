@@ -1,0 +1,34 @@
+@genre nomad
+
+## Herd and camp
+We migrate with the herd. | S=WE | V=migrate:v | A=with>the herd:n
+The horse is [fast|strong]. | S=the horse:n | V=be:v | O=fast:a|strong:a
+The yurt is [warm|small]. | S=the yurt:n | V=be:v | O=warm:a|small:a
+We drink mare's milk. | S=WE | V=drink:v | O=mare's_milk:n
+The herd eats the grass. | S=the herd:n | V=eat:v | O=the grass:n
+We leave the camp. | S=WE | V=leave:v | O=the camp:n
+
+## Steppe and sky
+The steppe is [large|dry]. | S=the steppe:n | V=be:v | O=large:a|dry:a
+The wind is [cold|strong]. | S=the wind:n | V=be:v | O=cold:a|strong:a
+The sky is open. | S=the sky:n | V=be:v | O=open:a
+The river is there. | S=the river:n | V=be:v | O=there:adv
+
+## Kin and hospitality
+My tribe is large. | S=my tribe:n | V=be:v | O=large:a
+The elder knows the way. | S=the elder:n | V=know:v | O=the way:n
+Where is the herd? | seq=init,V,S | init=WHERE | V=be:v | S=the herd:n
+We share the [food|milk] with the guest. | S=WE | V=share:v | O=the food:n|milk:n | A=with>the guest:n
+
+## Seasons and journey
+We follow the herd. | S=WE | V=follow:v | O=the herd:n
+The winter is [long|cold]. | S=the winter:n | V=be:v | O=long:a|cold:a
+The well is dry. | S=the well:n | V=be:v | O=dry:a
+The tent is [small|warm]. | S=the tent:n | V=be:v | O=small:a|warm:a
+I ride the horse. | S=I | V=ride:v | O=the horse:n
+
+## Law of the steppe
+The guest is holy. | S=the guest:n | V=be:v | O=holy:a
+The khan rides at dawn. | S=the khan:n | V=ride:v | A=at>the dawn:n
+The pasture is [green|dry]. | S=the pasture:n | V=be:v | O=green:a|dry:a
+We trade horses. | S=WE | V=trade:v | O=horse:n

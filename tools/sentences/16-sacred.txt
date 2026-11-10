@@ -1,0 +1,36 @@
+@genre sacred
+
+## Worship
+I pray to the god. | S=I | V=pray:v | A=to>the god:n
+The priest speaks the litany. | S=the priest:n | V=speak:v | O=the litany:n
+The altar is holy. | S=the altar:n | V=be:v | O=holy:a
+I bless you. | S=I | V=bless:v | O=YOU_O
+The god is [good|great]. | S=the god:n | V=be:v | O=good:a|great:a
+
+## Pilgrimage
+We walk to the temple. | S=WE | V=walk:v | A=to>the temple:n
+The pilgrimage is long. | S=the pilgrimage:n | V=be:v | O=long:a
+The pilgrim is tired. | S=the pilgrim:n | V=be:v | O=tired:a
+
+## Sin and mercy
+The priest absolves my sin. | S=the priest:n | V=absolve:v | O=my sin:n
+Forgive me. | mood=imperative | seq=V,O | V=forgive:v | O=ME
+I confess my sin. | S=I | V=confess:v | O=my sin:n
+
+## The dead and the light
+We honor the dead. | S=WE | V=honor:v | O=the dead:a
+The soul lives. | S=the soul:n | V=live:v
+The light is holy. | S=the light:n | V=be:v | O=holy:a
+
+## Rites and feasts
+The priest lights the [fire|candle]. | S=the priest:n | V=light:v | O=the fire:n|candle:n
+We sing the hymn. | S=WE | V=sing:v | O=the hymn:n
+The sacrifice is holy. | S=the sacrifice:n | V=be:v | O=holy:a
+The [temple|altar] is silent. | S=the temple:n|altar:n | V=be:v | O=silent:a
+I kneel. | S=I | V=kneel:v
+
+## Doctrine
+The word is true. | S=the word:n | V=be:v | O=true:a
+Faith is [strong|old]. | S=faith:n | V=be:v | O=strong:a|old:a
+The saint is holy. | S=the saint:n | V=be:v | O=holy:a
+We fast. | S=WE | V=fast:v

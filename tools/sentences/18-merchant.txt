@@ -1,0 +1,30 @@
+@genre merchant
+
+## Price and payment
+What is the price? | seq=init,V,S | init=WHAT | V=be:v | S=the price:n
+The price is [high|low]. | S=the price:n | V=be:v | O=high:a|low:a
+This is [cheap|expensive]. | S=THIS | V=be:v | O=cheap:a|expensive:a
+I buy the [goods|cloth]. | S=I | V=buy:v | O=the goods:n|cloth:n
+You sell the [salt|wine]. | S=YOU | V=sell:v | O=the salt:n|wine:n
+I pay in coin. | S=I | V=pay:v | A=in>coin:n
+
+## Bargaining
+We make a deal. | S=WE | V=make:v | O=a deal:n
+The tariff is high. | S=the tariff:n | V=be:v | O=high:a
+I haggle. | S=I | V=haggle:v
+I have a debt. | S=I | V=have:v | O=a debt:n
+Good deal. | init=+good deal:n
+
+## The caravan
+The caravan goes to the city. | S=the caravan:n | V=go:v | A=to>the city:n
+The road is [long|dangerous]. | S=the road:n | V=be:v | O=long:a|dangerous:a
+We sleep in the caravanserai. | S=WE | V=sleep:v | A=in>the caravanserai:n
+The ledger is open. | S=the ledger:n | V=be:v | O=open:a
+
+## Weights and measures
+The weight is [large|small]. | S=the weight:n | V=be:v | O=large:a|small:a
+Measure the [salt|cloth]. | mood=imperative | seq=V,O | V=measure:v | O=the salt:n|cloth:n
+I count the coin. | S=I | V=count:v | O=the coin:n
+The scale is [true|false]. | S=the scale:n | V=be:v | O=true:a|false:a
+The market is [open|closed]. | S=the market:n | V=be:v | O=open:a|closed:a
+We trade in [salt|silk]. | S=WE | V=trade:v | A=in>salt:n|silk:n

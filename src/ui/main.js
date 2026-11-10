@@ -278,7 +278,7 @@ async function start() {
     $('dictionary-search')?.addEventListener('input', renderDictionary);
     try {
         vocabulary = assertVocabulary(await loadJson('data/vocabulary.json'), 'data/vocabulary.json');
-        templates = (await loadJson('data/sentence-templates.json')).templates;
+        templates = await loadJson('data/sentence-templates.json');
         populateFilters();
         if ($('db-status')) $('db-status').textContent = `Vocabulary loaded: ${vocabulary.length} entries`;
     } catch (e) {
