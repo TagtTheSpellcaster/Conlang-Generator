@@ -1,2 +1,2 @@
 // Single source of truth for the application version.
-export const VERSION = '1.0.0';
+export const VERSION = '1.6.0';

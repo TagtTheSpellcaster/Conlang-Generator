@@ -42,7 +42,7 @@ test('lexicon: unique non-empty forms, at most 600 entries, core senses always p
 test('articles "none" removes the articles from the lexicon', () => {
     const L = gen({ articles: 'none' });
     assert.ok(!L.lexicon.some(e => e.pos === 'determiner' && ['the', 'a', 'an'].includes(e.lemma)));
-    assert.ok(L.samples.length >= 48);
+    assert.ok(L.samples.length >= 40);
 });
 
 test('filters change the selection', () => {
@@ -120,7 +120,7 @@ test('every option combination generates without error (randomised sweep + corne
         const L = generateLanguage({ ...r, seed: `sweep-${i}` }, vocabulary, templates);
         assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length, JSON.stringify(r));
         assert.deepEqual(L.skippedSamples, [], JSON.stringify(r));
-        assert.ok(L.samples.length >= 48, `${L.samples.length} ${JSON.stringify(r)}`);
+        assert.ok(L.samples.length >= 40, `${L.samples.length} ${JSON.stringify(r)}`);
         for (const s of L.samples) assert.ok(tokenText(s.tokens).trim().length > 0);
     });
 });

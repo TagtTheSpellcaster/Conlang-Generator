@@ -36,8 +36,8 @@ test('template coverage: every referenced sense exists and is unambiguous', () =
     assert.deepEqual(problems, []);
 });
 
-test('sentence sets: about 50 universal sentences, 20-50 per genre, unique ids and english, several topics', () => {
-    assert.ok(templates.universal.length >= 48 && templates.universal.length <= 52, `${templates.universal.length} universal sentences`);
+test('sentence sets: about 45-50 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
+    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 52, `${templates.universal.length} universal sentences`);
     assert.deepEqual(Object.keys(templates.genres).sort(), [...GENRE_IDS].sort());
     for (const [name, list] of Object.entries(sets)) {
         assert.equal(new Set(list.map(t => t.id)).size, list.length, `${name}: ids`);
@@ -48,9 +48,15 @@ test('sentence sets: about 50 universal sentences, 20-50 per genre, unique ids a
 });
 
 test('universal sentences cover the needs of the comparative literature (hunger, thirst, pain, danger, thanks, love, identity, place, what is this)', () => {
-    const en = new Set(templates.universal.map(t => t.en));
-    for (const s of ['I am hungry.', 'I am thirsty.', 'My hand hurts.', 'Danger!', 'Run!', 'Help me!', 'Thank you.', 'I love you.', 'Who are you?', 'Where is the water?', 'Where is the food?', 'What is this?'])
-        assert.ok(en.has(s), s);
+    const lemmas = new Set(templates.universal.flatMap(t => refsOf(t)).map(r => r.split(':')[0]));
+    for (const w of ['hungry', 'thirsty', 'hurt', 'danger', 'run', 'help', 'thanks', 'love', 'sick', 'water', 'food', 'interrogative.who', 'interrogative.what', 'interrogative.where', 'hello', 'goodbye', 'enemy', 'friend', 'name'])
+        assert.ok(lemmas.has(w), w);
+});
+
+test('universal sentence frames offer alternatives (more examples per sentence)', () => {
+    const withAlts = templates.universal.filter(t => /\[[^\]]+\|[^\]]+\]/.test(t.en));
+    assert.ok(withAlts.length >= 35, `${withAlts.length} frames with alternatives`);
+    for (const t of withAlts) assert.ok(refsOf(t).length > 1, t.en);
 });
 
 test('default language realises every sentence that applies (none skipped); the genre adds its own set', () => {
@@ -198,6 +204,6 @@ test('isolating languages: negation and auxiliary are words before the verb; imp
     assert.equal(neg, [f('pronoun.second_person_singular'), f('logic.not'), f('function.can'), f('verb.enter')].join(' '));
     const q = templates.universal.find(t => t.en === 'Who are you?');
     assert.equal(tokenText(realize(q, lang(L)).tokens), [f('interrogative.who'), f('verb.be'), f('pronoun.second_person_singular')].join(' '));
-    const imp = templates.universal.find(t => t.en === 'Come here.');
+    const imp = { id: 'x', en: 'Come here.', mood: 'imperative', seq: ['V', 'O'], V: { head: 'come:verb' }, O: { head: 'here:adverb' } };
     assert.equal(tokenText(realize(imp, lang(L)).tokens), [f('verb.come'), f('space.here')].join(' '));
 });

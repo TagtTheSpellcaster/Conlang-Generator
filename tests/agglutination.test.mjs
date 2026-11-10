@@ -9,10 +9,23 @@ import { vocabulary, templates } from './helpers.mjs';
 const gen = (input = {}) => generateLanguage({ seed: 'agg', articles: 'none', relations: 'cases', ...input }, vocabulary, templates);
 const morphOf = L => ({ spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes });
 const word = (L, id) => L.lexicon.find(e => e.id === id);
-const sample = (L, en) => L.samples.find(s => s.english === en);
-const verbToken = s => s.tokens.find(t => t.id?.startsWith('verb.'));
+
+const flat = ts => ts.flatMap(t => t.kind === 'alts' ? t.options.flatMap(flat) : [t]);
+const verbTokens = s => flat(s.tokens).filter(t => t.id?.startsWith('verb.'));
+const verbToken = s => verbTokens(s)[0];
 const kinds = t => t.parts.map(p => p.kind);
 const langOf = L => ({ spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes, lexicon: L.lexicon });
+const P1 = 'pronoun.first_person_singular', P2O = 'pronoun.second_person_singular_object';
+// fixed sentence frames (the shipped sentences use alternatives, which these checks do not want)
+const FRAMES = {
+    'You cannot enter.': { S: { head: 'pronoun.second_person_singular' }, V: { head: 'enter:verb', neg: true, aux: 'can:particle' } },
+    'Come here.': { mood: 'imperative', seq: ['V', 'O'], V: { head: 'come:verb' }, O: { head: 'here:adverb' } },
+    'Yesterday I came.': { tense: 'past', seq: ['initial', 'S', 'V'], initial: [{ head: 'yesterday:noun' }], S: { head: P1 }, V: { head: 'come:verb' } },
+    'Tomorrow we travel.': { tense: 'future', seq: ['initial', 'S', 'V'], initial: [{ head: 'tomorrow:noun' }], S: { head: 'pronoun.first_person_plural' }, V: { head: 'travel:verb' } },
+    'I hear you.': { S: { head: P1 }, V: { head: 'hear:verb' }, O: { head: P2O } },
+    'The good dog sees the small bird.': { S: { head: 'dog:noun', det: 'definite', adj: 'good:adjective' }, V: { head: 'see:verb' }, O: { head: 'bird:noun', det: 'definite', adj: 'small:adjective' } }
+};
+const sample = (L, en) => realize({ id: 'x', en, ...FRAMES[en] }, langOf(L));
 const mySisterIsGood = { id: 'x', en: 'My sister is good.', S: { head: 'sister:noun', poss: 'my:determiner' }, V: { head: 'be:verb' }, O: { head: 'good:adjective' } };
 
 test('agglutinative verbs are inflected: person, number and tense each have their own suffix', () => {
@@ -95,7 +108,7 @@ test('dual adds dual agreement cells', () => {
 
 test('verbs in agglutinative sentences carry suffix chains; isolating verbs stay bare', () => {
     const A = gen({ morphology: 'agglutinative' }), I = gen({ morphology: 'isolating' });
-    const verbs = L => L.samples.map(verbToken).filter(Boolean);
+    const verbs = L => L.samples.flatMap(verbTokens);
     const va = verbs(A), vi = verbs(I);
     const affixed = va.filter(t => t.parts.length > 1).length;
     assert.ok(affixed >= va.length / 2, `${affixed} of ${va.length} verbs carry suffixes`);

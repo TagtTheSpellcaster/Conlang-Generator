@@ -1,4 +1,4 @@
-# Conlang Generator (v2)
+# Conlang Generator
 
 A browser tool that generates artificial languages — phonology, morphology, syntax, a lexicon and sample sentences — with a focus on fantasy and science-fiction languages. Generation is deterministic: the same options and seed always give the same language.
 
@@ -36,7 +36,7 @@ The dictionary (6,690 entries) is rebuilt from the sources in `tools/lexicon/*.t
 
 ## Sample sentences
 The *Sample Sentences* tab has two columns:
-- **Universal Sentences** (50): greetings and courtesy, wishes, needs and the body, danger, affection and kinship, identity, place and resources, knowledge, quality and quantity, time and events, and basic sentence patterns (transitive, ditransitive, negation, ability, plural, dual, adjective order). They follow the semantic-primes tradition (Wierzbicka) and the survival, social and orientation needs described in comparative studies. They double as a short phrasebook and as a test of the grammar. Some of them need a number the language may not have (plural, dual) and are skipped then.
+- **Universal Sentences** (47 frames; each `[a|b|c]` frame shows several words, so the list covers about 180 sentences): greetings and courtesy, wishes, needs and the body, danger, affection and kinship, identity, place and resources, knowledge, quality and quantity, time and events, and basic sentence patterns (transitive, ditransitive, negation, ability, plural, dual, adjective order). They follow the semantic-primes tradition (Wierzbicka) and the survival, social and orientation needs described in comparative studies. They double as a short phrasebook and as a test of the grammar. Some of them need a number the language may not have (plural, dual) and are skipped then.
 - **Specialised Sentences**: 20 to 39 sentences per genre, grouped by topic (a war tongue gets commands, reports from the front, strategy and tactics, camp and supply, outcomes; the artisans get workshop and guild, tools and materials, making and quality; and so on). Without a genre the column explains that a genre is needed.
 
 Every sentence is realised with the language's own word order, case or adposition system, articles, adjective position, agreement and morphology. A language always contains the dictionary senses its sentences need, even if its genre would otherwise exclude them.
@@ -57,6 +57,9 @@ which checks every lemma against `data/vocabulary.json` (an unknown reference ab
 - Verb (`V`): `lemma:v`, with flags after `/`: `neg`, `can` (`enter:v/neg,can`).
 - `init` is placed first by default (interjections, question words); several phrases are separated by `;`. `A` and `B` are adjuncts placed after the verb arguments. `seq` overrides the order of the parts. `req=plural|dual` skips the sentence in languages without that number.
 - Words missing from the dictionary go into `tools/lexicon/10-sentence-words.txt` (then run the lexicon build first).
+
+## Versioning
+See `CHANGELOG.md`. `MAJOR.MINOR.PATCH`: a new feature raises MINOR (patch back to 0), a bug fix raises PATCH. Update `src/version.js`, `package.json` and the top of the changelog together; `npm test` fails if they disagree.
 
 ## Tests
 `npm test` covers the schema, the engine, phonology (including clusters and genre sound bias), agglutination and fusion, syntax, the genres (each generates a complete language, signature vocabulary, exclusions, determinism, a sweep over genre × morphology × word order) and the sample sentences (reference integrity, sentence counts, every sentence realised).
