@@ -3,6 +3,7 @@ import { esc } from '../core/text.js';
 import { label } from '../lexicon/schema.js';
 import { inflect, genderOf } from '../morphology/inflect.js';
 import { personCells } from '../morphology/affixes.js';
+import { exampleNoun, exampleVerb, exampleAdjective } from '../morphology/examples.js';
 
 export const PHONOTACTIC_INFO = {
     isolated: { title: 'Minimalist Isolating Pattern (Hawaiian-type)', description: 'The pattern categorically excludes consonant clusters and reduces the syllable to its minimum.', pattern: '(C)V' },
@@ -50,15 +51,6 @@ export function formHtml(parts, showZero) {
     return parts.length === 1 && showZero ? `${html}<span class="morph-empty">∅</span>` : html;
 }
 
-function exampleNoun(lexicon) {
-    const nouns = lexicon.filter(e => e.pos === 'noun');
-    for (const lemma of ['forest', 'house', 'tree', 'village', 'stone', 'water']) {
-        const hit = nouns.find(e => e.lemma === lemma && !e.gloss);
-        if (hit) return hit;
-    }
-    return nouns[0] ?? null;
-}
-
 export function morphemeInventoryHtml(lang) {
     const { spec, morphology } = lang;
     const { model, affixes } = morphology;
@@ -89,7 +81,7 @@ export function nominalCategoriesHtml(lang) {
     const { spec, morphology } = lang;
     if (spec.morphology === 'isolating') return '';
     const { model, affixes } = morphology;
-    const adjective = lang.lexicon.find(e => e.pos === 'adjective' && e.lemma === 'good') || lang.lexicon.find(e => e.pos === 'adjective');
+    const adjective = exampleAdjective(lang.lexicon);
     if (!adjective) return '';
     const morph = { spec, model, affixes };
     const rows = [];
@@ -104,12 +96,6 @@ export function nominalCategoriesHtml(lang) {
 
 const CELL_LABEL = { singular: 'sg', plural: 'pl', dual: 'du' };
 const cellLabel = cell => { const [p, n] = cell.split('.'); return `${p}${CELL_LABEL[n]}`; };
-
-function exampleVerb(lexicon) {
-    const verbs = lexicon.filter(e => e.pos === 'verb');
-    for (const lemma of ['see', 'eat', 'go']) { const hit = verbs.find(e => e.lemma === lemma && !e.gloss); if (hit) return hit; }
-    return verbs[0] ?? null;
-}
 
 export function verbMorphologyHtml(lang) {
     const { spec, morphology } = lang;
@@ -128,8 +114,9 @@ export function verbMorphologyHtml(lang) {
     const sfx = x => `<span class="morph-ending">${esc(x)}</span>`;
     const notes = [];
     if (v.mode === 'agglutinative') {
-        notes.push('Verb structure: stem – ability – negation – tense – subject agreement. Present tense and third person singular are unmarked.');
-        notes.push(`Ability: ${sfx(v.potential)} · negation: ${sfx(v.negation)} · imperative: ${sfx(v.imperative)}`);
+        notes.push('Verb structure: stem – ability – negation – aspect – tense – subject agreement. Present tense and third person singular are unmarked.');
+        notes.push(`Ability: ${sfx(v.potential)} · negation: ${sfx(v.negation)} · imperative: ${sfx(v.imperative)} · optative: ${sfx(v.optative)} · progressive: ${sfx(v.aspect.progressive)} · perfect: ${sfx(v.aspect.perfect)}`);
+        notes.push(`Comparative suffix on adjectives (before gender and number): ${sfx(affixes.comparative)}. The optative replaces the tense and keeps the agreement.`);
         const poss = affixes.possessive;
         if (poss) {
             const noun = exampleNoun(lang.lexicon);
@@ -137,8 +124,9 @@ export function verbMorphologyHtml(lang) {
             notes.push(`Possessor suffixes (between number and case): ${entries}${noun ? ` — e.g. ${esc(noun.lemma)}: ${formHtml(inflect(noun, { possessor: '1.singular', case: model.baseCase }, morph).parts, false)}` : ''}`);
         }
     } else {
-        notes.push('Fusional verbs: one portmanteau ending per tense, person and number. Negation and ability stay separate words; the imperative is the bare stem.');
+        notes.push('Fusional verbs: one portmanteau ending per tense, person and number. Negation, ability, aspect and the optative are separate words; the imperative is the bare stem.');
     }
+    notes.push(`Yes/no questions take the question particle ${spec.order.indexOf('V') < spec.order.indexOf('O') ? 'at the start' : 'at the end'} of the sentence.`);
     notes.push('Subject pronouns are dropped when the verb carries person and number.');
     return `<div class="card verb-morphology"><h3>Verb morphology</h3><div class="sub">Example verb: <strong>${esc(label(verb))}</strong> — <span class="morph-stem">${esc(verb.form)}</span></div><div class="morph-example-table"><div class="morph-verb-head"><span>Subject</span>${tenses.map(t => `<span>${esc(t)}</span>`).join('')}</div>${rows}</div>${notes.map(n => `<div class="morph-note">${n}</div>`).join('')}</div>`;
 }
@@ -194,5 +182,12 @@ export function resultHtml(lang) {
     const s = lang.spec;
     const chips = [s.culture[0], s.biome[0], s.era[0], s.order].filter(Boolean);
     const notes = lang.notes.length ? `<div class="card"><h3>Adjusted options</h3>${lang.notes.map(n => `<div class="morph-note">${esc(n)}</div>`).join('')}</div>` : '';
-    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="result-cols"><div class="result-col">${phonologyHtml(lang)}${morphemeInventoryHtml(lang)}</div><div class="result-col">${verbMorphologyHtml(lang)}${nominalCategoriesHtml(lang)}${notes}</div></div>`;
+    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="export-bar" role="group" aria-label="Export"><span class="sub">Export:</span><button type="button" class="btn ghost" data-export="html">Language sheet (HTML)</button><button type="button" class="btn ghost" data-export="md">Markdown</button><button type="button" class="btn ghost" data-export="csv">Lexicon (CSV)</button><button type="button" class="btn ghost" data-export="json">Language (JSON)</button></div><div class="result-cols"><div class="result-col">${phonologyHtml(lang)}${morphemeInventoryHtml(lang)}</div><div class="result-col">${verbMorphologyHtml(lang)}${nominalCategoriesHtml(lang)}${notes}</div></div>`;
+}
+
+const KIND_HEAD = { person: 'Name', family: 'Name', place: 'Name', epithet: 'Epithet' };
+export function namesHtml(names, kind) {
+    if (!names.length) return '<div class="empty">No names could be generated.</div>';
+    const rows = names.map(n => `<tr><td class="name-cell">${esc(n.name)}</td><td>${n.meaning ? esc(n.meaning) : '<span class="sub">—</span>'}</td></tr>`).join('');
+    return `<div class="card"><table class="names-table"><thead><tr><th>${KIND_HEAD[kind] ?? 'Name'}</th><th>Meaning</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }

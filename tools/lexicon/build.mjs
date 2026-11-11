@@ -21,7 +21,7 @@ const vocabulary = data.vocabulary;
 const norm = s => s.toLowerCase().trim();
 const slug = s => norm(s).replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '');
 const list = v => v.split(',').map(x => x.trim()).filter(Boolean);
-const POSMAP = { p: ['particle'], v: ['verb', 'transitive'], vi: ['verb', 'intransitive'], a: ['adjective'], adv: ['adverb'], n: ['noun'] };
+const POSMAP = { p: ['particle'], v: ['verb', 'transitive'], vi: ['verb', 'intransitive'], a: ['adjective'], adv: ['adverb'], n: ['noun'], c: ['conjunction'] };
 
 const ids = new Set(vocabulary.map(e => e.id));
 const senses = new Set(vocabulary.map(e => `${norm(e.lemma)}|${e.pos}|${norm(e.gloss ?? '')}`));
@@ -65,7 +65,7 @@ for (const f of sources) {
         tokens.push(cur);
         for (let tok of tokens.map(t => t.trim()).filter(Boolean)) {
             let pos = 'noun', transitivity = null;
-            const pm = tok.match(/^(v|vi|a|adv|n|p):\s*(.*)$/);
+            const pm = tok.match(/^(v|vi|a|adv|n|p|c):\s*(.*)$/);
             if (pm) { [pos, transitivity] = POSMAP[pm[1]]; tok = pm[2]; }
             let gloss;
             const gm = tok.match(/^(.*?)\s*\((.*)\)$/);

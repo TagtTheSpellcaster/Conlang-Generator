@@ -36,8 +36,8 @@ test('template coverage: every referenced sense exists and is unambiguous', () =
     assert.deepEqual(problems, []);
 });
 
-test('sentence sets: about 45-50 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
-    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 52, `${templates.universal.length} universal sentences`);
+test('sentence sets: about 45-65 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
+    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 65, `${templates.universal.length} universal sentences`);
     assert.deepEqual(Object.keys(templates.genres).sort(), [...GENRE_IDS].sort());
     for (const [name, list] of Object.entries(sets)) {
         assert.equal(new Set(list.map(t => t.id)).size, list.length, `${name}: ids`);
@@ -72,8 +72,9 @@ test('default language realises every sentence that applies (none skipped); the 
 
 test('number-dependent templates are only used when the language has that number', () => {
     const n = L => L.samples.filter(s => s.scope === 'universal').length;
-    assert.equal(n(gen({ number: 'singular' })), templates.universal.length - 2);
-    assert.equal(n(gen({ number: 'singular-plural' })), templates.universal.length - 1);
+    const needing = (...nums) => templates.universal.filter(t => nums.includes(t.requires?.number)).length;
+    assert.equal(n(gen({ number: 'singular' })), templates.universal.length - needing('plural', 'dual'));
+    assert.equal(n(gen({ number: 'singular-plural' })), templates.universal.length - needing('dual'));
 });
 
 test('a template with a missing concept is skipped and reported, never emitted with holes', () => {

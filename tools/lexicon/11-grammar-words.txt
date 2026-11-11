@@ -1,0 +1,9 @@
+# Function words the realiser uses for the grammar of the sample sentences (question particle, aspect, comparative, complementizer).
+@tier core
+@domain grammar
+## question_and_aspect
+p:question particle, p:progressive marker, p:perfect marker
+## degree
+adv:more
+## subordination
+c:that (complementizer)

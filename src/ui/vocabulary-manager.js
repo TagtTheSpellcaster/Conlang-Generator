@@ -1,22 +1,25 @@
 // Vocabulary manager. Validation, schema and inverse-relation rules come from src/lexicon/schema.js,
 // the same module the engine and tools/validate.mjs use.
 import {
-    SCHEMA_VERSION, POS, DOMAINS, TIERS, assertVocabulary, validateVocabulary, cloneEntry, closeRelations, INVERSE
+    POS, DOMAINS, TIERS, assertVocabulary, validateVocabulary, cloneEntry, closeRelations, INVERSE
 } from '../lexicon/schema.js';
+import { serializeVocabulary, diffVocabulary, overlaySize } from '../lexicon/store.js';
+import { loadVocabulary, persistEdits, discardEdits, saveToFile, canWriteFile } from './vocabulary-store.js';
 
-const STORAGE_KEY = 'conlang_vocabulary_v2';
 const FILTER_FIELDS = ['pos', 'domain', 'group', 'tier', 'region', 'culture', 'biome', 'era', 'tags'];
 const SORT_FIELDS = ['id', 'lemma', 'gloss', 'pos', 'domain', 'group', 'tier', 'region', 'culture', 'biome', 'era', 'tags'];
 const $ = id => document.getElementById(id);
 
 let vocabulary = [];
+let base = [];          // data/vocabulary.json as last read or written
 let filtered = [];
 let pendingAppend = null;
 let editingId = null;
 
-const serialize = () => ({ schema: SCHEMA_VERSION, vocabulary: vocabulary.map(cloneEntry) });
-const save = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(serialize(), null, 1));
 const setStatus = t => { $('databaseStatus').textContent = t; };
+const editsText = n => n ? `${n} local edit${n === 1 ? '' : 's'} not yet saved to data/vocabulary.json (the generator already uses them)` : 'Identical to data/vocabulary.json';
+// local edits are stored as a difference from the file; the generator reads them too
+const save = () => { const n = persistEdits(base, vocabulary); setStatus(editsText(n)); };
 const showError = m => { $('errorMessage').hidden = false; $('errorMessage').textContent = m; };
 const closeModal = id => { $(id).hidden = true; };
 const toArray = v => Array.isArray(v) ? v.map(String) : (v === undefined || v === null || typeof v === 'object' ? [] : [String(v)]);
@@ -29,36 +32,36 @@ const display = (e, a) => {
 };
 const title = a => a.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
-async function loadFromJson() {
-    const response = await fetch(`data/vocabulary.json?cacheBust=${Date.now()}`);
-    if (!response.ok) throw new Error(`HTTP error ${response.status}`);
-    vocabulary = assertVocabulary(await response.json(), 'data/vocabulary.json').map(cloneEntry);
-}
-
 async function load() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-        try {
-            vocabulary = assertVocabulary(JSON.parse(stored), 'local copy').map(cloneEntry);
-            setStatus('Local working copy');
-            return refresh();
-        } catch (e) { console.warn('Ignoring incompatible local vocabulary:', e); localStorage.removeItem(STORAGE_KEY); }
-    }
     try {
-        await loadFromJson(); save(); setStatus('Loaded from data/vocabulary.json'); refresh();
+        const loaded = await loadVocabulary();
+        vocabulary = loaded.vocabulary; base = loaded.base;
+        setStatus(editsText(loaded.edits));
+        if (loaded.warning) showError(loaded.warning);
+        refresh();
     } catch (e) { console.error(e); showError('Unable to load data/vocabulary.json:\n\n' + e.message); }
 }
 
 async function reload() {
-    if (!confirm('Reload data/vocabulary.json from the server?\n\nAll local changes stored in this browser will be discarded.')) return;
-    try { localStorage.removeItem(STORAGE_KEY); await loadFromJson(); save(); setStatus('Reloaded from data/vocabulary.json'); refresh(); }
-    catch (e) { alert('Unable to reload:\n\n' + e.message); }
+    if (!confirm('Reload data/vocabulary.json from the server?\n\nAll local edits stored in this browser will be discarded.')) return;
+    discardEdits();
+    await load();
 }
 
 function reset() {
-    if (!confirm('Clear local changes and reload data/vocabulary.json?')) return;
-    localStorage.removeItem(STORAGE_KEY);
+    if (!confirm('Discard all local edits and reload data/vocabulary.json?')) return;
+    discardEdits();
     load();
+}
+
+async function saveFile() {
+    try {
+        const how = await saveToFile(vocabulary);
+        if (how === 'file') {
+            base = vocabulary.map(cloneEntry); discardEdits();
+            setStatus('Saved to data/vocabulary.json — ' + editsText(0));
+        } else setStatus('Downloaded vocabulary.json: replace data/vocabulary.json with it to make the edits permanent. ' + editsText(overlaySize(diffVocabulary(base, vocabulary))));
+    } catch (e) { if (e?.name !== 'AbortError') showError('Unable to save the file:\n\n' + (e?.message || e)); }
 }
 
 async function handleAppendFile(event) {
@@ -89,12 +92,11 @@ function confirmAppend() {
     const errors = validateVocabulary(candidate);
     if (errors.length) return alert(errors.slice(0, 20).join('\n'));
     vocabulary = candidate; save();
-    setStatus(`${pendingAppend.newEntries.length} entries appended locally`);
     pendingAppend = null; closeModal('appendModal'); refresh();
 }
 
 function exportJson() {
-    const url = URL.createObjectURL(new Blob([JSON.stringify(serialize(), null, 1)], { type: 'application/json' }));
+    const url = URL.createObjectURL(new Blob([serializeVocabulary(vocabulary)], { type: 'application/json' }));
     const a = Object.assign(document.createElement('a'), { href: url, download: 'vocabulary.json' });
     document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
 }
@@ -235,6 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
     $('cancelAppend').addEventListener('click', () => closeModal('appendModal'));
     $('addVocabulary').addEventListener('click', () => openEntry());
     $('exportVocabulary').addEventListener('click', exportJson);
+    $('saveVocabulary').addEventListener('click', saveFile);
+    if (!canWriteFile()) $('saveVocabulary').title = 'This browser cannot write files: the file is downloaded instead.';
     $('resetVocabulary').addEventListener('click', reset);
     $('entryForm').addEventListener('submit', submit);
     document.querySelectorAll('[data-close-modal]').forEach(b => b.addEventListener('click', () => closeModal(b.dataset.closeModal)));

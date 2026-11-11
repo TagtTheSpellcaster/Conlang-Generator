@@ -12,8 +12,12 @@
 //   head                     lemma:pos, alternatives separated by |, "_" stands for a space (war_of_position:n)
 //   pos letters: n noun, v verb, a adjective, adv adverb, p particle, c conjunction, d determiner, pr pronoun
 //   pronoun aliases: I YOU WE YOU_PL THEY HE SHE IT ME YOU_O THIS THAT WHO WHAT WHERE HOW WHY
-//   prepositional phrase     adp>noun phrase      e.g. to>the village:n   with>ME
-// Verb phrase (V): lemma:v[|lemma:v] with optional flags after "/": neg, can   e.g. enter:v/neg,can
+//   cmp                      comparative degree of the adjective head (suffix, or the word "more")
+//   prepositional phrase     adp>noun phrase      e.g. to>the village:n   with>ME   (than:c>ME marks the standard of comparison)
+// Verb phrase (V): lemma:v[|lemma:v] with optional flags after "/": neg, can, prog (progressive), perf (perfect)   e.g. enter:v/neg,can
+// Other slots: q=yn (yes/no question particle), mood=imperative|optative
+// Subordinate clauses: comp=that:c ~ S=... ~ V=...  (complement, fills the object slot)
+//                      adv=because:c ~ S=... ~ V=... (adverbial clause: because, if, when...)
 // init takes several noun phrases separated by ";" and is placed first by default (interjections, question words)
 import fs from 'node:fs';
 import path from 'node:path';
@@ -34,7 +38,7 @@ const PRONOUN = {
     WHO: 'interrogative.who', WHAT: 'interrogative.what', WHERE: 'interrogative.where', HOW: 'interrogative.how', WHY: 'interrogative.why'
 };
 const POSSESSIVES = new Set(['my', 'your', 'his', 'her', 'our', 'their']);
-const CASE_OF = { to: 'dative', for: 'dative', from: 'ablative', in: 'locative', at: 'locative', on: 'locative', with: 'instrumental', of: 'genitive' };
+const CASE_OF = { to: 'dative', for: 'dative', from: 'ablative', in: 'locative', at: 'locative', on: 'locative', with: 'instrumental', of: 'genitive', 'than:c': 'ablative' };
 
 const errors = [];
 const missing = new Set();
@@ -62,6 +66,7 @@ function parseNP(text) {
         if (tok === 'the') np.det = 'definite';
         else if (tok === 'a') np.det = 'indefinite';
         else if (POSSESSIVES.has(tok)) np.poss = `${tok}:determiner`;
+        else if (tok === 'cmp') np.degree = 'comparative';
         else if (tok === 'pl') np.number = 'plural';
         else if (tok === 'du') np.number = 'dual';
         else if (tok.startsWith('+')) np.adj = heads(tok.slice(1), 'a');
@@ -75,20 +80,22 @@ function parseNP(text) {
 function parseSlot(text) {
     if (!text.includes('>')) return parseNP(text);
     const [adp, rest] = text.split('>');
-    return { adp: ref(`${adp.trim()}:ad`), case: CASE_OF[adp.trim()] ?? 'locative', np: parseNP(rest) };
+    return { adp: ref(adp.includes(':') ? adp.trim() : `${adp.trim()}:ad`), case: CASE_OF[adp.trim()] ?? 'locative', np: parseNP(rest) };
 }
 function parseVerb(text) {
     const [h, flags = ''] = text.trim().split('/');
     const v = { head: heads(h, 'v') };
     for (const f of flags.split(',').map(x => x.trim()).filter(Boolean)) {
-        if (f === 'neg') v.neg = true; else if (f === 'can') v.aux = 'can:particle'; else fail(`unknown verb flag "${f}"`);
+        if (f === 'neg') v.neg = true; else if (f === 'can') v.aux = 'can:particle';
+        else if (f === 'prog') v.aspect = 'progressive'; else if (f === 'perf') v.aspect = 'perfect'; else fail(`unknown verb flag "${f}"`);
     }
     return v;
 }
 
-function parseLine(line) {
-    const [english, ...slots] = line.split(' | ').map(x => x.trim());
-    const t = { en: english };
+const SLOT_ORDER = ['en', 'requires', 'mood', 'tense', 'q', 'seq', 'initial', 'S', 'V', 'O', 'A', 'B', 'comp', 'adv'];
+
+// Fills template t from "key=value" slots. Subordinate clauses (comp, adv) are written "conj ~ slot ~ slot" and parsed recursively.
+function parseSlots(slots, t, inClause) {
     const SEQ = { init: 'initial' };
     for (const s of slots) {
         const i = s.indexOf('=');
@@ -99,14 +106,24 @@ function parseLine(line) {
         else if (key === 'init') t.initial = val.split(';').map(parseNP);
         else if (key === 'mood') t.mood = val;
         else if (key === 'tense') t.tense = val;
+        else if (key === 'q') { if (val !== 'yn') fail(`unknown question type "${val}"`); t.q = 'yesno'; }
         else if (key === 'seq') t.seq = val.split(',').map(x => SEQ[x.trim()] ?? x.trim());
         else if (key === 'req') t.requires = { number: val };
-        else fail(`unknown slot "${key}"`);
+        else if ((key === 'comp' || key === 'adv') && !inClause) {
+            const [conj, ...rest] = val.split(' ~ ').map(x => x.trim());
+            const clause = {};
+            parseSlots(rest, clause, true);
+            t[key] = { conj: ref(conj, 'c'), clause: Object.fromEntries(SLOT_ORDER.filter(k => k in clause).map(k => [k, clause[k]])) };
+        } else fail(`unknown slot "${key}"`);
     }
+}
+
+function parseLine(line) {
+    const [english, ...slots] = line.split(' | ').map(x => x.trim());
+    const t = { en: english };
+    parseSlots(slots, t, false);
     if (!t.S && !t.V && !t.O && !t.initial && !t.A) fail('empty sentence');
-    // canonical key order: id, en, then mood/tense/requires/seq/initial/S/V/O/A/B
-    const order = ['en', 'requires', 'mood', 'tense', 'seq', 'initial', 'S', 'V', 'O', 'A', 'B'];
-    return Object.fromEntries(order.filter(k => k in t).map(k => [k, t[k]]));
+    return Object.fromEntries(SLOT_ORDER.filter(k => k in t).map(k => [k, t[k]]));
 }
 
 const universal = [];

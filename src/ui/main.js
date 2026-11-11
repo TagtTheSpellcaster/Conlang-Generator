@@ -1,11 +1,13 @@
 // Generator page controller: reads the form, calls the pure engine, renders the result.
 import { VERSION } from '../version.js';
+import { generateNames, NAME_KINDS } from '../names.js';
+import { languageDocument, toHtml, toMarkdown, lexiconCsv, languageJson, safeName } from '../export.js';
+import { loadVocabulary } from './vocabulary-store.js';
 import { generateLanguage } from '../engine.js';
-import { assertVocabulary } from '../lexicon/schema.js';
 import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
-import { resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -47,11 +49,37 @@ function renderDictionary() {
     $('dictionary-output').innerHTML = dictionaryHtml(current.lexicon, $('dictionary-direction')?.value || 'conlang-en', $('dictionary-search')?.value);
 }
 
+const EXPORTS = {
+    html: [l => toHtml(languageDocument(l, VERSION)), 'html', 'text/html'],
+    md: [l => toMarkdown(languageDocument(l, VERSION)), 'md', 'text/markdown'],
+    csv: [l => lexiconCsv(l), 'csv', 'text/csv'],
+    json: [l => languageJson(l, VERSION), 'json', 'application/json']
+};
+
+function exportLanguage(lang, kind) {
+    const [build, ext, type] = EXPORTS[kind];
+    const url = URL.createObjectURL(new Blob([build(lang)], { type: `${type};charset=utf-8` }));
+    const a = Object.assign(document.createElement('a'), { href: url, download: `${safeName(lang)}.${ext}` });
+    document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    say(`Exported ${safeName(lang)}.${ext}.`);
+}
+
+let nameSalt = 0;
+function renderNames() {
+    if (!current) return;
+    const kind = $('names-kind').value, count = Number($('names-count').value) || 12;
+    $('names-output').className = '';
+    $('names-output').innerHTML = namesHtml(generateNames(current, { kind, count, salt: nameSalt }), kind);
+}
+
 function render(lang) {
+    nameSalt = 0;
     const box = $('generation-output');
     box.className = 'result';
     box.innerHTML = resultHtml(lang);
     $('keep-seed')?.addEventListener('click', () => { $('seed').value = lang.spec.seed; say('Seed copied into the Seed field.'); });
+    box.querySelectorAll('[data-export]').forEach(b => b.addEventListener('click', () => exportLanguage(lang, b.dataset.export)));
     const samples = $('sample-sentences-output');
     samples.className = '';
     samples.innerHTML = samplesHtml(lang);
@@ -59,6 +87,7 @@ function render(lang) {
     lex.className = 'card';
     lex.innerHTML = lexiconHtml(lang.lexicon);
     renderDictionary();
+    renderNames();
 }
 
 function generate() {
@@ -284,13 +313,20 @@ async function start() {
     $('randomize')?.addEventListener('click', randomize);
     $('clear-filters')?.addEventListener('click', () => FILTERS.forEach(id => { if ($(id)) $(id).value = ''; }));
     for (const [id, type] of [['preset-historical', 'historical'], ['preset-fantasy', 'fantasy'], ['preset-modern', 'modern'], ['preset-scifi', 'scifi']]) $(id)?.addEventListener('click', () => preset(type));
+    if ($('names-kind')) {
+        $('names-kind').innerHTML = NAME_KINDS.map(k => `<option value="${k.id}">${esc(k.label)}</option>`).join('');
+        $('names-kind').addEventListener('change', () => { nameSalt = 0; renderNames(); });
+        $('names-count').addEventListener('change', renderNames);
+        $('names-more').addEventListener('click', () => { nameSalt++; renderNames(); });
+    }
     $('dictionary-direction')?.addEventListener('change', renderDictionary);
     $('dictionary-search')?.addEventListener('input', renderDictionary);
     try {
-        vocabulary = assertVocabulary(await loadJson('data/vocabulary.json'), 'data/vocabulary.json');
+        const loaded = await loadVocabulary();
+        vocabulary = loaded.vocabulary;
         templates = await loadJson('data/sentence-templates.json');
         populateFilters();
-        if ($('db-status')) $('db-status').textContent = `Vocabulary loaded: ${vocabulary.length} entries`;
+        if ($('db-status')) $('db-status').textContent = `Vocabulary loaded: ${vocabulary.length} entries${loaded.edits ? ` (${loaded.edits} local edit${loaded.edits === 1 ? '' : 's'} from the vocabulary manager)` : ''}${loaded.warning ? ` — ${loaded.warning}` : ''}`;
     } catch (e) {
         console.error(e);
         if ($('db-status')) $('db-status').textContent = 'Vocabulary load failed';

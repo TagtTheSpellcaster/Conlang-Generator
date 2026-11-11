@@ -73,3 +73,27 @@ The [dogs|birds] see the [children|fish]. | req=plural | S=the pl dog:n|bird:n |
 We [see|hear] two [dogs|birds]. | req=dual | S=WE | V=see:v|hear:v | O=du dog:n|bird:n
 You cannot [enter|leave]. | S=YOU | V=enter:v|leave:v/neg,can
 I can [help|follow|find] you. | S=I | V=help:v|follow:v|find:v/can | O=YOU_O
+
+## Yes/no questions
+Do you understand? | q=yn | S=YOU | V=understand:v
+Are you [hungry|thirsty|tired|afraid]? | q=yn | S=YOU | V=be:v | O=hungry:a|thirsty:a|tired:a|afraid:a
+Is the [water|food|road] here? | q=yn | S=the water:n|food:n|road:n | V=be:v | O=here:adv
+Can you help me? | q=yn | S=YOU | V=help:v/can | O=ME
+
+## Blessings and wishes (optative)
+May you live. | mood=optative | S=YOU | V=live:v
+May the [gods|spirits] protect you. | mood=optative | S=the god:n|spirit:n pl | V=protect:v | O=YOU_O | req=plural
+
+## Reasons and conditions
+I know that [he|she] is [here|good]. | S=I | V=know:v | comp=that:c ~ S=HE|SHE ~ V=be:v ~ O=here:adv|good:a
+I come because I am [hungry|thirsty|afraid]. | S=I | V=come:v | adv=because:c ~ S=I ~ V=be:v ~ O=hungry:a|thirsty:a|afraid:a
+If you come, I help you. | adv=if:c ~ S=YOU ~ V=come:v | S=I | V=help:v | O=YOU_O
+I [eat|sleep] when I am tired. | S=I | V=eat:v|sleep:v | adv=when:c ~ S=I ~ V=be:v ~ O=tired:a
+
+## Comparison
+The road is [longer|larger|smaller|shorter] than the river. | S=the road:n | V=be:v | O=cmp long:a|large:a|small:a|short:a | A=than:c>the river:n
+This is [better|worse] than that. | S=THIS | V=be:v | O=cmp good:a|bad:a | A=than:c>THAT
+
+## Ongoing and completed actions
+I am [eating|drinking|sleeping]. | S=I | V=eat:v|drink:v|sleep:v/prog
+I have [arrived|eaten|slept]. | S=I | V=arrive:v|eat:v|sleep:v/perf

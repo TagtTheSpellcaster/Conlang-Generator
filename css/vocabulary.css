@@ -166,3 +166,4 @@ form input { width: 100%; }
     main { padding: 16px; }
     .form-grid { grid-template-columns: 1fr; }
 }
+button.primary { background: #146b55; color: #fff; border-color: #1c9675; } button.primary:hover { background: #1a8068; }

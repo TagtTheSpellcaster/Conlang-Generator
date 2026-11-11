@@ -78,7 +78,11 @@ function nounPhrase(np, role, ctx) {
     const phrases = heads.map(h => {
         const features = { case: role.case, number, possessor };
         if (h.pos === 'adjective') features.gender = role.agree?.gender ?? spec.genders[0] ?? null;
+        // comparative: a suffix in agglutinative languages, otherwise the word "more" before the adjective
+        const comparative = np.degree === 'comparative' && h.pos === 'adjective';
+        if (comparative) features.degree = 'comparative';
         const headTok = word(h, features);
+        if (comparative && !ctx.morph.affixes.comparative) return [word(need('more:adverb')), headTok];
         if (!np.adj) return [headTok];
         const adjEntries = alternatives(np.adj);
         const adjFeatures = { case: role.case, number, gender: genderOf(h, spec) ?? spec.genders[0] };
@@ -101,62 +105,90 @@ function prepositionalPhrase(pp, ctx, adpPos) {
     return { tokens: adpPos === 'before' ? [adp, ...inner.tokens] : [...inner.tokens, adp], head: inner.head };
 }
 
-export function realize(template, lang) {
+// Realises one clause (a main sentence or a subordinate clause) and returns its token sequence.
+function clauseTokens(template, lang, ctx, top) {
     const { spec, model } = lang;
+    const verbEntry = template.V ? ctx.alternatives(template.V.head)[0] : null;
+    const copula = verbEntry?.features.transitivity === 'copula';
+    const hasObject = template.O && !template.O.adp;
+    const transitive = !!verbEntry && ['transitive', 'ditransitive'].includes(verbEntry.features.transitivity) && hasObject;
+    const ergative = model.alignment === 'ergative-absolutive';
+    const caseS = ergative ? (transitive ? 'ergative' : 'absolutive') : 'nominative';
+    const caseO = ergative ? 'absolutive' : (transitive ? 'accusative' : 'nominative');
+    const adpPos = adpositionPosition(spec.order);
+
+    // Person and number of the subject drive verb agreement. A personal pronoun is dropped when the verb carries it.
+    const sHeads = template.S ? asList(template.S.head).map(ref => ctx.index.resolve(ref)).filter(Boolean) : [];
+    const sPronoun = sHeads.length === 1 && sHeads[0].pos === 'pronoun' && sHeads[0].features.person ? sHeads[0] : null;
+    const person = template.mood === 'imperative' ? 2 : (sPronoun?.features.person ?? 3);
+    const personNumber = sPronoun?.features.number ?? template.S?.number ?? 'singular';
+    const prodrop = !!(ctx.morph.affixes.verb && verbEntry && sPronoun);
+
+    const parts = {};
+    let subjectHead = null;
+    if (template.S) {
+        const r = nounPhrase(template.S, { case: caseS }, ctx);
+        parts.S = prodrop ? [] : r.tokens; subjectHead = r.head;
+    }
+    const agree = subjectHead ? { gender: subjectHead.pos === 'noun' ? genderOf(subjectHead, spec) : null, number: template.S.number ?? 'singular' } : undefined;
+    if (template.O) {
+        const r = template.O.adp ? prepositionalPhrase(template.O, ctx, adpPos) : nounPhrase(template.O, { case: copula ? caseS : caseO, agree }, ctx);
+        parts.O = r.tokens;
+    }
+    if (template.V) {
+        const v = template.V;
+        const verbAffixes = ctx.morph.affixes.verb;
+        const toks = [];
+        const optative = template.mood === 'optative';
+        const vf = {
+            tense: template.tense ?? 'present', person, number: personNumber, imperative: template.mood === 'imperative',
+            negative: !!(v.neg && verbAffixes?.negation), potential: !!(v.aux === 'can:particle' && verbAffixes?.potential),
+            optative: optative && !!verbAffixes?.optative, aspect: v.aspect && verbAffixes?.aspect ? v.aspect : null
+        };
+        // languages without the matching verb suffix use a separate word before the verb
+        if (optative && !verbAffixes?.optative) toks.push(ctx.word(ctx.need('may:particle')));
+        if (v.neg && !verbAffixes?.negation) toks.push(ctx.word(ctx.need('not:particle')));
+        if (v.aux && !vf.potential) toks.push(ctx.word(ctx.need(v.aux)));
+        if (v.aspect && !vf.aspect) toks.push(ctx.word(ctx.need(`${v.aspect} marker:particle`)));
+        const verbs = ctx.alternatives(v.head);
+        toks.push(...verbs.length > 1 ? [{ kind: 'alts', options: verbs.map(e => [ctx.word(e, vf)]) }] : [ctx.word(verbEntry, vf)]);
+        parts.V = toks;
+    }
+    if (template.initial) parts.initial = template.initial.flatMap(np => nounPhrase(np, { case: model.baseCase }, ctx).tokens);
+    // adjuncts (A, B): a prepositional phrase (adp + np) or a bare noun phrase, e.g. "to me", "now"
+    for (const key of ['A', 'B']) {
+        const adj = template[key];
+        if (adj) parts[key] = (adj.adp ? prepositionalPhrase(adj, ctx, adpPos) : nounPhrase(adj, { case: model.baseCase }, ctx)).tokens;
+    }
+    // Subordinate clauses. The subordinator follows its clause in head-final languages and precedes it otherwise.
+    // A complement clause ("that ...") takes the place of the object; an adverbial clause goes first in head-final
+    // languages and last in head-initial ones.
+    const subordinate = sub => {
+        const inner = clauseTokens(sub.clause, lang, ctx, false);
+        const conj = ctx.word(ctx.need(sub.conj));
+        return adpPos === 'after' ? [...inner, conj] : [conj, ...inner];
+    };
+    if (template.comp) parts.O = [...(parts.O ?? []), ...subordinate(template.comp)];
+    if (template.adv) parts.SUB = subordinate(template.adv);
+
+    const base = [...(parts.initial ? ['initial'] : []), ...spec.order.split(''), 'A', 'B'];
+    const sequence = template.seq ?? (parts.SUB ? (adpPos === 'after' ? ['SUB', ...base] : [...base, 'SUB']) : base);
+    let tokens = sequence.flatMap(k => parts[k] ?? []);
+    // yes/no question: a final particle in head-final languages, an initial one otherwise
+    if (top && template.q === 'yesno') {
+        const q = ctx.word(ctx.need('question particle:particle'));
+        tokens = adpPos === 'after' ? [...tokens, q] : [q, ...tokens];
+    }
+    return tokens;
+}
+
+export function realize(template, lang) {
+    const { spec } = lang;
     if (template.requires?.number && !spec.numbers.includes(template.requires.number)) return { id: template.id, english: template.en, skipped: 'unavailable' };
     if (template.requires?.gender && !spec.genders.length) return { id: template.id, english: template.en, skipped: 'unavailable' };
     const ctx = makeContext(lang);
     try {
-        const verbEntry = template.V ? ctx.alternatives(template.V.head)[0] : null;
-        const copula = verbEntry?.features.transitivity === 'copula';
-        const hasObject = template.O && !template.O.adp;
-        const transitive = !!verbEntry && ['transitive', 'ditransitive'].includes(verbEntry.features.transitivity) && hasObject;
-        const ergative = model.alignment === 'ergative-absolutive';
-        const caseS = ergative ? (transitive ? 'ergative' : 'absolutive') : 'nominative';
-        const caseO = ergative ? 'absolutive' : (transitive ? 'accusative' : 'nominative');
-        const adpPos = adpositionPosition(spec.order);
-
-        // Person and number of the subject drive verb agreement. A personal pronoun is dropped when the verb carries it.
-        const sHeads = template.S ? asList(template.S.head).map(ref => ctx.index.resolve(ref)).filter(Boolean) : [];
-        const sPronoun = sHeads.length === 1 && sHeads[0].pos === 'pronoun' && sHeads[0].features.person ? sHeads[0] : null;
-        const person = template.mood === 'imperative' ? 2 : (sPronoun?.features.person ?? 3);
-        const personNumber = sPronoun?.features.number ?? template.S?.number ?? 'singular';
-        const prodrop = !!(ctx.morph.affixes.verb && verbEntry && sPronoun);
-
-        const parts = {};
-        let subjectHead = null;
-        if (template.S) {
-            const r = nounPhrase(template.S, { case: caseS }, ctx);
-            parts.S = prodrop ? [] : r.tokens; subjectHead = r.head;
-        }
-        const agree = subjectHead ? { gender: subjectHead.pos === 'noun' ? genderOf(subjectHead, spec) : null, number: template.S.number ?? 'singular' } : undefined;
-        if (template.O) {
-            const r = template.O.adp ? prepositionalPhrase(template.O, ctx, adpPos) : nounPhrase(template.O, { case: copula ? caseS : caseO, agree }, ctx);
-            parts.O = r.tokens;
-        }
-        if (template.V) {
-            const v = template.V;
-            const verbAffixes = ctx.morph.affixes.verb;
-            const toks = [];
-            const vf = {
-                tense: template.tense ?? 'present', person, number: personNumber, imperative: template.mood === 'imperative',
-                negative: !!(v.neg && verbAffixes?.negation), potential: !!(v.aux === 'can:particle' && verbAffixes?.potential)
-            };
-            if (v.neg && !verbAffixes?.negation) toks.push(ctx.word(ctx.need('not:particle')));
-            if (v.aux && !vf.potential) toks.push(ctx.word(ctx.need(v.aux)));
-            const verbs = ctx.alternatives(v.head);
-            toks.push(...verbs.length > 1 ? [{ kind: 'alts', options: verbs.map(e => [ctx.word(e, vf)]) }] : [ctx.word(verbEntry, vf)]);
-            parts.V = toks;
-        }
-        if (template.initial) parts.initial = template.initial.flatMap(np => nounPhrase(np, { case: model.baseCase }, ctx).tokens);
-        // adjuncts (A, B): a prepositional phrase (adp + np) or a bare noun phrase, e.g. "to me", "now"
-        for (const key of ['A', 'B']) {
-            const adj = template[key];
-            if (adj) parts[key] = (adj.adp ? prepositionalPhrase(adj, ctx, adpPos) : nounPhrase(adj, { case: model.baseCase }, ctx)).tokens;
-        }
-
-        const sequence = template.seq ?? [...(parts.initial ? ['initial'] : []), ...spec.order.split(''), 'A', 'B'];
-        const tokens = sequence.flatMap(k => parts[k] ?? []);
+        const tokens = clauseTokens(template, lang, ctx, true);
         return { id: template.id, english: template.en, tokens, partial: ctx.partial.length ? [...ctx.partial] : undefined };
     } catch (e) {
         if (e instanceof Skip) return { id: template.id, english: template.en, skipped: 'missing', missing: e.message };
@@ -176,9 +208,14 @@ export function templateRefs(t) {
     const walk = x => {
         if (!x || typeof x !== 'object') return;
         for (const [k, v] of Object.entries(x)) {
-            if (['head', 'adj', 'poss', 'adp', 'aux'].includes(k)) asList(v).forEach(r => refs.add(r));
+            if (['head', 'adj', 'poss', 'adp', 'aux', 'conj'].includes(k)) asList(v).forEach(r => refs.add(r));
             else if (k === 'initial') v.forEach(walk);
-            else if (['S', 'V', 'O', 'A', 'B', 'np'].includes(k)) walk(v);
+            else if (['S', 'V', 'O', 'A', 'B', 'np', 'comp', 'adv', 'clause'].includes(k)) walk(v);
+            // function words the realiser adds for grammar the language may express with a separate word
+            else if (k === 'q') refs.add('question particle:particle');
+            else if (k === 'aspect') refs.add(`${v} marker:particle`);
+            else if (k === 'degree') refs.add('more:adverb');
+            else if (k === 'mood' && v === 'optative') refs.add('may:particle');
         }
     };
     walk(t);

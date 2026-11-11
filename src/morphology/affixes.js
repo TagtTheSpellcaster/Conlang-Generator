@@ -73,14 +73,19 @@ export function generateAffixes(spec, model, reserved = new Set()) {
     result.possessive = {};
     for (const cell of personCells(spec)) result.possessive[cell] = make();
     result.verb = agglutinativeVerb(spec, make);
+    // Added last so that the affixes of earlier versions keep their shapes for a given seed.
+    result.comparative = make();
     return Object.freeze(result);
 }
 
-// Verb suffix chain: stem - POTENTIAL - NEGATION - TENSE - SUBJECT AGREEMENT (imperative replaces tense and agreement).
+// Verb suffix chain: stem - POTENTIAL - NEGATION - ASPECT - TENSE - SUBJECT AGREEMENT.
+// The imperative replaces tense and agreement; the optative replaces the tense and keeps the agreement.
 // Present tense and third person singular are unmarked.
 function agglutinativeVerb(spec, make) {
-    const verb = { mode: 'agglutinative', order: ['potential', 'negation', 'tense', 'agreement'], tense: { present: '', past: make(), future: make() }, negation: make(), potential: make(), imperative: make(), agreement: {} };
+    const verb = { mode: 'agglutinative', order: ['potential', 'negation', 'aspect', 'tense', 'agreement'], tense: { present: '', past: make(), future: make() }, negation: make(), potential: make(), imperative: make(), agreement: {} };
     for (const cell of personCells(spec)) verb.agreement[cell] = cell === '3.singular' ? '' : make();
+    verb.aspect = { progressive: make(), perfect: make() };
+    verb.optative = make();
     return verb;
 }
 

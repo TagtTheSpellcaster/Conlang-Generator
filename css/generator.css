@@ -599,3 +599,14 @@ main {
 .morph-adj-row, .morph-adj-head { gap: 10px; }
 @media (max-width: 520px) { .morph-verb-row .morph-form { font-size: 11px; } .morph-translation { font-size: 12px; } }
 .tabs { overflow-x: auto; scrollbar-width: none; } .tab { white-space: nowrap; flex: 0 0 auto; }
+
+.export-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0 0 12px; }
+@media print { .export-bar { display: none; } }
+
+.names-controls { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 12px; margin-bottom: 8px; }
+.names-controls .field { min-width: 160px; }
+.names-controls input[type=number] { width: 6rem; }
+.names-hint { margin-bottom: 10px; }
+.names-table { border-collapse: collapse; width: 100%; max-width: 560px; }
+.names-table th, .names-table td { text-align: left; padding: 4px 10px; border-bottom: 1px solid var(--border, #d5dce8); }
+.names-table .name-cell { font-weight: 600; font-family: ui-monospace, monospace; }

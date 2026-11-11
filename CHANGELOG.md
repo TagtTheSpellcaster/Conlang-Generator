@@ -4,6 +4,21 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.12.0
+- Proper-name generator (`src/names.js`) and a new *Names* tab: personal names, family/clan names, place names and epithets, built from the language's phonology (with the genre's sound bias) and, for meanings, from its own lexicon. Each of the 18 genres has its own naming custom and flavour words. The language sheet and the JSON export include a sample.
+
+## 1.11.0
+- Sentence grammar: yes/no questions with a question particle (final in head-final languages, initial otherwise), optative wishes (`May you live.`), subordinate clauses (complement and adverbial: `that`, `because`, `if`, `when`), comparatives (`longer than`) and verbal aspect (progressive, perfect).
+- Agglutinative verbs gain optative, progressive and perfect suffixes; adjectives gain a comparative suffix. They are generated after the older affixes, so affixes of existing seeds do not change. Isolating and fusional languages use marker words (*may*, *more*, *than* and new progressive/perfect/question markers).
+- 14 new universal frames (61 in total) and five new dictionary entries (question particle, progressive marker, perfect marker, *more*, *that* as complementizer; 6,695 entries). The sentence format gains `q=yn`, `mood=optative`, `cmp`, `/prog`, `/perf`, `comp=` and `adv=`.
+
+## 1.10.0
+- Language export: language sheet (standalone HTML, printable), Markdown, lexicon CSV and full-language JSON, from a button bar in the result panel (`src/export.js`).
+
+## 1.9.0
+- The vocabulary manager keeps only its differences from `data/vocabulary.json` (localStorage overlay) instead of a full copy; the generator uses the same edits; the old copy is migrated on first load.
+- "Save to data/vocabulary.json" writes the merged dictionary back to the file (File System Access API, with a download fallback); "Download vocabulary.json" stays available.
+
 ## 1.8.0
 - Choosing a genre also selects culture, biome and era in the Semantic profile, but only where the genre has a clear identity (marine: maritime + ocean; giant: alpine + prehistoric; machine: technocratic + futuristic; draconic: none). Selectors changed by hand are kept unless the genre names that dimension. Randomisation leaves the profile to the genre.
 

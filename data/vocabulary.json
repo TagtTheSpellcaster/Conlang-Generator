@@ -6690,6 +6690,11 @@
   {"id":"action.need","lemma":"need","pos":"verb","domain":"action","group":"everyday_verbs","tier":"common","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{"transitivity":"transitive"},"relations":{}},
   {"id":"action.talk","lemma":"talk","pos":"verb","domain":"action","group":"everyday_verbs","tier":"common","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{"transitivity":"intransitive"},"relations":{}},
   {"id":"nature.pasture","lemma":"pasture","pos":"noun","domain":"nature","group":"land_use","tier":"common","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{"animacy":"inanimate"},"relations":{}},
-  {"id":"society.undead","lemma":"undead","pos":"noun","domain":"society","group":"creatures_of_death","tier":"common","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{"animacy":"animate"},"relations":{}}
+  {"id":"society.undead","lemma":"undead","pos":"noun","domain":"society","group":"creatures_of_death","tier":"common","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{"animacy":"animate"},"relations":{}},
+  {"id":"grammar.question_particle","lemma":"question particle","pos":"particle","domain":"grammar","group":"question_and_aspect","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.progressive_marker","lemma":"progressive marker","pos":"particle","domain":"grammar","group":"question_and_aspect","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.perfect_marker","lemma":"perfect marker","pos":"particle","domain":"grammar","group":"question_and_aspect","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.more","lemma":"more","pos":"adverb","domain":"grammar","group":"degree","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.that","lemma":"that","gloss":"complementizer","pos":"conjunction","domain":"grammar","group":"subordination","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}}
  ]
 }

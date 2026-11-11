@@ -70,6 +70,7 @@ export function inflect(entry, features = {}, morph) {
     const markers = affixes.numberMarkers;
     const marker = number === 'plural' ? markers.plural : number === 'dual' ? markers.dual : '';
     // Gender agreement is shown on adjectives; nouns carry it only as a class.
+    if (entry.pos === 'adjective' && features.degree === 'comparative' && affixes.comparative) add(affixes.comparative, 'degree', 'more');
     if (entry.pos === 'adjective' && gender) add(affixes.genderEndings[gender], 'gender', gender);
     if (marker && entry.pos !== 'pronoun') {
         if (markers.mode === 'prefix') add(marker, 'number', number, 0);
@@ -80,7 +81,7 @@ export function inflect(entry, features = {}, morph) {
     return finish();
 }
 
-// features: { tense: present|past|future, person: 1|2|3, number, negative, potential, imperative }
+// features: { tense: present|past|future, person: 1|2|3, number, negative, potential, imperative, optative, aspect: progressive|perfect }
 function inflectVerb(entry, f, morph, { add, finish }) {
     const v = morph.affixes.verb;
     if (!v) return finish();
@@ -93,6 +94,8 @@ function inflectVerb(entry, f, morph, { add, finish }) {
     if (f.potential) add(v.potential, 'potential', 'can');
     if (f.negative) add(v.negation, 'negation', 'not');
     if (f.imperative) { add(v.imperative, 'mood', 'imperative'); return finish(); }
+    if (f.optative) { add(v.optative, 'mood', 'optative'); add(v.agreement[cell], 'agreement', cell); return finish(); }
+    if (f.aspect) add(v.aspect?.[f.aspect], 'aspect', f.aspect);
     add(v.tense[tense], 'tense', tense);
     add(v.agreement[cell], 'agreement', cell);
     return finish();

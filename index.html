@@ -18,7 +18,7 @@
         <div id="db-status" class="sub">Loading vocabulary…</div>
       </div>
     </header>
-    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button></nav>
+    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="names" aria-selected="false">Names</button></nav>
     <section id="generator" class="tab-panel active">
       <main>
         <div class="controls">
@@ -143,6 +143,17 @@
     <section id="sample-sentences" class="tab-panel">
       <main>
         <div id="sample-sentences-output" class="empty">Generate a language to populate the sample sentences.</div>
+      </main>
+    </section>
+    <section id="names" class="tab-panel">
+      <main>
+        <div class="names-controls">
+          <div class="field"><label for="names-kind">Kind</label><select id="names-kind"></select></div>
+          <div class="field"><label for="names-count">How many</label><input id="names-count" type="number" min="1" max="60" value="12"></div>
+          <button type="button" class="btn" id="names-more">New names</button>
+        </div>
+        <div class="sub names-hint">Names use the sounds of the language and, where they have a meaning, words of its own lexicon. The custom (single name, clan name, epithet, title) follows the genre.</div>
+        <div id="names-output" class="empty">Generate a language to create names.</div>
       </main>
     </section>
     <script type="module" src="src/ui/main.js"></script>
