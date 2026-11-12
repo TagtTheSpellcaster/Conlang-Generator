@@ -1,0 +1,369 @@
+# Word families: what a language builds from a base word instead of giving it an independent root.
+# Written once here; tools/derivation/families.mjs creates the dictionary entries that do not exist yet (tools/lexicon/13-families.txt),
+# tools/derivation/build.mjs writes the pairs to data/derivations.json. New entries inherit domain, era, culture and biome of their base.
+#
+#   base: type derived, type derived, ...          base = noun (or "v:bake", "a:dark", "adv:..." for another part of speech)
+#   a + b => lemma                                  compound of two words (modifier + head); "=> lemma" is optional
+# Types: agent act result quality abstract place diminutive feminine adjective privative adverb causative negative repetitive excess
+# A derived word takes the part of speech its type implies (agent, place... noun; adjective, privative adjective; adverb; causative verb);
+# write "a:", "n:", "v:" or "adv:" before the derived word to override ("a: stable" and "n: stable" are different words).
+# Only write a family when the derived meaning is regular: "of X", "place of X", "young X", "female X", "one who does X", "without X".
+
+## Animals: relational adjectives (of the animal), young, female, shelter, keeper
+dog: adjective canine, place kennel, diminutive puppy, agent dogkeeper
+cat: adjective feline, diminutive kitten, place cattery
+horse: adjective equine, place stable, diminutive foal, agent horseman, agent groom
+cow: adjective bovine, place cowshed, diminutive calf, agent cowherd
+bull: adjective taurine
+sheep: adjective ovine, diminutive lamb, place sheepfold, agent shepherd
+pig: adjective porcine, diminutive piglet, place pigsty, agent swineherd
+goat: adjective caprine, diminutive kid, agent goatherd
+wolf: adjective lupine, diminutive wolf cub
+fox: adjective vulpine, diminutive fox cub
+bear: adjective ursine, diminutive bear cub
+lion: adjective leonine, feminine lioness, diminutive lion cub
+eagle: adjective aquiline, diminutive eaglet, place eyrie
+hawk: agent falconer, place mews
+bird: adjective avian, diminutive fledgling, place aviary, agent fowler
+fish: adjective piscine, place fishpond
+v:fish: agent fisher, act fishing
+duck: diminutive duckling
+goose: diminutive gosling
+chicken: place henhouse, diminutive chick, feminine hen
+bee: place apiary, agent beekeeper, adjective apian
+snake: adjective serpentine, diminutive snakelet
+dragon: adjective draconic, diminutive wyrmling, place dragon lair, feminine dragoness
+deer: diminutive fawn, adjective cervine
+herd: agent herder
+a:wild: adjective wildish
+
+## Trades and agents from the thing or the activity
+v:bake: agent baker, place bakery, result baking
+v:brew: agent brewer, place brewery
+mill: agent miller
+pot: agent potter
+smith: place smithy, act smithing
+farm: agent farmer, place farmstead
+garden: agent gardener
+mine: agent miner
+sail: agent sailor, adjective sailing
+harp: agent harper
+drum: agent drummer
+pipe: agent piper
+herb: agent herbalist
+jewel: agent jeweler
+shield: agent shieldbearer
+sword: agent swordsman
+bow: agent bowman
+spear: agent spearman
+axe: agent axeman
+horn: agent hornblower
+cart: agent carter
+ship: agent shipwright
+wheel: agent wheelwright
+cloth: agent clothier
+leather: agent leatherworker
+glass: agent glassblower
+stone: agent stonecutter
+wood: agent woodcutter
+v:hunt: agent hunter, act hunting, place hunting ground
+v:build: agent builder, act building, result building
+v:write: agent writer, act writing
+v:read: agent reader
+v:teach: act teaching
+v:heal: act healing
+v:weave: act weaving, result weaving
+v:sing: act singing, result song
+v:dance: agent dancer
+v:cook: agent cook, place kitchen
+v:judge: agent judge
+v:guard: agent guardian
+v:rule: agent ruler, act ruling
+v:steal: agent thief
+v:fight: agent fighter, act fight
+v:trade: agent trader, act trading
+v:sell: agent seller
+v:buy: agent buyer
+v:serve: agent servant, act service
+
+## People: states, groups and offices (abstract), feminine forms, relational adjectives
+king: abstract kingship, adjective kingly, feminine queen, place kingdom
+queen: adjective queenly, abstract queenship
+lord: abstract lordship, adjective lordly, feminine lady
+prince: abstract princedom, adjective princely
+knight: abstract knighthood, adjective knightly
+priest: abstract priesthood, adjective priestly
+monk: abstract monkhood, adjective monkish, place monastery
+child: abstract childhood, adjective childlike, diminutive infant
+brother: abstract brotherhood, adjective brotherly, place brotherhood house
+mother: abstract motherhood, adjective motherly
+father: abstract fatherhood, adjective fatherly
+man: abstract manhood, adjective manly, feminine woman
+woman: abstract womanhood, adjective womanly
+friend: adjective friendly
+enemy: abstract enmity, adjective hostile
+v:rule: result rule
+slave: place slave pen
+thief: abstract thievery, adjective thievish
+v:marry: result marriage
+widow: abstract widowhood
+neighbor: adjective neighborly
+stranger: adjective strange
+orphan: abstract orphanhood
+v:serve: abstract servitude
+citizen: adjective civic
+town: agent townsman, adjective urban
+village: agent villager
+city: agent citizen
+nation: adjective national
+people: adjective popular
+law: adjective lawful, privative lawless, agent lawyer
+justice: adjective just
+war: adjective martial, agent warrior, privative peaceful
+peace: adjective peaceful
+home: privative homeless, adjective homely
+name: privative nameless, adjective nominal
+end: privative endless, adjective final
+hope: privative hopeless, adjective hopeful
+sleep: privative sleepless
+v:sleep: agent sleeper
+tooth: privative toothless
+hair: adjective hairy, privative hairless, agent hairdresser
+blood: adjective bloody
+sin: privative sinless
+shame: privative shameless
+fear: adjective fearful
+joy: adjective joyful, privative joyless
+sorrow: adjective sorrowful
+honor: adjective honorable, privative dishonorable
+
+## Nature: relational and descriptive adjectives
+wood: adjective wooden, adjective woody
+wool: adjective woolen
+stone: adjective stony
+rock: adjective rocky
+sand: adjective sandy
+mud: adjective muddy
+ice: adjective icy
+snow: adjective snowy
+wind: adjective windy
+rain: adjective rainy
+cloud: adjective cloudy
+storm: adjective stormy
+fog: adjective foggy
+fire: adjective fiery
+water: adjective watery
+earth: adjective earthen, adjective earthly
+sun: adjective solar, adjective sunny
+moon: adjective lunar, adjective moonlit
+star: adjective stellar, adjective starry
+sky: adjective heavenly
+sea: adjective maritime, agent seaman
+river: adjective riverine
+forest: agent forester, adjective forested
+mountain: adjective mountainous, agent mountaineer
+hill: adjective hilly
+night: adjective nocturnal, adjective nightly
+day: adjective daily
+year: adjective yearly
+summer: adjective summery
+winter: adjective wintry
+spring: adjective springlike
+autumn: adjective autumnal
+tree: diminutive sapling, adjective arboreal
+grass: adjective grassy
+leaf: adjective leafy
+thorn: adjective thorny
+salt: adjective salty
+dust: adjective dusty
+smoke: adjective smoky
+ash: adjective ashen
+gold: adjective golden
+silver: adjective silvery
+iron: adjective iron, adjective ferrous
+copper: adjective coppery
+glass: adjective glassy
+silk: adjective silken
+leather: adjective leathern
+honey: adjective honeyed
+milk: adjective milky
+bread: agent breadmaker
+oil: adjective oily
+poison: adjective poisonous
+magic: adjective magical, agent magician
+god: adjective divine, feminine goddess, abstract godhood
+heaven: adjective heavenly
+hell: adjective hellish
+spirit: adjective spiritual
+soul: privative soulless
+death: adjective deadly, adjective mortal
+life: adjective lively, adjective vital, privative lifeless
+dream: agent dreamer
+shadow: adjective shadowy, privative shadowless
+
+## Qualities (adjective -> noun, verb, adverb)
+a:strong: quality strength, causative strengthen, adverb strongly
+a:wide: quality width, causative widen
+a:long: quality length, causative lengthen
+a:deep: quality depth, causative deepen
+a:high: quality height, causative heighten
+a:warm: quality warmth, causative warm
+a:cold: quality coldness, adverb coldly
+a:dark: causative darken, adverb darkly
+a:bright: quality brightness, causative brighten, adverb brightly
+a:white: quality whiteness, causative whiten
+a:black: quality blackness, causative blacken
+a:red: quality redness, causative redden
+a:sweet: quality sweetness, causative sweeten
+a:thick: quality thickness, causative thicken
+a:short: quality shortness, causative shorten
+a:thin: quality thinness, causative thin
+a:tight: quality tightness, causative tighten
+a:light: quality lightness, causative lighten
+a:heavy: quality heaviness
+a:loud: quality loudness, adverb loudly
+a:cruel: quality cruelty, adverb cruelly
+a:brave: quality bravery, adverb bravely
+a:wise: quality wisdom, adverb wisely
+a:happy: quality happiness, adverb happily, negative unhappy
+a:kind: quality kindness, adverb kindly, negative unkind
+a:clean: quality cleanness, causative clean, negative unclean
+a:gentle: quality gentleness, adverb gently
+a:old: quality age
+a:young: quality youth
+a:poor: quality poverty
+a:rich: quality wealth
+a:true: quality truth, adverb truly
+a:free: quality freedom, causative free
+a:safe: quality safety
+a:cool: causative cool
+a:hard: quality hardness, adverb hardly
+a:soft: quality softness, adverb softly
+a:sharp: quality sharpness, adverb sharply
+a:slow: quality slowness
+a:quick: quality quickness
+a:great: quality greatness, adverb greatly
+a:small: quality smallness
+a:big: quality bigness
+a:holy: quality holiness, negative unholy
+a:evil: quality evil
+a:good: quality goodness, adverb well
+a:bad: quality badness
+a:fair: quality fairness
+a:proud: quality pride
+a:humble: quality humility, adverb humbly
+a:bold: quality boldness, adverb boldly
+a:silent: quality silence, adverb silently
+a:wild: quality wildness
+a:dry: quality dryness, causative dry
+a:wet: quality wetness, causative wet
+a:full: causative fill
+a:empty: causative empty, quality emptiness
+a:open: causative open
+
+## Verbs: reversal and repetition
+v:build: repetitive rebuild
+v:write: repetitive rewrite
+v:tell: repetitive retell
+v:turn: repetitive return
+v:tie: negative untie
+v:lock: negative unlock
+v:load: negative unload
+v:dress: negative undress
+v:cover: negative uncover
+v:wind: negative unwind
+v:do: negative undo, repetitive redo
+v:make: repetitive remake
+v:read: repetitive reread
+v:take: repetitive retake
+v:call: repetitive recall
+a:happy: excess overjoyed
+v:eat: excess overeat
+v:work: excess overwork
+v:burn: excess overburn
+v:sleep: excess oversleep
+v:flow: excess overflow
+
+## Compounds of two dictionary words
+river + bank => riverbank
+river + bed => riverbed
+river + side => riverside
+sea + shore => seashore
+sea + side => seaside
+sea + weed => seaweed
+sun + rise => sunrise
+sun + light => sunlight
+moon + light => moonlight
+star + light => starlight
+fire + wood => firewood
+fire + place => fireplace
+fire + fly => firefly
+day + light => daylight
+day + break => daybreak
+night + fall => nightfall
+rain + bow => rainbow
+rain + drop => raindrop
+snow + flake => snowflake
+snow + storm => snowstorm
+thunder + storm => thunderstorm
+wind + mill => windmill
+water + fall => waterfall
+water + mill => watermill
+hill + top => hilltop
+mountain + top => mountaintop
+tree + top => treetop
+wood + land => woodland
+grass + land => grassland
+home + land => homeland
+hand + shake => handshake
+head + band => headband
+foot + print => footprint
+foot + step => footstep
+eye + brow => eyebrow
+eye + lid => eyelid
+heart + beat => heartbeat
+blood + line => bloodline
+horse + shoe => horseshoe
+horse + back => horseback
+cow + bell => cowbell
+sheep + dog => sheepdog
+bee + hive => beehive
+bird + song => birdsong
+bird + nest => birdnest
+fish + hook => fishhook
+fish + net => fishnet
+fish + bone => fishbone
+wolf + pack => wolfpack
+dog + house => doghouse
+bed + room => bedroom
+house + hold => household
+door + step => doorstep
+door + way => doorway
+gate + way => gateway
+road + side => roadside
+bridge + head => bridgehead
+ship + wreck => shipwreck
+ship + yard => shipyard
+boat + man => boatman
+sword + play => swordplay
+bow + string => bowstring
+arrow + head => arrowhead
+spear + head => spearhead
+battle + field => battlefield
+battle + axe => battleaxe
+war + path => warpath
+war + lord => warlord
+war + like => warlike
+war + horse => warhorse
+war + ship => warship
+a:black + smith => blacksmith
+gold + smith => goldsmith
+silver + smith => silversmith
+ink + well => inkwell
+book + shelf => bookshelf
+bread + crumb => breadcrumb
+a:sweet + heart => sweetheart
+a:long + boat => longboat
+a:long + house => longhouse
+a:high + land => highland
+a:low + land => lowland

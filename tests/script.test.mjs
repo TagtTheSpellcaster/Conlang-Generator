@@ -39,7 +39,7 @@ test('every letter of every word belongs to the base inventory or to the chosen 
         const L = gen(genre ? { genre } : { script: ['umlaut', 'dotted'] });
         const ph = L.phonology;
         const allowed = new Set([...ph.vowels, ...ph.consonants, ...ph.extraVowels, ...ph.extraConsonants].join(''));
-        for (const e of L.lexicon) for (const ch of e.form) assert.ok(allowed.has(ch), `${genre}: "${ch}" in ${e.form}`);
+        for (const e of L.lexicon) for (const ch of e.form.replace(/ /g, '')) assert.ok(allowed.has(ch), `${genre}: "${ch}" in ${e.form}`);
         const used = new Set(L.lexicon.flatMap(e => [...e.form]));
         for (const x of [...ph.extraVowels, ...ph.extraConsonants]) assert.ok(used.has(x), `${genre}: ${x} is never used`);
     }

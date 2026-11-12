@@ -125,6 +125,14 @@ export function languageDocument(lang, version = '') {
             ...(c.instruments.length ? [{ type: 'heading', text: 'Instruments' }, T(['Name', 'English', 'Use'], c.instruments, x => [x.name, x.gloss, x.use ?? ''])] : [])
         ] });
     }
+    if (lang.history) {
+        const h = lang.history;
+        sections.push({ title: 'Daughter language', blocks: [
+            { type: 'para', text: `${h.stats.rules} sound changes; ${h.stats.unchanged} of ${h.stats.words} words unchanged; ${h.stats.merged} words merged into homophones.` },
+            { type: 'table', head: ['When', 'Change', 'Example'], rows: h.rules.map(r => [`c. ${r.years} years ago`, r.label, r.example ?? '']) },
+            { type: 'table', head: ['Daughter', 'Proto', 'English', 'Changes'], rows: h.lexicon.map(w => [w.daughter, `*${w.proto}`, w.lemma, w.changes.join(', ')]) }
+        ] });
+    }
     sections.push({ title: 'Names', blocks: [
         { type: 'para', text: 'A sample of names in the language (the Names tab generates more).' },
         ...NAME_KINDS.flatMap(k => [{ type: 'heading', text: k.label }, { type: 'table', head: ['Name', 'Meaning'], rows: generateNames(lang, { kind: k.id, count: 10 }).map(n => [n.name, n.meaning ?? '']) }])
@@ -180,6 +188,7 @@ export function languageJson(lang, version = '') {
     return JSON.stringify({
         format: 'Conlang Generator language', generator: version, name: lang.name, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
         morphology: { model: morphology.model, affixes: morphology.affixes },
+        history: lang.history ? { rules: lang.history.rules, stats: lang.history.stats, words: lang.history.lexicon.map(w => ({ lemma: w.lemma, proto: w.proto, daughter: w.daughter, changes: w.changes })) } : null,
         wordFormation: lang.derivation ? { affixes: Object.fromEntries(Object.entries(lang.derivation.affixes).map(([t, a]) => [t, { form: a.form, position: a.position }])), derived: lang.derivation.stats.applied } : null,
         lexicon: lang.lexicon.map(e => ({ word: e.form, id: e.id, english: label(e), pos: e.pos, domain: e.domain, group: e.group, ...(e.derivation ? { derivation: { type: e.derivation.type, parts: e.derivation.parts.map(p => p.text) } } : {}) })),
         numerals: { type: lang.numerals.config.type, config: lang.numerals.config, classifiers: lang.numerals.classifiers?.map(c => ({ class: c.id, form: c.form })) ?? null,

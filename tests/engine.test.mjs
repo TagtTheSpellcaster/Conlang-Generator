@@ -34,9 +34,9 @@ test('seed "auto" is resolved, reported and reproducible', () => {
     assert.notEqual(c.spec.seed, a.spec.seed);
 });
 
-test('lexicon: unique non-empty forms, at most 600 + the derivation extra, core senses always present', () => {
+test('lexicon: unique non-empty forms, at most 600 + the derivation extra (40%), core senses always present', () => {
     const L = gen();
-    assert.ok(L.lexicon.length <= 600 * 1.25);
+    assert.ok(L.lexicon.length <= 600 * 1.4);
     assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length);
     assert.ok(L.lexicon.every(e => e.form && e.form.length >= 1));
     const ids = new Set(L.lexicon.map(e => e.id));

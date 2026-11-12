@@ -4,6 +4,19 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.20.0
+- Joining of morphemes (`derivationPhonology`): each language decides what happens when two vowels meet at a derivational or compound boundary (kept, first vowel dropped, or a glide inserted) and whether compounds take a linking vowel (about a third of languages). Shown in the *Word formation* card. Own random stream: no other form changes.
+- History tab (prototype): the generated language is the proto-language, and one daughter language is derived by 8-12 ordered, dated sound changes chosen from a library of 16 (i-umlaut, palatalization, intervocalic voicing or spirantization, rhotacism, h-loss, w → v, nasal assimilation, syncope, vowel merger, apocope, final raising, final devoicing, final s-loss, cluster simplification, depalatalization). Rules apply only if they fit the inventory, change between 1.5% and 85% of the words and do not break the syllable structure of a word (otherwise that word keeps its form); rule sets that merge more than 3% of the words into homophones are discarded. The tab shows the rule table (date, change, words affected, example), the derivational affixes and a cognate table (daughter, proto, English, rules applied, etymology of derived words). Included in the language sheet and in the JSON.
+
+## 1.19.0
+- Word families (`tools/derivation/families.txt`): about 500 regular relations written by hand, from which `tools/derivation/families.mjs` creates 375 new dictionary entries (7,222 in all) and `tools/derivation/build.mjs` writes the pairs: relational adjectives and shelters of animals (*dog → canine, kennel, puppy*; *horse → equine, stable, foal*), trades (*bake → baker, bakery*), states and offices (*king → kingship, kingdom*), qualities and their verbs (*wide → width, widen*), privatives, reversals, and about 120 new compounds (*river + bank*, *fire + place*, *black + smith*). New entries inherit domain, era, culture and biome from their base. Derivation pairs: 812 → 1,312. `tools/lexicon/12b-family-parts.txt` adds the plain words that compounds need (hill, bank, bed, side, top…).
+- Selection: the words added for derivation may now be up to 40% of the limit (before 25%), so about 25-29% of a lexicon is derived or compound (before about 12%). The lexicon grows to about 840 entries (genres about 1,200).
+- Isolating languages write the two words of a compound apart, as they do their numerals; the others make one word.
+- The Generated Lexicon tab is arranged by topic (human body, family, qualities, actions, animals, nature… 27 topics, collapsible, Open all / Close all); alphabetical lookup stays in the Dictionary tab.
+
+## 1.18.1
+- Fix: the *Word formation* card and the calendar tables used about half of the width of their panel; their tables now fill the card like the lexicon.
+
 ## 1.18.0
 - Lexical derivation. About 810 pairs found in the English dictionary (`data/derivations.json`, made by `tools/derivation/build.mjs`): 290 derivations by suffix or prefix (*bake → baker*, *dark → darkness*, *fear → fearless*, *loyal → disloyal*, *turn → return*) and 520 compounds of two dictionary nouns (*night watch*, *fire giant*, *holy water*). Spelling coincidences (*flow → flower*, *count → counter*) are removed in `tools/derivation/exceptions.txt`, which can be edited.
 - Each language has its own derivational morphemes (15 types: agent, action, result, quality, abstract, place, diminutive, feminine, adjective, privative, adverb, causative, negative, repetitive, excess). Some types share one affix (action/result, quality/abstract), about 15% of languages are prefixing, and negative, repetitive and excess prefixes are common in the others. Derivation has its own random stream: the roots of all other words, and the inflectional affixes, keep their forms for a given seed.

@@ -7,7 +7,7 @@ import { generateLanguage } from '../engine.js';
 import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS, EXPANSIONS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
-import { derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { historyHtml, derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -103,6 +103,7 @@ function render(lang) {
     samples.innerHTML = samplesHtml(lang);
     const lex = $('lexicon-output');
     lex.className = '';
+    lex.onclick = ev => { const b = ev.target.closest('[data-lex-toggle]'); if (b) lex.querySelectorAll('.lex-section').forEach(d => { d.open = b.dataset.lexToggle === 'open'; }); };
     lex.innerHTML = derivationHtml(lang) + `<div class="card">${lexiconHtml(lang.lexicon)}</div>`;
     renderDictionary();
     renderNumerals();
@@ -110,6 +111,9 @@ function render(lang) {
     const cal = $('calendar-output');
     cal.className = '';
     cal.innerHTML = calendarHtml(lang);
+    const hist = $('history-output');
+    hist.className = '';
+    hist.innerHTML = historyHtml(lang);
 }
 
 function generate(keepSeed = false) {

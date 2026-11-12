@@ -68,7 +68,7 @@ function articleAllowed(entry, mode) {
 
 // `required`: entries the sample sentences need; they are always included, even if the genre would exclude them.
 // `derivations`: the pairs of data/derivations.json. They never shrink the lexicon; they add related words on top of the limit (at most DERIVATION_EXTRA of it).
-export const DERIVATION_EXTRA = 0.25;
+export const DERIVATION_EXTRA = 0.4;
 export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON_GENRE : MAX_LEXICON, required = [], derivations = []) {
     const ranked = vocabulary
         // equal scores are ordered by a fixed hash of the id (not the seed): the selected senses stay the same for every seed,

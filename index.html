@@ -18,7 +18,7 @@
         <div id="db-status" class="sub">Loading vocabulary…</div>
       </div>
     </header>
-    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="numerals" aria-selected="false">Numerals</button><button type="button" class="tab" data-tab="names" aria-selected="false">Names</button><button type="button" class="tab" data-tab="calendar" aria-selected="false">Calendar</button></nav>
+    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="numerals" aria-selected="false">Numerals</button><button type="button" class="tab" data-tab="names" aria-selected="false">Names</button><button type="button" class="tab" data-tab="calendar" aria-selected="false">Calendar</button><button type="button" class="tab" data-tab="history" aria-selected="false">History</button></nav>
     <section id="generator" class="tab-panel active">
       <main>
         <div class="controls">
@@ -197,6 +197,12 @@
       <main>
         <div class="sub names-hint">The calendar follows the culture, biome and era chosen (or the genre's): the later the era, the more rigid and standardised the measurement of time. Terms are words of the language.</div>
         <div id="calendar-output" class="empty">Generate a language to see its calendar.</div>
+      </main>
+    </section>
+    <section id="history" class="tab-panel">
+      <main>
+        <div class="sub names-hint">Prototype. The generated language is the proto-language; one daughter language is derived from it by ordered, dated sound changes.</div>
+        <div id="history-output" class="empty">Generate a language to see its history.</div>
       </main>
     </section>
     <script type="module" src="src/ui/main.js"></script>

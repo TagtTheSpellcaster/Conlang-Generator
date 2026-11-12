@@ -1,0 +1,31 @@
+# Plain words that the word families (tools/derivation/families.txt) need as parts of compounds or as bases.
+@tier common
+@era
+@culture
+@biome
+@tags
+
+@domain nature
+## land_forms
+hill, bank, flake
+@domain body
+## body_parts_more
+brow, lid
+@domain household
+## furnishings_more
+bed, shelf, room
+@domain food
+## food_more
+crumb
+@domain space
+## position_words
+side, top, place
+@domain object
+## marks
+print
+@domain war
+## war_words
+battle
+@domain quality
+## adjectives_more
+a:bold, a:safe, a:fair

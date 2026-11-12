@@ -5,6 +5,7 @@
 // and (2) two-word lemmas whose words are both dictionary entries (compounds). tools/derivation/exceptions.txt removes false friends
 // (flow -> flower) and adds pairs the rules cannot see; one line per pair: "- derived" removes it, "+ type derived < base [+ base2]" adds it.
 import fs from 'node:fs';
+import { parseFamilies, resolveFamilies } from './families.mjs';
 const here = new URL('./', import.meta.url), root = new URL('../../', import.meta.url);
 const vocabulary = JSON.parse(fs.readFileSync(new URL('data/vocabulary.json', root), 'utf8')).vocabulary;
 
@@ -33,7 +34,8 @@ const stems = (word, suffix) => {
     return [...new Set([s, s + 'e', s.replace(/(.)\1$/, '$1'), s.replace(/i$/, 'y'), s.replace(/iv$/, 'e'), s.replace(/at$/, 'e'), s.replace(/at$/, ''), s + 'y'])];
 };
 
-const pairs = new Map();   // derived id -> { id, type, bases: [ids], via }
+const pairs = new Map();
+const pairsDelete = id => pairs.delete(id);   // derived id -> { id, type, bases: [ids], via }
 const set = (derived, type, bases, via) => { if (!pairs.has(derived.id)) pairs.set(derived.id, { derived: derived.id, type, bases: bases.map(b => b.id), via, d: derived.lemma, b: bases.map(b => b.lemma).join(' + ') }); };
 
 for (const e of vocabulary) {
@@ -62,6 +64,17 @@ for (const e of vocabulary) {
     if (mod.pos === 'adjective' && /(ed|ing|ful|ly|al|ic|ous|ive|less)$/.test(m)) continue;
     if (m.endsWith('ing') || m.endsWith('ed')) continue;
     if (head && mod && HEAD_OK.has(head.pos) && MOD_OK.has(mod.pos) && mod.id !== e.id && head.id !== e.id) set(e, 'compound', [mod, head], 'compound');
+}
+// word families written by hand (families.txt): they replace what the rules found for the same word
+{
+    const { pairs: listed, errors } = parseFamilies(fs.readFileSync(new URL('families.txt', here), 'utf8'));
+    const { resolved, errors: e2 } = resolveFamilies(vocabulary, listed);
+    const missing = resolved.filter(r => !r.existing);
+    if (errors.length || e2.length || missing.length) {
+        console.error([...errors, ...e2, ...missing.map(r => `${r.where}: "${r.derived.lemma}" is not in the dictionary yet: run tools/derivation/families.mjs and tools/lexicon/build.mjs`)].slice(0, 30).join('\n'));
+        process.exit(1);
+    }
+    for (const r of resolved) { pairsDelete(r.existing.id); set(r.existing, r.type, r.bases, 'family'); }
 }
 // exceptions
 const byId = new Map(vocabulary.map(e => [e.id, e]));

@@ -49,10 +49,14 @@ Naming customs (`src/name-schemes.js`): the *Naming custom* selector of the Name
 - Day divisions: phases, temporal hours, double hours, watches, ship bells, canonical hours, prayer times, equal or decimal hours.
 - Simplifications: month lengths are fixed patterns, not astronomical computation; the user cannot yet force a calendar type except through era, culture, biome and numerals.
 
+## History (prototype)
+
+The History tab treats the generated language as a proto-language and derives one daughter language from it by 8–12 ordered, dated sound changes (forward direction only; nothing is reconstructed). The rule library (`src/history/changes.js`) has 16 changes; a rule is used only if it fits the inventory, affects 1.5–85% of the words and keeps every word syllabically valid. Rule sets that merge more than 3% of the words into homophones are rerolled. Output: rule table, derivational affixes, cognate table with applied rules and etymology of derived words. Known limits: one daughter only, no loanwords, no morphological re-analysis, stress fixed on the first syllable for syncope.
+
 ## Word formation
-`src/derivation/derive.js` and `data/derivations.json`. The file lists derived words and compounds of the dictionary with the entries they come from (`{ id, type, bases }`); `node tools/derivation/build.mjs` regenerates it from the dictionary (suffix and prefix rules checked against the dictionary, plus two-word nouns whose words both exist) and `node tools/derivation/build.mjs --list` prints every pair for review. `tools/derivation/exceptions.txt` removes false friends and adds or re-types pairs.
+`src/derivation/derive.js` and `data/derivations.json`. The file lists derived words and compounds of the dictionary with the entries they come from (`{ id, type, bases }`); `node tools/derivation/build.mjs` regenerates it from the dictionary (suffix and prefix rules checked against the dictionary, plus two-word nouns whose words both exist) and `node tools/derivation/build.mjs --list` prints every pair for review. `tools/derivation/families.txt` lists the regular families by hand (`node tools/derivation/families.mjs`, then `node tools/lexicon/build.mjs`, then `node tools/derivation/build.mjs`); `tools/derivation/exceptions.txt` removes false friends and adds or re-types pairs.
 - Each language gets one morpheme per type (agent, action, result, quality, abstract, place, diminutive, feminine, adjective, privative, adverb, causative, negative, repetitive, excess), with some syncretism and an occasional prefixing language. The word formation of a language never changes the roots of unrelated words.
-- Selection brings in the bases and derivatives of words already chosen (at most 25% more entries). A derived word whose bases are not in the lexicon keeps its own root.
+- Selection brings in the bases and derivatives of words already chosen (at most 40% more entries). A derived word whose bases are not in the lexicon keeps its own root.
 - Limits: only the pairs the English dictionary contains are used (there is no *canine* or *kennel* unless they are entries); no stem changes, vowel harmony or irregular derivation; compounds are written as one word in every language, isolating ones included; a derived meaning that drifted from its base is a false friend to add to the exceptions.
 
 ## Vocabulary edits

@@ -7,8 +7,9 @@ import { describePhonology, createWordFactory } from './phonology/words.js';
 import { buildMorphologyModel, generateAffixes } from './morphology/affixes.js';
 import { buildNumerals } from './numerals/system.js';
 import { resolveCalendar, calendarLemmas } from './calendar/plan.js';
+import { buildHistory } from './history/changes.js';
 import { buildCalendar } from './calendar/build.js';
-import { deriveAffixes, applyDerivation } from './derivation/derive.js';
+import { deriveAffixes, applyDerivation, derivationPhonology } from './derivation/derive.js';
 import { adpositionPosition, generateSamples, requiredEntries, templateSets } from './syntax/realize.js';
 import { GENRES } from './genres.js';
 
@@ -42,7 +43,9 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
     // Derived words and compounds are built from the words they come from (the other roots keep their forms).
     const derivationAffixes = deriveAffixes(spec, new Set(rooted.map(e => e.form)));
     const numeralForms = new Set([...Object.values(numerals.roots ?? {}), ...Object.values(numerals.words ?? {})].filter(x => typeof x === 'string'));
-    const { lexicon, stats: derivationStats } = applyDerivation(rooted, rules, spec, derivationAffixes, numeralForms);
+    const cache = {};
+    const derivationPhon = derivationPhonology(spec);
+    const { lexicon, stats: derivationStats } = applyDerivation(rooted, rules, spec, derivationAffixes, numeralForms, derivationPhon);
     // Inflectional affixes must not collide with any root form or derivational affix.
     const affixes = generateAffixes(spec, model, new Set([...lexicon.map(e => e.form), ...Object.values(derivationAffixes).map(a => a.form)]));
     const lang = { spec, model, affixes, lexicon, numerals };
@@ -60,6 +63,6 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
         spec, notes, phonology,
         morphology: { model, affixes },
         syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles },
-        numerals, calendar, derivation: { affixes: derivationAffixes, stats: derivationStats }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
+        numerals, calendar, get history() { return (cache.history ??= buildHistory(spec, lexicon, derivationAffixes)); }, derivation: { affixes: derivationAffixes, stats: derivationStats, phonology: derivationPhon }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
     });
 }

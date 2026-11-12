@@ -169,8 +169,27 @@ export function samplesHtml(lang) {
 
 export const lexiconRows = lexicon => lexicon.map(e => ({ word: e.form, english: label(e), meta: `${e.domain} · ${e.pos}`, structure: e.derivation ? `${e.derivation.text} (${e.derivation.gloss.toLowerCase()})` : '' }));
 
+// The lexicon is arranged by topic (a vocabulary lists words alphabetically: that is the Dictionary tab).
+export const LEXICON_TOPICS = Object.freeze([
+    ['body', 'Human body'], ['family', 'Family and kinship'], ['society', 'People and society'], ['quality', 'Qualities (adjectives)'], ['action', 'Actions and verbs'],
+    ['animal', 'Animals'], ['nature', 'Nature and landscape'], ['food', 'Food and drink'], ['clothing', 'Clothing'], ['household', 'Home and household'],
+    ['settlement', 'Settlements and buildings'], ['craft', 'Crafts and trades'], ['material', 'Materials'], ['object', 'Objects and tools'], ['weapon', 'Weapons'],
+    ['war', 'War'], ['transport', 'Travel and transport'], ['maritime', 'Sea and sailing'], ['magic', 'Magic'], ['faith', 'Faith and ritual'], ['music', 'Music'],
+    ['technology', 'Technology'], ['time', 'Time'], ['space', 'Space and position'], ['number', 'Numbers'], ['abstract', 'Abstract concepts'], ['need', 'Needs and states'], ['grammar', 'Grammar words']
+]);
+const POS_ORDER = ['noun', 'verb', 'adjective', 'adverb'];
 export function lexiconHtml(lexicon) {
-    return `<h3>Generated lexicon</h3><div class="lexicon">${lexiconRows(lexicon).map(r => `<div class="lex-row"><span class="word">${esc(r.word)}</span><span class="eng">${esc(r.english)}</span><span class="meta">${esc(r.meta)}${r.structure ? `<br><span class="structure">${esc(r.structure)}</span>` : ''}</span></div>`).join('')}</div>`;
+    const sections = LEXICON_TOPICS.map(([domain, title]) => {
+        const entries = lexicon.filter(e => e.domain === domain).sort((a, b) => (POS_ORDER.indexOf(a.pos) + 1 || 9) - (POS_ORDER.indexOf(b.pos) + 1 || 9) || label(a).localeCompare(label(b)));
+        return { domain, title, entries };
+    }).filter(x => x.entries.length);
+    const rows = entries => entries.map(e => {
+        const d = e.derivation;
+        return `<div class="lex-row"><span class="word">${esc(e.form)}</span><span class="eng">${esc(label(e))}</span><span class="meta">${esc(e.pos)}${d ? `<br><span class="structure">${esc(`${d.text} (${d.gloss.toLowerCase()})`)}</span>` : ''}</span></div>`;
+    }).join('');
+    return `<h3>Generated lexicon</h3>
+<div class="lex-toolbar"><span class="sub">${lexicon.length} words in ${sections.length} topics</span><span><button type="button" class="btn ghost" data-lex-toggle="open">Open all</button> <button type="button" class="btn ghost" data-lex-toggle="close">Close all</button></span></div>
+${sections.map(x => `<details class="lex-section" id="lex-${x.domain}"><summary><span>${esc(x.title)}</span><span class="count">${x.entries.length}</span></summary><div class="lexicon">${rows(x.entries)}</div></details>`).join('')}`;
 }
 
 export function dictionaryHtml(lexicon, direction, query) {
@@ -236,7 +255,7 @@ export function numberResultHtml(lang, n) {
 }
 
 // ---- Calendar tab ----
-const tbl = (head, rows, cls = 'names-table') => `<table class="${cls}"><thead><tr>${head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td${i === 0 ? ' class="name-cell"' : ''}>${c === '' || c == null ? '<span class="sub">—</span>' : esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+const tbl = (head, rows, cls = 'names-table full-table') => `<table class="${cls}"><thead><tr>${head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td${i === 0 ? ' class="name-cell"' : ''}>${c === '' || c == null ? '<span class="sub">—</span>' : esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
 
 export function calendarHtml(lang) {
     const c = lang.calendar;
@@ -277,8 +296,27 @@ export function derivationHtml(lang) {
     const compounds = derived.filter(e => e.derivation.type === 'compound');
     const order = lang.spec.adjPosition === 'before' ? 'modifier + head' : 'head + modifier';
     const compoundRows = compounds.slice(0, 6).map(e => `${e.form} = ${e.derivation.text} (${e.lemma})`);
+    const ph = d.phonology;
+    const joining = ph ? `Joining: vowel hiatus ${{ keep: 'is kept', elide: 'is resolved by dropping the first vowel', glide: `is broken by "${ph.glide}"` }[ph.hiatus]}; ${ph.linker ? `compounds take the linking vowel "${ph.linker}" between consonants` : 'compounds have no linking vowel'}.` : '';
     return `<div class="card"><h3>Word formation</h3>
-<p class="sub">${d.stats.applied} of the ${lang.lexicon.length} words are built from other words of the language (${d.stats.available} possible with the words present). Related words share their root; the others keep an independent root. Each row of the lexicon below shows the structure of derived words.</p>
-${tbl(['Affix', 'Type', 'Meaning', 'Examples'], rows)}
+<p class="sub">${d.stats.applied} of the ${lang.lexicon.length} words are built from other words of the language (${d.stats.available} possible with the words present). Related words share their root; the others keep an independent root. Each row of the lexicon below shows the structure of derived words. ${esc(joining)}</p>
+${tbl(['Affix', 'Type', 'Meaning', 'Examples'], rows, 'names-table full-table')}
 <h4>Compounds (${compounds.length}, ${order})</h4><p>${compoundRows.length ? compoundRows.map(esc).join('<br>') : '<span class="sub">none in this lexicon</span>'}</p></div>`;
+}
+
+// History tab: the proto-language (the generated language) and one daughter language derived by sound change.
+export function historyHtml(lang) {
+    const h = lang.history;
+    if (!h) return '<div class="empty">No history available.</div>';
+    const st = h.stats;
+    const pct = n => `${Math.round(100 * n / st.words)}%`;
+    const rules = h.rules.map((r, i) => [String(i + 1), `c. ${r.years} years ago`, r.label, `${r.words} (${pct(r.words)})`, r.example ?? '']);
+    const rows = [...h.lexicon].sort((a, b) => a.lemma.localeCompare(b.lemma)).map(w => [w.daughter, `*${w.proto}`, w.lemma, w.changes.length ? w.changes.join(', ') : 'unchanged', w.etymology ?? '']);
+    return `<div class="card"><h3>Daughter language</h3>
+<p class="sub">The generated language is treated as the proto-language. Its daughter is obtained by ${st.rules} ordered sound changes applied to every word (forward only: the proto forms are the ones generated). Derived words change as a whole, so related words come to differ in their roots. ${st.unchanged} of ${st.words} words (${pct(st.unchanged)}) are unchanged; ${st.merged} words (${pct(st.merged)}) have become homophones of another word${h.attempts > 1 ? `; ${h.attempts} rule sets were tried to keep this low` : ''}.</p>
+<h4>Sound changes, oldest first</h4>
+${tbl(['#', 'When', 'Change', 'Words affected', 'Example'], rules)}
+${h.affixes.length ? `<h4>Derivational affixes</h4>${tbl(['Type', 'Proto', 'Daughter'], h.affixes.map(a => [a.type, a.position === 'prefix' ? `*${a.proto}-` : `*-${a.proto}`, a.position === 'prefix' ? `${a.daughter}-` : `-${a.daughter}`]))}` : ''}
+<h4>Cognates (${rows.length})</h4>
+<div class="table-scroll history-scroll">${tbl(['Daughter', 'Proto', 'English', 'Changes', 'Etymology'], rows)}</div></div>`;
 }

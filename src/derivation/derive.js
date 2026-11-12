@@ -3,7 +3,7 @@
 // The relations are data (data/derivations.json, made by tools/derivation/build.mjs from the dictionary); this module
 // decides how the language marks each kind of derivation and builds the forms. Pure and deterministic.
 import { rng } from '../core/rng.js';
-import { createAffixFactory } from '../phonology/words.js';
+import { createAffixFactory, resolvePhonotactics } from '../phonology/words.js';
 import { join } from '../numerals/system.js';
 
 // type -> [label, what the affix does]
@@ -43,9 +43,38 @@ export function deriveAffixes(spec, reserved = new Set()) {
     return affixes;
 }
 
+// How the language joins morphemes: what it does when two vowels meet, and whether compounds take a linking vowel.
+// Own random stream. hiatus: 'keep' (the vowels stay side by side), 'elide' (the first is lost) or 'glide' (a consonant is put between).
+export function derivationPhonology(spec) {
+    const r = rng(`${spec.seed}|derivation|phonology`);
+    const ph = resolvePhonotactics(spec);
+    const a = r(), b = r(), c = r(), d = r();
+    const hiatus = a < 0.4 ? 'keep' : a < 0.8 ? 'elide' : 'glide';
+    const glide = ['j', 'w', 'h', 'n', 'r', 'l'].find(x => ph.model.c.includes(x)) ?? null;
+    const choices = ['o', 'i', 'a', 'e', 'u'].filter(v => ph.vowels.includes(v));
+    const linker = b < 0.35 && choices.length ? choices[Math.floor(c * Math.min(choices.length, 3))] : null;
+    return { hiatus: hiatus === 'glide' && !glide ? 'elide' : hiatus, glide, linker, order: d };
+}
+
+// Joins morphs the way the language does; `compound` adds the linking vowel after a consonant.
+function joinMorphs(forms, spec, phon, compound) {
+    const ph = resolvePhonotactics(spec);
+    const isVowel = ch => ph.vowels.includes(ch);
+    return forms.reduce((acc, f) => {
+        if (!acc) return f;
+        const last = acc[acc.length - 1], first = f[0];
+        if (compound && phon.linker && !isVowel(last) && !isVowel(first)) acc += phon.linker;
+        else if (isVowel(last) && isVowel(first)) {
+            if (phon.hiatus === 'elide' && acc.length > 1) acc = acc.slice(0, -1);
+            else if (phon.hiatus === 'glide') acc += phon.glide;
+        }
+        return join([acc, f], 'compound', spec);
+    }, '');
+}
+
 // Applies the derivations to a lexicon with forms. `derivations` = [{ id, type, bases: [ids] }].
 // Entries whose bases are not all in this lexicon keep their own root. `taken` = forms already used elsewhere (numerals).
-export function applyDerivation(lexicon, derivations, spec, affixes, taken = new Set()) {
+export function applyDerivation(lexicon, derivations, spec, affixes, taken = new Set(), phon = derivationPhonology(spec)) {
     const byId = new Map(lexicon.map(e => [e.id, e]));
     const rules = new Map((derivations ?? []).filter(d => byId.has(d.id) && d.bases.every(b => byId.has(b))).map(d => [d.id, d]));
     const forms = new Map(lexicon.map(e => [e.id, e.form]));
@@ -65,13 +94,14 @@ export function applyDerivation(lexicon, derivations, spec, affixes, taken = new
         const baseForms = rule.bases.map(b => forms.get(b));
         if (rule.type === COMPOUND) {
             const [mod, head] = baseForms;
-            form = join(compoundFirst ? [mod, head] : [head, mod], 'compound', spec);
+            // isolating languages write the two words apart, like their numerals; the others make one word
+            form = spec.morphology === 'isolating' ? join(compoundFirst ? [mod, head] : [head, mod], 'spaced', spec) : joinMorphs(compoundFirst ? [mod, head] : [head, mod], spec, phon, true);
             const order = compoundFirst ? [0, 1] : [1, 0];
             detail = { type: COMPOUND, bases: rule.bases, parts: order.map(i => ({ id: rule.bases[i], form: baseForms[i] })) };
         } else {
             const a = affixes[rule.type];
             if (!a) { state.set(id, 'skipped'); return false; }
-            form = join(a.position === 'prefix' ? [a.form, baseForms[0]] : [baseForms[0], a.form], 'compound', spec);
+            form = joinMorphs(a.position === 'prefix' ? [a.form, baseForms[0]] : [baseForms[0], a.form], spec, phon, false);
             const base = { id: rule.bases[0], form: baseForms[0] }, affix = { affix: rule.type, form: a.form };
             detail = { type: rule.type, bases: rule.bases, affix: a.form, position: a.position, parts: a.position === 'prefix' ? [affix, base] : [base, affix] };
         }
