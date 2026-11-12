@@ -4,6 +4,12 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.16.2
+- Fix: the *Expanded letters* box was a cell of the parameter grid (half width). It now sits inside the cluster grid and has exactly the width of the Onset and Coda boxes at every window size.
+
+## 1.16.1
+- Fix: the *Expanded letters* box now has the same border colour, legend style and width as the cluster boxes, and its labels wrap instead of overflowing.
+
 ## 1.16.0
 - Calendar and time-measurement system (`src/calendar/`), with a new *Calendar* tab: logic table (each choice with the rule behind it), seasons, months, week, division of the day, short durations and time-keeping instruments, all named with the language's own words and numerals, plus a table of every time word of the dictionary by category.
 - Rigidity grows with technology: nature-bound (no writing or clocks) → observed cycles and simple devices → fixed rules, canonical hours or bells → equal units and clocks. The era chosen by the user (else the genre's) sets it; no fixed 30-day months, epagomenal days, numbered hours or clocks before writing and calculation, while modern and later eras get numbered months, equal hours and decimal or 24 x 60 time.

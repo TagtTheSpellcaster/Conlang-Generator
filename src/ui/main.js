@@ -198,7 +198,7 @@ function installScriptControls() {
     const box = document.createElement('fieldset');
     box.className = 'script-controls';
     box.innerHTML = `<legend>Expanded letters</legend><div class="script-options">${Object.entries(EXPANSIONS).map(([key, g]) => `<label class="cluster-option"><input type="checkbox" name="script" value="${esc(key)}"> ${esc(g.label)}</label>`).join('')}</div><div class="sub cluster-hint">Marked letters for an exotic look. A few letters of each group are used (never the whole group), and only those whose base letter the language has. Genres such as dwarven or fey pick a group by themselves.</div>`;
-    anchor.insertAdjacentElement('afterend', box);
+    anchor.appendChild(box);   // a grid item of the cluster grid: same column width as the cluster boxes
 }
 
 function installClusterControls() {
