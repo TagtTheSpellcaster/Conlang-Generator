@@ -4,9 +4,9 @@ import { generateLanguage } from '../src/engine.js';
 import { resolveSpec } from '../src/spec.js';
 import { MODEL, CLUSTER_SETS, resolveClusters } from '../src/phonology/models.js';
 import { resolvePhonotactics, validWord, createWordFactory } from '../src/phonology/words.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'ph', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'ph', ...input }, vocabulary, templates, derivations);
 const forms = L => L.lexicon.map(e => e.form);
 const vowelsOf = L => L.phonology.vowels;
 const runs = (w, vowels) => w.match(new RegExp(`[^${vowels.join('')}]+`, 'g')) ?? [];
@@ -100,7 +100,7 @@ test('option sweep with clusters: unique forms, nothing skipped', () => {
     const onset = [null, ['liquids'], ['nasal_stop', 'harsh'], ['none'], ['slavic', 'greek']], coda = [null, ['none'], ['liquid_stop'], ['harsh', 'fricative_stop']];
     for (let i = 0; i < 60; i++) {
         const input = { seed: `cs-${i}`, consonants: pick(Object.keys(MODEL), i), onsetClusters: pick(onset, i), codaClusters: pick(coda, i + 1), maxCluster: i % 2 ? 2 : 3, morphology: pick(['agglutinative', 'fusional', 'isolating'], i), mean: 1 + (i % 4) };
-        const L = generateLanguage(input, vocabulary, templates);
+        const L = generateLanguage(input, vocabulary, templates, derivations);
         assert.equal(new Set(forms(L)).size, L.lexicon.length, JSON.stringify(input));
         assert.deepEqual(L.skippedSamples, [], JSON.stringify(input));
     }

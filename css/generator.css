@@ -620,3 +620,5 @@ main {
 .table-scroll { overflow-x: auto; }
 .names-table.wide-table { max-width: none; width: auto; min-width: 560px; }
 .meaning-cell { white-space: nowrap; }
+
+.lex-row .structure { color: #9fb3cf; font-family: ui-monospace, monospace; font-size: 11px; }

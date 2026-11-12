@@ -4,9 +4,9 @@ import { generateLanguage } from '../src/engine.js';
 import { NUMERAL_TYPES, GENRE_DEFAULT } from '../src/numerals/choose.js';
 import { numeralMeaning, numeralForm, numeralParts, isDefined, maxDefined, MAX_NUMERAL, sampleNumbers } from '../src/numerals/system.js';
 import { GENRE_IDS } from '../src/genres.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'num', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'num', ...input }, vocabulary, templates, derivations);
 
 test('numerals: deterministic and the type distribution is dominated by decimal', () => {
     assert.deepEqual(gen().numerals.config, gen().numerals.config);

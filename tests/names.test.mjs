@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
 import { generateNames, NAME_KINDS, PERSON_SCHEMES, nameStyle } from '../src/names.js';
 import { GENRE_IDS } from '../src/genres.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'names', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'names', ...input }, vocabulary, templates, derivations);
 
 test('names are deterministic, unique and as many as requested', () => {
     const L = gen();

@@ -4,9 +4,9 @@ import { generateLanguage } from '../src/engine.js';
 import { EXPANSIONS, EXPANSION_KEYS, EXTRA_VOWEL_CLASSES, EXTRA_CONSONANT_CLASSES, MODEL, VOWELS } from '../src/phonology/models.js';
 import { chooseExpanded, MAX_EXTRA_VOWELS, MAX_EXTRA_CONSONANTS } from '../src/phonology/script.js';
 import { GENRES, GENRE_IDS } from '../src/genres.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'script', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'script', ...input }, vocabulary, templates, derivations);
 const allSymbols = EXPANSION_KEYS.flatMap(k => [...EXPANSIONS[k].vowels.symbols, ...EXPANSIONS[k].consonants.symbols]);
 
 test('every expanded letter is one precomposed code point with phonetic classes', () => {

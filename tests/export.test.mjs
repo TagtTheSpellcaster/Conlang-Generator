@@ -6,7 +6,8 @@ import { languageDocument, toMarkdown, toHtml, lexiconCsv, languageJson, safeNam
 
 const vocab = JSON.parse(readFileSync(new URL('../data/vocabulary.json', import.meta.url))).vocabulary;
 const templates = JSON.parse(readFileSync(new URL('../data/sentence-templates.json', import.meta.url)));
-const make = o => generateLanguage({ seed: 'export', ...o }, vocab, templates);
+const derivations = JSON.parse(readFileSync(new URL('../data/derivations.json', import.meta.url))).derivations;
+const make = o => generateLanguage({ seed: 'export', ...o }, vocab, templates, derivations);
 
 for (const morphology of ['isolating', 'agglutinative', 'fusional']) {
     test(`export is complete for ${morphology}`, () => {

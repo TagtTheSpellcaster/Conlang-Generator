@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
 import { languageDocument, languageJson } from '../src/export.js';
 import { GENRE_IDS } from '../src/genres.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'cal', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'cal', ...input }, vocabulary, templates, derivations);
 const ERAS = ['prehistoric', 'ancient', 'medieval', 'renaissance', 'modern', 'futuristic'];
 
 test('calendar: deterministic, with logic table and the expected sections', () => {

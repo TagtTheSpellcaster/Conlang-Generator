@@ -1,0 +1,20 @@
+# Corrections to the pairs found by tools/derivation/build.mjs.
+#   - word [word ...]      remove the derivation of these words (spelling coincidences, meanings that drifted)
+#   + type word < base [+ base2]   add or replace a pair (type "compound" takes two bases: modifier + head)
+# Types: agent act result quality abstract place diminutive feminine adjective privative adverb causative negative repetitive excess compound
+# Spelling coincidences (the suffix is not one)
+- tiny wary slippery slipper banner counter felter flower honor lever lighter pitcher pointer razor router sewer shower sneaker tailor tender
+- prayer fasten hamlet sorceress gallery refine refuse relay reward barrage hostage hermitage understand
+- casing coping foundation sounding storming militarism
+# Suffix found, but the relation is another one: re-typed
++ abstract slavery < slave
++ abstract rivalry < rival
++ abstract wizardry < wizard
++ abstract weaponry < weapon
++ place orphanage < orphan
++ abstract pilgrimage < pilgrim
+# Compounds that look like -ship
++ compound airship < air + ship
++ compound fireship < fire + ship
++ compound flagship < flag + ship
++ compound starship < star + ship

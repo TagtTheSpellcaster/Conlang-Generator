@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
 import { tokenText, realize } from '../src/syntax/realize.js';
 import { inflect } from '../src/morphology/inflect.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'grammar', articles: 'none', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'grammar', articles: 'none', ...input }, vocabulary, templates, derivations);
 const langOf = L => ({ spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes, lexicon: L.lexicon });
 const flat = ts => ts.flatMap(t => t.kind === 'alts' ? t.options.flatMap(flat) : [t]);
 const ids = r => flat(r.tokens).map(t => t.id);

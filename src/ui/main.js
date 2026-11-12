@@ -7,7 +7,7 @@ import { generateLanguage } from '../engine.js';
 import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS, EXPANSIONS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
-import { calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -15,6 +15,7 @@ const say = text => { if ($('message')) $('message').textContent = text; };
 
 let vocabulary = [];
 let templates = [];
+let derivations = [];
 let current = null;          // last generated language
 let importedLexicon = null;  // rows imported for re-export only
 
@@ -85,7 +86,7 @@ function updateNumberResult() {
 let nameSalt = 0;
 function renderNames() {
     if (!current) return;
-    const kind = $('names-kind').value, count = Number($('names-count').value) || 12;
+    const kind = $('names-kind').value, count = Number($('names-count').value) || 20;
     $('names-output').className = '';
     $('names-output').innerHTML = namesHtml(generateNames(current, { kind, count, salt: nameSalt, scheme: $('names-scheme').value }), kind);
 }
@@ -101,8 +102,8 @@ function render(lang) {
     samples.className = '';
     samples.innerHTML = samplesHtml(lang);
     const lex = $('lexicon-output');
-    lex.className = 'card';
-    lex.innerHTML = lexiconHtml(lang.lexicon);
+    lex.className = '';
+    lex.innerHTML = derivationHtml(lang) + `<div class="card">${lexiconHtml(lang.lexicon)}</div>`;
     renderDictionary();
     renderNumerals();
     renderNames();
@@ -115,7 +116,7 @@ function generate(keepSeed = false) {
     try {
         const input = readInput();
         if (keepSeed === true && current) input.seed = current.spec.seed;   // same language, another numeral choice
-        current = generateLanguage(input, vocabulary, templates);
+        current = generateLanguage(input, vocabulary, templates, derivations);
         render(current);
         say(`Generated ${current.lexicon.length} entries.`);
     } catch (e) {
@@ -370,6 +371,7 @@ async function start() {
         const loaded = await loadVocabulary();
         vocabulary = loaded.vocabulary;
         templates = await loadJson('data/sentence-templates.json');
+        derivations = (await loadJson('data/derivations.json').catch(() => ({ derivations: [] }))).derivations;
         populateFilters();
         if ($('db-status')) $('db-status').textContent = `Vocabulary loaded: ${vocabulary.length} entries${loaded.edits ? ` (${loaded.edits} local edit${loaded.edits === 1 ? '' : 's'} from the vocabulary manager)` : ''}${loaded.warning ? ` — ${loaded.warning}` : ''}`;
     } catch (e) {

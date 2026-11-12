@@ -3,6 +3,7 @@ const load = p => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
 export const vocabularyFile = load('../data/vocabulary.json');
 export const vocabulary = vocabularyFile.vocabulary;
 export const templates = load('../data/sentence-templates.json');
+export const derivations = load('../data/derivations.json').derivations;
 export const universal = templates.universal;
 export const everyTemplate = [...templates.universal, ...Object.values(templates.genres).flat()];
 export const refsOf = t => {

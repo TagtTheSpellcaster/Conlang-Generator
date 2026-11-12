@@ -6,9 +6,9 @@ import { GENRES, GENRE_IDS, genreDefaults } from '../src/genres.js';
 import { MODEL, VOWELS, CLUSTER_SETS, SOUND_CLASSES } from '../src/phonology/models.js';
 import { genreBonus } from '../src/lexicon/select.js';
 import { createWordFactory } from '../src/phonology/words.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'gt', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'gt', ...input }, vocabulary, templates, derivations);
 const lemmas = L => new Set(L.lexicon.map(e => e.lemma));
 const forms = L => L.lexicon.filter(e => e.tier !== 'core').map(e => e.form);
 const VOWEL_SET = new Set(['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ']);

@@ -197,7 +197,7 @@ export function numeralMeaning(system, n) {
 }
 
 // Joins words into the language's way of writing numbers: separate words (isolating) or one compound word.
-function join(forms, style, spec) {
+export function join(forms, style, spec) {
     if (style === 'spaced') return forms.join(' ');
     const ph = resolvePhonotactics(spec);
     const isVowel = ch => ph.vowels.includes(ch);

@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
 import { realize, tokenText, buildIndex, adpositionPosition } from '../src/syntax/realize.js';
 import { inflect, genderOf } from '../src/morphology/inflect.js';
-import { vocabulary, templates, refsOf } from './helpers.mjs';
+import { vocabulary, templates, derivations, refsOf } from './helpers.mjs';
 import { GENRE_IDS } from '../src/genres.js';
 
 const byId = new Map(vocabulary.map(e => [e.id, e]));
-const gen = (input = {}) => generateLanguage({ seed: 'syn', articles: 'both', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'syn', articles: 'both', ...input }, vocabulary, templates, derivations);
 const lang = L => ({ spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes, lexicon: L.lexicon });
 const T = (en, o) => ({ id: 'x', en, ...o });
 const word = (L, id) => L.lexicon.find(e => e.id === id);

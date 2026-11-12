@@ -4,6 +4,12 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.18.0
+- Lexical derivation. About 810 pairs found in the English dictionary (`data/derivations.json`, made by `tools/derivation/build.mjs`): 290 derivations by suffix or prefix (*bake → baker*, *dark → darkness*, *fear → fearless*, *loyal → disloyal*, *turn → return*) and 520 compounds of two dictionary nouns (*night watch*, *fire giant*, *holy water*). Spelling coincidences (*flow → flower*, *count → counter*) are removed in `tools/derivation/exceptions.txt`, which can be edited.
+- Each language has its own derivational morphemes (15 types: agent, action, result, quality, abstract, place, diminutive, feminine, adjective, privative, adverb, causative, negative, repetitive, excess). Some types share one affix (action/result, quality/abstract), about 15% of languages are prefixing, and negative, repetitive and excess prefixes are common in the others. Derivation has its own random stream: the roots of all other words, and the inflectional affixes, keep their forms for a given seed.
+- A derived word or compound is built from the final forms of its bases (compounds follow the language's modifier/head order); when a form would equal another word it keeps an independent root. The lexicon selection adds the bases of a derived word and the derivatives of a word it already has, up to a quarter more entries than before (600 → at most 750; genre lexicons 900 → at most 1,125), only where the filters allow them.
+- The Generated Lexicon tab opens with a *Word formation* card (affix table with examples, compounds) and shows the structure of each derived word; the Dictionary, the language sheet, the CSV (new `structure` column) and the JSON include it.
+
 ## 1.17.1
 - Fix: in the Numerals tab the *Meaning* column no longer wraps; the numbers table widens to fit it and scrolls sideways inside its card if a number is very long.
 

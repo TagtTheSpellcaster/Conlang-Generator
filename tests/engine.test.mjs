@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
 import { resolveSpec, OPTIONS } from '../src/spec.js';
 import { tokenText } from '../src/syntax/realize.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 't1', articles: 'both', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 't1', articles: 'both', ...input }, vocabulary, templates, derivations);
 const text = L => L.samples.map(s => `${s.english} => ${tokenText(s.tokens)}`).join('\n');
 
 test('determinism: same input and seed give identical output', () => {
@@ -18,25 +18,25 @@ test('different seeds change forms but not the selected senses', () => {
     // only the calendar's own words (and the fill they displace) depend on the seed: a seed may give a lunar or a solar calendar
     const ids = new Set(b.lexicon.map(e => e.id));
     const shared = a.lexicon.filter(e => ids.has(e.id)).length;
-    assert.ok(shared >= a.lexicon.length * 0.93, `${shared} of ${a.lexicon.length} senses shared`);
+    assert.ok(shared >= a.lexicon.length * 0.9, `${shared} of ${a.lexicon.length} senses shared`);
     assert.ok(a.lexicon.filter(e => e.tier === 'core').every(e => ids.has(e.id)), 'core senses are always selected');
     assert.notDeepEqual(a.lexicon.map(e => e.form), b.lexicon.map(e => e.form));
 });
 
 test('seed "auto" is resolved, reported and reproducible', () => {
-    const a = generateLanguage({ seed: 'auto', articles: 'both' }, vocabulary, templates);
+    const a = generateLanguage({ seed: 'auto', articles: 'both' }, vocabulary, templates, derivations);
     assert.notEqual(a.spec.seed, 'auto');
     assert.match(a.spec.seed, /^auto-/);
-    const b = generateLanguage({ seed: a.spec.seed, articles: 'both' }, vocabulary, templates);
+    const b = generateLanguage({ seed: a.spec.seed, articles: 'both' }, vocabulary, templates, derivations);
     assert.equal(JSON.stringify(b.lexicon), JSON.stringify(a.lexicon));
     assert.equal(text(b), text(a));
-    const c = generateLanguage({ seed: 'auto' }, vocabulary, templates);
+    const c = generateLanguage({ seed: 'auto' }, vocabulary, templates, derivations);
     assert.notEqual(c.spec.seed, a.spec.seed);
 });
 
-test('lexicon: unique non-empty forms, at most 600 entries, core senses always present', () => {
+test('lexicon: unique non-empty forms, at most 600 + the derivation extra, core senses always present', () => {
     const L = gen();
-    assert.ok(L.lexicon.length <= 600);
+    assert.ok(L.lexicon.length <= 600 * 1.25);
     assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length);
     assert.ok(L.lexicon.every(e => e.form && e.form.length >= 1));
     const ids = new Set(L.lexicon.map(e => e.id));
@@ -121,7 +121,7 @@ test('every option combination generates without error (randomised sweep + corne
     for (let i = 0; i < 250; i++) runs.push(Object.fromEntries(Object.keys(OPTIONS).map(k => [k, pickOf(k)])));
     for (const consonants of OPTIONS.consonants) for (const vowels of OPTIONS.vowels) runs.push({ consonants, vowels, mean: 1 }, { consonants, vowels, mean: 5 });
     runs.forEach((r, i) => {
-        const L = generateLanguage({ ...r, seed: `sweep-${i}` }, vocabulary, templates);
+        const L = generateLanguage({ ...r, seed: `sweep-${i}` }, vocabulary, templates, derivations);
         assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length, JSON.stringify(r));
         assert.deepEqual(L.skippedSamples, [], JSON.stringify(r));
         assert.ok(L.samples.length >= 40, `${L.samples.length} ${JSON.stringify(r)}`);

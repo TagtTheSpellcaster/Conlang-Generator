@@ -167,15 +167,15 @@ export function samplesHtml(lang) {
     return `<div class="sample-frame"><div class="morph-note">${note}</div><div class="sample-columns">${left}${right}</div></div>`;
 }
 
-export const lexiconRows = lexicon => lexicon.map(e => ({ word: e.form, english: label(e), meta: `${e.domain} · ${e.pos}` }));
+export const lexiconRows = lexicon => lexicon.map(e => ({ word: e.form, english: label(e), meta: `${e.domain} · ${e.pos}`, structure: e.derivation ? `${e.derivation.text} (${e.derivation.gloss.toLowerCase()})` : '' }));
 
 export function lexiconHtml(lexicon) {
-    return `<h3>Generated lexicon</h3><div class="lexicon">${lexiconRows(lexicon).map(r => `<div class="lex-row"><span class="word">${esc(r.word)}</span><span class="eng">${esc(r.english)}</span><span class="meta">${esc(r.meta)}</span></div>`).join('')}</div>`;
+    return `<h3>Generated lexicon</h3><div class="lexicon">${lexiconRows(lexicon).map(r => `<div class="lex-row"><span class="word">${esc(r.word)}</span><span class="eng">${esc(r.english)}</span><span class="meta">${esc(r.meta)}${r.structure ? `<br><span class="structure">${esc(r.structure)}</span>` : ''}</span></div>`).join('')}</div>`;
 }
 
 export function dictionaryHtml(lexicon, direction, query) {
     const q = String(query || '').toLowerCase().trim();
-    let rows = lexiconRows(lexicon).map(r => direction === 'conlang-en' ? { l: r.word, r: r.english, m: r.meta } : { l: r.english, r: r.word, m: r.meta });
+    let rows = lexiconRows(lexicon).map(r => direction === 'conlang-en' ? { l: r.word, r: r.english, m: r.structure ? `${r.meta} · ${r.structure}` : r.meta } : { l: r.english, r: r.word, m: r.structure ? `${r.meta} · ${r.structure}` : r.meta });
     if (q) rows = rows.filter(x => `${x.l} ${x.r} ${x.m}`.toLowerCase().includes(q));
     rows.sort((a, b) => a.l.localeCompare(b.l));
     return `<div class="card"><h3>${direction === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.map(x => `<div class="dict-row"><strong>${esc(x.l)}</strong><span>${esc(x.r)}</span><span class="meta">${esc(x.m)}</span></div>`).join('')}</div></div>`;
@@ -257,4 +257,28 @@ export function calendarHtml(lang) {
     const cats = [...new Set(c.vocabulary.map(v => v.category))];
     parts.push(card('Time vocabulary', cats.map(k => `<h4>${esc(k)}</h4>${tbl(['Word', 'English', 'Part of speech'], c.vocabulary.filter(v => v.category === k).map(v => [v.word, v.english, v.pos]))}`).join('')));
     return parts.join('');
+}
+
+
+// ---- Derivation (Generated Lexicon tab) ----
+import { DERIVATION_TYPES } from '../derivation/derive.js';
+export function derivationHtml(lang) {
+    const d = lang.derivation;
+    if (!d || !d.stats.applied) return '';
+    const derived = lang.lexicon.filter(e => e.derivation);
+    const shown = new Set();
+    const rows = Object.entries(d.affixes).filter(([t, a]) => !a.sharedWith && (d.stats.byType[t] || a.shares.some(x => d.stats.byType[x]))).map(([t, a]) => {
+        const types = [t, ...a.shares];
+        const ex = derived.filter(e => types.includes(e.derivation.type)).slice(0, 3).map(e => `${e.form} = ${e.derivation.text} (${e.lemma})`);
+        types.forEach(x => shown.add(x));
+        const does = types.map(x => DERIVATION_TYPES[x][1]).join('; ');
+        return [`${a.position === 'prefix' ? `${a.form}-` : `-${a.form}`}`, types.map(x => DERIVATION_TYPES[x][0]).join(' / '), does, ex.join(' · ')];
+    });
+    const compounds = derived.filter(e => e.derivation.type === 'compound');
+    const order = lang.spec.adjPosition === 'before' ? 'modifier + head' : 'head + modifier';
+    const compoundRows = compounds.slice(0, 6).map(e => `${e.form} = ${e.derivation.text} (${e.lemma})`);
+    return `<div class="card"><h3>Word formation</h3>
+<p class="sub">${d.stats.applied} of the ${lang.lexicon.length} words are built from other words of the language (${d.stats.available} possible with the words present). Related words share their root; the others keep an independent root. Each row of the lexicon below shows the structure of derived words.</p>
+${tbl(['Affix', 'Type', 'Meaning', 'Examples'], rows)}
+<h4>Compounds (${compounds.length}, ${order})</h4><p>${compoundRows.length ? compoundRows.map(esc).join('<br>') : '<span class="sub">none in this lexicon</span>'}</p></div>`;
 }

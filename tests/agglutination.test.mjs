@@ -4,9 +4,9 @@ import { generateLanguage } from '../src/engine.js';
 import { inflect, attach } from '../src/morphology/inflect.js';
 import { personCells } from '../src/morphology/affixes.js';
 import { tokenText, realize } from '../src/syntax/realize.js';
-import { vocabulary, templates } from './helpers.mjs';
+import { vocabulary, templates, derivations } from './helpers.mjs';
 
-const gen = (input = {}) => generateLanguage({ seed: 'agg', articles: 'none', relations: 'cases', ...input }, vocabulary, templates);
+const gen = (input = {}) => generateLanguage({ seed: 'agg', articles: 'none', relations: 'cases', ...input }, vocabulary, templates, derivations);
 const morphOf = L => ({ spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes });
 const word = (L, id) => L.lexicon.find(e => e.id === id);
 
@@ -131,7 +131,7 @@ test('all affixes (nominal, possessive, verbal) are unique and never collide wit
 });
 
 test('junction: a linking vowel is inserted only when the consonant run would be illegal', () => {
-    const { spec } = generateLanguage({ seed: 'j', consonants: 'european', morphology: 'agglutinative' }, vocabulary, templates);
+    const { spec } = generateLanguage({ seed: 'j', consonants: 'european', morphology: 'agglutinative' }, vocabulary, templates, derivations);
     assert.equal(attach('kar', 'ta', spec), 'ta');        // r+t is a legal coda+onset
     assert.equal(attach('karkt', 'ta', spec), 'ata');     // rkt+t is not
     assert.equal(attach('kara', 'ta', spec), 'ta');       // vowel-final stems never need a linker

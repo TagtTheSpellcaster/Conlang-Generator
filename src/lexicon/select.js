@@ -67,7 +67,9 @@ function articleAllowed(entry, mode) {
 }
 
 // `required`: entries the sample sentences need; they are always included, even if the genre would exclude them.
-export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON_GENRE : MAX_LEXICON, required = []) {
+// `derivations`: the pairs of data/derivations.json. They never shrink the lexicon; they add related words on top of the limit (at most DERIVATION_EXTRA of it).
+export const DERIVATION_EXTRA = 0.25;
+export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON_GENRE : MAX_LEXICON, required = [], derivations = []) {
     const ranked = vocabulary
         // equal scores are ordered by a fixed hash of the id (not the seed): the selected senses stay the same for every seed,
         // but they are spread over the whole dictionary instead of always being its first entries
@@ -91,6 +93,17 @@ export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON
         ranked.filter(x => x.group === group && !seen.has(x.e.id)).sort(byScore).slice(0, quota).forEach(add);
     }
     ranked.filter(x => !seen.has(x.e.id)).sort(byScore).forEach(add);
+    if (derivations.length) {
+        // Related words are worth more than unrelated ones: a derived word whose bases are missing brings them in, and a word whose
+        // derivatives are missing gets them. Both are only added when the filters allow them, and only up to a quarter of the limit.
+        const allowed = new Map(ranked.map(x => [x.e.id, x]));
+        let extra = 0;
+        const cap = Math.round(limit * DERIVATION_EXTRA);
+        const addExtra = x => { if (x && !seen.has(x.e.id) && extra < cap) { seen.add(x.e.id); chosen.push(x.e); extra++; } };
+        const inLexicon = d => seen.has(d.id);
+        derivations.filter(inLexicon).flatMap(d => d.bases.map(b => allowed.get(b))).filter(Boolean).sort(byScore).forEach(addExtra);
+        derivations.filter(d => !inLexicon(d) && allowed.has(d.id) && d.bases.every(b => seen.has(b))).map(d => allowed.get(d.id)).sort(byScore).forEach(addExtra);
+    }
     return chosen;
 }
 
