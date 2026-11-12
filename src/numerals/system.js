@@ -157,6 +157,45 @@ export function numeralParts(system, n) {
     return compose(n);
 }
 
+
+// The arithmetic behind a number, written with the multiplication sign: 90 in a French-type system is "(4 × 20) + 10".
+// It mirrors numeralParts: same cuts, same units, same order of the terms.
+export function numeralMeaning(system, n) {
+    const { config, roots } = system;
+    if (!Number.isInteger(n) || n < 0) return '';
+    if (config.type === 'restricted') {
+        if (n >= 1 && n <= config.limit) return String(n);
+        if (config.extended && n >= 2 && n <= 5) return [...Array(Math.floor(n / 2)).fill('2'), ...(n % 2 ? ['1'] : [])].join(' + ');
+        return 'many';
+    }
+    const sub = config.subtractive;
+    const show = items => (items.length === 1 ? items[0].s : items.map(t => (t.compound ? `(${t.s})` : t.s)).join(' + '));
+    const operand = items => (items.length === 1 && !items[0].compound ? items[0].s : `(${show(items)})`);
+    const terms = value => {
+        if (roots[value] !== undefined) return [{ s: String(value) }];
+        const d = value % 10;
+        if (sub && value > 10 && d >= sub.from) return [{ s: `${operand(terms(value + 10 - d))} − ${operand(terms(10 - d))}`, compound: true }];
+        if (config.french && value >= 70 && value < 100 && Math.floor(value / 10) % 2 === 1) {
+            const base = Math.floor(value / 10) * 10 === 70 ? 60 : 80;
+            return [...terms(base), ...terms(value - base)];
+        }
+        if (config.halves && value >= 50 && value < 100 && Math.floor(value / 10) % 2 === 1) {
+            const k = (Math.floor(value / 10) + 1) / 2, r = value % 10;
+            return level([{ s: `${k - 0.5} × 20`, compound: true }], r, value);
+        }
+        const U = system.units.find(u => u.value <= value && (u.from === undefined || value >= u.from));
+        const q = Math.floor(value / U.value), r = value % U.value;
+        const head = q === 1 ? [{ s: String(U.value) }] : [{ s: `${operand(terms(q))} × ${U.value}`, compound: true }];
+        return level(head, r, value);
+    };
+    const level = (body, r, value) => {
+        if (!r) return body;
+        const tail = terms(r);
+        return config.unitFirst && value >= 20 && value < 100 && r < 10 ? [...tail, ...body] : [...body, ...tail];
+    };
+    return show(terms(n));
+}
+
 // Joins words into the language's way of writing numbers: separate words (isolating) or one compound word.
 function join(forms, style, spec) {
     if (style === 'spaced') return forms.join(' ');

@@ -30,6 +30,13 @@ const GENRE_NUMERALS = Object.freeze({
     artisan: { weights: { duodecimal: 4 } }
 });
 
+// The counting base each genre uses unless the user picks another (genres not listed fall back to the weighted draw of the seed).
+export const GENRE_DEFAULT = Object.freeze({
+    dwarven: 'vigesimal', giant: 'quinary', orcish: 'quinary', nomad: 'quinary', fey: 'vigesimal', machine: 'octal',
+    merchant: 'duodecimal', sacred: 'duodecimal', arcane: 'duodecimal', infernal: 'duodecimal',
+    hive: 'decimal', undead: 'decimal', marine: 'decimal', artisan: 'decimal', war: 'decimal', women: 'decimal', thieves: 'decimal', draconic: 'decimal'
+});
+
 const pickWeighted = (table, r) => {
     const entries = Object.entries(table), total = entries.reduce((s, [, w]) => s + w, 0);
     let x = r() * total;
@@ -45,9 +52,11 @@ export function resolveNumerals(spec, input = {}) {
     // every draw is made in a fixed order, whatever the user fixed, so that fixing one option does not reshuffle the others
     const weights = Object.fromEntries(Object.entries(BASE_WEIGHTS).map(([k, w]) => [k, w * (bias.weights?.[k] ?? 1)]));
     const drawType = pickWeighted(weights, r);
+    const genreDefault = GENRE_DEFAULT[spec.genre];
     const dSub = r(), dSubFrom = r(), dHalves = r(), dUnitFirst = r(), dLinker = r(), dLimit = r(), dExtended = r(), dClass = r(), dPos = r();
 
-    let type = NUMERAL_TYPES.includes(input.numerals) ? input.numerals : drawType;
+    // automatic: the genre's customary system; without a genre (or a free choice) the weighted draw is the fallback
+    let type = NUMERAL_TYPES.includes(input.numerals) ? input.numerals : (genreDefault ?? drawType);
     if (input.numerals && input.numerals !== 'auto' && !NUMERAL_TYPES.includes(input.numerals)) notes.push(`numerals: "${input.numerals}" is not valid, chosen automatically.`);
 
     let variant = NUMERAL_VARIANTS.includes(input.numeralVariant) ? input.numeralVariant : null;

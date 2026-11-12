@@ -6,7 +6,7 @@ import { personCells } from './morphology/affixes.js';
 import { exampleNoun, exampleVerb, exampleAdjective } from './morphology/examples.js';
 import { tokenText } from './syntax/realize.js';
 import { generateNames, NAME_KINDS } from './names.js';
-import { numeralForm, ordinalForm, sampleNumbers } from './numerals/system.js';
+import { numeralForm, ordinalForm, numeralMeaning, sampleNumbers } from './numerals/system.js';
 import { NUMERAL_LABELS } from './numerals/choose.js';
 
 const plain = parts => parts.map(p => p.text).join('-') || '∅';
@@ -108,7 +108,7 @@ export function languageDocument(lang, version = '') {
     if (lang.genre) sections.push(sentenceSection(`Specialised sentences — ${lang.genre.label}`, gen));
     sections.push({ title: 'Numerals', blocks: [
         { type: 'para', text: `${NUMERAL_LABELS[lang.numerals.config.type]}; numeral ${lang.numerals.config.position} the noun; ${lang.numerals.config.classifiers ? 'obligatory classifiers' : 'no classifiers'}.` },
-        { type: 'table', head: ['Number', 'Cardinal', 'Ordinal'], rows: sampleNumbers(lang.numerals).filter(n => n > 0 || lang.numerals.config.type !== 'restricted').map(n => [String(n), numeralForm(lang.numerals, n, lang.spec).form, ordinalForm(lang.numerals, n, lang.spec)]) },
+        { type: 'table', head: ['Number', 'Cardinal', 'Ordinal', 'Meaning'], rows: sampleNumbers(lang.numerals).filter(n => n > 0 || lang.numerals.config.type !== 'restricted').map(n => [String(n), numeralForm(lang.numerals, n, lang.spec).form, ordinalForm(lang.numerals, n, lang.spec), numeralMeaning(lang.numerals, n)]) },
         ...(lang.numerals.classifiers ? [{ type: 'heading', text: 'Classifiers' }, { type: 'table', head: ['Class', 'Classifier'], rows: lang.numerals.classifiers.map(c => [c.id, c.form]) }] : [])
     ] });
     {

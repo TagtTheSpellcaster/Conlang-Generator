@@ -1,8 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
-import { NUMERAL_TYPES } from '../src/numerals/choose.js';
-import { numeralForm, numeralParts, isDefined, maxDefined, MAX_NUMERAL, sampleNumbers } from '../src/numerals/system.js';
+import { NUMERAL_TYPES, GENRE_DEFAULT } from '../src/numerals/choose.js';
+import { numeralMeaning, numeralForm, numeralParts, isDefined, maxDefined, MAX_NUMERAL, sampleNumbers } from '../src/numerals/system.js';
 import { GENRE_IDS } from '../src/genres.js';
 import { vocabulary, templates } from './helpers.mjs';
 
@@ -86,4 +86,38 @@ test('sample sentences count with numerals; restricted languages skip only what 
     const R = gen({ numerals: 'restricted' });
     assert.deepEqual(R.skippedSamples, []);
     assert.ok(sampleNumbers(L.numerals).length > 20);
+});
+
+test('genre default: the genre sets the system when automatic, and the user can override it', () => {
+    for (const g of GENRE_IDS) {
+        assert.ok(GENRE_DEFAULT[g], g);
+        assert.equal(gen({ genre: g }).numerals.config.type, GENRE_DEFAULT[g], g);
+        assert.equal(gen({ genre: g, numerals: 'quinary' }).numerals.config.type, 'quinary', g);
+    }
+    assert.ok(NUMERAL_TYPES.includes(gen().numerals.config.type));   // no genre: weighted draw as fallback
+});
+
+test('meaning: arithmetic written with the multiplication sign', () => {
+    const fr = gen({ numerals: 'hybrid', numeralVariant: 'plain' }).numerals;
+    assert.equal(numeralMeaning(fr, 90), '(4 \u00d7 20) + 10');
+    assert.equal(numeralMeaning(fr, 7), '7');
+    assert.equal(numeralMeaning(gen({ numerals: 'hybrid', numeralVariant: 'halves' }).numerals, 50), '2.5 \u00d7 20');
+    assert.equal(numeralMeaning(gen({ numerals: 'decimal', numeralVariant: 'subtractive' }).numerals, 19), '(2 \u00d7 10) \u2212 1');
+    const r = gen({ numerals: 'restricted' }).numerals;
+    assert.equal(numeralMeaning(r, 99999), 'many');
+    for (const type of NUMERAL_TYPES) {
+        const sys = gen({ numerals: type }).numerals;
+        for (const n of [1, 2, 3, 19, 57, 90, 1234, 20000]) if (isDefined(sys, n)) assert.ok(!/NaN|undefined/.test(numeralMeaning(sys, n)), `${type} ${n}`);
+    }
+});
+
+test('meaning: the expression evaluates to the number (decimal, vigesimal, duodecimal, quinary, octal)', () => {
+    for (const type of ['decimal', 'vigesimal', 'duodecimal', 'quinary', 'octal']) {
+        const sys = gen({ numerals: type, numeralVariant: 'plain' }).numerals;
+        for (const n of [1, 9, 13, 19, 27, 99, 100, 144, 365, 1234, 40000, 999999]) {
+            if (!isDefined(sys, n)) continue;
+            const value = Function(`"use strict"; return (${numeralMeaning(sys, n).replace(/\u00d7/g, '*').replace(/\u2212/g, '-')});`)();
+            assert.equal(value, n, `${type} ${n}: ${numeralMeaning(sys, n)}`);
+        }
+    }
 });

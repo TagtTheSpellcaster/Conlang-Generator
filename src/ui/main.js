@@ -111,9 +111,11 @@ function render(lang) {
     cal.innerHTML = calendarHtml(lang);
 }
 
-function generate() {
+function generate(keepSeed = false) {
     try {
-        current = generateLanguage(readInput(), vocabulary, templates);
+        const input = readInput();
+        if (keepSeed === true && current) input.seed = current.spec.seed;   // same language, another numeral choice
+        current = generateLanguage(input, vocabulary, templates);
         render(current);
         say(`Generated ${current.lexicon.length} entries.`);
     } catch (e) {
@@ -345,6 +347,14 @@ async function start() {
     $('clear-filters')?.addEventListener('click', () => FILTERS.forEach(id => { if ($(id)) $(id).value = ''; }));
     for (const [id, type] of [['preset-historical', 'historical'], ['preset-fantasy', 'fantasy'], ['preset-modern', 'modern'], ['preset-scifi', 'scifi']]) $(id)?.addEventListener('click', () => preset(type));
     $('numeral-input')?.addEventListener('input', updateNumberResult);
+    // numeral system and variant can also be chosen on the Numerals tab: same selects as in Generation, kept in step
+    for (const [tab, main] of [['numeral-system-tab', 'numeral-system'], ['numeral-variant-tab', 'numeral-variant']]) {
+        if (!$(tab) || !$(main)) continue;
+        $(tab).innerHTML = $(main).innerHTML;
+        $(tab).value = $(main).value;
+        $(tab).addEventListener('change', () => { $(main).value = $(tab).value; generate(true); });
+        $(main).addEventListener('change', () => { $(tab).value = $(main).value; });
+    }
     if ($('names-kind')) {
         $('names-kind').innerHTML = NAME_KINDS.map(k => `<option value="${k.id}">${esc(k.label)}</option>`).join('');
         $('names-scheme').innerHTML = PERSON_SCHEMES.map(k => `<option value="${k.id}">${esc(k.label)}</option>`).join('');

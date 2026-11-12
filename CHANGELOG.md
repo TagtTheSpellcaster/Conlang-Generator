@@ -4,6 +4,11 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.17.0
+- Numerals tab: *Numeral system* and *Variant* selectors (same options as in Generation, kept in step). Changing them regenerates the same language (same seed) with the new counting system.
+- Each genre now has a default counting system, used when the choice is *Automatic* (dwarves and fey vigesimal; giants, orcs and nomads quinary; machines octal; merchants, sacred, arcane and infernal duodecimal; the others decimal). Without a genre the system is still drawn from the seed. Eras do not set a system.
+- New *Meaning* column after *Ordinal* in the numbers table, in the converter, in the language sheet and in the JSON: the arithmetic behind the number with the multiplication sign, e.g. `(4 × 20) + 10`, `2.5 × 20`, `(2 × 10) − 1`.
+
 ## 1.16.2
 - Fix: the *Expanded letters* box was a cell of the parameter grid (half width). It now sits inside the cluster grid and has exactly the width of the Onset and Coda boxes at every window size.
 

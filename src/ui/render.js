@@ -196,7 +196,7 @@ export function namesHtml(names, kind) {
 }
 
 // ---- Numerals tab ----
-import { numeralForm, ordinalForm, isDefined, maxDefined, sampleNumbers, MAX_NUMERAL } from '../numerals/system.js';
+import { numeralForm, ordinalForm, numeralMeaning, isDefined, maxDefined, sampleNumbers, MAX_NUMERAL } from '../numerals/system.js';
 import { NUMERAL_LABELS } from '../numerals/choose.js';
 
 const CLASS_LABEL = { person: 'people', animal: 'animals', long: 'long things', flat: 'flat things', round: 'round things', general: 'everything else' };
@@ -216,9 +216,9 @@ function numeralNotes(lang) {
 export function numeralsHtml(lang) {
     const sys = lang.numerals, spec = lang.spec;
     const form = n => numeralForm(sys, n, spec).form;
-    const rowFor = n => `<tr><td>${n}</td><td class="name-cell">${esc(form(n))}</td><td class="name-cell">${esc(ordinalForm(sys, n, spec))}</td></tr>`;
+    const rowFor = n => `<tr><td>${n}</td><td class="name-cell">${esc(form(n))}</td><td class="name-cell">${esc(ordinalForm(sys, n, spec))}</td><td>${esc(numeralMeaning(sys, n))}</td></tr>`;
     const nums = sampleNumbers(sys);
-    const table = `<table class="names-table"><thead><tr><th>Number</th><th>Cardinal</th><th>Ordinal</th></tr></thead><tbody>${nums.filter(n => n > 0 || sys.config.type !== 'restricted').map(rowFor).join('')}</tbody></table>`;
+    const table = `<table class="names-table"><thead><tr><th>Number</th><th>Cardinal</th><th>Ordinal</th><th>Meaning</th></tr></thead><tbody>${nums.filter(n => n > 0 || sys.config.type !== 'restricted').map(rowFor).join('')}</tbody></table>`;
     const classes = sys.classifiers ? `<div class="card"><h3>Classifiers</h3><table class="names-table"><thead><tr><th>Class</th><th>Counts</th><th>Classifier</th></tr></thead><tbody>${sys.classifiers.map(c => `<tr><td>${esc(c.id)}</td><td>${esc(CLASS_LABEL[c.id] ?? c.id)}</td><td class="name-cell">${esc(c.form)}</td></tr>`).join('')}</tbody></table></div>` : '';
     return `<div class="card"><h3>Numeral system</h3><ul>${numeralNotes(lang).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
 <div class="card"><h3>Number converter</h3><div id="numeral-result"></div></div>
@@ -232,7 +232,7 @@ export function numberResultHtml(lang, n) {
     if (!f.defined && n === 0) return '<div class="sub">This language has no word for zero.</div>';
     const parts = f.parts.map(p => `<tr><td class="name-cell">${esc(p.form)}</td><td>${esc(p.meaning)}</td></tr>`).join('');
     const note = !f.defined ? '<div class="sub">Beyond what this language can count: it says "many".</div>' : '';
-    return `<div><span class="name-cell">${esc(f.form)}</span> <span class="sub">(${n.toLocaleString('en')}; ordinal: ${esc(ordinalForm(sys, n, lang.spec))})</span></div>${note}<table class="names-table"><thead><tr><th>Part</th><th>Value</th></tr></thead><tbody>${parts}</tbody></table>`;
+    return `<div><span class="name-cell">${esc(f.form)}</span> <span class="sub">(${n.toLocaleString('en')}; ordinal: ${esc(ordinalForm(sys, n, lang.spec))}; ${esc(numeralMeaning(sys, n))})</span></div>${note}<table class="names-table"><thead><tr><th>Part</th><th>Value</th></tr></thead><tbody>${parts}</tbody></table>`;
 }
 
 // ---- Calendar tab ----
