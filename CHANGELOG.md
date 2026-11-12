@@ -4,6 +4,9 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.17.1
+- Fix: in the Numerals tab the *Meaning* column no longer wraps; the numbers table widens to fit it and scrolls sideways inside its card if a number is very long.
+
 ## 1.17.0
 - Numerals tab: *Numeral system* and *Variant* selectors (same options as in Generation, kept in step). Changing them regenerates the same language (same seed) with the new counting system.
 - Each genre now has a default counting system, used when the choice is *Automatic* (dwarves and fey vigesimal; giants, orcs and nomads quinary; machines octal; merchants, sacred, arcane and infernal duodecimal; the others decimal). Without a genre the system is still drawn from the seed. Eras do not set a system.

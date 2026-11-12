@@ -216,9 +216,9 @@ function numeralNotes(lang) {
 export function numeralsHtml(lang) {
     const sys = lang.numerals, spec = lang.spec;
     const form = n => numeralForm(sys, n, spec).form;
-    const rowFor = n => `<tr><td>${n}</td><td class="name-cell">${esc(form(n))}</td><td class="name-cell">${esc(ordinalForm(sys, n, spec))}</td><td>${esc(numeralMeaning(sys, n))}</td></tr>`;
+    const rowFor = n => `<tr><td>${n}</td><td class="name-cell">${esc(form(n))}</td><td class="name-cell">${esc(ordinalForm(sys, n, spec))}</td><td class="meaning-cell">${esc(numeralMeaning(sys, n))}</td></tr>`;
     const nums = sampleNumbers(sys);
-    const table = `<table class="names-table"><thead><tr><th>Number</th><th>Cardinal</th><th>Ordinal</th><th>Meaning</th></tr></thead><tbody>${nums.filter(n => n > 0 || sys.config.type !== 'restricted').map(rowFor).join('')}</tbody></table>`;
+    const table = `<div class="table-scroll"><table class="names-table wide-table"><thead><tr><th>Number</th><th>Cardinal</th><th>Ordinal</th><th>Meaning</th></tr></thead><tbody>${nums.filter(n => n > 0 || sys.config.type !== 'restricted').map(rowFor).join('')}</tbody></table></div>`;
     const classes = sys.classifiers ? `<div class="card"><h3>Classifiers</h3><table class="names-table"><thead><tr><th>Class</th><th>Counts</th><th>Classifier</th></tr></thead><tbody>${sys.classifiers.map(c => `<tr><td>${esc(c.id)}</td><td>${esc(CLASS_LABEL[c.id] ?? c.id)}</td><td class="name-cell">${esc(c.form)}</td></tr>`).join('')}</tbody></table></div>` : '';
     return `<div class="card"><h3>Numeral system</h3><ul>${numeralNotes(lang).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
 <div class="card"><h3>Number converter</h3><div id="numeral-result"></div></div>

@@ -85,7 +85,7 @@ function updateNumberResult() {
 let nameSalt = 0;
 function renderNames() {
     if (!current) return;
-    const kind = $('names-kind').value, count = Number($('names-count').value) || 20;
+    const kind = $('names-kind').value, count = Number($('names-count').value) || 12;
     $('names-output').className = '';
     $('names-output').innerHTML = namesHtml(generateNames(current, { kind, count, salt: nameSalt, scheme: $('names-scheme').value }), kind);
 }
