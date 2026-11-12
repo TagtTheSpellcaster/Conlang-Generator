@@ -20,7 +20,14 @@ const PROFILES = {
     sacred: { culture: 'religious' }, undead: { culture: 'occult' }, merchant: { culture: 'mercantile' }
 };
 
-const G = (id, label, summary, grammar, sound, semantics) => Object.freeze({ id, label, summary, grammar, sound, semantics, profile: Object.freeze({ ...PROFILES[id] }) });
+// Expanded letters (see phonology/script.js) for the genres where a marked alphabet adds to the impression of the language.
+// A few letters of each group are drawn per language: never the whole set.
+const SCRIPTS = Object.freeze({
+    dwarven: ['circumflex'], orcish: ['dotted'], giant: ['nordic'], fey: ['umlaut'], draconic: ['ligature'],
+    infernal: ['grave'], arcane: ['acute'], sacred: ['circumflex'], undead: ['ring'], nomad: ['cedilla']
+});
+
+const G = (id, label, summary, grammar, sound, semantics) => Object.freeze({ id, label, summary, grammar, sound: SCRIPTS[id] ? { ...sound, script: SCRIPTS[id] } : sound, semantics, profile: Object.freeze({ ...PROFILES[id] }) });
 
 export const GENRES = Object.freeze(Object.fromEntries([
     G('war', 'War tongue',
@@ -188,6 +195,6 @@ export const GENRE_IDS = Object.freeze(Object.keys(GENRES));
 
 // Order used to turn a genre's `grammar` and `sound` into spec defaults.
 export const GRAMMAR_KEYS = Object.freeze(['morphology', 'articles', 'order', 'plural', 'number', 'gender', 'relations', 'caseSystem', 'adjPosition']);
-export const SOUND_KEYS = Object.freeze(['consonants', 'vowels', 'mean', 'onsetClusters', 'codaClusters', 'maxCluster']);
+export const SOUND_KEYS = Object.freeze(['consonants', 'vowels', 'mean', 'onsetClusters', 'codaClusters', 'maxCluster', 'script']);
 
 export const genreDefaults = id => (GENRES[id] ? { ...GENRES[id].grammar, ...Object.fromEntries(SOUND_KEYS.filter(k => k in GENRES[id].sound).map(k => [k, GENRES[id].sound[k]])) } : {});

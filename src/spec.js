@@ -1,6 +1,9 @@
 // Input normalisation: turns whatever the UI (or a test) provides into one complete, valid spec,
 // and reports every place where a requested option was overridden.
-import { MODEL, CLUSTER_SETS, MAX_CLUSTER_OPTIONS, resolveClusters } from './phonology/models.js';
+import { MODEL, CLUSTER_SETS, MAX_CLUSTER_OPTIONS, resolveClusters, EXPANSION_KEYS } from './phonology/models.js';
+import { chooseExpanded } from './phonology/script.js';
+import { vowelsFor, modelFor } from './phonology/words.js';
+import { resolveNumerals } from './numerals/choose.js';
 import { freshSeed } from './core/rng.js';
 import { GENRES, genreDefaults } from './genres.js';
 
@@ -75,12 +78,28 @@ export function resolveSpec(rawInput = {}) {
     spec.seedRequested = requestedSeed || 'auto';
     spec.seed = requestedSeed && requestedSeed.toLowerCase() !== 'auto' ? requestedSeed : freshSeed();
 
+    // Expanded letters: groups come from the user or the genre ("none" = no expansion); a few letters of each group are drawn from the seed.
+    const requestedScript = list(input.script);
+    const groups = requestedScript.includes('none') ? [] : requestedScript.filter(k => EXPANSION_KEYS.includes(k));
+    for (const k of requestedScript) if (k !== 'none' && !EXPANSION_KEYS.includes(k)) notes.push(`expanded letters: "${k}" is not a valid group, ignored.`);
+    const expanded = chooseExpanded([...new Set(groups)], { vowels: vowelsFor(spec.vowels), consonants: MODEL[modelFor(spec.consonants)].c, seed: spec.seed });
+    spec.script = expanded.groups; spec.extraVowels = expanded.vowels; spec.extraConsonants = expanded.consonants;
+    notes.push(...expanded.notes);
+
     // Options that depend on each other.
     if (spec.morphology === 'isolating') {
         if (spec.relations !== 'prepositions') notes.push('Isolating morphology: grammatical relations are expressed with adpositions only.');
         if (spec.plural !== 'none') notes.push('Isolating morphology: no productive plural marker.');
         if (spec.gender !== 'none') notes.push('Isolating morphology: no grammatical gender.');
         spec.relations = 'prepositions'; spec.plural = 'none'; spec.gender = 'none';
+    }
+    // Numeral system. Obligatory classifiers already express plurality, so the noun is never marked for plural (as in natural classifier languages).
+    const numerals = resolveNumerals(spec, { numerals: input.numerals, numeralVariant: input.numeralVariant, classifiers: input.classifiers, numeralPosition: input.numeralPosition });
+    spec.numeralSystem = Object.freeze(numerals.config);
+    notes.push(...numerals.notes);
+    if (spec.numeralSystem.classifiers && (spec.plural !== 'none' || spec.number !== 'singular')) {
+        notes.push('Numeral classifiers: plural marking on nouns is switched off, since the classifier already counts.');
+        spec.plural = 'none'; spec.number = 'singular';
     }
     spec.numbers = spec.plural === 'none' || spec.number === 'singular' ? ['singular']
         : spec.number === 'singular-plural-dual' ? ['singular', 'plural', 'dual'] : ['singular', 'plural'];

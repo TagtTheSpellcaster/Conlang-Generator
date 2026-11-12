@@ -4,6 +4,9 @@
 import { createWordFactory } from './phonology/words.js';
 import { attach } from './morphology/inflect.js';
 import { rng, pick } from './core/rng.js';
+import { buildSchemes, PERSON_SCHEMES } from './name-schemes.js';
+
+export { PERSON_SCHEMES };
 
 export const NAME_KINDS = Object.freeze([
     { id: 'person', label: 'Personal names' },
@@ -41,8 +44,10 @@ const NAME_STYLES = Object.freeze({
 export const nameStyle = genre => NAME_STYLES[genre] ?? NAME_STYLES.default;
 
 const TITLES = ['king', 'queen', 'lord', 'lady', 'chief', 'priest', 'elder', 'master', 'captain', 'prophet', 'judge', 'wizard', 'mage', 'leader', 'ruler'];
-// only plain Latin letters are capitalised: capitals of phonetic symbols (esh, eng...) are unfamiliar or look like other letters
-const cap = w => /^[a-z]/.test(w) ? w[0].toUpperCase() + w.slice(1) : w;
+// every word of a name starts with a capital: letters with no capital form of their own are left as they are
+const capFirst = w => { const [c, ...rest] = w; const up = c === 'ß' ? 'ẞ' : c.toUpperCase(); return (up.length === 1 ? up : c) + rest.join(''); };
+const cap = w => (w ? capFirst(w) : w);
+export const capWords = t => t.split(/(\s+|-)/).map(x => (/^(\s+|-)$/.test(x) ? x : cap(x))).join('');
 const usable = e => !e.gloss && !/\s/.test(e.lemma) && !!e.form;
 
 // Words that make sense in a name or an epithet: animals, elements, colours, qualities (the language only uses those it has).
@@ -74,16 +79,25 @@ function pools(lexicon, spec) {
     };
 }
 
-export function generateNames(lang, { kind = 'person', count = 12, salt = 0 } = {}) {
+export function generateNames(lang, { kind = 'person', count = 12, salt = 0, scheme = 'genre' } = {}) {
     const { spec, lexicon } = lang;
     if (!NAME_KINDS.some(k => k.id === kind)) throw new Error(`Unknown name kind "${kind}".`);
     const n = Math.max(1, Math.min(60, Math.floor(count) || 12));
     const P = pools(lexicon, spec);
-    const base = `${spec.seed}|names|${kind}|${salt}`;
+    if (!PERSON_SCHEMES.some(x => x.id === scheme)) throw new Error(`Unknown naming scheme "${scheme}".`);
+    const custom = kind === 'person' && scheme !== 'genre' ? scheme : null;
+    const base = `${spec.seed}|names|${kind}|${custom ? `${custom}|` : ''}${salt}`;
     const r = rng(`${base}|choice`);
     const sounds = (mean, tag) => createWordFactory({
         consonants: spec.consonants, vowels: spec.vowels, mean: Math.max(1, Math.min(4, mean)), seed: `${base}|${tag}`,
-        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster, soundBias: spec.soundBias
+        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster, soundBias: spec.soundBias,
+        extraVowels: spec.extraVowels, extraConsonants: spec.extraConsonants
+    });
+    // words that belong to the language's naming custom (markers, day names, clan lists) do not change with the salt
+    const fixedSounds = (mean, tag) => createWordFactory({
+        consonants: spec.consonants, vowels: spec.vowels, mean: Math.max(1, Math.min(4, mean)), seed: `${spec.seed}|names|fixed|${tag}`,
+        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster, soundBias: spec.soundBias,
+        extraVowels: spec.extraVowels, extraConsonants: spec.extraConsonants
     });
     // names are shorter than ordinary words: one to three syllables, never the long profile
     const given = sounds(P.style.mean <= 1.8 ? 1.4 : 2.0, 'given'), family = sounds(2.0, 'family');
@@ -113,6 +127,7 @@ export function generateNames(lang, { kind = 'person', count = 12, salt = 0 } = 
     // each generator returns { parts: [{text, role, meaning?}], gloss: English reading or null }
     const make = {
         person: () => {
+            if (custom) return schemes[custom]();
             const g = { text: cap(given()), role: 'given' };
             if (P.style.person === 'single') return { parts: [g], gloss: null };
             if (P.style.person === 'title' && P.titles.length) { const t = pick(P.titles, r); return { parts: [wordPart(t, 'title'), g], gloss: t.lemma }; }
@@ -129,13 +144,21 @@ export function generateNames(lang, { kind = 'person', count = 12, salt = 0 } = 
         epithet: () => phrase()
     };
 
+    const schemes = buildSchemes({ spec, lexicon, r, given, family, fixedSounds, cap, usable, compound, phrase, clanName, wordPart, P });
+
+    // names stay short; the limit is relaxed when the language's own words are so long that nothing would pass it
     const seen = new Set(), names = [];
-    for (let guard = 0; names.length < n && guard < n * 40; guard++) {
-        const { parts, gloss } = make[kind]();
-        const name = parts.map(p => p.text).join(' ');
-        if (seen.has(name) || parts.some(p => p.text.length > 12)) continue;
-        seen.add(name);
-        names.push({ kind, name, meaning: gloss, parts });
+    for (const limit of [12, 20, Infinity]) {
+        for (let guard = 0; names.length < n && guard < n * 40; guard++) {
+            const made = make[kind]();
+            const gloss = made.gloss;
+            const parts = made.parts.map(p => ({ ...p, text: capWords(p.text) }));
+            const name = parts.map(p => p.text).join(' ');
+            if (seen.has(name) || parts.some(p => p.text.length > limit)) continue;
+            seen.add(name);
+            names.push({ kind, name, meaning: gloss, parts });
+        }
+        if (names.length >= n) break;
     }
     return names;
 }

@@ -61,7 +61,11 @@
     {"id":"u58","topic":"Comparison","en":"The road is [longer|larger|smaller|shorter] than the river.","S":{"head":"road:noun","det":"definite"},"V":{"head":"be:verb"},"O":{"head":["long:adjective","large:adjective","small:adjective","short:adjective"],"degree":"comparative"},"A":{"adp":"than:conjunction","case":"ablative","np":{"head":"river:noun","det":"definite"}}},
     {"id":"u59","topic":"Comparison","en":"This is [better|worse] than that.","S":{"head":"demonstrative.this"},"V":{"head":"be:verb"},"O":{"head":["good:adjective","bad:adjective"],"degree":"comparative"},"A":{"adp":"than:conjunction","case":"ablative","np":{"head":"demonstrative.that"}}},
     {"id":"u60","topic":"Ongoing and completed actions","en":"I am [eating|drinking|sleeping].","S":{"head":"pronoun.first_person_singular"},"V":{"head":["eat:verb","drink:verb","sleep:verb"],"aspect":"progressive"}},
-    {"id":"u61","topic":"Ongoing and completed actions","en":"I have [arrived|eaten|slept].","S":{"head":"pronoun.first_person_singular"},"V":{"head":["arrive:verb","eat:verb","sleep:verb"],"aspect":"perfect"}}
+    {"id":"u61","topic":"Ongoing and completed actions","en":"I have [arrived|eaten|slept].","S":{"head":"pronoun.first_person_singular"},"V":{"head":["arrive:verb","eat:verb","sleep:verb"],"aspect":"perfect"}},
+    {"id":"u62","topic":"Counting","en":"I see [two|three|five] [dogs|birds].","S":{"head":"pronoun.first_person_singular"},"V":{"head":"see:verb"},"O":{"head":["dog:noun","bird:noun"],"num":[2,3,5]}},
+    {"id":"u63","topic":"Counting","en":"We have [three|four] children.","S":{"head":"pronoun.first_person_plural"},"V":{"head":"have:verb"},"O":{"head":"child:noun","num":[3,4]}},
+    {"id":"u64","topic":"Counting","en":"The man has [two|ten] [dogs|birds].","S":{"head":"man:noun","det":"definite"},"V":{"head":"have:verb"},"O":{"head":["dog:noun","bird:noun"],"num":[2,10]}},
+    {"id":"u65","topic":"Counting","en":"[Five|Ten|Twenty] [men|women] are here.","S":{"head":["man:noun","woman:noun"],"num":[5,10,20]},"V":{"head":"be:verb"},"O":{"head":"here:adverb"}}
   ],
   "genres": {
    "war": [

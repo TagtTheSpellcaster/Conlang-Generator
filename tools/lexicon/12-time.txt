@@ -1,0 +1,54 @@
+# Time measurement: years, seasons, months, weeks, parts of the day, hours, small units and the instruments that keep them.
+# The calendar generator (src/calendar) draws on these entries; era tags follow the technology (no mechanical clock in a prehistoric language).
+@domain time
+@tier domain
+
+## year_and_cycles | tags=calendar
+lunar year, solar year, lunisolar year, sidereal year, solstice, equinox, midsummer, midwinter, new year, heliacal rising, cycle of years
+## year_bookkeeping | tags=calendar | era=ancient,medieval,renaissance,modern,futuristic
+leap year, leap month, epagomenal days, almanac, year count
+## seasons_temperate | tags=calendar
+early winter, late winter, early summer, high summer, thaw, freeze-up
+## seasons_tropical | tags=calendar
+rainy season, dry season, flood season, sowing season, growing season, harvest season, hot season, cool season, windy season
+## seasons_polar | tags=calendar
+spring-winter, autumn-summer, midnight sun, polar night, calving season, migration season
+## seasons_sea | tags=calendar | era=ancient,medieval,renaissance,modern,futuristic
+fair-wind season, storm season, fishing season
+## seasons_pastoral | tags=calendar
+summer pasture, winter pasture
+
+## months_and_moons | tags=calendar
+lunar month, waxing moon, waning moon, crescent moon, moon sighting, month name
+## fortnights_and_weeks | tags=calendar | era=ancient,medieval,renaissance,modern,futuristic
+fortnight, half month, waxing fortnight, waning fortnight, market day, market cycle, rest day, holy day, feast day, fast day, day of the week
+## market_names | tags=calendar | era=ancient,medieval,renaissance,modern,futuristic
+market village
+
+## day_parts | tags=calendar
+first light, early morning, mid-morning, high sun, heat of the day, late afternoon, sundown, twilight, nightfall, deep night, cockcrow, small hours, cool of the evening
+## night_watches | tags=calendar | era=ancient,medieval,renaissance,modern,futuristic
+night watch, first watch, second watch, third watch, fourth watch, fifth watch, middle watch, dog watch, ship's bell, bell stroke
+## canonical_hours | tags=calendar,religion | era=medieval,renaissance
+matins, lauds, prime, terce, sext, nones, vespers, compline
+## daily_prayers | tags=calendar,religion | era=ancient,medieval,renaissance,modern,futuristic
+dawn prayer, noon prayer, afternoon prayer, sunset prayer, night prayer, call to prayer, prayer time
+## hours_and_parts | tags=calendar | era=ancient,medieval,renaissance,modern,futuristic
+temporal hour, equinoctial hour, double hour, quarter hour, half hour, sixtieth part, hundredth part, decimal hour
+## hours_modern | tags=calendar | era=modern,futuristic
+time zone, timestamp, standard time, working hours
+## body_time | tags=calendar
+breath, heartbeat, blink of an eye, meal time, pipe time, walking time, cooking time, shadow length
+
+## time_instruments_early | tags=calendar,instrument
+shadow stick, gnomon, notched stick, knotted cord
+## time_instruments_ancient | tags=calendar,instrument | era=ancient,medieval,renaissance,modern,futuristic
+sundial, water clock, candle clock, incense clock, sand glass, bell, signal drum, horn call
+## time_instruments_medieval | tags=calendar,instrument | era=medieval,renaissance,modern,futuristic
+hourglass, mechanical clock, striking clock, clock tower, astrolabe
+## time_instruments_renaissance | tags=calendar,instrument | era=renaissance,modern,futuristic
+pendulum clock, pocket watch, chronometer
+## time_instruments_modern | tags=calendar,instrument | era=modern,futuristic
+wristwatch, stopwatch, quartz clock, timetable
+## time_instruments_future | tags=calendar,instrument | era=futuristic
+atomic clock, synchronised time, timer, shift cycle

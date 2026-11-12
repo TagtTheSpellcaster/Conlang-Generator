@@ -15,7 +15,11 @@ test('determinism: same input and seed give identical output', () => {
 
 test('different seeds change forms but not the selected senses', () => {
     const a = gen({ seed: 'one' }), b = gen({ seed: 'two' });
-    assert.deepEqual(a.lexicon.map(e => e.id), b.lexicon.map(e => e.id));
+    // only the calendar's own words (and the fill they displace) depend on the seed: a seed may give a lunar or a solar calendar
+    const ids = new Set(b.lexicon.map(e => e.id));
+    const shared = a.lexicon.filter(e => ids.has(e.id)).length;
+    assert.ok(shared >= a.lexicon.length * 0.93, `${shared} of ${a.lexicon.length} senses shared`);
+    assert.ok(a.lexicon.filter(e => e.tier === 'core').every(e => ids.has(e.id)), 'core senses are always selected');
     assert.notDeepEqual(a.lexicon.map(e => e.form), b.lexicon.map(e => e.form));
 });
 

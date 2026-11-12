@@ -19,6 +19,19 @@ A browser tool that generates artificial languages — phonology, morphology, sy
 - `src/export.js`: exports of a generated language (sheet as HTML or Markdown, lexicon as CSV, full language as JSON).
 - `src/lexicon/store.js` + `src/ui/vocabulary-store.js`: storage of the vocabulary manager's edits (see below).
 
+## Expanded letters
+Some languages get a marked alphabet, for the graphic impression of an exotic tongue (Khuzdul, Adûnaic, Quenya) as much as for its sounds. Eleven groups are available: circumflex vowels (â î û), acute (á é í ó ú), grave (à è ì ò ù), umlaut (ä ë ï ö ü), Nordic (æ ø å þ ð), ligatures (æ œ ß), ring and dotless i (å ů ı), thorn/eth/barred l (þ ð ł), dot below (ḍ ḥ ṣ ṭ ẓ ṛ ṇ ḷ), cedilla (ç ş ţ ḑ ģ ķ ļ ņ ŗ) and tilde (ñ).
+- A language never uses a whole group: two or three letters of each chosen group are drawn from the seed, at most 4 extra vowels and 4 extra consonants in all, so the alphabet stays believable.
+- A marked letter is available only if the language has its base letter (no *ô* without *o*; the minimal vowel set gives only â î û).
+- Extra letters join the inventory as separate phonemes with a lower weight than the plain ones; they appear in roots, affixes and names, and in the phonology card, the language sheet and the JSON export. Every symbol is one precomposed code point (NFC).
+- Genres that benefit pick a group by themselves: dwarven and sacred (circumflex), orcish (dot below), giants (Nordic), fey (umlaut), draconic (ligatures), infernal (grave), arcane (acute), undead (ring), nomads (cedilla). The others stay plain. In the interface the *Expanded letters* checkboxes show the genre's choice and can be changed; with nothing checked the language has no expanded letters.
+
+## Filters
+Culture, biome and era narrow the vocabulary. The era is a limit: words that belong only to later eras are excluded (medieval: no *plasma rifle*; earlier and timeless words stay). Specialised words tied to a biome you did not choose are left out. Culture only raises the score of matching words. Sample sentences that need an excluded word are skipped.
+
+## Numerals
+`src/numerals/` (`choose.js` picks the system, `system.js` builds roots and composes numbers). Types: decimal, vigesimal, mixed decimal-vigesimal, quinary, duodecimal, octal, restricted. Variants: subtractive, Danish-type halves, French cut, units-before-tens. Obligatory classifiers disable plural marking; the numeral follows the adjective position about 80% of the time. Numbers up to 999,999,999 are composed without gaps. Not implemented: body-part systems (Oksapmin), base 4, 6 or 27, and non-integer numbers.
+
 ## Names
 The *Names* tab generates proper names for the current language: personal names, family and clan names, place names and epithets (*New names* gives another set; the number is adjustable). `src/names.js` is pure and deterministic and does not change the language.
 - Sounds come from the language's phonology, including the genre's sound bias; names are one to three syllables.
@@ -26,6 +39,15 @@ The *Names* tab generates proper names for the current language: personal names,
 - Place names and clan names are compounds written as one word, in the language's modifier/head order, with a linking vowel where the junction would be unpronounceable. Epithets are phrases with the adjective before or after the noun as in the language.
 - The genre decides the custom of personal names: single name (giants, machines, hive), given + clan (orcs, dwarves, nomads, merchants), given + epithet (war, sea-folk, fey, women, artisans, thieves, undead) or title + given (draconic, infernal, arcane, sacred). Meanings are glossed in English, modifier first.
 - The language sheet and the JSON export include a sample of each kind.
+
+Naming customs (`src/name-schemes.js`): the *Naming custom* selector of the Names tab replaces the genre's custom for personal names with one of 30 naming systems (Roman, Slavic, Icelandic, Gaelic, Arabic, East Asian, Akan, Burmese, Inuit...). Their markers are words of the language and stay fixed across "New names". Every word of a name is capitalised.
+
+## Calendar and time
+`src/calendar/` (`plan.js` decides, `build.js` names and tabulates). The *Calendar* tab shows a logic table (each choice and its rule), seasons, months, week, division of the day, short durations, instruments and the time vocabulary. The plan depends on the era (else the genre's), culture/biome and numeral system:
+- Rigidity 0-3 follows technology: nature-bound, observed cycles, fixed rules and bells, standardised equal units. Before writing there are no fixed 30-day months, epagomenal days or numbered hours; modern and later eras have numbered months and equal or decimal hours. Instruments are filtered by era (shadow stick, water clock, mechanical clock, wristwatch, atomic clock).
+- Intensive farming never uses a pure lunar year; herders get two pastures; the biome gives 2-3, 4 or 6-8 seasons; lunar calendars start the day at sunset; restricted numeral systems describe months and hours instead of numbering them.
+- Day divisions: phases, temporal hours, double hours, watches, ship bells, canonical hours, prayer times, equal or decimal hours.
+- Simplifications: month lengths are fixed patterns, not astronomical computation; the user cannot yet force a calendar type except through era, culture, biome and numerals.
 
 ## Vocabulary edits
 The vocabulary manager does not copy the dictionary: it stores only the *differences* from `data/vocabulary.json` (added, modified and removed entries) in localStorage (`conlang_vocabulary_overlay_v1`). The generator reads the same overlay, so edits made in the manager are used at once, and a changed `data/vocabulary.json` is picked up while the local edits are kept. A full copy saved by older versions (`conlang_vocabulary_v2`) is converted to differences on first load.

@@ -4,6 +4,7 @@ import { norm } from '../core/text.js';
 import { label } from '../lexicon/schema.js';
 import { inflect, genderOf } from '../morphology/inflect.js';
 import { cellOf } from '../morphology/affixes.js';
+import { numeralForm, isDefined, classifierFor } from '../numerals/system.js';
 
 const TIER_RANK = { core: 0, common: 1, domain: 2 };
 
@@ -29,7 +30,7 @@ export function adpositionPosition(order) {
 }
 
 function makeContext(lang) {
-    const { spec, model, affixes, lexicon } = lang;
+    const { spec, model, affixes, lexicon, numerals } = lang;
     const index = buildIndex(lexicon);
     const morph = { spec, model, affixes };
     const partial = [];
@@ -54,7 +55,7 @@ function makeContext(lang) {
         if (!found.length) throw new Skip(asList(head).join('|'));
         return found;
     };
-    return { spec, model, index, morph, partial, word, need, alternatives };
+    return { spec, model, index, morph, partial, word, need, alternatives, numerals };
 }
 
 // features: { case, number, agree: {gender, number} }
@@ -75,20 +76,47 @@ function nounPhrase(np, role, ctx) {
         else pre.push(word(possEntry));
     }
 
+    // counted nouns: numeral (+ classifier) on the side of the noun the language prefers; no plural marking with classifiers
+    const counts = asList(np.num);
+    let numerals = null;
+    if (counts.length) {
+        const sys = ctx.numerals;
+        if (!sys) throw new Skip('numerals');
+        const usable = counts.filter(n => isDefined(sys, n));
+        for (const n of counts) if (!usable.includes(n)) ctx.partial.push(`numeral ${n}`);
+        if (!usable.length) throw new Skip(`numeral ${counts.join('|')}`);
+        numerals = { sys, values: usable };
+    }
+    const wordOf = (text, id, gloss) => ({ kind: 'word', id, gloss, form: text, parts: [{ text, kind: 'stem' }] });
+
     const phrases = heads.map(h => {
-        const features = { case: role.case, number, possessor };
+        let numberHere = number;
+        let counted = null;
+        if (numerals && h.pos === 'noun') {
+            const clf = classifierFor(numerals.sys, h);
+            const values = numerals.values;
+            if (!clf && values.every(n => n === 2) && spec.numbers.includes('dual')) numberHere = 'dual';
+            else if (!clf && values.some(n => n > 1) && spec.numbers.includes('plural')) numberHere = 'plural';
+            else if (clf) numberHere = 'singular';
+            const toks = values.map(n => wordOf(numeralForm(numerals.sys, n, spec).form, `numeral.${n}`, String(n)));
+            const clfTok = clf ? wordOf(clf.form, `classifier.${clf.id}`, `classifier (${clf.label})`) : null;
+            const group = toks.length === 1 ? [toks[0], ...(clfTok ? [clfTok] : [])] : [{ kind: 'alts', options: toks.map(t => [t, ...(clfTok ? [clfTok] : [])]) }];
+            counted = group;
+        }
+        const features = { case: role.case, number: numberHere, possessor };
         if (h.pos === 'adjective') features.gender = role.agree?.gender ?? spec.genders[0] ?? null;
         // comparative: a suffix in agglutinative languages, otherwise the word "more" before the adjective
         const comparative = np.degree === 'comparative' && h.pos === 'adjective';
         if (comparative) features.degree = 'comparative';
         const headTok = word(h, features);
+        const around = phrase => (counted ? (ctx.numerals.config.position === 'after' ? [...phrase, ...counted] : [...counted, ...phrase]) : phrase);
         if (comparative && !ctx.morph.affixes.comparative) return [word(need('more:adverb')), headTok];
-        if (!np.adj) return [headTok];
+        if (!np.adj) return around([headTok]);
         const adjEntries = alternatives(np.adj);
-        const adjFeatures = { case: role.case, number, gender: genderOf(h, spec) ?? spec.genders[0] };
+        const adjFeatures = { case: role.case, number: numberHere, gender: genderOf(h, spec) ?? spec.genders[0] };
         const adjToks = adjEntries.map(a => word(a, adjFeatures));
         const adjGroup = adjToks.length === 1 ? adjToks[0] : { kind: 'alts', options: adjToks.map(t => [t]) };
-        return spec.adjPosition === 'before' ? [adjGroup, headTok] : [headTok, adjGroup];
+        return around(spec.adjPosition === 'before' ? [adjGroup, headTok] : [headTok, adjGroup]);
     });
     const core = phrases.length === 1 ? phrases[0] : [{ kind: 'alts', options: phrases }];
     return { tokens: [...pre, ...core], head: heads.length === 1 ? heads[0] : null };

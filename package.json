@@ -1,6 +1,6 @@
 {
   "name": "conlang-generator",
-  "version": "1.12.0",
+  "version": "1.16.0",
   "private": true,
   "type": "module",
   "scripts": {

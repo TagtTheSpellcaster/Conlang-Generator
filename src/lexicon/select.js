@@ -2,6 +2,7 @@
 import { norm } from '../core/text.js';
 import { hash } from '../core/rng.js';
 import { createWordFactory } from '../phonology/words.js';
+import { numeralBeyondSystem } from '../numerals/system.js';
 
 const GROUP_OF = {
     verb: 'verb', adjective: 'adjective', pronoun: 'pronoun',
@@ -30,6 +31,22 @@ export function genreBonus(e, sem) {
 
 const excludedByGenre = (e, sem) => !!sem && e.tier !== 'core' && (sem.exclude?.domains?.includes(e.domain) || e.tags.some(t => sem.exclude?.tags?.includes(t)));
 
+// Choices made in the filters are respected, not just preferred. Eras are ordered: an entry is excluded when every era it belongs to
+// is later than the latest era chosen (no plasma rifle in a medieval language); earlier things stay (a medieval language still knows
+// the chariot). Specialised (domain-tier) entries tied to biomes the user did not choose are excluded as well. Entries with no era or
+// biome are timeless / placeless and always stay. Culture is only a preference, since cultures overlap.
+export const ERA_ORDER = Object.freeze(['prehistoric', 'ancient', 'medieval', 'renaissance', 'modern', 'futuristic']);
+export function conflictsWithFilters(e, spec) {
+    if (e.tier === 'core') return false;
+    const chosen = (spec.era ?? []).map(x => ERA_ORDER.indexOf(x)).filter(i => i >= 0);
+    if (chosen.length && e.era?.length) {
+        const own = e.era.map(x => ERA_ORDER.indexOf(x)).filter(i => i >= 0);
+        if (own.length && Math.min(...own) > Math.max(...chosen)) return true;
+    }
+    if (e.tier === 'domain' && spec.biome?.length && e.biome?.length && !e.biome.some(b => spec.biome.includes(b))) return true;
+    return false;
+}
+
 function score(e, spec) {
     let s = e.tier === 'domain' ? 0 : 1;
     s += genreBonus(e, spec.semantics);
@@ -55,12 +72,14 @@ export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON
         // equal scores are ordered by a fixed hash of the id (not the seed): the selected senses stay the same for every seed,
         // but they are spread over the whole dictionary instead of always being its first entries
         .map((e, index) => ({ e, index, order: hash(`select|${e.id}`), score: score(e, spec), group: GROUP_OF[e.pos] }))
-        .filter(x => articleAllowed(x.e, spec.articles) && !excludedByGenre(x.e, spec.semantics));
+        .filter(x => articleAllowed(x.e, spec.articles) && !excludedByGenre(x.e, spec.semantics) && !conflictsWithFilters(x.e, spec) && !numeralBeyondSystem(x.e, spec));
     const byScore = (a, b) => b.score - a.score || a.order - b.order || a.index - b.index;
     const chosen = [];
     const seen = new Set();
     const add = x => { if (x && !seen.has(x.e.id) && chosen.length < limit) { seen.add(x.e.id); chosen.push(x.e); } };
 
+    // sentences cannot force an entry the filters rule out; such sentences are skipped instead
+    required = required.filter(e => !conflictsWithFilters(e, spec));
     const needed = new Set(required.map(e => e.id));
     ranked.filter(x => x.e.tier === 'core' || needed.has(x.e.id)).forEach(add);
     required.filter(e => !seen.has(e.id) && articleAllowed(e, spec.articles)).forEach(e => add({ e }));

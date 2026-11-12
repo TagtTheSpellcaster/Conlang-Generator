@@ -1,5 +1,5 @@
 // Pure word and affix factories. No DOM, no globals: everything depends on (config, seed).
-import { MODEL, VOWELS, resolveClusters, CONSONANT_CLASSES, VOWEL_CLASSES } from './models.js';
+import { MODEL, VOWELS, resolveClusters, CONSONANT_CLASSES, VOWEL_CLASSES, EXTRA_VOWEL_CLASSES, EXTRA_CONSONANT_CLASSES } from './models.js';
 import { rng, pick } from '../core/rng.js';
 
 const LENGTH_PROFILES = {
@@ -22,6 +22,18 @@ function biasedPicker(symbols, classesOf, table) {
     };
 }
 
+// Same as biasedPicker, with the expanded letters present at a lower weight (they are accents on the language, not its backbone).
+export const EXTRA_WEIGHT = 0.6;
+function extrasPicker(symbols, classesOf, table, extras) {
+    const weights = symbols.map(sym => (extras.has(sym) ? EXTRA_WEIGHT : 1) * [...(classesOf[sym] ?? []), sym].reduce((w, key) => w * (table?.[key] ?? 1), 1));
+    const total = weights.reduce((a, b) => a + b, 0);
+    return r => {
+        let x = r() * total;
+        for (let i = 0; i < symbols.length; i++) { x -= weights[i]; if (x < 0) return symbols[i]; }
+        return symbols[symbols.length - 1];
+    };
+}
+
 export const vowelsFor = key => VOWELS[key] || VOWELS.standard;
 export const modelFor = key => MODEL[key] ? key : 'european';
 
@@ -29,8 +41,11 @@ export const modelFor = key => MODEL[key] ? key : 'european';
 // spec.onsetClusters / codaClusters: null = model default, [] = none, otherwise the chosen sets.
 export function resolvePhonotactics(c = {}) {
     const modelKey = modelFor(c.consonants);
-    const model = MODEL[modelKey];
-    const vowels = vowelsFor(c.vowels);
+    // expanded letters (see script.js) join the inventory; without them everything below is exactly as before
+    const extraV = c.extraVowels ?? [], extraC = c.extraConsonants ?? [];
+    const baseModel = MODEL[modelKey];
+    const model = extraC.length ? { ...baseModel, c: [...baseModel.c, ...extraC], onset: [...baseModel.onset, ...extraC], coda: [...baseModel.coda, ...extraC] } : baseModel;
+    const vowels = extraV.length ? [...vowelsFor(c.vowels), ...extraV] : vowelsFor(c.vowels);
     const maxCluster = [2, 3].includes(Number(c.maxCluster)) ? Number(c.maxCluster) : 3;
     const onsetChosen = Array.isArray(c.onsetClusters), codaChosen = Array.isArray(c.codaClusters);
     const onset = onsetChosen ? resolveClusters(modelKey, 'onset', c.onsetClusters, maxCluster) : (model.clusters ?? []).filter(cl => cl.length <= maxCluster);
@@ -38,9 +53,10 @@ export function resolvePhonotactics(c = {}) {
     const bias = c.soundBias ?? null;
     return {
         modelKey, model, vowels, maxCluster, onsetChosen, codaChosen, onset, coda,
-        pickOnset: biasedPicker(model.onset, CONSONANT_CLASSES, bias?.c),
-        pickCoda: biasedPicker(model.coda, CONSONANT_CLASSES, bias?.c),
-        pickVowel: biasedPicker(vowels, VOWEL_CLASSES, bias?.v),
+        extraV, extraC,
+        pickOnset: extraC.length ? extrasPicker(model.onset, { ...CONSONANT_CLASSES, ...EXTRA_CONSONANT_CLASSES }, bias?.c, new Set(extraC)) : biasedPicker(model.onset, CONSONANT_CLASSES, bias?.c),
+        pickCoda: extraC.length ? extrasPicker(model.coda, { ...CONSONANT_CLASSES, ...EXTRA_CONSONANT_CLASSES }, bias?.c, new Set(extraC)) : biasedPicker(model.coda, CONSONANT_CLASSES, bias?.c),
+        pickVowel: extraV.length ? extrasPicker(vowels, { ...VOWEL_CLASSES, ...EXTRA_VOWEL_CLASSES }, bias?.v, new Set(extraV)) : biasedPicker(vowels, VOWEL_CLASSES, bias?.v),
         closed: Number.isFinite(bias?.closed) ? bias.closed : 1,
         onsetSet: new Set(onset), codaSet: new Set(coda),
         // models without clusters keep their strict "no consonant run" rule unless the user picked clusters
@@ -107,13 +123,15 @@ export function validWord(w, modelKey, vowels, ph = resolvePhonotactics({ conson
     const m = MODEL[modelKey];
     if (!w || w.length < 2 || !vowels.some(v => w.includes(v))) return false;
     const vowelCount = [...w].filter(ch => vowels.includes(ch)).length;
-    if (/[aeiouyøæ]{3}/i.test(w)) return false;
+    const isVowel = ch => vowels.includes(ch.toLowerCase());
+    const vowelRun = (n) => { let run = 0; for (const ch of w) { run = isVowel(ch) ? run + 1 : 0; if (run >= n) return true; } return false; };
+    if (vowelRun(3)) return false;
     if (m.maxVowelRatio && vowelCount / w.length > m.maxVowelRatio) return false;
     if (/(.)\1/.test(w)) return false;
     const runs = consonantRuns(w, vowels);
     if (ph.strictSingle) {
         if (runs.some(run => run.text.length > 1)) return false;
-        if (modelKey === 'japanese' && /[^aeiouyøæ]$/i.test(w) && !/[nm]$/i.test(w)) return false;
+        if (modelKey === 'japanese' && !isVowel(w[w.length - 1]) && !/[nm]$/i.test(w)) return false;
     } else {
         for (const { text, start, end } of runs) {
             if (start === 0) { if (text.length > 1 && !ph.onsetSet.has(text)) return false; }
@@ -121,7 +139,7 @@ export function validWord(w, modelKey, vowels, ph = resolvePhonotactics({ conson
             else if (!medialRunOk(text, ph)) return false;
         }
     }
-    if (modelKey === 'semitic' && /[aeiouyøæ]{2}/i.test(w)) return false;
+    if (modelKey === 'semitic' && vowelRun(2)) return false;
     return true;
 }
 
@@ -184,15 +202,18 @@ export function createWordFactory(c = {}) {
 // `reserved` is a set of forms the affixes must not collide with.
 export function createAffixFactory(c = {}, reserved = new Set()) {
     const modelKey = modelFor(c.consonants);
-    const model = MODEL[modelKey];
-    const vowels = vowelsFor(c.vowels);
+    const extraV = c.extraVowels ?? [], extraC = c.extraConsonants ?? [];
+    const baseModel = MODEL[modelKey];
+    const model = extraC.length ? { ...baseModel, onset: [...baseModel.onset, ...extraC], coda: [...(baseModel.coda ?? baseModel.onset), ...extraC] } : baseModel;
+    const vowels = extraV.length ? [...vowelsFor(c.vowels), ...extraV] : vowelsFor(c.vowels);
     const r = rng(`${String(c.seed ?? 'auto')}|phonology|${modelKey}|affixes`);
     const used = new Set(reserved);
     // Affixes follow the genre's sound profile too: its consonant and vowel weights, and its taste for closed syllables.
     const bias = c.soundBias ?? null;
-    const pickOnset = biasedPicker(model.onset, CONSONANT_CLASSES, bias?.c);
-    const pickCoda = biasedPicker(model.coda ?? model.onset, CONSONANT_CLASSES, bias?.c);
-    const pickVowel = biasedPicker(vowels, VOWEL_CLASSES, bias?.v);
+    const consonantClasses = extraC.length ? { ...CONSONANT_CLASSES, ...EXTRA_CONSONANT_CLASSES } : CONSONANT_CLASSES;
+    const pickOnset = extraC.length ? extrasPicker(model.onset, consonantClasses, bias?.c, new Set(extraC)) : biasedPicker(model.onset, CONSONANT_CLASSES, bias?.c);
+    const pickCoda = extraC.length ? extrasPicker(model.coda ?? model.onset, consonantClasses, bias?.c, new Set(extraC)) : biasedPicker(model.coda ?? model.onset, CONSONANT_CLASSES, bias?.c);
+    const pickVowel = extraV.length ? extrasPicker(vowels, { ...VOWEL_CLASSES, ...EXTRA_VOWEL_CLASSES }, bias?.v, new Set(extraV)) : biasedPicker(vowels, VOWEL_CLASSES, bias?.v);
     const TEMPLATES = Number.isFinite(bias?.closed) && bias.closed < 0.5 ? ['CV', 'CV', 'CV', 'V'] : ['CV', 'CV', 'CV', 'V', 'VC'];
 
     const one = () => {
@@ -224,6 +245,9 @@ export function describePhonology(c = {}) {
         name: m.name,
         vowels: vowelsFor(c.vowels).slice(),
         consonants: m.c.slice(),
+        extraVowels: (c.extraVowels ?? []).slice(),
+        extraConsonants: (c.extraConsonants ?? []).slice(),
+        expandedGroups: (c.script ?? []).slice(),
         clusters: ph.onset.slice(),
         codaClusters: ph.coda.slice(),
         patterns: [...new Set(m.patterns)],

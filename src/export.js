@@ -6,6 +6,8 @@ import { personCells } from './morphology/affixes.js';
 import { exampleNoun, exampleVerb, exampleAdjective } from './morphology/examples.js';
 import { tokenText } from './syntax/realize.js';
 import { generateNames, NAME_KINDS } from './names.js';
+import { numeralForm, ordinalForm, sampleNumbers } from './numerals/system.js';
+import { NUMERAL_LABELS } from './numerals/choose.js';
 
 const plain = parts => parts.map(p => p.text).join('-') || '∅';
 const list = a => a.length ? a.join(' ') : 'none';
@@ -96,6 +98,7 @@ export function languageDocument(lang, version = '') {
         ...[['Culture', s.culture], ['Biome', s.biome], ['Era', s.era]].filter(([, v]) => v?.length).map(([k, v]) => [k, v.join(', ')])
     ] }] });
     sections.push({ title: 'Phonology', blocks: [{ type: 'kv', rows: [
+        ['Expanded letters', [...ph.extraVowels, ...ph.extraConsonants].join(' ') || 'none'],
         ['Pattern', `${ph.name} · ${ph.lengthProfile} words (mean ${ph.meanSyllables} syllables)`], ['Vowels', list(ph.vowels)], ['Consonants', list(ph.consonants)],
         ['Onset clusters', list(ph.clusters)], ['Coda clusters', list(ph.codaClusters)], ['Syllable patterns', list(ph.patterns)]
     ] }] });
@@ -103,6 +106,24 @@ export function languageDocument(lang, version = '') {
     const uni = lang.samples.filter(x => x.scope === 'universal'), gen = lang.samples.filter(x => x.scope === 'genre');
     sections.push(sentenceSection('Universal sentences', uni, 'Sentences every language needs. [a|b] shows alternatives.'));
     if (lang.genre) sections.push(sentenceSection(`Specialised sentences — ${lang.genre.label}`, gen));
+    sections.push({ title: 'Numerals', blocks: [
+        { type: 'para', text: `${NUMERAL_LABELS[lang.numerals.config.type]}; numeral ${lang.numerals.config.position} the noun; ${lang.numerals.config.classifiers ? 'obligatory classifiers' : 'no classifiers'}.` },
+        { type: 'table', head: ['Number', 'Cardinal', 'Ordinal'], rows: sampleNumbers(lang.numerals).filter(n => n > 0 || lang.numerals.config.type !== 'restricted').map(n => [String(n), numeralForm(lang.numerals, n, lang.spec).form, ordinalForm(lang.numerals, n, lang.spec)]) },
+        ...(lang.numerals.classifiers ? [{ type: 'heading', text: 'Classifiers' }, { type: 'table', head: ['Class', 'Classifier'], rows: lang.numerals.classifiers.map(c => [c.id, c.form]) }] : [])
+    ] });
+    {
+        const c = lang.calendar, T = (head, list, f) => ({ type: 'table', head, rows: list.map(f) });
+        sections.push({ title: 'Calendar and time', blocks: [
+            { type: 'heading', text: 'Logic table' }, T(['Dimension', 'Choice', 'Rule'], c.logic, x => [x.dimension, x.choice, x.rule]),
+            ...(c.seasons.length ? [{ type: 'heading', text: 'Seasons' }, T(['Name', 'English', 'Begins when'], c.seasons, x => [x.name, x.gloss, x.begins ?? ''])] : []),
+            ...(c.months.length ? [{ type: 'heading', text: 'Months' }, T(['Name', 'English', 'Days'], c.months, x => [x.name, x.gloss, String(x.days ?? '')])] : []),
+            ...(c.week.length ? [{ type: 'heading', text: 'Week' }, T(['Name', 'English', 'Note'], c.week, x => [x.name, x.gloss, x.note ?? ''])] : []),
+            { type: 'heading', text: 'Division of the day' }, { type: 'para', text: c.dayNote },
+            ...(c.day.length ? [T(['Name', 'English', 'Time'], c.day, x => [x.name, x.gloss, x.time ?? ''])] : []),
+            ...(c.small.length ? [{ type: 'heading', text: 'Short durations' }, T(['Name', 'English', 'Length'], c.small, x => [x.name, x.gloss, x.time ?? ''])] : []),
+            ...(c.instruments.length ? [{ type: 'heading', text: 'Instruments' }, T(['Name', 'English', 'Use'], c.instruments, x => [x.name, x.gloss, x.use ?? ''])] : [])
+        ] });
+    }
     sections.push({ title: 'Names', blocks: [
         { type: 'para', text: 'A sample of names in the language (the Names tab generates more).' },
         ...NAME_KINDS.flatMap(k => [{ type: 'heading', text: k.label }, { type: 'table', head: ['Name', 'Meaning'], rows: generateNames(lang, { kind: k.id, count: 10 }).map(n => [n.name, n.meaning ?? '']) }])
@@ -152,6 +173,9 @@ export function languageJson(lang, version = '') {
         format: 'Conlang Generator language', generator: version, name: lang.name, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
         morphology: { model: morphology.model, affixes: morphology.affixes },
         lexicon: lang.lexicon.map(e => ({ word: e.form, id: e.id, english: label(e), pos: e.pos, domain: e.domain, group: e.group })),
+        numerals: { type: lang.numerals.config.type, config: lang.numerals.config, classifiers: lang.numerals.classifiers?.map(c => ({ class: c.id, form: c.form })) ?? null,
+            numbers: Object.fromEntries(sampleNumbers(lang.numerals).map(n => [n, numeralForm(lang.numerals, n, lang.spec).form])) },
+        calendar: { config: lang.calendar.config, logic: lang.calendar.logic, seasons: lang.calendar.seasons, months: lang.calendar.months, week: lang.calendar.week, day: lang.calendar.day, secondary: lang.calendar.secondary, small: lang.calendar.small, instruments: lang.calendar.instruments, vocabulary: lang.calendar.vocabulary },
         names: Object.fromEntries(NAME_KINDS.map(k => [k.id, generateNames(lang, { kind: k.id, count: 20 }).map(n => ({ name: n.name, meaning: n.meaning }))])),
         sentences: lang.samples.map(s => ({ scope: s.scope, topic: s.topic, english: s.english, text: tokenText(s.tokens) }))
     }, null, 2);

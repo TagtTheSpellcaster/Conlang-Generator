@@ -97,3 +97,9 @@ This is [better|worse] than that. | S=THIS | V=be:v | O=cmp good:a|bad:a | A=tha
 ## Ongoing and completed actions
 I am [eating|drinking|sleeping]. | S=I | V=eat:v|drink:v|sleep:v/prog
 I have [arrived|eaten|slept]. | S=I | V=arrive:v|eat:v|sleep:v/perf
+
+## Counting
+I see [two|three|five] [dogs|birds]. | S=I | V=see:v | O=#2|3|5 dog:n|bird:n
+We have [three|four] children. | S=WE | V=have:v | O=#3|4 child:n
+The man has [two|ten] [dogs|birds]. | S=the man:n | V=have:v | O=#2|10 dog:n|bird:n
+[Five|Ten|Twenty] [men|women] are here. | S=#5|10|20 man:n|woman:n | V=be:v | O=here:adv

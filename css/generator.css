@@ -610,3 +610,7 @@ main {
 .names-table { border-collapse: collapse; width: 100%; max-width: 560px; }
 .names-table th, .names-table td { text-align: left; padding: 4px 10px; border-bottom: 1px solid var(--border, #d5dce8); }
 .names-table .name-cell { font-weight: 600; font-family: ui-monospace, monospace; }
+
+.script-controls { box-sizing: border-box; width: 100%; min-width: 0; margin: 10px 0 0; border: 1px solid var(--border, #d5dce8); border-radius: 8px; padding: 6px 10px 8px; }
+.script-controls legend { padding: 0 6px; font-weight: 600; }
+.script-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 2px 12px; }

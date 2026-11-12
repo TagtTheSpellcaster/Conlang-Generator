@@ -5,6 +5,9 @@ import { resolveSpec } from './spec.js';
 import { selectEntries, assignForms } from './lexicon/select.js';
 import { describePhonology, createWordFactory } from './phonology/words.js';
 import { buildMorphologyModel, generateAffixes } from './morphology/affixes.js';
+import { buildNumerals } from './numerals/system.js';
+import { resolveCalendar, calendarLemmas } from './calendar/plan.js';
+import { buildCalendar } from './calendar/build.js';
 import { adpositionPosition, generateSamples, requiredEntries, templateSets } from './syntax/realize.js';
 import { GENRES } from './genres.js';
 
@@ -12,7 +15,8 @@ export function languageName(spec) {
     const make = createWordFactory({
         consonants: spec.consonants, vowels: spec.vowels,
         mean: Math.max(1, Math.min(4, spec.mean * 0.8)), seed: `${spec.seed}|language-name`,
-        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster, soundBias: spec.soundBias
+        onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster, soundBias: spec.soundBias,
+        extraVowels: spec.extraVowels, extraConsonants: spec.extraConsonants
     });
     return make();
 }
@@ -24,12 +28,24 @@ export function generateLanguage(input, vocabulary, templates = []) {
     const phonology = describePhonology(spec);
     const model = buildMorphologyModel(spec);
     const sets = templateSets(templates, spec.genre);
-    const required = requiredEntries([...sets.universal, ...sets.specialised], vocabulary);
-    const lexicon = assignForms(selectEntries(vocabulary, spec, undefined, required), spec);
+    const calendarPlan = resolveCalendar(spec);
+    notes.push(...calendarPlan.notes);
+    const wanted = new Set(calendarLemmas(calendarPlan.config));
+    // one sense per lemma: the time sense when there are several
+    const calendarEntries = [...wanted].map(l => { const all = vocabulary.filter(e => e.pos === 'noun' && e.lemma === l && !e.gloss); return all.find(e => e.domain === 'time') ?? all[0]; }).filter(Boolean);
+    const required = [...requiredEntries([...sets.universal, ...sets.specialised], vocabulary), ...calendarEntries];
+    const assigned = assignForms(selectEntries(vocabulary, spec, undefined, required), spec);
+    const { system: numerals, lexicon } = buildNumerals(spec, assigned);
     // Affixes must not collide with any root form.
     const affixes = generateAffixes(spec, model, new Set(lexicon.map(e => e.form)));
-    const lang = { spec, model, affixes, lexicon };
-    const { samples, skipped } = generateSamples(templates, lang);
+    const lang = { spec, model, affixes, lexicon, numerals };
+    const calendar = buildCalendar(calendarPlan, lang);
+    const generated = generateSamples(templates, lang);
+    const { samples } = generated;
+    // Sentences counting beyond a restricted numeral system are not applicable by design, not a defect.
+    const notApplicable = numerals.config.type === 'restricted'
+        ? generated.skipped.filter(x => x.missing.startsWith('numeral')) : [];
+    const skipped = generated.skipped.filter(x => !notApplicable.includes(x));
     return Object.freeze({
         version: VERSION,
         name: languageName(spec),
@@ -37,6 +53,6 @@ export function generateLanguage(input, vocabulary, templates = []) {
         spec, notes, phonology,
         morphology: { model, affixes },
         syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles },
-        lexicon, samples, skippedSamples: skipped
+        numerals, calendar, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
     });
 }

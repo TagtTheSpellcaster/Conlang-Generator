@@ -22,7 +22,7 @@ export function clusterSummaryHtml(phonology) {
 export function phonologyHtml(lang) {
     const p = lang.phonology;
     const list = a => a.map(x => `<code>${esc(x)}</code>`).join(' ');
-    return `<div class="card phonology-card"><h3>Phonology</h3><div class="sub">${esc(p.name)} · ${esc(p.lengthProfile)} words</div><div class="phon-clusters"><div><strong>Vowels:</strong> ${list(p.vowels)}</div><div><strong>Consonants:</strong> ${list(p.consonants)}</div></div>${clusterSummaryHtml(p)}<div class="phon-clusters"><div><strong>Syllable patterns:</strong> ${list(p.patterns)}</div></div></div>`;
+    return `<div class="card phonology-card"><h3>Phonology</h3><div class="sub">${esc(p.name)} · ${esc(p.lengthProfile)} words</div><div class="phon-clusters"><div><strong>Vowels:</strong> ${list(p.vowels)}</div><div><strong>Consonants:</strong> ${list(p.consonants)}</div></div>${expandedHtml(p)}${clusterSummaryHtml(p)}<div class="phon-clusters"><div><strong>Syllable patterns:</strong> ${list(p.patterns)}</div></div></div>`;
 }
 
 export function synthesisIndex(mean) {
@@ -32,6 +32,9 @@ export function synthesisIndex(mean) {
     if (mean <= 3.5) return 'balanced-long';
     return 'long';
 }
+
+const expandedHtml = p => (p.extraVowels?.length || p.extraConsonants?.length)
+    ? `<div class="phon-clusters"><div><strong>Expanded letters:</strong> ${[...p.extraVowels, ...p.extraConsonants].map(x => `<span class="chip">${esc(x)}</span>`).join(' ')}</div></div>` : '';
 
 export function phonotacticInfoHtml(consonants, mean) {
     const d = PHONOTACTIC_INFO[consonants] || PHONOTACTIC_INFO.european;
@@ -190,4 +193,68 @@ export function namesHtml(names, kind) {
     if (!names.length) return '<div class="empty">No names could be generated.</div>';
     const rows = names.map(n => `<tr><td class="name-cell">${esc(n.name)}</td><td>${n.meaning ? esc(n.meaning) : '<span class="sub">—</span>'}</td></tr>`).join('');
     return `<div class="card"><table class="names-table"><thead><tr><th>${KIND_HEAD[kind] ?? 'Name'}</th><th>Meaning</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
+
+// ---- Numerals tab ----
+import { numeralForm, ordinalForm, isDefined, maxDefined, sampleNumbers, MAX_NUMERAL } from '../numerals/system.js';
+import { NUMERAL_LABELS } from '../numerals/choose.js';
+
+const CLASS_LABEL = { person: 'people', animal: 'animals', long: 'long things', flat: 'flat things', round: 'round things', general: 'everything else' };
+
+function numeralNotes(lang) {
+    const c = lang.numerals.config, out = [NUMERAL_LABELS[c.type]];
+    if (c.subtractive) out.push(`subtractive from ${c.subtractive.from} (e.g. 19 = 20 − 1)`);
+    if (c.halves) out.push('halves: 50, 70 and 90 are "half-third twenty", "half-fourth twenty"…');
+    if (c.french) out.push('French cut: 70–79 and 90–99 count on from 60 and 80');
+    if (c.unitFirst) out.push('units before tens (five-and-twenty)');
+    if (c.type === 'restricted') out.push(`counts exactly up to ${maxDefined(lang.numerals)}, then "many"`);
+    out.push(`numeral ${c.position === 'before' ? 'before' : 'after'} the noun (adjectives: ${lang.spec.adjPosition === 'before' ? 'before' : 'after'})`);
+    out.push(c.classifiers ? 'obligatory classifiers; no plural marking' : 'no classifiers');
+    return out;
+}
+
+export function numeralsHtml(lang) {
+    const sys = lang.numerals, spec = lang.spec;
+    const form = n => numeralForm(sys, n, spec).form;
+    const rowFor = n => `<tr><td>${n}</td><td class="name-cell">${esc(form(n))}</td><td class="name-cell">${esc(ordinalForm(sys, n, spec))}</td></tr>`;
+    const nums = sampleNumbers(sys);
+    const table = `<table class="names-table"><thead><tr><th>Number</th><th>Cardinal</th><th>Ordinal</th></tr></thead><tbody>${nums.filter(n => n > 0 || sys.config.type !== 'restricted').map(rowFor).join('')}</tbody></table>`;
+    const classes = sys.classifiers ? `<div class="card"><h3>Classifiers</h3><table class="names-table"><thead><tr><th>Class</th><th>Counts</th><th>Classifier</th></tr></thead><tbody>${sys.classifiers.map(c => `<tr><td>${esc(c.id)}</td><td>${esc(CLASS_LABEL[c.id] ?? c.id)}</td><td class="name-cell">${esc(c.form)}</td></tr>`).join('')}</tbody></table></div>` : '';
+    return `<div class="card"><h3>Numeral system</h3><ul>${numeralNotes(lang).map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>
+<div class="card"><h3>Number converter</h3><div id="numeral-result"></div></div>
+<div class="card"><h3>Numbers</h3>${table}</div>${classes}`;
+}
+
+export function numberResultHtml(lang, n) {
+    const sys = lang.numerals;
+    if (!Number.isInteger(n) || n < 0 || n > MAX_NUMERAL) return `<div class="sub">Enter an integer from 0 to ${MAX_NUMERAL.toLocaleString('en')}.</div>`;
+    const f = numeralForm(sys, n, lang.spec);
+    if (!f.defined && n === 0) return '<div class="sub">This language has no word for zero.</div>';
+    const parts = f.parts.map(p => `<tr><td class="name-cell">${esc(p.form)}</td><td>${esc(p.meaning)}</td></tr>`).join('');
+    const note = !f.defined ? '<div class="sub">Beyond what this language can count: it says "many".</div>' : '';
+    return `<div><span class="name-cell">${esc(f.form)}</span> <span class="sub">(${n.toLocaleString('en')}; ordinal: ${esc(ordinalForm(sys, n, lang.spec))})</span></div>${note}<table class="names-table"><thead><tr><th>Part</th><th>Value</th></tr></thead><tbody>${parts}</tbody></table>`;
+}
+
+// ---- Calendar tab ----
+const tbl = (head, rows, cls = 'names-table') => `<table class="${cls}"><thead><tr>${head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map((c, i) => `<td${i === 0 ? ' class="name-cell"' : ''}>${c === '' || c == null ? '<span class="sub">—</span>' : esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
+
+export function calendarHtml(lang) {
+    const c = lang.calendar;
+    if (!c) return '<div class="empty">No calendar.</div>';
+    const card = (title, body) => `<div class="card"><h3>${esc(title)}</h3>${body}</div>`;
+    const parts = [];
+    parts.push(card('Logic table', tbl(['Dimension', 'Choice', 'Rule'], c.logic.map(x => [x.dimension, x.choice, x.rule]))));
+    parts.push(card('Year', `<p>${esc(c.yearLength ?? '')}</p>`));
+    if (c.seasons.length) parts.push(card('Seasons', tbl(['Name', 'English', 'Begins when'], c.seasons.map(x => [x.name, x.gloss, x.begins]))));
+    if (c.months.length) parts.push(card('Months', tbl(['Name', 'English', 'Days'], c.months.map(x => [x.name, x.gloss, x.days != null ? String(x.days) : '']))));
+    else parts.push(card('Months', '<p class="sub">This language has no months: the year is counted in seasons and moons.</p>'));
+    if (c.week.length) parts.push(card(`Week (${c.weekDays} days)`, tbl(['Name', 'English', 'Note'], c.week.map(x => [x.name, x.gloss, x.note ?? '']))));
+    if (c.day.length) parts.push(card('Division of the day', `<p>${esc(c.dayNote)}</p>${tbl(['Name', 'English', 'Time'], c.day.map(x => [x.name, x.gloss, x.time ?? '']))}`));
+    else parts.push(card('Division of the day', `<p>${esc(c.dayNote)}</p>`));
+    if (c.secondary.length) parts.push(card('Further day marks', tbl(['Name', 'English', 'Time'], c.secondary.map(x => [x.name, x.gloss, x.time ?? '']))));
+    if (c.small.length) parts.push(card('Short durations', tbl(['Name', 'English', 'Length'], c.small.map(x => [x.name, x.gloss, x.time ?? '']))));
+    if (c.instruments.length) parts.push(card('Time-keeping instruments', tbl(['Name', 'English', 'Use'], c.instruments.map(x => [x.name, x.gloss, x.use ?? '']))));
+    const cats = [...new Set(c.vocabulary.map(v => v.category))];
+    parts.push(card('Time vocabulary', cats.map(k => `<h4>${esc(k)}</h4>${tbl(['Word', 'English', 'Part of speech'], c.vocabulary.filter(v => v.category === k).map(v => [v.word, v.english, v.pos]))}`).join('')));
+    return parts.join('');
 }

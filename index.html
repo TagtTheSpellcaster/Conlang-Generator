@@ -18,7 +18,7 @@
         <div id="db-status" class="sub">Loading vocabulary…</div>
       </div>
     </header>
-    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="names" aria-selected="false">Names</button></nav>
+    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="numerals" aria-selected="false">Numerals</button><button type="button" class="tab" data-tab="names" aria-selected="false">Names</button><button type="button" class="tab" data-tab="calendar" aria-selected="false">Calendar</button></nav>
     <section id="generator" class="tab-panel active">
       <main>
         <div class="controls">
@@ -78,6 +78,32 @@
                   <div class="field"><label for="adj-position">Adjective position</label><select id="adj-position">
                       <option value="after">Noun + adjective</option>
                       <option value="before">Adjective + noun</option>
+                    </select></div>
+                  <div class="field"><label for="numeral-system">Numeral system</label><select id="numeral-system">
+                      <option value="auto" selected>Automatic</option>
+                      <option value="decimal">Decimal</option>
+                      <option value="vigesimal">Vigesimal</option>
+                      <option value="hybrid">Mixed decimal-vigesimal</option>
+                      <option value="quinary">Quinary</option>
+                      <option value="duodecimal">Duodecimal</option>
+                      <option value="octal">Octal</option>
+                      <option value="restricted">Restricted (few numbers)</option>
+                    </select></div>
+                  <div class="field"><label for="numeral-variant">Numeral variant</label><select id="numeral-variant">
+                      <option value="auto" selected>Automatic</option>
+                      <option value="plain">Plain</option>
+                      <option value="subtractive">Subtractive (20 − 3)</option>
+                      <option value="halves">Halves (Danish-type)</option>
+                    </select></div>
+                  <div class="field"><label for="classifiers">Numeral classifiers</label><select id="classifiers">
+                      <option value="auto" selected>Automatic</option>
+                      <option value="none">None</option>
+                      <option value="obligatory">Obligatory (plural off)</option>
+                    </select></div>
+                  <div class="field"><label for="numeral-position">Numeral position</label><select id="numeral-position">
+                      <option value="auto" selected>Automatic (follows adjective)</option>
+                      <option value="before">Numeral + noun</option>
+                      <option value="after">Noun + numeral</option>
                     </select></div>
                   <div class="field"><label for="articles">Articles</label><select id="articles">
                       <option value="none">None</option>
@@ -145,15 +171,30 @@
         <div id="sample-sentences-output" class="empty">Generate a language to populate the sample sentences.</div>
       </main>
     </section>
+    <section id="numerals" class="tab-panel">
+      <main>
+        <div class="names-controls">
+          <div class="field"><label for="numeral-input">Number (0 – 999,999,999)</label><input id="numeral-input" type="number" min="0" max="999999999" value="1234"></div>
+        </div>
+        <div id="numerals-output" class="empty">Generate a language to see its numeral system.</div>
+      </main>
+    </section>
     <section id="names" class="tab-panel">
       <main>
         <div class="names-controls">
           <div class="field"><label for="names-kind">Kind</label><select id="names-kind"></select></div>
           <div class="field"><label for="names-count">How many</label><input id="names-count" type="number" min="1" max="60" value="12"></div>
+          <div class="field"><label for="names-scheme">Naming custom (personal names)</label><select id="names-scheme"></select></div>
           <button type="button" class="btn" id="names-more">New names</button>
         </div>
         <div class="sub names-hint">Names use the sounds of the language and, where they have a meaning, words of its own lexicon. The custom (single name, clan name, epithet, title) follows the genre.</div>
         <div id="names-output" class="empty">Generate a language to create names.</div>
+      </main>
+    </section>
+    <section id="calendar" class="tab-panel">
+      <main>
+        <div class="sub names-hint">The calendar follows the culture, biome and era chosen (or the genre's): the later the era, the more rigid and standardised the measurement of time. Terms are words of the language.</div>
+        <div id="calendar-output" class="empty">Generate a language to see its calendar.</div>
       </main>
     </section>
     <script type="module" src="src/ui/main.js"></script>

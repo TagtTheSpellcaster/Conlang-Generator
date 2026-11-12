@@ -12,6 +12,7 @@
 //   head                     lemma:pos, alternatives separated by |, "_" stands for a space (war_of_position:n)
 //   pos letters: n noun, v verb, a adjective, adv adverb, p particle, c conjunction, d determiner, pr pronoun
 //   pronoun aliases: I YOU WE YOU_PL THEY HE SHE IT ME YOU_O THIS THAT WHO WHAT WHERE HOW WHY
+//   #3 or #2|3|5             a counted noun phrase: the numeral (with the classifier, if the language has them) is added to the noun
 //   cmp                      comparative degree of the adjective head (suffix, or the word "more")
 //   prepositional phrase     adp>noun phrase      e.g. to>the village:n   with>ME   (than:c>ME marks the standard of comparison)
 // Verb phrase (V): lemma:v[|lemma:v] with optional flags after "/": neg, can, prog (progressive), perf (perfect)   e.g. enter:v/neg,can
@@ -67,6 +68,7 @@ function parseNP(text) {
         else if (tok === 'a') np.det = 'indefinite';
         else if (POSSESSIVES.has(tok)) np.poss = `${tok}:determiner`;
         else if (tok === 'cmp') np.degree = 'comparative';
+        else if (/^#\d+(\|\d+)*$/.test(tok)) np.num = tok.slice(1).split('|').map(Number);
         else if (tok === 'pl') np.number = 'plural';
         else if (tok === 'du') np.number = 'dual';
         else if (tok.startsWith('+')) np.adj = heads(tok.slice(1), 'a');

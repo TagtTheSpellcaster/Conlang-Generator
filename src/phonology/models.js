@@ -97,3 +97,43 @@ export const VOWEL_CLASSES = Object.freeze({
     y: ['close', 'front', 'rounded'], 'ø': ['mid', 'front', 'rounded'], 'æ': ['open', 'front']
 });
 export const SOUND_CLASSES = Object.freeze([...new Set([...Object.values(CONSONANT_CLASSES), ...Object.values(VOWEL_CLASSES)].flat())]);
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Expanded letters. A graphic and phonemic layer for languages that should look exotic (Khuzdul, Adûnaic, Quenya): groups of
+// extra vowels and consonants that are added, a few at a time, to the base inventory. Every symbol is one precomposed code point,
+// because words are handled symbol by symbol. `base` lists the plain letters a marked letter derives from: it is only available
+// when the language has one of them.
+const X = (symbols, bases = {}) => Object.freeze({ symbols, bases });
+export const EXPANSIONS = Object.freeze({
+    circumflex: Object.freeze({ label: 'Circumflex vowels (â î û — Khuzdul, Adûnaic)', vowels: X(['â', 'ê', 'î', 'ô', 'û'], { â: 'a', ê: 'e', î: 'i', ô: 'o', û: 'u' }), consonants: X([]) }),
+    acute: Object.freeze({ label: 'Acute vowels (á é í ó ú — Quenya)', vowels: X(['á', 'é', 'í', 'ó', 'ú'], { á: 'a', é: 'e', í: 'i', ó: 'o', ú: 'u' }), consonants: X([]) }),
+    grave: Object.freeze({ label: 'Grave vowels (à è ì ò ù)', vowels: X(['à', 'è', 'ì', 'ò', 'ù'], { à: 'a', è: 'e', ì: 'i', ò: 'o', ù: 'u' }), consonants: X([]) }),
+    umlaut: Object.freeze({ label: 'Umlaut vowels (ä ë ï ö ü)', vowels: X(['ä', 'ë', 'ï', 'ö', 'ü'], { ä: 'a', ë: 'e', ï: 'i', ö: 'o', ü: 'u' }), consonants: X([]) }),
+    nordic: Object.freeze({ label: 'Nordic letters (æ ø å þ ð)', vowels: X(['æ', 'ø', 'å']), consonants: X(['þ', 'ð']) }),
+    ligature: Object.freeze({ label: 'Ligatures (æ œ ß)', vowels: X(['æ', 'œ']), consonants: X(['ß']) }),
+    ring: Object.freeze({ label: 'Ring and dotless i (å ů ı)', vowels: X(['å', 'ů', 'ı'], { ů: 'u' }), consonants: X([]) }),
+    thorn: Object.freeze({ label: 'Thorn, eth, barred l (þ ð ł)', vowels: X([]), consonants: X(['þ', 'ð', 'ł'], { ł: 'l' }) }),
+    dotted: Object.freeze({ label: 'Dot below (ḍ ḥ ṣ ṭ ẓ ṛ ṇ ḷ)', vowels: X([]), consonants: X(['ḍ', 'ḥ', 'ṣ', 'ṭ', 'ẓ', 'ṛ', 'ṇ', 'ḷ'], { ḍ: 'd', ḥ: ['h', 'ħ'], ṣ: 's', ṭ: 't', ẓ: 'z', ṛ: 'r', ṇ: 'n', ḷ: 'l' }) }),
+    cedilla: Object.freeze({ label: 'Cedilla (ç ş ţ ḑ ģ ķ ļ ņ ŗ)', vowels: X([]), consonants: X(['ç', 'ş', 'ţ', 'ḑ', 'ģ', 'ķ', 'ļ', 'ņ', 'ŗ'], { ç: ['s', 'ʃ', 'k'], ş: ['ʃ', 's'], ţ: 't', ḑ: 'd', ģ: 'g', ķ: 'k', ļ: 'l', ņ: 'n', ŗ: 'r' }) }),
+    tilde: Object.freeze({ label: 'Tilde (ñ)', vowels: X([]), consonants: X(['ñ'], { ñ: 'n' }) })
+});
+export const EXPANSION_KEYS = Object.freeze(Object.keys(EXPANSIONS));
+
+// Phonetic classes of the extra letters (for the genre sound bias): a marked letter keeps the classes of its base letter.
+const MARKED_VOWEL = { ä: ['open', 'front'], ë: ['mid', 'front'], ï: ['close', 'front'], ö: ['mid', 'front', 'rounded'], ü: ['close', 'front', 'rounded'],
+    'æ': ['open', 'front'], 'ø': ['mid', 'front', 'rounded'], 'œ': ['mid', 'front', 'rounded'], 'å': ['open', 'back'], 'ů': ['close', 'back', 'rounded'], 'ı': ['close', 'back'] };
+const MARKED_CONSONANT = {
+    'þ': ['fricative', 'voiceless', 'dental'], 'ð': ['fricative', 'voiced', 'dental', 'soft'], 'ß': ['fricative', 'voiceless', 'sibilant', 'harsh'],
+    'ł': ['liquid', 'sonorant', 'voiced', 'velar'], 'ñ': ['nasal', 'sonorant', 'voiced', 'soft'],
+    'ḥ': ['fricative', 'voiceless', 'guttural', 'harsh'], 'ç': ['fricative', 'voiceless', 'sibilant'], 'ş': ['fricative', 'voiceless', 'sibilant', 'harsh']
+};
+const baseOf = (group, sym) => [].concat(group.bases[sym] ?? []);
+export const EXTRA_VOWEL_CLASSES = {}, EXTRA_CONSONANT_CLASSES = {};
+for (const g of Object.values(EXPANSIONS)) {
+    for (const v of g.vowels.symbols) EXTRA_VOWEL_CLASSES[v] = MARKED_VOWEL[v] ?? VOWEL_CLASSES[baseOf(g.vowels, v)[0]] ?? ['mid'];
+    for (const c of g.consonants.symbols) {
+        const base = baseOf(g.consonants, c)[0];
+        EXTRA_CONSONANT_CLASSES[c] = MARKED_CONSONANT[c] ?? [...(CONSONANT_CLASSES[base] ?? ['fricative']), ...(g === EXPANSIONS.dotted ? ['harsh', 'guttural'] : [])];
+    }
+}
+Object.freeze(EXTRA_VOWEL_CLASSES); Object.freeze(EXTRA_CONSONANT_CLASSES);
