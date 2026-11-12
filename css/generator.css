@@ -375,8 +375,7 @@ main {
 }
 
 .lexicon {
-  max-height: 620px;
-  overflow: auto
+  margin-bottom: 4px
 }
 
 .lex-row {
@@ -622,3 +621,19 @@ main {
 .meaning-cell { white-space: nowrap; }
 
 .lex-row .structure { color: #9fb3cf; font-family: ui-monospace, monospace; font-size: 11px; }
+
+/* Word formation: tables use the full width of the card */
+.names-table.full-table { width: 100%; max-width: none; }
+.full-table td:last-child { overflow-wrap: anywhere; }
+/* Generated lexicon: one collapsible section per topic */
+.lex-toolbar { display: flex; justify-content: space-between; align-items: center; margin: 4px 0 10px; }
+.lex-section { border: 1px solid #1d2739; border-radius: 8px; margin-bottom: 8px; }
+.lex-section > summary { cursor: pointer; padding: 9px 12px; display: flex; justify-content: space-between; font-weight: 600; color: #d9e2ef; list-style: none; }
+.lex-section > summary::-webkit-details-marker { display: none; }
+.lex-section > summary::before { content: '\25b8'; margin-right: 8px; color: var(--muted); }
+.lex-section[open] > summary::before { content: '\25be'; }
+.lex-section > summary > span:first-child { flex: 1; }
+.lex-section .count { color: var(--muted); font-weight: 400; font-size: 12px; }
+.lex-section .lexicon { padding: 0 12px 6px; }
+
+.history-scroll { max-height: 70vh; overflow: auto; }
