@@ -7,7 +7,8 @@ import { generateLanguage } from '../engine.js';
 import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
-import { setShowIpa, writingHtml, historyHtml, derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { stressOf } from '../ipa.js';
+import { setStress, setShowIpa, writingHtml, historyHtml, derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -90,6 +91,7 @@ function renderNames() {
 
 function render(lang) {
     nameSalt = 0;
+    setStress(stressOf(lang));
     const box = $('generation-output');
     box.className = 'result';
     box.innerHTML = resultHtml(lang);

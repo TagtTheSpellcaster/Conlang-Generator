@@ -1,6 +1,6 @@
 // Exports of a generated language. Pure: language -> text. The sheet is built once as a small document model
 // (sections of key/value lists, tables and paragraphs) and rendered to Markdown or standalone HTML.
-import { ipaWord, ipaOfLetter } from './ipa.js';
+import { ipaWord, ipaOfLetter, stressOf } from './ipa.js';
 import { buildWriting } from './writing/system.js';
 import { buildNumberSigns } from './writing/numerals.js';
 import { label } from './lexicon/schema.js';
@@ -187,7 +187,7 @@ export function toHtml(doc) {
 
 const csvCell = x => /[",\n\t]/.test(String(x)) ? `"${String(x).replace(/"/g, '""')}"` : String(x);
 export function lexiconCsv(lang) {
-    const rows = [['word', 'ipa', 'english', 'part_of_speech', 'domain', 'group', 'id', 'structure'], ...lang.lexicon.map(e => [e.form, `/${ipaWord(e.form)}/`, label(e), e.pos, e.domain, e.group, e.id, e.derivation ? e.derivation.text : e.loan ? `loan from ${e.loan.donorName} *${e.loan.source}*` : ''])];
+    const rows = [['word', 'ipa', 'english', 'part_of_speech', 'domain', 'group', 'id', 'structure'], ...lang.lexicon.map(e => [e.form, `/${ipaWord(e.form, stressOf(lang))}/`, label(e), e.pos, e.domain, e.group, e.id, e.derivation ? e.derivation.text : e.loan ? `loan from ${e.loan.donorName} *${e.loan.source}*` : ''])];
     return '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n';
 }
 

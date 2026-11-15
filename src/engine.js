@@ -13,6 +13,8 @@ import { buildCalendar } from './calendar/build.js';
 import { deriveAffixes, applyDerivation, derivationPhonology } from './derivation/derive.js';
 import { adpositionPosition, generateSamples, requiredEntries, templateSets } from './syntax/realize.js';
 import { GENRES } from './genres.js';
+import { rng as seededRng } from './core/rng.js';
+import { stressSystemFor } from './ipa.js';
 
 // The letters that actually occur in the words of the language, sorted into vowels and consonants.
 function usedLetters(lexicon, spec, phonology) {
@@ -76,7 +78,7 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
         version: VERSION,
         name: languageName(spec),
         genre: spec.genre ? { id: spec.genre, label: GENRES[spec.genre].label, summary: GENRES[spec.genre].summary } : null,
-        spec, notes, phonology: Object.freeze({ ...phonology, used: usedLetters(lexicon, spec, phonology) }),
+        spec, notes, phonology: Object.freeze({ ...phonology, used: usedLetters(lexicon, spec, phonology), stress: stressSystemFor(seededRng(`${spec.seed}|stress`)()).id }),
         morphology: { model, affixes },
         syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles },
         numerals: daughter.numerals, calendar, history, derivation: { affixes: daughter.derivationAffixes, stats: derivationStats, phonology: derivationPhon }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable

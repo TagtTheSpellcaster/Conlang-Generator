@@ -51,7 +51,7 @@ Naming customs (`src/name-schemes.js`): the *Naming custom* selector of the Name
 
 ## IPA
 
-The "Show IPA" checkbox in the header adds a transcription to the lexicon, dictionary, sample sentences and the Writing examples; the Phonology card always has an IPA chart. IPA is derived from the letters (extended letters have fixed values) and syllabified by onset maximisation; stress is always on the first syllable of words with more than one, which is a convention, not a property of the language.
+The "Show IPA" checkbox in the header adds a transcription to the lexicon, dictionary, sample sentences and the Writing examples; the Phonology card always has an IPA chart. IPA is derived from the letters (extended letters have fixed values) and syllabified by onset maximisation; each language has one fixed stress system (mostly on the last or last-but-one syllable; Latin-like weight-sensitive, Spanish-like, final, or rarely initial), with secondary stress in long words. It is a per-language convention: no lexical stress exceptions and no link to the sound changes.
 
 ## Writing system
 

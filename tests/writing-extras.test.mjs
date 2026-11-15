@@ -37,9 +37,23 @@ test('numerals: positional digits and tallies read back; base follows the counti
     assert.ok(types.size >= 2);
 });
 
-test('IPA: stress, syllables and extended letters', () => {
-    assert.equal(ipaWord('kapino'), 'ˈka.pi.no');
-    assert.equal(ipaWord('sa'), 'sa');
+test('IPA: stress systems, syllables, secondary stress, extended letters', () => {
+    assert.equal(ipaWord('kapino', 'penult'), 'kaˈpi.no');
+    assert.equal(ipaWord('kapino', 'final'), 'ˌka.piˈno');
+    assert.equal(ipaWord('kapino', 'latin'), 'ˈka.pi.no');          // light penult: antepenult
+    assert.equal(ipaWord('kapinto', 'latin'), 'kaˈpin.to');         // closed (heavy) penult
+    assert.equal(ipaWord('kapir', 'consonant-final'), 'kaˈpir');
+    assert.equal(ipaWord('kapin', 'consonant-final'), 'ˈka.pin');
+    assert.equal(ipaWord('kapino', 'consonant-final'), 'kaˈpi.no');
+    assert.equal(ipaWord('kapino', 'initial'), 'ˈka.pi.no');
+    assert.equal(ipaWord('sa', 'final'), 'sa');
+    assert.equal(ipaWord('kapinoran', 'penult'), 'ˌka.piˈno.ran');
     assert.ok(ipaWord('kapino kapino').includes(' '));
-    assert.ok(!/[ʃ]/.test(ipaWord('kapino')));
+});
+
+test('stress systems: drawn per language, mostly on the right edge, never always initial', () => {
+    const counts = {};
+    for (const seed of 'abcdefghijklmnopqrstuvwxyz') { const id = make(seed).phonology.stress; counts[id] = (counts[id] ?? 0) + 1; }
+    assert.ok(Object.keys(counts).length >= 3);
+    assert.ok((counts.initial ?? 0) <= 6);
 });

@@ -1,11 +1,13 @@
 // HTML builders for the generator page. Pure: (language) -> string. No DOM access.
 import { buildWriting, WRITING_LABELS } from '../writing/system.js';
 import { buildNumberSigns } from '../writing/numerals.js';
-import { ipaWord, ipaOfLetter } from '../ipa.js';
+import { ipaWord, ipaOfLetter, stressOf, STRESS_SYSTEMS } from '../ipa.js';
 
 let showIpa = false;
 export const setShowIpa = on => { showIpa = !!on; };
-const ipaText = form => `/${ipaWord(form)}/`;
+let curStress = 'penult';
+export const setStress = id => { curStress = id || 'penult'; };
+const ipaText = form => `/${ipaWord(form, curStress)}/`;
 import { esc } from '../core/text.js';
 import { label } from '../lexicon/schema.js';
 import { inflect, genderOf } from '../morphology/inflect.js';
@@ -26,10 +28,11 @@ export function clusterSummaryHtml(phonology) {
     return `<div class="phon-clusters"><div><strong>Onset clusters:</strong> ${list(phonology.clusters)}</div><div><strong>Coda clusters:</strong> ${list(phonology.codaClusters)}</div></div>`;
 }
 
-// Letter values in IPA for the letters of the language. Stress is on the first syllable.
+// Letter values in IPA for the letters of the language; the stress system is a property of the language.
 function ipaChartHtml(p) {
     const letters = [...p.used.vowels, ...p.used.consonants];
-    return `<div class="phon-clusters"><div><strong>IPA:</strong> ${letters.map(l => `<span class="chip">${esc(l)} = /${esc(ipaOfLetter(l))}/</span>`).join(' ')}</div><div class="sub">Stress on the first syllable of words with more than one; syllables are divided by onset maximisation. The IPA toggle in the header adds these transcriptions to the lexicon, the dictionary and the sample sentences.</div></div>`;
+    const st = STRESS_SYSTEMS.find(x => x.id === p.stress) ?? STRESS_SYSTEMS[0];
+    return `<div class="phon-clusters"><div><strong>Stress:</strong> ${esc(st.text)}.</div><div><strong>IPA:</strong> ${letters.map(l => `<span class="chip">${esc(l)} = /${esc(ipaOfLetter(l))}/</span>`).join(' ')}</div><div class="sub">Syllables are divided by onset maximisation; stress is fixed by the language (see below) and marked ˈ (main) and ˌ (secondary); one-syllable words are not marked. The IPA toggle in the header adds these transcriptions to the lexicon, the dictionary and the sample sentences.</div></div>`;
 }
 
 export function phonologyHtml(lang) {
@@ -149,7 +152,7 @@ const tokenHtml = t => t.kind === 'alts'
     : `<span class="sample-word" data-meaning="${esc(t.gloss)}">${t.parts.map(p => p.kind === 'stem' ? esc(p.text) : `<span class="morph-ending" title="${esc(p.meaning ?? p.kind)}">${esc(p.text)}</span>`).join('')}</span>`;
 
 const flatTokens = tokens => tokens.flatMap(t => t.kind === 'alts' ? flatTokens(t.options[0]) : t.kind === 'word' ? [t.parts.map(p => p.text).join('')] : []);
-const pillHtml = s => `<div class="sample-pill"><div class="en"><b>${s.number}.</b> ${esc(s.english)}</div><div class="cl"><b>${s.number}.</b> ${s.tokens.map(tokenHtml).join(' ')}</div>${showIpa ? `<div class="ipa-line">${esc(flatTokens(s.tokens).map(w => ipaWord(w)).join(' '))}</div>` : ''}</div>`;
+const pillHtml = s => `<div class="sample-pill"><div class="en"><b>${s.number}.</b> ${esc(s.english)}</div><div class="cl"><b>${s.number}.</b> ${s.tokens.map(tokenHtml).join(' ')}</div>${showIpa ? `<div class="ipa-line">${esc(flatTokens(s.tokens).map(w => ipaWord(w, curStress)).join(' '))}</div>` : ''}</div>`;
 
 // sentences of one scope grouped by topic, in source order
 function sampleColumnHtml(title, subtitle, samples, skipped, emptyMessage) {
@@ -414,6 +417,7 @@ const sample = (lang, n) => lang.samples.slice(0, n).map(smp => {
 }).filter(x => x.words.length);
 
 export function writingHtml(lang, choice = 'auto') {
+    setStress(stressOf(lang));
     const W = buildWriting(lang, choice);
     const sign = (svg, label, note = '') => `<div class="sign">${svg}<span class="sign-label">${esc(label)}</span>${note ? `<span class="sign-note">${esc(note)}</span>` : ''}</div>`;
     const cell = (c) => W.drawCell(c, 44);

@@ -15,7 +15,7 @@ const SONORANT = new Set([...'mnŋɲɳrlwjɾɽɭʀɬʎ']);
 export const ipaOfLetter = ch => LETTER_IPA[ch] ?? ch;
 export const isVowelLetter = ch => VOWEL_LETTERS.has(ch);
 
-function ipaToken(word) {
+function ipaToken(word, stress = 'penult') {
     const letters = [...word];
     const units = letters.map(ch => ({ ipa: ipaOfLetter(ch), v: isVowelLetter(ch) }));
     if (units.filter(u => u.v).length < 2) return units.map(u => u.ipa).join('');
@@ -44,9 +44,45 @@ function ipaToken(word) {
         for (const u of s) { if (u.v && cur.some(x => x.v)) { out.push(cur); cur = []; } cur.push(u); }
         out.push(cur);
     }
-    const text = out.map(s => s.map(u => u.ipa).join(''));
-    return `ˈ${text.join('.')}`;
+    const n = out.length;
+    const heavy = i => out[i].some(u => u.ipa.endsWith('ː')) || !out[i].at(-1).v;
+    const lastLetter = letters.at(-1);
+    let main;
+    switch (stress) {
+        case 'final': main = n - 1; break;
+        case 'initial': main = 0; break;
+        case 'latin': main = n === 2 ? 0 : heavy(n - 2) ? n - 2 : n - 3; break;
+        case 'consonant-final': main = isVowelLetter(lastLetter) || lastLetter === 'n' || lastLetter === 's' ? n - 2 : n - 1; break;
+        default: main = n - 2;
+    }
+    main = Math.max(0, main);
+    const secondary = new Set();
+    if (stress === 'initial') { for (let i = 2; i < n - 1; i += 2) if (n >= 5) secondary.add(i); }
+    else for (let i = main - 2; i >= 0; i -= 2) secondary.add(i);
+    const text = out.map((sy, i) => `${i === main ? 'ˈ' : secondary.has(i) ? 'ˌ' : ''}${sy.map(u => u.ipa).join('')}`);
+    return text.join('.').replace(/\.([ˈˌ])/g, '$1');
 }
 
-// Syllable boundaries by onset maximisation, stress on the first syllable of words with more than one.
-export const ipaWord = form => form.split(' ').map(ipaToken).join(' ');
+// Stress systems (a property of the language, fixed by its seed). Weights follow what is common among natural languages:
+// stress mostly falls on the last or the last-but-one syllable.
+//   penult: always the last-but-one (Polish, Swahili); final: always the last (Turkish-like, French-like);
+//   latin: last-but-one if heavy (long vowel or closed syllable), otherwise the one before it;
+//   consonant-final: last-but-one in words ending in a vowel, n or s, last syllable otherwise (Spanish);
+//   initial: first syllable (Czech, Hungarian, Finnish), the rarest of the five here.
+export const STRESS_SYSTEMS = [
+    { id: 'penult', weight: 34, text: 'stress on the last-but-one syllable' },
+    { id: 'latin', weight: 26, text: 'stress on the last-but-one syllable if it is heavy (long vowel or closed), otherwise on the one before it' },
+    { id: 'consonant-final', weight: 18, text: 'stress on the last-but-one syllable, or on the last one in words ending in a consonant other than n or s' },
+    { id: 'final', weight: 15, text: 'stress on the last syllable' },
+    { id: 'initial', weight: 7, text: 'stress on the first syllable' }
+];
+export function stressSystemFor(roll) {                          // roll in [0, 1)
+    const total = STRESS_SYSTEMS.reduce((a, x) => a + x.weight, 0);
+    let t = roll * total;
+    for (const x of STRESS_SYSTEMS) { if ((t -= x.weight) < 0) return x; }
+    return STRESS_SYSTEMS[0];
+}
+export const stressOf = lang => lang?.phonology?.stress ?? 'penult';
+
+// Syllable boundaries by onset maximisation; stress by the given system (one syllable words carry no mark).
+export const ipaWord = (form, stress = 'penult') => form.split(' ').map(w => ipaToken(w, stress)).join(' ');
