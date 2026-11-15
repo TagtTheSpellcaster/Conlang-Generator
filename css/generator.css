@@ -637,3 +637,36 @@ main {
 .lex-section .lexicon { padding: 0 12px 6px; }
 
 .history-scroll { max-height: 70vh; overflow: auto; }
+
+/* derivation graphs (History tab) */
+.graph { display: block; font-family: ui-monospace, Menlo, Consolas, monospace; overflow: visible }
+.graph-node { fill: var(--panel2); stroke: var(--line); stroke-width: 1 }
+.graph-node.graph-main { stroke: var(--accent) }
+.graph-edge { stroke: var(--muted); stroke-width: 1.2; fill: none }
+.graph-arrow { fill: var(--muted) }
+.graph-text { fill: var(--text); font-size: 12px }
+.graph-small { fill: var(--muted); font-size: 10px }
+.graph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(420px, 1fr)); gap: 10px; margin-top: 10px }
+.graph-card { border: 1px solid var(--line); border-radius: 8px; padding: 10px; background: var(--panel2); overflow-x: auto }
+.graph-title { margin-bottom: 6px }
+.graph-legend { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; color: var(--muted); font-size: 12px }
+.graph-legend strong { color: var(--text) }
+.two-col { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 12px }
+
+/* writing system (Writing tab) */
+.cell { color: var(--text); overflow: visible }
+.script-word { display: inline-flex; align-items: flex-end; gap: 3px; padding: 0 5px }
+.script-line { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-end; margin-bottom: 4px }
+.script-sentence { margin: 12px 0 }
+.sign-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; margin: 6px 0 12px }
+.sign { border: 1px solid var(--line); border-radius: 6px; padding: 8px 4px; text-align: center; background: var(--panel2); display: flex; flex-direction: column; align-items: center; gap: 4px }
+.sign-label { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 13px }
+.sign-note { color: var(--muted); font-size: 11px }
+.writing-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 10px }
+
+.ipa-toggle { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 13px; cursor: pointer }
+.ipa, .ipa-line { font-family: "Charis SIL", "Gentium Plus", "DejaVu Sans", ui-sans-serif, sans-serif; color: var(--accent) }
+.ipa-line { font-size: 13px; margin-top: 4px }
+.numeral { display: inline-flex; align-items: flex-end; gap: 3px; }
+.numeral svg { display: block; }
+.script-word.joined { border-bottom: 1.6px solid currentColor; padding-bottom: 2px; }
