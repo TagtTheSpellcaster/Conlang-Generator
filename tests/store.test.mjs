@@ -39,3 +39,15 @@ test('overlay: modified, added and removed entries are applied to the base and s
 test('an unknown overlay version is ignored', () => {
     assert.equal(applyOverlay(base, { version: 99, added: [], modified: [], removed: ['verb.see'] }).length, base.length);
 });
+
+test('an old full local copy is migrated without turning newer entries into deletions', async () => {
+    const { migrationOverlay, suspiciousOverlay, diffVocabulary, applyOverlay } = await import('../src/lexicon/store.js');
+    const { vocabulary } = await import('./helpers.mjs');
+    const old = vocabulary.filter((e, i) => i % 2 === 0);
+    const bad = diffVocabulary(vocabulary, old);
+    assert.ok(suspiciousOverlay(vocabulary, bad));
+    const good = migrationOverlay(vocabulary, old);
+    assert.equal(good.removed.length, 0);
+    assert.equal(applyOverlay(vocabulary, good).length, vocabulary.length);
+    assert.ok(!suspiciousOverlay(vocabulary, { removed: ['x'] }));
+});

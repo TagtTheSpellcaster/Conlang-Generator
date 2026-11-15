@@ -77,10 +77,9 @@ export function buildNumerals(spec, lexicon) {
     const out = [];
     for (const e of lexicon) {
         if (!numeralIds.has(e.id)) { out.push(e); continue; }
-        const card = CARDINALS[e.lemma], ord = ORDINALS[e.lemma];
-        const value = card ?? ord;
-        if (!isDefined(system, value) || (config.type === 'restricted' && value === 0)) continue;
-        out.push({ ...e, form: ord !== undefined && card === undefined ? ordinalForm(system, value, spec) : numeralForm(system, value, spec).form });
+        const form = numeralEntryForm(system, e, spec);
+        if (form === undefined) continue;
+        out.push({ ...e, form });
     }
     // "many" is the open end of a restricted system
     let lex = config.type === 'restricted' ? out.map(e => (e.id === 'adjective.many' ? { ...e, form: words.many } : e)) : out;
@@ -226,6 +225,14 @@ export function numeralBeyondSystem(entry, spec) {
     if (cfg?.type !== 'restricted') return false;
     const v = numeralValue(entry);
     return v !== undefined && (v === 0 || v > (cfg.extended ? 5 : cfg.limit));
+}
+
+// Form of a numeral entry of the dictionary in this system, or undefined when the system has no such number.
+export function numeralEntryForm(system, e, spec) {
+    const card = CARDINALS[e.lemma], ord = ORDINALS[e.lemma];
+    const value = card ?? ord;
+    if (value === undefined || !isDefined(system, value) || (system.config.type === 'restricted' && value === 0)) return undefined;
+    return ord !== undefined && card === undefined ? ordinalForm(system, value, spec) : numeralForm(system, value, spec).form;
 }
 
 export function numeralForm(system, n, spec) {

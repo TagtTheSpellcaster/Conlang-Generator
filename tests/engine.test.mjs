@@ -132,5 +132,8 @@ test('every option combination generates without error (randomised sweep + corne
 test('phonology: forms use only the vowels and consonants of the model', () => {
     const L = gen({ consonants: 'japanese', vowels: 'minimal' });
     const allowed = new Set([...L.phonology.vowels, ...L.phonology.consonants]);
-    for (const e of L.lexicon) for (const ch of e.form) assert.ok(allowed.has(ch), `${e.form} contains ${ch}`);
+    for (const e of L.lexicon) for (const ch of e.protoForm.replace(/ /g, '')) assert.ok(allowed.has(ch), `${e.protoForm} contains ${ch}`);
+    // the daughter may use sounds the mother lacked, but only those the history reports
+    const gained = new Set(L.history.inventory.gained);
+    for (const e of L.lexicon) for (const ch of e.form.replace(/ /g, '')) assert.ok(allowed.has(ch) || gained.has(ch), `${e.form} contains ${ch}`);
 });

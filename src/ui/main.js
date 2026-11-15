@@ -5,9 +5,9 @@ import { languageDocument, toHtml, toMarkdown, lexiconCsv, languageJson, safeNam
 import { loadVocabulary } from './vocabulary-store.js';
 import { generateLanguage } from '../engine.js';
 import { esc, uniq } from '../core/text.js';
-import { CLUSTER_SETS, CLUSTER_LABELS, EXPANSIONS } from '../phonology/models.js';
+import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
-import { historyHtml, derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { setShowIpa, writingHtml, historyHtml, derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -24,7 +24,6 @@ const selected = id => { const e = $(id); return e ? [...e.selectedOptions].map(
 // Nothing checked = model default; "none" = no clusters; otherwise the checked sets.
 const checkedClusters = position => [...document.querySelectorAll(`input[name="${position}-clusters"]:checked`)].map(i => i.value);
 
-const checkedScript = () => [...document.querySelectorAll('input[name="script"]:checked')].map(i => i.value);
 
 function readInput() {
     const v = id => $(id)?.value;
@@ -35,9 +34,7 @@ function readInput() {
         gender: v('gender'), relations: v('relations'), caseSystem: v('case-system'), adjPosition: v('adj-position'),
         genre: v('genre'),
         numerals: v('numeral-system'), numeralVariant: v('numeral-variant'), classifiers: v('classifiers'), numeralPosition: v('numeral-position'),
-        onsetClusters: checkedClusters('onset'), codaClusters: checkedClusters('coda'), maxCluster: v('max-cluster'),
-        // nothing checked = no expanded letters (an explicit choice, so a genre's default does not come back)
-        script: checkedScript().length ? checkedScript() : ['none']
+        onsetClusters: checkedClusters('onset'), codaClusters: checkedClusters('coda'), maxCluster: v('max-cluster')
     };
 }
 
@@ -114,6 +111,16 @@ function render(lang) {
     const hist = $('history-output');
     hist.className = '';
     hist.innerHTML = historyHtml(lang);
+    lastLang = lang;
+    renderWriting();
+}
+
+let lastLang = null;
+function renderWriting() {
+    const out = $('writing-output');
+    if (!out || !lastLang) return;
+    out.className = '';
+    out.innerHTML = writingHtml(lastLang, $('writing-type')?.value ?? 'auto');
 }
 
 function generate(keepSeed = false) {
@@ -199,15 +206,6 @@ function installPhonotacticInfo() {
     refresh();
 }
 
-function installScriptControls() {
-    const anchor = document.querySelector('.cluster-controls');
-    if (!anchor) return;
-    const box = document.createElement('fieldset');
-    box.className = 'script-controls';
-    box.innerHTML = `<legend>Expanded letters</legend><div class="script-options">${Object.entries(EXPANSIONS).map(([key, g]) => `<label class="cluster-option"><input type="checkbox" name="script" value="${esc(key)}"> ${esc(g.label)}</label>`).join('')}</div><div class="sub cluster-hint">Marked letters for an exotic look. A few letters of each group are used (never the whole group), and only those whose base letter the language has. Genres such as dwarven or fey pick a group by themselves.</div>`;
-    anchor.appendChild(box);   // a grid item of the cluster grid: same column width as the cluster boxes
-}
-
 function installClusterControls() {
     const seed = $('seed')?.closest('.field');
     if (!seed) return;
@@ -254,7 +252,6 @@ function applyGenre(id) {
     for (const [position, list] of [['onset', g.sound.onsetClusters], ['coda', g.sound.codaClusters]]) {
         for (const box of document.querySelectorAll(`input[name="${position}-clusters"]`)) box.checked = !!list?.includes(box.value);
     }
-    for (const box of document.querySelectorAll('input[name="script"]')) box.checked = !!g.sound.script?.includes(box.value);
     $('consonants')?.dispatchEvent(new Event('change'));
 }
 
@@ -345,8 +342,10 @@ async function loadJson(path) {
 
 async function start() {
     if ($('app-version')) $('app-version').textContent = `v${VERSION}`;
-    installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls(); installScriptControls(); installGenreControls();
+    installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls(); installGenreControls();
     $('generate')?.addEventListener('click', generate);
+    $('writing-type')?.addEventListener('change', renderWriting);
+    $('show-ipa')?.addEventListener('change', () => { setShowIpa($('show-ipa').checked); if (current) render(current); });
     $('regenerate')?.addEventListener('click', () => { randomize(); generate(); });
     $('randomize')?.addEventListener('click', randomize);
     $('clear-filters')?.addEventListener('click', () => FILTERS.forEach(id => { if ($(id)) $(id).value = ''; }));

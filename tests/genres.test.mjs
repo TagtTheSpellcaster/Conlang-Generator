@@ -10,7 +10,7 @@ import { vocabulary, templates, derivations } from './helpers.mjs';
 
 const gen = (input = {}) => generateLanguage({ seed: 'gt', ...input }, vocabulary, templates, derivations);
 const lemmas = L => new Set(L.lexicon.map(e => e.lemma));
-const forms = L => L.lexicon.filter(e => e.tier !== 'core').map(e => e.form);
+const forms = L => L.lexicon.filter(e => e.tier !== 'core').map(e => e.protoForm);   // genre sound statistics describe the mother language
 const VOWEL_SET = new Set(['a', 'e', 'i', 'o', 'u', 'y', 'ø', 'æ']);
 const share = (words, pred) => words.filter(pred).length / words.length;
 
@@ -129,6 +129,15 @@ test('semantics: genres that do not know war leave out non-core war and weapon v
 test('genreBonus is bounded and zero without a profile', () => {
     assert.equal(genreBonus(vocabulary[0], null), 0);
     for (const g of Object.values(GENRES)) for (const e of vocabulary.slice(0, 1500)) { const b = genreBonus(e, g.semantics); assert.ok(b >= -6 && b <= 12); }
+});
+
+test('the daughter keeps the character of its mother: open-ended words and length', () => {
+    for (const genre of ['marine', 'war', 'dwarven']) {
+        const L = gen({ genre });
+        const vf = f => L.lexicon.filter(e => VOWEL_SET.has(f(e).at(-1))).length / L.lexicon.length, len = f => L.lexicon.reduce((n, e) => n + f(e).length, 0) / L.lexicon.length;
+        assert.ok(vf(e => e.form) >= vf(e => e.protoForm) - 0.11, `${genre} vowel-final`);
+        assert.ok(len(e => e.form) >= len(e => e.protoForm) * 0.85, `${genre} length`);
+    }
 });
 
 test('sound: sea-folk use open syllables, war tongue closed ones and shorter words', () => {

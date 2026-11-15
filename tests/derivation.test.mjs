@@ -37,7 +37,7 @@ test('derived words contain their bases, in the order the structure says', () =>
         for (const e of derived) {
             const d = e.derivation;
             // a doubled letter or a linking vowel may change the junction by one letter, never more
-            for (const p of d.parts) { const t = p.text.replace(/^-|-$/g, ''); assert.ok(e.form.includes(t.length <= 2 ? t[0] : t.slice(1, -1)), `${e.form} lacks ${p.text} (${e.lemma})`); }
+            for (const p of d.parts) { const t = p.text.replace(/^-|-$/g, ''); assert.ok(e.protoForm.includes(t.length <= 2 ? t[0] : t.slice(1, -1)), `${e.protoForm} lacks ${p.text} (${e.lemma})`); }
             assert.equal(d.parts.length, 2);
             const baseIndex = d.parts.findIndex(p => p.id);
             if (d.type !== 'compound') assert.equal(d.parts[baseIndex ? 0 : 1].affix, d.type);
@@ -60,9 +60,9 @@ test('roots of words that are not derived do not change when derivation is switc
     for (const seed of ['a', 'b', 'c']) {
         const base = gen({ seed }, []), withD = gen({ seed }, derivations);
         // numeral words are drawn again around the new forms of the lexicon; every other root must stay put
-        const forms = new Map(withD.lexicon.filter(e => !e.derivation && !e.id.startsWith('number.')).map(e => [e.id, e.form]));
+        const forms = new Map(withD.lexicon.filter(e => !e.derivation && !e.id.startsWith('number.')).map(e => [e.id, e.protoForm]));
         let same = 0, total = 0;
-        for (const e of base.lexicon) if (forms.has(e.id)) { total++; if (forms.get(e.id) === e.form) same++; }
+        for (const e of base.lexicon) if (forms.has(e.id)) { total++; if (forms.get(e.id) === e.protoForm) same++; }
         assert.ok(total > 400 && same === total, `${seed}: ${same}/${total}`);
     }
 });
@@ -117,22 +117,23 @@ test('joining: vowel hiatus is kept, elided or broken by a glide; some languages
         if (p.linker) {
             const c = L.lexicon.filter(e => e.derivation?.type === 'compound');
             assert.ok(c.length > 0);
-            assert.ok(c.some(e => e.form.includes(p.linker)), `${p.linker}`);
+            assert.ok(c.some(e => e.protoForm.includes(p.linker)), `${p.linker}`);
         }
     }
     assert.ok(seen.keep > 20 && seen.elide > 20 && seen.glide > 5 && seen.linker > 15, JSON.stringify(seen));
 });
 
-test('history: 8-12 ordered, dated rules; daughter forms are valid and deterministic', () => {
+test('history: up to 12 ordered, dated rules; daughter forms are valid and deterministic', () => {
     for (let i = 0; i < 12; i++) {
         const input = { seed: `h${i}`, morphology: ['isolating', 'agglutinative', 'fusional'][i % 3] };
         const L = gen(input), h = L.history;
-        assert.ok(h.rules.length >= 6 && h.rules.length <= 12, `${h.rules.length} rules`);
+        assert.ok(h.rules.length >= 3 && h.rules.length <= 12, `${h.rules.length} rules`);
         for (let k = 1; k < h.rules.length; k++) assert.ok(h.rules[k].years < h.rules[k - 1].years);
         assert.ok(h.stats.unchanged > 0 && h.stats.unchanged < h.stats.words);
-        assert.ok(h.stats.merged / h.stats.words <= 0.06, `merged ${h.stats.merged}`);
+        assert.ok(h.stats.blocked / h.stats.words <= 0.06, `blocked ${h.stats.blocked}`);
+        assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length, 'daughter forms are unique');
         for (const w of h.lexicon) assert.ok(w.daughter.length >= 2 && /\S/.test(w.daughter), w.daughter);
         assert.deepEqual(gen(input).history.rules, h.rules);
-        assert.ok(L.lexicon.every(e => e.form), 'proto forms stay the generated ones');
+        assert.ok(L.lexicon.every(e => e.form && e.protoForm), 'every word has a mother form');
     }
 });

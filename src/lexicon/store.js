@@ -28,6 +28,17 @@ export function diffVocabulary(base, current) {
 
 export const overlaySize = o => o ? o.added.length + o.modified.length + o.removed.length : 0;
 
+// An overlay that removes a large part of the file was not made by hand (see migrationOverlay): it must not be applied.
+export const MASS_REMOVAL = 0.2;
+export const suspiciousOverlay = (base, overlay) => !!overlay && Array.isArray(overlay.removed) && overlay.removed.length > base.length * MASS_REMOVAL;
+
+// Overlay for an old full local copy (written automatically by versions before 1.9.0). Only the entries the user
+// added are kept: entries missing from the old copy are simply newer than it, and differing ones are older versions.
+export function migrationOverlay(base, oldCopy) {
+    const o = diffVocabulary(base, oldCopy);
+    return { ...o, modified: [], removed: [] };
+}
+
 // Applies an overlay to a (possibly newer) base. Entries keep the base order; added entries go at the end.
 export function applyOverlay(base, overlay) {
     if (!overlay || overlay.version !== OVERLAY_VERSION) return base.map(cloneEntry);

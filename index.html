@@ -14,11 +14,11 @@
         </div>
         <div class="sub">Vocabulary-driven language generation</div>
       </div>
-      <div class="header-tools"><button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button><button type="button" class="btn" id="copy-vocabulary">Copy to Clipboard</button><button type="button" class="btn" id="export-vocabulary">Export vocabulary</button><button type="button" class="btn" id="import-vocabulary">Import vocabulary</button><input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
+      <div class="header-tools"><button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button><button type="button" class="btn" id="copy-vocabulary">Copy to Clipboard</button><button type="button" class="btn" id="export-vocabulary">Export vocabulary</button><button type="button" class="btn" id="import-vocabulary">Import vocabulary</button><label class="ipa-toggle"><input type="checkbox" id="show-ipa"> IPA</label><input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
         <div id="db-status" class="sub">Loading vocabulary…</div>
       </div>
     </header>
-    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="numerals" aria-selected="false">Numerals</button><button type="button" class="tab" data-tab="names" aria-selected="false">Names</button><button type="button" class="tab" data-tab="calendar" aria-selected="false">Calendar</button><button type="button" class="tab" data-tab="history" aria-selected="false">History</button></nav>
+    <nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="numerals" aria-selected="false">Numerals</button><button type="button" class="tab" data-tab="names" aria-selected="false">Names</button><button type="button" class="tab" data-tab="calendar" aria-selected="false">Calendar</button><button type="button" class="tab" data-tab="history" aria-selected="false">History</button><button type="button" class="tab" data-tab="writing" aria-selected="false">Writing</button></nav>
     <section id="generator" class="tab-panel active">
       <main>
         <div class="controls">
@@ -201,8 +201,16 @@
     </section>
     <section id="history" class="tab-panel">
       <main>
-        <div class="sub names-hint">Prototype. The generated language is the proto-language; one daughter language is derived from it by ordered, dated sound changes.</div>
+        <div class="sub names-hint">The language returned by the generator is the daughter of a mother language (the one generated from your settings) by ordered, dated sound changes. This tab shows the mother, the changes and the comparison.</div>
         <div id="history-output" class="empty">Generate a language to see its history.</div>
+      </main>
+    </section>
+    <section id="writing" class="tab-panel">
+      <main>
+        <div class="writing-bar"><label for="writing-type">Writing system</label>
+          <select id="writing-type"><option value="auto">Automatic (by culture)</option><option value="alphabet">Alphabet</option><option value="abjad">Abjad</option><option value="abugida">Abugida</option><option value="syllabary">Syllabary</option></select>
+          <span class="sub">The language is written in Latin letters in every other tab; this tab shows a native script for it. Logographic systems are not offered.</span></div>
+        <div id="writing-output" class="empty">Generate a language to see its writing system.</div>
       </main>
     </section>
     <script type="module" src="src/ui/main.js"></script>

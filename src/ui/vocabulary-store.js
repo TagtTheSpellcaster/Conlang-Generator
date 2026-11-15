@@ -3,7 +3,7 @@
 // "Save to file" writes the working copy back to data/vocabulary.json (File System Access API, Chromium browsers;
 // elsewhere the file is downloaded and has to replace data/vocabulary.json by hand).
 import { assertVocabulary, validateVocabulary, cloneEntry } from '../lexicon/schema.js';
-import { diffVocabulary, applyOverlay, overlaySize, serializeVocabulary } from '../lexicon/store.js';
+import { diffVocabulary, applyOverlay, overlaySize, serializeVocabulary, migrationOverlay, suspiciousOverlay } from '../lexicon/store.js';
 
 const OVERLAY_KEY = 'conlang_vocabulary_overlay_v1';
 const LEGACY_KEY = 'conlang_vocabulary_v2';   // full local copy written by versions before 1.9.0
@@ -27,7 +27,7 @@ export async function loadVocabulary() {
     if (legacy && !read(OVERLAY_KEY)) {
         try {
             const old = assertVocabulary(JSON.parse(legacy), 'local copy').map(cloneEntry);
-            const overlay = diffVocabulary(base, old);
+            const overlay = migrationOverlay(base, old);
             if (overlaySize(overlay)) write(OVERLAY_KEY, JSON.stringify(overlay));
         } catch (e) { console.warn('Ignoring incompatible local copy', e); }
     }
@@ -35,6 +35,11 @@ export async function loadVocabulary() {
     let overlay = null;
     const stored = read(OVERLAY_KEY);
     if (stored) { try { overlay = JSON.parse(stored); } catch { overlay = null; } }
+    if (suspiciousOverlay(base, overlay)) {
+        warning = `Ignored stored dictionary edits that removed ${overlay.removed.length} of ${base.length} entries (left by an old local copy); they have been discarded`;
+        remove(OVERLAY_KEY);
+        overlay = null;
+    }
     let vocabulary = base;
     if (overlay) {
         const merged = applyOverlay(base, overlay);

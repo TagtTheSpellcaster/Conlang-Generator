@@ -7,7 +7,7 @@ import { resolvePhonotactics, validWord, createWordFactory } from '../src/phonol
 import { vocabulary, templates, derivations } from './helpers.mjs';
 
 const gen = (input = {}) => generateLanguage({ seed: 'ph', ...input }, vocabulary, templates, derivations);
-const forms = L => L.lexicon.map(e => e.form);
+const forms = L => L.lexicon.map(e => e.protoForm);
 const vowelsOf = L => L.phonology.vowels;
 const runs = (w, vowels) => w.match(new RegExp(`[^${vowels.join('')}]+`, 'g')) ?? [];
 const initialRun = (w, vowels) => (vowels.includes(w[0]) ? '' : runs(w, vowels)[0]);

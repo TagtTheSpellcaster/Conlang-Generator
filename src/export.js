@@ -1,5 +1,8 @@
 // Exports of a generated language. Pure: language -> text. The sheet is built once as a small document model
 // (sections of key/value lists, tables and paragraphs) and rendered to Markdown or standalone HTML.
+import { ipaWord, ipaOfLetter } from './ipa.js';
+import { buildWriting } from './writing/system.js';
+import { buildNumberSigns } from './writing/numerals.js';
 import { label } from './lexicon/schema.js';
 import { inflect, genderOf } from './morphology/inflect.js';
 import { personCells } from './morphology/affixes.js';
@@ -99,8 +102,7 @@ export function languageDocument(lang, version = '') {
         ...[['Culture', s.culture], ['Biome', s.biome], ['Era', s.era]].filter(([, v]) => v?.length).map(([k, v]) => [k, v.join(', ')])
     ] }] });
     sections.push({ title: 'Phonology', blocks: [{ type: 'kv', rows: [
-        ['Expanded letters', [...ph.extraVowels, ...ph.extraConsonants].join(' ') || 'none'],
-        ['Pattern', `${ph.name} · ${ph.lengthProfile} words (mean ${ph.meanSyllables} syllables)`], ['Vowels', list(ph.vowels)], ['Consonants', list(ph.consonants)],
+        ['Pattern', `${ph.name} · ${ph.lengthProfile} words (mean ${ph.meanSyllables} syllables)`], ['Vowels', list(ph.used.vowels)], ['Consonants', list(ph.used.consonants)], ['IPA', [...ph.used.vowels, ...ph.used.consonants].map(l => `${l} = /${ipaOfLetter(l)}/`).join(', ')],
         ['Onset clusters', list(ph.clusters)], ['Coda clusters', list(ph.codaClusters)], ['Syllable patterns', list(ph.patterns)]
     ] }] });
     sections.push(...paradigmSections(lang));
@@ -125,12 +127,19 @@ export function languageDocument(lang, version = '') {
             ...(c.instruments.length ? [{ type: 'heading', text: 'Instruments' }, T(['Name', 'English', 'Use'], c.instruments, x => [x.name, x.gloss, x.use ?? ''])] : [])
         ] });
     }
+    {
+        const W = buildWriting(lang);
+        sections.push({ title: 'Writing system', blocks: [
+            { type: 'kv', rows: [['Kind', W.type], ['Glyph style', W.style], ['Direction', W.direction === 'rtl' ? 'right to left' : 'left to right'], ['Signs', String(W.letters.base.length + (W.type === 'syllabary' ? W.letters.syllables.length : 0))], ['Reading rules', W.ruleText.join('; ') || 'phonemic spelling'], ['Words with the exception mark', `${W.exceptions.length} (${(100 * W.exceptionShare).toFixed(1)}%)`]] }
+        ] });
+    }
     if (lang.history) {
         const h = lang.history;
-        sections.push({ title: 'Daughter language', blocks: [
-            { type: 'para', text: `${h.stats.rules} sound changes; ${h.stats.unchanged} of ${h.stats.words} words unchanged; ${h.stats.merged} words merged into homophones.` },
+        sections.push({ title: 'Mother language and sound changes', blocks: [
+            { type: 'para', text: `The language of this sheet is the daughter of the generated mother language: ${h.stats.rules} sound changes; ${h.stats.unchanged} of ${h.stats.words} words unchanged; ${h.stats.blocked} words kept apart from another word.` },
             { type: 'table', head: ['When', 'Change', 'Example'], rows: h.rules.map(r => [`c. ${r.years} years ago`, r.label, r.example ?? '']) },
-            { type: 'table', head: ['Daughter', 'Proto', 'English', 'Changes'], rows: h.lexicon.map(w => [w.daughter, `*${w.proto}`, w.lemma, w.changes.join(', ')]) }
+            ...(h.loans ? [{ type: 'heading', text: `Loanwords (${h.loans.items.length})` }, { type: 'table', head: ['Donor', 'Kind', 'Contact'], rows: h.loans.donors.map(d => [d.name, d.role, `c. ${d.years} years ago`]) }, { type: 'table', head: ['Word', 'Donor form', 'English', 'Donor', 'Replaces'], rows: h.loans.items.map(x => [x.form, `*${x.source}*`, x.lemma, h.loans.donors.find(d => d.id === x.donor)?.name ?? x.donor, x.replaced]) }] : []),
+            { type: 'table', head: ['Daughter', 'Mother', 'English', 'Changes'], rows: h.lexicon.map(w => [w.daughter, `*${w.proto}`, w.lemma, w.loan ? 'loan' : w.changes.join(', ')]) }
         ] });
     }
     sections.push({ title: 'Names', blocks: [
@@ -178,7 +187,7 @@ export function toHtml(doc) {
 
 const csvCell = x => /[",\n\t]/.test(String(x)) ? `"${String(x).replace(/"/g, '""')}"` : String(x);
 export function lexiconCsv(lang) {
-    const rows = [['word', 'english', 'part_of_speech', 'domain', 'group', 'id', 'structure'], ...lang.lexicon.map(e => [e.form, label(e), e.pos, e.domain, e.group, e.id, e.derivation ? e.derivation.text : ''])];
+    const rows = [['word', 'ipa', 'english', 'part_of_speech', 'domain', 'group', 'id', 'structure'], ...lang.lexicon.map(e => [e.form, `/${ipaWord(e.form)}/`, label(e), e.pos, e.domain, e.group, e.id, e.derivation ? e.derivation.text : e.loan ? `loan from ${e.loan.donorName} *${e.loan.source}*` : ''])];
     return '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n';
 }
 
@@ -188,7 +197,8 @@ export function languageJson(lang, version = '') {
     return JSON.stringify({
         format: 'Conlang Generator language', generator: version, name: lang.name, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
         morphology: { model: morphology.model, affixes: morphology.affixes },
-        history: lang.history ? { rules: lang.history.rules, stats: lang.history.stats, words: lang.history.lexicon.map(w => ({ lemma: w.lemma, proto: w.proto, daughter: w.daughter, changes: w.changes })) } : null,
+        writing: (() => { const W = buildWriting(lang); return { type: W.type, style: W.style, direction: W.direction, signs: W.letters.base.length, syllables: W.letters.syllables.length, rules: W.ruleText, exceptions: W.exceptions, ligatures: W.ligatures, joined: W.joined, numerals: (() => { const N = buildNumberSigns(lang, W); return { base: N.base, restricted: N.restricted, kind: N.composite ? 'dots-and-bars' : N.restricted ? 'tally' : 'glyphs' }; })() }; })(),
+        history: lang.history ? { rules: lang.history.rules, stats: lang.history.stats, loans: lang.history.loans ? { absorbency: lang.history.loans.absorbency, donors: lang.history.loans.donors, items: lang.history.loans.items } : null, words: lang.history.lexicon.map(w => ({ lemma: w.lemma, proto: w.proto, daughter: w.daughter, changes: w.changes, loan: w.loan ? w.loan.donor : null })) } : null,
         wordFormation: lang.derivation ? { affixes: Object.fromEntries(Object.entries(lang.derivation.affixes).map(([t, a]) => [t, { form: a.form, position: a.position }])), derived: lang.derivation.stats.applied } : null,
         lexicon: lang.lexicon.map(e => ({ word: e.form, id: e.id, english: label(e), pos: e.pos, domain: e.domain, group: e.group, ...(e.derivation ? { derivation: { type: e.derivation.type, parts: e.derivation.parts.map(p => p.text) } } : {}) })),
         numerals: { type: lang.numerals.config.type, config: lang.numerals.config, classifiers: lang.numerals.classifiers?.map(c => ({ class: c.id, form: c.form })) ?? null,

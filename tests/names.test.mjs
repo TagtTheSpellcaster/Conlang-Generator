@@ -30,7 +30,7 @@ test('a different salt or seed gives different names; the language itself is unt
 test('every genre yields all four kinds; letters belong to the language and meanings to its lexicon', () => {
     for (const genre of ['', ...GENRE_IDS]) {
         const L = gen(genre ? { genre } : {});
-        const alphabet = new Set([...L.phonology.vowels, ...L.phonology.consonants, ...L.phonology.extraVowels, ...L.phonology.extraConsonants].join('').toLowerCase());
+        const alphabet = new Set([...L.phonology.vowels, ...L.phonology.consonants, ...L.phonology.extraVowels, ...L.phonology.extraConsonants, ...L.history.inventory.gained].join('').toLowerCase());
         const lemmas = new Set(L.lexicon.map(e => e.lemma));
         for (const { id } of NAME_KINDS) {
             const names = generateNames(L, { kind: id, count: 12 });
