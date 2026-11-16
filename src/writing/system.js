@@ -3,7 +3,7 @@
 // sound (k before i or e written k and read ʃ, as Italian writes gn or Italian "c" before e/i): those are the reading rules,
 // each valid for nearly every word; the words that do not follow them carry an exception mark.
 import { rng } from '../core/rng.js';
-import { makeGlyphs, makeMarks, cellSvg, ligature, MARK_SHAPES } from './glyphs.js';
+import { buildGraphics } from '../graphics/scripts.js';
 
 export const WRITING_TYPES = ['alphabet', 'abjad', 'abugida', 'syllabary'];
 export const WRITING_LABELS = { alphabet: 'Alphabet', abjad: 'Abjad', abugida: 'Abugida', syllabary: 'Syllabary' };
@@ -122,8 +122,7 @@ export function buildWriting(lang, choice = 'auto') {
     const minCount = Math.max(type === 'abugida' ? 6 : 8, Math.ceil(lexWords.length * (type === 'abugida' ? 0.012 : 0.006)));
     const ligPairs = new Set([...pairCount].filter(([, n]) => n >= minCount).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, limit).map(([k]) => k));
     const ligMode = type === 'abugida' ? 'half' : 'fused';
-    const joined = (type === 'alphabet' || type === 'abjad') && (style === 'curvy' || style === 'mixed') && joinRoll < 0.5;
-
+    
     // glyphs
     const seed = spec.seed;
     const sys = { type, style, direction, rules, exceptions, inherent, vowels, consonants, isV };
@@ -131,18 +130,11 @@ export function buildWriting(lang, choice = 'auto') {
         : type === 'abjad' ? ['@', ...consonants, ...matres.map(v => `m:${v}`)]
             : type === 'abugida' ? [...consonants, ...vowels.map(v => `v:${v}`)]
                 : consonants;
-    const paths = makeGlyphs(seed, style, baseKeys.length + 1);
-    const glyph = new Map(baseKeys.map((k, i) => [k, paths[i]]));
-    const exceptionPath = paths[baseKeys.length];
     const markVowels = type === 'abjad' ? vowels.filter(v => !matres.includes(v)) : type === 'abugida' ? vowels.filter(v => v !== inherent) : [];
-    const markList = makeMarks(seed, markVowels.length + 1);
-    const mark = new Map(markVowels.map((v, i) => [v, markList[i]]));
-    const zeroMark = markList[markVowels.length];                    // virama (abugida) or no-vowel sign (pointed abjad)
-    const SYLLABARY_SHAPES = MARK_SHAPES.filter((d, i) => i !== 3);      // a lone dot is too faint for a component
-    const shapes = type === 'syllabary' ? SYLLABARY_SHAPES : MARK_SHAPES;
-    const ligGlyph = new Map([...ligPairs].map(k => [k, ligature(glyph.get(k[0]), glyph.get(k[1]), ligMode)]));
-    const vowelShapes = new Map(vowels.map((v, i) => [v, shapes[(i + Math.floor(r() * 3)) % shapes.length]]));
-    if (type === 'syllabary') { const used = new Set(); for (const [v] of vowelShapes) { let s = vowelShapes.get(v), k = 0; while (used.has(s) && k++ < 20) s = shapes[(shapes.indexOf(s) + 1) % shapes.length]; used.add(s); vowelShapes.set(v, s); } }
+    const gfx = buildGraphics({ spec, type, style, direction, isV, vowels, consonants, matres, inherent, markVowels, ligPairs, ligMode, syllables, cursivePref: joinRoll < 0.6 });
+    const { glyph, mark, zeroMark } = gfx;
+    const exceptionPath = gfx.unit({ x: true }).strokes.length;
+    const vowelShapes = new Map();
 
     // ---- cells (logical order) ---------------------------------------------------------------------------------
     // cell: { b: key of the base glyph, marks: [mark names], syl: 'ka' (syllabary), x: true (exception sign) }
@@ -193,16 +185,8 @@ export function buildWriting(lang, choice = 'auto') {
     }
 
     // ---- drawing ------------------------------------------------------------------------------------------------
-    function drawCell(cell, height = 38) {
-        if (cell.x) return cellSvg({ base: exceptionPath, baseScale: 0.55 }, height);
-        if (type === 'syllabary') {
-            if (cell.c === null) return cellSvg({ vowelMark: null, base: null, marks: [] }, height).replace('</svg>', `<path d="${vowelShapes.get(cell.v)}" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" transform="translate(1 6) scale(2.2)"/></svg>`).replace(/viewBox="[^"]*"/, 'viewBox="0 0 20 30"').replace(/width="[^"]*"/, `width="${Math.round(20 * height / 30)}"`);
-            return cellSvg({ base: glyph.get(cell.c), baseScale: 0.8, vowelMark: cell.v ? vowelShapes.get(cell.v) : null, bar: !cell.v }, height);
-        }
-        const marks = (cell.marks ?? []).map(m => m === '0' ? zeroMark : mark.get(m)).filter(Boolean);
-        return cellSvg({ base: cell.b.startsWith('L:') ? ligGlyph.get(cell.b.slice(2)) : glyph.get(cell.b), marks }, height);
-    }
-    const wordSvg = (word, height = 38, pointed = true) => `<span class="script-word${joined ? ' joined' : ''}" dir="${direction}">${cellsOf(word, pointed).map(c => drawCell(c, height)).join('')}</span>`;
+    const drawCell = (cell, height = 38) => gfx.drawCell(cell, height);
+    const wordSvg = (word, height = 38, pointed = true) => `<span class="script-word${gfx.cursive ? ' joined' : ''}" dir="${direction}">${gfx.wordSvg(cellsOf(word, pointed), height)}</span>`;
 
     // ---- checks and statistics ------------------------------------------------------------------------------------
     const roundTrip = type === 'abjad' ? lexWords.filter(w => readCells(cellsOf(w, true)) !== w).length : lexWords.filter(w => readCells(cellsOf(w)) !== w).length;
@@ -216,7 +200,7 @@ export function buildWriting(lang, choice = 'auto') {
     const ruleText = rules.map(x => x.text);
     const examplesOf = ru => lexWords.filter(w => ru.write(w) !== w && !exceptions.has(w)).slice(0, 3).map(w => ({ spoken: w, written: spelled(w) }));
     return {
-        type, style, direction, inherent, ligatures: [...ligPairs], ligMode, joined, rules: rules.map(ru => ({ id: ru.id, text: ru.text, examples: examplesOf(ru) })), ruleText,
+        type, style, direction, inherent, ligatures: [...ligPairs], ligMode, joined: gfx.cursive, graphics: gfx.describe, tradition: gfx.tradition, graphicsQuality: gfx.quality, forms: gfx.forms, rules: rules.map(ru => ({ id: ru.id, text: ru.text, examples: examplesOf(ru) })), ruleText,
         exceptions: [...exceptions], exceptionShare: exceptions.size / lexWords.length,
         letters: { vowels, consonants, base: baseKeys, syllables: [...syllables].sort() },
         homographs: type === 'abjad' ? homographs : 0, words: lexWords.length, failures: roundTrip, openShare, clusterShare,

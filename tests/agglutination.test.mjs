@@ -119,11 +119,17 @@ test('verbs in agglutinative sentences carry suffix chains; isolating verbs stay
 });
 
 test('all affixes (nominal, possessive, verbal) are unique and never collide with roots', () => {
+    const collect2 = (x, out) => { if (typeof x === 'string') { if (x) out.push(x); } else if (x && typeof x === 'object') Object.values(x).forEach(y => collect2(y, out)); };
     for (const morphology of ['agglutinative', 'fusional']) for (const consonants of ['isolated', 'european', 'semitic']) {
         const L = gen({ morphology, consonants, number: 'singular-plural-dual', gender: 'masculine-feminine-neuter', caseSystem: 'extensive' });
         const a = L.morphology.affixes, all = [];
         const collect = x => { if (typeof x === 'string') { if (x) all.push(x); } else if (x && typeof x === 'object') Object.values(x).forEach(collect); };
-        collect({ ...a, numberMarkers: { plural: a.numberMarkers.plural, dual: a.numberMarkers.dual } });
+        const { classOverlays, classMap, suppletion, ...base } = a;
+        collect({ ...base, numberMarkers: { plural: a.numberMarkers.plural, dual: a.numberMarkers.dual } });
+        // class overlays share cells with the base table on purpose (syncretism), but never an ending with a root
+        const overlayForms = []; collect2(classOverlays, overlayForms);
+        for (const x of overlayForms) assert.ok(!new Set(L.lexicon.map(e => e.form)).has(x), `${x} (class) collides with a root`);
+        for (const x of Object.values(suppletion).flatMap(o => Object.values(o))) assert.ok(!new Set(L.lexicon.map(e => e.form)).has(x), `${x} (suppletive stem) collides with a root`);
         const roots = new Set(L.lexicon.map(e => e.form));
         assert.equal(new Set(all).size, all.length, `${morphology} ${consonants}`);
         for (const x of all) assert.ok(!roots.has(x), `${x} collides with a root`);

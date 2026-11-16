@@ -10,7 +10,7 @@ export const setStress = id => { curStress = id || 'penult'; };
 const ipaText = form => `/${ipaWord(form, curStress)}/`;
 import { esc } from '../core/text.js';
 import { label } from '../lexicon/schema.js';
-import { inflect, genderOf } from '../morphology/inflect.js';
+import { inflect, genderOf, classOf } from '../morphology/inflect.js';
 import { personCells } from '../morphology/affixes.js';
 import { exampleNoun, exampleVerb, exampleAdjective } from '../morphology/examples.js';
 
@@ -63,7 +63,7 @@ const gloss = (c, noun, number) => `${(CASE_FRAMES[c] || (n => n))(noun)}${numbe
 
 // parts -> html: stem plain, every affix highlighted; an empty ending is shown as ∅ when the paradigm has endings.
 export function formHtml(parts, showZero) {
-    const html = parts.map(p => p.kind === 'stem' ? esc(p.text) : `<span class="morph-ending">${esc(p.text)}</span>`).join('');
+    const html = parts.map(p => p.kind === 'stem' ? esc(p.text) : p.kind === 'stem-alt' ? `<span class="morph-alt" title="stem alternation (regular stem ${esc(p.regular)})">${esc(p.text)}</span>` : p.kind === 'suppletive' ? `<span class="morph-supp" title="suppletive stem">${esc(p.text)}</span>` : `<span class="morph-ending">${esc(p.text)}</span>`).join('');
     return parts.length === 1 && showZero ? `${html}<span class="morph-empty">∅</span>` : html;
 }
 
@@ -113,6 +113,67 @@ export function nominalCategoriesHtml(lang) {
 const CELL_LABEL = { singular: 'sg', plural: 'pl', dual: 'du' };
 const cellLabel = cell => { const [p, n] = cell.split('.'); return `${p}${CELL_LABEL[n]}`; };
 
+// Inflection classes, stem alternations from the sound changes, and suppletion.
+export function classesHtml(lang) {
+    const { spec, morphology } = lang;
+    const { model, affixes } = morphology;
+    if (spec.morphology === 'isolating' && !Object.keys(affixes.suppletion ?? {}).length) return '';
+    const morph = { spec, model, affixes };
+    const notes = [], parts = [];
+    const lex = lang.lexicon;
+    const rank = { core: 0, common: 1, domain: 2 };
+    const sorted = [...lex].sort((a, b) => rank[a.tier] - rank[b.tier]);
+    const ruleLabel = Object.fromEntries((lang.history?.rules ?? []).map(r => [r.id, r.label]));
+    const fmt = r => `<span class="morph-form">${formHtml(r.parts, false)}</span>`;
+    const rowsFor = (group, count, pos, cellsOf, head) => {
+        const members = lex.filter(e => pos.includes(e.pos) && !e.loan);
+        const by = Array.from({ length: count }, () => []);
+        for (const e of members) by[classOf(e, affixes, spec)].push(e);
+        const finals = k => Object.entries(affixes.classMap?.[group] ?? {}).filter(([, c]) => c === k).map(([l]) => l);
+        const rows = by.map((list, k) => {
+            const ex = sorted.find(e => pos.includes(e.pos) && !e.loan && classOf(e, affixes, spec) === k && !e.gloss);
+            return `<tr><td class="name-cell">${['I', 'II', 'III', 'IV'][k]}</td><td>${members.length ? (100 * list.length / members.length).toFixed(0) : 0}%</td><td>${esc(finals(k).slice(0, 8).join(' ')) || '—'}</td><td>${ex ? esc(label(ex)) : '—'}</td>${ex ? cellsOf(ex).map(r => `<td>${fmt(r)}</td>`).join('') : head.map(() => '<td></td>').join('')}</tr>`;
+        }).join('');
+        return `<table class="names-table full-table"><thead><tr><th>Class</th><th>Share</th><th>Last sound of the mother stem</th><th>Example</th>${head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows}</tbody></table>`;
+    };
+    const nCount = affixes.classOverlays?.noun?.length ?? 1, vCount = affixes.classOverlays?.verb?.length ?? 1;
+    if (nCount > 1) {
+        const c2 = model.cases.find(c => c !== model.baseCase);
+        const head = ['singular', 'plural', ...(c2 ? [`${c2} sg.`, `${c2} pl.`] : [])];
+        const cells = e => [inflect(e, { number: 'singular', case: model.baseCase }, morph), inflect(e, { number: 'plural', case: model.baseCase }, morph), ...(c2 ? [inflect(e, { number: 'singular', case: c2 }, morph), inflect(e, { number: 'plural', case: c2 }, morph)] : [])];
+        parts.push(`<h4>Noun and adjective classes (${nCount})</h4>${rowsFor('noun', nCount, ['noun', 'adjective'], cells, head)}`);
+        notes.push(`A noun's class depends on the last sound of its stem in the mother language (the "theme"); about ${Math.round((affixes.classMap?.exceptions ?? 0) * 100)}% of the words belong to another class for no reason the form shows. Adjectives follow the noun classes.`);
+    } else if (spec.morphology !== 'isolating') notes.push('All nouns and adjectives share one paradigm.');
+    if (vCount > 1 && affixes.verb) {
+        const head = ['present 3sg.', 'present 1pl.', 'past 3sg.', 'future 3pl.'];
+        const f = (e, tense, person, number) => inflect(e, { tense, person, number }, morph);
+        const cells = e => [f(e, 'present', 3, 'singular'), f(e, 'present', 1, 'plural'), f(e, 'past', 3, 'singular'), f(e, 'future', 3, 'plural')];
+        parts.push(`<h4>Verb classes (${vCount})</h4>${rowsFor('verb', vCount, ['verb'], cells, head)}`);
+    } else if (spec.morphology !== 'isolating' && affixes.verb) notes.push('All verbs share one conjugation.');
+    // stem alternations produced by the sound changes
+    const alt = [];
+    if (affixes.history) {
+        const tryCells = e => e.pos === 'verb' ? [{ tense: 'past', person: 3, number: 'singular' }, { tense: 'present', person: 1, number: 'plural' }, { tense: 'future', person: 3, number: 'plural' }]
+            : e.pos === 'noun' ? [{ number: 'plural', case: model.baseCase }, ...(model.cases.slice(1, 3).map(c => ({ number: 'singular', case: c })))] : [];
+        for (const e of sorted) {
+            if (alt.length >= 12) break;
+            if (!['noun', 'verb'].includes(e.pos) || e.gloss) continue;
+            for (const f of tryCells(e)) { const r = inflect(e, f, morph); if (r.irregular) { alt.push({ e, f, r }); break; } }
+        }
+    }
+    if (alt.length) {
+        const cellName = f => f.tense ? `${f.tense}${f.person ? ` ${f.person}${f.number === 'plural' ? 'pl' : 'sg'}` : ''}` : `${f.number}${f.case ? ` ${f.case}` : ''}`;
+        parts.push(`<h4>Stem alternations</h4><p class="sub">The mother's stem and ending were joined first and the sound changes then ran over the whole word, so some forms have a stem that differs from the dictionary form. Analogy has levelled the others, so only some words alternate.</p><table class="names-table full-table"><thead><tr><th>Word</th><th>Form</th><th>Cell</th><th>Regular form would be</th><th>Caused by</th></tr></thead><tbody>${alt.map(({ e, f, r }) => `<tr><td class="name-cell">${esc(label(e))}: ${esc(e.form)}</td><td>${fmt(r)}</td><td>${esc(cellName(f))}</td><td>${esc(r.irregular.regular)}</td><td>${esc(r.irregular.rules.map(id => { const m = id.match(/^(\S+) \((.*)\)$/); return m ? `${ruleLabel[m[1]] ?? m[1]} (${m[2]})` : (ruleLabel[id] ?? id); }).join('; ') || '—')}</td></tr>`).join('')}</tbody></table>`);
+    }
+    const supp = Object.entries(affixes.suppletion ?? {});
+    if (supp.length) {
+        const rows = supp.map(([id, o]) => { const e = lex.find(x => x.id === id); return e ? `<tr><td class="name-cell">${esc(label(e))}</td><td>${esc(e.form)}</td><td>${Object.entries(o).map(([k, w]) => `${esc(k)}: <span class="morph-supp">${esc(w)}</span>`).join(', ')}</td></tr>` : ''; }).join('');
+        parts.push(`<h4>Suppletion</h4><p class="sub">Frequent words whose past tense or comparative uses a different stem (as in <em>go</em> ~ <em>went</em>, <em>good</em> ~ <em>better</em>).</p><table class="names-table full-table"><thead><tr><th>Word</th><th>Stem</th><th>Irregular stems</th></tr></thead><tbody>${rows}</tbody></table>`);
+    }
+    if (!parts.length && !notes.length) return '';
+    return `<div class="card class-morphology"><h3>Inflection classes and irregular forms</h3>${notes.map(n => `<div class="sub">${esc(n)}</div>`).join('')}${parts.join('')}</div>`;
+}
+
 export function verbMorphologyHtml(lang) {
     const { spec, morphology } = lang;
     const { model, affixes } = morphology;
@@ -149,7 +210,7 @@ export function verbMorphologyHtml(lang) {
 
 const tokenHtml = t => t.kind === 'alts'
     ? `[${t.options.map(o => o.map(tokenHtml).join(' ')).join('|')}]`
-    : `<span class="sample-word" data-meaning="${esc(t.gloss)}">${t.parts.map(p => p.kind === 'stem' ? esc(p.text) : `<span class="morph-ending" title="${esc(p.meaning ?? p.kind)}">${esc(p.text)}</span>`).join('')}</span>`;
+    : `<span class="sample-word" data-meaning="${esc(t.gloss)}">${t.parts.map(p => ['stem', 'stem-alt', 'suppletive'].includes(p.kind) ? esc(p.text) : `<span class="morph-ending" title="${esc(p.meaning ?? p.kind)}">${esc(p.text)}</span>`).join('')}</span>`;
 
 const flatTokens = tokens => tokens.flatMap(t => t.kind === 'alts' ? flatTokens(t.options[0]) : t.kind === 'word' ? [t.parts.map(p => p.text).join('')] : []);
 const pillHtml = s => `<div class="sample-pill"><div class="en"><b>${s.number}.</b> ${esc(s.english)}</div><div class="cl"><b>${s.number}.</b> ${s.tokens.map(tokenHtml).join(' ')}</div>${showIpa ? `<div class="ipa-line">${esc(flatTokens(s.tokens).map(w => ipaWord(w, curStress)).join(' '))}</div>` : ''}</div>`;
@@ -219,7 +280,7 @@ export function resultHtml(lang) {
     const s = lang.spec;
     const chips = [s.culture[0], s.biome[0], s.era[0], s.order].filter(Boolean);
     const notes = lang.notes.length ? `<div class="card"><h3>Adjusted options</h3>${lang.notes.map(n => `<div class="morph-note">${esc(n)}</div>`).join('')}</div>` : '';
-    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="export-bar" role="group" aria-label="Export"><span class="sub">Export:</span><button type="button" class="btn ghost" data-export="html">Language sheet (HTML)</button><button type="button" class="btn ghost" data-export="md">Markdown</button><button type="button" class="btn ghost" data-export="csv">Lexicon (CSV)</button><button type="button" class="btn ghost" data-export="json">Language (JSON)</button></div><div class="result-cols"><div class="result-col">${phonologyHtml(lang)}${morphemeInventoryHtml(lang)}</div><div class="result-col">${verbMorphologyHtml(lang)}${nominalCategoriesHtml(lang)}${notes}</div></div>`;
+    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="export-bar" role="group" aria-label="Export"><span class="sub">Export:</span><button type="button" class="btn ghost" data-export="html">Language sheet (HTML)</button><button type="button" class="btn ghost" data-export="md">Markdown</button><button type="button" class="btn ghost" data-export="csv">Lexicon (CSV)</button><button type="button" class="btn ghost" data-export="json">Language (JSON)</button></div><div class="result-cols"><div class="result-col">${phonologyHtml(lang)}${morphemeInventoryHtml(lang)}</div><div class="result-col">${verbMorphologyHtml(lang)}${nominalCategoriesHtml(lang)}${classesHtml(lang)}${notes}</div></div>`;
 }
 
 const KIND_HEAD = { person: 'Name', family: 'Name', place: 'Name', epithet: 'Epithet' };
@@ -416,6 +477,15 @@ const sample = (lang, n) => lang.samples.slice(0, n).map(smp => {
     return { words: flat(smp.tokens), english: String(smp.english).replace(/\[([^|\]]+)(?:\|[^\]]*)*\]/g, '$1') };
 }).filter(x => x.words.length);
 
+const TECH_TXT = { stone: 'chiselled in stone', clay: 'pressed into clay with a stylus', brush: 'painted with a brush', pen: 'written with a broad pen', print: 'drawn with a uniform line' };
+function graphicsText(W) {
+    const g = W.graphics, bits = [`Tradition: ${TECH_TXT[g.tech] ?? g.tech}`, `${g.form} forms`];
+    if (W.type === 'abugida') bits.push(g.strategy === 'marks' ? 'vowels as signs placed around the consonant' : 'vowels as strokes grown out of the consonant', g.headline ? 'headline joining the letters' : 'no headline');
+    if (W.type === 'abjad') bits.push(g.cursive ? 'cursive with contextual forms' : 'non-joining letters');
+    if (W.type === 'syllabary') bits.push(g.model === 'block' ? 'syllables as blocks (consonant part + vowel part)' : 'the vowel is the orientation of the consonant shape');
+    if (W.type === 'alphabet' || W.type === 'abjad') bits.push(`letters in ${g.families.length} families by place and manner of articulation`);
+    return bits.join('; ') + '.';
+}
 export function writingHtml(lang, choice = 'auto') {
     setStress(stressOf(lang));
     const W = buildWriting(lang, choice);
@@ -451,12 +521,17 @@ export function writingHtml(lang, choice = 'auto') {
         ligHtml = `<h4>Ligatures</h4><p class="sub">${esc(kind)}</p><div class="sign-grid">${W.ligatures.map(k => sign(cell({ b: `L:${k}`, marks: [] }), W.type === 'abugida' ? `${k[0]}${k[1]}` : k)).join('')}</div>`;
     } else if (W.type === 'abjad' || W.type === 'syllabary') ligHtml = `<h4>Ligatures</h4><p class="sub">${W.type === 'abjad' ? 'Letters are not fused in this script.' : 'Each sign is already a whole syllable, so there are no ligatures.'}</p>`;
     else if (W.type === 'alphabet') ligHtml = '<h4>Ligatures</h4><p class="sub">None: no pair of letters is frequent enough to deserve its own sign.</p>';
-    if (W.joined) ligHtml += `<p class="sub">Letters are joined: the strokes of a word run along a common baseline (cursive).</p>`;
+    if (W.joined && W.forms) {
+        const ex = consonants.slice(0, 4);
+        ligHtml += `<h4>Joining forms</h4><p class="sub">A cursive hand: letters join along a baseline and change shape by position; some letters never join to the next one.</p>${table(['Letter', 'Isolated', 'Initial', 'Medial', 'Final'], ex.map(l => [esc(l), ...W.forms(l).map(f => f.svg)]))}`;
+    }
     const N = buildNumberSigns(lang, W);
     const numHtml = (() => {
-        const how = N.restricted ? `This language counts only up to ${N.limit}: numbers are tally strokes, and anything larger is written with a single sign for “many”.`
+        const MODE = { derived: 'derived from the script: same technology and radicals as the letters', autonomous: 'an independent system with its own technology and forms', counting: 'derived from tally counting: strokes grouped by fives, a separate sign for zero', imported: 'an independent system adapted to the script (its proportions and stroke weight)' };
+        const how0 = `Glyphs are ${MODE[N.mode]}. `;
+        const how = how0 + (N.restricted ? `This language counts only up to ${N.limit}: numbers are tally strokes, and anything larger is written with a single sign for “many”.`
             : N.composite ? `Base-${N.base} positional notation. Digits are made of dots (1) and bars (5) with a shell for zero; the digits are written left to right, largest place first.`
-                : `Base-${N.base} positional notation with a glyph for every digit, zero included, written left to right, largest place first (also inside right-to-left text).`;
+                : `Base-${N.base} positional notation with a glyph for every digit, zero included, written left to right, largest place first (also inside right-to-left text).`);
         const digits = N.restricted ? `<div class="sign-grid">${[1, 2, 3, 4, 5].filter(n => n <= N.limit).map(n => sign(N.drawCell({ tally: n }, 44), String(n))).join('')}${sign(N.many, 'many')}</div>`
             : `<div class="sign-grid">${N.digits.map(d => sign(d.svg, String(d.v))).join('')}</div>`;
         const rows = N.examples.map(e => [N.write(e.n, 30), String(e.n), esc(e.word), esc(ipaText(e.word))]);
@@ -475,7 +550,7 @@ export function writingHtml(lang, choice = 'auto') {
     const lines = sample(lang, 5).map(x => `<div class="script-sentence"><div class="script-line" dir="${W.direction}">${x.words.map(w => W.wordSvg(w, 34, false)).join('')}</div><div class="sub">${esc(x.words.join(' '))} — ${esc(x.english)}</div></div>`).join('');
     const check = W.failures === 0 ? 'every word of the language reads back as it was written' : `${W.failures} words do not read back correctly`;
     return `<div class="card"><h3>${esc(WRITING_LABELS[W.type])}</h3>
-<p class="sub">${esc(intro)} Glyph style: ${esc(W.style)}. The language is shown in Latin transcription everywhere else.</p>
+<p class="sub">${esc(intro)} ${W.graphics ? esc(graphicsText(W)) : ''} The language is shown in Latin transcription everywhere else.</p>
 <h4>Signs</h4>${signs}
 ${ligHtml}${numHtml}
 <h4>Reading rules</h4><ul class="notes">${rulesList.map(x => `<li>${esc(x)}</li>`).join('')}</ul>

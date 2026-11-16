@@ -4,6 +4,25 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.25.0
+- **New graphics engine for scripts and numerals** (`src/graphics/`), replacing the random-walk glyph generator. Linguistic layers (spelling, inventories, cells, reading, ligature selection) are unchanged.
+- **Tradition.** Each script has a writing technology (stone, clay, brush, broad pen, uniform line, chosen by genre), straight/curvilinear/geometric forms, proportions, slant, stroke width, terminals and a ductus (stroke order and direction). Strokes are drawn as outlines with width profiles that depend on the technology.
+- **Glyph families.** Alphabet and abjad letters are built from a small radical library: one radical per class of consonant (labial, coronal, sibilant, dorsal, nasal, liquid, glide), members told apart by modifiers (bar, tick, dot…), ascender/descender stems by family, vowels with their own radicals, accented letters = base letter + diacritic.
+- **Abugida:** vowels as signs placed by quality (above, below, after) or as strokes grown out of the consonant; optional headline; virama; conjunct = reduced first consonant; independent vowels on a carrier.
+- **Abjad:** non-joining hand or cursive hand with a baseline, isolated/initial/medial/final forms, entry/exit strokes, letter classes that never join; vowel points. The Writing tab shows the joining forms.
+- **Syllabary:** either the vowel is the orientation of the consonant shape, or syllables are blocks (consonant part + vowel part).
+- **Words are drawn as one SVG** (right to left for abjads) instead of one box per cell.
+- **Numeral glyphs** are separate from the numeral system (bases, words, math unchanged): derived from the script, autonomous, tally-based (strokes grouped by fives, zero a separate sign) or imported-and-adapted; no dot-and-bar notation. Digits are checked for distinctness and weight and redrawn if needed.
+- Checks: signs must be distinguishable (several attempts per script), tests in `tests/graphics.test.mjs`.
+- Limits: outlines are generated SVG, not a font; scripts do not derive from one another historically; alphabets are not cursive; visual quality is not guaranteed for every seed.
+
+## 1.24.0
+- **Inflection classes.** Fusional languages have 2-4 noun/adjective classes and 2-3 verb classes; agglutinative ones 1-2 (a second class overrides some endings). A word's class follows the last sound of its stem in the mother language, as with Latin theme vowels, with about 8% of words in a class their form does not predict. Class overlays are generated after the base tables, so the base endings of a seed are unchanged.
+- **Stem alternations from the sound changes.** Mother stem and mother ending are joined and the sound changes run over the whole word (umlaut, lenition, syncope across the boundary…). Only a changed stem counts (the ending stays as the table says) and only for 45% of the affected words (the rest are levelled by analogy). The Morphology tab lists examples with the rules that caused them.
+- **Suppletion.** Frequent verbs (be, go, come, have, give) may have another stem for the past or future, and good/bad for the comparative.
+- **Sentence frames beyond the simple clause (15 new, 79 in all):** coordination of nouns and clauses (and, but), genitive (case ending or "of", before the head in head-final languages), relative clauses (gap on subject or object, before the noun in head-final languages and closed by the relativiser, after it otherwise), embedded questions, reflexive and reciprocal pronouns, negative indefinites. Negation, questions, imperative, optative, complement and adverbial clauses and comparatives already existed.
+- Limits: no passive or other voice, no relative clauses on obliques, no verb forms specific to subordinate clauses; classes and alternations are not shown for isolating languages.
+
 ## 1.23.1
 - **IPA stress corrected.** Stress was always on the first syllable, which natural languages rarely do. Each language now has a fixed stress system, drawn from its seed with weights favouring the right edge of the word: last-but-one syllable (34%), Latin rule (penult if heavy, else antepenult; 26%), Spanish-like (penult, or last in words ending in a consonant other than n/s; 18%), last syllable (15%), first syllable (7%). Words of five or more syllables (four or more when stress is not initial) also get secondary stress ˌ every second syllable before the main one. The system is shown in the Phonology card. Stress remains a fixed convention per language: it is not derived from the sound changes or from lexical exceptions.
 

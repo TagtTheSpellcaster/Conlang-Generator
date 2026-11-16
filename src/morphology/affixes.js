@@ -1,5 +1,6 @@
 // Morphological model (which cases exist) and affix inventory (what the endings are).
 import { createAffixFactory } from '../phonology/words.js';
+import { rng } from '../core/rng.js';
 
 export const CASE_SETS = Object.freeze({
     accusative: Object.freeze({
@@ -62,6 +63,7 @@ export function generateAffixes(spec, model, reserved = new Set()) {
         }
         result.fused = fused;
         result.verb = fusionalVerb(spec, make);
+        result.classOverlays = inflectionClasses(spec, result, make);
         return Object.freeze(result);
     }
 
@@ -75,6 +77,7 @@ export function generateAffixes(spec, model, reserved = new Set()) {
     result.verb = agglutinativeVerb(spec, make);
     // Added last so that the affixes of earlier versions keep their shapes for a given seed.
     result.comparative = make();
+    result.classOverlays = inflectionClasses(spec, result, make);
     return Object.freeze(result);
 }
 
@@ -100,3 +103,49 @@ function fusionalVerb(spec, make) {
 }
 
 export const FUSED_NO_GENDER = NO_GENDER;
+
+
+// ---- inflection classes ---------------------------------------------------------------------------------------------
+// Classes are alternative paradigms: class 0 is the base table, every other class overrides part of it (agglutinative
+// languages: a few endings; fusional languages: most of the portmanteau endings, with some cells shared). Which class
+// a word belongs to is decided in the engine from the last sound of its mother-language stem (see assignClasses).
+// Generated after everything else with the same factory, so the base endings of a seed do not change.
+export function inflectionClasses(spec, t, make) {
+    const r = rng(`${spec.seed}|inflection classes`);
+    const fusional = !!t.fused;
+    const pickCount = (weights) => { const x = r(); let a = 0; for (const [n, w] of weights) { a += w; if (x < a) return n; } return weights.at(-1)[0]; };
+    const nounCount = fusional ? pickCount([[2, 0.35], [3, 0.4], [4, 0.25]]) : pickCount([[1, 0.55], [2, 0.45]]);
+    const verbCount = fusional ? pickCount([[2, 0.55], [3, 0.45]]) : pickCount([[1, 0.6], [2, 0.4]]);
+    const noun = [null], verb = [null];
+    for (let k = 1; k < nounCount; k++) {
+        if (fusional) {
+            const ov = {};
+            for (const [g, byN] of Object.entries(t.fused)) { ov[g] = {}; for (const [n, byC] of Object.entries(byN)) { ov[g][n] = {}; for (const [c, e] of Object.entries(byC)) ov[g][n][c] = e === '' ? '' : (r() < 0.3 ? e : make()); } }
+            noun.push({ fused: ov });
+        } else {
+            const ov = { numberMarkers: {}, caseEndings: {} };
+            if (t.numberMarkers.plural && r() < 0.85) ov.numberMarkers.plural = make();
+            if (t.numberMarkers.dual && r() < 0.5) ov.numberMarkers.dual = make();
+            for (const [c, e] of Object.entries(t.caseEndings)) if (e && r() < 0.4) ov.caseEndings[c] = make();
+            if (!Object.keys(ov.numberMarkers).length && !Object.keys(ov.caseEndings).length) {
+                const first = Object.keys(t.caseEndings).find(c => t.caseEndings[c]);
+                if (t.numberMarkers.plural) ov.numberMarkers.plural = make(); else if (first) ov.caseEndings[first] = make();
+            }
+            noun.push(ov);
+        }
+    }
+    const v = t.verb;
+    for (let k = 1; k < verbCount && v; k++) {
+        if (v.mode === 'fusional') {
+            const ov = { fused: {} };
+            for (const [tense, cells] of Object.entries(v.fused)) { ov.fused[tense] = {}; for (const [cell, e] of Object.entries(cells)) ov.fused[tense][cell] = e === '' ? '' : (r() < 0.35 ? e : make()); }
+            verb.push(ov);
+        } else {
+            const ov = { tense: {}, agreement: {} };
+            for (const tense of ['past', 'future']) if (r() < 0.65) ov.tense[tense] = make();
+            for (const [cell, e] of Object.entries(v.agreement)) if (e && r() < 0.45) ov.agreement[cell] = make();
+            verb.push(ov);
+        }
+    }
+    return { noun, verb };
+}

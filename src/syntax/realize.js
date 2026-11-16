@@ -55,7 +55,7 @@ function makeContext(lang) {
         if (!found.length) throw new Skip(asList(head).join('|'));
         return found;
     };
-    return { spec, model, index, morph, partial, word, need, alternatives, numerals };
+    return { spec, model, index, morph, partial, word, need, alternatives, numerals, lang };
 }
 
 // features: { case, number, agree: {gender, number} }
@@ -119,7 +119,27 @@ function nounPhrase(np, role, ctx) {
         return around(spec.adjPosition === 'before' ? [adjGroup, headTok] : [headTok, adjGroup]);
     });
     const core = phrases.length === 1 ? phrases[0] : [{ kind: 'alts', options: phrases }];
-    return { tokens: [...pre, ...core], head: heads.length === 1 ? heads[0] : null };
+    const adpPos = adpositionPosition(spec.order);
+    const headFinal = adpPos === 'after';
+    let tokens = [...pre, ...core];
+    // genitive: "the dog of the man" / "the man's dog": the possessor before the head in head-final languages, after it otherwise;
+    // a case ending where the language has a genitive, otherwise the adposition "of"
+    if (np.gen) {
+        const g = prepositionalPhrase({ adp: 'of:adposition', case: 'genitive', np: np.gen }, ctx, adpPos).tokens;
+        tokens = headFinal ? [...pre, ...g, ...core] : [...pre, ...core, ...g];
+    }
+    // relative clause: before the noun in head-final languages (closed by the relativiser), after it otherwise (opened by it)
+    if (np.rel) {
+        const inner = clauseTokens(np.rel.clause, ctx.lang, ctx, false, { gap: np.rel.role, headNumber: number });
+        const rel = word(need('that:pronoun'));
+        tokens = headFinal ? [...pre, ...inner, rel, ...tokens.slice(pre.length)] : [...tokens, rel, ...inner];
+    }
+    // coordination: "A and B"
+    if (np.and) {
+        const second = nounPhrase(np.and, role, ctx);
+        tokens = [...tokens, word(need('and:conjunction')), ...second.tokens];
+    }
+    return { tokens, head: heads.length === 1 && !np.and ? heads[0] : null };
 }
 
 function prepositionalPhrase(pp, ctx, adpPos) {
@@ -134,11 +154,11 @@ function prepositionalPhrase(pp, ctx, adpPos) {
 }
 
 // Realises one clause (a main sentence or a subordinate clause) and returns its token sequence.
-function clauseTokens(template, lang, ctx, top) {
+function clauseTokens(template, lang, ctx, top, opts = {}) {
     const { spec, model } = lang;
     const verbEntry = template.V ? ctx.alternatives(template.V.head)[0] : null;
     const copula = verbEntry?.features.transitivity === 'copula';
-    const hasObject = template.O && !template.O.adp;
+    const hasObject = (template.O && !template.O.adp) || opts.gap === 'O';
     const transitive = !!verbEntry && ['transitive', 'ditransitive'].includes(verbEntry.features.transitivity) && hasObject;
     const ergative = model.alignment === 'ergative-absolutive';
     const caseS = ergative ? (transitive ? 'ergative' : 'absolutive') : 'nominative';
@@ -149,7 +169,7 @@ function clauseTokens(template, lang, ctx, top) {
     const sHeads = template.S ? asList(template.S.head).map(ref => ctx.index.resolve(ref)).filter(Boolean) : [];
     const sPronoun = sHeads.length === 1 && sHeads[0].pos === 'pronoun' && sHeads[0].features.person ? sHeads[0] : null;
     const person = template.mood === 'imperative' ? 2 : (sPronoun?.features.person ?? 3);
-    const personNumber = sPronoun?.features.number ?? template.S?.number ?? 'singular';
+    const personNumber = opts.gap === 'S' ? (opts.headNumber ?? 'singular') : template.S?.and ? 'plural' : (sPronoun?.features.number ?? template.S?.number ?? 'singular');
     const prodrop = !!(ctx.morph.affixes.verb && verbEntry && sPronoun);
 
     const parts = {};
@@ -158,7 +178,7 @@ function clauseTokens(template, lang, ctx, top) {
         const r = nounPhrase(template.S, { case: caseS }, ctx);
         parts.S = prodrop ? [] : r.tokens; subjectHead = r.head;
     }
-    const agree = subjectHead ? { gender: subjectHead.pos === 'noun' ? genderOf(subjectHead, spec) : null, number: template.S.number ?? 'singular' } : undefined;
+    const agree = subjectHead || template.S?.and ? { gender: subjectHead?.pos === 'noun' ? genderOf(subjectHead, spec) : null, number: template.S.and ? 'plural' : (template.S.number ?? 'singular') } : undefined;
     if (template.O) {
         const r = template.O.adp ? prepositionalPhrase(template.O, ctx, adpPos) : nounPhrase(template.O, { case: copula ? caseS : caseO, agree }, ctx);
         parts.O = r.tokens;
@@ -202,6 +222,8 @@ function clauseTokens(template, lang, ctx, top) {
     const base = [...(parts.initial ? ['initial'] : []), ...spec.order.split(''), 'A', 'B'];
     const sequence = template.seq ?? (parts.SUB ? (adpPos === 'after' ? ['SUB', ...base] : [...base, 'SUB']) : base);
     let tokens = sequence.flatMap(k => parts[k] ?? []);
+    // coordinated clause: "A, and B" / "A, but B"
+    if (template.coord) tokens = [...tokens, ctx.word(ctx.need(template.coord.conj)), ...clauseTokens(template.coord.clause, lang, ctx, false)];
     // yes/no question: a final particle in head-final languages, an initial one otherwise
     if (top && template.q === 'yesno') {
         const q = ctx.word(ctx.need('question particle:particle'));
@@ -238,7 +260,7 @@ export function templateRefs(t) {
         for (const [k, v] of Object.entries(x)) {
             if (['head', 'adj', 'poss', 'adp', 'aux', 'conj'].includes(k)) asList(v).forEach(r => refs.add(r));
             else if (k === 'initial') v.forEach(walk);
-            else if (['S', 'V', 'O', 'A', 'B', 'np', 'comp', 'adv', 'clause'].includes(k)) walk(v);
+            else if (['S', 'V', 'O', 'A', 'B', 'np', 'comp', 'adv', 'clause', 'coord', 'gen', 'rel', 'and'].includes(k)) { walk(v); if (k === 'and') refs.add('and:conjunction'); if (k === 'gen') refs.add('of:adposition'); if (k === 'rel') refs.add('that:pronoun'); }
             // function words the realiser adds for grammar the language may express with a separate word
             else if (k === 'q') refs.add('question particle:particle');
             else if (k === 'aspect') refs.add(`${v} marker:particle`);

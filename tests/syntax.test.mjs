@@ -36,8 +36,8 @@ test('template coverage: every referenced sense exists and is unambiguous', () =
     assert.deepEqual(problems, []);
 });
 
-test('sentence sets: about 45-65 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
-    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 65, `${templates.universal.length} universal sentences`);
+test('sentence sets: about 45-80 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
+    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 80, `${templates.universal.length} universal sentences`);
     assert.deepEqual(Object.keys(templates.genres).sort(), [...GENRE_IDS].sort());
     for (const [name, list] of Object.entries(sets)) {
         assert.equal(new Set(list.map(t => t.id)).size, list.length, `${name}: ids`);

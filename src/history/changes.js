@@ -169,8 +169,9 @@ function build(spec, entries, salt, opts = {}) {
         return { id: rule.id, label: rule.label, years: years[i], words: ch.length, blocked: res.perRule[i].blocked, example: j === undefined ? null : `*${res.perRule[i].before[j]} → ${res.perRule[i].after[j]}` };
     });
     const convert = w => chosen.reduce((acc, ru) => { const o = ru.apply(acc); return safe(acc, o, isV) ? o : acc; }, w);
+    const traceOf = w => { const ids = []; let acc = w; for (const ru of chosen) { const o = ru.apply(acc); if (safe(acc, o, isV) && o !== acc) { ids.push(ru.id); acc = o; } } return ids; };
     const blockedWords = res.blocked.filter(b => b.length).length;
-    return { chosen, years, rules, stage: res.stage, trace: res.trace, blocked: res.blocked, convert, blockedWords, span, isV, duplicates: duplicates(res.stage) };
+    return { chosen, years, rules, stage: res.stage, trace: res.trace, blocked: res.blocked, convert, traceOf, blockedWords, span, isV, duplicates: duplicates(res.stage) };
 }
 
 // Several rule sets are tried; the one that blocks the fewest words and leaves no duplicate wins.
@@ -288,7 +289,7 @@ export function deriveDaughter(spec, lexicon, derivationAffixes, numerals) {
         stats: { words: entries.length, unchanged, blocked: h.blockedWords, repaired: fixed.length, rules: h.rules.length, span: h.span, alternations: alternations.length }
     };
     // inflectional affixes are generated afterwards (they avoid the daughter's words) and then converted
-    const convertAffixes = table => mapAffixes(table, injective(h.convert, new Set(leaves(table)), new Set([...lexTaken, ...Object.values(dAffixes).map(a => a.form), ...Object.values(dNumerals.roots), ...Object.values(dNumerals.words)])));
+    const convertAffixes = (table, extraTaken = []) => mapAffixes(table, injective(h.convert, new Set(leaves(table)), new Set([...extraTaken, ...lexTaken, ...Object.values(dAffixes).map(a => a.form), ...Object.values(dNumerals.roots), ...Object.values(dNumerals.words)])));
     // a word that enters the language at a given date only undergoes the changes that come after it
     const later = (w, year) => h.chosen.reduce((acc, ru, i) => { if (h.years[i] >= year) return acc; const o = ru.apply(acc); return safe(acc, o, h.isV) ? o : acc; }, w);
     history.sister = { rules: sh.rules, stats: { rules: sh.rules.length, same: words.filter((e, i) => sh.stage[i] === h.stage[i]).length, words: words.length, attempts: sh.attempts } };
@@ -303,5 +304,5 @@ export function deriveDaughter(spec, lexicon, derivationAffixes, numerals) {
         const chosenIdx = [...new Set([...apart.slice(0, Math.ceil(count * 0.4)), ...derived.slice(0, 3), ...apart.sort(() => rr() - 0.5).slice(0, count), ...together.sort(() => rr() - 0.5).slice(0, 2)])].slice(0, count);
         return chosenIdx.map(i => ({ id: words[i].id, lemma: words[i].lemma, etymology: words[i].derivation ? `*${words[i].derivation.parts.map(p => p.text).join(' + ')}` : null, mother: words[i].form, daughter: h.stage[i], sister: sh.stage[i], daughterSteps: steps(h, i), sisterSteps: steps(sh, i) }));
     };
-    return { lexicon: lex, derivationAffixes: dAffixes, numerals: dNumerals, history, convertAffixes, later, sisterExamples };
+    return { lexicon: lex, derivationAffixes: dAffixes, numerals: dNumerals, history, convertAffixes, convertWord: h.convert, traceWord: h.traceOf, later, sisterExamples };
 }

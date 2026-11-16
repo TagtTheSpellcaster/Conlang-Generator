@@ -5,6 +5,7 @@ import { resolveSpec } from './spec.js';
 import { selectEntries, assignForms } from './lexicon/select.js';
 import { describePhonology, createWordFactory } from './phonology/words.js';
 import { buildMorphologyModel, generateAffixes } from './morphology/affixes.js';
+import { assignClasses, buildSuppletion } from './morphology/classes.js';
 import { buildNumerals } from './numerals/system.js';
 import { resolveCalendar, calendarLemmas } from './calendar/plan.js';
 import { deriveDaughter } from './history/changes.js';
@@ -65,7 +66,12 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
     const loanById = new Map(borrowed.loans.items.map(x => [x.id, x]));
     const history = { ...daughter.history, sister: { ...daughter.history.sister, examples: daughter.sisterExamples(14, new Set(borrowed.loans.items.map(x => x.id))) }, loans: borrowed.loans, lexicon: daughter.history.lexicon.map(w => loanById.has(w.id) ? { ...w, daughter: loanById.get(w.id).form, loan: loanById.get(w.id) } : w) };
     // Inflectional affixes must not collide with any root form or derivational affix; they undergo the same changes.
-    const affixes = daughter.convertAffixes(generateAffixes(spec, model, new Set([...lexicon.map(e => e.form), ...Object.values(daughter.derivationAffixes).map(a => a.form)])));
+    const protoAffixes = generateAffixes(spec, model, new Set([...lexicon.map(e => e.form), ...Object.values(daughter.derivationAffixes).map(a => a.form)]));
+    const converted = daughter.convertAffixes(protoAffixes, lexicon.map(e => e.form));   // loans entered after the history was built
+    // Inflection classes follow the mother's stems; irregular forms come from running the sound changes over whole words (inflect.js).
+    const affixes = { ...converted, classMap: assignClasses(lexicon, converted.classOverlays, spec), suppletion: buildSuppletion(lexicon, spec, !!converted.verb) };
+    Object.defineProperty(affixes, 'history', { value: { proto: protoAffixes, convert: daughter.convertWord, trace: daughter.traceWord, survive: 45 }, enumerable: false });
+    Object.freeze(affixes);
     const lang = { spec, model, affixes, lexicon, numerals: daughter.numerals };
     const calendar = buildCalendar(calendarPlan, lang);
     const generated = generateSamples(templates, lang);
