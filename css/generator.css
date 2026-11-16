@@ -672,3 +672,6 @@ main {
 .script-word.joined { border-bottom: 1.6px solid currentColor; padding-bottom: 2px; }
 .morph-alt { color: var(--accent, #7cc4ff); border-bottom: 1px dotted currentColor; }
 .morph-supp { color: var(--accent, #ffb86c); font-style: italic; }
+.timeline { margin: 8px 0 8px 18px; padding: 0; }
+.timeline li { margin: 6px 0; line-height: 1.45; }
+.timeline li.contact strong { color: var(--accent, #7aa7ff); }
