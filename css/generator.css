@@ -670,3 +670,5 @@ main {
 .numeral { display: inline-flex; align-items: flex-end; gap: 3px; }
 .numeral svg { display: block; }
 .script-word.joined { border-bottom: 1.6px solid currentColor; padding-bottom: 2px; }
+.morph-alt { color: var(--accent, #7cc4ff); border-bottom: 1px dotted currentColor; }
+.morph-supp { color: var(--accent, #ffb86c); font-style: italic; }
