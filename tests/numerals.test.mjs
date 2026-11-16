@@ -74,7 +74,7 @@ test('position: the numeral usually follows the adjective position, and can be f
 test('lexicon: numeral entries carry composed forms; all forms stay unique over every genre', () => {
     for (const genre of GENRE_IDS) {
         const L = gen({ genre, seed: `g-${genre}` });
-        assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length, genre);
+        assert.equal(new Set(L.lexicon.filter(e => !e.colex).map(e => e.form)).size, L.lexicon.filter(e => !e.colex).length, genre);
         const twelve = L.lexicon.find(e => e.id === 'number.twelve');
         if (twelve && L.numerals.config.type !== 'restricted') assert.equal(twelve.form, numeralForm(L.numerals, 12, L.spec).form);
     }

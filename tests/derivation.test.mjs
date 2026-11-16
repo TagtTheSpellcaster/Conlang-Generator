@@ -48,7 +48,7 @@ test('derived words contain their bases, in the order the structure says', () =>
 test('forms stay unique and distinct from the numerals, for every genre', () => {
     for (const g of [undefined, ...GENRE_IDS]) {
         const L = gen({ seed: `u-${g}`, genre: g });
-        const forms = L.lexicon.map(e => e.form);
+        const forms = L.lexicon.filter(e => !e.colex).map(e => e.form);
         assert.equal(new Set(forms).size, forms.length, g);
         assert.ok(L.derivation.stats.applied > 20, `${g}: ${L.derivation.stats.applied}`);
         const nums = new Set(Object.values(L.numerals.roots));
@@ -60,7 +60,7 @@ test('roots of words that are not derived do not change when derivation is switc
     for (const seed of ['a', 'b', 'c']) {
         const base = gen({ seed }, []), withD = gen({ seed }, derivations);
         // numeral words are drawn again around the new forms of the lexicon; every other root must stay put
-        const forms = new Map(withD.lexicon.filter(e => !e.derivation && !e.id.startsWith('number.')).map(e => [e.id, e.protoForm]));
+        const forms = new Map(withD.lexicon.filter(e => !e.derivation && !e.colex && !e.id.startsWith('number.')).map(e => [e.id, e.protoForm]));
         let same = 0, total = 0;
         for (const e of base.lexicon) if (forms.has(e.id)) { total++; if (forms.get(e.id) === e.protoForm) same++; }
         assert.ok(total > 400 && same === total, `${seed}: ${same}/${total}`);
@@ -131,7 +131,7 @@ test('history: up to 12 ordered, dated rules; daughter forms are valid and deter
         for (let k = 1; k < h.rules.length; k++) assert.ok(h.rules[k].years < h.rules[k - 1].years);
         assert.ok(h.stats.unchanged > 0 && h.stats.unchanged < h.stats.words);
         assert.ok(h.stats.blocked / h.stats.words <= 0.06, `blocked ${h.stats.blocked}`);
-        assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length, 'daughter forms are unique');
+        assert.equal(new Set(L.lexicon.filter(e => !e.colex).map(e => e.form)).size, L.lexicon.filter(e => !e.colex).length, 'daughter forms are unique');
         for (const w of h.lexicon) assert.ok(w.daughter.length >= 2 && /\S/.test(w.daughter), w.daughter);
         assert.deepEqual(gen(input).history.rules, h.rules);
         assert.ok(L.lexicon.every(e => e.form && e.protoForm), 'every word has a mother form');

@@ -39,14 +39,20 @@ function attemptNumerals({ seed, base, restricted, limit, script, mode, attempt 
     const pool = shuffle(RADS.filter(n => !ZERO.includes(n)), r), zeroRad = ZERO[Math.floor(r() * ZERO.length)];
     const mods = shuffle(MODIFIER_NAMES, r);
 
+    // Tally digits: every group of five is a sign of its own, large and closed (a cross, a box, a triangle), and the units are
+    // short strokes beside it, so 1, 5 and 6 differ at first sight: one stroke, one big sign, the sign and one stroke.
+    const FIVE = [
+        (x, wd) => [S([[x, TOP + 1], [x + wd, BOT]]), S([[x + wd, TOP + 1], [x, BOT]])],
+        (x, wd) => [S([[x, TOP + 2], [x + wd, TOP + 2], [x + wd, BOT - 1], [x, BOT - 1], [x, TOP + 2]])],
+        (x, wd) => [S([[x, BOT], [x + wd / 2, TOP], [x + wd, BOT], [x, BOT]])],
+        (x, wd) => [S([[x, TOP + 2], [x + wd, TOP + 2]]), S([[x + wd / 2, TOP + 2], [x + wd / 2, BOT]]), S([[x, BOT], [x + wd, BOT]])]
+    ];
+    const fiveOrder = shuffle([0, 1, 2, 3], r);
     function tallyDigit(v) {
-        const fives = Math.floor(v / 5), units = v % 5, step = Math.max(2.6, w / 5), width = Math.max(units, 1) * step;
-        let out = [];
-        for (let i = 0; i < units; i++) out.push(S([[i * step, TOP + 2], [i * step, BOT]]));
-        const total = Math.max(units - 1, 0) * step;
-        if (fives >= 1) out.push(S(units ? [[-1.5, BOT - 3], [total + 1.5, TOP + 4]] : [[0, BOT], [width, TOP + 1]]));
-        if (fives >= 2) out.push(S(units ? [[-1.5, TOP + 4], [total + 1.5, BOT - 3]] : [[0, TOP + 1], [width, BOT]]));
-        if (fives >= 3) out.push(S([[-1.5, (TOP + BOT) / 2], [total + 1.5, (TOP + BOT) / 2]]));
+        const fives = Math.floor(v / 5), units = v % 5, step = 3.4, big = Math.max(6.4, w * 0.95);
+        let out = [], x = 0;
+        for (let k = 0; k < fives; k++) { out.push(...FIVE[fiveOrder[k % 4]](x, big)); x += big + 2.6; }
+        for (let i = 0; i < units; i++) { out.push(S([[x + i * step, TOP + 5], [x + i * step, BOT - 3]])); }
         return out;
     }
     function zeroSign() {
@@ -64,7 +70,7 @@ function attemptNumerals({ seed, base, restricted, limit, script, mode, attempt 
     const partial = mode === 'derived' && base > 12 ? true : false;
     const digitStrokes = v => countingDigits ? (v === 0 ? zeroSign() : tallyDigit(v)) : partial && v >= 1 && v <= 4 ? tallyDigit(v) : glyphDigit(v);
     const manyStrokes = () => place(rad('spiral', 0), 0, TOP, w, H);
-    const tally = n => { const out = []; const step = 3; for (let i = 0; i < n; i++) out.push(S([[i * step, TOP + 1], [i * step, BOT]])); if (n >= 5) out.push(S([[-1.5, BOT - 3], [(n - 1) * step + 1.5, TOP + 3]])); return out; };
+    const tally = n => tallyDigit(n);
 
     const unitOf = strokes => { const b = bbox(strokes); return { strokes: shift(finish(strokes), -b.x0, 0), w: b.w }; };
     const gap = Math.max(2.6, tr.spacing * 1.2), pad = 1.2;

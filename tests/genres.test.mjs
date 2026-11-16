@@ -69,7 +69,7 @@ test('every genre generates a complete language: unique forms, no skipped sample
     for (const id of GENRE_IDS) for (const seed of ['a', 'b', 'c']) {
         const L = gen({ genre: id, seed });
         assert.equal(L.genre.id, id);
-        assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length, `${id}/${seed} unique forms`);
+        assert.equal(new Set(L.lexicon.filter(e => !e.colex).map(e => e.form)).size, L.lexicon.filter(e => !e.colex).length, `${id}/${seed} unique forms`);
         assert.deepEqual(L.skippedSamples, [], `${id}/${seed} skipped samples`);
         assert.deepEqual(L.notes, [], `${id}/${seed} notes`);
         assert.ok(L.lexicon.length >= 590, `${id}/${seed} lexicon size ${L.lexicon.length}`);
@@ -158,8 +158,12 @@ test('sound: consonant and vowel bias shape the inventory of use', () => {
     assert.ok(count(orc, back) / count(orc, front) > 1.5 * (count(free, back) / count(free, front)), 'orcs favour back vowels');
     const hive = gen({ genre: 'hive' });
     assert.ok(count(hive, ['s', 'z', 'ʃ']) / forms(hive).join('').length > count(free, ['s', 'z', 'ʃ']) / forms(free).join('').length, 'hive favours sibilants');
-    const fey = gen({ genre: 'fey' });
-    assert.ok(count(fey, ['l', 'r', 'j', 'w']) / forms(fey).join('').length > count(free, ['l', 'r', 'j', 'w']) / forms(free).join('').length, 'fey favour liquids and glides');
+    // a statistical claim: judged over several seeds (the share is close to the neutral one for some single seeds)
+    const share = L => count(L, ['l', 'r', 'j', 'w']) / forms(L).join('').length;
+    const seeds = ['fa', 'fb', 'fc', 'fd'];
+    const feyMean = seeds.reduce((a, seed) => a + share(gen({ genre: 'fey', seed })), 0) / seeds.length;
+    const freeMean = seeds.reduce((a, seed) => a + share(gen({ morphology: 'agglutinative', consonants: 'english', seed })), 0) / seeds.length;
+    assert.ok(feyMean > freeMean, `fey favour liquids and glides: ${feyMean.toFixed(3)} vs ${freeMean.toFixed(3)}`);
 });
 
 test('a bias weight of 0 removes a class completely', () => {

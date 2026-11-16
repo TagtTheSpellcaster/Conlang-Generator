@@ -11,7 +11,7 @@ test('loanwords: other languages, adapted, unique, never numerals or derived wor
         const L = gen({ seed: `loan-${genre}`, genre });
         const lo = L.history.loans;
         assert.ok(lo.donors.length >= 1 && lo.donors.length <= 3);
-        const forms = L.lexicon.map(e => e.form);
+        const forms = L.lexicon.filter(e => !e.colex).map(e => e.form);
         assert.equal(new Set(forms).size, forms.length, `${genre}: unique forms`);
         const native = new Set(L.lexicon.filter(e => !e.loan).flatMap(e => [...e.form.replace(/ /g, '')]));
         for (const x of lo.items) {

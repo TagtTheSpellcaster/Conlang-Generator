@@ -101,7 +101,7 @@ test('option sweep with clusters: unique forms, nothing skipped', () => {
     for (let i = 0; i < 60; i++) {
         const input = { seed: `cs-${i}`, consonants: pick(Object.keys(MODEL), i), onsetClusters: pick(onset, i), codaClusters: pick(coda, i + 1), maxCluster: i % 2 ? 2 : 3, morphology: pick(['agglutinative', 'fusional', 'isolating'], i), mean: 1 + (i % 4) };
         const L = generateLanguage(input, vocabulary, templates, derivations);
-        assert.equal(new Set(forms(L)).size, L.lexicon.length, JSON.stringify(input));
+        assert.equal(new Set(L.lexicon.filter(e => !e.colex).map(e => e.form)).size, L.lexicon.filter(e => !e.colex).length, JSON.stringify(input));
         assert.deepEqual(L.skippedSamples, [], JSON.stringify(input));
     }
 });

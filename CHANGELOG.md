@@ -4,6 +4,15 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.26.0
+- **Semantic structure** (`src/semantics/colex.js`). Meanings are no longer one root each: about 6–10 pairs per language share a word (hand/arm, foot/leg, tree/wood, moon/month, man/husband, …) from a catalogue with the mechanism of the extension (part and whole, metonymy, metaphor, generalisation, role shift). The extended sense takes the root of the original one before derivation, so derived words follow. Colour terms follow Berlin–Kay stages (3 to 9 basic terms, optional "grue"); kinship is descriptive, sibling-like or classificatory. Forms of such entries are no longer unique: `entry.colex` / `entry.colexHeads` mark them, the Lexicon tab has a "Semantic structure" card.
+- **Figurative expressions** (`src/semantics/idioms.js`): about a dozen idioms and kennings per language ("a long hand" = thief, "to hold one's tongue", "the road of the ships" = sea), realised with the language's own grammar.
+- **Connected texts** (`src/discourse/texts.js`): three short texts per language (always one dialogue), with referring expressions decided by the discourse (a hunter → the hunter → he; pro-drop languages drop the pronoun), shown below the sample sentences.
+- **History of the language** (`src/history/story.js`): a dated narrative of sound changes, contacts with donor languages and the words they left, the split from the sister, and the present state.
+- **Sister language:** a new table of loanwords this language took and its sister did not (the sister keeps the inherited word).
+- **Numeral glyphs:** in tally systems the five is now a large closed sign (cross, box, triangle, T) and the units are separate strokes, so 1, 5 and 6 are clearly different.
+- Tests: `tests/semantics.test.mjs`, `tests/discourse.test.mjs`; uniqueness tests now exclude polysemous entries.
+
 ## 1.25.0
 - **New graphics engine for scripts and numerals** (`src/graphics/`), replacing the random-walk glyph generator. Linguistic layers (spelling, inventories, cells, reading, ligature selection) are unchanged.
 - **Tradition.** Each script has a writing technology (stone, clay, brush, broad pen, uniform line, chosen by genre), straight/curvilinear/geometric forms, proportions, slant, stroke width, terminals and a ductus (stroke order and direction). Strokes are drawn as outlines with width profiles that depend on the technology.

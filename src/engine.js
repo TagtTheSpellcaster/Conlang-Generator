@@ -11,6 +11,18 @@ import { resolveCalendar, calendarLemmas } from './calendar/plan.js';
 import { deriveDaughter } from './history/changes.js';
 import { applyLoans } from './history/loans.js';
 import { buildCalendar } from './calendar/build.js';
+// Loanwords of this language that the sister did not take: there the word kept its inherited shape (Italian cane < canis,
+// Spanish perro is the loan). Only words whose sister form differs from the loan are listed.
+function sisterLoanContrast(spec, loans, sisterForms, motherLexicon) {
+    const r = seededRng(`${spec.seed}|sister|loan-contrast`), mother = new Map(motherLexicon.map(e => [e.id, e.form]));
+    const donor = id => loans.donors.find(d => d.id === id)?.name ?? id;
+    return loans.items.filter(x => sisterForms.has(x.id) && sisterForms.get(x.id) !== x.form && mother.has(x.id))
+        .map(x => [r(), x]).sort((a, b) => a[0] - b[0]).slice(0, 12).map(([, x]) => ({ id: x.id, lemma: x.lemma, mother: mother.get(x.id), sister: sisterForms.get(x.id), daughter: x.form, source: x.source, donor: donor(x.donor), years: x.years, replaced: x.replaced }))
+        .sort((a, b) => a.lemma.localeCompare(b.lemma));
+}
+import { chooseStories, realizeStories } from './discourse/texts.js';
+import { chooseIdioms, realizeIdioms } from './semantics/idioms.js';
+import { planSemantics, colexifyRoots, reattach } from './semantics/colex.js';
 import { deriveAffixes, applyDerivation, derivationPhonology } from './derivation/derive.js';
 import { adpositionPosition, generateSamples, requiredEntries, templateSets } from './syntax/realize.js';
 import { GENRES } from './genres.js';
@@ -48,23 +60,34 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
     const wanted = new Set(calendarLemmas(calendarPlan.config));
     // one sense per lemma: the time sense when there are several
     const calendarEntries = [...wanted].map(l => { const all = vocabulary.filter(e => e.pos === 'noun' && e.lemma === l && !e.gloss); return all.find(e => e.domain === 'time') ?? all[0]; }).filter(Boolean);
-    const required = [...requiredEntries([...sets.universal, ...sets.specialised], vocabulary), ...calendarEntries];
     const rules = Array.isArray(derivations) ? derivations : derivations?.derivations ?? [];
+    const vocabIds = new Set(vocabulary.map(e => e.id));
+    const semanticPlan = planSemantics(spec, id => vocabIds.has(id));
+    const semanticEntries = [...new Set([...semanticPlan.ids, ...semanticPlan.colourIds])].map(id => vocabulary.find(e => e.id === id)).filter(Boolean);
+    const idiomPick = chooseIdioms(spec, vocabulary);
+    const storyPick = chooseStories(spec, vocabulary);
+    const required = [...storyPick.entries, ...idiomPick.entries, ...semanticEntries, ...requiredEntries([...sets.universal, ...sets.specialised], vocabulary), ...calendarEntries];
     const assigned = assignForms(selectEntries(vocabulary, spec, undefined, required, rules), spec);
-    const { system: numerals, lexicon: rooted } = buildNumerals(spec, assigned);
+    const { system: numerals, lexicon: rootedPlain } = buildNumerals(spec, assigned);
+    const rootIds = new Set(rootedPlain.map(e => e.id));
+    const derivedIds = new Set(rules.filter(d => rootIds.has(d.id) && d.bases.every(b => rootIds.has(b))).map(d => d.id));
+    const colex = colexifyRoots(rootedPlain, semanticPlan, derivedIds);
+    const rooted = colex.lexicon;
     // Derived words and compounds are built from the words they come from (the other roots keep their forms).
     const derivationAffixes = deriveAffixes(spec, new Set(rooted.map(e => e.form)));
     const numeralForms = new Set([...Object.values(numerals.roots ?? {}), ...Object.values(numerals.words ?? {})].filter(x => typeof x === 'string'));
     const derivationPhon = derivationPhonology(spec);
     const mother = applyDerivation(rooted, rules, spec, derivationAffixes, numeralForms, derivationPhon);
     // The generated language is the mother; what is returned is its daughter: every form has gone through the sound changes.
-    const daughter = deriveDaughter(spec, mother.lexicon, derivationAffixes, numerals);
+    const motherLexicon = mother.lexicon, motherCore = motherLexicon.filter(e => !colex.extended.has(e.id));
+    const daughter = deriveDaughter(spec, motherCore, derivationAffixes, numerals);
     // Words borrowed after the split: other languages, adapted to the daughter's sounds.
     const numeralFixed = [...Object.values(daughter.numerals.roots), ...Object.values(daughter.numerals.words), ...(daughter.numerals.classifiers ?? []).map(c => c.form), ...Object.values(daughter.derivationAffixes).map(a => a.form)];
     const borrowed = applyLoans(spec, daughter.lexicon, daughter.history, daughter.later, numeralFixed);
-    const lexicon = borrowed.lexicon, derivationStats = mother.stats;
+    const sem = reattach(borrowed.lexicon, motherLexicon, semanticPlan, colex.applied);
+    const lexicon = sem.lexicon, derivationStats = mother.stats;
     const loanById = new Map(borrowed.loans.items.map(x => [x.id, x]));
-    const history = { ...daughter.history, sister: { ...daughter.history.sister, examples: daughter.sisterExamples(14, new Set(borrowed.loans.items.map(x => x.id))) }, loans: borrowed.loans, lexicon: daughter.history.lexicon.map(w => loanById.has(w.id) ? { ...w, daughter: loanById.get(w.id).form, loan: loanById.get(w.id) } : w) };
+    const history = { ...daughter.history, sister: { ...daughter.history.sister, examples: daughter.sisterExamples(14, new Set(borrowed.loans.items.map(x => x.id))), loanContrast: sisterLoanContrast(spec, borrowed.loans, daughter.sisterForms, motherLexicon) }, loans: borrowed.loans, lexicon: daughter.history.lexicon.map(w => { const x = loanById.has(w.id) ? { ...w, daughter: loanById.get(w.id).form, loan: loanById.get(w.id) } : w; return x; }).concat(colex.applied.map(p => { const w = daughter.history.lexicon.find(h => h.id === p.original), x = loanById.has(p.original) ? { ...w, daughter: loanById.get(p.original).form } : w; const B = motherLexicon.find(e => e.id === p.extended); return { ...x, id: B.id, lemma: B.lemma, shift: { from: p.original, kind: p.kind } }; })) };
     // Inflectional affixes must not collide with any root form or derivational affix; they undergo the same changes.
     const protoAffixes = generateAffixes(spec, model, new Set([...lexicon.map(e => e.form), ...Object.values(daughter.derivationAffixes).map(a => a.form)]));
     const converted = daughter.convertAffixes(protoAffixes, lexicon.map(e => e.form));   // loans entered after the history was built
@@ -87,6 +110,6 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
         spec, notes, phonology: Object.freeze({ ...phonology, used: usedLetters(lexicon, spec, phonology), stress: stressSystemFor(seededRng(`${spec.seed}|stress`)()).id }),
         morphology: { model, affixes },
         syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles },
-        numerals: daughter.numerals, calendar, history, derivation: { affixes: daughter.derivationAffixes, stats: derivationStats, phonology: derivationPhon }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
+        numerals: daughter.numerals, calendar, history, texts: realizeStories(lang, storyPick.ids), semantics: { ...sem.semantics, idioms: realizeIdioms(lang, idiomPick.ids) }, derivation: { affixes: daughter.derivationAffixes, stats: derivationStats, phonology: derivationPhon }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
     });
 }

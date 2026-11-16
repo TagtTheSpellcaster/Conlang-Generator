@@ -230,6 +230,12 @@ function sampleColumnHtml(title, subtitle, samples, skipped, emptyMessage) {
     return `<section class="sample-col"><h3>${esc(title)}</h3><div class="sub">${esc(subtitle)}</div>${body}${sk}</section>`;
 }
 
+export function textsHtml(lang) {
+    const texts = lang.texts ?? [];
+    if (!texts.length) return '';
+    const line = l => `<div class="sample-pill"><div class="en">${l.speaker ? `<b>${esc(l.speaker)}:</b> ` : ''}${esc(l.en)}</div><div class="cl">${l.speaker ? `<b>${esc(l.speaker)}:</b> ` : ''}${l.tokens.map(tokenHtml).join(' ')}</div>${showIpa ? `<div class="ipa-line">${esc(flatTokens(l.tokens).map(w => ipaWord(w, curStress)).join(' '))}</div>` : ''}</div>`;
+    return `<div class="card"><h3>Connected texts</h3><p class="sub">Short texts built from the same grammar as the sample sentences. A character is introduced with an indefinite noun phrase, named again with a definite one, and referred to by a pronoun while it is the topic; where the verb carries person and number the pronoun is dropped. Hover a word for its meaning.</p>${texts.map(t => `<h4 class="sample-topic">${esc(t.title)} <span class="sub">(${esc(t.kind)})</span></h4>${t.lines.map(line).join('')}`).join('')}</div>`;
+}
 export function samplesHtml(lang) {
     const s = lang.syntax;
     const uni = lang.samples.filter(x => x.scope === 'universal'), gen = lang.samples.filter(x => x.scope === 'genre');
@@ -242,7 +248,9 @@ export function samplesHtml(lang) {
     return `<div class="sample-frame"><div class="morph-note">${note}</div><div class="sample-columns">${left}${right}</div></div>`;
 }
 
-export const structureOf = e => e.derivation ? `${e.derivation.text} (${e.derivation.gloss.toLowerCase()})` : e.loan ? `loan from ${e.loan.donorName} *${e.loan.source}*` : '';
+import { historyStory } from '../history/story.js';
+import { MECHANISMS } from '../semantics/colex.js';
+export const structureOf = e => e.colex ? `same word as “${e.colex.with.split('.')[1].replace(/_/g, ' ')}” (${e.colex.group === 'pair' ? (MECHANISMS[e.colex.kind] ?? e.colex.kind).split(' (')[0] : e.colex.note.split(':')[0]})` : e.colexHeads ? `also names: ${e.colexHeads.map(id => id.split('.')[1].replace(/_/g, ' ')).join(', ')}` : e.derivation ? `${e.derivation.text} (${e.derivation.gloss.toLowerCase()})` : e.loan ? `loan from ${e.loan.donorName} *${e.loan.source}*` : '';
 export const lexiconRows = lexicon => lexicon.map(e => ({ word: e.form, english: label(e), meta: `${showIpa ? `${ipaText(e.form)} · ` : ''}${e.domain} · ${e.pos}`, structure: structureOf(e) }));
 
 // The lexicon is arranged by topic (a vocabulary lists words alphabetically: that is the Dictionary tab).
@@ -357,6 +365,24 @@ export function calendarHtml(lang) {
 
 // ---- Derivation (Generated Lexicon tab) ----
 import { DERIVATION_TYPES } from '../derivation/derive.js';
+const plainTable = (head, rows) => `<div class="table-scroll"><table class="names-table"><thead><tr>${head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+export function semanticsHtml(lang) {
+    const m = lang.semantics;
+    if (!m) return '';
+    const byId = new Map(lang.lexicon.map(e => [e.id, e]));
+    const lab = id => { const e = byId.get(id); return e ? e.lemma : id.split('.')[1]; };
+    const formOf = id => byId.get(id)?.form ?? '';
+    const pairRows = m.pairs.map(p => [esc(formOf(p.original)), esc(lab(p.original)), esc(lab(p.extended)), esc(MECHANISMS[p.kind] ?? p.kind)]);
+    const kin = m.kinshipPairs.map(p => `${esc(lab(p.extended))} = ${esc(lab(p.original))} (${esc(formOf(p.original))})`);
+    const col = m.colourPairs.map(p => `${esc(lab(p.extended))} = ${esc(lab(p.original))} (${esc(formOf(p.original))})`);
+    const c = m.colours;
+    return `<div class="card"><h3>Semantic structure</h3>
+<p class="sub">The language does not give every English sense a root of its own. Some meanings share one word: the sense listed first is the older one, and the second was added by extension. Both are in the lexicon and the dictionary, with the same form.</p>
+<h4>Words with more than one sense</h4>${pairRows.length ? plainTable(['Word', 'Original sense', 'Also means', 'Mechanism'], pairRows) : '<p class="sub">None in this vocabulary.</p>'}
+<h4>Colour terms</h4><p class="sub">${c.terms} basic colour terms${c.terms <= 4 ? ' (an old-fashioned system: most colours are named by the nearest basic term)' : c.terms >= 9 ? ' (every colour of the dictionary has its own word)' : ''}.${col.length ? ` Not basic: ${col.join('; ')}.` : ''}</p>
+<h4>Kinship</h4><p class="sub">${esc(m.kinship.label[0].toUpperCase() + m.kinship.label.slice(1))}.${kin.length ? ` ${kin.join('; ')}.` : ''}</p>
+<h4>Figurative expressions</h4><p class="sub">Phrases whose meaning is not the sum of their words, with the language's own word order. The literal English is the gloss word for word.</p>${(m.idioms ?? []).length ? plainTable(['Expression', 'Literally', 'Means', 'IPA'], m.idioms.map(i => [`<span class="cl">${i.tokens.map(tokenHtml).join(' ')}</span>`, esc(i.en), esc(i.meaning), showIpa ? esc(flatTokens(i.tokens).map(w => ipaWord(w, curStress)).join(' ')) : '—'])) : '<p class="sub">None: the vocabulary lacks the words.</p>'}</div>`;
+}
 export function derivationHtml(lang) {
     const d = lang.derivation;
     if (!d || !d.stats.applied) return '';
@@ -394,7 +420,9 @@ export function historyHtml(lang) {
     const inv = h.inventory;
     const invText = [inv.gained.length ? `new sounds: ${inv.gained.join(' ')}` : '', inv.lost.length ? `lost sounds: ${inv.lost.join(' ')}` : ''].filter(Boolean).join('; ');
     const sorted = [...h.lexicon].sort((a, b) => a.lemma.localeCompare(b.lemma));
-    return `<div class="card"><h3>Mother language and sound changes</h3>
+    const story = historyStory(lang);
+    const storyHtml = story ? `<div class="card"><h3>History of the language</h3><p class="sub">${esc(story.intro)}</p><ol class="timeline">${story.events.map(e => `<li class="${e.kind}"><strong>c. ${e.years} years ago</strong> — ${esc(e.text)}</li>`).join('')}</ol><p class="sub">${esc(story.outro)}</p></div>` : '';
+    return `${storyHtml}<div class="card"><h3>Mother language and sound changes</h3>
 <p class="sub">The language shown in every other tab is the <strong>daughter</strong>. The generator first builds its mother (the proto-language, whose sound system is the one chosen in the Phonology settings) and then applies ${st.rules} ordered sound changes to every word, to the derivational and inflectional affixes and to the numerals. Forms marked * are the mother's. Derived words change as wholes, so related words come to differ in their roots. ${st.unchanged} of ${st.words} words (${pct(st.unchanged)}) are unchanged. A rule never makes a word identical to another word: where it would, that word keeps its older shape (${st.blocked} words${st.repaired ? `; ${st.repaired} more repaired after the numerals were recomposed` : ''})${h.attempts > 1 ? `; ${h.attempts} rule sets were tried` : ''}.${invText ? ` Sounds of the daughter against the mother — ${esc(invText)}.` : ''} Sentences, names and the calendar are built from the daughter's words, so inflected forms are made of changed stems and changed affixes (no further rule applies to them).</p>
 <h4>Sound changes, oldest first</h4>
 ${tbl(['#', 'When', 'Change', 'Words affected', 'Example'], rules)}
@@ -468,7 +496,14 @@ function sisterHtml(h) {
 <p class="sub">A sister descends from the same mother through other changes (${s.stats.rules} here; the two languages may share some innovations). Only examples are shown: ${s.stats.same} of ${s.stats.words} words come out identical in both. Each graph follows one word from the mother to the daughter (this language) and to the sister, with every intermediate form and the change that produced it.</p>
 ${familyTreeSvg(h)}
 <div class="two-col"><div><h5>Changes of the daughter</h5>${ruleTable(h.rules)}</div><div><h5>Changes of the sister</h5>${ruleTable(s.rules)}</div></div>
-<div class="graph-grid">${cards}</div>`;
+<div class="graph-grid">${cards}</div>${contrastHtml(s)}`;
+}
+function contrastHtml(s) {
+    const c = s.loanContrast ?? [];
+    if (!c.length) return '';
+    return `<h4>Loanwords this language took and its sister did not</h4>
+<p class="sub">The mother’s word survives in the sister (as with Italian <em>cane</em> from Latin <em>canis</em> against Spanish <em>perro</em>, a loan); in this language it was replaced by a word from another language.</p>
+${tbl(['English', 'Mother', 'Sister (inherited)', 'This language (loan)', 'Donor', 'Entered'], c.map(x => [x.lemma, `*${x.mother}`, x.sister, x.daughter, `${x.donor} *${x.source}*`, `c. ${x.years} years ago`]))}`;
 }
 
 // ---- Writing tab ---------------------------------------------------------------------------------------------------

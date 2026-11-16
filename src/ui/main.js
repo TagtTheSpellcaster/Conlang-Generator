@@ -8,7 +8,7 @@ import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
 import { stressOf } from '../ipa.js';
-import { setStress, setShowIpa, writingHtml, historyHtml, derivationHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { setStress, setShowIpa, writingHtml, historyHtml, derivationHtml, semanticsHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, textsHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -99,11 +99,11 @@ function render(lang) {
     box.querySelectorAll('[data-export]').forEach(b => b.addEventListener('click', () => exportLanguage(lang, b.dataset.export)));
     const samples = $('sample-sentences-output');
     samples.className = '';
-    samples.innerHTML = samplesHtml(lang);
+    samples.innerHTML = samplesHtml(lang) + textsHtml(lang);
     const lex = $('lexicon-output');
     lex.className = '';
     lex.onclick = ev => { const b = ev.target.closest('[data-lex-toggle]'); if (b) lex.querySelectorAll('.lex-section').forEach(d => { d.open = b.dataset.lexToggle === 'open'; }); };
-    lex.innerHTML = derivationHtml(lang) + `<div class="card">${lexiconHtml(lang.lexicon)}</div>`;
+    lex.innerHTML = semanticsHtml(lang) + derivationHtml(lang) + `<div class="card">${lexiconHtml(lang.lexicon)}</div>`;
     renderDictionary();
     renderNumerals();
     renderNames();

@@ -15,10 +15,10 @@ test('determinism: same input and seed give identical output', () => {
 
 test('different seeds change forms but not the selected senses', () => {
     const a = gen({ seed: 'one' }), b = gen({ seed: 'two' });
-    // only the calendar's own words (and the fill they displace) depend on the seed: a seed may give a lunar or a solar calendar
+    // the words of the calendar, of the semantic pairs, the idioms and the texts depend on the seed (and displace some fill)
     const ids = new Set(b.lexicon.map(e => e.id));
     const shared = a.lexicon.filter(e => ids.has(e.id)).length;
-    assert.ok(shared >= a.lexicon.length * 0.9, `${shared} of ${a.lexicon.length} senses shared`);
+    assert.ok(shared >= a.lexicon.length * 0.8, `${shared} of ${a.lexicon.length} senses shared`);
     assert.ok(a.lexicon.filter(e => e.tier === 'core').every(e => ids.has(e.id)), 'core senses are always selected');
     assert.notDeepEqual(a.lexicon.map(e => e.form), b.lexicon.map(e => e.form));
 });
@@ -37,7 +37,7 @@ test('seed "auto" is resolved, reported and reproducible', () => {
 test('lexicon: unique non-empty forms, at most 600 + the derivation extra (40%), core senses always present', () => {
     const L = gen();
     assert.ok(L.lexicon.length <= 600 * 1.4);
-    assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length);
+    assert.equal(new Set(L.lexicon.filter(e => !e.colex).map(e => e.form)).size, L.lexicon.filter(e => !e.colex).length);
     assert.ok(L.lexicon.every(e => e.form && e.form.length >= 1));
     const ids = new Set(L.lexicon.map(e => e.id));
     for (const e of vocabulary.filter(e => e.tier === 'core' && !(e.pos === 'determiner' && ['the', 'a'].includes(e.lemma)))) assert.ok(ids.has(e.id), e.id);
@@ -122,7 +122,7 @@ test('every option combination generates without error (randomised sweep + corne
     for (const consonants of OPTIONS.consonants) for (const vowels of OPTIONS.vowels) runs.push({ consonants, vowels, mean: 1 }, { consonants, vowels, mean: 5 });
     runs.forEach((r, i) => {
         const L = generateLanguage({ ...r, seed: `sweep-${i}` }, vocabulary, templates, derivations);
-        assert.equal(new Set(L.lexicon.map(e => e.form)).size, L.lexicon.length, JSON.stringify(r));
+        assert.equal(new Set(L.lexicon.filter(e => !e.colex).map(e => e.form)).size, L.lexicon.filter(e => !e.colex).length, JSON.stringify(r));
         assert.deepEqual(L.skippedSamples, [], JSON.stringify(r));
         assert.ok(L.samples.length >= 40, `${L.samples.length} ${JSON.stringify(r)}`);
         for (const s of L.samples) assert.ok(tokenText(s.tokens).trim().length > 0);

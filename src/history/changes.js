@@ -304,5 +304,5 @@ export function deriveDaughter(spec, lexicon, derivationAffixes, numerals) {
         const chosenIdx = [...new Set([...apart.slice(0, Math.ceil(count * 0.4)), ...derived.slice(0, 3), ...apart.sort(() => rr() - 0.5).slice(0, count), ...together.sort(() => rr() - 0.5).slice(0, 2)])].slice(0, count);
         return chosenIdx.map(i => ({ id: words[i].id, lemma: words[i].lemma, etymology: words[i].derivation ? `*${words[i].derivation.parts.map(p => p.text).join(' + ')}` : null, mother: words[i].form, daughter: h.stage[i], sister: sh.stage[i], daughterSteps: steps(h, i), sisterSteps: steps(sh, i) }));
     };
-    return { lexicon: lex, derivationAffixes: dAffixes, numerals: dNumerals, history, convertAffixes, convertWord: h.convert, traceWord: h.traceOf, later, sisterExamples };
+    return { lexicon: lex, derivationAffixes: dAffixes, numerals: dNumerals, history, convertAffixes, convertWord: h.convert, traceWord: h.traceOf, later, sisterExamples, sisterForms: new Map(words.map((e, i) => [e.id, sh.stage[i]])) };
 }
