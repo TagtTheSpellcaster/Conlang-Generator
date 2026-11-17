@@ -1,5 +1,4 @@
-# Tutlayin — ⵜⵓⵜⵍⴰⵢⵉⵏ 
-##### Constructed Language Workshop
+# Tutlayin — ⵜⵓⵜⵍⴰⵢⵉⵏ — Constructed Language Workshop
 
 A browser tool that generates artificial languages — phonology, morphology, syntax, a lexicon and sample sentences — with a focus on fantasy and science-fiction languages. Generation is deterministic: the same options and seed always give the same language.
 
