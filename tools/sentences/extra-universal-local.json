@@ -1,0 +1,187 @@
+[
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "The man came (I saw it).",
+  "tense": "past",
+  "evid": "direct",
+  "S": {
+   "head": "man:noun",
+   "det": "definite"
+  },
+  "V": {
+   "head": "come:verb"
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "The man came (they say).",
+  "tense": "past",
+  "evid": "reported",
+  "S": {
+   "head": "man:noun",
+   "det": "definite"
+  },
+  "V": {
+   "head": "come:verb"
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "The man came (I infer it).",
+  "tense": "past",
+  "evid": "inferred",
+  "S": {
+   "head": "man:noun",
+   "det": "definite"
+  },
+  "V": {
+   "head": "come:verb"
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "What do you [see|want|eat]?",
+  "initial": [
+   {
+    "head": "interrogative.what"
+   }
+  ],
+  "seq": [
+   "initial",
+   "S",
+   "V"
+  ],
+  "S": {
+   "head": "pronoun.second_person_singular"
+  },
+  "V": {
+   "head": [
+    "see:verb",
+    "want:verb",
+    "eat:verb"
+   ]
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "Who [sees|loves] you?",
+  "initial": [
+   {
+    "head": "interrogative.who"
+   }
+  ],
+  "seq": [
+   "initial",
+   "V",
+   "O"
+  ],
+  "V": {
+   "head": [
+    "see:verb",
+    "love:verb"
+   ]
+  },
+  "O": {
+   "head": "pronoun.second_person_singular_object"
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "Do not [go|come|wait].",
+  "mood": "imperative",
+  "seq": [
+   "V"
+  ],
+  "V": {
+   "head": [
+    "go:verb",
+    "come:verb",
+    "wait:verb"
+   ],
+   "neg": true
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "I knew that you were [hungry|tired].",
+  "tense": "past",
+  "enNoShift": "I knew that you are [hungry|tired].",
+  "S": {
+   "head": "pronoun.first_person_singular"
+  },
+  "V": {
+   "head": "know:verb"
+  },
+  "comp": {
+   "conj": "that:conjunction",
+   "clause": {
+    "tense": "past",
+    "shifted": true,
+    "S": {
+     "head": "pronoun.second_person_singular"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": [
+      "hungry:adjective",
+      "tired:adjective"
+     ]
+    }
+   }
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "(Polite) Do you want [water|food]?",
+  "polite": true,
+  "q": "yesno",
+  "S": {
+   "head": "pronoun.second_person_singular"
+  },
+  "V": {
+   "head": "want:verb"
+  },
+  "O": {
+   "head": [
+    "water:noun",
+    "food:noun"
+   ]
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "(Polite) Can you help me?",
+  "polite": true,
+  "q": "yesno",
+  "S": {
+   "head": "pronoun.second_person_singular"
+  },
+  "V": {
+   "head": "help:verb",
+   "aux": "can:particle"
+  },
+  "O": {
+   "head": "pronoun.first_person_singular_object"
+  }
+ },
+ {
+  "topic": "Questions, prohibition, evidence and politeness",
+  "en": "(Polite) Are you [hungry|tired]?",
+  "polite": true,
+  "q": "yesno",
+  "S": {
+   "head": "pronoun.second_person_singular"
+  },
+  "V": {
+   "head": "be:verb"
+  },
+  "O": {
+   "head": [
+    "hungry:adjective",
+    "tired:adjective"
+   ]
+  }
+ }
+]

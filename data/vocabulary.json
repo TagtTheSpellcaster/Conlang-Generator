@@ -7227,6 +7227,12 @@
   {"id":"grammar.passive_marker","lemma":"passive marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
   {"id":"grammar.antipassive_marker","lemma":"antipassive marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
   {"id":"grammar.causative_marker","lemma":"causative marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
-  {"id":"grammar.applicative_marker","lemma":"applicative marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}}
+  {"id":"grammar.applicative_marker","lemma":"applicative marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.quotative_marker","lemma":"quotative marker","pos":"particle","domain":"grammar","group":"subordination","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.prohibitive_marker","lemma":"prohibitive marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.polite_marker","lemma":"polite marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.witnessed_marker","lemma":"witnessed marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.reported_marker","lemma":"reported marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.inferred_marker","lemma":"inferred marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}}
  ]
 }

@@ -11,3 +11,7 @@ c:that (complementizer)
 p:topic marker, p:focus marker
 ## voice_and_valency
 p:passive marker, p:antipassive marker, p:causative marker, p:applicative marker
+## subordination
+p:quotative marker
+## local_grammar
+p:prohibitive marker, p:polite marker, p:witnessed marker, p:reported marker, p:inferred marker

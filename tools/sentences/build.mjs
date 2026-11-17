@@ -149,7 +149,8 @@ for (const f of files) {
         target.push({ id: `${prefix}${String(target.length + 1).padStart(2, '0')}`, topic, ...t });
     });
     // sentences written as data (relative clauses, coordination, possession…) follow the first universal file; they keep their numbers
-    if (f === '00-universal.txt') for (const e of JSON.parse(fs.readFileSync(path.join(dir, 'extra-universal.json'), 'utf8'))) universal.push({ id: `u${String(universal.length + 1).padStart(2, '0')}`, ...e });
+    const extra = { '00-universal.txt': 'extra-universal.json', '00b-universal-voice.txt': ['extra-universal-subordination.json', 'extra-universal-local.json'] }[f];
+    if (extra) for (const e of [extra].flat().flatMap(x => JSON.parse(fs.readFileSync(path.join(dir, x), 'utf8')))) universal.push({ id: `u${String(universal.length + 1).padStart(2, '0')}`, ...e });
 }
 
 const unresolved = [...missing].sort();
