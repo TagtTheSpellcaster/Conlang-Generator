@@ -15,7 +15,7 @@
 //   #3 or #2|3|5             a counted noun phrase: the numeral (with the classifier, if the language has them) is added to the noun
 //   cmp                      comparative degree of the adjective head (suffix, or the word "more")
 //   prepositional phrase     adp>noun phrase      e.g. to>the village:n   with>ME   (than:c>ME marks the standard of comparison)
-// Verb phrase (V): lemma:v[|lemma:v] with optional flags after "/": neg, can, prog (progressive), perf (perfect)   e.g. enter:v/neg,can
+// Verb phrase (V): lemma:v[|lemma:v] with optional flags after "/": neg, can, prog (progressive), perf (perfect), passive, antipassive, causative, applicative (voice)   e.g. enter:v/neg,can
 // Other slots: q=yn (yes/no question particle), mood=imperative|optative
 // Subordinate clauses: comp=that:c ~ S=... ~ V=...  (complement, fills the object slot)
 //                      adv=because:c ~ S=... ~ V=... (adverbial clause: because, if, when...)
@@ -39,7 +39,7 @@ const PRONOUN = {
     WHO: 'interrogative.who', WHAT: 'interrogative.what', WHERE: 'interrogative.where', HOW: 'interrogative.how', WHY: 'interrogative.why'
 };
 const POSSESSIVES = new Set(['my', 'your', 'his', 'her', 'our', 'their']);
-const CASE_OF = { to: 'dative', for: 'dative', from: 'ablative', in: 'locative', at: 'locative', on: 'locative', with: 'instrumental', of: 'genitive', 'than:c': 'ablative' };
+const CASE_OF = { to: 'dative', for: 'dative', from: 'ablative', in: 'locative', at: 'locative', on: 'locative', with: 'instrumental', by: 'instrumental', of: 'genitive', 'than:c': 'ablative' };
 
 const errors = [];
 const missing = new Set();
@@ -89,7 +89,7 @@ function parseVerb(text) {
     const v = { head: heads(h, 'v') };
     for (const f of flags.split(',').map(x => x.trim()).filter(Boolean)) {
         if (f === 'neg') v.neg = true; else if (f === 'can') v.aux = 'can:particle';
-        else if (f === 'prog') v.aspect = 'progressive'; else if (f === 'perf') v.aspect = 'perfect'; else fail(`unknown verb flag "${f}"`);
+        else if (f === 'prog') v.aspect = 'progressive'; else if (f === 'perf') v.aspect = 'perfect'; else if (['passive', 'antipassive', 'causative', 'applicative'].includes(f)) v.voice = f; else fail(`unknown verb flag "${f}"`);
     }
     return v;
 }
@@ -148,6 +148,8 @@ for (const f of files) {
         const t = parseLine(line);
         target.push({ id: `${prefix}${String(target.length + 1).padStart(2, '0')}`, topic, ...t });
     });
+    // sentences written as data (relative clauses, coordination, possession…) follow the first universal file; they keep their numbers
+    if (f === '00-universal.txt') for (const e of JSON.parse(fs.readFileSync(path.join(dir, 'extra-universal.json'), 'utf8'))) universal.push({ id: `u${String(universal.length + 1).padStart(2, '0')}`, ...e });
 }
 
 const unresolved = [...missing].sort();

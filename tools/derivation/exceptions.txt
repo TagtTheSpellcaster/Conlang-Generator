@@ -18,3 +18,12 @@
 + compound fireship < fire + ship
 + compound flagship < flag + ship
 + compound starship < star + ship
++ result broken < break
++ result fallen < fall
++ result hidden < hide
++ result woven < weave
++ result lost < lose
++ result bound < bind
++ result wounded < wound
++ result dead < die
++ result shot < shoot

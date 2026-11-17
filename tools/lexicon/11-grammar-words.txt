@@ -7,3 +7,7 @@ p:question particle, p:progressive marker, p:perfect marker
 adv:more
 ## subordination
 c:that (complementizer)
+## information_structure
+p:topic marker, p:focus marker
+## voice_and_valency
+p:passive marker, p:antipassive marker, p:causative marker, p:applicative marker

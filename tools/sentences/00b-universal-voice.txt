@@ -1,0 +1,14 @@
+# Voice and valency: passive, antipassive (ergative languages), causative, applicative. A language without the construction skips the sentence.
+@universal
+
+## Voice and valency
+The [door|window] was opened by the man. | tense=past | S=the door:n|window:n | V=open:v/passive | A=by>the man:n
+The [wolf|dog] was killed by the hunter. | tense=past | S=the wolf:n|dog:n | V=kill:v/passive | A=by>the hunter:n
+The bread was eaten. | tense=past | S=the bread:n | V=eat:v/passive
+The [man|woman] is eating. | S=the man:n|woman:n | V=eat:v/antipassive,prog
+The woman ate bread. | tense=past | S=the woman:n | V=eat:v/antipassive | A=to>bread:n
+I made the child sleep. | tense=past | S=I | V=sleep:v/causative | O=the child:n
+The king made me laugh. | tense=past | S=the king:n | V=laugh:v/causative | O=ME
+The man made the dog eat the bread. | tense=past | S=the man:n | V=eat:v/causative | O=the bread:n | A=to>the dog:n
+The man cut the bread with a knife. | tense=past | S=the man:n | V=cut:v/applicative | O=a knife:n | A=to>the bread:n
+I sing for you. | S=I | V=sing:v/applicative | O=YOU_O

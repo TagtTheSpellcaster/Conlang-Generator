@@ -7221,6 +7221,12 @@
   {"id":"time.autumnal","lemma":"autumnal","pos":"adjective","domain":"time","group":"derived_time_100","tier":"domain","region":[],"culture":[],"biome":[],"era":[],"tags":["derived"],"features":{},"relations":{}},
   {"id":"time.cowbell","lemma":"cowbell","pos":"noun","domain":"time","group":"derived_time_101","tier":"domain","region":[],"culture":[],"biome":[],"era":["ancient","medieval","renaissance","modern","futuristic"],"tags":["derived"],"features":{"animacy":"inanimate"},"relations":{}},
   {"id":"transport.warship","lemma":"warship","pos":"noun","domain":"transport","group":"derived_transport_102","tier":"domain","region":[],"culture":["maritime","mercantile"],"biome":[],"era":["ancient","medieval","renaissance","modern"],"tags":["derived"],"features":{"animacy":"inanimate"},"relations":{}},
-  {"id":"war.bloodline","lemma":"bloodline","pos":"noun","domain":"war","group":"derived_war_103","tier":"domain","region":[],"culture":["warrior","militaristic"],"biome":[],"era":["ancient","medieval","renaissance","modern"],"tags":["derived"],"features":{"animacy":"inanimate"},"relations":{}}
+  {"id":"war.bloodline","lemma":"bloodline","pos":"noun","domain":"war","group":"derived_war_103","tier":"domain","region":[],"culture":["warrior","militaristic"],"biome":[],"era":["ancient","medieval","renaissance","modern"],"tags":["derived"],"features":{"animacy":"inanimate"},"relations":{}},
+  {"id":"grammar.topic_marker","lemma":"topic marker","pos":"particle","domain":"grammar","group":"information_structure","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.focus_marker","lemma":"focus marker","pos":"particle","domain":"grammar","group":"information_structure","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.passive_marker","lemma":"passive marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.antipassive_marker","lemma":"antipassive marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.causative_marker","lemma":"causative marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"grammar.applicative_marker","lemma":"applicative marker","pos":"particle","domain":"grammar","group":"voice_and_valency","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}}
  ]
 }
