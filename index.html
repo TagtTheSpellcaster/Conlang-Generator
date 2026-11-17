@@ -3,18 +3,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Conlang Generator</title>
+    <title>Tutlayin — Constructed Language Workshop</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Tifinagh&display=swap">
+    <script>(function(){var m="dark";try{m=localStorage.getItem("tutlayin-theme")||"dark"}catch(e){}var l=m==="light"||(m==="system"&&window.matchMedia&&matchMedia("(prefers-color-scheme: light)").matches);document.documentElement.setAttribute("data-theme",l?"light":"dark")})()</script>
     <link rel="stylesheet" href="css/generator.css">
   </head>
   <body>
     <header>
       <div>
         <div class="title-row">
-          <h1>Conlang Generator</h1><span id="app-version" class="chip"></span>
+          <h1>Tutlayin</h1><span class="tifinagh" aria-hidden="true">ⵜⵓⵜⵍⴰⵢⵉⵏ</span><span id="app-version" class="chip"></span>
         </div>
-        <div class="sub">Vocabulary-driven language generation</div>
+        <div class="sub">Constructed Language Workshop</div>
       </div>
-      <div class="header-tools"><button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button><button type="button" class="btn" id="copy-vocabulary">Copy to Clipboard</button><button type="button" class="btn" id="export-vocabulary">Export vocabulary</button><button type="button" class="btn" id="import-vocabulary">Import vocabulary</button><label class="ipa-toggle"><input type="checkbox" id="show-ipa"> IPA</label><input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
+      <div class="header-tools"><select id="theme-select" class="theme-select" aria-label="Colour theme" title="Colour theme"><option value="dark">Dark</option><option value="light">Light</option><option value="system">System</option></select><button type="button" class="btn" id="open-vocabulary">Vocabulary manager</button><button type="button" class="btn" id="copy-vocabulary">Copy to Clipboard</button><button type="button" class="btn" id="export-vocabulary">Export vocabulary</button><button type="button" class="btn" id="import-vocabulary">Import vocabulary</button><label class="ipa-toggle"><input type="checkbox" id="show-ipa"> IPA</label><input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
         <div id="db-status" class="sub">Loading vocabulary…</div>
       </div>
     </header>
@@ -209,7 +211,20 @@
       <main>
         <div class="writing-bar"><label for="writing-type">Writing system</label>
           <select id="writing-type"><option value="auto">Automatic (by culture)</option><option value="alphabet">Alphabet</option><option value="abjad">Abjad</option><option value="abugida">Abugida</option><option value="syllabary">Syllabary</option></select>
+          <label for="writing-direction">Direction</label>
+          <select id="writing-direction"><option value="auto">Automatic (by age and kind of script)</option><option value="ltr">Left to right</option><option value="rtl">Right to left</option><option value="boustrophedon">Boustrophedon</option></select>
+          <label for="writing-numerals">Numerals</label>
+          <select id="writing-numerals"><option value="auto">Automatic</option><option value="cistercian">Cistercian (standard)</option><option value="cistercian-early">Cistercian (early, with dots)</option></select>
+          <label for="writing-stave">Cistercian stave</label>
+          <select id="writing-stave"><option value="auto">Automatic</option><option value="vertical">Vertical</option><option value="horizontal">Horizontal</option></select>
           <span class="sub">The language is written in Latin letters in every other tab; this tab shows a native script for it. Logographic systems are not offered.</span></div>
+        <div class="card write-box"><h3>Write a text</h3>
+          <p class="sub">Type words in the transcription of the language (the Latin letters of the other tabs), numbers as digits, or English words found in the dictionary. A new line starts a new line of text.</p>
+          <textarea id="write-input" rows="3" spellcheck="false" placeholder="e.g. a word, a sentence, 2026"></textarea>
+          <div class="write-options"><button type="button" class="btn" id="write-go">Write</button>
+            <label class="ipa-toggle"><input type="checkbox" id="write-lookup" checked> look up English words</label>
+            <label class="ipa-toggle" id="write-pointed-label"><input type="checkbox" id="write-pointed" checked> vowel marks (abjad)</label></div>
+          <div id="write-output"></div></div>
         <div id="writing-output" class="empty">Generate a language to see its writing system.</div>
       </main>
     </section>

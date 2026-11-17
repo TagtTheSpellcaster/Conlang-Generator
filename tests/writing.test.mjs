@@ -14,7 +14,7 @@ test('writing: only alphabet, abjad, abugida and syllabary; every word reads bac
         const W = buildWriting(L, type);
         assert.equal(W.type, type);
         assert.equal(W.failures, 0, `${L.spec.seed} ${type}: ${W.failures} words do not read back`);
-        assert.ok(W.direction === 'ltr' || type === 'abjad', 'only an abjad may run right to left');
+        assert.ok(['ltr', 'rtl'].includes(W.direction), 'direction is horizontal');
     }
 });
 

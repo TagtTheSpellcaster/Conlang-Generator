@@ -36,8 +36,8 @@ test('template coverage: every referenced sense exists and is unambiguous', () =
     assert.deepEqual(problems, []);
 });
 
-test('sentence sets: about 45-80 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
-    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 80, `${templates.universal.length} universal sentences`);
+test('sentence sets: about 45-95 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
+    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 95, `${templates.universal.length} universal sentences`);
     assert.deepEqual(Object.keys(templates.genres).sort(), [...GENRE_IDS].sort());
     for (const [name, list] of Object.entries(sets)) {
         assert.equal(new Set(list.map(t => t.id)).size, list.length, `${name}: ids`);
@@ -62,7 +62,9 @@ test('universal sentence frames offer alternatives (more examples per sentence)'
 test('default language realises every sentence that applies (none skipped); the genre adds its own set', () => {
     const L = gen({ number: 'singular-plural-dual', gender: 'masculine-feminine' });
     assert.deepEqual(L.skippedSamples, []);
-    assert.equal(L.samples.filter(s => s.scope === 'universal').length, templates.universal.length);
+    // a voice the language does not have is not a sentence it needs
+    const applicable = (lang, list) => list.filter(t => !t.V?.voice || lang.syntax.valency[t.V.voice]);
+    assert.equal(L.samples.filter(s => s.scope === 'universal').length, applicable(L, templates.universal).length);
     assert.equal(L.samples.filter(s => s.scope === 'genre').length, 0, 'no genre, no specialised sentences');
     const G = gen({ genre: 'marine', number: 'singular-plural-dual', gender: 'masculine-feminine' });
     assert.deepEqual(G.skippedSamples, []);
@@ -73,8 +75,10 @@ test('default language realises every sentence that applies (none skipped); the 
 test('number-dependent templates are only used when the language has that number', () => {
     const n = L => L.samples.filter(s => s.scope === 'universal').length;
     const needing = (...nums) => templates.universal.filter(t => nums.includes(t.requires?.number)).length;
-    assert.equal(n(gen({ number: 'singular' })), templates.universal.length - needing('plural', 'dual'));
-    assert.equal(n(gen({ number: 'singular-plural' })), templates.universal.length - needing('dual'));
+    const count = (L, ...nums) => templates.universal.filter(t => !nums.includes(t.requires?.number) && (!t.V?.voice || L.syntax.valency[t.V.voice])).length;
+    const one = gen({ number: 'singular' }), two = gen({ number: 'singular-plural' });
+    assert.equal(n(one), count(one, 'plural', 'dual'));
+    assert.equal(n(two), count(two, 'dual'));
 });
 
 test('a template with a missing concept is skipped and reported, never emitted with holes', () => {

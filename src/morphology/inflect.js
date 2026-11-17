@@ -150,7 +150,7 @@ function inflectCore(entry, features = {}, morph) {
     return finish();
 }
 
-// features: { tense: present|past|future, person: 1|2|3, number, negative, potential, imperative, optative, aspect: progressive|perfect }
+// features: { tense: present|past|future, person: 1|2|3, number, negative, potential, imperative, optative, aspect: progressive|perfect, voice: passive|antipassive|causative|applicative }
 function inflectVerb(entry, f, morph, { parts, add, finish }) {
     const v = morph.affixes.verb;
     if (!v) return finish();
@@ -163,6 +163,7 @@ function inflectVerb(entry, f, morph, { parts, add, finish }) {
         if (!f.imperative) add(v.fused[tense]?.[cell] ?? '', 'fused', `${tense}.${cell}`);
         return finish();
     }
+    if (f.voice) add(morph.affixes.voice?.[f.voice], 'voice', f.voice);
     if (f.potential) add(v.potential, 'potential', 'can');
     if (f.negative) add(v.negation, 'negation', 'not');
     if (f.imperative) { add(v.imperative, 'mood', 'imperative'); return finish(); }

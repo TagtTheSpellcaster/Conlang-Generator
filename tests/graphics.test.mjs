@@ -36,7 +36,8 @@ test('numeral glyphs: one distinct digit per base value, positional numbers read
         const L = gen(`nm${i}`), W = buildWriting(L, 'alphabet'), N = buildNumberSigns(L, W);
         modes.add(N.mode);
         assert.equal(N.failures, 0);
-        if (!N.restricted) { assert.equal(N.digits.length, N.base); assert.equal(new Set(N.digits.map(d => d.svg)).size, N.base); }
+        if (N.cistercian) assert.equal(N.digits.length, 0);   // composite signs: one per group of four digits, not one per digit
+        else if (!N.restricted) { assert.equal(N.digits.length, N.base); assert.equal(new Set(N.digits.map(d => d.svg)).size, N.base); }
         assert.ok(N.write(2026).includes('<svg'));
     }
     assert.ok(modes.size >= 2);

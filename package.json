@@ -1,6 +1,6 @@
 {
-  "name": "conlang-generator",
-  "version": "1.26.0",
+  "name": "tutlayin",
+  "version": "1.30.0",
   "private": true,
   "type": "module",
   "scripts": {

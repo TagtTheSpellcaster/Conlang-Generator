@@ -191,7 +191,8 @@ export function verbMorphologyHtml(lang) {
     const sfx = x => `<span class="morph-ending">${esc(x)}</span>`;
     const notes = [];
     if (v.mode === 'agglutinative') {
-        notes.push('Verb structure: stem – ability – negation – aspect – tense – subject agreement. Present tense and third person singular are unmarked.');
+        notes.push('Verb structure: stem – voice – ability – negation – aspect – tense – subject agreement. Present tense and third person singular are unmarked.');
+        if (affixes.voice && Object.keys(affixes.voice).length) notes.push(`Voice suffixes (right after the stem): ${Object.entries(affixes.voice).map(([k, a]) => `${k} ${sfx(a)}`).join(' · ')}.`);
         notes.push(`Ability: ${sfx(v.potential)} · negation: ${sfx(v.negation)} · imperative: ${sfx(v.imperative)} · optative: ${sfx(v.optative)} · progressive: ${sfx(v.aspect.progressive)} · perfect: ${sfx(v.aspect.perfect)}`);
         notes.push(`Comparative suffix on adjectives (before gender and number): ${sfx(affixes.comparative)}. The optative replaces the tense and keeps the agreement.`);
         const poss = affixes.possessive;
@@ -245,7 +246,9 @@ export function samplesHtml(lang) {
     const right = lang.genre
         ? sampleColumnHtml(`Specialised Sentences · ${lang.genre.label}`, `${gen.length} sentences typical of this genre, by topic`, gen, skip('genre'), 'No specialised sentence could be built.')
         : sampleColumnHtml('Specialised Sentences', 'Not available without a genre', [], [], 'Choose a language genre (war, marine, artisans, women\'s tongue…) to get sentences typical of it.');
-    return `<div class="sample-frame"><div class="morph-note">${note}</div><div class="sample-columns">${left}${right}</div></div>`;
+    const vt = s.valencyText, noteVoice = vt ? `<div class="morph-note">Passive: ${esc(vt.passive)} · antipassive: ${esc(vt.antipassive)} · causative: ${esc(vt.causative)} · applicative: ${esc(vt.applicative)}</div>` : '';
+    const it = s.informationText, noteInfo = it ? `<div class="morph-note">Demonstratives: ${esc(it.demonstratives)} · reflexive: ${esc(it.reflexive)} · topic: ${esc(it.topic)} · focus: ${esc(it.focus)}</div>` : '';
+    return `<div class="sample-frame"><div class="morph-note">${note}</div>${noteInfo}${noteVoice}<div class="sample-columns">${left}${right}</div></div>`;
 }
 
 import { historyStory } from '../history/story.js';
@@ -521,9 +524,65 @@ function graphicsText(W) {
     if (W.type === 'alphabet' || W.type === 'abjad') bits.push(`letters in ${g.families.length} families by place and manner of articulation`);
     return bits.join('; ') + '.';
 }
-export function writingHtml(lang, choice = 'auto') {
+// A text typed by the user, written in the script. Words are given in the language's own transcription; numbers use the
+// numerals of the language; with the lookup option an English word is replaced by the word of the dictionary.
+export function writeTextHtml(lang, text, { choice = 'auto', direction = 'auto', pointed = true, lookup = true, numerals = {} } = {}) {
     setStress(stressOf(lang));
-    const W = buildWriting(lang, choice);
+    const W = buildWriting(lang, choice, direction), N = buildNumberSigns(lang, W, numerals);
+    const known = new Set([...W.letters.vowels, ...W.letters.consonants]);
+    const byEnglish = new Map(), nativeForms = new Set(lang.lexicon.map(e => e.form));
+    if (lookup) for (const e of lang.lexicon) { const k = label(e).toLowerCase(); if (!byEnglish.has(k)) byEnglish.set(k, e); }
+    const rows = [], problems = [], lines = [];
+    const chunk = W.boustrophedon ? 6 : Infinity;
+    for (const raw of String(text).normalize('NFC').split(/\r?\n/)) {
+        const items = [];
+        for (const tok of raw.match(/[\p{L}\p{M}'’-]+|\d+/gu) ?? []) {
+            if (/^\d+$/.test(tok)) {
+                const n = Number(tok);
+                if (tok.length > 12 || !Number.isSafeInteger(n)) { problems.push(`${tok.slice(0, 14)}…: number too long`); continue; }
+                try { items.push({ html: `<span class="script-word">${N.write(n, 34)}</span>` }); rows.push([esc(tok), '', 'number']); } catch { problems.push(`${tok}: this number has no sign in the numerals of the language`); }
+                continue;
+            }
+            const word = tok.toLowerCase().replace(/['’-]/g, '');
+            if (!word) continue;
+            let forms = [word], note = '';
+            const bad = [...word].filter(ch => !known.has(ch));
+            if (bad.length || (lookup && !nativeForms.has(word) && byEnglish.has(word))) {
+                const e = byEnglish.get(word);
+                if (e) { forms = e.form.split(' '); note = `dictionary: ${label(e)}`; }
+                else { problems.push(`${tok}: ${[...new Set(bad)].join(' ')} ${bad.length > 1 ? 'are not letters' : 'is not a letter'} of this language${lookup ? ', and the word is not in the dictionary' : ''}`); continue; }
+            }
+            for (const f of forms) {
+                try { W.wordSvg(f, 30, pointed); } catch { problems.push(`${f}: cannot be written in this script`); continue; }
+                items.push(f); rows.push([esc(f), esc(ipaWord(f, stressOf(lang))), esc(note || (W.spelled(f) === f ? '' : `spelled ${W.spelled(f)}`))]);
+            }
+        }
+        for (let i = 0; i < items.length; i += chunk) lines.push(items.slice(i, i + chunk));
+    }
+    const body = lines.filter(l => l.length).map((l, i) => W.line(l, i, 40, pointed)).join('');
+    const table = rows.length ? `<div class="table-scroll"><table class="names-table"><thead><tr><th>Word</th><th>IPA</th><th>Note</th></tr></thead><tbody>${rows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>` : '';
+    const warn = problems.length ? `<ul class="notes">${problems.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : '';
+    return `<div class="card"><div class="script-sentence">${body || '<p class="sub">Nothing to write.</p>'}</div>${warn}${table}<p class="sub">Written ${esc(W.direction === 'rtl' ? 'right to left' : 'left to right')}${W.boustrophedon ? ', boustrophedon' : ''}. Punctuation is not written.</p></div>`;
+}
+
+function cistercianHtml(N, sign, table) {
+    const c = N.cistercian;
+    const how = `${c.system === 'standard' ? 'Lines only: 1 and 2 are strokes at the top and below it, 3 and 4 the two diagonals, 5 is 4 and 1 together, 6 a vertical stub, 7 = 1 + 6, 8 = 2 + 6, 9 = 1 + 2 + 6.' : 'The early system: 1 and 2 are strokes, 3 and 4 have the shapes that the standard system gives to 7 and 8 (and the other way round), 5 and 6 are one and two dots, 9 is a triangle on the stave.'} A sign writes a number from 1 to 9999 on one stave: units at the top right, tens at the top left (mirrored), hundreds at the bottom right (turned over), thousands at the bottom left (both). An empty corner is a zero; there is no sign for the digit zero. The stave is ${c.orientation}${c.orientation === 'horizontal' ? ' (the vertical sign turned a quarter turn counterclockwise)' : ''}. Larger numbers are written as groups of four digits, the largest group first. The numbers are written in decimal, whatever the base of the spoken numerals.`;
+    const rows = c.table.map(r => `<h5>${esc(r.label)}</h5><div class="sign-grid">${r.cells.map(x => sign(x.svg, String(x.v))).join('')}</div>`).join('');
+    const ex = N.examples.map(e => [N.write(e.n, 44), String(e.n), esc(e.word), esc(ipaText(e.word))]);
+    return `<h4>Numerals</h4><p class="sub">${esc(c.label)}. ${esc(how)}</p>${rows}<h5>Examples</h5>${table(['Written', 'Value', 'Spoken', 'IPA'], ex)}<p class="sub">Check: ${N.failures === 0 ? 'all sample numbers read back correctly' : `${N.failures} numbers do not read back`}.</p>`;
+}
+
+export function directionText(W, mode = 'auto') {
+    const d = W.directionInfo, pct = x => `${(100 * x).toFixed(1)}%`, name = W.direction === 'rtl' ? 'right to left' : 'left to right';
+    const how = W.boustrophedon ? `boustrophedon: the first line runs ${name}, the next one the opposite way with mirrored letters, and so on`
+        : `${name}`;
+    const why = mode === 'auto' ? ` Chosen from the age of the language (${d.age >= 0.75 ? 'ancient' : d.age >= 0.45 ? 'no clear era' : 'recent'}) and the kind of script: right-to-left odds ${pct(d.rtl)} (8.5% of living scripts, 21% of all scripts in Unicode, ancient ones more often), boustrophedon ${pct(d.share)}.` : ' Chosen by the user.';
+    return `Written ${how}.${why}`;
+}
+export function writingHtml(lang, choice = 'auto', directionMode = 'auto', numeralOption = {}) {
+    setStress(stressOf(lang));
+    const W = buildWriting(lang, choice, directionMode);
     const sign = (svg, label, note = '') => `<div class="sign">${svg}<span class="sign-label">${esc(label)}</span>${note ? `<span class="sign-note">${esc(note)}</span>` : ''}</div>`;
     const cell = (c) => W.drawCell(c, 44);
     const { vowels, consonants, base, syllables } = W.letters;
@@ -560,8 +619,9 @@ export function writingHtml(lang, choice = 'auto') {
         const ex = consonants.slice(0, 4);
         ligHtml += `<h4>Joining forms</h4><p class="sub">A cursive hand: letters join along a baseline and change shape by position; some letters never join to the next one.</p>${table(['Letter', 'Isolated', 'Initial', 'Medial', 'Final'], ex.map(l => [esc(l), ...W.forms(l).map(f => f.svg)]))}`;
     }
-    const N = buildNumberSigns(lang, W);
+    const N = buildNumberSigns(lang, W, numeralOption);
     const numHtml = (() => {
+        if (N.cistercian) return cistercianHtml(N, sign, table);
         const MODE = { derived: 'derived from the script: same technology and radicals as the letters', autonomous: 'an independent system with its own technology and forms', counting: 'derived from tally counting: strokes grouped by fives, a separate sign for zero', imported: 'an independent system adapted to the script (its proportions and stroke weight)' };
         const how0 = `Glyphs are ${MODE[N.mode]}. `;
         const how = how0 + (N.restricted ? `This language counts only up to ${N.limit}: numbers are tally strokes, and anything larger is written with a single sign for “many”.`
@@ -582,14 +642,15 @@ export function writingHtml(lang, choice = 'auto') {
     for (const e of lexWords) { if (pick.length >= 8) break; if (W.spelled(e.form) !== e.form && !pick.includes(e)) pick.push(e); }
     for (let i = 0; pick.length < 24 && i < lexWords.length; i += Math.max(1, Math.floor(lexWords.length / 40))) if (!pick.includes(lexWords[i])) pick.push(lexWords[i]);
     const exRows = pick.map(e => [W.wordSvg(e.form), esc(e.form), esc(W.spelled(e.form) === e.form ? '' : W.spelled(e.form)), esc(label(e))]);
-    const lines = sample(lang, 5).map(x => `<div class="script-sentence"><div class="script-line" dir="${W.direction}">${x.words.map(w => W.wordSvg(w, 34, false)).join('')}</div><div class="sub">${esc(x.words.join(' '))} — ${esc(x.english)}</div></div>`).join('');
+    const lines = sample(lang, 5).map(x => `<div class="script-sentence">${W.line(x.words, 0, 34, false)}<div class="sub">${esc(x.words.join(' '))} — ${esc(x.english)}</div></div>`).join('');
     const check = W.failures === 0 ? 'every word of the language reads back as it was written' : `${W.failures} words do not read back correctly`;
     return `<div class="card"><h3>${esc(WRITING_LABELS[W.type])}</h3>
 <p class="sub">${esc(intro)} ${W.graphics ? esc(graphicsText(W)) : ''} The language is shown in Latin transcription everywhere else.</p>
+<h4>Direction</h4><p class="sub">${esc(directionText(W, directionMode))}</p>
 <h4>Signs</h4>${signs}
 ${ligHtml}${numHtml}
 <h4>Reading rules</h4><ul class="notes">${rulesList.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
 <p class="sub">Check: ${esc(check)}.</p>
 <h4>Examples</h4>${table(W.type === 'abjad' ? ['Ordinary text', 'Pointed', 'Spoken', 'IPA', 'English'] : ['Script', 'Spoken', 'IPA', 'Spelled', 'English'], pick.map(e => W.type === 'abjad' ? [W.wordSvg(e.form, 38, false), W.wordSvg(e.form), esc(e.form), esc(ipaText(e.form)), esc(label(e))] : [W.wordSvg(e.form), esc(e.form), esc(ipaText(e.form)), esc(W.spelled(e.form) === e.form ? '—' : W.spelled(e.form)), esc(label(e))]))}
-<h4>Sample sentences</h4>${lines}</div>`;
+<h4>Sample sentences</h4>${lines}${W.boustrophedon ? `<p class="sub">Boustrophedon: the same sentence on two consecutive lines, the second one reversed and mirrored.</p><div class="script-sentence">${(() => { const x = sample(lang, 8).sort((p, q) => q.words.length - p.words.length)[0]; return x ? W.line(x.words, 0, 34, false) + W.line(x.words.slice().reverse(), 1, 34, false) : ''; })()}</div>` : ''}</div>`;
 }

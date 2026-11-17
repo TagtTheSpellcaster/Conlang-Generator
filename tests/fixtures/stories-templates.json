@@ -1,0 +1,711 @@
+{
+ "hunter-wolf": [
+  {
+   "id": "hunter-wolf:1",
+   "en": "Once a hunter went into the forest.",
+   "template": {
+    "id": "hunter-wolf:1",
+    "en": "Once a hunter went into the forest.",
+    "S": {
+     "head": "hunter:noun",
+     "det": "indefinite"
+    },
+    "V": {
+     "head": "go:verb"
+    },
+    "A": {
+     "adp": "into:adposition",
+     "np": {
+      "head": "forest:noun",
+      "det": "definite"
+     }
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "once:adverb"
+     }
+    ]
+   }
+  },
+  {
+   "id": "hunter-wolf:2",
+   "en": "He saw a wolf.",
+   "template": {
+    "id": "hunter-wolf:2",
+    "en": "He saw a wolf.",
+    "S": {
+     "head": "pronoun.third_person_singular_male"
+    },
+    "V": {
+     "head": "see:verb"
+    },
+    "O": {
+     "head": "wolf:noun",
+     "det": "indefinite"
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "hunter-wolf:3",
+   "en": "It was hungry.",
+   "template": {
+    "id": "hunter-wolf:3",
+    "en": "It was hungry.",
+    "S": {
+     "head": "pronoun.third_person_singular_neutral"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "hungry:adjective"
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "hunter-wolf:4",
+   "en": "The hunter was afraid, but he did not run.",
+   "template": {
+    "id": "hunter-wolf:4",
+    "en": "The hunter was afraid, but he did not run.",
+    "S": {
+     "head": "hunter:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "afraid:adjective"
+    },
+    "tense": "past",
+    "coord": {
+     "conj": "but:conjunction",
+     "clause": {
+      "S": {
+       "head": "pronoun.third_person_singular_male"
+      },
+      "V": {
+       "head": "run:verb",
+       "neg": true
+      },
+      "tense": "past"
+     }
+    }
+   }
+  },
+  {
+   "id": "hunter-wolf:5",
+   "en": "Then the wolf went away.",
+   "template": {
+    "id": "hunter-wolf:5",
+    "en": "Then the wolf went away.",
+    "S": {
+     "head": "wolf:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "go:verb"
+    },
+    "B": {
+     "head": "away:adverb"
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "then:conjunction"
+     }
+    ]
+   }
+  },
+  {
+   "id": "hunter-wolf:6",
+   "en": "The hunter went to the village.",
+   "template": {
+    "id": "hunter-wolf:6",
+    "en": "The hunter went to the village.",
+    "S": {
+     "head": "hunter:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "go:verb"
+    },
+    "A": {
+     "adp": "to:adposition",
+     "np": {
+      "head": "village:noun",
+      "det": "definite"
+     }
+    },
+    "tense": "past"
+   }
+  }
+ ],
+ "farmer-storm": [
+  {
+   "id": "farmer-storm:1",
+   "en": "Once a farmer lived in a village.",
+   "template": {
+    "id": "farmer-storm:1",
+    "en": "Once a farmer lived in a village.",
+    "S": {
+     "head": "farmer:noun",
+     "det": "indefinite"
+    },
+    "V": {
+     "head": "live:verb"
+    },
+    "A": {
+     "adp": "in:adposition",
+     "np": {
+      "head": "village:noun",
+      "det": "indefinite"
+     }
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "once:adverb"
+     }
+    ]
+   }
+  },
+  {
+   "id": "farmer-storm:2",
+   "en": "He had a field by the river.",
+   "template": {
+    "id": "farmer-storm:2",
+    "en": "He had a field by the river.",
+    "S": {
+     "head": "pronoun.third_person_singular_male"
+    },
+    "V": {
+     "head": "have:verb"
+    },
+    "O": {
+     "head": "field:noun",
+     "det": "indefinite"
+    },
+    "A": {
+     "adp": "by:adposition",
+     "np": {
+      "head": "river:noun",
+      "det": "definite"
+     }
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "farmer-storm:3",
+   "en": "Usually he went to the field.",
+   "template": {
+    "id": "farmer-storm:3",
+    "en": "Usually he went to the field.",
+    "S": {
+     "head": "pronoun.third_person_singular_male"
+    },
+    "V": {
+     "head": "go:verb"
+    },
+    "A": {
+     "adp": "to:adposition",
+     "np": {
+      "head": "field:noun",
+      "det": "definite"
+     }
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "usually:adverb"
+     }
+    ]
+   }
+  },
+  {
+   "id": "farmer-storm:4",
+   "en": "Then a storm came.",
+   "template": {
+    "id": "farmer-storm:4",
+    "en": "Then a storm came.",
+    "S": {
+     "head": "storm:noun",
+     "det": "indefinite"
+    },
+    "V": {
+     "head": "come:verb"
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "then:conjunction"
+     }
+    ]
+   }
+  },
+  {
+   "id": "farmer-storm:5",
+   "en": "It was strong, and a river rose.",
+   "template": {
+    "id": "farmer-storm:5",
+    "en": "It was strong, and a river rose.",
+    "S": {
+     "head": "pronoun.third_person_singular_neutral"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "strong:adjective"
+    },
+    "tense": "past",
+    "coord": {
+     "conj": "and:conjunction",
+     "clause": {
+      "S": {
+       "head": "river:noun",
+       "det": "indefinite"
+      },
+      "V": {
+       "head": "rise:verb"
+      },
+      "tense": "past"
+     }
+    }
+   }
+  },
+  {
+   "id": "farmer-storm:6",
+   "en": "The farmer was afraid.",
+   "template": {
+    "id": "farmer-storm:6",
+    "en": "The farmer was afraid.",
+    "S": {
+     "head": "farmer:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "afraid:adjective"
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "farmer-storm:7",
+   "en": "But the storm went away.",
+   "template": {
+    "id": "farmer-storm:7",
+    "en": "But the storm went away.",
+    "S": {
+     "head": "storm:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "go:verb"
+    },
+    "B": {
+     "head": "away:adverb"
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "but:conjunction"
+     }
+    ]
+   }
+  },
+  {
+   "id": "farmer-storm:8",
+   "en": "The farmer was happy.",
+   "template": {
+    "id": "farmer-storm:8",
+    "en": "The farmer was happy.",
+    "S": {
+     "head": "farmer:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "happy:adjective"
+    },
+    "tense": "past"
+   }
+  }
+ ],
+ "queen-crow": [
+  {
+   "id": "queen-crow:1",
+   "en": "Once a queen lived in a house.",
+   "template": {
+    "id": "queen-crow:1",
+    "en": "Once a queen lived in a house.",
+    "S": {
+     "head": "queen:noun",
+     "det": "indefinite"
+    },
+    "V": {
+     "head": "live:verb"
+    },
+    "A": {
+     "adp": "in:adposition",
+     "np": {
+      "head": "house:noun",
+      "det": "indefinite"
+     }
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "once:adverb"
+     }
+    ]
+   }
+  },
+  {
+   "id": "queen-crow:2",
+   "en": "She had a crow.",
+   "template": {
+    "id": "queen-crow:2",
+    "en": "She had a crow.",
+    "S": {
+     "head": "pronoun.third_person_singular_female"
+    },
+    "V": {
+     "head": "have:verb"
+    },
+    "O": {
+     "head": "crow:noun",
+     "det": "indefinite"
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "queen-crow:3",
+   "en": "It was wise.",
+   "template": {
+    "id": "queen-crow:3",
+    "en": "It was wise.",
+    "S": {
+     "head": "pronoun.third_person_singular_neutral"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "wise:adjective"
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "queen-crow:4",
+   "en": "Then it saw a fox.",
+   "template": {
+    "id": "queen-crow:4",
+    "en": "Then it saw a fox.",
+    "S": {
+     "head": "pronoun.third_person_singular_neutral"
+    },
+    "V": {
+     "head": "see:verb"
+    },
+    "O": {
+     "head": "fox:noun",
+     "det": "indefinite"
+    },
+    "tense": "past",
+    "initial": [
+     {
+      "head": "then:conjunction"
+     }
+    ]
+   }
+  },
+  {
+   "id": "queen-crow:5",
+   "en": "The fox was hungry.",
+   "template": {
+    "id": "queen-crow:5",
+    "en": "The fox was hungry.",
+    "S": {
+     "head": "fox:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "hungry:adjective"
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "queen-crow:6",
+   "en": "The crow brought bread.",
+   "template": {
+    "id": "queen-crow:6",
+    "en": "The crow brought bread.",
+    "S": {
+     "head": "crow:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "bring:verb"
+    },
+    "O": {
+     "head": "bread:noun",
+     "det": "indefinite"
+    },
+    "tense": "past"
+   }
+  },
+  {
+   "id": "queen-crow:7",
+   "en": "The fox was happy.",
+   "template": {
+    "id": "queen-crow:7",
+    "en": "The fox was happy.",
+    "S": {
+     "head": "fox:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "happy:adjective"
+    },
+    "tense": "past"
+   }
+  }
+ ],
+ "river-night": [
+  {
+   "id": "river-night:1",
+   "en": "The moon is high.",
+   "template": {
+    "id": "river-night:1",
+    "en": "The moon is high.",
+    "S": {
+     "head": "moon:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "high:adjective"
+    }
+   }
+  },
+  {
+   "id": "river-night:2",
+   "en": "The river is cold, and the night is dark.",
+   "template": {
+    "id": "river-night:2",
+    "en": "The river is cold, and the night is dark.",
+    "S": {
+     "head": "river:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "cold:adjective"
+    },
+    "coord": {
+     "conj": "and:conjunction",
+     "clause": {
+      "S": {
+       "head": "night:noun",
+       "det": "definite"
+      },
+      "V": {
+       "head": "be:verb"
+      },
+      "O": {
+       "head": "dark:adjective"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "river-night:3",
+   "en": "The wolf sleeps.",
+   "template": {
+    "id": "river-night:3",
+    "en": "The wolf sleeps.",
+    "S": {
+     "head": "wolf:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "sleep:verb"
+    }
+   }
+  },
+  {
+   "id": "river-night:4",
+   "en": "But the wind comes.",
+   "template": {
+    "id": "river-night:4",
+    "en": "But the wind comes.",
+    "S": {
+     "head": "wind:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "come:verb"
+    },
+    "initial": [
+     {
+      "head": "but:conjunction"
+     }
+    ]
+   }
+  },
+  {
+   "id": "river-night:5",
+   "en": "The village is quiet.",
+   "template": {
+    "id": "river-night:5",
+    "en": "The village is quiet.",
+    "S": {
+     "head": "village:noun",
+     "det": "definite"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "quiet:adjective"
+    }
+   }
+  }
+ ],
+ "bread-and-water": [
+  {
+   "id": "bread-and-water:1",
+   "en": "Hello, friend.",
+   "template": {
+    "id": "bread-and-water:1",
+    "en": "Hello, friend.",
+    "initial": [
+     {
+      "head": "hello:particle"
+     },
+     {
+      "head": "friend:noun"
+     }
+    ]
+   }
+  },
+  {
+   "id": "bread-and-water:2",
+   "en": "Hello. Are you hungry?",
+   "template": {
+    "id": "bread-and-water:2",
+    "en": "Hello. Are you hungry?",
+    "initial": [
+     {
+      "head": "hello:particle"
+     }
+    ],
+    "q": "yesno",
+    "S": {
+     "head": "pronoun.second_person_singular"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "hungry:adjective"
+    }
+   }
+  },
+  {
+   "id": "bread-and-water:3",
+   "en": "Yes, I am hungry.",
+   "template": {
+    "id": "bread-and-water:3",
+    "en": "Yes, I am hungry.",
+    "initial": [
+     {
+      "head": "yes:particle"
+     }
+    ],
+    "S": {
+     "head": "pronoun.first_person_singular"
+    },
+    "V": {
+     "head": "be:verb"
+    },
+    "O": {
+     "head": "hungry:adjective"
+    }
+   }
+  },
+  {
+   "id": "bread-and-water:4",
+   "en": "I have bread and water.",
+   "template": {
+    "id": "bread-and-water:4",
+    "en": "I have bread and water.",
+    "S": {
+     "head": "pronoun.first_person_singular"
+    },
+    "V": {
+     "head": "have:verb"
+    },
+    "O": {
+     "head": "bread:noun",
+     "and": {
+      "head": "water:noun"
+     }
+    }
+   }
+  },
+  {
+   "id": "bread-and-water:5",
+   "en": "Eat.",
+   "template": {
+    "id": "bread-and-water:5",
+    "en": "Eat.",
+    "mood": "imperative",
+    "V": {
+     "head": "eat:verb"
+    }
+   }
+  },
+  {
+   "id": "bread-and-water:6",
+   "en": "Thank you, friend.",
+   "template": {
+    "id": "bread-and-water:6",
+    "en": "Thank you, friend.",
+    "initial": [
+     {
+      "head": "thanks:particle"
+     },
+     {
+      "head": "friend:noun"
+     }
+    ]
+   }
+  }
+ ]
+}

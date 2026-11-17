@@ -55,7 +55,36 @@ function consonantUnits(s, isV) {          // [{c, v}] : a consonant with the vo
     return units;
 }
 
-export function buildWriting(lang, choice = 'auto') {
+// ---- direction of writing ----------------------------------------------------------------------------------------------
+// Shares come from the census of scripts that are written only left to right or right to left (vertical scripts left out):
+// 13 of about 153 living scripts run right to left (8.5%), 37 of 175 scripts encoded in Unicode, dead ones included (21%).
+// The probability is interpolated on the age of the language: modern or future 8.5%, no information 21%, ancient 40% (the
+// ancient figure is an estimate: most scripts of the ancient Near East and Mediterranean were right to left until the
+// Greek and Roman influence). The kind of script shifts the odds (abjads descend from the right-to-left Semitic tradition).
+// Boustrophedon (alternate lines, mirrored letters) is attested only in a few ancient scripts: 0.5% to 3%, growing with age.
+export const DIRECTION_MODES = Object.freeze(['auto', 'ltr', 'rtl', 'boustrophedon']);
+const ERA_AGE = { prehistoric: 1, ancient: 1, medieval: 0.6, renaissance: 0.3, modern: 0, futuristic: 0 };
+export function scriptAge(eras) {
+    const ages = (eras ?? []).map(e => ERA_AGE[e]).filter(a => a !== undefined);
+    return ages.length ? ages.reduce((a, b) => a + b, 0) / ages.length : 0.5;
+}
+const TYPE_ODDS = { abjad: 4, alphabet: 1, abugida: 0.6, syllabary: 0.4 };
+export function directionOdds(eras, type) {
+    const a = scriptAge(eras), base = a <= 0.5 ? 0.085 + (0.21 - 0.085) * (a / 0.5) : 0.21 + (0.4 - 0.21) * ((a - 0.5) / 0.5);
+    const odds = base / (1 - base) * (TYPE_ODDS[type] ?? 1), rtl = odds / (1 + odds);
+    return { age: a, rtl, boustrophedon: 0.005 + 0.025 * a };
+}
+export function chooseDirection(seed, eras, type, mode = 'auto') {
+    const o = directionOdds(eras, type), r = rng(`${seed}|writing|direction`);
+    const u = r(), v = r();
+    const start = v < o.rtl ? 'rtl' : 'ltr';
+    const out = (direction, boustrophedon) => ({ ...o, share: o.boustrophedon, direction, boustrophedon });
+    if (mode === 'ltr' || mode === 'rtl') return out(mode, false);
+    if (mode === 'boustrophedon') return out(start, true);
+    return out(start, u < o.boustrophedon);
+}
+
+export function buildWriting(lang, choice = 'auto', directionMode = 'auto') {
     const spec = lang.spec;
     const vset = new Set([...VOWEL_LETTERS, ...(spec.extraVowels ?? []), ...(lang.phonology?.vowels ?? [])]);
     const isV = ch => vset.has(ch);
@@ -74,7 +103,8 @@ export function buildWriting(lang, choice = 'auto') {
         if (spec.era?.some(e => ['futuristic', 'modern'].includes(e))) type = 'alphabet';
     }
     const style = useGenre ? gStyle : rollStyle;
-    const direction = type === 'abjad' && r() < 0.6 ? 'rtl' : 'ltr';
+    if (type === 'abjad') r();
+    const dirInfo = chooseDirection(spec.seed, spec.era, type, directionMode), { direction, boustrophedon } = dirInfo;
 
     // spelling rules: at most two, each affecting enough words and with few exceptions
     let rules = [];
@@ -188,6 +218,10 @@ export function buildWriting(lang, choice = 'auto') {
     const drawCell = (cell, height = 38) => gfx.drawCell(cell, height);
     const wordSvg = (word, height = 38, pointed = true) => `<span class="script-word${gfx.cursive ? ' joined' : ''}" dir="${direction}">${gfx.wordSvg(cellsOf(word, pointed), height)}</span>`;
 
+    // a line of words: lines of a boustrophedon text alternate, the reversed ones with mirrored letters
+    const lineDirection = i => boustrophedon && i % 2 === 1 ? (direction === 'rtl' ? 'ltr' : 'rtl') : direction;
+    const line = (list, i = 0, height = 34, pointed = false) => `<div class="script-line${boustrophedon && i % 2 === 1 ? ' mirrored' : ''}" dir="${lineDirection(i)}">${list.map(w => typeof w === 'string' ? wordSvg(w, height, pointed) : w.html).join('')}</div>`;
+
     // ---- checks and statistics ------------------------------------------------------------------------------------
     const roundTrip = type === 'abjad' ? lexWords.filter(w => readCells(cellsOf(w, true)) !== w).length : lexWords.filter(w => readCells(cellsOf(w)) !== w).length;
     let homographs = 0;
@@ -200,7 +234,7 @@ export function buildWriting(lang, choice = 'auto') {
     const ruleText = rules.map(x => x.text);
     const examplesOf = ru => lexWords.filter(w => ru.write(w) !== w && !exceptions.has(w)).slice(0, 3).map(w => ({ spoken: w, written: spelled(w) }));
     return {
-        type, style, direction, inherent, ligatures: [...ligPairs], ligMode, joined: gfx.cursive, graphics: gfx.describe, tradition: gfx.tradition, graphicsQuality: gfx.quality, forms: gfx.forms, rules: rules.map(ru => ({ id: ru.id, text: ru.text, examples: examplesOf(ru) })), ruleText,
+        type, style, direction, boustrophedon, directionInfo: dirInfo, lineDirection, line, inherent, ligatures: [...ligPairs], ligMode, joined: gfx.cursive, graphics: gfx.describe, tradition: gfx.tradition, graphicsQuality: gfx.quality, forms: gfx.forms, rules: rules.map(ru => ({ id: ru.id, text: ru.text, examples: examplesOf(ru) })), ruleText,
         exceptions: [...exceptions], exceptionShare: exceptions.size / lexWords.length,
         letters: { vowels, consonants, base: baseKeys, syllables: [...syllables].sort() },
         homographs: type === 'abjad' ? homographs : 0, words: lexWords.length, failures: roundTrip, openShare, clusterShare,

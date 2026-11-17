@@ -4,6 +4,8 @@ import { norm } from '../core/text.js';
 import { label } from '../lexicon/schema.js';
 import { inflect, genderOf } from '../morphology/inflect.js';
 import { cellOf } from '../morphology/affixes.js';
+import { chooseValency } from './valency.js';
+import { reflexiveRef, REFLEXIVE_REFS } from '../discourse/info.js';
 import { numeralForm, isDefined, classifierFor } from '../numerals/system.js';
 
 const TIER_RANK = { core: 0, common: 1, domain: 2 };
@@ -21,6 +23,7 @@ export function buildIndex(lexicon) {
 }
 
 class Skip extends Error {}
+class Unavailable extends Skip {}   // the language has no such construction (a voice it does not mark)
 const asList = x => x === undefined ? [] : Array.isArray(x) ? x : [x];
 
 const CORE_ADPOSITION_CASES = new Set(['nominative', 'accusative', 'absolutive', 'ergative', 'genitive']);
@@ -55,7 +58,7 @@ function makeContext(lang) {
         if (!found.length) throw new Skip(asList(head).join('|'));
         return found;
     };
-    return { spec, model, index, morph, partial, word, need, alternatives, numerals, lang };
+    return { spec, model, index, morph, partial, word, need, alternatives, numerals, lang, info: lang.info ?? {}, valency: lang.valency ?? chooseValency(spec) };
 }
 
 // features: { case, number, agree: {gender, number} }
@@ -63,7 +66,12 @@ function nounPhrase(np, role, ctx) {
     const { spec, word, need, alternatives } = ctx;
     const heads = alternatives(np.head);
     const pre = [];
-    if (np.det) {
+    let demonstrative = null;
+    if (np.dem) {
+        const ref = np.dem === 'distal' && ctx.info.demonstrative?.terms !== 'one' ? 'demonstrative.that' : 'demonstrative.this';
+        demonstrative = word(need(ref));
+        if ((ctx.info.demonstrative?.position ?? 'before') === 'before') pre.push(demonstrative);
+    } else if (np.det) {
         const art = ctx.index.resolve(np.det === 'definite' ? 'the:determiner' : 'a:determiner');
         if (art && spec.articles !== 'none') pre.push(word(art));
     }
@@ -134,6 +142,8 @@ function nounPhrase(np, role, ctx) {
         const rel = word(need('that:pronoun'));
         tokens = headFinal ? [...pre, ...inner, rel, ...tokens.slice(pre.length)] : [...tokens, rel, ...inner];
     }
+    // a demonstrative placed after the noun phrase
+    if (demonstrative && !pre.includes(demonstrative)) tokens = [...tokens, demonstrative];
     // coordination: "A and B"
     if (np.and) {
         const second = nounPhrase(np.and, role, ctx);
@@ -159,7 +169,10 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
     const verbEntry = template.V ? ctx.alternatives(template.V.head)[0] : null;
     const copula = verbEntry?.features.transitivity === 'copula';
     const hasObject = (template.O && !template.O.adp) || opts.gap === 'O';
-    const transitive = !!verbEntry && ['transitive', 'ditransitive'].includes(verbEntry.features.transitivity) && hasObject;
+    const voice = template.V?.voice ?? null, voiceHow = voice ? ctx.valency[voice] : null;
+    if (voice && !voiceHow) throw new Unavailable(`voice:${voice}`);
+    // causative and applicative add an argument: an object is then a core argument whatever the verb says
+    const transitive = !!verbEntry && hasObject && (['transitive', 'ditransitive'].includes(verbEntry.features.transitivity) || voice === 'causative' || voice === 'applicative');
     const ergative = model.alignment === 'ergative-absolutive';
     const caseS = ergative ? (transitive ? 'ergative' : 'absolutive') : 'nominative';
     const caseO = ergative ? 'absolutive' : (transitive ? 'accusative' : 'nominative');
@@ -179,8 +192,13 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
         parts.S = prodrop ? [] : r.tokens; subjectHead = r.head;
     }
     const agree = subjectHead || template.S?.and ? { gender: subjectHead?.pos === 'noun' ? genderOf(subjectHead, spec) : null, number: template.S.and ? 'plural' : (template.S.number ?? 'singular') } : undefined;
+    let objectNp = template.O;
+    if (objectNp?.refl) {
+        const cls = typeof objectNp.refl === 'string' ? objectNp.refl : sPronoun?.tags?.includes('male') ? 'male' : sPronoun?.tags?.includes('female') ? 'female' : 'neutral';
+        objectNp = { head: reflexiveRef(ctx.info, person, personNumber, personNumber === 'plural' && person === 3 ? 'plural' : cls) };
+    }
     if (template.O) {
-        const r = template.O.adp ? prepositionalPhrase(template.O, ctx, adpPos) : nounPhrase(template.O, { case: copula ? caseS : caseO, agree }, ctx);
+        const r = objectNp.adp ? prepositionalPhrase(objectNp, ctx, adpPos) : nounPhrase(objectNp, { case: copula ? caseS : caseO, agree }, ctx);
         parts.O = r.tokens;
     }
     if (template.V) {
@@ -191,8 +209,10 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
         const vf = {
             tense: template.tense ?? 'present', person, number: personNumber, imperative: template.mood === 'imperative',
             negative: !!(v.neg && verbAffixes?.negation), potential: !!(v.aux === 'can:particle' && verbAffixes?.potential),
-            optative: optative && !!verbAffixes?.optative, aspect: v.aspect && verbAffixes?.aspect ? v.aspect : null
+            optative: optative && !!verbAffixes?.optative, aspect: v.aspect && verbAffixes?.aspect ? v.aspect : null,
+            voice: voiceHow === 'affix' ? voice : null
         };
+        if (voiceHow === 'particle') toks.push(ctx.word(ctx.need(`${voice} marker:particle`)));
         // languages without the matching verb suffix use a separate word before the verb
         if (optative && !verbAffixes?.optative) toks.push(ctx.word(ctx.need('may:particle')));
         if (v.neg && !verbAffixes?.negation) toks.push(ctx.word(ctx.need('not:particle')));
@@ -221,7 +241,22 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
 
     const base = [...(parts.initial ? ['initial'] : []), ...spec.order.split(''), 'A', 'B'];
     const sequence = template.seq ?? (parts.SUB ? (adpPos === 'after' ? ['SUB', ...base] : [...base, 'SUB']) : base);
-    let tokens = sequence.flatMap(k => parts[k] ?? []);
+    // information structure: the topic is fronted (and marked, if the language has a topic marker); focus is marked or fronted
+    let order = sequence;
+    if (template.info) {
+        const { topic, focus } = template.info, st = ctx.info;
+        const front = [];
+        if (topic && st.topic && st.topic !== 'none' && parts[topic]?.length) {
+            front.push(topic);
+            if (st.topic === 'particle') parts[topic] = [...parts[topic], ctx.word(ctx.need('topic marker:particle'))];
+        }
+        if (focus && focus !== topic && st.focus && st.focus !== 'none' && parts[focus]?.length) {
+            if (st.focus === 'front') front.push(focus);
+            else parts[focus] = [...parts[focus], ctx.word(ctx.need('focus marker:particle'))];
+        }
+        if (front.length) { const rest = sequence.filter(k => !front.includes(k)), lead = rest[0] === 'initial' ? ['initial'] : []; order = [...lead, ...front, ...rest.filter(k => !lead.includes(k))]; }
+    }
+    let tokens = order.flatMap(k => parts[k] ?? []);
     // coordinated clause: "A, and B" / "A, but B"
     if (template.coord) tokens = [...tokens, ctx.word(ctx.need(template.coord.conj)), ...clauseTokens(template.coord.clause, lang, ctx, false)];
     // yes/no question: a final particle in head-final languages, an initial one otherwise
@@ -241,6 +276,7 @@ export function realize(template, lang) {
         const tokens = clauseTokens(template, lang, ctx, true);
         return { id: template.id, english: template.en, tokens, partial: ctx.partial.length ? [...ctx.partial] : undefined };
     } catch (e) {
+        if (e instanceof Unavailable) return { id: template.id, english: template.en, skipped: 'unavailable' };
         if (e instanceof Skip) return { id: template.id, english: template.en, skipped: 'missing', missing: e.message };
         throw e;
     }
@@ -263,7 +299,10 @@ export function templateRefs(t) {
             else if (['S', 'V', 'O', 'A', 'B', 'np', 'comp', 'adv', 'clause', 'coord', 'gen', 'rel', 'and'].includes(k)) { walk(v); if (k === 'and') refs.add('and:conjunction'); if (k === 'gen') refs.add('of:adposition'); if (k === 'rel') refs.add('that:pronoun'); }
             // function words the realiser adds for grammar the language may express with a separate word
             else if (k === 'q') refs.add('question particle:particle');
-            else if (k === 'aspect') refs.add(`${v} marker:particle`);
+            else if (k === 'dem') { refs.add('demonstrative.this'); refs.add('demonstrative.that'); }
+            else if (k === 'refl') REFLEXIVE_REFS.forEach(r => refs.add(r));
+            else if (k === 'info') { if (v.topic) refs.add('topic marker:particle'); if (v.focus) refs.add('focus marker:particle'); }
+            else if (k === 'aspect' || k === 'voice') refs.add(`${v} marker:particle`);
             else if (k === 'degree') refs.add('more:adverb');
             else if (k === 'mood' && v === 'optative') refs.add('may:particle');
         }

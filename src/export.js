@@ -2,6 +2,7 @@
 // (sections of key/value lists, tables and paragraphs) and rendered to Markdown or standalone HTML.
 import { ipaWord, ipaOfLetter, stressOf } from './ipa.js';
 import { buildWriting } from './writing/system.js';
+import { writingHtml, directionText } from './ui/render.js';
 import { buildNumberSigns } from './writing/numerals.js';
 import { label } from './lexicon/schema.js';
 import { inflect, genderOf } from './morphology/inflect.js';
@@ -59,7 +60,8 @@ function paradigmSections(lang) {
         });
         const blocks = [{ type: 'para', text: `Example verb: ${label(verb)} — ${verb.form}.` }, { type: 'table', head: ['Subject', ...tenses], rows }];
         if (v.mode === 'agglutinative') {
-            blocks.push({ type: 'para', text: `Verb structure: stem – ability – negation – aspect – tense – subject agreement. Ability: ${v.potential}; negation: ${v.negation}; imperative: ${v.imperative}; optative: ${v.optative} (replaces the tense); progressive: ${v.aspect.progressive}; perfect: ${v.aspect.perfect}.` });
+            blocks.push({ type: 'para', text: `Verb structure: stem – voice – ability – negation – aspect – tense – subject agreement. Ability: ${v.potential}; negation: ${v.negation}; imperative: ${v.imperative}; optative: ${v.optative} (replaces the tense); progressive: ${v.aspect.progressive}; perfect: ${v.aspect.perfect}.` });
+            if (affixes.voice && Object.keys(affixes.voice).length) blocks.push({ type: 'para', text: `Voice suffixes (right after the stem): ${Object.entries(affixes.voice).map(([k, a]) => `${k} ${a}`).join(', ')}.` });
             blocks.push({ type: 'para', text: `Comparative suffix on adjectives: ${affixes.comparative} (stem – comparative – gender – number – case).` });
             if (affixes.possessive) blocks.push({ type: 'para', text: `Possessor suffixes (between number and case): ${Object.entries(affixes.possessive).map(([cell, a]) => `${cellLabel(cell)} ${a}`).join(', ')}.` });
         } else blocks.push({ type: 'para', text: 'Fusional verbs: one portmanteau ending per tense, person and number. Negation, ability, aspect and the optative are separate words; the imperative is the bare stem.' });
@@ -89,7 +91,7 @@ function sentenceSection(title, samples, intro) {
     return { title, blocks };
 }
 
-export function languageDocument(lang, version = '') {
+export function languageDocument(lang, version = '', opts = {}) {
     const s = lang.spec, m = lang.morphology.model, ph = lang.phonology;
     const sections = [];
     sections.push({ title: 'Overview', blocks: [{ type: 'kv', rows: [
@@ -99,6 +101,8 @@ export function languageDocument(lang, version = '') {
         ['Gender', s.genders.length ? s.genders.join(', ') : 'none'], ['Relations', `${m.relationModel}${m.cases.length ? ` (${m.cases.join(', ')})` : ''}`],
         ['Adjective position', `${lang.syntax.adjectivePosition} the noun`], ['Adpositions', lang.syntax.adpositionPosition === 'before' ? 'prepositions' : 'postpositions'],
         ['Subject pronouns', lang.syntax.prodrop ? 'dropped when the verb carries person and number' : 'always expressed'],
+        ...(lang.syntax.valencyText ? Object.entries(lang.syntax.valencyText).map(([k, v]) => [k[0].toUpperCase() + k.slice(1), v]) : []),
+        ...(lang.syntax.informationText ? [['Demonstratives', lang.syntax.informationText.demonstratives], ['Reflexive', lang.syntax.informationText.reflexive], ['Topic', lang.syntax.informationText.topic], ['Focus', lang.syntax.informationText.focus]] : []),
         ...[['Culture', s.culture], ['Biome', s.biome], ['Era', s.era]].filter(([, v]) => v?.length).map(([k, v]) => [k, v.join(', ')])
     ] }] });
     sections.push({ title: 'Phonology', blocks: [{ type: 'kv', rows: [
@@ -128,10 +132,11 @@ export function languageDocument(lang, version = '') {
         ] });
     }
     {
-        const W = buildWriting(lang);
+        const W = buildWriting(lang, opts.writing ?? 'auto', opts.direction ?? 'auto');
         sections.push({ title: 'Writing system', blocks: [
-            { type: 'kv', rows: [['Kind', W.type], ['Glyph style', W.style], ['Direction', W.direction === 'rtl' ? 'right to left' : 'left to right'], ['Signs', String(W.letters.base.length + (W.type === 'syllabary' ? W.letters.syllables.length : 0))], ['Reading rules', W.ruleText.join('; ') || 'phonemic spelling'], ['Words with the exception mark', `${W.exceptions.length} (${(100 * W.exceptionShare).toFixed(1)}%)`]] }
-        ] });
+            { type: 'kv', rows: [['Kind', W.type], ['Glyph style', W.style], ['Direction', `${W.direction === 'rtl' ? 'right to left' : 'left to right'}${W.boustrophedon ? ', boustrophedon (alternate lines mirrored)' : ''}`], ['Signs', String(W.letters.base.length + (W.type === 'syllabary' ? W.letters.syllables.length : 0))], ['Reading rules', W.ruleText.join('; ') || 'phonemic spelling'], ['Words with the exception mark', `${W.exceptions.length} (${(100 * W.exceptionShare).toFixed(1)}%)`]] }
+      , { type: 'raw', html: writingHtml(lang, opts.writing ?? 'auto', opts.direction ?? 'auto', opts.numerals ?? {}), md: `The signs, numerals and sample texts in the script are in the HTML export. ${directionText(W, opts.direction ?? 'auto')}` }
+    ] });
     }
     if (lang.history) {
         const h = lang.history;
@@ -155,7 +160,7 @@ export function languageDocument(lang, version = '') {
     }
     const rows = [...lang.lexicon].sort((a, b) => label(a).localeCompare(label(b))).map(e => [e.form, label(e), e.pos, e.domain, e.derivation ? `${e.derivation.text} (${e.derivation.gloss.toLowerCase()})` : e.colex ? `same word as ${e.colex.with}` : '']);
     sections.push({ title: 'Lexicon', blocks: [{ type: 'table', head: ['Word', 'English', 'Part of speech', 'Domain', 'Structure'], rows }] });
-    return { title: lang.name, subtitle: `Generated by Conlang Generator${version ? ` v${version}` : ''}`, sections };
+    return { title: lang.name, subtitle: `Generated by Tutlayin${version ? ` v${version}` : ''}`, sections };
 }
 
 const mdCell = x => String(x).replace(/\|/g, '\\|').replace(/\n/g, ' ');
@@ -166,6 +171,7 @@ export function toMarkdown(doc) {
         for (const b of sec.blocks) {
             if (b.type === 'heading') out.push(`### ${b.text}`, '');
             else if (b.type === 'para') out.push(b.text, '');
+            else if (b.type === 'raw') out.push(b.md ?? '', '');
             else if (b.type === 'kv') out.push(...b.rows.map(([k, v]) => `- **${k}:** ${v}`), '');
             else if (b.type === 'table') out.push(`| ${b.head.map(mdCell).join(' | ')} |`, `| ${b.head.map(() => '---').join(' | ')} |`, ...b.rows.map(r => `| ${r.map(mdCell).join(' | ')} |`), '');
         }
@@ -174,11 +180,18 @@ export function toMarkdown(doc) {
 }
 
 const esc = x => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-const CSS = `body{font:14px/1.5 system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#1b2230}h1{margin:0}h2{margin-top:2rem;border-bottom:2px solid #c9d3e3;padding-bottom:.2rem}h3{margin:1.2rem 0 .3rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:#52627f}table{border-collapse:collapse;width:100%;margin:.3rem 0 1rem}th,td{border:1px solid #d5dce8;padding:4px 8px;text-align:left;vertical-align:top}th{background:#eef2f8}td:nth-child(2),td:nth-child(3){font-family:ui-monospace,monospace}dl{display:grid;grid-template-columns:11rem 1fr;gap:.2rem 1rem}dt{font-weight:600}dd{margin:0}.sub{color:#52627f}@media print{body{margin:0}h2{break-after:avoid}tr{break-inside:avoid}}`;
+const CSS = `body{font:14px/1.5 system-ui,sans-serif;max-width:900px;margin:2rem auto;padding:0 1rem;color:#1b2230}h1{margin:0}h2{margin-top:2rem;border-bottom:2px solid #c9d3e3;padding-bottom:.2rem}h3{margin:1.2rem 0 .3rem;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:#52627f}table{border-collapse:collapse;width:100%;margin:.3rem 0 1rem}th,td{border:1px solid #d5dce8;padding:4px 8px;text-align:left;vertical-align:top}th{background:#eef2f8}td:nth-child(2),td:nth-child(3){font-family:ui-monospace,monospace}dl{display:grid;grid-template-columns:11rem 1fr;gap:.2rem 1rem}dt{font-weight:600}dd{margin:0}.sub{color:#52627f}@media print{body{margin:0}h2{break-after:avoid}tr{break-inside:avoid}}
+:root{--text:#1b2230;--line:#c9d3e3;--panel2:#f5f7fb;--muted:#667085;--accent:#2563eb}
+.cell{color:var(--text);overflow:visible}.script-word{display:inline-flex;align-items:flex-end;gap:3px;padding:0 5px}.script-word.joined{border-bottom:1.6px solid currentColor;padding-bottom:2px}
+.script-line{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:4px}.script-line.mirrored .script-word{transform:scaleX(-1)}.script-sentence{margin:12px 0}
+.sign-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;margin:6px 0 12px}.sign{border:1px solid var(--line);border-radius:6px;padding:8px 4px;text-align:center;background:var(--panel2);display:flex;flex-direction:column;align-items:center;gap:4px}
+.sign-label{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13px}.sign-note{color:var(--muted);font-size:11px}.numeral{display:inline-flex;align-items:flex-end;gap:3px}.numeral svg{display:block}
+.script-export h3{font-size:1.1rem;text-transform:none;letter-spacing:0;color:inherit}.script-export h4,.script-export h5{margin:1rem 0 .3rem}.script-export .sub{color:var(--muted)}.script-export .table-scroll{overflow-x:auto}`;
 export function toHtml(doc) {
     const body = doc.sections.map(sec => `<h2>${esc(sec.title)}</h2>${sec.blocks.map(b => {
         if (b.type === 'heading') return `<h3>${esc(b.text)}</h3>`;
         if (b.type === 'para') return `<p>${esc(b.text)}</p>`;
+        if (b.type === 'raw') return `<div class="script-export">${b.html}</div>`;
         if (b.type === 'kv') return `<dl>${b.rows.map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`;
         return `<table><thead><tr>${b.head.map(h => `<th>${esc(h)}</th>`).join('')}</tr></thead><tbody>${b.rows.map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table>`;
     }).join('')}`).join('');
@@ -191,13 +204,32 @@ export function lexiconCsv(lang) {
     return '﻿' + rows.map(r => r.map(csvCell).join(',')).join('\r\n') + '\r\n';
 }
 
-export function languageJson(lang, version = '') {
+// the signs of a script as SVG, keyed by the sign they write
+function signSvgs(W) {
+    const { base, syllables, consonants, vowels } = W.letters, out = {};
+    if (W.type === 'syllabary') for (const syl of syllables) out[syl] = W.drawCell({ syl, c: syl.slice(0, -1) || null, v: syl.slice(-1) }, 44);
+    for (const b of base) out[b] = W.drawCell({ b }, 44);
+    if (W.type === 'abugida') for (const c of consonants) out[`${c}${W.inherent}`] = W.drawCell({ b: c, marks: [] }, 44);
+    return out;
+}
+function sampleLinesSvg(lang, W) {
+    const seen = new Set(), out = [];
+    for (const s of lang.samples) {
+        const words = tokenText(s.tokens).split(' ').filter(Boolean);
+        if (!words.length || seen.has(s.english)) continue;
+        seen.add(s.english);
+        out.push({ text: words.join(' '), english: s.english, svg: W.line(words, 0, 34, false) });
+        if (out.length >= 8) break;
+    }
+    return out;
+}
+export function languageJson(lang, version = '', opts = {}) {
     const { spec, morphology, phonology, syntax } = lang;
     const clean = ({ semantics, soundBias, ...rest }) => rest;
     return JSON.stringify({
-        format: 'Conlang Generator language', generator: version, name: lang.name, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
+        format: 'Tutlayin language', generator: version, name: lang.name, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
         morphology: { model: morphology.model, affixes: morphology.affixes },
-        writing: (() => { const W = buildWriting(lang); return { type: W.type, style: W.style, direction: W.direction, signs: W.letters.base.length, syllables: W.letters.syllables.length, rules: W.ruleText, exceptions: W.exceptions, ligatures: W.ligatures, joined: W.joined, numerals: (() => { const N = buildNumberSigns(lang, W); return { base: N.base, restricted: N.restricted, kind: N.composite ? 'dots-and-bars' : N.restricted ? 'tally' : 'glyphs' }; })() }; })(),
+        writing: (() => { const W = buildWriting(lang, opts.writing ?? 'auto', opts.direction ?? 'auto'); return { type: W.type, style: W.style, direction: W.direction, boustrophedon: W.boustrophedon, directionOdds: { rightToLeft: W.directionInfo.rtl, boustrophedon: W.directionInfo.share, age: W.directionInfo.age }, tradition: W.tradition, graphics: W.graphics, signSvg: signSvgs(W), sampleLines: sampleLinesSvg(lang, W), signs: W.letters.base.length, syllables: W.letters.syllables.length, rules: W.ruleText, exceptions: W.exceptions, ligatures: W.ligatures, joined: W.joined, numerals: (() => { const N = buildNumberSigns(lang, W, opts.numerals ?? {}); return { base: N.base, restricted: N.restricted, kind: N.cistercian ? `cistercian-${N.cistercian.system}` : N.composite ? 'dots-and-bars' : N.restricted ? 'tally' : 'glyphs', ...(N.cistercian ? { orientation: N.cistercian.orientation } : {}), examples: N.examples.map(e => ({ value: e.n, svg: N.write(e.n, 40) })) }; })() }; })(),
         history: lang.history ? { rules: lang.history.rules, stats: lang.history.stats, loans: lang.history.loans ? { absorbency: lang.history.loans.absorbency, donors: lang.history.loans.donors, items: lang.history.loans.items } : null, words: lang.history.lexicon.map(w => ({ lemma: w.lemma, proto: w.proto, daughter: w.daughter, changes: w.changes, loan: w.loan ? w.loan.donor : null })) } : null,
         wordFormation: lang.derivation ? { affixes: Object.fromEntries(Object.entries(lang.derivation.affixes).map(([t, a]) => [t, { form: a.form, position: a.position }])), derived: lang.derivation.stats.applied } : null,
         semantics: lang.semantics ? { kinship: lang.semantics.kinship.id, colourTerms: lang.semantics.colours.terms, pairs: lang.semantics.pairs.map(p => ({ original: p.original, extended: p.extended, mechanism: p.kind })), colourPairs: lang.semantics.colourPairs.map(p => [p.original, p.extended]), kinshipPairs: lang.semantics.kinshipPairs.map(p => [p.original, p.extended]) } : null,

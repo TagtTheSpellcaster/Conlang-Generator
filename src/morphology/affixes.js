@@ -1,6 +1,7 @@
 // Morphological model (which cases exist) and affix inventory (what the endings are).
 import { createAffixFactory } from '../phonology/words.js';
 import { rng } from '../core/rng.js';
+import { chooseValency, VOICES } from '../syntax/valency.js';
 
 export const CASE_SETS = Object.freeze({
     accusative: Object.freeze({
@@ -78,10 +79,14 @@ export function generateAffixes(spec, model, reserved = new Set()) {
     // Added last so that the affixes of earlier versions keep their shapes for a given seed.
     result.comparative = make();
     result.classOverlays = inflectionClasses(spec, result, make);
+    // Voice and valency suffixes, drawn last again so that every earlier ending keeps its shape.
+    const valency = chooseValency(spec);
+    result.voice = {};
+    for (const v of VOICES) if (valency[v] === 'affix') result.voice[v] = make();
     return Object.freeze(result);
 }
 
-// Verb suffix chain: stem - POTENTIAL - NEGATION - ASPECT - TENSE - SUBJECT AGREEMENT.
+// Verb suffix chain: stem - VOICE - POTENTIAL - NEGATION - ASPECT - TENSE - SUBJECT AGREEMENT.
 // The imperative replaces tense and agreement; the optative replaces the tense and keeps the agreement.
 // Present tense and third person singular are unmarked.
 function agglutinativeVerb(spec, make) {

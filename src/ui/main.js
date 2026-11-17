@@ -8,7 +8,8 @@ import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
 import { stressOf } from '../ipa.js';
-import { setStress, setShowIpa, writingHtml, historyHtml, derivationHtml, semanticsHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, textsHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { initTheme } from './theme.js';
+import { setStress, setShowIpa, writingHtml, writeTextHtml, historyHtml, derivationHtml, semanticsHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, textsHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -53,11 +54,14 @@ function renderDictionary() {
     $('dictionary-output').innerHTML = dictionaryHtml(current.lexicon, $('dictionary-direction')?.value || 'conlang-en', $('dictionary-search')?.value);
 }
 
+// the writing system chosen in the Writing tab is the one that is saved
+const numeralOptions = () => ({ system: $('writing-numerals')?.value ?? 'auto', orientation: $('writing-stave')?.value ?? 'auto' });
+const writingOptions = () => ({ writing: $('writing-type')?.value ?? 'auto', direction: $('writing-direction')?.value ?? 'auto', numerals: numeralOptions() });
 const EXPORTS = {
-    html: [l => toHtml(languageDocument(l, VERSION)), 'html', 'text/html'],
-    md: [l => toMarkdown(languageDocument(l, VERSION)), 'md', 'text/markdown'],
+    html: [l => toHtml(languageDocument(l, VERSION, writingOptions())), 'html', 'text/html'],
+    md: [l => toMarkdown(languageDocument(l, VERSION, writingOptions())), 'md', 'text/markdown'],
     csv: [l => lexiconCsv(l), 'csv', 'text/csv'],
-    json: [l => languageJson(l, VERSION), 'json', 'application/json']
+    json: [l => languageJson(l, VERSION, writingOptions()), 'json', 'application/json']
 };
 
 function exportLanguage(lang, kind) {
@@ -122,7 +126,15 @@ function renderWriting() {
     const out = $('writing-output');
     if (!out || !lastLang) return;
     out.className = '';
-    out.innerHTML = writingHtml(lastLang, $('writing-type')?.value ?? 'auto');
+    out.innerHTML = writingHtml(lastLang, $('writing-type')?.value ?? 'auto', $('writing-direction')?.value ?? 'auto', numeralOptions());
+    if ($('write-output')?.innerHTML) renderWrittenText();
+}
+
+function renderWrittenText() {
+    const out = $('write-output');
+    if (!out) return;
+    if (!lastLang) { out.innerHTML = '<p class="sub">Generate a language first.</p>'; return; }
+    out.innerHTML = writeTextHtml(lastLang, $('write-input').value, { choice: $('writing-type')?.value ?? 'auto', direction: $('writing-direction')?.value ?? 'auto', pointed: $('write-pointed').checked, lookup: $('write-lookup').checked, numerals: numeralOptions() });
 }
 
 function generate(keepSeed = false) {
@@ -314,7 +326,7 @@ function installVocabularyTools() {
     $('export-vocabulary')?.addEventListener('click', () => {
         const lexicon = rows();
         if (!lexicon.length) return say('Generate a language before exporting its vocabulary.');
-        const payload = { format: 'Conlang Generator vocabulary', version: 1, generator: VERSION, seed: current?.spec.seed, exported_at: new Date().toISOString(), lexicon };
+        const payload = { format: 'Tutlayin vocabulary', version: 1, generator: VERSION, seed: current?.spec.seed, exported_at: new Date().toISOString(), lexicon };
         const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
         Object.assign(document.createElement('a'), { href: url, download: 'conlang-vocabulary.json' }).click();
         URL.revokeObjectURL(url);
@@ -347,6 +359,13 @@ async function start() {
     installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls(); installGenreControls();
     $('generate')?.addEventListener('click', generate);
     $('writing-type')?.addEventListener('change', renderWriting);
+    $('writing-direction')?.addEventListener('change', renderWriting);
+    $('writing-numerals')?.addEventListener('change', renderWriting);
+    $('writing-stave')?.addEventListener('change', renderWriting);
+    $('write-go')?.addEventListener('click', renderWrittenText);
+    $('write-lookup')?.addEventListener('change', renderWrittenText);
+    $('write-pointed')?.addEventListener('change', renderWrittenText);
+    $('write-input')?.addEventListener('keydown', e => { if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); renderWrittenText(); } });
     $('show-ipa')?.addEventListener('change', () => { setShowIpa($('show-ipa').checked); if (current) render(current); });
     $('regenerate')?.addEventListener('click', () => { randomize(); generate(); });
     $('randomize')?.addEventListener('click', randomize);
@@ -386,3 +405,5 @@ async function start() {
     }
 }
 start();
+
+initTheme($('theme-select'));
