@@ -4,6 +4,39 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.33.0
+- **Interface**: new sand palette (light: #F4EFE3 / #493326 / #A15D35; dark: #211B18 / #F0E5D2 / #D99568) as CSS variables. Two values were adjusted for contrast: the light secondary text is #75634F (the proposed #806D5B gave 4.3:1) and a separate `--accent-text` (#8C5028 in light mode) is used for small text in the accent colour; buttons use light text on the dark accent in light mode and dark text on the light accent in dark mode. Every text/background pair used is checked at 4.5:1 or more by a test.
+- **Theme selector**: a two-segment control (Light Mode | Dark Mode) in the interface font replaces the drop-down; the "System" choice is gone (a value saved by an earlier version is resolved once).
+- **Icons**: line icons (inline SVG, `src/ui/icons.js`) on the nine tabs and the four header buttons; none on the panel titles.
+- **Header**: the Tifinagh name sits in a cartouche; a thin geometric band (zigzag and dots, drawn with a mask in the accent colour) closes the tab bar; panels have rounder corners and a soft shadow.
+- The vocabulary manager page (`vocabulary.html`) keeps its own style.
+- Tests: `tests/theme.test.mjs`.
+
+## 1.32.0
+- **Local constructions** (`src/syntax/local.js`), each drawn from the seed of the language:
+  - *Prohibitive* ("do not go"): the ordinary negation (5/11), a separate prohibitive word (3/11) or, in agglutinative languages, a verb suffix that replaces the negation in the imperative (3/11).
+  - *Question words* (who, what, where, when, why): fronted (55% of verb-initial languages, 12% of the others) or left in place, in the slot of the missing argument; 30% of languages also add the question particle.
+  - *Evidentiality*: none (50%), two values (witnessed, reported; 30%) or three (plus inferred; 20%), as a particle after the verb or, in agglutinative languages, a verb suffix (60%). A sentence with a value the language lacks is unavailable.
+  - *Tense sequence*: backshift or absolute. In an absolute language a clause reported under a past verb keeps the speaker's tense; the English of the sentence follows (`enNoShift`).
+  - *Politeness*: the plural of the second person (30%), a politeness particle before or after the clause (50%), both or neither; a polite sentence is unavailable in a language with neither.
+- **Template keys**: `evid` (direct, reported, inferred), `polite`, `shifted` (on a reported clause whose past is a backshift), `enNoShift`.
+- **Verb chain**: stem – voice – ability – negation (or prohibitive) – aspect – tense – agreement – evidential – subordinator.
+- **Dictionary**: five particles (`prohibitive marker`, `polite marker`, `witnessed marker`, `reported marker`, `inferred marker`). 7233 entries.
+- **Sample sentences**: ten new (107 universal); `tools/sentences/extra-universal-local.json`. "She said that she was hungry" now follows the tense sequence of the language.
+- Shown in the Samples tab and in the language sheet. Tests: `tests/local.test.mjs`.
+- Limits: the question word keeps the base case when left in place; no story uses these constructions yet (the text planner comes later).
+- **README**: title now includes the Tifinagh name.
+
+## 1.31.0
+- **Subordination and reported speech** (`src/syntax/subordination.js`): every language draws from its seed how it builds subordinate clauses. Complement clauses: with a complementizer ("that") or juxtaposed, before or after the main verb. Adverbial clauses (because, if, when, whenever, although, though, while): a conjunction word or, in agglutinative languages, a verb suffix (one each for reason, condition, time, concession, simultaneity); conjunctions without a suffix (e.g. "unless") keep their word. Converb (agglutinative only, 70%): a non-finite verb suffix with no tense or agreement; otherwise the clauses are joined with "and". Reported speech: indirect only, direct only, or both (4/4/2); direct speech may carry a quotative particle (never in indirect-only languages).
+- **Control complements** ("I want to eat"): the complement has no subject and its verb agrees with the subject of the main verb.
+- **Frames**: `conv` (converb clause), `quote` (`prefer`, `indirect`, `direct`), `comp.control`; templates carry `enDirect`, the English used when the language reports the sentence as direct speech.
+- **Verb chain**: stem – voice – ability – negation – aspect – tense – agreement – subordinator. Choices are shown in the Samples tab and the language sheet.
+- **Dictionary**: one particle (`quotative marker`). 7228 entries.
+- **Sample sentences**: eight sentences on subordination (97 universal sentences); `tools/sentences/build.mjs` appends `extra-universal-subordination.json`.
+- **Texts**: *The farmer and the fox* (complement, control, concessive, converb, reported speech).
+- Tests: `tests/subordination.test.mjs`.
+
 ## 1.30.0
 - **Voice and valency** (`src/syntax/valency.js`): every language draws, from its seed, which of four operations it has and how it marks them. Passive (patient becomes subject, agent in a "by" phrase or dropped), antipassive (ergative languages only: patient demoted, agent in the intransitive subject case), causative (new subject; the old subject becomes the object of an intransitive verb, or a dative phrase if the verb has an object) and applicative (an oblique becomes the object, the old object becomes a dative phrase). Each is absent, a verb suffix right after the stem (agglutinative languages, 80% of their operations) or a particle before the verb (all other languages). Chances: passive 85%, antipassive 70% (ergative only), causative 90%, applicative 50%; at least one operation is always present. The suffix chain is now stem – voice – ability – negation – aspect – tense – agreement. The choices are shown in the Samples tab and the language sheet.
 - **Case and agreement follow the new valency**: the patient of a passive and the agent of an antipassive take the intransitive subject case (absolutive or nominative); the causer of a clause with an object is ergative in ergative languages; the causee of an intransitive verb is a core object.

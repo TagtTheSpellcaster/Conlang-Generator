@@ -2,6 +2,8 @@
 import { createAffixFactory } from '../phonology/words.js';
 import { rng } from '../core/rng.js';
 import { chooseValency, VOICES } from '../syntax/valency.js';
+import { chooseSubordination, SUBORDINATOR_KEYS } from '../syntax/subordination.js';
+import { chooseLocal, evidentialsOf } from '../syntax/local.js';
 
 export const CASE_SETS = Object.freeze({
     accusative: Object.freeze({
@@ -83,6 +85,16 @@ export function generateAffixes(spec, model, reserved = new Set()) {
     const valency = chooseValency(spec);
     result.voice = {};
     for (const v of VOICES) if (valency[v] === 'affix') result.voice[v] = make();
+    // Subordinating suffixes and the converb, after the voice suffixes for the same reason.
+    const sub = chooseSubordination(spec);
+    result.subordinators = {};
+    if (sub.adverbial.mode === 'suffix') for (const k of SUBORDINATOR_KEYS) result.subordinators[k] = make();
+    if (sub.converb) result.subordinators.converb = make();
+    // Prohibitive and evidential suffixes, last again.
+    const local = chooseLocal(spec);
+    result.local = { evidential: {} };
+    if (local.prohibitive === 'suffix') result.local.prohibitive = make();
+    if (local.evidentiality.mode === 'suffix') for (const k of evidentialsOf(local)) result.local.evidential[k] = make();
     return Object.freeze(result);
 }
 

@@ -191,8 +191,10 @@ export function verbMorphologyHtml(lang) {
     const sfx = x => `<span class="morph-ending">${esc(x)}</span>`;
     const notes = [];
     if (v.mode === 'agglutinative') {
-        notes.push('Verb structure: stem – voice – ability – negation – aspect – tense – subject agreement. Present tense and third person singular are unmarked.');
+        notes.push('Verb structure: stem – voice – ability – negation – aspect – tense – subject agreement – evidential – subordinator. Present tense and third person singular are unmarked.');
         if (affixes.voice && Object.keys(affixes.voice).length) notes.push(`Voice suffixes (right after the stem): ${Object.entries(affixes.voice).map(([k, a]) => `${k} ${sfx(a)}`).join(' · ')}.`);
+        if (affixes.subordinators && Object.keys(affixes.subordinators).length) notes.push(`Subordinating suffixes (last on the verb): ${Object.entries(affixes.subordinators).map(([k, a]) => `${k} ${sfx(a)}`).join(' · ')}.`);
+        if (affixes.local?.prohibitive || Object.keys(affixes.local?.evidential ?? {}).length) notes.push(`${affixes.local.prohibitive ? `Prohibitive suffix (replaces the negation in the imperative): ${sfx(affixes.local.prohibitive)}. ` : ''}${Object.keys(affixes.local.evidential).length ? `Evidential suffixes (after the agreement): ${Object.entries(affixes.local.evidential).map(([k, a]) => `${k} ${sfx(a)}`).join(' · ')}.` : ''}`);
         notes.push(`Ability: ${sfx(v.potential)} · negation: ${sfx(v.negation)} · imperative: ${sfx(v.imperative)} · optative: ${sfx(v.optative)} · progressive: ${sfx(v.aspect.progressive)} · perfect: ${sfx(v.aspect.perfect)}`);
         notes.push(`Comparative suffix on adjectives (before gender and number): ${sfx(affixes.comparative)}. The optative replaces the tense and keeps the agreement.`);
         const poss = affixes.possessive;
@@ -248,7 +250,9 @@ export function samplesHtml(lang) {
         : sampleColumnHtml('Specialised Sentences', 'Not available without a genre', [], [], 'Choose a language genre (war, marine, artisans, women\'s tongue…) to get sentences typical of it.');
     const vt = s.valencyText, noteVoice = vt ? `<div class="morph-note">Passive: ${esc(vt.passive)} · antipassive: ${esc(vt.antipassive)} · causative: ${esc(vt.causative)} · applicative: ${esc(vt.applicative)}</div>` : '';
     const it = s.informationText, noteInfo = it ? `<div class="morph-note">Demonstratives: ${esc(it.demonstratives)} · reflexive: ${esc(it.reflexive)} · topic: ${esc(it.topic)} · focus: ${esc(it.focus)}</div>` : '';
-    return `<div class="sample-frame"><div class="morph-note">${note}</div>${noteInfo}${noteVoice}<div class="sample-columns">${left}${right}</div></div>`;
+    const st = s.subordinationText, noteSub = st ? `<div class="morph-note">Complement: ${esc(st.complement)} · adverbial: ${esc(st.adverbial)} · converb: ${esc(st.converb)} · reported speech: ${esc(st.reported)} · quotative: ${esc(st.quotative)}</div>` : '';
+    const lt = s.localText, noteLocal = lt ? `<div class="morph-note">Prohibitive: ${esc(lt.prohibitive)} · question words: ${esc(lt.wh)} · evidentiality: ${esc(lt.evidentiality)} · tense sequence: ${esc(lt.tenseSequence)} · politeness: ${esc(lt.register)}</div>` : '';
+    return `<div class="sample-frame"><div class="morph-note">${note}</div>${noteInfo}${noteVoice}${noteSub}${noteLocal}<div class="sample-columns">${left}${right}</div></div>`;
 }
 
 import { historyStory } from '../history/story.js';

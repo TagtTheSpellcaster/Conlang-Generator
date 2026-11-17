@@ -150,7 +150,7 @@ function inflectCore(entry, features = {}, morph) {
     return finish();
 }
 
-// features: { tense: present|past|future, person: 1|2|3, number, negative, potential, imperative, optative, aspect: progressive|perfect, voice: passive|antipassive|causative|applicative }
+// features: { tense: present|past|future, person: 1|2|3, number, negative, potential, imperative, optative, aspect: progressive|perfect, voice: passive|antipassive|causative|applicative, converb, subordinator: reason|condition|time|concession|simultaneous }
 function inflectVerb(entry, f, morph, { parts, add, finish }) {
     const v = morph.affixes.verb;
     if (!v) return finish();
@@ -165,11 +165,16 @@ function inflectVerb(entry, f, morph, { parts, add, finish }) {
     }
     if (f.voice) add(morph.affixes.voice?.[f.voice], 'voice', f.voice);
     if (f.potential) add(v.potential, 'potential', 'can');
-    if (f.negative) add(v.negation, 'negation', 'not');
+    if (f.negative && f.imperative && f.prohibitive && morph.affixes.local?.prohibitive) add(morph.affixes.local.prohibitive, 'prohibitive', 'do not');
+    else if (f.negative) add(v.negation, 'negation', 'not');
     if (f.imperative) { add(v.imperative, 'mood', 'imperative'); return finish(); }
     if (f.optative) { add(v.optative, 'mood', 'optative'); add(v.agreement[cell], 'agreement', cell); return finish(); }
     if (f.aspect) add(v.aspect?.[f.aspect], 'aspect', f.aspect);
+    // the converb is non-finite: no tense, no agreement
+    if (f.converb) { add(morph.affixes.subordinators?.converb, 'converb', 'converb'); return finish(); }
     add(v.tense[tense], 'tense', tense);
     add(v.agreement[cell], 'agreement', cell);
+    if (f.evidential) add(morph.affixes.local?.evidential?.[f.evidential], 'evidential', f.evidential);
+    if (f.subordinator) add(morph.affixes.subordinators?.[f.subordinator], 'subordinator', f.subordinator);
     return finish();
 }

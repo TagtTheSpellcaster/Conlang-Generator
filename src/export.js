@@ -60,7 +60,9 @@ function paradigmSections(lang) {
         });
         const blocks = [{ type: 'para', text: `Example verb: ${label(verb)} — ${verb.form}.` }, { type: 'table', head: ['Subject', ...tenses], rows }];
         if (v.mode === 'agglutinative') {
-            blocks.push({ type: 'para', text: `Verb structure: stem – voice – ability – negation – aspect – tense – subject agreement. Ability: ${v.potential}; negation: ${v.negation}; imperative: ${v.imperative}; optative: ${v.optative} (replaces the tense); progressive: ${v.aspect.progressive}; perfect: ${v.aspect.perfect}.` });
+            blocks.push({ type: 'para', text: `Verb structure: stem – voice – ability – negation – aspect – tense – subject agreement – evidential – subordinator. Ability: ${v.potential}; negation: ${v.negation}; imperative: ${v.imperative}; optative: ${v.optative} (replaces the tense); progressive: ${v.aspect.progressive}; perfect: ${v.aspect.perfect}.` });
+            if (affixes.subordinators && Object.keys(affixes.subordinators).length) blocks.push({ type: 'para', text: `Subordinating suffixes (last on the verb): ${Object.entries(affixes.subordinators).map(([k, a]) => `${k} ${a}`).join(' · ')}.` });
+            if (affixes.local?.prohibitive || Object.keys(affixes.local?.evidential ?? {}).length) blocks.push({ type: 'para', text: `${affixes.local.prohibitive ? `Prohibitive suffix (replaces the negation in the imperative): ${affixes.local.prohibitive}. ` : ''}${Object.keys(affixes.local.evidential).length ? `Evidential suffixes (after the agreement): ${Object.entries(affixes.local.evidential).map(([k, a]) => `${k} ${a}`).join(' · ')}.` : ''}` });
             if (affixes.voice && Object.keys(affixes.voice).length) blocks.push({ type: 'para', text: `Voice suffixes (right after the stem): ${Object.entries(affixes.voice).map(([k, a]) => `${k} ${a}`).join(', ')}.` });
             blocks.push({ type: 'para', text: `Comparative suffix on adjectives: ${affixes.comparative} (stem – comparative – gender – number – case).` });
             if (affixes.possessive) blocks.push({ type: 'para', text: `Possessor suffixes (between number and case): ${Object.entries(affixes.possessive).map(([cell, a]) => `${cellLabel(cell)} ${a}`).join(', ')}.` });
@@ -102,6 +104,8 @@ export function languageDocument(lang, version = '', opts = {}) {
         ['Adjective position', `${lang.syntax.adjectivePosition} the noun`], ['Adpositions', lang.syntax.adpositionPosition === 'before' ? 'prepositions' : 'postpositions'],
         ['Subject pronouns', lang.syntax.prodrop ? 'dropped when the verb carries person and number' : 'always expressed'],
         ...(lang.syntax.valencyText ? Object.entries(lang.syntax.valencyText).map(([k, v]) => [k[0].toUpperCase() + k.slice(1), v]) : []),
+        ...(lang.syntax.subordinationText ? [['Complement', lang.syntax.subordinationText.complement], ['Adverbial', lang.syntax.subordinationText.adverbial], ['Converb', lang.syntax.subordinationText.converb], ['Reported speech', lang.syntax.subordinationText.reported], ['Quotative', lang.syntax.subordinationText.quotative]] : []),
+        ...(lang.syntax.localText ? [['Prohibitive', lang.syntax.localText.prohibitive], ['Question words', lang.syntax.localText.wh], ['Evidentiality', lang.syntax.localText.evidentiality], ['Tense sequence', lang.syntax.localText.tenseSequence], ['Politeness', lang.syntax.localText.register]] : []),
         ...(lang.syntax.informationText ? [['Demonstratives', lang.syntax.informationText.demonstratives], ['Reflexive', lang.syntax.informationText.reflexive], ['Topic', lang.syntax.informationText.topic], ['Focus', lang.syntax.informationText.focus]] : []),
         ...[['Culture', s.culture], ['Biome', s.biome], ['Era', s.era]].filter(([, v]) => v?.length).map(([k, v]) => [k, v.join(', ')])
     ] }] });

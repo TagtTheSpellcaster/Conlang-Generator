@@ -24,7 +24,7 @@ const phrase = (x, wrap) => x ? (x.adp ? x : wrap(x)) : null;
 export const VOICE_NAMES = Object.freeze(['active', 'passive', 'antipassive', 'causative', 'applicative']);
 
 export function toTemplate(frame) {
-    const { roles = {}, pred, coord, comp, adv, voice = 'active', ...rest } = frame;
+    const { roles = {}, pred, coord, comp, adv, conv, quote, voice = 'active', ...rest } = frame;
     if (!VOICE_NAMES.includes(voice)) throw new Error(`unknown voice "${voice}"`);
     for (const k of Object.keys(roles)) if (!ROLES.includes(k)) throw new Error(`unknown role "${k}"`);
     if (roles.causer && voice !== 'causative') throw new Error('the role "causer" needs the causative voice');
@@ -65,7 +65,8 @@ export function toTemplate(frame) {
     const second = obliques[1] ?? roles.adjunct;
     if (second) out.B = second;
     const nested = c => c && { ...c, ...(c.frame ? { clause: toTemplate(c.frame) } : {}), frame: undefined };
-    for (const [k, c] of [['coord', coord], ['comp', comp], ['adv', adv]]) if (c) { const n = nested(c); delete n.frame; out[k] = n; }
+    if (quote) out.quote = { ...(quote.prefer ? { prefer: quote.prefer } : {}), indirect: toTemplate(quote.indirect), direct: toTemplate(quote.direct) };
+    for (const [k, c] of [['coord', coord], ['comp', comp], ['adv', adv], ['conv', conv]]) if (c) { const n = nested(c); delete n.frame; out[k] = n; }
     return out;
 }
 

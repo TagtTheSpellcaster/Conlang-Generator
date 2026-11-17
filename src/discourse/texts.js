@@ -97,6 +97,18 @@ export const STORIES = Object.freeze([
         ]
     },
     {
+        id: 'farmer-and-fox', title: 'The farmer and the fox', kind: 'narrative',
+        lines: [
+            { link: 'once:adverb', frame: { pred: V('live'), roles: { agent: '$1', oblique: loc('in', 'village', 'indefinite') }, tense: 'past' }, en: 'Once {1} lived in a village.', slots: ['farmer'] },
+            { frame: { pred: V('see'), roles: { agent: '$1', patient: '$2' }, tense: 'past' }, en: '{1} saw {2}.', slots: ['farmer', 'fox'] },
+            { frame: { pred: V('think'), roles: { agent: '$1' }, tense: 'past', comp: { conj: 'that:conjunction', frame: { pred: V('be'), roles: { theme: '$2', attribute: cop('hungry') }, tense: 'past', shifted: true } } }, en: '{1} thought that {2} was hungry.', enNoShift: '{1} thought that {2} is hungry.', slots: ['farmer', 'fox'] },
+            { frame: { pred: V('want'), roles: { agent: '$1' }, tense: 'past', comp: { control: true, frame: { pred: V('feed'), roles: { patient: '$2' } } } }, en: '{1} wanted to feed {2}.', slots: ['farmer', 'fox'] },
+            { frame: { pred: V('be'), roles: { theme: '$1', attribute: cop('afraid') }, tense: 'past', adv: { conj: 'although:conjunction', frame: { pred: V('be'), roles: { theme: '$2', attribute: cop('small') }, tense: 'past' } } }, en: '{1} was afraid although {2} was small.', slots: ['farmer', 'fox'] },
+            { frame: { pred: V('run'), roles: { agent: '$1' }, tense: 'past', conv: { frame: { pred: V('eat'), roles: { patient: np('bread:noun') }, tense: 'past' } } }, en: '{1} ate the bread and ran.', slots: ['fox'] },
+            { frame: { pred: V('say'), roles: { agent: '$1' }, tense: 'past', quote: { prefer: 'indirect', indirect: { pred: V('be'), roles: { theme: '$2', attribute: cop('happy') }, tense: 'past', shifted: true }, direct: { pred: V('be'), roles: { theme: np('pronoun.first_person_singular'), attribute: cop('happy') } } } }, en: '{1} said that {2} was happy.', enNoShift: '{1} said that {2} is happy.', enDirect: '{1} said: "I am happy."', slots: ['fox', 'fox'] }
+        ]
+    },
+    {
         id: 'seen-by-whom', title: 'Who saw whom', kind: 'dialogue',
         lines: [
             { speaker: 'A', frame: { q: 'yesno', pred: V('see'), roles: { agent: np('wolf:noun'), patient: np('hunter:noun') }, tense: 'past' }, en: 'Did the wolf see the hunter?' },
@@ -133,7 +145,7 @@ export function compileStory(story) {
     const state = new DiscourseState(ACTORS);
     return story.lines.map((ln, i) => {
         const id = `${story.id}:${i + 1}`;
-        let frame = ln.frame, en = ln.en, alt = null;
+        let frame = ln.frame, en = ln.en, enDirect = null, enNoShift = null, alt = null;
         if (ln.slots) {
             // marks which slots are subjects (they take the subject form of a pronoun); the subject role depends on the voice
             const markWith = (node, kinds) => {
@@ -169,7 +181,10 @@ export function compileStory(story) {
                 .replace(/\{r(\d+)\}/g, (_, n) => EN_REFL[ACTORS[ln.slots[n - 1]].pron]);
             frame = fill(skeleton);
             en = say(ln.en, kinds);
+            if (ln.enDirect) enDirect = say(ln.enDirect, kinds);
+            if (ln.enNoShift) { enNoShift = say(ln.enNoShift, kinds); enNoShift = enNoShift[0].toUpperCase() + enNoShift.slice(1); }
             en = en[0].toUpperCase() + en.slice(1);
+            if (enDirect) enDirect = enDirect[0].toUpperCase() + enDirect.slice(1);
             if (ln.alt) {   // the same line in the active voice, for languages without the construction of the main line
                 const subjectsAlt = {};
                 alt = { frame: fill(markWith(ln.alt.frame, subjectsAlt)), en: say(ln.alt.en, subjectsAlt) };
@@ -178,7 +193,7 @@ export function compileStory(story) {
         const build = (fr, text) => { const t = toTemplate(fr); return { id, en: text, ...t, ...(ln.link ? { initial: [{ head: ln.link }, ...(t.initial ?? [])] } : {}) }; };
         const template = build(frame, en);
         if (alt) { alt.en = alt.en[0].toUpperCase() + alt.en.slice(1); alt.template = build(alt.frame, alt.en); }
-        return { id, speaker: ln.speaker, en, frame, template, alt };
+        return { id, speaker: ln.speaker, en, enDirect, enNoShift, frame, template, alt };
     });
 }
 
@@ -202,6 +217,8 @@ export function realizeStories(lang, ids) {
         const lines = COMPILED.get(id).map(l => {
             let res = realize(l.template, lang), en = l.en;
             if (res.skipped === 'unavailable' && l.alt) { res = realize(l.alt.template, lang); en = l.alt.en; }
+            if (res.quote === 'direct' && l.enDirect) en = l.enDirect;
+            else if (res.noShift && l.enNoShift) en = l.enNoShift;
             return res.skipped ? null : { en, speaker: l.speaker, tokens: res.tokens };
         });
         if (lines.some(l => !l)) continue;

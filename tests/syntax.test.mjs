@@ -1,3 +1,4 @@
+import { evidentialsOf } from '../src/syntax/local.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { generateLanguage } from '../src/engine.js';
@@ -9,6 +10,8 @@ import { GENRE_IDS } from '../src/genres.js';
 const byId = new Map(vocabulary.map(e => [e.id, e]));
 const gen = (input = {}) => generateLanguage({ seed: 'syn', articles: 'both', ...input }, vocabulary, templates, derivations);
 const lang = L => ({ spec: L.spec, model: L.morphology.model, affixes: L.morphology.affixes, lexicon: L.lexicon });
+// a sentence is not needed by a language that lacks the construction: a voice, an evidential value, polite address
+const available = (L, t) => (!t.V?.voice || L.syntax.valency[t.V.voice]) && (!t.evid || evidentialsOf(L.syntax.local).includes(t.evid)) && (!t.polite || L.syntax.local.register.pronoun || L.syntax.local.register.particle !== 'none');
 const T = (en, o) => ({ id: 'x', en, ...o });
 const word = (L, id) => L.lexicon.find(e => e.id === id);
 const I = 'pronoun.first_person_singular', YOU_O = 'pronoun.second_person_singular_object';
@@ -36,8 +39,8 @@ test('template coverage: every referenced sense exists and is unambiguous', () =
     assert.deepEqual(problems, []);
 });
 
-test('sentence sets: about 45-95 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
-    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 95, `${templates.universal.length} universal sentences`);
+test('sentence sets: about 45-110 universal sentence frames, 20-50 per genre, unique ids and english, several topics', () => {
+    assert.ok(templates.universal.length >= 44 && templates.universal.length <= 110, `${templates.universal.length} universal sentences`);
     assert.deepEqual(Object.keys(templates.genres).sort(), [...GENRE_IDS].sort());
     for (const [name, list] of Object.entries(sets)) {
         assert.equal(new Set(list.map(t => t.id)).size, list.length, `${name}: ids`);
@@ -63,7 +66,7 @@ test('default language realises every sentence that applies (none skipped); the 
     const L = gen({ number: 'singular-plural-dual', gender: 'masculine-feminine' });
     assert.deepEqual(L.skippedSamples, []);
     // a voice the language does not have is not a sentence it needs
-    const applicable = (lang, list) => list.filter(t => !t.V?.voice || lang.syntax.valency[t.V.voice]);
+    const applicable = (lang, list) => list.filter(t => available(lang, t));
     assert.equal(L.samples.filter(s => s.scope === 'universal').length, applicable(L, templates.universal).length);
     assert.equal(L.samples.filter(s => s.scope === 'genre').length, 0, 'no genre, no specialised sentences');
     const G = gen({ genre: 'marine', number: 'singular-plural-dual', gender: 'masculine-feminine' });
@@ -75,7 +78,7 @@ test('default language realises every sentence that applies (none skipped); the 
 test('number-dependent templates are only used when the language has that number', () => {
     const n = L => L.samples.filter(s => s.scope === 'universal').length;
     const needing = (...nums) => templates.universal.filter(t => nums.includes(t.requires?.number)).length;
-    const count = (L, ...nums) => templates.universal.filter(t => !nums.includes(t.requires?.number) && (!t.V?.voice || L.syntax.valency[t.V.voice])).length;
+    const count = (L, ...nums) => templates.universal.filter(t => !nums.includes(t.requires?.number) && available(L, t)).length;
     const one = gen({ number: 'singular' }), two = gen({ number: 'singular-plural' });
     assert.equal(n(one), count(one, 'plural', 'dual'));
     assert.equal(n(two), count(two, 'dual'));
@@ -188,8 +191,9 @@ test('inflect: noun paradigm cells are all different; prefix mode puts the numbe
     const P = gen({ plural: 'prefix', relations: 'prepositions' });
     const pm = { spec: P.spec, model: P.morphology.model, affixes: P.morphology.affixes };
     const f = inflect(word(P, 'object.house'), { number: 'plural' }, pm);
-    assert.ok(f.form.startsWith(P.morphology.affixes.numberMarkers.plural));
+    // the marker may be adapted to the stem (assimilation), so check the position and the form, not the underlying shape
     assert.equal(f.parts[0].kind, 'number');
+    assert.ok(f.form.startsWith(f.parts[0].text));
 });
 
 test('inflect leaves uninflected parts of speech and isolating languages alone', () => {
@@ -208,7 +212,7 @@ test('isolating languages: negation and auxiliary are words before the verb; imp
     const neg = tokenText(realize(T('x', { S: { head: 'pronoun.second_person_singular' }, V: { head: 'enter:verb', neg: true, aux: 'can:particle' } }), lang(L)).tokens);
     assert.equal(neg, [f('pronoun.second_person_singular'), f('logic.not'), f('function.can'), f('verb.enter')].join(' '));
     const q = templates.universal.find(t => t.en === 'Who are you?');
-    assert.equal(tokenText(realize(q, lang(L)).tokens), [f('interrogative.who'), f('verb.be'), f('pronoun.second_person_singular')].join(' '));
+    assert.equal(tokenText(realize(q, { ...lang(L), local: { ...L.syntax.local, wh: { position: 'front', particle: false } } }).tokens), [f('interrogative.who'), f('verb.be'), f('pronoun.second_person_singular')].join(' '));
     const imp = { id: 'x', en: 'Come here.', mood: 'imperative', seq: ['V', 'O'], V: { head: 'come:verb' }, O: { head: 'here:adverb' } };
     assert.equal(tokenText(realize(imp, lang(L)).tokens), [f('verb.come'), f('space.here')].join(' '));
 });

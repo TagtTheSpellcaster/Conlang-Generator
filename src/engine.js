@@ -26,6 +26,8 @@ import { planSemantics, colexifyRoots, reattach } from './semantics/colex.js';
 import { deriveAffixes, applyDerivation, derivationPhonology } from './derivation/derive.js';
 import { chooseInformation, describeInformation } from './discourse/info.js';
 import { chooseValency, describeValency } from './syntax/valency.js';
+import { chooseSubordination, describeSubordination } from './syntax/subordination.js';
+import { chooseLocal, describeLocal } from './syntax/local.js';
 import { adpositionPosition, generateSamples, requiredEntries, templateSets } from './syntax/realize.js';
 import { GENRES } from './genres.js';
 import { rng as seededRng } from './core/rng.js';
@@ -68,7 +70,7 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
     const semanticEntries = [...new Set([...semanticPlan.ids, ...semanticPlan.colourIds])].map(id => vocabulary.find(e => e.id === id)).filter(Boolean);
     const idiomPick = chooseIdioms(spec, vocabulary);
     const storyPick = chooseStories(spec, vocabulary);
-    const info = chooseInformation(spec), valency = chooseValency(spec);
+    const info = chooseInformation(spec), valency = chooseValency(spec), subordination = chooseSubordination(spec), local = chooseLocal(spec);
     const infoEntries = ['demonstrative.this', 'demonstrative.that', ...(info.topic === 'particle' ? ['grammar.topic_marker'] : []), ...(info.focus === 'particle' ? ['grammar.focus_marker'] : [])].map(id => vocabulary.find(e => e.id === id)).filter(Boolean);
     const required = [...infoEntries, ...storyPick.entries, ...idiomPick.entries, ...semanticEntries, ...requiredEntries([...sets.universal, ...sets.specialised], vocabulary), ...calendarEntries];
     const assigned = assignForms(selectEntries(vocabulary, spec, undefined, required, rules), spec);
@@ -99,7 +101,7 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
     const affixes = { ...converted, classMap: assignClasses(lexicon, converted.classOverlays, spec), suppletion: buildSuppletion(lexicon, spec, !!converted.verb) };
     Object.defineProperty(affixes, 'history', { value: { proto: protoAffixes, convert: daughter.convertWord, trace: daughter.traceWord, survive: 45 }, enumerable: false });
     Object.freeze(affixes);
-    const lang = { spec, model, affixes, lexicon, numerals: daughter.numerals, info, valency };
+    const lang = { spec, model, affixes, lexicon, numerals: daughter.numerals, info, valency, subordination, local };
     const calendar = buildCalendar(calendarPlan, lang);
     const generated = generateSamples(templates, lang);
     const { samples } = generated;
@@ -113,7 +115,7 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
         genre: spec.genre ? { id: spec.genre, label: GENRES[spec.genre].label, summary: GENRES[spec.genre].summary } : null,
         spec, notes, phonology: Object.freeze({ ...phonology, used: usedLetters(lexicon, spec, phonology), stress: stressSystemFor(seededRng(`${spec.seed}|stress`)()).id }),
         morphology: { model, affixes },
-        syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles, information: Object.freeze({ ...info }), informationText: describeInformation(info), valency: Object.freeze({ ...valency }), valencyText: describeValency(valency) },
+        syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles, information: Object.freeze({ ...info }), informationText: describeInformation(info), valency: Object.freeze({ ...valency }), valencyText: describeValency(valency), subordination: Object.freeze({ ...subordination }), subordinationText: describeSubordination(subordination), local: Object.freeze({ ...local }), localText: describeLocal(local) },
         numerals: daughter.numerals, calendar, history, texts: realizeStories(lang, storyPick.ids), semantics: { ...sem.semantics, idioms: realizeIdioms(lang, idiomPick.ids) }, derivation: { affixes: daughter.derivationAffixes, stats: derivationStats, phonology: derivationPhon }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
     });
 }

@@ -5,6 +5,8 @@ import { label } from '../lexicon/schema.js';
 import { inflect, genderOf } from '../morphology/inflect.js';
 import { cellOf } from '../morphology/affixes.js';
 import { chooseValency } from './valency.js';
+import { chooseSubordination, SUFFIX_KEY } from './subordination.js';
+import { chooseLocal, evidentialsOf, EVIDENTIAL_ENTRY } from './local.js';
 import { reflexiveRef, REFLEXIVE_REFS } from '../discourse/info.js';
 import { numeralForm, isDefined, classifierFor } from '../numerals/system.js';
 
@@ -58,7 +60,7 @@ function makeContext(lang) {
         if (!found.length) throw new Skip(asList(head).join('|'));
         return found;
     };
-    return { spec, model, index, morph, partial, word, need, alternatives, numerals, lang, info: lang.info ?? {}, valency: lang.valency ?? chooseValency(spec) };
+    return { spec, model, index, morph, partial, word, need, alternatives, numerals, lang, info: lang.info ?? {}, valency: lang.valency ?? chooseValency(spec), sub: lang.subordination ?? chooseSubordination(spec), local: lang.local ?? chooseLocal(spec), used: {} };
 }
 
 // features: { case, number, agree: {gender, number} }
@@ -164,8 +166,25 @@ function prepositionalPhrase(pp, ctx, adpPos) {
 }
 
 // Realises one clause (a main sentence or a subordinate clause) and returns its token sequence.
+const SECOND_PERSON = new Set(['pronoun.second_person_singular', 'pronoun.second_person_singular_object']);
+// polite address with the plural of the second person
+const politeForm = t => {
+    const swap = np => np && !np.adp && asList(np.head).length === 1 && SECOND_PERSON.has(asList(np.head)[0]) ? { ...np, head: 'pronoun.second_person_plural' } : np;
+    return { ...t, S: swap(t.S), O: swap(t.O) };
+};
+const isWh = t => !!t.initial?.length && t.initial.every(np => asList(np.head).every(h => String(h).startsWith('interrogative.')));
+
 function clauseTokens(template, lang, ctx, top, opts = {}) {
     const { spec, model } = lang;
+    const LOC = ctx.local;
+    if (template.polite) {
+        if (!LOC.register.pronoun && LOC.register.particle === 'none') throw new Unavailable('register');
+        if (LOC.register.pronoun) template = politeForm(template);
+    }
+    // tense sequence: a clause reported under a past verb keeps the speaker's tense in languages without backshift
+    const shiftedBack = !!(template.shifted && opts.underPast && LOC.tenseSequence === 'absolute');
+    if (shiftedBack) ctx.used.noShift = true;
+    const tenseName = shiftedBack ? 'present' : (template.tense ?? 'present');
     const verbEntry = template.V ? ctx.alternatives(template.V.head)[0] : null;
     const copula = verbEntry?.features.transitivity === 'copula';
     const hasObject = (template.O && !template.O.adp) || opts.gap === 'O';
@@ -181,7 +200,7 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
     // Person and number of the subject drive verb agreement. A personal pronoun is dropped when the verb carries it.
     const sHeads = template.S ? asList(template.S.head).map(ref => ctx.index.resolve(ref)).filter(Boolean) : [];
     const sPronoun = sHeads.length === 1 && sHeads[0].pos === 'pronoun' && sHeads[0].features.person ? sHeads[0] : null;
-    const person = template.mood === 'imperative' ? 2 : (sPronoun?.features.person ?? 3);
+    const person = template.mood === 'imperative' ? 2 : opts.gap === 'S' && opts.person ? opts.person : (sPronoun?.features.person ?? 3);
     const personNumber = opts.gap === 'S' ? (opts.headNumber ?? 'singular') : template.S?.and ? 'plural' : (sPronoun?.features.number ?? template.S?.number ?? 'singular');
     const prodrop = !!(ctx.morph.affixes.verb && verbEntry && sPronoun);
 
@@ -207,20 +226,31 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
         const toks = [];
         const optative = template.mood === 'optative';
         const vf = {
-            tense: template.tense ?? 'present', person, number: personNumber, imperative: template.mood === 'imperative',
+            tense: tenseName, person, number: personNumber, imperative: template.mood === 'imperative',
             negative: !!(v.neg && verbAffixes?.negation), potential: !!(v.aux === 'can:particle' && verbAffixes?.potential),
             optative: optative && !!verbAffixes?.optative, aspect: v.aspect && verbAffixes?.aspect ? v.aspect : null,
-            voice: voiceHow === 'affix' ? voice : null
+            voice: voiceHow === 'affix' ? voice : null, converb: !!opts.converb, subordinator: opts.subordinator ?? null
         };
         if (voiceHow === 'particle') toks.push(ctx.word(ctx.need(`${voice} marker:particle`)));
         // languages without the matching verb suffix use a separate word before the verb
         if (optative && !verbAffixes?.optative) toks.push(ctx.word(ctx.need('may:particle')));
-        if (v.neg && !verbAffixes?.negation) toks.push(ctx.word(ctx.need('not:particle')));
+        // prohibitive: the language may use a word or a suffix of its own instead of the ordinary negation
+        const prohibitive = template.mood === 'imperative' && v.neg;
+        vf.prohibitive = !!(prohibitive && LOC.prohibitive === 'suffix' && verbAffixes?.negation && ctx.morph.affixes.local?.prohibitive);
+        if (prohibitive && LOC.prohibitive === 'particle') { vf.negative = false; toks.push(ctx.word(ctx.need('prohibitive marker:particle'))); }
+        else if (v.neg && !verbAffixes?.negation) toks.push(ctx.word(ctx.need('not:particle')));
+        // evidentiality: a suffix on the verb or a particle after it
+        let evidence = null;
+        if (template.evid) {
+            if (!evidentialsOf(LOC).includes(template.evid)) throw new Unavailable(`evidential:${template.evid}`);
+            if (LOC.evidentiality.mode === 'suffix' && ctx.morph.affixes.local?.evidential?.[template.evid]) vf.evidential = template.evid;
+            else evidence = ctx.word(ctx.need(EVIDENTIAL_ENTRY[template.evid]));
+        }
         if (v.aux && !vf.potential) toks.push(ctx.word(ctx.need(v.aux)));
         if (v.aspect && !vf.aspect) toks.push(ctx.word(ctx.need(`${v.aspect} marker:particle`)));
         const verbs = ctx.alternatives(v.head);
         toks.push(...verbs.length > 1 ? [{ kind: 'alts', options: verbs.map(e => [ctx.word(e, vf)]) }] : [ctx.word(verbEntry, vf)]);
-        parts.V = toks;
+        parts.V = evidence ? [...toks, evidence] : toks;
     }
     if (template.initial) parts.initial = template.initial.flatMap(np => nounPhrase(np, { case: model.baseCase }, ctx).tokens);
     // adjuncts (A, B): a prepositional phrase (adp + np) or a bare noun phrase, e.g. "to me", "now"
@@ -231,18 +261,50 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
     // Subordinate clauses. The subordinator follows its clause in head-final languages and precedes it otherwise.
     // A complement clause ("that ...") takes the place of the object; an adverbial clause goes first in head-final
     // languages and last in head-initial ones.
-    const subordinate = sub => {
-        const inner = clauseTokens(sub.clause, lang, ctx, false);
-        const conj = ctx.word(ctx.need(sub.conj));
-        return adpPos === 'after' ? [...inner, conj] : [conj, ...inner];
+    const place = (inner, word, position) => position === 'after' ? [...inner, word] : [word, ...inner];
+    const subject = { gap: 'S', headNumber: personNumber, person };           // a clause whose subject is the subject of this one
+    const SUBS = ctx.sub, affixes = ctx.morph.affixes.subordinators;
+    const complement = c => {
+        if (c.control) return clauseTokens(c.clause, lang, ctx, false, subject);   // "I want [to] eat": no subject, no complementizer
+        const inner = clauseTokens(c.clause, lang, ctx, false, { underPast: template.tense === 'past' });
+        if (c.conj === 'that:conjunction') return SUBS.complement.mode === 'none' ? inner : place(inner, ctx.word(ctx.need(c.conj)), SUBS.complement.position);
+        return place(inner, ctx.word(ctx.need(c.conj)), adpPos === 'after' ? 'after' : 'before');
     };
-    if (template.comp) parts.O = [...(parts.O ?? []), ...subordinate(template.comp)];
-    if (template.adv) parts.SUB = subordinate(template.adv);
+    const adverbial = a => {
+        const key = SUFFIX_KEY[a.conj];
+        if (key && SUBS.adverbial.mode === 'suffix' && affixes?.[key]) return clauseTokens(a.clause, lang, ctx, false, { subordinator: key });
+        return place(clauseTokens(a.clause, lang, ctx, false), ctx.word(ctx.need(a.conj)), SUBS.adverbial.position);
+    };
+    // A complement clause takes the place of the object; an adverbial clause goes first in head-final languages and last in head-initial ones.
+    if (template.comp) parts.O = [...(parts.O ?? []), ...complement(template.comp)];
+    if (template.adv) parts.SUB = adverbial(template.adv);
+    // reported speech: a quotation or a complement clause, as the language does it
+    if (template.quote) {
+        const q = template.quote, mode = SUBS.reported === 'both' ? (q.prefer ?? 'indirect') : SUBS.reported;
+        ctx.used.quote = mode;
+        if (mode === 'indirect') parts.O = [...(parts.O ?? []), ...complement({ conj: 'that:conjunction', clause: q.indirect })];
+        else {
+            const inner = clauseTokens(q.direct, lang, ctx, true);
+            parts.O = [...(parts.O ?? []), ...(SUBS.quotative === 'particle' ? place(inner, ctx.word(ctx.need('quotative marker:particle')), adpPos === 'after' ? 'after' : 'before') : inner)];
+        }
+    }
+    // a converb clause ("singing, he walked") comes first; without a converb the two clauses are joined with "and"
+    let conjoined = null;
+    if (template.conv) {
+        if (SUBS.converb && affixes?.converb) parts.CONV = clauseTokens(template.conv.clause, lang, ctx, false, { ...subject, converb: true });
+        else conjoined = clauseTokens(template.conv.clause, lang, ctx, false, subject);
+    }
 
+    // question words: left in place, in the slot of the missing argument, unless the language fronts them
+    const whInSitu = isWh(template) && parts.initial && LOC.wh.position === 'in-situ';
+    if (whInSitu) {
+        const slot = !template.S ? 'S' : !template.O ? 'O' : 'B';
+        parts[slot] = [...(parts[slot] ?? []), ...parts.initial]; delete parts.initial;
+    }
     const base = [...(parts.initial ? ['initial'] : []), ...spec.order.split(''), 'A', 'B'];
-    const sequence = template.seq ?? (parts.SUB ? (adpPos === 'after' ? ['SUB', ...base] : [...base, 'SUB']) : base);
+    const sequence = whInSitu ? base : template.seq ?? (parts.SUB ? (adpPos === 'after' ? ['SUB', ...base] : [...base, 'SUB']) : base);
     // information structure: the topic is fronted (and marked, if the language has a topic marker); focus is marked or fronted
-    let order = sequence;
+    let order = parts.CONV ? [...sequence.filter(k => k === 'initial'), 'CONV', ...sequence.filter(k => k !== 'initial')] : sequence;
     if (template.info) {
         const { topic, focus } = template.info, st = ctx.info;
         const front = [];
@@ -254,15 +316,24 @@ function clauseTokens(template, lang, ctx, top, opts = {}) {
             if (st.focus === 'front') front.push(focus);
             else parts[focus] = [...parts[focus], ctx.word(ctx.need('focus marker:particle'))];
         }
-        if (front.length) { const rest = sequence.filter(k => !front.includes(k)), lead = rest[0] === 'initial' ? ['initial'] : []; order = [...lead, ...front, ...rest.filter(k => !lead.includes(k))]; }
+        if (front.length) { const rest = order.filter(k => !front.includes(k)), lead = rest[0] === 'initial' ? ['initial'] : []; order = [...lead, ...front, ...rest.filter(k => !lead.includes(k))]; }
     }
     let tokens = order.flatMap(k => parts[k] ?? []);
+    if (conjoined) tokens = [...conjoined, ctx.word(ctx.need('and:conjunction')), ...tokens];
     // coordinated clause: "A, and B" / "A, but B"
     if (template.coord) tokens = [...tokens, ctx.word(ctx.need(template.coord.conj)), ...clauseTokens(template.coord.clause, lang, ctx, false)];
     // yes/no question: a final particle in head-final languages, an initial one otherwise
     if (top && template.q === 'yesno') {
         const q = ctx.word(ctx.need('question particle:particle'));
         tokens = adpPos === 'after' ? [...tokens, q] : [q, ...tokens];
+    }
+    if (top && isWh(template) && LOC.wh.particle) {
+        const q = ctx.word(ctx.need('question particle:particle'));
+        tokens = adpPos === 'after' ? [...tokens, q] : [q, ...tokens];
+    }
+    if (top && template.polite && LOC.register.particle !== 'none') {
+        const p = ctx.word(ctx.need('polite marker:particle'));
+        tokens = LOC.register.particle === 'after' ? [...tokens, p] : [p, ...tokens];
     }
     return tokens;
 }
@@ -274,7 +345,9 @@ export function realize(template, lang) {
     const ctx = makeContext(lang);
     try {
         const tokens = clauseTokens(template, lang, ctx, true);
-        return { id: template.id, english: template.en, tokens, partial: ctx.partial.length ? [...ctx.partial] : undefined };
+        // a direct quotation changes the English of the sentence
+        const english = ctx.used.quote === 'direct' && template.enDirect ? template.enDirect : ctx.used.noShift && template.enNoShift ? template.enNoShift : template.en;
+        return { id: template.id, english, quote: ctx.used.quote, noShift: ctx.used.noShift, tokens, partial: ctx.partial.length ? [...ctx.partial] : undefined };
     } catch (e) {
         if (e instanceof Unavailable) return { id: template.id, english: template.en, skipped: 'unavailable' };
         if (e instanceof Skip) return { id: template.id, english: template.en, skipped: 'missing', missing: e.message };
@@ -295,8 +368,8 @@ export function templateRefs(t) {
         if (!x || typeof x !== 'object') return;
         for (const [k, v] of Object.entries(x)) {
             if (['head', 'adj', 'poss', 'adp', 'aux', 'conj'].includes(k)) asList(v).forEach(r => refs.add(r));
-            else if (k === 'initial') v.forEach(walk);
-            else if (['S', 'V', 'O', 'A', 'B', 'np', 'comp', 'adv', 'clause', 'coord', 'gen', 'rel', 'and'].includes(k)) { walk(v); if (k === 'and') refs.add('and:conjunction'); if (k === 'gen') refs.add('of:adposition'); if (k === 'rel') refs.add('that:pronoun'); }
+            else if (k === 'initial') { v.forEach(walk); if (isWh(t)) refs.add('question particle:particle'); }
+            else if (['S', 'V', 'O', 'A', 'B', 'np', 'comp', 'adv', 'conv', 'quote', 'direct', 'indirect', 'clause', 'coord', 'gen', 'rel', 'and'].includes(k)) { walk(v); if (k === 'and' || k === 'conv') refs.add('and:conjunction'); if (k === 'quote') { refs.add('that:conjunction'); refs.add('quotative marker:particle'); } if (k === 'gen') refs.add('of:adposition'); if (k === 'rel') refs.add('that:pronoun'); }
             // function words the realiser adds for grammar the language may express with a separate word
             else if (k === 'q') refs.add('question particle:particle');
             else if (k === 'dem') { refs.add('demonstrative.this'); refs.add('demonstrative.that'); }
@@ -305,9 +378,12 @@ export function templateRefs(t) {
             else if (k === 'aspect' || k === 'voice') refs.add(`${v} marker:particle`);
             else if (k === 'degree') refs.add('more:adverb');
             else if (k === 'mood' && v === 'optative') refs.add('may:particle');
+            else if (k === 'evid') refs.add(EVIDENTIAL_ENTRY[v]);
+            else if (k === 'polite') refs.add('polite marker:particle');
         }
     };
     walk(t);
+    if (t.mood === 'imperative' && t.V?.neg) refs.add('prohibitive marker:particle');
     return refs;
 }
 

@@ -1,24 +1,30 @@
 :root {
-  --bg: #0b1020;
-  --panel: #11182a;
-  --panel2: #0d1424;
-  --line: #26324a;
-  --text: #e7edf7;
-  --muted: #8fa0ba;
-  --accent: #55c7ff;
-  --good: #55d6a0;
-  --panel3: #0e1526; --deep: #090f1c; --tip: #050914; --tip-text: #fff; --raised: #18233a; --line2: #1d2739; --line3: #3d5277;
-  --good-bg: #146b55; --good-line: #1c9675; --grad1: #121d34; --grad2: #0e1627;
-  --text2: #d9e2ef; --text3: #a9c4e8; --strong: #fff;
-  --err-line: #743c3c; --err-bg: #281516; --err-text: #e5a5a5;
+  /* Tutlayin sand palette, dark */
+  --bg: #211B18;
+  --panel: #2A2320;
+  --panel2: #251F1C;
+  --line: #43372F;
+  --text: #F0E5D2;
+  --muted: #B9A18B;
+  --accent: #D99568;
+  --accent-text: #D99568;
+  --good: #9CC48B;
+  --panel3: #211B18; --deep: #1B1613; --tip: #0F0B09; --tip-text: #F0E5D2; --raised: #352B26; --line2: #3A2F29; --line3: #6A5848;
+  --primary-bg: #D99568; --primary-text: #211B18; --primary-line: #E6A97F; --primary-hover: #E6A97F;
+  --toggle-active: #3B2F28; --shadow: 0 1px 2px rgba(0,0,0,.35), 0 6px 18px rgba(0,0,0,.18);
+  --grad1: #2A2320; --grad2: #241E1B;
+  --text2: #E2D4BE; --text3: #D8B48F; --strong: #FFF8EA;
+  --err-line: #8A4A40; --err-bg: #2F1A16; --err-text: #EAA597;
   color-scheme: dark
 }
 :root[data-theme="light"] {
-  --bg: #f4f6fb; --panel: #ffffff; --panel2: #f1f4fa; --line: #cfd8e6; --text: #1b2230; --muted: #5b6b85; --accent: #0b6fa8; --good: #12805c;
-  --panel3: #f7f9fc; --deep: #eef1f7; --tip: #1b2230; --tip-text: #fff; --raised: #e6ebf5; --line2: #dde4ef; --line3: #9fb0cc;
-  --good-bg: #d6f2e8; --good-line: #7cc9ae; --grad1: #ffffff; --grad2: #eef2f9;
-  --text2: #2a3650; --text3: #3a5f8f; --strong: #0b1020;
-  --err-line: #e0a0a0; --err-bg: #fdecec; --err-text: #8f2b2b;
+  --bg: #F4EFE3; --panel: #FBF8F0; --panel2: #F7F2E6; --line: #D9CDB6; --text: #493326; --muted: #75634F; --accent: #A15D35; --accent-text: #8C5028; --good: #2F6B3A;
+  --panel3: #F4EFE3; --deep: #EFE8D8; --tip: #493326; --tip-text: #FFF8EA; --raised: #F0E8D6; --line2: #E4DAC6; --line3: #B9A584;
+  --primary-bg: #A15D35; --primary-text: #FFF8EA; --primary-line: #8C5028; --primary-hover: #8C5028;
+  --toggle-active: #E9DFC9; --shadow: 0 1px 2px rgba(73,51,38,.08), 0 6px 18px rgba(73,51,38,.07);
+  --grad1: #FBF8F0; --grad2: #F1EADA;
+  --text2: #5A4030; --text3: #6B4A33; --strong: #2B1D14;
+  --err-line: #D9A598; --err-bg: #FBEAE4; --err-text: #8A2F22;
   color-scheme: light
 }
 
@@ -44,8 +50,7 @@ button {
 }
 
 header {
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--line);
+  padding: 16px 24px 12px;
   background: var(--panel3);
   display: flex;
   justify-content: space-between;
@@ -60,7 +65,8 @@ h3 {
 }
 
 h1 {
-  font-size: 20px
+  font-size: 28px;
+  letter-spacing: -.01em
 }
 
 .sub {
@@ -89,12 +95,24 @@ h1 {
   white-space: nowrap
 }
 
+.tabs-wrap {
+  background: var(--panel3)
+}
+
 .tabs {
   display: flex;
   gap: 0;
-  border-bottom: 1px solid var(--line);
-  background: var(--panel3);
-  padding: 0 22px
+  padding: 0 22px;
+  flex-wrap: wrap
+}
+
+/* a thin geometric band (zigzag with a dotted line), drawn with a mask so that it follows the accent colour of the theme */
+.band {
+  height: 12px;
+  background: var(--accent);
+  opacity: .55;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 11L6 4l6 7 6-7 6 7' fill='none' stroke='black' stroke-width='1.6'/%3E%3Ccircle cx='6' cy='1.4' r='1'/%3E%3Ccircle cx='18' cy='1.4' r='1'/%3E%3C/svg%3E") repeat-x center / 24px 12px;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='12' viewBox='0 0 24 12'%3E%3Cpath d='M0 11L6 4l6 7 6-7 6 7' fill='none' stroke='black' stroke-width='1.6'/%3E%3Ccircle cx='6' cy='1.4' r='1'/%3E%3Ccircle cx='18' cy='1.4' r='1'/%3E%3C/svg%3E") repeat-x center / 24px 12px
 }
 
 .tab {
@@ -102,7 +120,10 @@ h1 {
   border-bottom: 2px solid transparent;
   background: transparent;
   color: var(--muted);
-  padding: 13px 18px
+  padding: 13px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px
 }
 
 .tab:hover {
@@ -159,9 +180,10 @@ main {
 .section {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-radius: 10px;
-  padding: 15px;
-  min-width: 0
+  border-radius: 14px;
+  padding: 16px;
+  min-width: 0;
+  box-shadow: var(--shadow)
 }
 
 .section h2 {
@@ -244,8 +266,13 @@ main {
 }
 
 .btn.good {
-  background: var(--good-bg);
-  border-color: var(--good-line)
+  background: var(--primary-bg);
+  border-color: var(--primary-line);
+  color: var(--primary-text)
+}
+
+.btn.good:hover {
+  background: var(--primary-hover)
 }
 
 .btn.ghost {
@@ -372,7 +399,7 @@ main {
 
 .card h3 {
   font-size: 13px;
-  color: var(--accent);
+  color: var(--accent-text);
   margin-bottom: 10px
 }
 
@@ -401,7 +428,7 @@ main {
 
 .lex-row .word {
   font-weight: 700;
-  color: var(--accent);
+  color: var(--accent-text);
   font-family: ui-monospace, monospace
 }
 
@@ -444,7 +471,7 @@ main {
 }
 
 .dict-row strong {
-  color: var(--accent);
+  color: var(--accent-text);
   font-family: ui-monospace, monospace
 }
 
@@ -538,7 +565,7 @@ main {
 .base-parameters { margin-top: 16px; }
 .base-parameters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
 .base-parameters .param-group { background: var(--panel2); border: 1px solid var(--line); border-radius: 8px; padding: 11px; }
-.base-parameters .param-title { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--accent); margin-bottom: 7px; }
+.base-parameters .param-title { font-size: 11px; text-transform: uppercase; letter-spacing: .04em; color: var(--accent-text); margin-bottom: 7px; }
 .base-parameters .param-value { color: var(--text); line-height: 1.5; }
 .compact-grid { align-items: start; }
 .compact-grid > .field { margin-top: 0; }
@@ -620,7 +647,7 @@ main {
 .names-controls input[type=number] { width: 6rem; }
 .names-hint { margin-bottom: 10px; }
 .names-table { border-collapse: collapse; width: 100%; max-width: 560px; }
-.names-table th, .names-table td { text-align: left; padding: 4px 10px; border-bottom: 1px solid var(--border, #d5dce8); }
+.names-table th, .names-table td { text-align: left; padding: 4px 10px; border-bottom: 1px solid var(--line); }
 .names-table .name-cell { font-weight: 600; font-family: ui-monospace, monospace; }
 
 .script-controls { box-sizing: border-box; width: auto; min-width: 0; margin: 0; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px 8px; }
@@ -679,18 +706,34 @@ main {
 .writing-bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 10px }
 
 .ipa-toggle { display: inline-flex; align-items: center; gap: 5px; color: var(--muted); font-size: 13px; cursor: pointer }
-.ipa, .ipa-line { font-family: "Charis SIL", "Gentium Plus", "DejaVu Sans", ui-sans-serif, sans-serif; color: var(--accent) }
+.ipa, .ipa-line { font-family: "Charis SIL", "Gentium Plus", "DejaVu Sans", ui-sans-serif, sans-serif; color: var(--accent-text) }
 .ipa-line { font-size: 13px; margin-top: 4px }
 .numeral { display: inline-flex; align-items: flex-end; gap: 3px; }
 .numeral svg { display: block; }
 .script-word.joined { border-bottom: 1.6px solid currentColor; padding-bottom: 2px; }
-.morph-alt { color: var(--accent, #7cc4ff); border-bottom: 1px dotted currentColor; }
-.morph-supp { color: var(--accent, #ffb86c); font-style: italic; }
+.morph-alt { color: var(--accent-text); border-bottom: 1px dotted currentColor; }
+.morph-supp { color: var(--accent-text); font-style: italic; }
 .timeline { margin: 8px 0 8px 18px; padding: 0; }
 .timeline li { margin: 6px 0; line-height: 1.45; }
-.timeline li.contact strong { color: var(--accent, #7aa7ff); }
+.timeline li.contact strong { color: var(--accent-text); }
 
 .tifinagh { font-family: 'Noto Sans Tifinagh', 'Ebrima', 'Segoe UI Historic', 'DejaVu Sans', sans-serif; font-size: 22px; color: var(--accent); letter-spacing: 2px; margin-left: 2px }
-.theme-select { background: var(--panel2); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px }
 .write-box { margin-bottom: 14px } .write-box textarea { width: 100%; background: var(--deep); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 8px; font: 15px/1.4 ui-monospace, monospace; resize: vertical } .write-options { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin: 8px 0 }
 .header-tools { flex-wrap: wrap; justify-content: flex-end } header { flex-wrap: wrap; gap: 8px }
+
+/* header: cartouche around the Tifinagh name, icons, theme toggle */
+.cartouche { display: inline-flex; align-items: center; border: 2px solid var(--accent); border-radius: 14px; padding: 2px 16px; margin-left: 6px; position: relative; letter-spacing: 3px; line-height: 1.25 }
+.cartouche::before, .cartouche::after { content: ""; position: absolute; top: 50%; width: 6px; height: 6px; background: var(--accent); transform: translateY(-50%) rotate(45deg) }
+.cartouche::before { left: 5px } .cartouche::after { right: 5px }
+.cartouche > span { padding: 0 6px }
+.icon { flex: none; vertical-align: -3px }
+.btn[data-icon] { display: inline-flex; align-items: center; gap: 7px }
+.header-tools .btn { background: var(--primary-bg); border-color: var(--primary-line); color: var(--primary-text) }
+.header-tools .btn:hover { background: var(--primary-hover) }
+.theme-toggle { display: inline-flex; align-items: center; padding: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow) }
+.theme-toggle button { border: 0; background: transparent; color: var(--muted); font-weight: 500; padding: 7px 14px; border-radius: 7px }
+.theme-toggle button[aria-pressed="true"] { background: var(--toggle-active); color: var(--strong); font-weight: 700 }
+.theme-toggle button:hover:not([aria-pressed="true"]) { color: var(--text) }
+.theme-toggle .sep { width: 1px; height: 16px; background: var(--line); margin: 0 2px }
+.theme-toggle button:focus-visible, .tab:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px }
+@media (max-width: 900px) { header { flex-wrap: wrap } .header-tools { flex-wrap: wrap } }

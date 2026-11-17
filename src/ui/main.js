@@ -9,6 +9,7 @@ import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
 import { stressOf } from '../ipa.js';
 import { initTheme } from './theme.js';
+import { addIcons } from './icons.js';
 import { setStress, setShowIpa, writingHtml, writeTextHtml, historyHtml, derivationHtml, semanticsHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, textsHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
@@ -406,4 +407,5 @@ async function start() {
 }
 start();
 
-initTheme($('theme-select'));
+initTheme($('theme-toggle'));
+addIcons();

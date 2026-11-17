@@ -63,7 +63,9 @@ test('comparative: suffix on the adjective (agglutinative) or the word "more"; t
 test('subordinate clauses: complement fills the object slot; adverbial clause first in head-final, last otherwise', () => {
     const comp = { id: 's', en: 'x', S: I, V: { head: 'know:verb' }, comp: { conj: 'that:conjunction', clause: { S: HE, V: { head: 'come:verb' } } } };
     const adv = { id: 'b', en: 'x', S: I, V: { head: 'come:verb' }, adv: { conj: 'because:conjunction', clause: { S: I, V: { head: 'sleep:verb' } } } };
-    const sov = langOf(gen({ order: 'SOV', morphology: 'isolating' })), svo = langOf(gen({ order: 'SVO', morphology: 'isolating' }));
+    // the language draws its own strategy; here it is pinned to the default one (word, after the clause when head-final, before it otherwise)
+    const pin = (L, pos) => ({ ...langOf(L), subordination: { complement: { mode: 'word', position: pos }, adverbial: { mode: 'word', position: pos }, converb: false, reported: 'indirect', quotative: 'none' } });
+    const sov = pin(gen({ order: 'SOV', morphology: 'isolating' }), 'after'), svo = pin(gen({ order: 'SVO', morphology: 'isolating' }), 'before');
     // head-final: [clause that] know ; the adverbial clause precedes the main clause
     const c1 = ids(realize(comp, sov));
     assert.deepEqual(c1.filter(x => ['grammar.that', 'verb.know', 'verb.come'].includes(x)), ['verb.come', 'grammar.that', 'verb.know']);
