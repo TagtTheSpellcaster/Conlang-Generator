@@ -46,5 +46,5 @@ test('history story and the loans the sister did not take', () => {
     assert.ok(c.length >= 3);
     for (const x of c) assert.ok(x.sister !== x.daughter && x.mother && x.donor);
     const html = historyHtml(L);
-    assert.ok(html.includes('History of the language') && html.includes('its sister did not'));
+    assert.ok(html.includes('History of the language') && html.includes('Loanwords this language took and') && html.includes('did not'));
 });

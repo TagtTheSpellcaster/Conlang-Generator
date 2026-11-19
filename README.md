@@ -19,6 +19,11 @@ Exports: *Export MediaWiki (.txt)* and *Markdown* on the tab; the entry is also 
 The additive clitic *also* (like Finnish *-kin*) is an affix of every language (`affixes.additive`; a suffix, or a particle in isolating languages) and the feature `additive` of `inflect()`. The sentence realiser does not use it yet: it appears in the Description and in the guide.
 Limits: the English translations of the examples are built by rule from a short list of regular nouns and verbs; examples use the first alternative of each `[a|b|c]` frame; topics on information structure and politeness have a description but no example sentences.
 
+## Language code and sister language
+The seed alone does not fix a language: every option takes part in the draws. The **language code** (`src/code.js`) packs seed, options and program version into one line, `TUT1.<version>.<D|S>.<payload>.<check>`; it is shown under the seed, copied with "Copy code", and loaded from the "Language code" box of the Generator tab. A code from another version loads with a warning; a damaged code is refused.
+
+**Generate sister language** builds the second descendant of the same mother (`generateLanguage(..., { branch: 'sister' })`): the same mother lexicon and inflectional morphology, other sound changes (`src/history/changes.js`) and other loanwords (`src/history/loans.js`: same donor languages, shared and own loans, adapted to the sister's sounds). It is a full language with its own code (branch `S`). The first language does not depend on the sister. Limits: templates, stories, writing system and grammatical options are shared with the first language; invented names are not run through the sound changes.
+
 ## Project layout
 - `src/lexicon/schema.js`: single source of truth for parts of speech, domains, tiers, features, relations and validation.
 - `src/core`, `src/phonology`, `src/morphology`, `src/lexicon/select.js`, `src/syntax`, `src/engine.js`: the pure engine (no DOM), also runnable in Node.

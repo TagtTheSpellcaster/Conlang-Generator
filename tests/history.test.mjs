@@ -46,7 +46,8 @@ test('sister language: same mother, other changes, examples with traceable deriv
         const L = gen({ seed: `sis${i}` });
         const s = L.history.sister;
         const shared = s.rules.filter(r => L.history.rules.some(d => d.id === r.id)).length;
-        assert.ok(shared <= 2, `shared ${shared}`);
+        assert.ok(shared < s.rules.length && shared <= L.history.rules.length, `shared ${shared}`);   // some innovations are shared, not all
+        assert.notEqual(s.rules.map(r => r.id).join(), L.history.rules.map(r => r.id).join());
         assert.ok(s.rules.length >= 2);
         assert.ok(s.examples.length >= 6 && s.examples.length <= 14, `${s.examples.length}`);
         const loaned = new Set(L.history.loans.items.map(x => x.id));

@@ -36,6 +36,11 @@
               <div class="morph-note semantic-hint">A genre fills these in when it calls for them. They only add weight to matching words and never exclude any.</div>
               <div class="preset-row"><button type="button" class="btn ghost" id="clear-filters">Clear filters</button><button type="button" class="btn" id="preset-historical">Historical</button><button type="button" class="btn" id="preset-fantasy">Fantasy</button><button type="button" class="btn" id="preset-modern">Modern</button><button type="button" class="btn" id="preset-scifi">Science fiction</button></div>
             </section>
+            <section class="section code-section">
+              <h2>Language code</h2>
+              <div class="field"><label for="code-input">Paste a code to recreate a language (seed, all options and program version)</label><input id="code-input" type="text" spellcheck="false" autocomplete="off" placeholder="TUT1.1.40.0.D…"></div>
+              <div class="preset-row"><button type="button" class="btn" id="load-code">Load and generate</button><span id="code-message" class="sub"></span></div>
+            </section>
             <div class="generation-actions"><span id="message" class="status"></span><button type="button" class="btn good" id="generate">Generate language</button><button type="button" class="btn" id="regenerate">Instant generate</button></div>
             </div>
             <div class="parameter-col">
