@@ -48,7 +48,10 @@ export function generateAffixes(spec, model, reserved = new Set()) {
     const make = createAffixFactory(spec, reserved);
     const cases = model.cases;
     const result = { caseEndings: {}, numberMarkers: { plural: '', dual: '', mode: spec.plural }, genderEndings: {}, fused: null, possessive: null, verb: null };
-    if (spec.morphology === 'isolating') return Object.freeze(result);
+    // The additive clitic ("also", "too": Finnish -kin, Latin -que) is drawn last of all, so every earlier ending keeps its shape for a given seed.
+    // Isolating languages have it as a separate particle after the word it adds to.
+    const additive = () => make();
+    if (spec.morphology === 'isolating') { result.additive = additive(); return Object.freeze(result); }
 
     if (model.fusional) {
         // One portmanteau ending per gender x number x case. The unmarked cell stays empty.
@@ -67,6 +70,7 @@ export function generateAffixes(spec, model, reserved = new Set()) {
         result.fused = fused;
         result.verb = fusionalVerb(spec, make);
         result.classOverlays = inflectionClasses(spec, result, make);
+        result.additive = additive();
         return Object.freeze(result);
     }
 
@@ -95,6 +99,7 @@ export function generateAffixes(spec, model, reserved = new Set()) {
     result.local = { evidential: {} };
     if (local.prohibitive === 'suffix') result.local.prohibitive = make();
     if (local.evidentiality.mode === 'suffix') for (const k of evidentialsOf(local)) result.local.evidential[k] = make();
+    result.additive = additive();
     return Object.freeze(result);
 }
 

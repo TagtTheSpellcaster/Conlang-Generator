@@ -4,6 +4,41 @@ Versioning: `MAJOR.MINOR.PATCH`. MINOR increases for every new feature that does
 
 History before 1.6.0 is reconstructed from the development sessions; it was not tracked release by release.
 
+## 1.39.0
+- **Grammar guide, part 3: clauses and sentences.** Word order, noun phrase, questions, prohibition, subordinate clauses, comparison, reported speech, information structure, demonstratives and reflexives, each with glossed sentences taken from the realised universal sentences (first alternative of each frame), the strategies of the language and a *How it works* box. Function words are glossed by code (DEF, INDF, PROH, Q, COMP, REL, CMPR…).
+- The Leipzig abbreviation list closes the Grammar tab and lists only the abbreviations used on the page.
+- README: sections Interface, Description and Grammar guide.
+
+## 1.38.0
+- **Grammar guide, part 2: verbs.** Verb structure, tense, person and number agreement, aspect, negation and ability, mood and prohibition, voice and valency, evidentiality (when the language has it). Agglutinative verbs show the suffix chain one suffix at a time; fusional verbs show the portmanteau ending as one block; isolating languages show sentences. English translations are built by rule from a short list of regular verbs.
+
+## 1.37.0
+- **Grammar guide, part 1: nouns and noun phrases** (`src/grammar/`): morphological type, number, gender, case, possession, alignment (S/A/P comparison), the additive clitic and adjectives. Each topic has an explanation (`texts.js`, editable), a line on the language itself, glossed examples and a *How it works* box with a word-for-word calque.
+- **Glossing layer** (`gloss.js`, Leipzig Glossing Rules): `glossWord()` inflects with the real engine and glosses every part; a test fails if `inflect()` produces a kind of part without a gloss or if the segments do not rebuild the word.
+- **Additive clitic “also”** (like Finnish *-kin*, Latin *-que*): `affixes.additive` in every language (suffix; a separate particle in isolating languages) and the feature `additive` of `inflect()`, always the last element of the word. It is drawn after all other affixes, so earlier endings keep their shape for a given seed. The sentence realiser does not use it yet.
+- Tests: `tests/grammar-guide.test.mjs`.
+
+## 1.36.0
+- **Description tab**: an encyclopedia-style entry generated from the language itself: infobox (native name, region, ethnicity, speakers, family, early form, sister language, writing system, word order, alignment, status, private-use language code), lead, and sections on classification and history, geographic distribution and status, phonology, writing system, grammar (nouns, verbs, syntax), vocabulary and a sample text with translation. Speaker numbers, region, status and the language code are invented from the seed within what genre, era, culture and biome allow; the rest is derived from the existing History, Writing, phonology, syntax and lexicon data. Prose is deterministic (templates with 2-3 variants), with no language model involved.
+- **MediaWiki export** of the entry (`.wiki.txt`), with options: links to new wiki pages for region, people and mother/sister language; links from linguistic terms to Wikipedia (external links); infobox as a self-contained table or as `{{Infobox language}}`. Section links are always generated. Markdown export of the entry; the entry is also the first section of the HTML/Markdown language sheet and a `description` object in the JSON export.
+- New core word `language` in the vocabulary (7234 entries).
+- Tests: `tests/description.test.mjs`.
+
+## 1.35.0
+- **Seven tabs instead of nine**: *Generator* (inputs, Generate, export bar and a short lead paragraph that links to the Description), *Description*, *Grammar* (tables with an index; Numerals and Calendar are sections of it), *Lexicon* (sub-tabs: Generated lexicon, Dictionary, Names, Semantic structure, Word formation), *Texts* (sample sentences and connected texts), *Writing*, *History*. The ids of the output containers are unchanged.
+- The underline of the active tab is now clear of the decorative band.
+- **Light/Dark toggle**: both segments have a fixed width and weight; selecting one no longer resizes the row below.
+- **Header**: *Import vocabulary* removed (it only stored rows that nothing used) and *Export vocabulary* removed (the per-language exports cover it). *Copy to Clipboard* is now *Copy lexicon*. The IPA checkbox is labelled *Show IPA* and has a tooltip.
+- Tests: `tests/theme.test.mjs` updated (7 tabs, two header buttons).
+
+## 1.34.0
+- **Text planner** (`src/discourse/planner.js`): a language now gets texts that are written from its seed instead of picked from a fixed list. Three schemas: a *meeting* (dialogue: greeting, "Who are you?", "What do you want?" or "Where do you go?", answers), a *quest* (a person lives somewhere, wants something, goes to a place, meets someone who is kind or hostile, and gets the thing or flees) and an *event* (something comes, the hero is afraid because of it, feeds it or sees it go away). The lines are frames with generated English, compiled by the same code as the hand-written stories, so articles and pronouns, subordination (`want` + infinitive, `think that`, `because`), the tense sequence of step 5 and every other choice of the language apply.
+- **Verb frames** (`src/discourse/verbs.js`): 135 verbs with their frame (intransitive, transitive, ditransitive, motion to a goal with its adposition, clause-taking, control) and the classes of participant each role accepts (human, animal, place, building, dwelling, object, food, drink, plant, natural force), plus English past forms. A cast of 89 nouns with class, pronoun, mass/count and trade (the verb a hunter or a farmer does), and adjectives by class. A test checks every line of 60 planned stories against these restrictions ("the stone ate the wolf" cannot happen).
+- **Mass nouns** (bread, water, gold…) have no indefinite article in the English of a text.
+- A language has four texts: the three planned and one hand-written. Their words become required words of the language, as before.
+- Tests: `tests/planner.test.mjs`.
+- Limits: one story per schema per language; the planner uses only the past tense and, in dialogues, the present; it does not yet use voice, evidentiality or polite forms; the hand-written story keeps the constructions of steps 4 and 5.
+
 ## 1.33.0
 - **Interface**: new sand palette (light: #F4EFE3 / #493326 / #A15D35; dark: #211B18 / #F0E5D2 / #D99568) as CSS variables. Two values were adjusted for contrast: the light secondary text is #75634F (the proposed #806D5B gave 4.3:1) and a separate `--accent-text` (#8C5028 in light mode) is used for small text in the accent colour; buttons use light text on the dark accent in light mode and dark text on the light accent in dark mode. Every text/background pair used is checked at 4.5:1 or more by a test.
 - **Theme selector**: a two-segment control (Light Mode | Dark Mode) in the interface font replaces the drop-down; the "System" choice is gone (a value saved by an earlier version is resolved once).

@@ -12,8 +12,9 @@ const P = {
     writing: '<path d="M4 20l1-4L17 4l3 3L8 19z"/><path d="M14.5 6.5l3 3"/>',
     vocabulary: '<path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 21a2 2 0 0 1 2-2h13"/><path d="M12 7v6M9 10h6"/>',
     copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/>',
-    export: '<path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M4 20h16"/>',
-    import: '<path d="M12 15V4M7.5 8.5L12 4l4.5 4.5M4 20h16"/>'
+    description: '<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 12h7M9 15.5h7M9 19h4"/>',
+    grammar: '<path d="M4 20V5M4 5h7v15M11 20V8h9v12z"/><path d="M14 12h3M14 16h3"/>',
+    texts: '<path d="M5 4h14v16H5z"/><path d="M8.5 8h7M8.5 11.5h7M8.5 15h4"/>'
 };
 export const ICON_NAMES = Object.freeze(Object.keys(P));
 export const iconSvg = name => P[name] ? `<svg class="icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${P[name]}</svg>` : '';

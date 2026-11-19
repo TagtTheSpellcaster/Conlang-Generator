@@ -16,11 +16,11 @@
         </div>
         <div class="sub">Constructed Language Workshop</div>
       </div>
-      <div class="header-tools"><div id="theme-toggle" class="theme-toggle" role="group" aria-label="Colour theme"><button type="button" data-theme-choice="light" aria-pressed="false">Light Mode</button><span class="sep" aria-hidden="true"></span><button type="button" data-theme-choice="dark" aria-pressed="true">Dark Mode</button></div><button type="button" class="btn" id="open-vocabulary" data-icon="vocabulary">Vocabulary manager</button><button type="button" class="btn" id="copy-vocabulary" data-icon="copy">Copy to Clipboard</button><button type="button" class="btn" id="export-vocabulary" data-icon="export">Export vocabulary</button><button type="button" class="btn" id="import-vocabulary" data-icon="import">Import vocabulary</button><label class="ipa-toggle"><input type="checkbox" id="show-ipa"> IPA</label><input type="file" id="import-vocabulary-file" accept="application/json,.json" hidden>
+      <div class="header-tools"><div id="theme-toggle" class="theme-toggle" role="group" aria-label="Colour theme"><button type="button" data-theme-choice="light" aria-pressed="false">Light Mode</button><span class="sep" aria-hidden="true"></span><button type="button" data-theme-choice="dark" aria-pressed="true">Dark Mode</button></div><button type="button" class="btn" id="open-vocabulary" data-icon="vocabulary">Vocabulary manager</button><button type="button" class="btn" id="copy-vocabulary" data-icon="copy">Copy lexicon</button><label class="ipa-toggle" title="Show an IPA transcription next to each word in the lexicon, dictionary, sample sentences and texts"><input type="checkbox" id="show-ipa"> Show IPA</label>
         <div id="db-status" class="sub">Loading vocabulary…</div>
       </div>
     </header>
-    <div class="tabs-wrap"><nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" data-icon="generator" aria-selected="true">Generation</button><button type="button" class="tab" data-tab="lexicon" data-icon="lexicon" aria-selected="false">Generated Lexicon</button><button type="button" class="tab" data-tab="dictionary" data-icon="dictionary" aria-selected="false">Dictionary</button><button type="button" class="tab" data-tab="sample-sentences" data-icon="sample-sentences" aria-selected="false">Sample Sentences</button><button type="button" class="tab" data-tab="numerals" data-icon="numerals" aria-selected="false">Numerals</button><button type="button" class="tab" data-tab="names" data-icon="names" aria-selected="false">Names</button><button type="button" class="tab" data-tab="calendar" data-icon="calendar" aria-selected="false">Calendar</button><button type="button" class="tab" data-tab="history" data-icon="history" aria-selected="false">History</button><button type="button" class="tab" data-tab="writing" data-icon="writing" aria-selected="false">Writing</button></nav><div class="band" aria-hidden="true"></div></div>
+    <div class="tabs-wrap"><nav class="tabs" aria-label="Main sections"><button type="button" class="tab active" data-tab="generator" data-icon="generator" aria-selected="true">Generator</button><button type="button" class="tab" data-tab="description" data-icon="description" aria-selected="false">Description</button><button type="button" class="tab" data-tab="grammar" data-icon="grammar" aria-selected="false">Grammar</button><button type="button" class="tab" data-tab="lexicon" data-icon="lexicon" aria-selected="false">Lexicon</button><button type="button" class="tab" data-tab="texts" data-icon="texts" aria-selected="false">Texts</button><button type="button" class="tab" data-tab="writing" data-icon="writing" aria-selected="false">Writing</button><button type="button" class="tab" data-tab="history" data-icon="history" aria-selected="false">History</button></nav><div class="band" aria-hidden="true"></div></div>
     <section id="generator" class="tab-panel active">
       <main>
         <div class="controls">
@@ -151,13 +151,36 @@
         </div>
       </main>
     </section>
-    <section id="lexicon" class="tab-panel">
+    <section id="description" class="tab-panel">
       <main>
-        <div id="lexicon-output" class="empty">Generate a language to populate the lexicon.</div>
+        <div class="desc-controls" role="group" aria-label="Description export"><button type="button" class="btn ghost" id="desc-export-wiki">Export MediaWiki (.txt)</button><button type="button" class="btn ghost" id="desc-export-md">Markdown</button><label><input type="checkbox" id="desc-page-links" checked> Link region, people and languages (new wiki pages)</label><label><input type="checkbox" id="desc-term-links"> Link linguistic terms to Wikipedia</label><label><input type="checkbox" id="desc-template"> Infobox as <code>{{Infobox language}}</code></label></div>
+        <div id="description-output" class="empty">Generate a language to see its description.</div>
       </main>
     </section>
-    <section id="dictionary" class="tab-panel">
+    <section id="grammar" class="tab-panel">
       <main>
+        <nav class="toc" id="grammar-toc" aria-label="Grammar contents"></nav>
+        <div id="grammar-output" class="empty">Generate a language to see its grammar.</div>
+        <section id="grammar-numerals" class="gram-section"><h2>Numerals</h2>
+        <div class="names-controls">
+          <div class="field"><label for="numeral-system-tab">Numeral system</label><select id="numeral-system-tab"></select></div>
+          <div class="field"><label for="numeral-variant-tab">Variant</label><select id="numeral-variant-tab"></select></div>
+          <div class="field"><label for="numeral-input">Number (0 – 999,999,999)</label><input id="numeral-input" type="number" min="0" max="999999999" value="1234"></div>
+        </div>
+        <div id="numerals-output" class="empty">Generate a language to see its numeral system.</div>
+      </section>
+        <section id="grammar-calendar" class="gram-section"><h2>Calendar</h2>
+        <div class="sub names-hint">The calendar follows the culture, biome and era chosen (or the genre's): the later the era, the more rigid and standardised the measurement of time. Terms are words of the language.</div>
+        <div id="calendar-output" class="empty">Generate a language to see its calendar.</div>
+      </section>
+        <section id="grammar-abbreviations" class="gram-section"></section>
+      </main>
+    </section>
+    <section id="lexicon" class="tab-panel">
+      <main>
+        <nav class="subtabs" aria-label="Lexicon sections"><button type="button" class="subtab active" data-sub="lex-words" aria-selected="true">Generated lexicon</button><button type="button" class="subtab" data-sub="lex-dictionary" aria-selected="false">Dictionary</button><button type="button" class="subtab" data-sub="lex-names" aria-selected="false">Names</button><button type="button" class="subtab" data-sub="lex-semantics" aria-selected="false">Semantic structure</button><button type="button" class="subtab" data-sub="lex-derivation" aria-selected="false">Word formation</button></nav>
+        <div id="lex-words" class="sub-panel active"><div id="lexicon-output" class="empty">Generate a language to populate the lexicon.</div></div>
+        <div id="lex-dictionary" class="sub-panel">
         <div class="dictionary-controls">
           <div class="field"><label for="dictionary-direction">Direction</label><select id="dictionary-direction">
               <option value="conlang-en">Conlang → English</option>
@@ -166,25 +189,8 @@
           <div class="field search"><label for="dictionary-search">Search</label><input id="dictionary-search" type="search" placeholder="Search the dictionary…"></div>
         </div>
         <div id="dictionary-output" class="empty">Generate a language to populate the dictionary.</div>
-      </main>
-    </section>
-    <section id="sample-sentences" class="tab-panel">
-      <main>
-        <div id="sample-sentences-output" class="empty">Generate a language to populate the sample sentences.</div>
-      </main>
-    </section>
-    <section id="numerals" class="tab-panel">
-      <main>
-        <div class="names-controls">
-          <div class="field"><label for="numeral-system-tab">Numeral system</label><select id="numeral-system-tab"></select></div>
-          <div class="field"><label for="numeral-variant-tab">Variant</label><select id="numeral-variant-tab"></select></div>
-          <div class="field"><label for="numeral-input">Number (0 – 999,999,999)</label><input id="numeral-input" type="number" min="0" max="999999999" value="1234"></div>
-        </div>
-        <div id="numerals-output" class="empty">Generate a language to see its numeral system.</div>
-      </main>
-    </section>
-    <section id="names" class="tab-panel">
-      <main>
+      </div>
+        <div id="lex-names" class="sub-panel">
         <div class="names-controls">
           <div class="field"><label for="names-kind">Kind</label><select id="names-kind"></select></div>
           <div class="field"><label for="names-count">How many</label><input id="names-count" type="number" min="1" max="60" value="20"></div>
@@ -193,18 +199,14 @@
         </div>
         <div class="sub names-hint">Names use the sounds of the language and, where they have a meaning, words of its own lexicon. The custom (single name, clan name, epithet, title) follows the genre.</div>
         <div id="names-output" class="empty">Generate a language to create names.</div>
+      </div>
+        <div id="lex-semantics" class="sub-panel"><div id="semantics-output" class="empty">Generate a language to see its semantic structure.</div></div>
+        <div id="lex-derivation" class="sub-panel"><div id="derivation-output" class="empty">Generate a language to see its word formation.</div></div>
       </main>
     </section>
-    <section id="calendar" class="tab-panel">
+    <section id="texts" class="tab-panel">
       <main>
-        <div class="sub names-hint">The calendar follows the culture, biome and era chosen (or the genre's): the later the era, the more rigid and standardised the measurement of time. Terms are words of the language.</div>
-        <div id="calendar-output" class="empty">Generate a language to see its calendar.</div>
-      </main>
-    </section>
-    <section id="history" class="tab-panel">
-      <main>
-        <div class="sub names-hint">The language returned by the generator is the daughter of a mother language (the one generated from your settings) by ordered, dated sound changes. This tab shows the mother, the changes and the comparison.</div>
-        <div id="history-output" class="empty">Generate a language to see its history.</div>
+        <div id="sample-sentences-output" class="empty">Generate a language to populate the sample sentences.</div>
       </main>
     </section>
     <section id="writing" class="tab-panel">
@@ -226,6 +228,12 @@
             <label class="ipa-toggle" id="write-pointed-label"><input type="checkbox" id="write-pointed" checked> vowel marks (abjad)</label></div>
           <div id="write-output"></div></div>
         <div id="writing-output" class="empty">Generate a language to see its writing system.</div>
+      </main>
+    </section>
+    <section id="history" class="tab-panel">
+      <main>
+        <div class="sub names-hint">The language returned by the generator is the daughter of a mother language (the one generated from your settings) by ordered, dated sound changes. This tab shows the mother, the changes and the comparison.</div>
+        <div id="history-output" class="empty">Generate a language to see its history.</div>
       </main>
     </section>
     <script type="module" src="src/ui/main.js"></script>

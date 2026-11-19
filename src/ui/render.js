@@ -1,4 +1,5 @@
 // HTML builders for the generator page. Pure: (language) -> string. No DOM access.
+import { buildGuide } from '../grammar/guide.js';
 import { buildWriting, WRITING_LABELS } from '../writing/system.js';
 import { buildNumberSigns } from '../writing/numerals.js';
 import { ipaWord, ipaOfLetter, stressOf, STRESS_SYSTEMS } from '../ipa.js';
@@ -291,11 +292,52 @@ export function dictionaryHtml(lexicon, direction, query) {
     return `<div class="card"><h3>${direction === 'conlang-en' ? 'Conlang → English' : 'English → Conlang'}</h3><div class="sub" style="margin-bottom:10px">${rows.length} matching entries</div><div class="dictionary">${rows.map(x => `<div class="dict-row"><strong>${esc(x.l)}</strong><span>${esc(x.r)}</span><span class="meta">${esc(x.m)}</span></div>`).join('')}</div></div>`;
 }
 
+const ORDER_NAME = { SVO: 'subject–verb–object', SOV: 'subject–object–verb', VSO: 'verb–subject–object', VOS: 'verb–object–subject', OSV: 'object–subject–verb', OVS: 'object–verb–subject' };
+const MORPH_NAME = { isolating: 'isolating', agglutinative: 'agglutinative', fusional: 'fusional' };
+
+// Short paragraph shown under the generator: what the language is, with a pointer to the Description tab.
+export function leadHtml(lang) {
+    const s = lang.spec;
+    const align = s.relations === 'ergative' ? 'ergative–absolutive' : s.relations === 'prepositions' ? 'prepositional' : s.relations === 'cases' ? 'case-marking' : 'mixed case and preposition';
+    const place = [s.culture[0], s.biome[0], s.era[0]].filter(Boolean);
+    const setting = place.length ? ` It is set in a ${place.join(', ')} context.` : '';
+    return `<p class="lead"><b>${esc(lang.name)}</b> is a constructed language with ${esc(ORDER_NAME[s.order] ?? s.order)} word order. It is ${esc(MORPH_NAME[s.morphology] ?? s.morphology)} and ${align}, and its lexicon has ${lang.lexicon.length} entries.${esc(setting)} <a href="#description" data-goto-tab="description">Read the full description</a>.</p>`;
+}
+
 export function resultHtml(lang) {
     const s = lang.spec;
     const chips = [s.culture[0], s.biome[0], s.era[0], s.order].filter(Boolean);
+    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="export-bar" role="group" aria-label="Export"><span class="sub">Export:</span><button type="button" class="btn ghost" data-export="html">Language sheet (HTML)</button><button type="button" class="btn ghost" data-export="md">Markdown</button><button type="button" class="btn ghost" data-export="csv">Lexicon (CSV)</button><button type="button" class="btn ghost" data-export="json">Language (JSON)</button></div>${leadHtml(lang)}`;
+}
+
+// Reference tables (phonology, morphology, verbs, nominal categories, classes) for the Grammar tab.
+export function grammarTablesHtml(lang) {
     const notes = lang.notes.length ? `<div class="card"><h3>Adjusted options</h3>${lang.notes.map(n => `<div class="morph-note">${esc(n)}</div>`).join('')}</div>` : '';
-    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="export-bar" role="group" aria-label="Export"><span class="sub">Export:</span><button type="button" class="btn ghost" data-export="html">Language sheet (HTML)</button><button type="button" class="btn ghost" data-export="md">Markdown</button><button type="button" class="btn ghost" data-export="csv">Lexicon (CSV)</button><button type="button" class="btn ghost" data-export="json">Language (JSON)</button></div><div class="result-cols"><div class="result-col">${phonologyHtml(lang)}${morphemeInventoryHtml(lang)}</div><div class="result-col">${verbMorphologyHtml(lang)}${nominalCategoriesHtml(lang)}${classesHtml(lang)}${notes}</div></div>`;
+    return `<section id="grammar-tables" class="gram-section"><h2>Tables</h2><div class="result-cols"><div class="result-col">${phonologyHtml(lang)}${morphemeInventoryHtml(lang)}</div><div class="result-col">${verbMorphologyHtml(lang)}${nominalCategoriesHtml(lang)}${classesHtml(lang)}${notes}</div></div></section>`;
+}
+
+// ---- grammar guide (src/grammar/guide.js) ----
+const igtHtml = e => `<div class="igt"><div class="igt-words">${e.words.map(w => `<span class="igt-w"><span class="igt-f">${esc(w.form)}</span><span class="igt-s">${esc(w.seg)}</span><span class="igt-g">${esc(w.gloss)}</span></span>`).join('')}</div><div class="igt-tr">‘${esc(e.translation)}’</div></div>`;
+// consecutive one-word examples (a paradigm) form one table, sentences keep their own card
+const igtRowsHtml = list => `<table class="igt igt-table"><thead><tr><th>Form</th><th>Segmented</th><th>Gloss</th><th>Translation</th></tr></thead><tbody>${list.map(e => `<tr><td class="igt-f">${esc(e.words[0].form)}</td><td class="igt-s">${esc(e.words[0].seg)}</td><td class="igt-g">${esc(e.words[0].gloss)}</td><td>‘${esc(e.translation)}’</td></tr>`).join('')}</tbody></table>`;
+function examplesHtml(examples) {
+    const out = []; let run = [];
+    const flush = () => { if (run.length > 1) out.push(igtRowsHtml(run)); else if (run.length === 1) out.push(igtHtml(run[0])); run = []; };
+    for (const e of examples) { if (e.words.length === 1) run.push(e); else { flush(); out.push(igtHtml(e)); } }
+    flush();
+    return out.join('');
+}
+export function grammarGuideHtml(lang) {
+    const g = buildGuide(lang);
+    return g.sections.map(sec => `<section id="${sec.id}" class="gram-section guide"><h2>${esc(sec.title)}</h2>${sec.topics.map(t => `<article id="g-${t.id}" class="guide-topic"><h3>${esc(t.title)}</h3><p>${esc(t.text)}</p>${t.local.length ? `<p class="guide-local"><b>In ${esc(lang.name)}:</b> ${t.local.map(esc).join(' ')}</p>` : ''}${examplesHtml(t.examples)}${t.box ? `<aside class="howbox"><h4>How it works</h4>${t.box.lines.map(l => `<p>${esc(l)}</p>`).join('')}<p class="calque"><code>${esc(t.box.calque)}</code></p><p class="sub">${esc(t.box.note)}</p></aside>` : ''}</article>`).join('')}</section>`).join('');
+}
+export function grammarTocHtml(lang) {
+    const g = buildGuide(lang);
+    return `${g.sections.map(sec => `<span class="toc-group"><a href="#${sec.id}">${esc(sec.title)}</a>: ${sec.topics.map(t => `<a href="#g-${t.id}">${esc(t.title)}</a>`).join(' · ')}</span>`).join('')}<span class="toc-group"><a href="#grammar-tables">Tables</a> · <a href="#grammar-numerals">Numerals</a> · <a href="#grammar-calendar">Calendar</a> · <a href="#grammar-abbreviations">Abbreviations</a></span>`;
+}
+export function abbreviationsHtml(lang) {
+    const g = buildGuide(lang);
+    return `<h2>Abbreviations</h2><p class="sub">Glosses follow the <a href="https://www.eva.mpg.de/lingua/resources/glossing-rules.php" target="_blank" rel="noopener">Leipzig Glossing Rules</a>. Only the abbreviations used on this page are listed; † marks an abbreviation that is not in the Leipzig list.</p><dl class="abbr-list">${g.abbreviations.map(a => `<div><dt>${esc(a.code)}${a.leipzig ? '' : '†'}</dt><dd>${esc(a.label)}</dd></div>`).join('')}</dl>`;
 }
 
 const KIND_HEAD = { person: 'Name', family: 'Name', place: 'Name', epithet: 'Epithet' };

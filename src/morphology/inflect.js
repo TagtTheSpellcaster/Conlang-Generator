@@ -2,6 +2,7 @@
 // Used by the tables in the UI and by the sentence realiser, so both always agree.
 //   nouns:      stem - NUMBER - POSSESSOR - CASE          (agglutinative; fusional: one portmanteau ending)
 //   adjectives: stem - GENDER - NUMBER - CASE
+//   an additive clitic (features.additive) closes the word of a noun, pronoun or adjective: stem - ... - CASE - ADD
 //   verbs:      stem - POTENTIAL - NEGATION - TENSE - AGREEMENT   (fusional: tense+person+number portmanteau)
 import { hash } from '../core/rng.js';
 import { FUSED_NO_GENDER, cellOf } from './affixes.js';
@@ -116,7 +117,7 @@ function inflectCore(entry, features = {}, morph) {
         else parts.splice(at, 0, { text: attach(parts.slice(0, at).map(p => p.text).join(''), text, spec), kind, meaning });
     };
     const finish = () => ({ stem, parts, form: built() });
-    if (!INFLECTS.has(entry.pos) || spec.morphology === 'isolating') return finish();
+    if (!INFLECTS.has(entry.pos) || spec.morphology === 'isolating') return finish();       // (the isolating particle is a separate word, see the grammar guide)
 
     if (entry.pos === 'verb') return inflectVerb(entry, features, { ...morph, affixes, supp }, { parts, add, finish });
 
@@ -133,6 +134,7 @@ function inflectCore(entry, features = {}, morph) {
     if (affixes.fused) {
         const ending = affixes.fused[gender ?? FUSED_NO_GENDER]?.[number]?.[grammaticalCase ?? '-'] ?? '';
         add(ending, 'fused', [gender, number, grammaticalCase].filter(Boolean).join('.'));
+        if (features.additive) add(affixes.additive, 'additive', 'also');
         return finish();
     }
 
@@ -147,6 +149,7 @@ function inflectCore(entry, features = {}, morph) {
     }
     if (entry.pos === 'noun' && features.possessor && affixes.possessive?.[features.possessor]) add(affixes.possessive[features.possessor], 'possessor', `poss.${features.possessor}`);
     if (grammaticalCase) add(affixes.caseEndings[grammaticalCase], 'case', grammaticalCase);
+    if (features.additive) add(affixes.additive, 'additive', 'also');
     return finish();
 }
 

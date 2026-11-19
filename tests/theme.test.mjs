@@ -37,9 +37,9 @@ test('theme: the header has a two-segment toggle, the cartouche, the geometric b
     assert.ok(!html.includes('theme-select'));
     assert.ok(html.includes('class="tifinagh cartouche"') && html.includes('class="band"'));
     const tabs = [...html.matchAll(/class="tab[^"]*" data-tab="([\w-]+)"([^>]*)>/g)];
-    assert.equal(tabs.length, 9);
+    assert.equal(tabs.length, 7);
     for (const [, tab, rest] of tabs) { assert.ok(rest.includes(`data-icon="${tab}"`), tab); assert.ok(ICON_NAMES.includes(tab), tab); }
-    for (const id of ['open-vocabulary', 'copy-vocabulary', 'export-vocabulary', 'import-vocabulary']) assert.ok(new RegExp(`id="${id}" data-icon="(\\w+)"`).test(html), id);
+    for (const id of ['open-vocabulary', 'copy-vocabulary']) assert.ok(new RegExp(`id="${id}" data-icon="(\\w+)"`).test(html), id);
     for (const [, name] of html.matchAll(/data-icon="([\w-]+)"/g)) assert.ok(ICON_NAMES.includes(name), name);
 });
 

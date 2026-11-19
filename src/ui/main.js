@@ -10,7 +10,9 @@ import { GENRES, GENRE_IDS } from '../genres.js';
 import { stressOf } from '../ipa.js';
 import { initTheme } from './theme.js';
 import { addIcons } from './icons.js';
-import { setStress, setShowIpa, writingHtml, writeTextHtml, historyHtml, derivationHtml, semanticsHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, samplesHtml, textsHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
+import { describeLanguage } from '../description/describe.js';
+import { descriptionHtml, descriptionMarkdown, descriptionWikitext } from '../description/render.js';
+import { setStress, setShowIpa, writingHtml, writeTextHtml, historyHtml, derivationHtml, semanticsHtml, calendarHtml, numeralsHtml, numberResultHtml, namesHtml, resultHtml, grammarTablesHtml, grammarGuideHtml, grammarTocHtml, abbreviationsHtml, samplesHtml, textsHtml, lexiconHtml, dictionaryHtml, lexiconRows, phonotacticInfoHtml } from './render.js';
 
 const $ = id => document.getElementById(id);
 const FILTERS = ['culture', 'biome', 'era'];
@@ -20,7 +22,6 @@ let vocabulary = [];
 let templates = [];
 let derivations = [];
 let current = null;          // last generated language
-let importedLexicon = null;  // rows imported for re-export only
 
 const selected = id => { const e = $(id); return e ? [...e.selectedOptions].map(o => o.value).filter(Boolean) : []; };
 
@@ -74,6 +75,24 @@ function exportLanguage(lang, kind) {
     say(`Exported ${safeName(lang)}.${ext}.`);
 }
 
+const descOptions = () => ({ pageLinks: $('desc-page-links')?.checked, termLinks: $('desc-term-links')?.checked, infobox: $('desc-template')?.checked ? 'template' : 'table' });
+function renderDescription() {
+    if (!current) return;
+    const out = $('description-output');
+    out.className = '';
+    out.innerHTML = descriptionHtml(describeLanguage(current, writingOptions()), { ipa: $('show-ipa')?.checked, termLinks: $('desc-term-links')?.checked });
+}
+function exportDescription(kind) {
+    if (!current) return say('Generate a language first.');
+    const d = describeLanguage(current, writingOptions());
+    const text = kind === 'wiki' ? descriptionWikitext(d, descOptions()) : descriptionMarkdown(d);
+    const ext = kind === 'wiki' ? 'wiki.txt' : 'description.md';
+    const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
+    const a = Object.assign(document.createElement('a'), { href: url, download: `${safeName(current)}.${ext}` });
+    document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+    say(`Exported ${safeName(current)}.${ext}.`);
+}
+
 function renderNumerals() {
     if (!current) return;
     const out = $('numerals-output');
@@ -105,10 +124,19 @@ function render(lang) {
     const samples = $('sample-sentences-output');
     samples.className = '';
     samples.innerHTML = samplesHtml(lang) + textsHtml(lang);
+    const gram = $('grammar-output');
+    gram.className = '';
+    gram.innerHTML = grammarGuideHtml(lang) + grammarTablesHtml(lang);
+    $('grammar-toc').innerHTML = grammarTocHtml(lang);
+    const abbr = $('grammar-abbreviations');
+    abbr.className = 'gram-section';
+    abbr.innerHTML = abbreviationsHtml(lang);
     const lex = $('lexicon-output');
     lex.className = '';
     lex.onclick = ev => { const b = ev.target.closest('[data-lex-toggle]'); if (b) lex.querySelectorAll('.lex-section').forEach(d => { d.open = b.dataset.lexToggle === 'open'; }); };
-    lex.innerHTML = semanticsHtml(lang) + derivationHtml(lang) + `<div class="card">${lexiconHtml(lang.lexicon)}</div>`;
+    lex.innerHTML = `<div class="card">${lexiconHtml(lang.lexicon)}</div>`;
+    for (const [id, html] of [['semantics-output', semanticsHtml(lang)], ['derivation-output', derivationHtml(lang)]]) { $(id).className = ''; $(id).innerHTML = html; }
+    renderDescription();
     renderDictionary();
     renderNumerals();
     renderNames();
@@ -300,52 +328,44 @@ function installRelationControls() {
     sync();
 }
 
+function showTab(name) {
+    document.querySelectorAll('.tab').forEach(t => { const on = t.dataset.tab === name; t.classList.toggle('active', on); t.setAttribute('aria-selected', String(on)); });
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === name));
+}
+
 function installTabs() {
-    document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => {
-        document.querySelectorAll('.tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected', 'false'); });
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active'); tab.setAttribute('aria-selected', 'true');
-        $(tab.dataset.tab)?.classList.add('active');
+    document.querySelectorAll('.tab').forEach(tab => tab.addEventListener('click', () => showTab(tab.dataset.tab)));
+    // sub-tabs inside a panel (Lexicon)
+    document.querySelectorAll('.subtabs').forEach(bar => bar.addEventListener('click', ev => {
+        const b = ev.target.closest('.subtab');
+        if (!b) return;
+        bar.querySelectorAll('.subtab').forEach(t => { t.classList.toggle('active', t === b); t.setAttribute('aria-selected', String(t === b)); });
+        bar.parentElement.querySelectorAll(':scope > .sub-panel').forEach(p => p.classList.toggle('active', p.id === b.dataset.sub));
     }));
+    // links to another tab, and in-page anchors of the Grammar tab (the page has no routing of its own)
+    document.addEventListener('click', ev => {
+        const go = ev.target.closest('[data-goto-tab]');
+        if (go) { ev.preventDefault(); showTab(go.dataset.gotoTab); window.scrollTo(0, 0); return; }
+        const dl = ev.target.closest('[data-desc-link]');
+        if (dl) { ev.preventDefault(); document.getElementById(dl.dataset.descLink)?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+        const toc = ev.target.closest('.toc a');
+        if (toc) { ev.preventDefault(); document.getElementById(toc.getAttribute('href').slice(1))?.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
 }
 
 function installVocabularyTools() {
     $('open-vocabulary')?.addEventListener('click', () => { window.location.href = 'vocabulary.html'; });
-    const rows = () => importedLexicon || (current ? lexiconRows(current.lexicon) : []);
     $('copy-vocabulary')?.addEventListener('click', async () => {
         const r = current ? lexiconRows(current.lexicon) : [];
-        if (!r.length) return say('Generate a language before copying its vocabulary.');
+        if (!r.length) return say('Generate a language before copying its lexicon.');
         const text = r.map(x => [x.word, x.english, x.meta].filter(Boolean).join('\t')).join('\n');
         try { await navigator.clipboard.writeText(text); } catch {
             const area = Object.assign(document.createElement('textarea'), { value: text });
             area.style.cssText = 'position:fixed;opacity:0';
             document.body.appendChild(area); area.select(); document.execCommand('copy'); area.remove();
         }
-        say(`Copied ${r.length} vocabulary entries to the clipboard.`);
-        const b = $('copy-vocabulary'); b.textContent = 'Copied'; setTimeout(() => { b.textContent = 'Copy to Clipboard'; }, 1200);
-    });
-    $('export-vocabulary')?.addEventListener('click', () => {
-        const lexicon = rows();
-        if (!lexicon.length) return say('Generate a language before exporting its vocabulary.');
-        const payload = { format: 'Tutlayin vocabulary', version: 1, generator: VERSION, seed: current?.spec.seed, exported_at: new Date().toISOString(), lexicon };
-        const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
-        Object.assign(document.createElement('a'), { href: url, download: 'conlang-vocabulary.json' }).click();
-        URL.revokeObjectURL(url);
-        say(`Exported ${lexicon.length} entries.`);
-    });
-    $('import-vocabulary')?.addEventListener('click', () => $('import-vocabulary-file')?.click());
-    $('import-vocabulary-file')?.addEventListener('change', async ev => {
-        const file = ev.target.files?.[0];
-        if (!file) return;
-        try {
-            const data = JSON.parse(await file.text());
-            const raw = Array.isArray(data) ? data : (Array.isArray(data.lexicon) ? data.lexicon : []);
-            const lexicon = raw.map(i => ({ word: i.word ?? i.form ?? i.conlang, english: i.english ?? i.concept, meta: i.meta ?? '' })).filter(x => x.word && x.english);
-            if (!lexicon.length) throw new Error('No valid lexicon entries found.');
-            importedLexicon = lexicon;
-            say(`Imported ${lexicon.length} entries.`);
-            if ($('db-status')) $('db-status').textContent = 'Imported vocabulary loaded';
-        } catch (err) { say(err.message || 'Import failed.'); } finally { ev.target.value = ''; }
+        say(`Copied ${r.length} lexicon entries to the clipboard.`);
+        const b = $('copy-vocabulary'), label = b.lastChild; const old = label.textContent; label.textContent = 'Copied'; setTimeout(() => { label.textContent = old; }, 1200);
     });
 }
 
@@ -357,6 +377,10 @@ async function loadJson(path) {
 
 async function start() {
     if ($('app-version')) $('app-version').textContent = `v${VERSION}`;
+    $('desc-export-wiki')?.addEventListener('click', () => exportDescription('wiki'));
+    $('desc-export-md')?.addEventListener('click', () => exportDescription('md'));
+    $('desc-term-links')?.addEventListener('change', renderDescription);
+    for (const id of ['writing-type', 'writing-direction']) $(id)?.addEventListener('change', renderDescription);
     installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls(); installGenreControls();
     $('generate')?.addEventListener('click', generate);
     $('writing-type')?.addEventListener('change', renderWriting);

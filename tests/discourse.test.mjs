@@ -8,10 +8,10 @@ import { vocabulary, templates, derivations } from './helpers.mjs';
 
 const gen = (seed, extra = {}) => generateLanguage({ seed, ...extra }, vocabulary, templates, derivations);
 
-test('texts: every language gets a dialogue and two more texts, all lines realised, deterministic', () => {
+test('texts: every language gets a dialogue and three more texts (three of them planned), all lines realised, deterministic', () => {
     for (const seed of ['dx1', 'dx2', 'dx3', 'dx4']) {
         const L = gen(seed), again = gen(seed);
-        assert.equal(L.texts.length, 3, seed);
+        assert.equal(L.texts.length, 4, seed);
         assert.ok(L.texts.some(t => t.kind === 'dialogue'));
         assert.deepEqual(L.texts.map(t => t.title), again.texts.map(t => t.title));
         for (const t of L.texts) for (const l of t.lines) assert.ok(l.tokens.length >= 1 && l.en, `${t.id}: ${l.en}`);

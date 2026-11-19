@@ -7,6 +7,7 @@ import { buildIndex, templateRefs, realize } from '../syntax/realize.js';
 import { rng } from '../core/rng.js';
 import { toTemplate, SUBJECT_ROLES } from '../syntax/frame.js';
 import { DiscourseState } from './state.js';
+import { planStories } from './planner.js';
 const SUBJECT = new Set(SUBJECT_ROLES);
 // which role is the subject of the clause, by voice (the pronoun takes the subject form)
 const SUBJECT_OF = { passive: new Set(['patient', 'theme']), causative: new Set(['causer']) };
@@ -141,8 +142,8 @@ export const STORIES = Object.freeze([
 
 // Resolves the characters of a story: the frames become plain templates (language-independent) and the English text is built
 // from the same decisions of the discourse state.
-export function compileStory(story) {
-    const state = new DiscourseState(ACTORS);
+export function compileStory(story, actors = story.actors ?? ACTORS) {
+    const state = new DiscourseState(actors);
     return story.lines.map((ln, i) => {
         const id = `${story.id}:${i + 1}`;
         let frame = ln.frame, en = ln.en, enDirect = null, enNoShift = null, alt = null;
@@ -156,10 +157,11 @@ export function compileStory(story) {
             };
             const kinds = {}, skeleton = markWith(frame, kinds), nps = {}, words = {}, forms = {};
             ln.slots.forEach((key, k) => {
-                const a = ACTORS[key], isSubject = kinds[k + 1] ?? false, form = state.refer(key, isSubject);
+                const a = actors[key], isSubject = kinds[k + 1] ?? false, form = state.refer(key, isSubject);
                 forms[k + 1] = form;
                 if (form === 'pron') { nps[k + 1] = { head: PRON[a.pron] }; words[k + 1] = EN_PRON[a.pron][isSubject ? 0 : 1]; }
                 else if (form === 'def' && ln.dem?.includes(k + 1)) { nps[k + 1] = { head: a.head, dem: 'distal' }; words[k + 1] = `that ${a.en}`; }
+                else if (form === 'indef' && a.mass) { nps[k + 1] = { head: a.head }; words[k + 1] = a.en; }   // a mass noun has no indefinite article
                 else { nps[k + 1] = { head: a.head, det: form === 'indef' ? 'indefinite' : 'definite' }; words[k + 1] = `${form === 'indef' ? (vowel(a.en) ? 'an' : 'a') : 'the'} ${a.en}`; }
             });
             state.endClause();
@@ -168,17 +170,17 @@ export function compileStory(story) {
                 const out = {};
                 for (const [k, v] of Object.entries(node)) {
                     const n = slotRef(v);
-                    if (k === 'refl' && n) out.refl = ACTORS[ln.slots[n - 1]].pron;
-                    else if (k === 'poss' && n) { if (forms[n] === 'pron') out.poss = POSS[ACTORS[ln.slots[n - 1]].pron]; else out.gen = nps[n]; }
+                    if (k === 'refl' && n) out.refl = actors[ln.slots[n - 1]].pron;
+                    else if (k === 'poss' && n) { if (forms[n] === 'pron') out.poss = POSS[actors[ln.slots[n - 1]].pron]; else out.gen = nps[n]; }
                     else out[k] = fill(v);
                 }
                 return out;
             };
             const fill = node => Array.isArray(node) ? node.map(fill) : node && typeof node === 'object' ? fillObject(node) : typeof node === 'string' && /^\$\d+$/.test(node) ? nps[node.slice(1)] : node;
             // the English of a line; a pronoun takes the subject or the object form according to the roles of that version of the line
-            const say = (text, subjects) => text.replace(/\{(\d+)\}/g, (_, n) => forms[n] === 'pron' ? EN_PRON[ACTORS[ln.slots[n - 1]].pron][subjects[n] ? 0 : 1] : words[n])
-                .replace(/\{p(\d+)\}/g, (_, n) => forms[n] === 'pron' ? EN_POSS[ACTORS[ln.slots[n - 1]].pron] : `${words[n]}'s`)
-                .replace(/\{r(\d+)\}/g, (_, n) => EN_REFL[ACTORS[ln.slots[n - 1]].pron]);
+            const say = (text, subjects) => text.replace(/\{(\d+)\}/g, (_, n) => forms[n] === 'pron' ? EN_PRON[actors[ln.slots[n - 1]].pron][subjects[n] ? 0 : 1] : words[n])
+                .replace(/\{p(\d+)\}/g, (_, n) => forms[n] === 'pron' ? EN_POSS[actors[ln.slots[n - 1]].pron] : `${words[n]}'s`)
+                .replace(/\{r(\d+)\}/g, (_, n) => EN_REFL[actors[ln.slots[n - 1]].pron]);
             frame = fill(skeleton);
             en = say(ln.en, kinds);
             if (ln.enDirect) enDirect = say(ln.enDirect, kinds);
@@ -198,23 +200,31 @@ export function compileStory(story) {
 }
 
 const COMPILED = new Map(STORIES.map(s => [s.id, compileStory(s)]));
-export const storyRefs = story => [...new Set(COMPILED.get(story.id).flatMap(l => [...templateRefs(l.template)]))];
+const PLANNED = new WeakMap();   // planned stories are compiled once per story object
+const compiledOf = story => COMPILED.get(story.id) ?? (PLANNED.has(story) ? PLANNED.get(story) : PLANNED.set(story, compileStory(story)).get(story));
+export const storyRefs = story => [...new Set(compiledOf(story).flatMap(l => [...templateRefs(l.template), ...(l.alt ? [] : [])]))];
 
-// which stories a language has (all those whose words exist), in a seed-dependent order; their words become required
-export function chooseStories(spec, vocabulary, count = 3) {
+// Which stories a language has, in a seed-dependent order; their words become required. The planner writes a meeting, a quest
+// and an event from the seed; one story written by hand (dialogue or narrative, with the constructions of the grammar steps) completes the set.
+// `planned` holds the story objects of the planner, which realizeStories needs besides the ids.
+export function chooseStories(spec, vocabulary, count = 4) {
     const index = buildIndex(vocabulary), r = rng(`${spec.seed}|stories`);
-    const ok = STORIES.filter(s => storyRefs(s).every(ref => index.resolve(ref)));
+    const usable = s => storyRefs(s).every(ref => index.resolve(ref));
+    const planned = planStories(spec, index).filter(usable);
+    const ok = STORIES.filter(usable);
     const ordered = ok.map(s => [r(), s]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
-    const picked = [ordered.find(s => s.kind === 'dialogue'), ...ordered.filter(s => s.kind !== 'dialogue')].filter(Boolean).slice(0, count);
+    const dialogue = planned.find(s => s.kind === 'dialogue') ?? ordered.find(s => s.kind === 'dialogue');
+    const picked = [...new Set([dialogue, ...planned, ...ordered])].filter(Boolean).slice(0, count);
     const entries = [...new Set(picked.flatMap(storyRefs))].map(ref => index.resolve(ref)).filter(Boolean);
-    return { ids: picked.map(s => s.id), entries };
+    return { ids: picked.map(s => s.id), entries, planned: picked.filter(s => s.planned) };
 }
 
-export function realizeStories(lang, ids) {
+export function realizeStories(lang, ids, planned = []) {
     const out = [];
     for (const id of ids) {
-        const story = STORIES.find(s => s.id === id);
-        const lines = COMPILED.get(id).map(l => {
+        const story = STORIES.find(s => s.id === id) ?? planned.find(s => s.id === id);
+        if (!story) continue;
+        const lines = compiledOf(story).map(l => {
             let res = realize(l.template, lang), en = l.en;
             if (res.skipped === 'unavailable' && l.alt) { res = realize(l.alt.template, lang); en = l.alt.en; }
             if (res.quote === 'direct' && l.enDirect) en = l.enDirect;

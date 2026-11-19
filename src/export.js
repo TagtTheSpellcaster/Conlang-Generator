@@ -13,6 +13,7 @@ import { generateNames, NAME_KINDS } from './names.js';
 import { DERIVATION_TYPES } from './derivation/derive.js';
 import { numeralForm, ordinalForm, numeralMeaning, sampleNumbers } from './numerals/system.js';
 import { NUMERAL_LABELS } from './numerals/choose.js';
+import { describeLanguage, plainText } from './description/describe.js';
 
 const plain = parts => parts.map(p => p.text).join('-') || '∅';
 const list = a => a.length ? a.join(' ') : 'none';
@@ -113,6 +114,11 @@ export function languageDocument(lang, version = '', opts = {}) {
         ['Pattern', `${ph.name} · ${ph.lengthProfile} words (mean ${ph.meanSyllables} syllables)`], ['Vowels', list(ph.used.vowels)], ['Consonants', list(ph.used.consonants)], ['IPA', [...ph.used.vowels, ...ph.used.consonants].map(l => `${l} = /${ipaOfLetter(l)}/`).join(', ')],
         ['Onset clusters', list(ph.clusters)], ['Coda clusters', list(ph.codaClusters)], ['Syllable patterns', list(ph.patterns)]
     ] }] });
+    {
+        const d = describeLanguage(lang, opts);
+        sections.unshift({ title: 'Description', blocks: [{ type: 'kv', rows: d.infobox.map(([k, v]) => [k, plainText(v)]) }, ...d.lead.map(t => ({ type: 'para', text: plainText(t) })),
+            ...d.sections.flatMap(x => [{ type: 'heading', text: x.title }, ...x.paragraphs.map(t => ({ type: 'para', text: plainText(t) })), ...(x.subsections ?? []).flatMap(y => [{ type: 'heading', text: y.title }, ...y.paragraphs.map(t => ({ type: 'para', text: plainText(t) }))]), ...(x.sample ? [{ type: 'table', head: ['', d.title, 'English'], rows: x.sample.rows.map(r => [r.speaker ?? '', r.native, r.english]) }] : [])])] });
+    }
     sections.push(...paradigmSections(lang));
     const uni = lang.samples.filter(x => x.scope === 'universal'), gen = lang.samples.filter(x => x.scope === 'genre');
     sections.push(sentenceSection('Universal sentences', uni, 'Sentences every language needs. [a|b] shows alternatives.'));
@@ -234,6 +240,7 @@ export function languageJson(lang, version = '', opts = {}) {
         format: 'Tutlayin language', generator: version, name: lang.name, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
         morphology: { model: morphology.model, affixes: morphology.affixes },
         writing: (() => { const W = buildWriting(lang, opts.writing ?? 'auto', opts.direction ?? 'auto'); return { type: W.type, style: W.style, direction: W.direction, boustrophedon: W.boustrophedon, directionOdds: { rightToLeft: W.directionInfo.rtl, boustrophedon: W.directionInfo.share, age: W.directionInfo.age }, tradition: W.tradition, graphics: W.graphics, signSvg: signSvgs(W), sampleLines: sampleLinesSvg(lang, W), signs: W.letters.base.length, syllables: W.letters.syllables.length, rules: W.ruleText, exceptions: W.exceptions, ligatures: W.ligatures, joined: W.joined, numerals: (() => { const N = buildNumberSigns(lang, W, opts.numerals ?? {}); return { base: N.base, restricted: N.restricted, kind: N.cistercian ? `cistercian-${N.cistercian.system}` : N.composite ? 'dots-and-bars' : N.restricted ? 'tally' : 'glyphs', ...(N.cistercian ? { orientation: N.cistercian.orientation } : {}), examples: N.examples.map(e => ({ value: e.n, svg: N.write(e.n, 40) })) }; })() }; })(),
+        description: (() => { const d = describeLanguage(lang, opts); return { infobox: Object.fromEntries(d.infobox.map(([k, v]) => [k, plainText(v)])), lead: d.lead.map(plainText), facts: d.facts, sections: d.sections.map(x => ({ title: x.title, paragraphs: [...x.paragraphs, ...(x.subsections ?? []).flatMap(y => y.paragraphs)].map(plainText) })) }; })(),
         history: lang.history ? { rules: lang.history.rules, stats: lang.history.stats, loans: lang.history.loans ? { absorbency: lang.history.loans.absorbency, donors: lang.history.loans.donors, items: lang.history.loans.items } : null, words: lang.history.lexicon.map(w => ({ lemma: w.lemma, proto: w.proto, daughter: w.daughter, changes: w.changes, loan: w.loan ? w.loan.donor : null })) } : null,
         wordFormation: lang.derivation ? { affixes: Object.fromEntries(Object.entries(lang.derivation.affixes).map(([t, a]) => [t, { form: a.form, position: a.position }])), derived: lang.derivation.stats.applied } : null,
         semantics: lang.semantics ? { kinship: lang.semantics.kinship.id, colourTerms: lang.semantics.colours.terms, pairs: lang.semantics.pairs.map(p => ({ original: p.original, extended: p.extended, mechanism: p.kind })), colourPairs: lang.semantics.colourPairs.map(p => [p.original, p.extended]), kinshipPairs: lang.semantics.kinshipPairs.map(p => [p.original, p.extended]) } : null,

@@ -4,7 +4,7 @@ import { generateLanguage } from '../src/engine.js';
 import { realize, tokenText } from '../src/syntax/realize.js';
 import { chooseValency, VOICES } from '../src/syntax/valency.js';
 import { toTemplate } from '../src/syntax/frame.js';
-import { realizeStories } from '../src/discourse/texts.js';
+import { realizeStories, chooseStories } from '../src/discourse/texts.js';
 import { vocabulary, templates, derivations } from './helpers.mjs';
 
 const gen = (seed, extra = {}) => generateLanguage({ seed, ...extra }, vocabulary, templates, derivations);
@@ -94,12 +94,12 @@ test('valency: the case of the subject follows the new valency in ergative and a
 });
 
 test('valency: a text line falls back to the active voice when the language lacks the construction', () => {
-    const without = find(l => !l.syntax.valency.passive && l.texts.some(t => t.id === 'woman-and-bread'));
-    const t = without.texts.find(x => x.id === 'woman-and-bread');
+    // a language carries one hand-written text, chosen by its seed: look for seeds that chose this one (cheap), then for the voices
+    const carrying = pred => { for (let i = 0; i < 600; i++) { const seed = `wb${i}`; if (!chooseStories({ seed }, vocabulary).ids.includes('woman-and-bread')) continue; const L = gen(seed); if (pred(L)) return L; } throw new Error('no language found'); };
+    const without = carrying(l => !l.syntax.valency.passive), t = without.texts.find(x => x.id === 'woman-and-bread');
     assert.ok(t.lines.some(l => l.en === 'A child ate the bread.'));
     assert.equal(t.lines.some(l => /was eaten/.test(l.en)), false);
-    const withIt = find(l => l.syntax.valency.passive && l.syntax.valency.causative && l.syntax.valency.applicative && l.texts.some(x => x.id === 'woman-and-bread'));
-    const u = withIt.texts.find(x => x.id === 'woman-and-bread');
+    const withIt = carrying(l => l.syntax.valency.passive && l.syntax.valency.causative && l.syntax.valency.applicative), u = withIt.texts.find(x => x.id === 'woman-and-bread');
     assert.ok(u.lines.some(l => l.en === 'The bread was eaten by a child.') && u.lines.some(l => l.en === 'It made the woman laugh.'));
     assert.equal(realizeStories(langOf(withIt), ['woman-and-bread'])[0].lines.length, 6);
 });

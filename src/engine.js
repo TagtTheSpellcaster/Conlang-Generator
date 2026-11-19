@@ -116,6 +116,6 @@ export function generateLanguage(input, vocabulary, templates = [], derivations 
         spec, notes, phonology: Object.freeze({ ...phonology, used: usedLetters(lexicon, spec, phonology), stress: stressSystemFor(seededRng(`${spec.seed}|stress`)()).id }),
         morphology: { model, affixes },
         syntax: { order: spec.order, prodrop: !!affixes.verb, adpositionPosition: adpositionPosition(spec.order), adjectivePosition: spec.adjPosition, articles: spec.articles, information: Object.freeze({ ...info }), informationText: describeInformation(info), valency: Object.freeze({ ...valency }), valencyText: describeValency(valency), subordination: Object.freeze({ ...subordination }), subordinationText: describeSubordination(subordination), local: Object.freeze({ ...local }), localText: describeLocal(local) },
-        numerals: daughter.numerals, calendar, history, texts: realizeStories(lang, storyPick.ids), semantics: { ...sem.semantics, idioms: realizeIdioms(lang, idiomPick.ids) }, derivation: { affixes: daughter.derivationAffixes, stats: derivationStats, phonology: derivationPhon }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
+        numerals: daughter.numerals, calendar, history, texts: realizeStories(lang, storyPick.ids, storyPick.planned), semantics: { ...sem.semantics, idioms: realizeIdioms(lang, idiomPick.ids) }, derivation: { affixes: daughter.derivationAffixes, stats: derivationStats, phonology: derivationPhon }, lexicon, samples, skippedSamples: skipped, notApplicableSamples: notApplicable
     });
 }
