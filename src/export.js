@@ -1,3 +1,4 @@
+import { encodeLanguageCode } from './code.js';
 // Exports of a generated language. Pure: language -> text. The sheet is built once as a small document model
 // (sections of key/value lists, tables and paragraphs) and rendered to Markdown or standalone HTML.
 import { ipaWord, ipaOfLetter, stressOf } from './ipa.js';
@@ -237,7 +238,7 @@ export function languageJson(lang, version = '', opts = {}) {
     const { spec, morphology, phonology, syntax } = lang;
     const clean = ({ semantics, soundBias, ...rest }) => rest;
     return JSON.stringify({
-        format: 'Tutlayin language', generator: version, name: lang.name, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
+        format: 'Tutlayin language', generator: version, name: lang.name, languageCode: encodeLanguageCode(lang.input, lang.family.branch, version || undefined), family: { branch: lang.family.branch, mother: lang.family.proto, sister: lang.family.sister }, genre: lang.genre?.id ?? null, spec: clean(spec), phonology, syntax,
         morphology: { model: morphology.model, affixes: morphology.affixes },
         writing: (() => { const W = buildWriting(lang, opts.writing ?? 'auto', opts.direction ?? 'auto'); return { type: W.type, style: W.style, direction: W.direction, boustrophedon: W.boustrophedon, directionOdds: { rightToLeft: W.directionInfo.rtl, boustrophedon: W.directionInfo.share, age: W.directionInfo.age }, tradition: W.tradition, graphics: W.graphics, signSvg: signSvgs(W), sampleLines: sampleLinesSvg(lang, W), signs: W.letters.base.length, syllables: W.letters.syllables.length, rules: W.ruleText, exceptions: W.exceptions, ligatures: W.ligatures, joined: W.joined, numerals: (() => { const N = buildNumberSigns(lang, W, opts.numerals ?? {}); return { base: N.base, restricted: N.restricted, kind: N.cistercian ? `cistercian-${N.cistercian.system}` : N.composite ? 'dots-and-bars' : N.restricted ? 'tally' : 'glyphs', ...(N.cistercian ? { orientation: N.cistercian.orientation } : {}), examples: N.examples.map(e => ({ value: e.n, svg: N.write(e.n, 40) })) }; })() }; })(),
         description: (() => { const d = describeLanguage(lang, opts); return { infobox: Object.fromEntries(d.infobox.map(([k, v]) => [k, plainText(v)])), lead: d.lead.map(plainText), facts: d.facts, sections: d.sections.map(x => ({ title: x.title, paragraphs: [...x.paragraphs, ...(x.subsections ?? []).flatMap(y => y.paragraphs)].map(plainText) })) }; })(),

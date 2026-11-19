@@ -4,6 +4,7 @@ import { generateNames, NAME_KINDS, PERSON_SCHEMES } from '../names.js';
 import { languageDocument, toHtml, toMarkdown, lexiconCsv, languageJson, safeName } from '../export.js';
 import { loadVocabulary } from './vocabulary-store.js';
 import { generateLanguage } from '../engine.js';
+import { decodeLanguageCode, encodeLanguageCode } from '../code.js';
 import { esc, uniq } from '../core/text.js';
 import { CLUSTER_SETS, CLUSTER_LABELS } from '../phonology/models.js';
 import { GENRES, GENRE_IDS } from '../genres.js';
@@ -119,6 +120,13 @@ function render(lang) {
     const box = $('generation-output');
     box.className = 'result';
     box.innerHTML = resultHtml(lang);
+    $('copy-code')?.addEventListener('click', async () => {
+        const text = $('language-code').value;
+        try { await navigator.clipboard.writeText(text); say('Language code copied.'); } catch { $('language-code').select(); say('Select the code and copy it (Ctrl+C).'); }
+    });
+    $('language-code')?.addEventListener('focus', ev => ev.target.select());
+    $('make-sister')?.addEventListener('click', () => otherBranch('sister'));
+    $('make-first')?.addEventListener('click', () => otherBranch('daughter'));
     $('keep-seed')?.addEventListener('click', () => { $('seed').value = lang.spec.seed; say('Seed copied into the Seed field.'); });
     box.querySelectorAll('[data-export]').forEach(b => b.addEventListener('click', () => exportLanguage(lang, b.dataset.export)));
     const samples = $('sample-sentences-output');
@@ -166,11 +174,29 @@ function renderWrittenText() {
     out.innerHTML = writeTextHtml(lastLang, $('write-input').value, { choice: $('writing-type')?.value ?? 'auto', direction: $('writing-direction')?.value ?? 'auto', pointed: $('write-pointed').checked, lookup: $('write-lookup').checked, numerals: numeralOptions() });
 }
 
-function generate(keepSeed = false) {
+// Form controls by input key (the keys of the language code); used to put a code back into the form.
+const CONTROL_IDS = { vowels: 'vowels', consonants: 'consonants', mean: 'mean', order: 'word-order', morphology: 'morphology', articles: 'articles', plural: 'plural', number: 'number', gender: 'gender', relations: 'relations', caseSystem: 'case-system', adjPosition: 'adj-position', numerals: 'numeral-system', numeralVariant: 'numeral-variant', classifiers: 'classifiers', numeralPosition: 'numeral-position', maxCluster: 'max-cluster' };
+function applyInput(input) {
+    const setValue = (id, value) => { const e = $(id); if (e) { e.value = value ?? ''; e.dispatchEvent(new Event('change')); e.dispatchEvent(new Event('input')); } };
+    // the genre first: it fills in the other controls, which the code then overwrites
+    const genre = input.genre ?? 'none';
+    if ($('genre')) { $('genre').value = genre; applyGenre(genre); }
+    for (const id of FILTERS) { const e = $(id); if (e) for (const o of e.options) o.selected = (input[id] ?? []).includes(o.value); }
+    for (const [key, id] of Object.entries(CONTROL_IDS)) setValue(id, input[key]);
+    for (const position of ['onset', 'coda']) {
+        const wanted = input[`${position}Clusters`] ?? [];
+        for (const box of document.querySelectorAll(`input[name="${position}-clusters"]`)) box.checked = wanted.includes(box.value);
+    }
+    if ($('seed')) $('seed').value = input.seed ?? 'auto';
+}
+
+let currentBranch = 'daughter';
+function generate(keepSeed = false, branch = 'daughter') {
     try {
         const input = readInput();
         if (keepSeed === true && current) input.seed = current.spec.seed;   // same language, another numeral choice
-        current = generateLanguage(input, vocabulary, templates, derivations);
+        currentBranch = branch;
+        current = generateLanguage(input, vocabulary, templates, derivations, { branch });
         render(current);
         say(`Generated ${current.lexicon.length} entries.`);
     } catch (e) {
@@ -180,6 +206,22 @@ function generate(keepSeed = false) {
         box.className = 'result';
         box.innerHTML = `<div class="error">${esc(e.message)}</div>`;
     }
+}
+
+// The sister (or the first language again) of the language on screen: same seed and options, the form is put back as they were.
+function otherBranch(branch) {
+    if (!current) return;
+    applyInput(current.input);
+    generate(false, branch);
+}
+
+function loadCode() {
+    const msg = $('code-message');
+    const result = decodeLanguageCode($('code-input')?.value);
+    if (!result.ok) { if (msg) msg.textContent = result.error; return; }
+    applyInput(result.input);
+    generate(false, result.branch);
+    if (msg) msg.textContent = result.warning ?? `Code loaded (${result.branch === 'sister' ? 'sister language' : 'first language'}).`;
 }
 
 function randomize() {
@@ -382,7 +424,9 @@ async function start() {
     $('desc-term-links')?.addEventListener('change', renderDescription);
     for (const id of ['writing-type', 'writing-direction']) $(id)?.addEventListener('change', renderDescription);
     installTabs(); installRelationControls(); installVocabularyTools(); installMeanSlider(); installPhonotacticInfo(); installClusterControls(); installGenreControls();
-    $('generate')?.addEventListener('click', generate);
+    $('generate')?.addEventListener('click', () => generate());
+    $('load-code')?.addEventListener('click', loadCode);
+    $('code-input')?.addEventListener('keydown', ev => { if (ev.key === 'Enter') loadCode(); });
     $('writing-type')?.addEventListener('change', renderWriting);
     $('writing-direction')?.addEventListener('change', renderWriting);
     $('writing-numerals')?.addEventListener('change', renderWriting);

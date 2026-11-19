@@ -48,7 +48,7 @@ const roundSig = (n, d = 2) => { if (n < 10) return Math.round(n); const p = 10 
 const approx = n => n >= 1e6 ? `${(n / 1e6).toFixed(n >= 1e7 ? 0 : 1).replace(/\.0$/, '')} million` : num(n);
 
 function invent(lang) {
-    const { spec } = lang, r = rng(`${spec.seed}|description`), G = lang.genre ? GENRES[lang.genre.id] : null;
+    const { spec } = lang, r = rng(`${spec.seed}|description${lang.family?.branch === 'sister' ? '|sister' : ''}`), G = lang.genre ? GENRES[lang.genre.id] : null;
     const eras = Object.keys(ERA_SPEAKERS);
     const era = spec.era[0] ?? G?.profile?.era ?? pick(['ancient', 'medieval', 'medieval', 'renaissance', 'modern'], r);
     const culture = spec.culture[0] ?? G?.profile?.culture ?? null;
@@ -170,7 +170,7 @@ function sampleSection(lang, id) {
 export function describeLanguage(lang, opts = {}) {
     const f = invent(lang), r = f.r, spec = lang.spec;
     const Name = cap(lang.name), story = lang.history ? historyStory(lang) : null;
-    const proto = `Proto-${Name}`, sisterName = cap(languageName({ ...spec, seed: `${spec.seed}|sister-name` }));
+    const proto = lang.family?.proto ?? `Proto-${Name}`, sisterName = cap(lang.family?.sister ?? languageName({ ...spec, seed: `${spec.seed}|sister-name` }));
     const region = f.places[0], towns = f.places.slice(1, 4);
     const W = buildWriting(lang, opts.writing ?? 'auto', opts.direction ?? 'auto');
     const [orderTitle, orderLow] = ORDER[spec.order];

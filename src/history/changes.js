@@ -217,15 +217,19 @@ const leaves = node => typeof node === 'string' ? [node] : Array.isArray(node) ?
 
 // Turns the language that was generated (the mother) into its daughter. Returns the daughter's lexicon, derivational
 // affixes and numeral system, a function that converts any other form (inflectional affixes) and the account of the change.
-export function deriveDaughter(spec, lexicon, derivationAffixes, numerals) {
+export function deriveDaughter(spec, lexicon, derivationAffixes, numerals, branch = 'daughter') {
     const isNumeral = e => numeralValue(e) !== undefined;
     const words = lexicon.filter(e => !isNumeral(e));
-    const h = bestBuild(spec, words);
+    const h0 = bestBuild(spec, words);
     // The sister: the same mother, other changes (two of the daughter's rules may recur: sisters often share innovations)
     const rs = rng(`${spec.seed}|sister|share`);
-    const shared = h.rules.map(x => x.id).sort(() => rs() - 0.5).slice(0, 2);
-    const avoid = new Set(h.rules.map(x => x.id).filter(id => !shared.includes(id)));
-    const sh = bestBuild(spec, words, { key: 'sister', avoid });
+    const order = h0.rules.map(x => x.id).sort(() => rs() - 0.5);
+    // the sister repeats a few of the daughter's changes (shared innovations) and avoids about half of the others
+    const shared = order.slice(0, 2);
+    const avoid = new Set(order.slice(2).filter((id, i) => i % 2 === 0));
+    const sh0 = bestBuild(spec, words, { key: 'sister', avoid });
+    // branch 'sister': the language returned is the sister; the other branch then plays the part of the "sister" in the comparisons
+    const [h, sh] = branch === 'sister' ? [sh0, h0] : [h0, sh0];
     const wordForm = new Map(words.map((e, i) => [e.id, h.stage[i]]));
     const lexTaken = new Set(h.stage);
     const strings = [...Object.values(numerals.roots), ...Object.values(numerals.words), ...(numerals.classifiers ?? []).map(c => c.form), ...Object.values(derivationAffixes).map(a => a.form)];

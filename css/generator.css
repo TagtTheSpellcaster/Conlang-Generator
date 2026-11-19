@@ -790,3 +790,9 @@ main {
 .igt-table { border-collapse: collapse; width: 100% }
 .igt-table th { text-align: left; font-weight: 500; color: var(--muted); font-size: .85em; padding: 2px 14px 4px 0 }
 .igt-table td { padding: 2px 14px 2px 0; vertical-align: top }
+
+/* language code */
+.code-row { display: flex; gap: 8px; align-items: center; margin: 4px 0; }
+.code-row input { flex: 1; min-width: 0; font-family: ui-monospace, Consolas, monospace; font-size: 12px; }
+.family-line { margin-top: 6px; }
+.code-section .field input { width: 100%; font-family: ui-monospace, Consolas, monospace; font-size: 12px; }

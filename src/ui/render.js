@@ -10,6 +10,7 @@ let curStress = 'penult';
 export const setStress = id => { curStress = id || 'penult'; };
 const ipaText = form => `/${ipaWord(form, curStress)}/`;
 import { esc } from '../core/text.js';
+import { encodeLanguageCode } from '../code.js';
 import { label } from '../lexicon/schema.js';
 import { inflect, genderOf, classOf } from '../morphology/inflect.js';
 import { personCells } from '../morphology/affixes.js';
@@ -307,7 +308,7 @@ export function leadHtml(lang) {
 export function resultHtml(lang) {
     const s = lang.spec;
     const chips = [s.culture[0], s.biome[0], s.era[0], s.order].filter(Boolean);
-    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="export-bar" role="group" aria-label="Export"><span class="sub">Export:</span><button type="button" class="btn ghost" data-export="html">Language sheet (HTML)</button><button type="button" class="btn ghost" data-export="md">Markdown</button><button type="button" class="btn ghost" data-export="csv">Lexicon (CSV)</button><button type="button" class="btn ghost" data-export="json">Language (JSON)</button></div>${leadHtml(lang)}`;
+    return `<div class="hero"><div><div class="lang-name">Name of language: ${esc(lang.name)}</div>${lang.genre ? `<div class="sub genre-line"><strong>Genre:</strong> ${esc(lang.genre.label)} — ${esc(lang.genre.summary)}</div>` : ''}<div class="chips">${chips.map(x => `<span class="chip">${esc(x)}</span>`).join('')}</div><div class="sub">Seed: <code id="used-seed">${esc(s.seed)}</code> <button type="button" class="btn ghost" id="keep-seed">Use this seed</button></div><div class="code-line"><label class="sub" for="language-code">Language code (seed, options and version):</label><div class="code-row"><input id="language-code" type="text" readonly value="${esc(encodeLanguageCode(lang.input, lang.family.branch))}"><button type="button" class="btn ghost" id="copy-code">Copy code</button></div></div><div class="family-line sub">${lang.family.branch === 'sister' ? `This is the <strong>sister language</strong> of ${esc(lang.family.sister)}; both descend from ${esc(lang.family.proto)}. <button type="button" class="btn ghost" id="make-first">Show the first language (${esc(lang.family.sister)})</button>` : `Its sister language, ${esc(lang.family.sister)}, descends from the same mother. <button type="button" class="btn" id="make-sister">Generate sister language</button>`}</div></div><div class="status">${lang.lexicon.length} lexical entries</div></div><div class="export-bar" role="group" aria-label="Export"><span class="sub">Export:</span><button type="button" class="btn ghost" data-export="html">Language sheet (HTML)</button><button type="button" class="btn ghost" data-export="md">Markdown</button><button type="button" class="btn ghost" data-export="csv">Lexicon (CSV)</button><button type="button" class="btn ghost" data-export="json">Language (JSON)</button></div>${leadHtml(lang)}`;
 }
 
 // Reference tables (phonology, morphology, verbs, nominal categories, classes) for the Grammar tab.
@@ -472,14 +473,14 @@ export function historyHtml(lang) {
     const story = historyStory(lang);
     const storyHtml = story ? `<div class="card"><h3>History of the language</h3><p class="sub">${esc(story.intro)}</p><ol class="timeline">${story.events.map(e => `<li class="${e.kind}"><strong>c. ${e.years} years ago</strong> — ${esc(e.text)}</li>`).join('')}</ol><p class="sub">${esc(story.outro)}</p></div>` : '';
     return `${storyHtml}<div class="card"><h3>Mother language and sound changes</h3>
-<p class="sub">The language shown in every other tab is the <strong>daughter</strong>. The generator first builds its mother (the proto-language, whose sound system is the one chosen in the Phonology settings) and then applies ${st.rules} ordered sound changes to every word, to the derivational and inflectional affixes and to the numerals. Forms marked * are the mother's. Derived words change as wholes, so related words come to differ in their roots. ${st.unchanged} of ${st.words} words (${pct(st.unchanged)}) are unchanged. A rule never makes a word identical to another word: where it would, that word keeps its older shape (${st.blocked} words${st.repaired ? `; ${st.repaired} more repaired after the numerals were recomposed` : ''})${h.attempts > 1 ? `; ${h.attempts} rule sets were tried` : ''}.${invText ? ` Sounds of the daughter against the mother — ${esc(invText)}.` : ''} Sentences, names and the calendar are built from the daughter's words, so inflected forms are made of changed stems and changed affixes (no further rule applies to them).</p>
+<p class="sub">The language shown in every other tab is the <strong>${lang.family.branch === 'sister' ? 'sister language' : 'daughter'}</strong>. The generator first builds its mother (the proto-language, whose sound system is the one chosen in the Phonology settings) and then applies ${st.rules} ordered sound changes to every word, to the derivational and inflectional affixes and to the numerals. Forms marked * are the mother's. Derived words change as wholes, so related words come to differ in their roots. ${st.unchanged} of ${st.words} words (${pct(st.unchanged)}) are unchanged. A rule never makes a word identical to another word: where it would, that word keeps its older shape (${st.blocked} words${st.repaired ? `; ${st.repaired} more repaired after the numerals were recomposed` : ''})${h.attempts > 1 ? `; ${h.attempts} rule sets were tried` : ''}.${invText ? ` Sounds of the daughter against the mother — ${esc(invText)}.` : ''} Sentences, names and the calendar are built from the daughter's words, so inflected forms are made of changed stems and changed affixes (no further rule applies to them).</p>
 <h4>Sound changes, oldest first</h4>
 ${tbl(['#', 'When', 'Change', 'Words affected', 'Example'], rules)}
 <h4>Examples: daughter against mother</h4>
 ${tbl(['Daughter', 'Mother', 'English', 'Changes', 'Etymology', 'Note'], examples.map(row))}
 ${h.alternations.length ? `<h4>Related words whose root has diverged (${st.alternations})</h4>${tbl(['Base', 'Derived', 'Mother: base → derived', 'Relation'], h.alternations.map(a => [a.base, a.derived, `*${a.baseProto} → *${a.derivedProto}`, `${a.lemmas} (${a.type})`]))}` : ''}
 ${h.affixes.length ? `<h4>Derivational affixes</h4>${tbl(['Type', 'Mother', 'Daughter'], h.affixes.map(a => [a.type, a.position === 'prefix' ? `*${a.proto}-` : `*-${a.proto}`, a.position === 'prefix' ? `${a.daughter}-` : `-${a.daughter}`]))}` : ''}
-${sisterHtml(h)}
+${sisterHtml(h, lang.family)}
 ${loansHtml(h)}
 <h4>All words (${sorted.length})</h4>
 <div class="table-scroll history-scroll">${tbl(['Daughter', 'Mother', 'English', 'Changes', 'Etymology', 'Note'], sorted.map(row))}</div></div>`;
@@ -502,16 +503,16 @@ const CW = 7.4;   // character width of the graph font (monospace 12px), in px
 const nodeW = text => Math.max(28, Math.round(text.length * CW) + 14);
 
 // Family tree: the mother at the top, the two daughters below, the changes along each branch.
-function familyTreeSvg(h) {
+function familyTreeSvg(h, fam) {
     const d = h.rules, sr = h.sister.rules;
     const W = 720, rowH = 15;
     const lines = (rules, x, anchor) => rules.map((r, i) => `<text x="${x}" y="${108 + i * rowH}" text-anchor="${anchor}" class="graph-small">${esc(`c. ${r.years} · ${r.id}`)}</text>`).join('');
     const H = Math.max(150, 100 + Math.max(d.length, sr.length) * rowH);
     return `<svg class="graph" viewBox="0 0 ${W} ${H}" role="img" aria-label="Family tree: the mother language and its two daughters" width="100%" style="max-width:${W}px">
-<rect x="${W / 2 - 70}" y="6" width="140" height="26" rx="5" class="graph-node"/><text x="${W / 2}" y="24" text-anchor="middle" class="graph-text">Mother (proto)</text>
+<rect x="${W / 2 - 70}" y="6" width="140" height="26" rx="5" class="graph-node"/><text x="${W / 2}" y="24" text-anchor="middle" class="graph-text">${esc(fam.proto)}</text>
 <path d="M${W / 2 - 30} 32 L${W * 0.25} 66" class="graph-edge"/><path d="M${W / 2 + 30} 32 L${W * 0.75} 66" class="graph-edge"/>
-<rect x="${W * 0.25 - 95}" y="62" width="190" height="26" rx="5" class="graph-node graph-main"/><text x="${W * 0.25}" y="80" text-anchor="middle" class="graph-text">Daughter (this language)</text>
-<rect x="${W * 0.75 - 95}" y="62" width="190" height="26" rx="5" class="graph-node"/><text x="${W * 0.75}" y="80" text-anchor="middle" class="graph-text">Sister (examples only)</text>
+<rect x="${W * 0.25 - 95}" y="62" width="190" height="26" rx="5" class="graph-node graph-main"/><text x="${W * 0.25}" y="80" text-anchor="middle" class="graph-text">${esc(fam.name)} (this language)</text>
+<rect x="${W * 0.75 - 95}" y="62" width="190" height="26" rx="5" class="graph-node"/><text x="${W * 0.75}" y="80" text-anchor="middle" class="graph-text">${esc(fam.sister)} (${fam.branch === 'sister' ? 'first language, examples only' : 'sister, examples only'})</text>
 ${lines(d, W * 0.25, 'middle')}${lines(sr, W * 0.75, 'middle')}
 </svg>`;
 }
@@ -536,23 +537,23 @@ function wordGraphSvg(e) {
     return `<svg class="graph" viewBox="0 0 ${W} ${16 + rowH + 36}" width="${W}" role="img" aria-label="Derivation of ${esc(e.lemma)}"><defs><marker id="arr" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L8 4 L0 8 z" class="graph-arrow"/></marker></defs>${a.out}${b.out}</svg>`;
 }
 
-function sisterHtml(h) {
+function sisterHtml(h, fam) {
     const s = h.sister;
     if (!s?.examples?.length) return '';
-    const cards = s.examples.map(e => `<div class="graph-card"><div class="graph-title"><strong>${esc(e.lemma)}</strong>${e.etymology ? ` <span class="sub">${esc(e.etymology)}</span>` : ''}</div>${wordGraphSvg(e)}<div class="graph-legend"><span>top: daughter (this language) <strong>${esc(e.daughter)}</strong></span><span>bottom: sister <strong>${esc(e.sister)}</strong></span></div></div>`).join('');
+    const cards = s.examples.map(e => `<div class="graph-card"><div class="graph-title"><strong>${esc(e.lemma)}</strong>${e.etymology ? ` <span class="sub">${esc(e.etymology)}</span>` : ''}</div>${wordGraphSvg(e)}<div class="graph-legend"><span>top: ${esc(fam.name)} (this language) <strong>${esc(e.daughter)}</strong></span><span>bottom: ${esc(fam.sister)} <strong>${esc(e.sister)}</strong></span></div></div>`).join('');
     const ruleTable = (rules) => tbl(['When', 'Change'], rules.map(r => [`c. ${r.years} years ago`, r.label]));
-    return `<h4>Sister language (examples)</h4>
+    return `<h4>${fam.branch === 'sister' ? `Comparison with ${esc(fam.sister)}, the first language` : `Sister language ${esc(fam.sister)} (examples)`}</h4>${fam.branch === 'sister' ? '' : '<p class="sub">The sister is a complete language of its own: press <strong>Generate sister language</strong> at the top of the Generator tab to have it with its own lexicon, grammar, loanwords and texts.</p>'}
 <p class="sub">A sister descends from the same mother through other changes (${s.stats.rules} here; the two languages may share some innovations). Only examples are shown: ${s.stats.same} of ${s.stats.words} words come out identical in both. Each graph follows one word from the mother to the daughter (this language) and to the sister, with every intermediate form and the change that produced it.</p>
-${familyTreeSvg(h)}
-<div class="two-col"><div><h5>Changes of the daughter</h5>${ruleTable(h.rules)}</div><div><h5>Changes of the sister</h5>${ruleTable(s.rules)}</div></div>
-<div class="graph-grid">${cards}</div>${contrastHtml(s)}`;
+${familyTreeSvg(h, fam)}
+<div class="two-col"><div><h5>Changes of ${esc(fam.name)}</h5>${ruleTable(h.rules)}</div><div><h5>Changes of ${esc(fam.sister)}</h5>${ruleTable(s.rules)}</div></div>
+<div class="graph-grid">${cards}</div>${contrastHtml(s, fam)}`;
 }
-function contrastHtml(s) {
+function contrastHtml(s, fam) {
     const c = s.loanContrast ?? [];
     if (!c.length) return '';
-    return `<h4>Loanwords this language took and its sister did not</h4>
+    return `<h4>Loanwords this language took and ${esc(fam.sister)} did not</h4>
 <p class="sub">The mother’s word survives in the sister (as with Italian <em>cane</em> from Latin <em>canis</em> against Spanish <em>perro</em>, a loan); in this language it was replaced by a word from another language.</p>
-${tbl(['English', 'Mother', 'Sister (inherited)', 'This language (loan)', 'Donor', 'Entered'], c.map(x => [x.lemma, `*${x.mother}`, x.sister, x.daughter, `${x.donor} *${x.source}*`, `c. ${x.years} years ago`]))}`;
+${tbl(['English', 'Mother', `${fam.sister} (inherited)`, 'This language (loan)', 'Donor', 'Entered'], c.map(x => [x.lemma, `*${x.mother}`, x.sister, x.daughter, `${x.donor} *${x.source}*`, `c. ${x.years} years ago`]))}`;
 }
 
 // ---- Writing tab ---------------------------------------------------------------------------------------------------

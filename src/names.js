@@ -81,12 +81,13 @@ function pools(lexicon, spec) {
 
 export function generateNames(lang, { kind = 'person', count = 12, salt = 0, scheme = 'genre' } = {}) {
     const { spec, lexicon } = lang;
+    const seedKey = lang.family?.branch === 'sister' ? `${spec.seed}|sister` : spec.seed;   // the sister's names are not the first language's
     if (!NAME_KINDS.some(k => k.id === kind)) throw new Error(`Unknown name kind "${kind}".`);
     const n = Math.max(1, Math.min(60, Math.floor(count) || 12));
     const P = pools(lexicon, spec);
     if (!PERSON_SCHEMES.some(x => x.id === scheme)) throw new Error(`Unknown naming scheme "${scheme}".`);
     const custom = kind === 'person' && scheme !== 'genre' ? scheme : null;
-    const base = `${spec.seed}|names|${kind}|${custom ? `${custom}|` : ''}${salt}`;
+    const base = `${seedKey}|names|${kind}|${custom ? `${custom}|` : ''}${salt}`;
     const r = rng(`${base}|choice`);
     const sounds = (mean, tag) => createWordFactory({
         consonants: spec.consonants, vowels: spec.vowels, mean: Math.max(1, Math.min(4, mean)), seed: `${base}|${tag}`,
@@ -95,7 +96,7 @@ export function generateNames(lang, { kind = 'person', count = 12, salt = 0, sch
     });
     // words that belong to the language's naming custom (markers, day names, clan lists) do not change with the salt
     const fixedSounds = (mean, tag) => createWordFactory({
-        consonants: spec.consonants, vowels: spec.vowels, mean: Math.max(1, Math.min(4, mean)), seed: `${spec.seed}|names|fixed|${tag}`,
+        consonants: spec.consonants, vowels: spec.vowels, mean: Math.max(1, Math.min(4, mean)), seed: `${seedKey}|names|fixed|${tag}`,
         onsetClusters: spec.onsetClusters, codaClusters: spec.codaClusters, maxCluster: spec.maxCluster, soundBias: spec.soundBias,
         extraVowels: spec.extraVowels, extraConsonants: spec.extraConsonants
     });

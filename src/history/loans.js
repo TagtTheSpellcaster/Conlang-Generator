@@ -45,10 +45,15 @@ function nativize(word, ctx, r) {
 }
 
 // lexicon: the daughter's lexicon (forms already changed); history: from deriveDaughter; later(word, year)
-export function applyLoans(spec, lexicon, history, later, fixedForms) {
-    const r = rng(`${spec.seed}|loans`);
+// sister (optional): { items } = the loans of the language this one is the sister of. The sister keeps the same donor languages
+// (their sound systems are the same, their words are not drawn again), may have one donor of its own, takes its own words in its own
+// fields, and takes some of the same words from the same donors (Italian caffè, French café), adapted to its own sounds.
+export function applyLoans(spec, lexicon, history, later, fixedForms, sister = null) {
+    let r = rng(`${spec.seed}|loans`);
+    const rSister = rng(`${spec.seed}|loans|sister`);
     const genre = spec.genre;
-    const factor = 0.6 + r() * 0.9;
+    const factor0 = 0.6 + r() * 0.9;
+    const factor = sister ? 0.6 + rSister() * 0.9 : factor0;
     const absorbency = (ABSORBENCY[genre] ?? DEFAULT_ABSORBENCY) * factor;
     const isNumeral = e => numeralValue(e) !== undefined;
     const vset = new Set([...'aeiouyøæ', ...(spec.extraVowels ?? [])]);
@@ -71,7 +76,8 @@ export function applyLoans(spec, lexicon, history, later, fixedForms) {
     const vowelKeys = Object.keys(VOWELS);
     const donors = order.slice(0, n).map((role, i) => {
         const consonantsKey = modelKeys[Math.floor(r() * modelKeys.length)], vowelsKey = vowelKeys[Math.floor(r() * vowelKeys.length)];
-        const factory = createWordFactory({ consonants: consonantsKey, vowels: vowelsKey, mean: r() < 0.55 ? 1.4 : 2.0, seed: `${spec.seed}|loans|donor${i}` });
+        const donorMean = r() < 0.55 ? 1.4 : 2.0;
+        const factory = createWordFactory({ consonants: consonantsKey, vowels: vowelsKey, mean: donorMean, seed: `${spec.seed}|loans|donor${i}${sister ? '|sister' : ''}` });
         const nameFactory = createWordFactory({ consonants: consonantsKey, vowels: vowelsKey, mean: 2.4, seed: `${spec.seed}|loans|name${i}` });
         let name = nameFactory();
         if (name.length < 4) name += nameFactory({ short: true });
@@ -79,8 +85,25 @@ export function applyLoans(spec, lexicon, history, later, fixedForms) {
         const jitter = Object.fromEntries(Object.keys(DONOR_ROLES.trade.weights).concat(['war', 'weapon', 'faith', 'magic', 'nature', 'animal']).map(d => [d, 0.5 + r() * 1.3]));
         return { id: `D${i + 1}`, role, name: name[0].toUpperCase() + name.slice(1), model: MODEL[consonantsKey].name, strength: 1 - i * 0.25, factory, jitter, years: 0 };
     });
+    donors.forEach(d => { d.shared = !!sister; });
+    if (sister) {
+        r = rSister;
+        // one more donor, the sister's own, with a sound system of its own (the "gauche" of this language)
+        if (r() < 0.7) {
+            const free = Object.keys(DONOR_ROLES), role = free[Math.floor(r() * free.length)];
+            const consonantsKey = modelKeys[Math.floor(r() * modelKeys.length)], vowelsKey = vowelKeys[Math.floor(r() * vowelKeys.length)];
+            const nameFactory = createWordFactory({ consonants: consonantsKey, vowels: vowelsKey, mean: 2.4, seed: `${spec.seed}|loans|sister-name` });
+            let name = nameFactory();
+            if (name.length < 4) name += nameFactory({ short: true });
+            const jitter = Object.fromEntries(Object.keys(DONOR_ROLES.trade.weights).concat(['war', 'weapon', 'faith', 'magic', 'nature', 'animal']).map(d => [d, 0.5 + r() * 1.3]));
+            donors.push({ id: `D${donors.length + 1}`, role, name: name[0].toUpperCase() + name.slice(1), model: MODEL[consonantsKey].name, strength: 0.9, factory: createWordFactory({ consonants: consonantsKey, vowels: vowelsKey, mean: r() < 0.55 ? 1.4 : 2.0, seed: `${spec.seed}|loans|sister-donor` }), jitter, years: 0, shared: false });
+        }
+        // the shared donors are weighed again: the sister's contacts were not the same
+        for (const d of donors) if (d.shared) { d.strength = Math.max(0.3, d.strength * (0.7 + r() * 0.6)); for (const k of Object.keys(d.jitter)) d.jitter[k] = 0.5 + r() * 1.3; }
+    }
     const firstChange = history.rules.length ? history.rules[0].years : 300;
     donors.forEach(d => { d.years = Math.max(60, Math.round((firstChange * (0.15 + r() * 0.85)) / 10) * 10); });
+    const fromMate = new Map((sister?.items ?? []).map(x => [x.id, x]));
 
     const candidates = lexicon.map((e, i) => ({ e, i })).filter(({ e }) => !isNumeral(e) && !e.derivation && !NEVER.has(e.domain));
     const weight = (e, d) => {
@@ -93,29 +116,32 @@ export function applyLoans(spec, lexicon, history, later, fixedForms) {
     const loans = [];
     const out = lexicon.slice();
     candidates.forEach(({ e, i }, k) => {
-        if (r() >= Math.min(0.6, raw[k] * scale)) return;
+        const mate = fromMate.get(e.id);
+        const same = mate && donors.find(d => d.id === mate.donor && d.shared) && r() < 0.5;
+        if (!same && r() >= Math.min(0.6, raw[k] * scale)) return;
         const ws = donors.map(d => weight(e, d)), total = ws.reduce((a, b) => a + b, 0);
         let x = r() * total, di = 0;
         while (di < donors.length - 1 && (x -= ws[di]) > 0) di++;
-        const d = donors[di];
+        const d = same ? donors.find(z => z.id === mate.donor) : donors[di];
         const years = Math.max(30, d.years + Math.round((r() - 0.5) * 6) * 10);
         let source, native, form = null;
         for (let t = 0; t < 8 && !form; t++) {
-            source = d.factory({ short: e.pos === 'pronoun' });
+            source = same ? mate.source : d.factory({ short: e.pos === 'pronoun' });
             native = nativize(source, ctx, r);
             const f = native && later(native, years);
             if (f && f.length >= 2 && !taken.has(f)) form = f;
+            if (same) break;
         }
         if (!form) return;
         taken.add(form);
-        loans.push({ id: e.id, lemma: e.lemma, pos: e.pos, domain: e.domain, donor: d.id, source, adapted: native, form, years, replaced: e.form, replacedProto: e.protoForm });
+        loans.push({ id: e.id, lemma: e.lemma, pos: e.pos, domain: e.domain, donor: d.id, source, adapted: native, form, years, replaced: e.form, replacedProto: e.protoForm, ...(same ? { sameAsSister: mate.form } : {}) });
         out[i] = { ...e, form, loan: { donor: d.id, donorName: d.name, source, years, replaced: e.form } };
     });
     return {
         lexicon: out,
         loans: {
             absorbency: Number(absorbency.toFixed(3)),
-            donors: donors.map(({ factory, jitter, strength, ...d }) => d),
+            donors: donors.map(({ factory, jitter, strength, shared, ...d }) => sister ? { ...d, shared } : d),
             items: loans, share: loans.length / lexicon.length
         }
     };
