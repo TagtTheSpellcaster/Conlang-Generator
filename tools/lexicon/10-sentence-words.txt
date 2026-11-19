@@ -17,6 +17,11 @@ health
 ## people_terms
 people
 
+@tier core
+## language_terms
+language
+@tier common
+
 @domain body
 ## body_parts
 beard

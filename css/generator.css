@@ -102,7 +102,7 @@ h1 {
 .tabs {
   display: flex;
   gap: 0;
-  padding: 0 22px;
+  padding: 0 22px 10px;   /* the active tab's underline stays clear of the band below */
   flex-wrap: wrap
 }
 
@@ -731,9 +731,62 @@ main {
 .header-tools .btn { background: var(--primary-bg); border-color: var(--primary-line); color: var(--primary-text) }
 .header-tools .btn:hover { background: var(--primary-hover) }
 .theme-toggle { display: inline-flex; align-items: center; padding: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; box-shadow: var(--shadow) }
-.theme-toggle button { border: 0; background: transparent; color: var(--muted); font-weight: 500; padding: 7px 14px; border-radius: 7px }
-.theme-toggle button[aria-pressed="true"] { background: var(--toggle-active); color: var(--strong); font-weight: 700 }
+.theme-toggle button { border: 0; background: transparent; color: var(--muted); font-weight: 600; width: 7.5rem; padding: 7px 0; border-radius: 7px; text-align: center }   /* fixed width and weight: selecting a segment never changes the size of the row */
+.theme-toggle button[aria-pressed="true"] { background: var(--toggle-active); color: var(--strong) }
 .theme-toggle button:hover:not([aria-pressed="true"]) { color: var(--text) }
 .theme-toggle .sep { width: 1px; height: 16px; background: var(--line); margin: 0 2px }
 .theme-toggle button:focus-visible, .tab:focus-visible, .btn:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px }
 @media (max-width: 900px) { header { flex-wrap: wrap } .header-tools { flex-wrap: wrap } }
+
+/* 1.35.0: sub-tabs, table of contents, lead paragraph */
+#copy-vocabulary { min-width: 10.5rem; justify-content: center }
+.subtabs { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 14px; border-bottom: 1px solid var(--line); padding-bottom: 8px }
+.subtab { border: 1px solid var(--line); background: var(--panel); color: var(--muted); border-radius: 7px; padding: 6px 12px; cursor: pointer }
+.subtab:hover { color: var(--text) }
+.subtab.active { background: var(--toggle-active); color: var(--strong); border-color: var(--accent) }
+.subtab:focus-visible { outline: 2px solid var(--accent-text); outline-offset: 2px }
+.sub-panel { display: none } .sub-panel.active { display: block }
+.toc { display: flex; flex-wrap: wrap; gap: 6px 16px; margin: 0 0 14px; padding: 8px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px }
+.toc a, .lead a { color: var(--accent-text) }
+.gram-section { margin: 0 0 22px } .gram-section > h2 { margin: 0 0 10px; padding-bottom: 4px; border-bottom: 1px solid var(--line) }
+.lead { margin: 12px 0 0; line-height: 1.55; max-width: 70ch }
+
+/* 1.36.0: Description tab */
+.desc-controls { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; margin: 0 0 14px }
+.desc-controls label { color: var(--muted); font-size: .92em }
+.description { max-width: 100ch; line-height: 1.6 } .description p { max-width: 72ch }
+.description .desc-title { margin: 0 0 8px }
+.description .desc-section > h2 { margin: 22px 0 8px; padding-bottom: 4px; border-bottom: 1px solid var(--line) }
+.description h3 { margin: 14px 0 4px }
+.description a { color: var(--accent-text) }
+.description .ipa { font-weight: 400; color: var(--muted); font-size: .7em }
+.infobox { float: right; clear: right; width: 22rem; max-width: 100%; margin: 0 0 14px 20px; border: 1px solid var(--line); background: var(--panel); border-collapse: collapse; font-size: .9em }
+.infobox caption { font-weight: 700; padding: 8px; background: var(--toggle-active); color: var(--strong) }
+.infobox th, .infobox td { padding: 5px 8px; border-top: 1px solid var(--line); vertical-align: top; text-align: left }
+.infobox th { width: 38%; color: var(--muted); font-weight: 600 }
+.desc-toc { clear: both }
+.desc-sample { margin: 10px 0 }
+@media (max-width: 760px) { .infobox { float: none; width: 100%; margin-left: 0 } }
+
+/* 1.37.0: grammar guide (interlinear examples, "How it works" boxes) */
+.toc .toc-group { display: block; width: 100% }
+.toc .toc-group a + a { margin-left: 4px }
+.guide-topic { margin: 0 0 24px; max-width: 78ch }
+.guide-topic h3 { margin: 0 0 6px }
+.guide-local { color: var(--muted) }
+.igt { margin: 10px 0; padding: 8px 12px; background: var(--panel); border: 1px solid var(--line); border-radius: 8px }
+.igt-words { display: flex; flex-wrap: wrap; gap: 2px 18px }
+.igt-w { display: flex; flex-direction: column }
+.igt-f { font-weight: 600; color: var(--strong) }
+.igt-s { color: var(--muted) }
+.igt-g { color: var(--accent-text) }
+.igt-tr { margin-top: 4px }
+.howbox { margin: 10px 0; padding: 8px 12px; border-left: 3px solid var(--accent); background: var(--panel) }
+.howbox h4 { margin: 0 0 4px }
+.howbox p { margin: 2px 0 }
+.howbox .calque code { font-size: 1.02em; color: var(--accent-text) }
+.abbr-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr)); gap: 4px 24px }
+.abbr-list div { display: flex; gap: 10px } .abbr-list dt { font-weight: 600; min-width: 4.2rem } .abbr-list dd { margin: 0 }
+.igt-table { border-collapse: collapse; width: 100% }
+.igt-table th { text-align: left; font-weight: 500; color: var(--muted); font-size: .85em; padding: 2px 14px 4px 0 }
+.igt-table td { padding: 2px 14px 2px 0; vertical-align: top }

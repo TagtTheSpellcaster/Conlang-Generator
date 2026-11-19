@@ -7233,6 +7233,7 @@
   {"id":"grammar.polite_marker","lemma":"polite marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
   {"id":"grammar.witnessed_marker","lemma":"witnessed marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
   {"id":"grammar.reported_marker","lemma":"reported marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
-  {"id":"grammar.inferred_marker","lemma":"inferred marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}}
+  {"id":"grammar.inferred_marker","lemma":"inferred marker","pos":"particle","domain":"grammar","group":"local_grammar","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{},"relations":{}},
+  {"id":"society.language","lemma":"language","pos":"noun","domain":"society","group":"language_terms","tier":"core","region":[],"culture":[],"biome":[],"era":[],"tags":[],"features":{"animacy":"inanimate"},"relations":{}}
  ]
 }
