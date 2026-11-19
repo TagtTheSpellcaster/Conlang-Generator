@@ -24,6 +24,9 @@ The seed alone does not fix a language: every option takes part in the draws. Th
 
 **Generate sister language** builds the second descendant of the same mother (`generateLanguage(..., { branch: 'sister' })`): the same mother lexicon and inflectional morphology, other sound changes (`src/history/changes.js`) and other loanwords (`src/history/loans.js`: same donor languages, shared and own loans, adapted to the sister's sounds). It is a full language with its own code (branch `S`). The first language does not depend on the sister. Limits: templates, stories, writing system and grammatical options are shared with the first language; invented names are not run through the sound changes.
 
+## Insults, vulgar and taboo words
+Domain `taboo`: insults, rude acts and oaths, vulgar words for body and sex, taboo words and euphemisms. Every language has such words, so every generated language gets the `_basic` groups and a seeded share of the rest (`tabooEntries` in `src/lexicon/select.js`; the share depends on the genre). They are appended after the ordinary vocabulary and do not displace it. The Lexicon tab shows them in their own section. No grammatical register is modelled: they are inflected like any other word, and the generator has no sentence composer that could translate "fuck off" freely; the entry `fuck off` is a lexical item.
+
 ## Project layout
 - `src/lexicon/schema.js`: single source of truth for parts of speech, domains, tiers, features, relations and validation.
 - `src/core`, `src/phonology`, `src/morphology`, `src/lexicon/select.js`, `src/syntax`, `src/engine.js`: the pure engine (no DOM), also runnable in Node.
@@ -108,7 +111,7 @@ A genre has four parts:
 3. **Profile**: the culture, biome and era the interface selects with the genre (only where the genre has a clear identity). They are soft preferences you can change.
 4. **Semantics**: weights for dictionary domains, groups, tags, cultures, biomes and eras, and exclusions (a fey tongue has no war vocabulary). With a genre the lexicon grows from 600 to up to 900 entries.
 
-The dictionary (7,234 entries) is rebuilt from the sources in `tools/lexicon/*.txt` with `node tools/lexicon/build.mjs` (idempotent; it validates the result), then `node tools/validate.mjs`.
+The dictionary (7,539 entries) is rebuilt from the sources in `tools/lexicon/*.txt` with `node tools/lexicon/build.mjs` (idempotent; it validates the result), then `node tools/validate.mjs`.
 
 ## Sample sentences
 The sentences are shown in the *Texts* tab, in two columns:

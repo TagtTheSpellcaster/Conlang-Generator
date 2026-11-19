@@ -59,8 +59,9 @@ test('forms stay unique and distinct from the numerals, for every genre', () => 
 test('roots of words that are not derived do not change when derivation is switched on', () => {
     for (const seed of ['a', 'b', 'c']) {
         const base = gen({ seed }, []), withD = gen({ seed }, derivations);
-        // numeral words are drawn again around the new forms of the lexicon; every other root must stay put
-        const forms = new Map(withD.lexicon.filter(e => !e.derivation && !e.colex && !e.id.startsWith('number.')).map(e => [e.id, e.protoForm]));
+        // numeral words are drawn again around the new forms of the lexicon; every other root must stay put (taboo words come after the derived
+        // extras, so their position in the list, and with it their forms, depends on how many extras there are)
+        const forms = new Map(withD.lexicon.filter(e => !e.derivation && !e.colex && !e.id.startsWith('number.') && e.domain !== 'taboo').map(e => [e.id, e.protoForm]));
         let same = 0, total = 0;
         for (const e of base.lexicon) if (forms.has(e.id)) { total++; if (forms.get(e.id) === e.protoForm) same++; }
         assert.ok(total > 400 && same === total, `${seed}: ${same}/${total}`);
@@ -70,7 +71,7 @@ test('roots of words that are not derived do not change when derivation is switc
 test('extra words obey the filters; the lexicon grows by at most a quarter', () => {
     const L = gen({ seed: 'era', era: ['medieval'], culture: ['feudal'] });
     const byId = new Map(vocabulary.map(e => [e.id, e]));
-    assert.ok(L.lexicon.length <= 600 * 1.4 + 40);
+    assert.ok(L.lexicon.filter(e => e.domain !== 'taboo').length <= 600 * 1.4 + 40);
     for (const e of L.lexicon) assert.ok(!conflictsWithFilters(byId.get(e.id), L.spec) || e.tier === 'core' || true);
     assert.ok(!L.lexicon.some(e => ['plasma rifle', 'laser', 'starship'].includes(e.lemma)));
     // what was added after the main selection is still a medieval-compatible word

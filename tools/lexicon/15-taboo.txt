@@ -1,0 +1,53 @@
+# Insults, vulgar words and taboo words. Every known language has them; they are a cultural universal, not an optional extra.
+# Domain "taboo": the generator adds the entries that the filters allow after the ordinary vocabulary (see select.js), so they
+# never displace other words. Groups ending in _basic are always added (the words everybody tests first); of the others a share is drawn from the seed. Insults target behaviour, character, animals and sexual morality; no ethnic, religious, disability or
+# sexual-orientation slurs. Grammatical register is not modelled (README, "Insults, vulgar and taboo words").
+@domain taboo
+@tier domain
+@era
+@tags taboo
+
+## insults_basic | animacy=human | tags=insult,rude
+fool, idiot, coward, bastard, scoundrel, swine (as an insult), dog (as an insult), wretch, scum, jerk, whore, slut, cuckold, son of a bitch, motherfucker
+
+## vulgar_basic | tags=vulgar,rude
+arse, cock (vulgar), cunt, balls (vulgar), tits, shit, piss, fart, turd
+v:fuck, vi:shit, vi:piss, vi:fart
+
+## rude_basic | tags=rude
+v:curse at, vi:swear (use profanity), vi:fuck off, vi:piss off, vi:get lost, vi:shut up, vi:drop dead
+a:fucking (intensifier), a:bloody (intensifier), a:stupid (as an insult), a:worthless
+p:damn (interjection), p:shit (interjection), p:fuck (interjection), p:hell (interjection)
+
+## taboo_basic | tags=taboo
+penis, vagina, testicles, breasts (taboo), buttocks, semen, urine, excrement, menstruation, virginity, intercourse, copulation, adultery, incest, nakedness, blasphemy, taboo, curse word, swear word, euphemism, name of the dead, unspeakable name, evil eye
+v:copulate, vi:pass away (euphemism), vi:relieve oneself (euphemism), vi:lie with (euphemism)
+
+## insult_persons | animacy=human | tags=insult,rude
+fool, idiot, dunce, blockhead, simpleton, dolt, nitwit, numbskull, oaf, lout, brute, coward, weakling, wretch, scoundrel, scum, vermin, lowlife, trash (contemptible person), swine (as an insult), dog (as an insult), cur, snake (as an insult), worm (as an insult), rat (as an insult), louse (as an insult), leech (as an insult), jackass, braggart, snob, sneak, tattletale, crybaby, wimp, loser, jerk, glutton (as an insult), drunkard, miser, gossip (as an insult), beggar (as an insult), hag, shrew, crone (as an insult), bully, coward's whelp, whelp (as an insult), wastrel, parasite (as an insult), sycophant, hypocrite, backstabber, oathbreaker, deserter, cuckold, bastard, whoreson, son of a bitch, motherfucker
+
+## insult_qualities | tags=insult,rude
+a:stupid (as an insult), a:dim-witted, a:brainless, a:spineless, a:gutless, a:worthless, a:contemptible, a:pathetic, a:snivelling, a:loathsome, a:vile, a:slimy, a:rotten (as an insult), a:mangy, a:flea-bitten, a:cross-eyed (as an insult), a:pig-headed, a:muddle-headed, a:lily-livered, a:bloody (intensifier), a:fucking (intensifier), a:goddamn (intensifier), a:shitty, a:crappy, a:arse-licking
+
+## rude_acts | tags=insult,rude
+v:insult, v:curse at, v:spit on, v:sneer at, v:jeer at, v:mock to one's face, v:call names, v:shame publicly, v:slander, v:cuss, vi:swear (use profanity), vi:blaspheme, vi:fuck off, vi:piss off, vi:get lost, vi:shut up, vi:drop dead, vi:bugger off, v:kiss my arse, v:go fuck oneself, v:tell off
+
+## interjections_and_oaths | tags=rude,oath
+p:damn (interjection), p:hell (interjection), p:shit (interjection), p:fuck (interjection), p:bloody hell (interjection), p:curse it (interjection), p:by the gods (oath), p:blast (interjection), p:ouch (interjection), p:ugh (interjection of disgust), p:yuck (interjection), p:what the hell (interjection)
+
+## vulgar_body | tags=vulgar,rude
+arse, arsehole, balls (vulgar), cock (vulgar), cunt, tits, nipple (vulgar), pussy (vulgar), prick (vulgar), cum, boner, bollocks, bum, rump (vulgar), crotch, crack (vulgar, of buttocks), tail (vulgar), piles (vulgar), snatch (vulgar), nuts (vulgar), crap, shit, turd, piss, fart, belch, snot, phlegm, pus, puke, vomit (vulgar), dung (vulgar), stink, shitter, bog (privy)
+v:fuck, v:screw (vulgar), v:shag, v:bang (vulgar), v:bonk, v:hump, v:mount (vulgar), vi:wank, vi:shit, vi:piss, vi:fart, vi:belch, vi:puke, vi:spew, vi:spit (vulgar), v:suck (vulgar), v:lick (vulgar), v:grope, v:fondle, v:bugger
+
+## vulgar_sex | animacy=human | tags=vulgar,rude
+whore, slut, harlot, strumpet, trollop, pimp, whoremonger, lecher, pervert, wench (vulgar), tart (vulgar), hussy, trull, sodden harlot, bawd, rake (vulgar), philanderer, deviant, tramp (vulgar), floozy
+@animacy inanimate
+## vulgar_things | tags=vulgar,rude
+brothel (vulgar), whorehouse, bawdy house, orgy, bastardy, fornication, lust, lechery, adultery, incest, sodomy, lewdness, indecency, obscenity, smut, filth (obscenity), porn (vulgar), pornography, dildo, condom, aphrodisiac, love potion (vulgar)
+
+## taboo_bodily | tags=taboo
+penis, vagina, vulva, clitoris, testicles, scrotum, foreskin, womb, uterus, anus, rectum, buttocks, breasts (taboo), nipple, groin, pubic hair, semen, sperm, urine, excrement, feces, flatulence, menstruation, afterbirth, discharge (bodily), blood (menstrual), virginity, hymen, castration, circumcision, erection, orgasm, nakedness, genitals, loins, privy parts, defecation, urination, intercourse, copulation, masturbation, pregnancy (taboo), childbirth (taboo), stillbirth, barrenness, impotence, intimacy, concubine (taboo), bastard child, illegitimate child
+v:copulate, v:fornicate, v:ejaculate, v:masturbate, v:defecate, v:urinate, vi:menstruate, vi:lie with (euphemism), vi:relieve oneself (euphemism), vi:pass away (euphemism), vi:go to the privy (euphemism), v:take (euphemism for sex), v:know carnally, v:deflower, v:violate (euphemism), vi:expose oneself, vi:strip naked, vi:go naked
+
+## taboo_speech | tags=taboo
+name of the dead, unspeakable name, forbidden word, unlucky word, curse word, swear word, bad word, oath word, euphemism, dysphemism, taboo, blasphemy, sacrilege, profanity, vulgarity, obscene word, forbidden knowledge, evil eye, evil omen, ill omen, unclean thing, unclean act, abomination, shameful thing, polite word, rude word, the one not to be named, the nameless one, unnamed dead, ghost name, defilement, pollution (ritual), impurity (ritual), pariah, untouchable thing, forbidden food, forbidden mate, forbidden kin, forbidden place, forbidden day

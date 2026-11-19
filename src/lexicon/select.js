@@ -66,6 +66,17 @@ function articleAllowed(entry, mode) {
     return ['both', 'indefinite', 'partitive'].includes(mode);
 }
 
+// Insults, vulgar and taboo words (domain "taboo") exist in every language. They are added after the ordinary vocabulary and do not count
+// against its limit, so they never displace other words and the forms of the other words do not change. The groups ending in _basic are
+// always added; of the rest a share is drawn from the seed, larger for some genres and smaller for others.
+const TABOO_SHARE = 0.35;
+const TABOO_SHARE_BY_GENRE = { orcish: 0.65, giant: 0.55, undead: 0.5, infernal: 0.6, war: 0.6, thieves: 0.65, marine: 0.5, nomad: 0.45, sacred: 0.12, fey: 0.15, machine: 0.12, hive: 0.1, arcane: 0.2, women: 0.25 };
+export function tabooEntries(vocabulary, spec) {
+    const share = TABOO_SHARE_BY_GENRE[spec.genre] ?? TABOO_SHARE;
+    return vocabulary.filter(e => e.domain === 'taboo' && !excludedByGenre(e, spec.semantics) && !conflictsWithFilters(e, spec)
+        && (e.group.endsWith('_basic') || hash(`taboo|${spec.seed}|${e.id}`) % 1000 < share * 1000));
+}
+
 // `required`: entries the sample sentences need; they are always included, even if the genre would exclude them.
 // `derivations`: the pairs of data/derivations.json. They never shrink the lexicon; they add related words on top of the limit (at most DERIVATION_EXTRA of it).
 export const DERIVATION_EXTRA = 0.4;
@@ -74,7 +85,7 @@ export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON
         // equal scores are ordered by a fixed hash of the id (not the seed): the selected senses stay the same for every seed,
         // but they are spread over the whole dictionary instead of always being its first entries
         .map((e, index) => ({ e, index, order: hash(`select|${e.id}`), score: score(e, spec), group: GROUP_OF[e.pos] }))
-        .filter(x => articleAllowed(x.e, spec.articles) && !excludedByGenre(x.e, spec.semantics) && !conflictsWithFilters(x.e, spec) && !numeralBeyondSystem(x.e, spec));
+        .filter(x => x.e.domain !== 'taboo' && articleAllowed(x.e, spec.articles) && !excludedByGenre(x.e, spec.semantics) && !conflictsWithFilters(x.e, spec) && !numeralBeyondSystem(x.e, spec));
     const byScore = (a, b) => b.score - a.score || a.order - b.order || a.index - b.index;
     const chosen = [];
     const seen = new Set();
@@ -104,6 +115,7 @@ export function selectEntries(vocabulary, spec, limit = spec.genre ? MAX_LEXICON
         derivations.filter(inLexicon).flatMap(d => d.bases.map(b => allowed.get(b))).filter(Boolean).sort(byScore).forEach(addExtra);
         derivations.filter(d => !inLexicon(d) && allowed.has(d.id) && d.bases.every(b => seen.has(b))).map(d => allowed.get(d.id)).sort(byScore).forEach(addExtra);
     }
+    for (const e of tabooEntries(vocabulary, spec)) if (!seen.has(e.id)) { seen.add(e.id); chosen.push(e); }
     return chosen;
 }
 

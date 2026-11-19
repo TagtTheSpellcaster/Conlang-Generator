@@ -12,7 +12,7 @@ export const POS = Object.freeze([
 export const DOMAINS = Object.freeze([
     'abstract', 'action', 'animal', 'body', 'clothing', 'craft', 'faith', 'family', 'food', 'grammar', 'household',
     'magic', 'maritime', 'material', 'music', 'nature', 'need', 'number', 'object', 'quality', 'settlement', 'society',
-    'space', 'technology', 'time', 'transport', 'war', 'weapon'
+    'space', 'taboo', 'technology', 'time', 'transport', 'war', 'weapon'
 ]);
 
 // core: always in the lexicon; common: preferred; domain: only when the filters match.

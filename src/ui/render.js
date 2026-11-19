@@ -268,9 +268,16 @@ export const LEXICON_TOPICS = Object.freeze([
     ['animal', 'Animals'], ['nature', 'Nature and landscape'], ['food', 'Food and drink'], ['clothing', 'Clothing'], ['household', 'Home and household'],
     ['settlement', 'Settlements and buildings'], ['craft', 'Crafts and trades'], ['material', 'Materials'], ['object', 'Objects and tools'], ['weapon', 'Weapons'],
     ['war', 'War'], ['transport', 'Travel and transport'], ['maritime', 'Sea and sailing'], ['magic', 'Magic'], ['faith', 'Faith and ritual'], ['music', 'Music'],
-    ['technology', 'Technology'], ['time', 'Time'], ['space', 'Space and position'], ['number', 'Numbers'], ['abstract', 'Abstract concepts'], ['need', 'Needs and states'], ['grammar', 'Grammar words']
+    ['technology', 'Technology'], ['time', 'Time'], ['space', 'Space and position'], ['number', 'Numbers'], ['abstract', 'Abstract concepts'], ['need', 'Needs and states'], ['grammar', 'Grammar words'], ['taboo', 'Insults, vulgar and taboo words']
 ]);
 const POS_ORDER = ['noun', 'verb', 'adjective', 'adverb'];
+// The taboo section is split by kind. Register is not a grammatical category of the generated language: these are ordinary words.
+const TABOO_KINDS = [['insult', 'Insults'], ['rude', 'Rude words, oaths and interjections'], ['interjections', 'Rude words, oaths and interjections'], ['vulgar', 'Vulgar words (body and sex)'], ['taboo', 'Taboo words and euphemisms']];
+function tabooBody(entries, rows) {
+    const kind = e => TABOO_KINDS.find(([p]) => e.group.startsWith(p))?.[1] ?? 'Other';
+    const titles = [...new Set(TABOO_KINDS.map(k => k[1]))];
+    return `<p class="sub">Rude, vulgar and taboo vocabulary. Every language has some; these are ordinary words of the lexicon, with no separate grammatical register.</p>${titles.map(t => { const list = entries.filter(e => kind(e) === t); return list.length ? `<h4>${esc(t)} <span class="count">${list.length}</span></h4><div class="lexicon">${rows(list)}</div>` : ''; }).join('')}`;
+}
 export function lexiconHtml(lexicon) {
     const sections = LEXICON_TOPICS.map(([domain, title]) => {
         const entries = lexicon.filter(e => e.domain === domain).sort((a, b) => (POS_ORDER.indexOf(a.pos) + 1 || 9) - (POS_ORDER.indexOf(b.pos) + 1 || 9) || label(a).localeCompare(label(b)));
@@ -282,7 +289,7 @@ export function lexiconHtml(lexicon) {
     }).join('');
     return `<h3>Generated lexicon</h3>
 <div class="lex-toolbar"><span class="sub">${lexicon.length} words in ${sections.length} topics</span><span><button type="button" class="btn ghost" data-lex-toggle="open">Open all</button> <button type="button" class="btn ghost" data-lex-toggle="close">Close all</button></span></div>
-${sections.map(x => `<details class="lex-section" id="lex-${x.domain}"><summary><span>${esc(x.title)}</span><span class="count">${x.entries.length}</span></summary><div class="lexicon">${rows(x.entries)}</div></details>`).join('')}`;
+${sections.map(x => `<details class="lex-section" id="lex-${x.domain}"><summary><span>${esc(x.title)}</span><span class="count">${x.entries.length}</span></summary>${x.domain === 'taboo' ? tabooBody(x.entries, rows) : `<div class="lexicon">${rows(x.entries)}</div>`}</details>`).join('')}`;
 }
 
 export function dictionaryHtml(lexicon, direction, query) {

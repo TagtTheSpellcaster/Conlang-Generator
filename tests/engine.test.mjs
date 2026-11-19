@@ -36,7 +36,7 @@ test('seed "auto" is resolved, reported and reproducible', () => {
 
 test('lexicon: unique non-empty forms, at most 600 + the derivation extra (40%), core senses always present', () => {
     const L = gen();
-    assert.ok(L.lexicon.length <= 600 * 1.4);
+    assert.ok(L.lexicon.filter(e => e.domain !== 'taboo').length <= 600 * 1.4);   // the taboo words come on top (select.js)
     assert.equal(new Set(L.lexicon.filter(e => !e.colex).map(e => e.form)).size, L.lexicon.filter(e => !e.colex).length);
     assert.ok(L.lexicon.every(e => e.form && e.form.length >= 1));
     const ids = new Set(L.lexicon.map(e => e.id));

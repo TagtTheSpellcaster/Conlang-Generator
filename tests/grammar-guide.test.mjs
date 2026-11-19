@@ -51,7 +51,10 @@ test('the additive clitic is the last element of the word and does not change th
         if (L.spec.morphology === 'isolating') { assert.equal(added.form, plain.form); continue; }
         assert.equal(added.parts.at(-1).kind, 'additive');
         assert.ok(added.form.endsWith(added.parts.at(-1).text) && added.form.length > plain.form.length);
-        assert.deepEqual(added.parts.slice(0, -1).map(p => p.text), plain.parts.map(p => p.text));
+        // the same parts, one more: a sound change of the language may alter the neighbouring segment across the new boundary (k > ʃ before i),
+        // and the part is then reported as an alternant (stem-alt)
+        assert.equal(added.parts.length, plain.parts.length + 1);
+        assert.deepEqual(added.parts.slice(0, -1).map(p => p.kind.replace('-alt', '')), plain.parts.map(p => p.kind.replace('-alt', '')));
     }
 });
 
